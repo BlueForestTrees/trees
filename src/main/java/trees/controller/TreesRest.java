@@ -88,7 +88,13 @@ public class TreesRest {
     @RequestMapping(value = "/requantifiedTrunk/{id}/{qt}/{unitShortName}", method = GET)
     @ResponseBody
     TrunkDTO requantifiedTrunk(@PathVariable long id, @PathVariable double qt, @PathVariable String unitShortName) {
-        return treeService.getRequantifiedTrunk(id, qt, unitShortName);
+        return treeService.getRequantifiedTrunk(id, qt, "".equals(unitShortName) ? "one" : unitShortName);
+    }
+
+    @RequestMapping(value = "/requantifiedTrunk/{id}/{qt}", method = GET)
+    @ResponseBody
+    TrunkDTO requantifiedTrunk(@PathVariable long id, @PathVariable double qt) {
+        return treeService.getRequantifiedTrunk(id, qt, "");
     }
 
 }

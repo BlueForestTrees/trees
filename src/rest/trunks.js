@@ -6,6 +6,7 @@ const {check, validationResult} = require('express-validator/check');
 const {matchedData, sanitize} = require('express-validator/filter');
 const units = require('../service/units');
 const trunks = require('../service/trunks');
+const headers = require('../service/headers');
 
 module.exports = router;
 
@@ -52,7 +53,7 @@ router.post('/api/root',
 
 router.delete('/api/trunk/:trunkId',
     [
-        check('trunkId').exists().custom((value) => trunks.id(value)),
+        check('trunkId').exists().isMongoId(),
     ],
     json(async (req) => {
             validationResult(req).throw();
@@ -60,7 +61,6 @@ router.delete('/api/trunk/:trunkId',
         }
     )
 );
-
 
 router.delete('/api/root/:trunkId/:rootId',
     [
@@ -76,7 +76,7 @@ router.delete('/api/root/:trunkId/:rootId',
 
 router.get('/api/search/:namepart',
     [
-        check('namepart').exists().isLength({min:3})
+        check('namepart').exists().isLength({min: 3})
     ],
     json(async (req) => {
             validationResult(req).throw();
@@ -84,3 +84,51 @@ router.get('/api/search/:namepart',
         }
     )
 );
+
+router.get('/api/headers',
+    json(async () => {
+            return headers.all();
+        }
+    )
+);
+
+router.get('/api/trunk/:id',
+    [
+        check('id').exists().isMongoId(),
+    ],
+    json(async (req) => {
+            validationResult(req).throw();
+            return trunks.get(req.params.id);
+        }
+    )
+);
+
+router.get('/api/trunk/:id/:qt',
+    [
+        check('id').exists().isMongoId(),
+        check('qt').exists().isInt(),
+    ],
+    json(async (req) => {
+            validationResult(req).throw();
+            const idQt = matchedData(req);
+            const unit = "";
+            return trunks.getWithQtUnit(idQt.id, idQt.qt, unit);
+        }
+    )
+);
+
+router.get('/api/trunk/:id/:qt/:unit',
+    [
+        check('id').exists().isMongoId(),
+        check('qt').exists().isInt(),
+        check('unit').exists().isIn(units.shortNames())
+    ],
+
+    json(async (req) => {
+            validationResult(req).throw();
+            const idQtUnit = matchedData(req);
+        return trunks.getWithQtUnit(idQtUnit.id, idQtUnit.qt, idQtUnit.unit);
+        }
+    )
+);
+

@@ -1,5 +1,5 @@
 const db = require('../repo/db');
-const fields = {qt:1,displayUnit:1,name:1};
+const fields = {qt:1,unit:1,name:1};
 const headers = {};
 
 headers.all = async () => {

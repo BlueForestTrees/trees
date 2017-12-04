@@ -13,13 +13,13 @@ module.exports = router;
 router.post('/api/trunk',
     [
         check('qt').exists().isInt(),
-        check('displayUnit').exists().isIn(units.shortNames()),
+        check('unit').exists().isIn(units.shortNames()),
         check('name').exists()
     ],
 
     json(async (req, res, next) => {
         validationResult(req).throw();
-        return (await (await db).collection('Trees').insertOne(matchedData(req))).ops[0];
+        return trunks.create(matchedData(req));
     })
 );
 
@@ -29,7 +29,8 @@ router.post('/api/root',
         check('rootId').exists(),
         check('trunkQt').exists().isInt(),
         check('rootQt').exists().isInt(),
-        check('displayUnit').exists().isIn(units.shortNames()),
+        check('unit').exists().isIn(units.shortNames()),
+
         check('rootId', 'rootId and trunkId must be different').custom((rootId, {req}) => rootId !== req.body.trunkId),
         check('trunkId', 'specified trunk doesn\'t exist').custom((value) => trunks.contains(value)),
         check('rootId', 'specified root doesn\'t exist').custom((value) => trunks.contains(value))
@@ -43,7 +44,7 @@ router.post('/api/root',
         const root = {
             rootId: rootCreation.rootId,
             qt: rootCreation.rootQt * (trunk.qt / rootCreation.trunkQt),
-            displayUnit: rootCreation.displayUnit
+            unit: rootCreation.unit
         };
 
         return trunks.addRoot(trunk, root);
@@ -85,7 +86,7 @@ router.get('/api/search/:namepart',
     )
 );
 
-router.get('/api/headers',
+router.get('/api/all',
     json(async () => {
             return headers.all();
         }

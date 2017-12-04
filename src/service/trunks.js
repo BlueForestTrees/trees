@@ -25,13 +25,18 @@ const applyQtCoef = (trunks, coef) => {
     }
 };
 
+trunks.create = async (trunk) => {
+    return (await (await db).collection('Trees').insertOne(trunk)).ops[0];
+};
+
 trunks.getWithQtUnit = async (id, qt, unit) => {
     const trunk = await get(id);
     const qtInReferenceUnit = units.toReference(qt, unit);
-    const coef = trunk.qt / qtInReferenceUnit;
+    const trunkQtReferenceUnit = units.toReference(trunk.qt,trunk.unit);
+    const coef = trunkQtReferenceUnit / qtInReferenceUnit;
 
     trunk.qt = qt;
-    trunk.displayUnit = unit;
+    trunk.unit = unit;
     applyQtCoef(trunk.roots, coef);
 
     return trunk;

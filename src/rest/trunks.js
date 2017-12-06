@@ -77,7 +77,7 @@ router.delete('/api/root/:trunkId/:rootId',
 
 router.get('/api/search/:namepart',
     [
-        check('namepart').exists().isLength({min: 3})
+        check('namepart').exists()
     ],
     json(async (req) => {
             validationResult(req).throw();

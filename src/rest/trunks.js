@@ -1,7 +1,6 @@
 const json = require('./util/json');
 const express = require('express');
 const router = express.Router();
-const db = require('../repo/db');
 const {check, validationResult} = require('express-validator/check');
 const {matchedData, sanitize} = require('express-validator/filter');
 const units = require('../service/units');
@@ -12,9 +11,9 @@ module.exports = router;
 
 router.post('/api/trunk',
     [
-        check('qt').exists().isInt(),
-        check('unit').exists().isIn(units.shortNames()),
-        check('name').exists()
+        check('qt').optional().isNumeric(),
+        check('unit').optional().isIn(units.shortNames()),
+        check('name').isLength({ min: 1 })
     ],
 
     json(async (req, res, next) => {

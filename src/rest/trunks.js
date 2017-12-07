@@ -74,13 +74,13 @@ router.delete('/api/root/:trunkId/:rootId',
     )
 );
 
-router.get('/api/search/:namepart',
+router.get('/api/trunks',
     [
-        check('namepart').exists()
+        check('q').exists()
     ],
     json(async (req) => {
             validationResult(req).throw();
-            return trunks.search(req.params.namepart);
+            return trunks.search(req.query.q);
         }
     )
 );
@@ -131,3 +131,7 @@ router.get('/api/trunk/:id/:qt/:unit',
         }
     )
 );
+
+router.get('/api/purge', json(async () => {
+    return trunks.purge();
+}));

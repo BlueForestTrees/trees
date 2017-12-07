@@ -12,8 +12,12 @@ const addToRoots = (value) => {
     return {$push: {roots: value}};
 };
 
+const col = async () => {
+    return (await db).collection('Trees');
+};
+
 const get = async (id) => {
-    return (await db).collection('Trees').findOne(withId(id));
+    return (await col()).findOne(withId(id));
 };
 
 const applyQtCoef = (trunks, coef) => {
@@ -26,7 +30,7 @@ const applyQtCoef = (trunks, coef) => {
 };
 
 trunks.create = async (trunk) => {
-    return (await (await db).collection('Trees').insertOne(trunk)).ops[0];
+    return (await (await col()).insertOne(trunk)).ops[0];
 };
 
 trunks.getWithQtUnit = async (id, qt, unit) => {
@@ -47,20 +51,24 @@ trunks.get = trunks.contains = (id) => {
 };
 
 trunks.remove = async (id) => {
-    return (await db).collection('Trees').deleteOne(withId(id));
+    return (await col()).deleteOne(withId(id));
 };
 
 trunks.addRoot = async (trunk, root) => {
-    return (await db).collection('Trees').update(withId(trunk._id), addToRoots(root));
+    return (await col()).update(withId(trunk._id), addToRoots(root));
 };
 
 trunks.removeRoot = async (trunkId, rootId) => {
-    return (await db).collection('Trees').update(withId(trunkId), {$pull: {roots: {rootId: rootId}}});
+    return (await col()).update(withId(trunkId), {$pull: {roots: {rootId: rootId}}});
 };
 
 
 trunks.search = async (value) => {
-    return (await db).collection('Trees').find({name: {$regex: "^" + value}}).toArray();
+    return (await col()).find({name: {$regex: ".*" + value + ".*"}}).toArray();
+};
+
+trunks.purge = async () => {
+    return (await col()).deleteMany();
 };
 
 module.exports = trunks;

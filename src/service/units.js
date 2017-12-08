@@ -35,7 +35,7 @@ let units = [
     return acc;
 }, {});
 
-const shortNames = (Object.keys(units));
+const shortNames = Object.keys(units);
 
 const lookup = (unit) => {
     return units[unit];
@@ -50,7 +50,7 @@ unitService.shortNames = () => {
 };
 
 unitService.toReference = (qt, unit) => {
-    return qt * lookup(unit).coef;
+    return qt * lookup(unit||"").coef;
 };
 
 module.exports = unitService;

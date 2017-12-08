@@ -11,6 +11,9 @@ const withId = (value) => {
 const addToRoots = (value) => {
     return {$push: {roots: value}};
 };
+const pullFromRoots = (value) => {
+    return {$pull: {roots: {rootId: value}}};
+};
 
 const col = async () => {
     return (await db).collection('Trees');
@@ -33,10 +36,10 @@ trunks.create = async (trunk) => {
     return (await (await col()).insertOne(trunk)).ops[0];
 };
 
-trunks.getWithQtUnit = async (id, qt, unit) => {
+trunks.getWithQtUnit = async ({id, qt, unit}) => {
     const trunk = await get(id);
     const qtInReferenceUnit = units.toReference(qt, unit);
-    const trunkQtReferenceUnit = units.toReference(trunk.qt,trunk.unit);
+    const trunkQtReferenceUnit = units.toReference(trunk.qt, trunk.unit);
     const coef = trunkQtReferenceUnit / qtInReferenceUnit;
 
     trunk.qt = qt;
@@ -54,17 +57,38 @@ trunks.remove = async (id) => {
     return (await col()).deleteOne(withId(id));
 };
 
-trunks.addRoot = async (trunk, root) => {
-    return (await col()).update(withId(trunk._id), addToRoots(root));
+trunks.addRoot = async ({trunkId, rootId, trunkQt, rootQt, unit}) => {
+    return (await col()).update(
+        withId(trunkId),
+        addToRoots({
+            rootId: rootId,
+            qt: rootQt * ((await trunks.get(trunkId)).qt / trunkQt),
+            unit: unit
+        })
+    );
 };
 
-trunks.removeRoot = async (trunkId, rootId) => {
-    return (await col()).update(withId(trunkId), {$pull: {roots: {rootId: rootId}}});
+trunks.removeRoot = async ({trunkId, rootId}) => {
+    return (await col()).update(
+        withId(trunkId),
+        pullFromRoots(rootId)
+    );
 };
 
 
-trunks.search = async (value) => {
-    return (await col()).find({name: {$regex: ".*" + value + ".*"}}).toArray();
+trunks.search = async ({qt, unit, name}) => {
+
+    //determiner la grandeur
+    //stocker la grandeur au create
+    //filtrer sur la grandeur
+
+    //requantifier les enfants
+    //renvoyer le qt unit désiré.
+
+    return (await col())
+        .find({name: {$regex: ".*" + name + ".*"}})
+        .sort({name: 1})
+        .toArray();
 };
 
 trunks.purge = async () => {

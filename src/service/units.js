@@ -1,14 +1,14 @@
-let unitService = {};
-let unit = (grandeur, shortname, name, coef) => {
-    return {
-        grandeur: grandeur,
-        shortName: shortname,
+const GRANDEUR = "grandeur";
+
+const unit = (grandeur, shortname, name, coef) =>
+    ({
+        [GRANDEUR]: grandeur,
+        shortname: shortname,
         name: name,
         coef: coef
-    };
-};
+    });
 
-let units = [
+const units = [
     unit("NOMBRE", "", "", 1),
     unit("VOLUME", "m3", "mètre-cube", 1),
     unit("VOLUME", "l", "litre", 0.001),
@@ -30,27 +30,15 @@ let units = [
     unit("LONGUEUR", "m", "mètre", 1),
     unit("LONGUEUR", "km", "kilomètre", 1000),
     unit("COUT", "€", "euro", 1),
-].reduce(function(acc, cur, i) {
-    acc[cur.shortName] = cur;
+].reduce(function (acc, cur) {
+    acc[cur.shortname] = cur;
     return acc;
 }, {});
 
-const shortNames = Object.keys(units);
-
-const lookup = (unit) => {
-    return units[unit];
+module.exports = {
+    all: () => units,
+    shortnames: () => Object.keys(units),
+    lookup: (unit) => units[unit],
+    grandeurs: () => Object.values(units).map(unit => unit[GRANDEUR]),
+    toReference: (qt, unit) => qt * units[unit || ""].coef
 };
-
-unitService.all = () => {
-    return units;
-};
-
-unitService.shortNames = () => {
-    return shortNames;
-};
-
-unitService.toReference = (qt, unit) => {
-    return qt * lookup(unit||"").coef;
-};
-
-module.exports = unitService;

@@ -1,7 +1,11 @@
 const mongo = require('mongodb');
 
 async function connect(){
-    return await mongo.MongoClient.connect('mongodb://localhost/TreeDB')
+    try {
+        return await mongo.MongoClient.connect('mongodb://localhost/TreeDB')
+    }catch(e){
+        console.error(e);
+    }
 }
 
 module.exports = connect();

@@ -1,6 +1,7 @@
 const db = require('../repo/db');
 const mongo = require('mongodb');
 const units = require('./units');
+const headers = require('./headers');
 
 let trunks = {};
 
@@ -19,10 +20,6 @@ const col = async () => {
     return (await db).collection('Trees');
 };
 
-const get = async (id) => {
-    return (await col()).findOne(withId(id));
-};
-
 const applyQtCoef = (trunks, coef) => {
     if (trunks) {
         trunks.forEach((trunk) => {
@@ -32,11 +29,15 @@ const applyQtCoef = (trunks, coef) => {
     }
 };
 
-trunks.create = async (trunk) => {
-    return (await (await col()).insertOne(trunk)).ops[0];
+const get = async (id) => {
+    return (await col()).findOne(withId(id));
 };
 
-trunks.getWithQtUnit = async ({id, qt, unit}) => {
+trunks.create = async (trunk) => {
+    return headers.get((await (await col()).insertOne(trunk)).ops[0]._id);
+};
+
+trunks.load = async ({id, qt, unit}) => {
     const trunk = await get(id);
     const qtInReferenceUnit = units.toReference(qt, unit);
     const trunkQtReferenceUnit = units.toReference(trunk.qt, trunk.unit);
@@ -61,9 +62,9 @@ trunks.addRoot = async ({trunkId, rootId, trunkQt, rootQt, unit}) => {
     return (await col()).update(
         withId(trunkId),
         addToRoots({
-            rootId: rootId,
-            qt: rootQt * ((await trunks.get(trunkId)).qt / trunkQt),
-            unit: unit
+            rootId: rootId//,
+            // qt: rootQt * ((await trunks.get(trunkId)).qt / trunkQt),
+            // unit: unit
         })
     );
 };
@@ -75,18 +76,9 @@ trunks.removeRoot = async ({trunkId, rootId}) => {
     );
 };
 
-
-trunks.search = async ({qt, unit, name}) => {
-
-    //determiner la grandeur
-    //stocker la grandeur au create
-    //filtrer sur la grandeur
-
-    //requantifier les enfants
-    //renvoyer le qt unit désiré.
-
+trunks.search = async (grandeur, name) => {
     return (await col())
-        .find({name: {$regex: ".*" + name + ".*"}})
+        .find({name: {$regex: ".*" + name + ".*"}, grandeur: grandeur || undefined})
         .sort({name: 1})
         .toArray();
 };

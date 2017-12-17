@@ -1,90 +1,54 @@
 const db = require('../repo/db');
 const mongo = require('mongodb');
-const units = require('./units');
-const headers = require('./headers');
-
-let trunks = {};
-
-const withId = (value) => {
-    return {"_id": new mongo.ObjectID(value)};
-};
-
-const addToRoots = (value) => {
-    return {$push: {roots: value}};
-};
-const pullFromRoots = (value) => {
-    return {$pull: {roots: {rootId: value}}};
-};
-
-const col = async () => {
-    return (await db).collection('Trees');
-};
-
-const applyQtCoef = (trunks, coef) => {
-    if (trunks) {
-        trunks.forEach((trunk) => {
-            trunk.qt /= coef;
-            applyQtCoef(trunk.roots, coef);
-        });
+const headerFields = {qt: 1, unit: 1, name: 1};
+const withId = (value) => ({"_id": new mongo.ObjectID(value)});
+const graphLookup = {
+    $graphLookup: {
+        from: "Trees",
+        startWith: "$roots._id",
+        connectFromField: "roots._id",
+        connectToField: "_id",
+        maxDepth: 1,
+        as: "cache"
     }
 };
+const matchId = (_id) => ({$match: withId(_id)});
 
-const get = async (id) => {
-    return (await col()).findOne(withId(id));
+const pushRoots = (rootId, qt, unit) => ({$push: {roots: {...withId(rootId), qt, unit}}});
+
+const pullFromRoots = (id) => ({$pull: {roots: withId(id)}});
+
+const col = async () => (await db).collection('Trees');
+
+const headerGet = async (id) => (await col()).findOne(withId(id), headerFields);
+
+const setRootQtUnit = async ({trunkId, rootId, qt, unit}) => {
+    await removeRoot({trunkId, rootId});
+    return addRoot({trunkId, rootId, qt, unit});
 };
+const addRoot = async ({trunkId, rootId, qt, unit}) => (await col()).update(withId(trunkId), pushRoots(rootId, qt, unit));
+const removeRoot = async ({trunkId, rootId}) => (await col()).update(withId(trunkId), pullFromRoots(rootId));
 
-trunks.create = async (trunk) => {
-    return headers.get((await (await col()).insertOne(trunk)).ops[0]._id);
-};
+module.exports = {
+    addRoot,
+    setRootQtUnit,
 
-trunks.load = async ({id, qt, unit}) => {
-    const trunk = await get(id);
-    const qtInReferenceUnit = units.toReference(qt, unit);
-    const trunkQtReferenceUnit = units.toReference(trunk.qt, trunk.unit);
-    const coef = trunkQtReferenceUnit / qtInReferenceUnit;
+    headersAll: async () => (await db).collection('Trees').find({}, headerFields).toArray(),
 
-    trunk.qt = qt;
-    trunk.unit = unit;
-    applyQtCoef(trunk.roots, coef);
+    get: async (_id) => (await col()).aggregate([matchId(_id), graphLookup]).next(),
 
-    return trunk;
-};
+    contains: headerGet,
 
-trunks.get = trunks.contains = (id) => {
-    return get(id);
-};
+    create: async (trunk) => headerGet((await (await col()).insertOne(trunk)).ops[0]._id),
 
-trunks.remove = async (id) => {
-    return (await col()).deleteOne(withId(id));
-};
+    remove: async (id) => (await col()).deleteOne(withId(id)),
 
-trunks.addRoot = async ({trunkId, rootId, trunkQt, rootQt, unit}) => {
-    return (await col()).update(
-        withId(trunkId),
-        addToRoots({
-            rootId: rootId//,
-            // qt: rootQt * ((await trunks.get(trunkId)).qt / trunkQt),
-            // unit: unit
-        })
-    );
-};
+    removeRoot,
 
-trunks.removeRoot = async ({trunkId, rootId}) => {
-    return (await col()).update(
-        withId(trunkId),
-        pullFromRoots(rootId)
-    );
-};
-
-trunks.search = async (grandeur, name) => {
-    return (await col())
-        .find({name: {$regex: ".*" + name + ".*"}, grandeur: grandeur || undefined})
+    search: async (grandeur, name) => (await col())
+        .find({name: {$regex:`.*${name}.*`}, grandeur: grandeur || undefined})
         .sort({name: 1})
-        .toArray();
-};
+        .toArray(),
 
-trunks.purge = async () => {
-    return (await col()).deleteMany();
+    purge: async () => (await col()).deleteMany(),
 };
-
-module.exports = trunks;

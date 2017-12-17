@@ -6,6 +6,10 @@ const trunks = require('../service/trunks');
 
 module.exports = router;
 
+router.get('/api/all',
+    run(trunks.headersAll)
+);
+
 router.get('/api/trunks',
     [
         check('g').optional().isIn(units.grandeurs()),
@@ -16,25 +20,7 @@ router.get('/api/trunks',
 
 router.get('/api/trunk/:id',
     [
-        check('id').exists().isMongoId(),
+        check('id').exists().isMongoId()
     ],
     run(({id})=>trunks.get(id))
-);
-
-router.get('/api/trunk/:id/:qt',
-    [
-        check('id').exists().isMongoId(),
-        check('qt').exists().isInt(),
-    ],
-    run(trunks.load)
-);
-
-router.get('/api/trunk/:id/:qt/:unit',
-    [
-        check('id').exists().isMongoId(),
-        check('qt').exists().isInt(),
-        check('unit').exists().isIn(units.shortnames())
-    ],
-
-    run(trunks.load)
 );

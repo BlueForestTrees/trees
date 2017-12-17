@@ -4,8 +4,6 @@ const router = express.Router();
 const {check} = require('express-validator/check');
 const trunks = require('../service/trunks');
 
-module.exports = router;
-
 router.delete('/api/trunk/:id',
     [
         check('id').exists().isMongoId(),
@@ -20,3 +18,7 @@ router.delete('/api/root/:trunkId/:rootId',
     ],
     run(trunks.removeRoot)
 );
+
+router.delete('/api/all', run(trunks.purge));
+
+module.exports = router;

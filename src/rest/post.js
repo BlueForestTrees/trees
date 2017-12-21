@@ -26,14 +26,14 @@ router.post('/api/root',
 
 router.post('/api/qtunit',
     [
-        check('trunkId').exists().isMongoId(),
-        check('rootId').exists().isMongoId(),
-        check('qt').exists().isInt(),
-        check('unit').exists().isIn(units.shortnames()),
+        check('trunk._id').exists().isMongoId(),
+        check('trunk.qt').optional().exists().isNumeric(),
+        check('root._id').exists().isMongoId(),
+        check('root.qt').exists().isNumeric(),
 
-        check('rootId', 'rootId and trunkId must be different').custom((rootId, {req}) => rootId !== req.body.trunkId),
-        check('trunkId', 'specified trunk doesn\'t exist').custom(trunks.contains),
-        check('rootId', 'specified root doesn\'t exist').custom(trunks.contains)
+        check('root._id', 'rootId and trunkId must be different').custom((rootId, {req}) => rootId !== req.body.trunkId),
+        check('trunk._id', 'specified trunk doesn\'t exist').custom(trunks.contains),
+        check('root._id', 'specified root doesn\'t exist').custom(trunks.contains)
     ],
     run(trunks.setRootQtUnit)
 );

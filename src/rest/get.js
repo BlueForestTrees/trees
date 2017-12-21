@@ -7,7 +7,7 @@ const trunks = require('../service/trunks');
 module.exports = router;
 
 router.get('/api/all',
-    run(trunks.headersAll)
+    run(trunks.all)
 );
 
 router.get('/api/trunks',
@@ -23,4 +23,12 @@ router.get('/api/trunk/:id',
         check('id').exists().isMongoId()
     ],
     run(({id})=>trunks.get(id))
+);
+
+
+router.get('/trunk/nomap/:id',
+    [
+        check('id').exists().isMongoId()
+    ],
+    run(({id})=>trunks.getNoMap(id))
 );

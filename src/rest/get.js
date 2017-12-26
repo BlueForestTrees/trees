@@ -15,14 +15,22 @@ router.get('/api/trunks',
         check('g').optional().isIn(units.grandeurs()),
         check('n').exists()
     ],
-    run(({g,n})=>trunks.search(g,n))
+    run(({g, n}) => trunks.search(g, n))
 );
 
-router.get('/api/trunk/:id',
+router.get('/api/trunk/:_id',
     [
-        check('id').exists().isMongoId()
+        check('_id').exists().isMongoId()
     ],
-    run(({id})=>trunks.get(id))
+    run(({_id}) => trunks.get(_id))
+);
+
+router.get('/api/trunk/:qt/:_id',
+    [
+        check('_id').exists().isMongoId(),
+        check('qt').isNumeric()
+    ],
+    run(({_id, qt}) => trunks.get(_id, qt))
 );
 
 
@@ -30,5 +38,5 @@ router.get('/trunk/nomap/:id',
     [
         check('id').exists().isMongoId()
     ],
-    run(({id})=>trunks.getNoMap(id))
+    run(({id}) => trunks.getNoMap(id))
 );

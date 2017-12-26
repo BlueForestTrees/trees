@@ -1,26 +1,27 @@
 const _ = require('lodash');
 const cached = (_id, cache) => _.find(cache, (e => e._id.equals(_id)));
 
-const buildRoots = (coef, childList, cache) => {
+const buildRoots = (coef, ressources, cache) => {
     const roots = [];
-    if (childList) {
-        _.forEach(childList, child => {
+    if (ressources) {
+        _.forEach(ressources, child => {
             const cachon = cached(child._id, cache);
             const qt = coef * child.qt;
+
             roots.push({
-                _id: cachon._id, name: cachon.name, qt: qt,
-                roots: buildRoots(qt / cachon.qt || 1, cachon.childList, cache)
+                _id: cachon._id,
+                name: cachon.name,
+                qt: qt,
+                roots: buildRoots(qt / cachon.qt || 1, cachon.ressources, cache)
             });
         });
     }
     return roots;
 };
 
-const treefy = dbTree => ({
-    _id: dbTree._id, name: dbTree.name, qt: dbTree.qt,
-    roots: buildRoots(1, dbTree.childList, dbTree.cache)
-});
-
 module.exports = {
-    treefy
+    treefy: (qt, dbTree) => ({
+        _id: dbTree._id, name: dbTree.name, qt: qt ? qt : dbTree.qt,
+        roots: buildRoots(qt ? qt / dbTree.qt : 1, dbTree.ressources, dbTree.cache)
+    })
 };

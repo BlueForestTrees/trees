@@ -29,7 +29,7 @@ app.use(function (err, req, res, next) {
         res.status(422).json(err.mapped());
     }else {
         console.error(err);
-        res.status(err.status || 500).json({error:err.message});
+        res.status(err.status || 500).json({error: err.stack.split("\n")});
     }
 });
 

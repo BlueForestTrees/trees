@@ -28,7 +28,7 @@ router.get('/api/trunk/:_id',
 router.get('/api/trunk/:qt/:_id',
     [
         check('_id').exists().isMongoId(),
-        check('qt').isNumeric()
+        check('qt').isDecimal()
     ],
     run(({_id, qt}) => trunks.get(_id, qt))
 );

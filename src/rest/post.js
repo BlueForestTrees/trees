@@ -13,7 +13,7 @@ router.post('/api/all',
 
 router.post('/api/trunk',
     [
-        check('qt').optional().isNumeric(),
+        check('qt').optional().isDecimal(),
         check('unit').optional().isIn(units.shortnames()),
         check('name').matches(/^.+/)
     ],
@@ -32,11 +32,11 @@ router.post('/api/root',
 router.post('/api/qtunit',
     [
         check('trunk._id').exists().isMongoId(),
-        check('trunk.qt').optional().exists().isNumeric(),
+        check('trunk.qt').optional().exists().isDecimal(),
         check('root._id').exists().isMongoId(),
-        check('root.qt').exists().isNumeric(),
+        check('root.qt').exists().isDecimal(),
 
-        check('root._id', 'rootId and trunkId must be different').custom((root, {req}) => root._id !== req.body.trunk._id),
+        check('root._id', 'root._id and trunk.id must be different').custom((root, {req}) => root._id !== req.body.trunk._id),
         check('trunk._id', 'specified trunk doesn\'t exist').custom(trunks.contains),
         check('root._id', 'specified root doesn\'t exist').custom(trunks.contains)
     ],

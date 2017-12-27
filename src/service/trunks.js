@@ -29,7 +29,7 @@ const pullFromRoots = (id) => ({$pull: {ressources: withId(id)}});
 const setQt = (qt) => ({$set: {qt: qt}});
 
 
-const headerGet = async (id) => (await trunks()).findOne(withId(id), headerFields);
+const getHeader = async (id) => (await trunks()).findOne(withId(id), headerFields);
 
 const qt = async (id) => (await ((await trunks()).findOne(withId(id), qtField))).qt;
 
@@ -45,12 +45,16 @@ const adaptQt = async ({trunk, root}) => {
     return root.qt * (trunkQt / trunk.qt);
 };
 
-const updateRoot = async (root) => {
+const upsertRoot = async (root) => {
     await removeRoot(root);
     await addRoot(root);
 };
 
-const setRootQtUnit = async ({trunk, root}) => updateRoot({trunkId:trunk._id, rootId:root._id, qt:await adaptQt({trunk, root})});
+const setRootQtUnit = async ({trunk, root}) => upsertRoot({
+    trunkId: trunk._id,
+    rootId: root._id,
+    qt: await adaptQt({trunk, root})
+});
 
 const addRoot = async ({trunkId, rootId, qt, unit}) => (await trunks()).update(withId(trunkId), pushRoots(rootId, qt, unit));
 const removeRoot = async ({trunkId, rootId}) => (await trunks()).update(withId(trunkId), pullFromRoots(rootId));
@@ -71,20 +75,28 @@ const putall = async (data) => {
     return col.find().toArray();
 };
 
+const create = async (trunk) => getHeader((await (await trunks()).insertOne(trunk)).ops[0]._id);
+
+const remove = async (id) => (await trunks()).deleteOne(withId(id));
+
+const search = async (grandeur, name) => (await trunks())
+    .find({name: {$regex: `.*${name}.*`}, grandeur: grandeur || undefined})
+    .sort({name: 1})
+    .toArray();
+
+const purge = async () => (await trunks()).deleteMany();
+
 module.exports = {
     addRoot,
-    setRootQtUnit,
     all,
+    contains: getHeader,
+    create,
+    get,
+    getNoMap,
+    purge,
     putall,
-    get: get,
-    getNoMap: getNoMap,
-    contains: headerGet,
-    create: async (trunk) => headerGet((await (await trunks()).insertOne(trunk)).ops[0]._id),
-    remove: async (id) => (await trunks()).deleteOne(withId(id)),
+    remove,
     removeRoot,
-    search: async (grandeur, name) => (await trunks())
-        .find({name: {$regex: `.*${name}.*`}, grandeur: grandeur || undefined})
-        .sort({name: 1})
-        .toArray(),
-    purge: async () => (await trunks()).deleteMany(),
+    search,
+    setRootQtUnit
 };

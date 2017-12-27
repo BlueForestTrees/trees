@@ -12,7 +12,7 @@ const buildRoots = (coef, ressources, cache) => {
                 _id: cachon._id,
                 name: cachon.name,
                 qt: qt,
-                roots: buildRoots(qt / cachon.qt || 1, cachon.ressources, cache)
+                roots: buildRoots(qt / cachon.qt, cachon.ressources, cache)
             });
         });
     }
@@ -21,7 +21,7 @@ const buildRoots = (coef, ressources, cache) => {
 
 module.exports = {
     treefy: (qt, dbTree) => ({
-        _id: dbTree._id, name: dbTree.name, qt: qt ? qt : dbTree.qt,
+        _id: dbTree._id, name: dbTree.name, qt: qt ? qt : dbTree.qt || null,
         roots: buildRoots(qt ? qt / dbTree.qt : 1, dbTree.ressources, dbTree.cache)
     })
 };

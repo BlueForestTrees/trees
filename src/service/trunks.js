@@ -9,6 +9,9 @@ const withId = id => ({"_id": object(id)});
 const withQt = (qt, unit) => {
     return qt ? {qt, unit} : {}
 };
+const withFacet = (qt, unit) => {
+    return qt ? {qt, unit} : {}
+};
 const unstrict = {strict: false};
 const graphLookup = {
     $graphLookup: {
@@ -23,6 +26,7 @@ const graphLookup = {
 const matchId = (_id) => ({$match: withId(_id)});
 
 const pushRoots = (rootId, qt, unit) => ({$push: {ressources: {...withId(rootId), ...withQt(qt, unit)}}});
+const pushFacet = (id, facet) => ({$push: {facets: facet}});
 
 const pullFromRoots = (id) => ({$pull: {ressources: withId(id)}});
 
@@ -56,6 +60,7 @@ const setRootQtUnit = async ({trunk, root}) => upsertRoot({
     qt: await adaptQt({trunk, root})
 });
 
+const addFacet = async ({treeId,facet}) => (await trunks()).update(withId(treeId), pushFacet(facet));
 const addRoot = async ({trunkId, rootId, qt, unit}) => (await trunks()).update(withId(trunkId), pushRoots(rootId, qt, unit));
 const removeRoot = async ({trunkId, rootId}) => (await trunks()).update(withId(trunkId), pullFromRoots(rootId));
 const getNoMap = async (_id) => {
@@ -86,6 +91,7 @@ const search = async (grandeur, name) => (await trunks())
 
 const purge = async () => (await trunks()).deleteMany();
 
+
 module.exports = {
     addRoot,
     all,
@@ -98,5 +104,6 @@ module.exports = {
     remove,
     removeRoot,
     search,
-    setRootQtUnit
+    setRootQtUnit,
+    addFacet
 };

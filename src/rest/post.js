@@ -42,3 +42,11 @@ router.post('/api/qtunit',
     ],
     run(trunks.setRootQtUnit)
 );
+
+router.post('/api/facet',
+    [
+        check('treeId').exists().isMongoId(),
+        check('facet').matches(/^.+/)
+    ],
+    run(trunks.addFacet)
+    );

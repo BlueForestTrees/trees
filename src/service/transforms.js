@@ -22,6 +22,7 @@ const buildRoots = (coef, ressources, cache) => {
 module.exports = {
     treefy: (qt, dbTree) => ({
         _id: dbTree._id, name: dbTree.name, qt: qt ? qt : dbTree.qt || null,
-        roots: buildRoots(qt ? qt / dbTree.qt : 1, dbTree.ressources, dbTree.cache)
+        roots: buildRoots(qt ? qt / dbTree.qt : 1, dbTree.ressources, dbTree.cache),
+        facets: dbTree.facets
     })
 };

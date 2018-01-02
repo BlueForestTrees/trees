@@ -46,7 +46,9 @@ router.post('/api/qtunit',
 router.post('/api/facet',
     [
         check('treeId').exists().isMongoId(),
-        check('facet').matches(/^.+/)
+        check('facet.qt').isDecimal(),
+        check('facet.unit').isIn(units.shortnames()),
+        check('facet.name').matches(/^.+/)
     ],
     run(trunks.addFacet)
-    );
+);

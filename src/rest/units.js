@@ -3,8 +3,8 @@ const router = express.Router();
 const json = require('./util/run');
 const units = require('../service/units');
 
-router.get('/api/units', json(async () => {
-    return units.all();
+router.get('/api/grandeurs', json(async () => {
+    return units.grandeurs;
 }));
 
 module.exports = router;

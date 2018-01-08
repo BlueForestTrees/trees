@@ -27,7 +27,9 @@ const pushFacet = (facet) => ({$push: {facets: facet}});
 const pushRoot = (rootId, qt, unit) => ({$push: {ressources: {...withId(rootId), ...withQt(qt, unit)}}});
 const pullFromRoots = (id) => ({$pull: {ressources: withId(id)}});
 
-const setQt = (qt) => ({$set: {qt: qt}});
+const setQt = qt => ({$set: {qt}});
+const setPrice = price => ({$set: {price}});
+const setQuantity = quantity => ({$set: {quantity}});
 
 
 const getHeader = async (id) => (await trunks()).findOne(withId(id), headerFields);
@@ -88,6 +90,8 @@ const search = async (grandeur, name) => (await trunks())
 
 const purge = async () => (await trunks()).deleteMany();
 
+const upsertPrice = async ({treeId, price}) => (await trunks()).update(withId(treeId), setPrice(price));
+const upsertQuantity = async ({treeId, quantity}) => (await trunks()).update(withId(treeId), setQuantity(quantity));
 
 module.exports = {
     addRoot,
@@ -102,5 +106,7 @@ module.exports = {
     removeRoot,
     search,
     setRootQtUnit,
-    addFacet
+    addFacet,
+    upsertPrice,
+    upsertQuantity
 };

@@ -12,7 +12,7 @@ router.get('/api/all',
 
 router.get('/api/trunks',
     [
-        check('g').optional().isIn(units.grandeurs()),
+        check('g').optional().isIn(units.grandeurs),
         check('n').exists()
     ],
     run(({g, n}) => trunks.search(g, n))

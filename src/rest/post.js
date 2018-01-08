@@ -14,7 +14,7 @@ router.post('/api/all',
 router.post('/api/trunk',
     [
         check('qt').optional().isDecimal(),
-        check('unit').optional().isIn(units.shortnames()),
+        check('unit').optional().isIn(units.shortnames),
         check('name').matches(/^.+/)
     ],
     run(trunks.create)
@@ -47,8 +47,25 @@ router.post('/api/facet',
     [
         check('treeId').exists().isMongoId(),
         check('facet.qt').isDecimal(),
-        check('facet.unit').isIn(units.shortnames()),
+        check('facet.unit').isIn(units.shortnames),
         check('facet.name').matches(/^.+/)
     ],
     run(trunks.addFacet)
+);
+
+router.post('/api/price',
+    [
+        check('treeId').exists().isMongoId(),
+        check('price').isDecimal()
+    ],
+    run(trunks.upsertPrice)
+);
+
+router.post('/api/quantity',
+    [
+        check('treeId').exists().isMongoId(),
+        check('quantity.qt').isDecimal(),
+        check('quantity.unit').isIn(units.shortnames)
+    ],
+    run(trunks.upsertQuantity)
 );

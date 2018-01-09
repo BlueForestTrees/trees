@@ -1,13 +1,13 @@
-const run = require('./util/run');
-const runraw = require('./util/runraw');
+const run = require('../../util/run');
+const runraw = require('../../util/runraw');
 const router = require('express').Router();
 const {check} = require('express-validator/check');
-const units = require('../service/units');
-const trunks = require('../service/trunks');
+const units = require('../../service/grandeurs');
+const trunks = require('../../service/trunks');
 
 module.exports = router;
 
-router.post('/api/all',
+router.post('/api/trunks/all',
     runraw(trunks.putall)
 );
 
@@ -29,7 +29,7 @@ router.post('/api/root',
     run(trunks.addRoot)
 );
 
-router.post('/api/qtunit',
+router.post('/api/root/qtunit',
     [
         check('trunk._id').exists().isMongoId(),
         check('trunk.qt').optional().exists().isDecimal(),
@@ -53,7 +53,7 @@ router.post('/api/facet',
     run(trunks.addFacet)
 );
 
-router.post('/api/price',
+router.post('/api/trunk/price',
     [
         check('treeId').exists().isMongoId(),
         check('price').isDecimal()
@@ -61,7 +61,7 @@ router.post('/api/price',
     run(trunks.upsertPrice)
 );
 
-router.post('/api/quantity',
+router.post('/api/trunk/quantity',
     [
         check('treeId').exists().isMongoId(),
         check('quantity.qt').isDecimal(),

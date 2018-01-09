@@ -62,11 +62,13 @@ const setRootQtUnit = async ({trunk, root}) => upsertRoot({
 const addFacet = async ({treeId, facet}) => (await trunks()).update(withId(treeId), pushFacet(facet));
 const addRoot = async ({trunkId, rootId, qt, unit}) => (await trunks()).update(withId(trunkId), pushRoot(rootId, qt, unit));
 const removeRoot = async ({trunkId, rootId}) => (await trunks()).update(withId(trunkId), pullFromRoots(rootId));
-const getNoMap = async (_id) => {
-    const t = await (await trunks()).aggregate([matchId(_id), graphLookup]).next();
-    if (!t) throw new Error(`trunk not found: ${_id}`);
-    return t;
+
+const trunkNotFound = _id => {
+    throw new Error(`trunk not found: ${_id}`)
 };
+
+const getNoMap = async _id => await (await trunks()).aggregate([matchId(_id), graphLookup]).next() || trunkNotFound(_id);
+
 const get = async (_id, qt) => treefy(qt, await getNoMap(_id));
 
 const all = async () => (await trunks()).find({}).toArray();
@@ -88,6 +90,8 @@ const search = async (grandeur, name) => (await trunks())
     .sort({name: 1})
     .toArray();
 
+const lookup = async name => (await trunks()).findOne({name});
+
 const purge = async () => (await trunks()).deleteMany();
 
 const upsertPrice = async ({treeId, price}) => (await trunks()).update(withId(treeId), setPrice(price));
@@ -105,6 +109,7 @@ module.exports = {
     remove,
     removeRoot,
     search,
+    lookup,
     setRootQtUnit,
     addFacet,
     upsertPrice,

@@ -1,21 +1,28 @@
-const run = require('./util/run');
+const run = require('../../util/run');
 const router = require('express').Router();
 const {check} = require('express-validator/check');
-const units = require('../service/units');
-const trunks = require('../service/trunks');
+const units = require('../../service/grandeurs');
+const trunks = require('../../service/trunks');
 
 module.exports = router;
 
-router.get('/api/all',
+router.get('/api/trunks/all',
     run(trunks.all)
 );
 
 router.get('/api/trunks',
     [
         check('g').optional().isIn(units.grandeurs),
-        check('n').exists()
+        check('q').exists()
     ],
-    run(({g, n}) => trunks.search(g, n))
+    run(({g, q}) => trunks.search(g, q))
+);
+
+router.get('/api/trunk',
+    [
+        check('q').exists()
+    ],
+    run(({q}) => trunks.lookup(q))
 );
 
 router.get('/api/trunk/:_id',
@@ -34,7 +41,7 @@ router.get('/api/trunk/:qt/:_id',
 );
 
 
-router.get('/trunk/nomap/:id',
+router.get('/api/nomaptrunk/:id',
     [
         check('id').exists().isMongoId()
     ],

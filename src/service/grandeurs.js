@@ -63,8 +63,8 @@ const units = _.chain(grandeurs)
         .keyBy('shortname')
         .value();
 
-
 module.exports = {
-    grandeurs: grandeurs,
+    grandeurs,
+    grandeursKeys: Object.keys(grandeurs),
     shortnames: Object.keys(units)
 };

@@ -5,6 +5,6 @@ const facets = require("../../service/facets");
 
 module.exports = router;
 
-router.delete('/api/facets', run(facets.purge));
+router.delete('/api/facetEntries', run(facets.purge));
 
 

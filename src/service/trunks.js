@@ -1,11 +1,13 @@
+const _ = require('lodash');
 const mongo = require('mongodb');
 const db = require('../repo/db');
 const trunks = async () => (await db).collection('Trees');
 const treefy = require('./transforms').treefy;
 const headerFields = {qt: 1, unit: 1, name: 1};
 const qtField = {qt: 1, _id: 0};
-const object = id => new mongo.ObjectID(id);
-const withId = id => ({"_id": object(id)});
+const withId = require('../util/query').withId;
+const pullFromRoots = require('../util/query').pullFromRoots;
+
 const withQt = (qt, unit) => {
     return qt ? {qt, unit} : {}
 };
@@ -25,7 +27,7 @@ const matchId = (_id) => ({$match: withId(_id)});
 const pushFacet = (facet) => ({$push: {facets: facet}});
 
 const pushRoot = (rootId, qt, unit) => ({$push: {ressources: {...withId(rootId), ...withQt(qt, unit)}}});
-const pullFromRoots = (id) => ({$pull: {ressources: withId(id)}});
+
 
 const setQt = qt => ({$set: {qt}});
 const setPrice = price => ({$set: {price}});
@@ -62,7 +64,6 @@ const setRootQtUnit = async ({trunk, root}) => upsertRoot({
 const addFacet = async ({treeId, facet}) => (await trunks()).update(withId(treeId), pushFacet(facet));
 const addRoot = async ({trunkId, rootId, qt, unit}) => (await trunks()).update(withId(trunkId), pushRoot(rootId, qt, unit));
 const removeRoot = async ({trunkId, rootId}) => (await trunks()).update(withId(trunkId), pullFromRoots(rootId));
-
 const trunkNotFound = _id => {
     throw new Error(`trunk not found: ${_id}`)
 };

@@ -7,7 +7,7 @@ module.exports = router;
 
 router.get('/api/facetEntries',
     [
-        check('q').exists().isLength({min:3})
+        check('q').exists()
     ],
     run(({q}) => facets.search(q))
 );

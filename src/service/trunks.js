@@ -77,7 +77,6 @@ const all = async () => (await trunks()).find({}).toArray();
 const putall = async (data) => {
     const col = await trunks();
     await col.remove();
-
     await col.insert(data);
     return col.find().toArray();
 };

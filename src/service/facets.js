@@ -1,19 +1,12 @@
 const db = require('../repo/db2');
+const trees = () => db('Trees');
 const facets = () => db('Facets');
 const withId = require('../util/query').withId;
 const pullFromFacets = require('../util/query').pullFromFacets;
 
-
-
-
 const get = async name => (await facets()).findOne({name});
 
-
-const deleteFacets = async ({treeId, facetIds}) => {
-    let pullFromFacets2 = pullFromFacets(facetIds);
-
-    return await facets().update(withId(treeId), pullFromFacets2, {multi: true});
-};
+const deleteFacets = async ({treeId, facetIds}) => await trees().update(withId(treeId), pullFromFacets(facetIds));
 
 module.exports = {
 

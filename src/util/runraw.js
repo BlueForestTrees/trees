@@ -10,6 +10,11 @@ const objId = (data) => {
                 root._id = object(root._id);
             })
         }
+        if(trunk.facets) {
+            _.forEach(trunk.facets, root => {
+                root._id = object(root._id);
+            })
+        }
     });
     return data;
 };

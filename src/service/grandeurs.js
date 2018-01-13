@@ -49,6 +49,7 @@ const grandeurs = {
     ],
     "Longueur": [
         unit("mm", "millimètre", 0.001),
+        unit("cm", "centimètre", 0.01),
         unit("m", "mètre", 1),
         unit("km", "kilomètre", 1000)
     ],

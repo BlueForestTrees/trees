@@ -26,7 +26,7 @@ const grandeurs = {
     ],
     "Volume": [
         unit("m3", "mètre-cube", 1),
-        unit("l", "litre", 0.001),
+        unit("L", "litre", 0.001),
         unit("goutte", "goutte", 0.001 * 20000)
     ],
     "Durée": [

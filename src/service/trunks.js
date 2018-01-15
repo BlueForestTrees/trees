@@ -81,13 +81,13 @@ const putall = async (data) => {
     return col.find().toArray();
 };
 
-const create = async (trunk) => getHeader((await (await trunks()).insertOne(trunk)).ops[0]._id);
+const create = async (trunk) => getHeader((await (await trunks()).insertOne({...trunk,name_lower:trunk.name.toLowerCase()})).ops[0]._id);
 
 const remove = async (id) => (await trunks()).deleteOne(withId(id));
 
 const search = async (grandeur, name) => (await trunks())
-    .find({name: {$regex: `.*${name}.*`}, grandeur: grandeur || undefined})
-    .sort({name: 1})
+    .find({name_lower: {$regex: `.*${name.toLowerCase()}.*`}, grandeur: grandeur || undefined})
+    .sort({name_lower: 1})
     .toArray();
 
 const lookup = async name => (await trunks()).findOne({name});

@@ -86,7 +86,7 @@ const create = async (trunk) => getHeader((await (await trunks()).insertOne({...
 const remove = async (id) => (await trunks()).deleteOne(withId(id));
 
 const search = async (grandeur, name) => (await trunks())
-    .find({name_lower: {$regex: `.*${name.toLowerCase()}.*`}, grandeur: grandeur || undefined})
+    .find({name_lower: {$regex: `^${name.toLowerCase()}.*`}, grandeur: grandeur || undefined})
     .sort({name_lower: 1})
     .toArray();
 

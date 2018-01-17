@@ -11,6 +11,7 @@ const pullFromRoots = require('../util/query').pullFromRoots;
 const withQt = (qt, unit) => {
     return qt ? {qt, unit} : {}
 };
+
 const unstrict = {strict: false};
 const graphLookup = {
     $graphLookup: {
@@ -32,6 +33,7 @@ const pushRoot = (rootId, qt, unit) => ({$push: {ressources: {...withId(rootId),
 const setQt = qt => ({$set: {qt}});
 const setPrice = price => ({$set: {price}});
 const setQuantity = quantity => ({$set: {quantity}});
+const setName = name => ({$set: {name, name_lower:name.toLowerCase()}});
 
 
 const getHeader = async (id) => (await trunks()).findOne(withId(id), headerFields);
@@ -81,9 +83,21 @@ const putall = async (data) => {
     return col.find().toArray();
 };
 
-const create = async (trunk) => getHeader((await (await trunks()).insertOne({...trunk,name_lower:trunk.name.toLowerCase()})).ops[0]._id);
+const createOrClone = ({sourceId, qt, unit, name}) => sourceId ? clone(sourceId) : create({qt, unit, name});
 
-const remove = async (id) => (await trunks()).deleteOne(withId(id));
+const clone = async sourceId => create(anonymize(await simpleGet(sourceId)));
+
+const simpleGet = async _id => (await trunks()).findOne(withId(_id));
+
+const anonymize = tree => {
+    delete tree._id;
+    tree.name = `${tree.name}_copy`;
+    return tree;
+};
+
+const create = async trunk => getHeader((await (await trunks()).insertOne({...trunk,name_lower:trunk.name.toLowerCase()})).ops[0]._id);
+
+const remove = async id => (await trunks()).deleteOne(withId(id));
 
 const search = async (grandeur, name) => (await trunks())
     .find({name_lower: {$regex: `^${name.toLowerCase()}.*`}, grandeur: grandeur || undefined})
@@ -97,11 +111,13 @@ const purge = async () => (await trunks()).deleteMany();
 const upsertPrice = async ({treeId, price}) => (await trunks()).update(withId(treeId), setPrice(price));
 const upsertQuantity = async ({treeId, quantity}) => (await trunks()).update(withId(treeId), setQuantity(quantity));
 
+const updateName = async ({_id, name}) => (await trunks()).update(withId(_id), setName(name));
+
 module.exports = {
     addRoot,
     all,
     contains: getHeader,
-    create,
+    createOrClone,
     get,
     getNoMap,
     purge,
@@ -111,6 +127,7 @@ module.exports = {
     search,
     lookup,
     setRootQtUnit,
+    updateName,
     addFacet,
     upsertPrice,
     upsertQuantity

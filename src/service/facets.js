@@ -8,6 +8,13 @@ const get = async name => (await facets()).findOne({name});
 
 const deleteFacets = async ({treeId, facetIds}) => await trees().update(withId(treeId), pullFromFacets(facetIds));
 
+const putall = async (data) => {
+    const col = await facets();
+    await col.remove();
+    await col.insert(data);
+    return col.find().toArray();
+};
+
 module.exports = {
 
     search: async namePart => await facets()
@@ -23,5 +30,7 @@ module.exports = {
 
     listall: async () => (await facets()).find({}).toArray(),
 
-    get
+    get,
+
+    putall
 };

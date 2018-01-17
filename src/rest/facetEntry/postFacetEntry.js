@@ -1,4 +1,6 @@
 const run = require('../../util/run');
+const runraw = require('../../util/runraw');
+
 const express = require('express');
 const router = express.Router();
 const {check} = require('express-validator/check');
@@ -13,4 +15,8 @@ router.post('/api/facetEntry',
         check('grandeur').isIn(grandeursKeys)
     ],
     run(facets.add)
+);
+
+router.post('/api/facetEntries',
+    runraw(facets.putall)
 );

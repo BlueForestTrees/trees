@@ -1,5 +1,6 @@
 const run = require('../../util/run');
 const runraw = require('../../util/runraw');
+const _ = require('lodash');
 const router = require('express').Router();
 const {check} = require('express-validator/check');
 const units = require('../../service/grandeurs');
@@ -15,9 +16,16 @@ router.post('/api/trunk',
     [
         check('qt').optional().isDecimal(),
         check('unit').optional().isIn(units.shortnames),
-        check('name').matches(/^.+/)
+        check('name').optional().matches(/^.+/),
+        check('sourceId').optional().isMongoId(),
+        check('sourceId', 'body.name OR sourceId must be defined').custom((sourceId, {req}) => {
+            const noBody = _.isEmpty(req.body);
+            const noSourceId = !sourceId;
+
+            return (!noBody && noSourceId) || (noBody && !noSourceId)
+        })
     ],
-    run(trunks.create)
+    run(trunks.createOrClone)
 );
 
 router.post('/api/root',

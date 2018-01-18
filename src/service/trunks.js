@@ -4,9 +4,10 @@ const db = require('../repo/db');
 const trunks = async () => (await db).collection('Trees');
 const treefy = require('./transforms').treefy;
 const headerFields = {qt: 1, unit: 1, name: 1};
-const qtField = {qt: 1, _id: 0};
+const qtField = {quantity: 1, _id: 0};
 const withId = require('../util/query').withId;
 const pullFromRoots = require('../util/query').pullFromRoots;
+const searchMixin = {name:1};
 
 const withQt = (qt, unit) => {
     return qt ? {qt, unit} : {}
@@ -30,7 +31,7 @@ const pushFacet = (facet) => ({$push: {facets: facet}});
 const pushRoot = (rootId, qt, unit) => ({$push: {ressources: {...withId(rootId), ...withQt(qt, unit)}}});
 
 
-const setQt = qt => ({$set: {qt}});
+const setQt = qt => ({$set: {quantity:{qt}}});
 const setPrice = price => ({$set: {price}});
 const setQuantity = quantity => ({$set: {quantity}});
 const setName = name => ({$set: {name, name_lower:name.toLowerCase()}});
@@ -38,12 +39,12 @@ const setName = name => ({$set: {name, name_lower:name.toLowerCase()}});
 
 const getHeader = async (id) => (await trunks()).findOne(withId(id), headerFields);
 
-const qt = async (id) => (await ((await trunks()).findOne(withId(id), qtField))).qt;
+const quantity = async (id) => (await ((await trunks()).findOne(withId(id), qtField))).quantity.qt;
 
 const upsertQt = async (trunkId, qt) => (await trunks()).update(withId(trunkId), setQt(qt), unstrict);
 
 const adaptQt = async ({trunk, root}) => {
-    let trunkQt = await qt(trunk._id);
+    let trunkQt = await quantity(trunk._id);
     if (!trunkQt) {
         await upsertQt(trunk._id, trunk.qt);
         trunkQt = trunk.qt;
@@ -60,7 +61,8 @@ const upsertRoot = async (root) => {
 const setRootQtUnit = async ({trunk, root}) => upsertRoot({
     trunkId: trunk._id,
     rootId: root._id,
-    qt: await adaptQt({trunk, root})
+    qt: await adaptQt({trunk, root}),
+    unit: root.unit
 });
 
 const addFacet = async ({treeId, facet}) => (await trunks()).update(withId(treeId), pushFacet(facet));
@@ -83,7 +85,7 @@ const putall = async (data) => {
     return col.find().toArray();
 };
 
-const createOrClone = ({sourceId, qt, unit, name}) => sourceId ? clone(sourceId) : create({qt, unit, name});
+const createOrClone = ({sourceId, name}) => sourceId ? clone(sourceId) : create({name});
 
 const clone = async sourceId => create(anonymize(await simpleGet(sourceId)));
 
@@ -100,7 +102,7 @@ const create = async trunk => getHeader((await (await trunks()).insertOne({...tr
 const remove = async id => (await trunks()).deleteOne(withId(id));
 
 const search = async (grandeur, name) => (await trunks())
-    .find({name_lower: {$regex: `^${name.toLowerCase()}.*`}, grandeur: grandeur || undefined})
+    .find({name_lower: {$regex: `^${name.toLowerCase()}.*`}, grandeur: grandeur || undefined}, searchMixin)
     .sort({name_lower: 1})
     .toArray();
 

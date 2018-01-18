@@ -14,8 +14,6 @@ router.post('/api/trunks/all',
 
 router.post('/api/trunk',
     [
-        check('qt').optional().isDecimal(),
-        check('unit').optional().isIn(units.shortnames),
         check('name').optional().matches(/^.+/),
         check('sourceId').optional().isMongoId(),
         check('sourceId', 'body.name OR sourceId must be defined').custom((sourceId, {req}) => {
@@ -26,29 +24,6 @@ router.post('/api/trunk',
         })
     ],
     run(trunks.createOrClone)
-);
-
-router.post('/api/root',
-    [
-        check('trunkId').exists().isMongoId(),
-        check('rootId').exists().isMongoId(),
-    ],
-
-    run(trunks.addRoot)
-);
-
-router.post('/api/root/qtunit',
-    [
-        check('trunk._id').exists().isMongoId(),
-        check('trunk.qt').optional().exists().isDecimal(),
-        check('root._id').exists().isMongoId(),
-        check('root.qt').exists().isDecimal(),
-
-        check('root._id', 'root._id and trunk.id must be different').custom((root, {req}) => root._id !== req.body.trunk._id),
-        check('trunk._id', 'specified trunk doesn\'t exist').custom(trunks.contains),
-        check('root._id', 'specified root doesn\'t exist').custom(trunks.contains)
-    ],
-    run(trunks.setRootQtUnit)
 );
 
 router.post('/api/trunk/facet',

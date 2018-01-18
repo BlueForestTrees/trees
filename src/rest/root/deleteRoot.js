@@ -6,12 +6,10 @@ const trunks = require('../../service/trunks');
 
 module.exports = router;
 
-router.delete('/api/trunk/:id',
+router.delete('/api/root/:trunkId/:rootId',
     [
-        check('id').exists().isMongoId(),
+        check('trunkId').exists().isMongoId(),
+        check('rootId').exists().isMongoId()
     ],
-    run(({id})=>trunks.remove(id))
+    run(trunks.removeRoot)
 );
-
-router.delete('/api/trunks', run(trunks.purge));
-

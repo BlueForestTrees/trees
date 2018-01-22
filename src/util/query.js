@@ -4,6 +4,7 @@ const mongo = require('mongodb');
 const object = id => new mongo.ObjectID(id);
 
 const withId = id => ({_id: object(id)});
+const withRootId = id => ({ressources:withId(id)});
 
 const objects = ids => _.map(ids, object);
 
@@ -14,5 +15,5 @@ const pullFromRoots = (id) => ({$pull: {ressources: withId(id)}});
 const pullFromFacets = (facetIds) => ({$pull: {facets: withIdIn(facetIds)}});
 
 module.exports = {
-    withId, pullFromFacets, pullFromRoots
+    withId, pullFromFacets, pullFromRoots, withRootId
 };

@@ -53,20 +53,9 @@ const adaptQt = async ({trunk, root}) => {
     return root.qt * (trunkQt / trunk.qt);
 };
 
-const upsertRoot = async (root) => {
-    await removeRoot(root);
-    await addRoot(root);
-};
 
-const setRootQtUnit = async ({trunk, root}) => upsertRoot({
-    trunkId: trunk._id,
-    rootId: root._id,
-    qt: await adaptQt({trunk, root}),
-    unit: root.unit
-});
 
 const addFacet = async ({treeId, facet}) => (await trunks()).update(withId(treeId), pushFacet(facet));
-const addRoot = async ({trunkId, rootId, qt, unit}) => (await trunks()).update(withId(trunkId), pushRoot(rootId, qt, unit));
 const removeRoot = async ({trunkId, rootId}) => (await trunks()).update(withId(trunkId), pullFromRoots(rootId));
 const trunkNotFound = _id => {
     throw new Error(`trunk not found: ${_id}`)
@@ -115,8 +104,27 @@ const upsertQuantity = async ({treeId, quantity}) => (await trunks()).update(wit
 
 const updateName = async ({_id, name}) => (await trunks()).update(withId(_id), setName(name));
 
+
+
+
+
+const addRoot = async ({trunkId, rootId, qt, unit}) => (await trunks()).update(withId(trunkId), pushRoot(rootId, qt, unit));
+const setRootQtUnit = async ({trunk, root}) => upsertRoot({
+    trunkId: trunk._id,
+    rootId: root._id,
+    qt: await adaptQt({trunk, root}),
+    unit: root.unit
+});
+const upsertRoot = async (root) => {
+    await removeRoot(root);
+    await addRoot(root);
+};
+
+
+
+
+
 module.exports = {
-    addRoot,
     all,
     contains: getHeader,
     createOrClone,
@@ -128,9 +136,10 @@ module.exports = {
     removeRoot,
     search,
     lookup,
-    setRootQtUnit,
+    addRoot,
     updateName,
     addFacet,
     upsertPrice,
-    upsertQuantity
+    upsertQuantity,
+    upsertRoot:setRootQtUnit
 };

@@ -1,4 +1,4 @@
-import {pullFromRoots, withId, withRootId} from "../util/query";
+import {pullFromRoots, pushRoot, withId} from "../util/query";
 import {treefy} from "./transforms";
 import db from "../repo/db";
 
@@ -6,10 +6,6 @@ const trunks = async () => (await db).collection('Trees');
 const headerFields = {qt: 1, unit: 1, name: 1};
 const qtField = {quantity: 1, _id: 0};
 const searchMixin = {name: 1};
-
-const withQtUnit = (qt, unit) => {
-    return qt ? {qt, unit} : {}
-};
 
 const unstrict = {strict: false};
 const graphLookup = {
@@ -28,7 +24,6 @@ const setQt = qt => ({$set: {quantity: {qt}}});
 const setPrice = price => ({$set: {price}});
 const setQuantity = quantity => ({$set: {quantity}});
 const setName = name => ({$set: {name, name_lower: name.toLowerCase()}});
-const setRoot = ({_id, qt, unit}) => ({$set: {"ressources.$": {...withId(_id), ...withQtUnit(qt, unit)}}});
 
 
 const trunkService = {
@@ -44,7 +39,6 @@ const trunkService = {
     upsertPrice: async ({treeId, price}) => (await trunks()).update(withId(treeId), setPrice(price)),
     upsertQuantity: async ({treeId, quantity}) => (await trunks()).update(withId(treeId), setQuantity(quantity)),
     remove: async id => (await trunks()).deleteOne(withId(id)),
-    removeRoot: async ({trunkId, rootId}) => (await trunks()).update(withId(trunkId), pullFromRoots(rootId)),
 
     putall: async (data) => {
         const col = await trunks();
@@ -58,17 +52,24 @@ const trunkService = {
         .sort({name_lower: 1})
         .toArray(),
 
-    upsertRoot: async ({trunk, root}) => {
 
-        let query = {...withId(trunk._id), ...withRootId(root._id)};
-        let update = setRoot({_id: root._id, ...await adaptQtUnit(trunk, root)});
-        let options = {upsert : true};
+    removeAddRoot : async (root) => {
+        await trunkService.removeRoot(root);
+        return await trunkService.addRoot(root);
+    },
+    removeRoot: async ({trunkId, rootId}) => (await trunks()).update(withId(trunkId), pullFromRoots(rootId)),
+    addRoot : async ({trunkId, rootId, qt, unit}) => (await trunks()).update(withId(trunkId), pushRoot(rootId, qt, unit)),
 
-        console.log(query, update);
+    upsertRoot : async ({trunk, root}) => trunkService.removeAddRoot({
+        trunkId: trunk._id,
+        rootId: root._id,
+        ...await adaptQtUnit(trunk, root)
+    })
 
-        return (await trunks()).update(query,update, options);
-    }
+
 };
+
+
 
 
 const adaptQtUnit = async (trunk, root) => {

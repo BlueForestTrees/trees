@@ -29,7 +29,7 @@ const setName = name => ({$set: {name, name_lower: name.toLowerCase()}});
 const trunkService = {
     getNoMap: getRessourcesGraph,
     all: async () => (await trunks()).find({}).toArray(),
-    contains: async _id => !!getHead(_id),
+    contains: async _id => getHead(_id),
     createOrClone: ({sourceId, name}) => sourceId ? clone(sourceId) : create({name}),
     get: async (_id, qt) => treefy(qt, await getRessourcesGraph(_id)),
     purge: async () => (await trunks()).deleteMany(),

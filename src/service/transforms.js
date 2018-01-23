@@ -1,4 +1,5 @@
-const _ = require('lodash');
+import _ from 'lodash';
+
 const cached = (_id, cache) => _.find(cache, (e => e._id.equals(_id)));
 
 const buildRoots = (coef, ressources, cache) => {
@@ -19,14 +20,12 @@ const buildRoots = (coef, ressources, cache) => {
     return roots;
 };
 
-module.exports = {
-    treefy: (qt, dbTree) => ({
-        _id: dbTree._id,
-        name: dbTree.name,
-        qt: qt ? qt : dbTree.qt || null,
-        quantity: dbTree.quantity,
-        price: dbTree.price,
-        roots: buildRoots(qt ? qt / dbTree.qt : 1, dbTree.ressources, dbTree.cache),
-        facets: dbTree.facets
-    })
-};
+export const treefy = (qt, dbTree) => ({
+    _id: dbTree._id,
+    name: dbTree.name,
+    qt: qt ? qt : dbTree.qt || null,
+    quantity: dbTree.quantity,
+    price: dbTree.price,
+    roots: buildRoots(qt ? qt / dbTree.qt : 1, dbTree.ressources, dbTree.cache),
+    facets: dbTree.facets
+});

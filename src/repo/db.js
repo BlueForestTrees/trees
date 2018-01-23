@@ -1,11 +1,11 @@
-const mongo = require('mongodb');
+import {MongoClient} from 'mongodb';
 
 async function connect(){
     try {
-        return await mongo.MongoClient.connect('mongodb://localhost/TreeDB')
+        return await MongoClient.connect('mongodb://localhost/TreeDB')
     }catch(e){
         console.error(e);
     }
 }
 
-module.exports = connect();
+export default connect();

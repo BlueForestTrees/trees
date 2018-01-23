@@ -1,19 +1,13 @@
-const _ = require('lodash');
-const mongo = require('mongodb');
+import _ from 'lodash';
+import mongo from 'mongodb';
 
-const object = id => new mongo.ObjectID(id);
 
-const withId = id => ({_id: object(id)});
-const withRootId = id => ({ressources:withId(id)});
+export const object = id => new mongo.ObjectID(id);
+export const objects = ids => _.map(ids, object);
 
-const objects = ids => _.map(ids, object);
+export const withId = id => ({_id: object(id)});
+export const withIdIn = ids => ({_id: {$in: objects(ids)}});
+export const withRootId = id => ({"ressources._id": object(id)});
 
-const withIdIn = ids => ({_id:{$in: objects(ids)}});
-
-const pullFromRoots = (id) => ({$pull: {ressources: withId(id)}});
-
-const pullFromFacets = (facetIds) => ({$pull: {facets: withIdIn(facetIds)}});
-
-module.exports = {
-    withId, pullFromFacets, pullFromRoots, withRootId
-};
+export const pullFromFacets = facetIds => ({$pull: {facets: withIdIn(facetIds)}});
+export const pullFromRoots = id => ({$pull: {ressources: withId(id)}});

@@ -1,3 +1,5 @@
+import {existingId} from "../../const/validations";
+
 const run = require('../../util/run');
 const router = require('express').Router();
 const {check} = require('express-validator/check');
@@ -27,23 +29,23 @@ router.get('/api/trunk',
 
 router.get('/api/trunk/:_id',
     [
-        check('_id').exists().isMongoId()
+        existingId
     ],
     run(({_id}) => trunks.get(_id))
 );
 
 router.get('/api/trunk/:qt/:_id',
     [
-        check('_id').exists().isMongoId(),
+        existingId,
         check('qt').isDecimal()
     ],
     run(({_id, qt}) => trunks.get(_id, qt))
 );
 
 
-router.get('/api/nomaptrunk/:id',
+router.get('/api/nomaptrunk/:_id',
     [
-        check('id').exists().isMongoId()
+        existingId
     ],
-    run(({id}) => trunks.getNoMap(id))
+    run(({_id}) => trunks.getNoMap(_id))
 );

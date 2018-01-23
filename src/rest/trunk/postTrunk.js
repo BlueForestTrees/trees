@@ -1,8 +1,11 @@
+import {EITHER_OR, IS_PRESENT_VALID_FOUND} from "../../const/messages";
+import {validTreeId} from "../../const/validations";
+
 const run = require('../../util/run');
 const runraw = require('../../util/runraw');
 const _ = require('lodash');
 const router = require('express').Router();
-const {check} = require('express-validator/check');
+const {check, oneOf} = require('express-validator/check');
 const units = require('../../service/grandeurs');
 const trunks = require('../../service/trunks');
 
@@ -15,20 +18,19 @@ router.post('/api/trunks/all',
 router.post('/api/trunk',
     [
         check('name').optional().matches(/^.+/),
-        check('sourceId').optional().isMongoId(),
-        check('sourceId', 'body.name OR sourceId must be defined').custom((sourceId, {req}) => {
-            const noBody = _.isEmpty(req.body);
-            const noSourceId = !sourceId;
+        check('sourceId', IS_PRESENT_VALID_FOUND).optional().isMongoId().custom(trunks.contains),
 
-            return (!noBody && noSourceId) || (noBody && !noSourceId)
-        })
+        oneOf([
+            [check('name').exists(), check('sourceId').not().exists()],
+            [check('name').not().exists(), check('sourceId').exists()]
+        ],EITHER_OR)
     ],
     run(trunks.createOrClone)
 );
 
 router.post('/api/trunk/facet',
     [
-        check('treeId').exists().isMongoId(),
+        validTreeId,
         check('facet._id').isMongoId(),
         check('facet.qt').isDecimal(),
         check('facet.unit').isIn(units.shortnames),
@@ -39,7 +41,7 @@ router.post('/api/trunk/facet',
 
 router.post('/api/trunk/price',
     [
-        check('treeId').exists().isMongoId(),
+        validTreeId,
         check('price').isDecimal()
     ],
     run(trunks.upsertPrice)
@@ -47,7 +49,7 @@ router.post('/api/trunk/price',
 
 router.post('/api/trunk/quantity',
     [
-        check('treeId').exists().isMongoId(),
+        validTreeId,
         check('quantity.qt').isDecimal(),
         check('quantity.unit').isIn(units.shortnames)
     ],

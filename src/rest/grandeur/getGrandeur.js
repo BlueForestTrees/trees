@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const json = require('../../util/run');
+const run = require('../../util/run');
 const {grandeurs} = require('../../service/grandeurs');
 
-router.get('/api/grandeurs', json(async () => {
-    return grandeurs;
-}));
+router.get('/api/grandeurs',
+    run(() => grandeurs)
+);
 
 module.exports = router;

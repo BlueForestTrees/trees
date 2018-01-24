@@ -13,6 +13,12 @@ export class GrandeurMismatchError extends Error {
     }
 }
 
+export class NoUnitError extends Error {
+    constructor(shortname, ...params) {
+        super(`no unit with this shortname: '${shortname}'`, ...params);
+    }
+}
+
 
 export function TrunkUnitInvalidError(message, nested) {
     NestedError.call(this, message, nested);

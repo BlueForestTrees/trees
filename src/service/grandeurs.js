@@ -1,4 +1,4 @@
-import {erreurDifferenteGrandeurs} from "../exceptions/Errors";
+import {erreurDifferenteGrandeurs, NoUnitError} from "../exceptions/Errors";
 
 const _ = require('lodash');
 
@@ -66,7 +66,7 @@ _.forEach(_grandeurs, (units, grandeurName) => {
 });
 
 const unitNotFound = shortname => {
-    throw Error(`no unit with this shortname: '${shortname}'`);
+    throw new NoUnitError(shortname);
 };
 
 export const units = _.chain(_grandeurs).values().flatten().keyBy('shortname').value();
@@ -76,7 +76,8 @@ export const shortnames = Object.keys(units);
 export const unit = shortname => _.find(units, {shortname}) || unitNotFound(shortname);
 export const grandeur = shortname => unit(shortname).grandeur;
 export const checkGrandeur = (leftShortname,rightShortname) => unit(leftShortname).grandeur === unit(rightShortname).grandeur || erreurDifferenteGrandeurs(leftShortname, rightShortname);
-export const unitCoef = (leftShortname, rightShortname) => checkGrandeur(leftShortname, rightShortname) || unit(leftShortname).coef / unit(rightShortname).coef;
+
+export const unitCoef = (leftShortname, rightShortname) => checkGrandeur(leftShortname, rightShortname) && unit(leftShortname).coef / unit(rightShortname).coef;
 
 //TODO ici il faut exprimer les deux trunk qt dans la même unité puis faire la division
 export const qtUnitCoef = ({qt:leftQt, unit:leftUnit}, {qt:rightQt, unit:rightUnit}) => leftQt / rightQt * unitCoef(leftUnit, rightUnit);

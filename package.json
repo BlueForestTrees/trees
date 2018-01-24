@@ -16,7 +16,11 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-3": "^6.24.1",
     "babel-register": "^6.26.0",
-    "nodemon": "^1.14.11"
+    "chai": "^4.1.2",
+    "mocha": "^5.0.0",
+    "nodemon": "^1.14.11",
+    "nyc": "^11.4.1",
+    "sinon": "^4.2.1"
   },
   "dependencies": {
     "babel-plugin-transform-builtin-extend": "^1.1.2",

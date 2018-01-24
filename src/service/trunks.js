@@ -72,7 +72,10 @@ const trunkService = {
 
 
 
-const getSertQuantity = async trunk => {
+export const getQuantity = async (id) => (await ((await trunks()).findOne(withId(id), qtField))).quantity;
+export const upsertQuantity = async (trunkId, quantity) => (await trunks()).update(withId(trunkId), ({$set: {quantity}}), unstrict);
+
+export const getSertQuantity = async trunk => {
     const qt = await getQuantity(trunk._id);
     if(qt) {
         console.log("qt found", qt);
@@ -87,19 +90,15 @@ const getSertQuantity = async trunk => {
 const adaptQtUnit = async (trunk, root) => {
 
     let dbTrunkQt = await getSertQuantity(trunk);
-
     let trunkCoef = 0;
 
     try{
-        console.log("qtUnitCoef",dbTrunkQt, trunk.quantity);
         trunkCoef = qtUnitCoef(dbTrunkQt, trunk.quantity);
     }catch(e){
         if(e instanceof GrandeurMismatchError){
             throw new TrunkUnitInvalidError(`unité de trunk incompatible`,e);
         }
     }
-
-    console.log(trunkCoef);
 
     return {qt: trunkCoef * root.quantity.qt, unit: root.quantity.unit};
 };
@@ -123,8 +122,6 @@ const simpleGet = async _id => (await trunks()).findOne(withId(_id));
 const trunkNotFound = _id => {
     throw new Error(`trunk not found: ${_id}`)
 };
-const getQuantity = async (id) => (await ((await trunks()).findOne(withId(id), qtField))).quantity;
-const upsertQuantity = async (trunkId, quantity) => (await trunks()).update(withId(trunkId), ({$set: {quantity}}), unstrict);
 const getHead = async (id) => (await trunks()).findOne(withId(id), headerFields);
 
 

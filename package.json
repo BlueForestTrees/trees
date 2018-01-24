@@ -19,6 +19,7 @@
     "nodemon": "^1.14.11"
   },
   "dependencies": {
+    "babel-plugin-transform-builtin-extend": "^1.1.2",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
@@ -27,7 +28,8 @@
     "fs-readdir-recursive": "^1.1.0",
     "lodash": "^4.17.4",
     "mongodb": "^2.2.33",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "nested-error-stacks": "^2.0.0"
   },
   "babel": {
     "presets": [
@@ -35,7 +37,16 @@
       "stage-3"
     ],
     "plugins": [
-      "transform-runtime"
+      "transform-runtime",
+      [
+        "transform-builtin-extend",
+        {
+          "globals": [
+            "Error",
+            "Array"
+          ]
+        }
+      ]
     ],
     "env": {
       "test": {

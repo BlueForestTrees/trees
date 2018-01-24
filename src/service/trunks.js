@@ -1,6 +1,8 @@
 import {pullFromRoots, pushRoot, withId} from "../util/query";
 import {treefy} from "./transforms";
 import db from "../repo/db";
+import {qtUnitCoef} from "./grandeurs";
+import {GrandeurMismatchError, TrunkUnitInvalidError} from "../exceptions/Errors";
 
 const trunks = async () => (await db).collection('Trees');
 const headerFields = {qt: 1, unit: 1, name: 1};
@@ -20,7 +22,6 @@ const graphLookup = {
 };
 const matchId = (_id) => ({$match: withId(_id)});
 const pushFacet = (facet) => ({$push: {facets: facet}});
-const setQt = qt => ({$set: {quantity: {qt}}});
 const setPrice = price => ({$set: {price}});
 const setQuantity = quantity => ({$set: {quantity}});
 const setName = name => ({$set: {name, name_lower: name.toLowerCase()}});
@@ -71,31 +72,37 @@ const trunkService = {
 
 
 
+const getSertQuantity = async trunk => {
+    const qt = await getQuantity(trunk._id);
+    if(qt) {
+        console.log("qt found", qt);
+        return qt;
+    }else{
+        console.log("qt inserted", trunk.quantity);
+        await upsertQuantity(trunk._id, trunk.quantity);
+        return trunk.quantity;
+    }
+};
 
 const adaptQtUnit = async (trunk, root) => {
 
-    console.log("adaptQt trunk", trunk);
-    console.log("adaptQt root", root);
+    let dbTrunkQt = await getSertQuantity(trunk);
 
-    let trunkQt = await quantity(trunk._id);
-    if (!trunkQt) {
+    let trunkCoef = 0;
 
-        console.log("no trunkQt in base, setting it to", trunk.quantity.qt);
-
-        trunkQt = trunk.quantity.qt;
-
-        await upsertQt(trunk._id, trunkQt);
-    } else {
-        console.log("trunkQt found in db: ", trunkQt);
+    try{
+        console.log("qtUnitCoef",dbTrunkQt, trunk.quantity);
+        trunkCoef = qtUnitCoef(dbTrunkQt, trunk.quantity);
+    }catch(e){
+        if(e instanceof GrandeurMismatchError){
+            throw new TrunkUnitInvalidError(`unité de trunk incompatible`,e);
+        }
     }
 
-    let rootQt = root.quantity.qt * (trunkQt / trunk.quantity.qt);
+    console.log(trunkCoef);
 
-    console.log(`root qt formula => ${root.quantity.qt} * (${trunkQt} / ${trunk.quantity.qt}) = ${rootQt}`);
-
-    return {qt: rootQt, unit: root.quantity.unit};
+    return {qt: trunkCoef * root.quantity.qt, unit: root.quantity.unit};
 };
-const upsertQt = async (trunkId, qt) => (await trunks()).update(withId(trunkId), setQt(qt), unstrict);
 
 const getRessourcesGraph = async _id => await (await trunks()).aggregate([matchId(_id), graphLookup]).next() || trunkNotFound(_id);
 
@@ -116,7 +123,8 @@ const simpleGet = async _id => (await trunks()).findOne(withId(_id));
 const trunkNotFound = _id => {
     throw new Error(`trunk not found: ${_id}`)
 };
-const quantity = async (id) => (await ((await trunks()).findOne(withId(id), qtField))).quantity.qt;
+const getQuantity = async (id) => (await ((await trunks()).findOne(withId(id), qtField))).quantity;
+const upsertQuantity = async (trunkId, quantity) => (await trunks()).update(withId(trunkId), ({$set: {quantity}}), unstrict);
 const getHead = async (id) => (await trunks()).findOne(withId(id), headerFields);
 
 

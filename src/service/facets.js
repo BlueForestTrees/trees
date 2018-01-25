@@ -1,6 +1,8 @@
-const db = require('../repo/db2');
-const trees = () => db('Trees');
-const facets = () => db('Facets');
+import {cols} from "../const/collections";
+
+const db = require('../repo/db');
+const trees = () => db(cols.TREES);
+const facets = () => db(cols.FACETS);
 const withId = require('../util/query').withId;
 const pullFromFacets = require('../util/query').pullFromFacets;
 

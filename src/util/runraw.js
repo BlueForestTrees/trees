@@ -1,25 +1,6 @@
-const mongo = require('mongodb');
-const object = id => new mongo.ObjectID(id);
-const _ = require('lodash');
+import {objId} from "./sanitize";
 
-const objId = (data) => {
-    _.forEach(data, trunk => {
-        trunk._id = object(trunk._id);
-        if(trunk.ressources) {
-            _.forEach(trunk.ressources, root => {
-                root._id = object(root._id);
-            })
-        }
-        if(trunk.facets) {
-            _.forEach(trunk.facets, root => {
-                root._id = object(root._id);
-            })
-        }
-    });
-    return data;
-};
-
-module.exports = function runraw(work) {
+export const runraw = work => {
     let validResultJson = async (req, res, next) => {
         res.json(await work(objId(req.body), res, next));
     };

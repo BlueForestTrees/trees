@@ -1,11 +1,12 @@
-import {MongoClient} from 'mongodb';
+import {dbname} from "../const/collections";
 
-async function connect(){
-    try {
-        return await MongoClient.connect('mongodb://localhost/TreeDB')
-    }catch(e){
-        console.error(e);
-    }
-}
+const mongo = require('mongodb');
 
-export default connect();
+let database = null;
+
+mongo.MongoClient.connect(`mongodb://localhost/${dbname}`, function (err, db) {
+    if (err) {throw err;}
+    database = db;
+});
+
+export const col = collectionName => database.collection(collectionName);

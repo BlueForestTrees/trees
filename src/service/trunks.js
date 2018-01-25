@@ -1,10 +1,11 @@
 import {pullFromRoots, pushRoot, withId} from "../util/query";
 import {treefy} from "./transforms";
-import db from "../repo/db";
 import {qtUnitCoef} from "./grandeurs";
 import {GrandeurMismatchError, TrunkUnitInvalidError} from "../exceptions/Errors";
+import {cols} from "../const/collections";
+import {col} from "../repo/db";
 
-const trunks = async () => (await db).collection('Trees');
+const trunks = () => col(cols.TREES);
 const headerFields = {qt: 1, unit: 1, name: 1};
 const qtField = {quantity: 1, _id: 0};
 const searchMixin = {name: 1};
@@ -29,34 +30,33 @@ const setName = name => ({$set: {name, name_lower: name.toLowerCase()}});
 
 const trunkService = {
     getNoMap: getRessourcesGraph,
-    all: async () => (await trunks()).find({}).toArray(),
-    contains: async _id => getHead(_id),
+    all: () => trunks().find({}).toArray(),
+    contains: _id => getHead(_id),
     createOrClone: ({sourceId, name}) => sourceId ? clone(sourceId) : create({name}),
     get: async (_id, qt) => treefy(qt, await getRessourcesGraph(_id)),
-    purgeTrunks: async () => (await trunks()).deleteMany(),
-    lookup: async name => (await trunks()).findOne({name}),
-    updateName: async ({_id, name}) => (await trunks()).update(withId(_id), setName(name)),
-    addFacet: async ({treeId, facet}) => (await trunks()).update(withId(treeId), pushFacet(facet)),
-    upsertPrice: async ({treeId, price}) => (await trunks()).update(withId(treeId), setPrice(price)),
-    upsertQuantity: async ({treeId, quantity}) => (await trunks()).update(withId(treeId), setQuantity(quantity)),
-    remove: async id => (await trunks()).deleteOne(withId(id)),
+    purgeTrunks: () => trunks().deleteMany(),
+    lookup: name => trunks().findOne({name}),
+    updateName: ({_id, name}) => trunks().update(withId(_id), setName(name)),
+    addFacet: ({treeId, facet}) => trunks().update(withId(treeId), pushFacet(facet)),
+    upsertPrice: ({treeId, price}) => trunks().update(withId(treeId), setPrice(price)),
+    upsertQuantity: ({treeId, quantity}) => trunks().update(withId(treeId), setQuantity(quantity)),
+    remove: id => trunks().deleteOne(withId(id)),
 
     putall: async (data) => {
-        const col = await trunks();
-        await col.remove();
-        await col.insert(data);
-        return col.find().toArray();
+        await trunks().remove();
+        await trunks().insert(data);
+        return trunks().find().toArray();
     },
 
-    searchOrAll: async (grandeur, name) => {
+    searchOrAll: (grandeur, name) => {
         if (grandeur || name) {
-            return trunkService.search(grandeur, name);
+            return trunkService.search({grandeur, name});
         } else {
             return trunkService.all();
         }
     },
 
-    search: async search => (await trunks())
+    search: search => trunks()
         .find({
             name_lower: {$regex: `^${search.name.toLowerCase()}.*`},
             grandeur: search.grandeur || undefined

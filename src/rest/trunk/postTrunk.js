@@ -1,8 +1,8 @@
 import {EITHER_OR, IS_PRESENT_VALID_FOUND} from "../../const/messages";
 import {validTreeId} from "../../const/validations";
+import {runraw} from "../../util/runraw";
 
 const run = require('../../util/run');
-const runraw = require('../../util/runraw');
 const _ = require('lodash');
 const router = require('express').Router();
 const {check, oneOf} = require('express-validator/check');

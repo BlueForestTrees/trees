@@ -30,7 +30,7 @@ const setName = name => ({$set: {name, name_lower: name.toLowerCase()}});
 
 const trunkService = {
     getNoMap: getRessourcesGraph,
-    all: () => trunks().find({}).toArray(),
+    all: () => trunks().find({},searchMixin).toArray(),
     contains: _id => getHead(_id),
     createOrClone: ({sourceId, name}) => sourceId ? clone(sourceId) : create({name}),
     get: async (_id, qt) => treefy(qt, await getRessourcesGraph(_id)),

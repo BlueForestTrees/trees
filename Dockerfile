@@ -6,7 +6,7 @@ WORKDIR /usr/api
 COPY package*.json ./
 RUN npm install
 
-COPY index.js .
+COPY src/index.js .
 COPY src/ ./src
 
 EXPOSE 8080

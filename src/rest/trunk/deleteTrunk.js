@@ -14,5 +14,5 @@ router.delete('/api/trunk/:id',
     run(({id})=>trunks.remove(id))
 );
 
-router.delete('/api/trunks', run(trunks.purge));
+router.delete('/api/trunks', run(trunks.purgeTrunks));
 

@@ -76,8 +76,5 @@ export const shortnames = Object.keys(units);
 export const unit = shortname => _.find(units, {shortname}) || unitNotFound(shortname);
 export const grandeur = shortname => unit(shortname).grandeur;
 export const checkGrandeur = (leftShortname,rightShortname) => unit(leftShortname).grandeur === unit(rightShortname).grandeur || erreurDifferenteGrandeurs(leftShortname, rightShortname);
-
 export const unitCoef = (leftShortname, rightShortname) => checkGrandeur(leftShortname, rightShortname) && unit(leftShortname).coef / unit(rightShortname).coef;
-
-//TODO ici il faut exprimer les deux trunk qt dans la même unité puis faire la division
 export const qtUnitCoef = ({qt:leftQt, unit:leftUnit}, {qt:rightQt, unit:rightUnit}) => leftQt / rightQt * unitCoef(leftUnit, rightUnit);

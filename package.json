@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "start": "nodemon $NODE_DEBUG_OPTION src/index.js --exec babel-node",
+    "build": "babel lib -d dist",
+    "serve": "node dist/index.js"
+  },
   "name": "api",
   "version": "0.0.0",
   "private": true,
@@ -30,11 +35,6 @@
     "mongodb": "^2.2.33",
     "morgan": "^1.9.0",
     "nested-error-stacks": "^2.0.0"
-  },
-  "scripts": {
-    "start": "nodemon index.js --exec babel-node",
-    "build": "babel lib -d dist",
-    "serve": "node dist/index.js"
   },
   "babel": {
     "presets": [

@@ -33,7 +33,7 @@ const trunkService = {
     contains: async _id => getHead(_id),
     createOrClone: ({sourceId, name}) => sourceId ? clone(sourceId) : create({name}),
     get: async (_id, qt) => treefy(qt, await getRessourcesGraph(_id)),
-    purge: async () => (await trunks()).deleteMany(),
+    purgeTrunks: async () => (await trunks()).deleteMany(),
     lookup: async name => (await trunks()).findOne({name}),
     updateName: async ({_id, name}) => (await trunks()).update(withId(_id), setName(name)),
     addFacet: async ({treeId, facet}) => (await trunks()).update(withId(treeId), pushFacet(facet)),
@@ -48,20 +48,31 @@ const trunkService = {
         return col.find().toArray();
     },
 
-    search: async (grandeur, name) => (await trunks())
-        .find({name_lower: {$regex: `^${name.toLowerCase()}.*`}, grandeur: grandeur || undefined}, searchMixin)
+    searchOrAll: async (grandeur, name) => {
+        if (grandeur || name) {
+            return trunkService.search(grandeur, name);
+        } else {
+            return trunkService.all();
+        }
+    },
+
+    search: async search => (await trunks())
+        .find({
+            name_lower: {$regex: `^${search.name.toLowerCase()}.*`},
+            grandeur: search.grandeur || undefined
+        }, searchMixin)
         .sort({name_lower: 1})
         .toArray(),
 
 
-    removeAddRoot : async (root) => {
+    removeAddRoot: async (root) => {
         await trunkService.removeRoot(root);
         return await trunkService.addRoot(root);
     },
     removeRoot: async ({trunkId, rootId}) => (await trunks()).update(withId(trunkId), pullFromRoots(rootId)),
-    addRoot : async ({trunkId, rootId, qt, unit}) => (await trunks()).update(withId(trunkId), pushRoot(rootId, qt, unit)),
+    addRoot: async ({trunkId, rootId, qt, unit}) => (await trunks()).update(withId(trunkId), pushRoot(rootId, qt, unit)),
 
-    upsertRoot : async ({trunk, root}) => trunkService.removeAddRoot({
+    upsertRoot: async ({trunk, root}) => trunkService.removeAddRoot({
         trunkId: trunk._id,
         rootId: root._id,
         ...await adaptQtUnit(trunk, root)
@@ -71,16 +82,15 @@ const trunkService = {
 };
 
 
-
 export const getQuantity = async (id) => (await ((await trunks()).findOne(withId(id), qtField))).quantity;
 export const upsertQuantity = async (trunkId, quantity) => (await trunks()).update(withId(trunkId), ({$set: {quantity}}), unstrict);
 
 export const getSertQuantity = async trunk => {
     const qt = await getQuantity(trunk._id);
-    if(qt) {
+    if (qt) {
         console.log("qt found", qt);
         return qt;
-    }else{
+    } else {
         console.log("qt inserted", trunk.quantity);
         await upsertQuantity(trunk._id, trunk.quantity);
         return trunk.quantity;
@@ -92,11 +102,11 @@ const adaptQtUnit = async (trunk, root) => {
     let dbTrunkQt = await getSertQuantity(trunk);
     let trunkCoef = 0;
 
-    try{
+    try {
         trunkCoef = qtUnitCoef(dbTrunkQt, trunk.quantity);
-    }catch(e){
-        if(e instanceof GrandeurMismatchError){
-            throw new TrunkUnitInvalidError(`unité de trunk incompatible`,e);
+    } catch (e) {
+        if (e instanceof GrandeurMismatchError) {
+            throw new TrunkUnitInvalidError(`unité de trunk incompatible`, e);
         }
     }
 
@@ -106,10 +116,14 @@ const adaptQtUnit = async (trunk, root) => {
 const getRessourcesGraph = async _id => await (await trunks()).aggregate([matchId(_id), graphLookup]).next() || trunkNotFound(_id);
 
 const clone = async sourceId => create(anonymize(await simpleGet(sourceId)));
-const create = async trunk => getHead((await (await trunks()).insertOne({
-    ...trunk,
-    name_lower: trunk.name.toLowerCase()
-})).ops[0]._id);
+const create = async trunk => getHead(
+    (
+        await (await trunks()).insertOne({
+            ...trunk,
+            name_lower: trunk.name.toLowerCase()
+        })
+    ).ops[0]._id);
+
 const anonymize = tree => {
     delete tree._id;
     tree.name = `${tree.name}_copy`;

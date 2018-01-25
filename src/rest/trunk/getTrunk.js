@@ -8,16 +8,12 @@ const trunks = require('../../service/trunks');
 
 module.exports = router;
 
-router.get('/api/trunks/all',
-    run(trunks.all)
-);
-
 router.get('/api/trunks',
     [
         check('g').optional().isIn(units.grandeurs),
-        check('q').exists()
+        check('q').optional().exists()
     ],
-    run(({g, q}) => trunks.search(g, q))
+    run(({g, q}) => trunks.searchOrAll(g, q))
 );
 
 router.get('/api/trunk',

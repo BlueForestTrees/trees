@@ -24,7 +24,7 @@ module.exports = {
 
     add: async facet => (await get(facet.name) || {_id: await facets().insertOne(facet).insertedId, ...facet}),
 
-    purge: async () => await facets().deleteMany(),
+    purgeFacets: async () => await facets().deleteMany(),
 
     deleteFacets,
 

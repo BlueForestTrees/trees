@@ -1,8 +1,8 @@
-import {objId} from "./sanitize";
+import {addObjects} from "./addObjectID";
 
 export const runraw = work => {
     let validResultJson = async (req, res, next) => {
-        res.json(await work(objId(req.body), res, next));
+        res.json(await work(addObjects(req.body), res, next));
     };
 
     return (req, res, next) => {

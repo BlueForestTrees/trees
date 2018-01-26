@@ -2,7 +2,7 @@ import {
     ALL_OR_NONE, IS_VALID_UNIT, IS_DECIMAL,
     SHOULD_BE_DEFINED, SHOULD_NOT_BE_DEFINED
 } from "../../const/messages";
-import {ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT} from "../../const/paths";
+import {ROOT_QT, ROOT_QUANTITY, ROOT_UNIT, TRUNK_QT, TRUNK_QUANTITY, TRUNK_UNIT} from "../../const/paths";
 import {existingRootId, rootIdIsNotTrunkId, existingTrunkId} from "../../const/validations";
 
 const run = require('../../util/run');

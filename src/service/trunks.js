@@ -10,7 +10,6 @@ const headerFields = {qt: 1, unit: 1, name: 1};
 const qtField = {quantity: 1, _id: 0};
 const searchMixin = {name: 1};
 
-const unstrict = {strict: false};
 const graphLookup = {
     $graphLookup: {
         from: "Trees",
@@ -23,23 +22,24 @@ const graphLookup = {
 };
 const matchId = (_id) => ({$match: withId(_id)});
 const pushFacet = (facet) => ({$push: {facets: facet}});
-const setPrice = price => ({$set: {price}});
-const setQuantity = quantity => ({$set: {quantity}});
 const setName = name => ({$set: {name, name_lower: name.toLowerCase()}});
-
+const updateName = ({_id, name}) => trunks().update(withId(_id), setName(name));
 
 const trunkService = {
     getNoMap: getRessourcesGraph,
-    all: () => trunks().find({},searchMixin).toArray(),
+    all: () => trunks().find({}).toArray(),
     contains: _id => getHead(_id),
     createOrClone: ({sourceId, name}) => sourceId ? clone(sourceId) : create({name}),
     get: async (_id, qt) => treefy(qt, await getRessourcesGraph(_id)),
     purgeTrunks: () => trunks().deleteMany(),
     lookup: name => trunks().findOne({name}),
-    updateName: ({_id, name}) => trunks().update(withId(_id), setName(name)),
+    update: async ({_id, name, quantity}) => {
+        if (name)
+            return await updateName({_id, name});
+        else if (quantity)
+            return await upsertQuantity({_id, quantity});
+    },
     addFacet: ({treeId, facet}) => trunks().update(withId(treeId), pushFacet(facet)),
-    upsertPrice: ({treeId, price}) => trunks().update(withId(treeId), setPrice(price)),
-    upsertQuantity: ({treeId, quantity}) => trunks().update(withId(treeId), setQuantity(quantity)),
     remove: id => trunks().deleteOne(withId(id)),
 
     putall: async (data) => {
@@ -81,22 +81,6 @@ const trunkService = {
 
 };
 
-
-export const getQuantity = async (id) => (await ((await trunks()).findOne(withId(id), qtField))).quantity;
-export const upsertQuantity = async (trunkId, quantity) => (await trunks()).update(withId(trunkId), ({$set: {quantity}}), unstrict);
-
-export const getSertQuantity = async trunk => {
-    const qt = await getQuantity(trunk._id);
-    if (qt) {
-        console.log("qt found", qt);
-        return qt;
-    } else {
-        console.log("qt inserted", trunk.quantity);
-        await upsertQuantity(trunk._id, trunk.quantity);
-        return trunk.quantity;
-    }
-};
-
 const adaptQtUnit = async (trunk, root) => {
 
     let dbTrunkQt = await getSertQuantity(trunk);
@@ -113,7 +97,23 @@ const adaptQtUnit = async (trunk, root) => {
     return {qt: trunkCoef * root.quantity.qt, unit: root.quantity.unit};
 };
 
-const getRessourcesGraph = async _id => await (await trunks()).aggregate([matchId(_id), graphLookup]).next() || trunkNotFound(_id);
+export const getQuantity = async (id) => (await ((await trunks()).findOne(withId(id), qtField))).quantity;
+
+export const upsertQuantity = ({_id, quantity}) => trunks().update(withId(_id), ({$set: {quantity}}));
+
+export const getSertQuantity = async trunk => {
+    const qt = await getQuantity(trunk._id);
+    if (qt) {
+        return qt;
+    } else if (trunk.quantity.qt && trunk.quantity.unit) {
+        await upsertQuantity({_id:trunk._id, quantity:trunk.quantity});
+        return trunk.quantity;
+    } else {
+        return {};
+    }
+};
+
+const getRessourcesGraph = _id => trunks().aggregate([matchId(_id), graphLookup]).next() || trunkNotFound(_id);
 
 const clone = async sourceId => create(anonymize(await simpleGet(sourceId)));
 const create = async trunk => getHead(

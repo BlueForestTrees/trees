@@ -1,0 +1,1 @@
+export const oneModifiedResponse = {n: 1, nModified: 1, ok: 1};

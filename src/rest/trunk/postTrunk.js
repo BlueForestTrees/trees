@@ -38,20 +38,3 @@ router.post('/api/trunk/facet',
     ],
     run(trunks.addFacet)
 );
-
-router.post('/api/trunk/price',
-    [
-        validTreeId,
-        check('price').isDecimal()
-    ],
-    run(trunks.upsertPrice)
-);
-
-router.post('/api/trunk/quantity',
-    [
-        validTreeId,
-        check('quantity.qt').isDecimal(),
-        check('quantity.unit').isIn(units.shortnames)
-    ],
-    run(trunks.upsertQuantity)
-);

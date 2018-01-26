@@ -9,7 +9,7 @@ import read from 'fs-readdir-recursive';
 import _ from 'lodash';
 
 const app = express();
-app.use(logger('dev'));
+app.use(logger(':status :method :url :response-time ms - :res[content-length]'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
@@ -19,7 +19,7 @@ read(path.join(__dirname, "rest")).forEach(function (file) {
 });
 
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
+    const err = new Error('Not Found');
     err.status = 404;
     next(err);
 });

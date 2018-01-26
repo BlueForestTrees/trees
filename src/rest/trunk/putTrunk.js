@@ -1,4 +1,8 @@
 import {validId} from "../../const/validations";
+import {NAME, QUANTITY} from "../../const/paths";
+import {SHOULD_BE_DEFINED, SHOULD_NOT_BE_DEFINED} from "../../const/messages";
+
+const {oneOf} = require('express-validator/check');
 
 const run = require('../../util/run');
 const router = require('express').Router();
@@ -10,7 +14,16 @@ module.exports = router;
 router.put('/api/trunk/:_id',
     [
         validId,
-        check('name', 'name is mandatory').exists().matches(/^.+/)
+        oneOf([
+            [
+                check(NAME, SHOULD_BE_DEFINED).exists().matches(/^.+/),
+                check(QUANTITY, SHOULD_NOT_BE_DEFINED).not().exists()
+            ],
+            [
+                check(NAME, SHOULD_NOT_BE_DEFINED).not().exists(),
+                check(QUANTITY, SHOULD_BE_DEFINED).exists(),
+            ],
+        ])
     ],
-    run(trunks.updateName)
+    run(trunks.update)
 );

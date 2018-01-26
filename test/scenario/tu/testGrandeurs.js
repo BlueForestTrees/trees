@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {mock, match} from 'sinon';
-import {qtUnitCoef, unit, unitCoef} from "../src/service/grandeurs";
-import {GrandeurMismatchError, NoUnitError} from "../src/exceptions/Errors";
-import {initTools} from "./common/index";
+import {match, mock} from 'sinon';
+import {qtUnitCoef, unit, unitCoef} from "../../../src/service/grandeurs";
+import {GrandeurMismatchError, NoUnitError} from "../../../src/exceptions/Errors";
+import {initTools} from "../../common/index";
 
 describe('Grandeurs', function () {
 

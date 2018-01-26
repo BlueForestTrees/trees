@@ -2,19 +2,30 @@ const mongo = require('mongodb');
 const object = id => new mongo.ObjectID(id);
 const _ = require('lodash');
 
-export const objId = (data) => {
+export const addObjects = (data) => {
     _.forEach(data, trunk => {
         trunk._id = object(trunk._id);
-        if(trunk.ressources) {
+        if (trunk.ressources) {
             _.forEach(trunk.ressources, root => {
                 root._id = object(root._id);
             })
         }
-        if(trunk.facets) {
+        if (trunk.facets) {
             _.forEach(trunk.facets, root => {
                 root._id = object(root._id);
             })
         }
+        return trunk;
     });
     return data;
+};
+
+export const removeObjects = data => {
+    return _.cloneDeepWith(data, val => {
+        if (val instanceof mongo.ObjectID) {
+            return val.toString();
+        } else {
+            return undefined;
+        }
+    });
 };

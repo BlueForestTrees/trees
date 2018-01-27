@@ -7,7 +7,7 @@ const {oneOf} = require('express-validator/check');
 const run = require('../../util/run');
 const router = require('express').Router();
 const {check} = require('express-validator/check');
-const trunks = require('../../service/trunks');
+const trunks = require('../../service/trunk/putTrunkService');
 
 module.exports = router;
 

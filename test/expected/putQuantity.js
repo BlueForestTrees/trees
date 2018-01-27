@@ -1,6 +1,6 @@
 import {oneModifiedResponse} from "./common";
 import {cols} from "../../src/const/collections";
-import {withQtParentTree} from "../data/database";
+import {topTrunkQt} from "../data/database";
 import _ from 'lodash';
 
 const quantity = {qt: 69, unit: "m"};
@@ -8,7 +8,7 @@ const quantity = {qt: 69, unit: "m"};
 export const quantify = {};
 
 quantify.req = {
-    params: {_id: withQtParentTree._id},
+    params: {_id: topTrunkQt._id},
     body: {
         quantity
     }
@@ -19,9 +19,9 @@ quantify.res = {
 
 quantify.db = {
     expected: {
-        colname: cols.TREES,
+        colname: cols.TRUNK,
         doc: {
-            ...(_.omit(withQtParentTree, 'quantity')),
+            ...(_.omit(topTrunkQt, 'quantity')),
             quantity
         }
     }

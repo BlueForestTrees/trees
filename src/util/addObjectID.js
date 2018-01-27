@@ -10,6 +10,11 @@ export const addObjects = (data) => {
                 root._id = object(root._id);
             })
         }
+        if (trunk.roots) {
+            _.forEach(trunk.roots, root => {
+                root._id = object(root._id);
+            })
+        }
         if (trunk.facets) {
             _.forEach(trunk.facets, root => {
                 root._id = object(root._id);

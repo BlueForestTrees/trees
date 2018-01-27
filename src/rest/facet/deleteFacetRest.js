@@ -1,7 +1,7 @@
 const run = require('../../util/run');
 const express = require('express');
 const router = express.Router();
-const facets = require("../../service/facets");
+const facets = require("../../service/facetsService");
 const {check} = require('express-validator/check');
 
 

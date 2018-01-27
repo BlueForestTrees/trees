@@ -8,11 +8,12 @@ const buildRoots = (coef, ressources, cache) => {
         _.forEach(ressources, child => {
             const cachon = cached(child._id, cache);
             const qt = coef * child.qt;
+            const unit = child.unit;
 
             roots.push({
                 _id: cachon._id,
                 name: cachon.name,
-                qt: qt,
+                qt, unit,
                 roots: buildRoots(qt / cachon.qt, cachon.ressources, cache)
             });
         });
@@ -23,7 +24,6 @@ const buildRoots = (coef, ressources, cache) => {
 export const treefy = (qt, dbTree) => ({
     _id: dbTree._id,
     name: dbTree.name,
-    qt: qt ? qt : dbTree.qt || null,
     quantity: dbTree.quantity,
     price: dbTree.price,
     roots: buildRoots(qt ? qt / dbTree.qt : 1, dbTree.ressources, dbTree.cache),

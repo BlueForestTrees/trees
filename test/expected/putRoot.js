@@ -1,30 +1,33 @@
-import {childNoQt, leftTree, rightTree, withQtParentTree} from "../data/database";
-import {oneModifiedResponse} from "./common";
+import {downTrunkNoQt, laRoot, leftTrunk, rightTrunk, topTrunkQt} from "../data/database";
+import {oneModifiedResponse, oneUpsertedResponse} from "./common";
 import {cols} from "../../src/const/collections";
 import _ from 'lodash';
+
+const trunkId = leftTrunk._id;
+const rootId = rightTrunk._id;
 
 export const justIds = {};
 justIds.req = {
     body: {
         trunk: {
-            _id: leftTree._id
+            _id: trunkId
         },
         root: {
-            _id: rightTree._id
+            _id: rootId
         }
     }
 };
 justIds.res = {
-    body: oneModifiedResponse
+    body: oneUpsertedResponse(trunkId)
 };
 justIds.db = {
     expected: {
-        colname: cols.TREES,
+        colname: cols.ROOT,
         doc: {
-            ...leftTree,
-            "ressources": [
+            _id: trunkId,
+            "roots": [
                 {
-                    "_id": rightTree._id
+                    _id: rootId
                 }
             ],
 
@@ -36,14 +39,14 @@ export const definingBothQt = {};
 definingBothQt.req = {
     body: {
         trunk: {
-            _id: leftTree._id,
+            _id: trunkId,
             quantity: {
                 unit: "min",
                 qt: 20
             }
         },
         root: {
-            _id: rightTree._id,
+            _id: rootId,
             quantity: {
                 unit: "kg",
                 qt: 10
@@ -52,17 +55,16 @@ definingBothQt.req = {
     }
 };
 definingBothQt.res = {
-    body: oneModifiedResponse
+    body: oneUpsertedResponse(trunkId)
 };
 definingBothQt.db = {
     expected: {
-        colname: cols.TREES,
+        colname: cols.ROOT,
         doc: {
-            ...leftTree,
-            "quantity": definingBothQt.req.body.trunk.quantity,
-            "ressources": [
+            _id: trunkId,
+            "roots": [
                 {
-                    "_id": rightTree._id,
+                    "_id": rightTrunk._id,
                     "qt": definingBothQt.req.body.root.quantity.qt,
                     "unit": definingBothQt.req.body.root.quantity.unit
                 }
@@ -73,17 +75,20 @@ definingBothQt.db = {
 };
 
 export const updatingTrunkQt = {};
+let updatedRoots = _.cloneDeep(laRoot.roots);
+updatedRoots[1].qt = 10;
+
 updatingTrunkQt.req = {
     body: {
         trunk: {
-            _id: withQtParentTree._id,
+            _id: topTrunkQt._id,
             quantity: {
                 unit: "min",
                 qt: 60
             }
         },
         root: {
-            _id: childNoQt._id,
+            _id: downTrunkNoQt._id,
             quantity: {
                 unit: "kg",
                 qt: 30
@@ -96,33 +101,29 @@ updatingTrunkQt.res = {
 };
 updatingTrunkQt.db = {
     expected: {
-        colname: cols.TREES,
+        colname: cols.ROOT,
         doc: {
-            ...(_.omit(withQtParentTree,'ressources')),
-            "ressources": [
-                {
-                    "_id": childNoQt._id,
-                    "qt": 10,
-                    "unit": "kg"
-                }
-            ],
-
+            _id: topTrunkQt._id,
+            roots: updatedRoots,
         }
     }
 };
 
 export const differentUnit = {};
+updatedRoots = _.cloneDeep(laRoot.roots);
+updatedRoots[1].qt = 100;
+updatedRoots[1].unit = "g";
 differentUnit.req = {
     body: {
         trunk: {
-            _id: withQtParentTree._id,
+            _id: topTrunkQt._id,
             quantity: {
                 unit: "h",
                 qt: 1
             }
         },
         root: {
-            _id: childNoQt._id,
+            _id: downTrunkNoQt._id,
             quantity: {
                 unit: "g",
                 qt: 300
@@ -135,16 +136,10 @@ differentUnit.res = {
 };
 differentUnit.db = {
     expected: {
-        colname: cols.TREES,
+        colname: cols.ROOT,
         doc: {
-            ...(_.omit(withQtParentTree,'ressources')),
-            "ressources": [
-                {
-                    "_id": childNoQt._id,
-                    "qt": 100,
-                    "unit": "g"
-                }
-            ],
+            _id: topTrunkQt._id,
+            roots: updatedRoots,
 
         }
     }

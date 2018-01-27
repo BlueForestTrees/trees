@@ -1,0 +1,34 @@
+import {cols} from "../../const/collections";
+import {col} from "../../repo/index";
+import {withId} from "../../util/query";
+
+const trunks = () => col(cols.TRUNK);
+
+const peekFields = {name: 1};
+const getFields = {name_lower: 0,roots:0};
+const getFullFields = {name_lower: 0};
+const qtField = {quantity: 1, _id: 0};
+const searchMixin = {name: 1};
+
+export const peekTrunk = async _id => trunks().findOne(withId(_id), peekFields);
+export const getTrunk = async _id => trunks().findOne(withId(_id), getFields);
+export const getFullTrunk = async _id => trunks().findOne(withId(_id), getFullFields);
+
+export const searchOrAll = (grandeur, name) => {
+    if (grandeur || name) {
+        return search({grandeur, name});
+    } else {
+        return all();
+    }
+};
+export const search = search => trunks()
+    .find({
+        name_lower: {$regex: `^${search.name.toLowerCase()}.*`},
+        grandeur: search.grandeur || undefined
+    }, searchMixin)
+    .sort({name_lower: 1})
+    .toArray();
+
+export const getQuantity = async (id) => (await ((await trunks()).findOne(withId(id), qtField))).quantity;
+
+export const all = () => trunks().find({}).toArray();

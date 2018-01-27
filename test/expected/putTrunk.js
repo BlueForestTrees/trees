@@ -1,12 +1,12 @@
 import {oneModifiedResponse} from "./common";
-import {leftTree} from "../data/database";
+import {leftTrunk} from "../data/database";
 import {cols} from "../../src/const/collections";
 
 const someNewName = "paPRika" + Math.random();
 
 export const rename = {};
 
-let _id = leftTree._id;
+let _id = leftTrunk._id;
 rename.req = {
     params: {_id},
     body: {
@@ -19,7 +19,7 @@ rename.res = {
 
 rename.db = {
     expected: {
-        colname: cols.TREES,
+        colname: cols.TRUNK,
         doc: {
             _id,
             ...rename.req.body,

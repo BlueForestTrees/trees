@@ -1,5 +1,5 @@
-import {validTrunkId} from "../../const/validations";
-import {addFacet} from "../../service/facet/postFacetService";
+import {validTreeId} from "../../const/validations";
+import {setFacet} from "../../service/facet/postFacetService";
 
 const run = require('../../util/run');
 const _ = require('lodash');
@@ -9,13 +9,12 @@ const units = require('../../service/grandeursService');
 
 module.exports = router;
 
-router.post('/api/facet',
+router.post('/api/facet/:treeId',
     [
-        validTrunkId,
+        validTreeId,
         check('facet._id').isMongoId(),
         check('facet.qt').isDecimal(),
-        check('facet.unit').isIn(units.shortnames),
-        check('facet.name').matches(/^.+/)
+        check('facet.unit').isIn(units.shortnames)
     ],
-    run(addFacet)
+    run(setFacet)
 );

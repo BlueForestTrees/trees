@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {match, mock} from 'sinon';
 import {qtUnitCoef, unit, unitCoef} from "../../../src/service/grandeursService";
 import {GrandeurMismatchError, NoUnitError} from "../../../src/exceptions/Errors";
-import {initTools} from "../../common/index";
+import {initTools} from "../integ/testIntegPlumbing";
 
 describe('Grandeurs', function () {
 

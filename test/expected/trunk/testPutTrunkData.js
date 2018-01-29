@@ -1,6 +1,6 @@
-import {oneModifiedResponse} from "./common";
-import {leftTrunk} from "../data/database";
-import {cols} from "../../src/const/collections";
+import {oneModifiedResponse} from "../testCommonData";
+import {leftTrunk} from "../../scenario/integ/testIntegDatabase";
+import {cols} from "../../../src/const/collections";
 
 const someNewName = "paPRika" + Math.random();
 

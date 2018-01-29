@@ -1,16 +1,9 @@
-import chai, {expect} from 'chai';
-import chaiHttp from 'chai-http';
+import chai from 'chai';
 import {match, mock} from 'sinon';
 
-import {assertDb, initDatabase} from "../../../common/index";
 import server from '../../../../src/index';
-import {definingBothQt, differentUnit, justIds, updatingTrunkQt} from "../../../expected/putRoot";
-
-process.env.NODE_ENV = 'test';
-process.env.PORT = 8081;
-
-chai.use(chaiHttp);
-chai.should();
+import {definingBothQt, differentUnit, justIds, updatingTrunkQt} from "../../../expected/root/testPostRootData";
+import {assertDb, initDatabase} from "../testIntegPlumbing";
 
 describe('POST Root', function () {
 

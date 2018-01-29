@@ -1,9 +1,15 @@
-import {withId} from "../../util/query";
+import {object, upsert, withId} from "../../util/query";
 import {cols} from "../../const/collections";
 import {col} from "../../repo/index";
+import {deleteFacets} from "../facetsService";
 
 const facets = () => col(cols.FACET);
 
-const pushFacet = (facet) => ({$push: {facets: facet}});
+const pushFacet = ({_id, qt, unit}) => ({$push: {facets: {_id: object(_id), qt, unit}}});
 
-export const addFacet = ({treeId, facet}) => facets().update(withId(treeId), pushFacet(facet));
+export const setFacet = async ({treeId, facet}) => {
+    await deleteFacets(treeId, facet._id);
+    return addFacet({treeId,facet});
+};
+
+const addFacet = ({treeId, facet}) => facets().update(withId(treeId), pushFacet(facet), upsert);

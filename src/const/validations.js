@@ -1,4 +1,4 @@
-import {ID, NAME, ROOT_ID, SOURCE_ID, TRUNK_ID} from "./paths";
+import {ID, NAME, ROOT_ID, SOURCE_ID, TREE_ID, TRUNK_ID} from "./paths";
 import {IS_DECIMAL, IS_NOT_TRUNK_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED, SHOULD_NOT_BE_DEFINED} from "./messages";
 import {check} from 'express-validator/check';
 import {peekTrunk} from "../service/trunk/getTrunkService";
@@ -15,7 +15,7 @@ const valid = (field, optional) => {
 const found = (field, optional) => valid(field, optional).custom(peekTrunk).withMessage("not found");
 
 export const validId = valid(ID);
-export const validTrunkId = valid(TRUNK_ID);
+export const validTreeId = valid(TREE_ID);
 export const existingId = found(ID);
 export const existingTrunkId = found(TRUNK_ID);
 export const existingRootId = found(ROOT_ID);

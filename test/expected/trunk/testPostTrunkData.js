@@ -1,5 +1,5 @@
-import {cols} from "../../src/const/collections";
-import {topTrunkQt} from "../data/database";
+import {cols} from "../../../src/const/collections";
+import {trunkQtRootsQt} from "../../scenario/integ/testIntegDatabase";
 import _ from 'lodash';
 
 const lowerizeName = name => name.toLowerCase();
@@ -30,20 +30,20 @@ export const clone = {};
 
 clone.req = {
     body: {
-        sourceId: topTrunkQt._id
+        sourceId: trunkQtRootsQt._id
     }
 };
 clone.res = {
-    body: _id => ({_id, name: clonedName(_id, topTrunkQt)})
+    body: _id => ({_id, name: clonedName(_id, trunkQtRootsQt)})
 };
 clone.db = {
     expected: _id => ({
         colname: cols.TRUNK,
         doc: {
-            ...(_.omit(topTrunkQt, ['_id', 'name', 'name_lower'])),
+            ...(_.omit(trunkQtRootsQt, ['_id', 'name', 'name_lower'])),
             _id,
-            name: clonedName(_id, topTrunkQt),
-            name_lower: lowerizeName(clonedName(_id, topTrunkQt))
+            name: clonedName(_id, trunkQtRootsQt),
+            name_lower: lowerizeName(clonedName(_id, trunkQtRootsQt))
         }
     })
 };

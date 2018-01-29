@@ -1,6 +1,6 @@
-import {oneModifiedResponse} from "./common";
-import {cols} from "../../src/const/collections";
-import {topTrunkQt} from "../data/database";
+import {oneModifiedResponse} from "../testCommonData";
+import {cols} from "../../../src/const/collections";
+import {trunkQtRootsQt} from "../../scenario/integ/testIntegDatabase";
 import _ from 'lodash';
 
 const quantity = {qt: 69, unit: "m"};
@@ -8,7 +8,7 @@ const quantity = {qt: 69, unit: "m"};
 export const quantify = {};
 
 quantify.req = {
-    params: {_id: topTrunkQt._id},
+    params: {_id: trunkQtRootsQt._id},
     body: {
         quantity
     }
@@ -21,7 +21,7 @@ quantify.db = {
     expected: {
         colname: cols.TRUNK,
         doc: {
-            ...(_.omit(topTrunkQt, 'quantity')),
+            ...(_.omit(trunkQtRootsQt, 'quantity')),
             quantity
         }
     }

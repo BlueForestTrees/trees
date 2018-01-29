@@ -2,9 +2,9 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 
 import server from '../../../../src/index';
-import {assertDb, initDatabase} from "../../../common";
-import {deletion} from "../../../expected/deleteTrunk";
-import {oneModifiedResponse, oneResponse} from "../../../expected/common";
+import {assertDb, initDatabase} from "../testIntegPlumbing";
+import {deletion} from "../../../expected/trunk/testDeleteTrunkData";
+import {oneModifiedResponse, oneResponse} from "../../../expected/testCommonData";
 
 process.env.NODE_ENV = 'test';
 process.env.PORT = 8081;

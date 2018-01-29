@@ -1,8 +1,8 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../../../../src/index';
-import {initDatabase} from "../../../common";
-import {getAll, search, trunk} from "../../../expected/getTrunk";
+import {initDatabase} from "../testIntegPlumbing";
+import {getAll, search, trunk} from "../../../expected/trunk/testGetTrunkData";
 
 
 process.env.NODE_ENV = 'test';
@@ -38,14 +38,16 @@ describe('GET Trunks', function () {
             });
     });
 
-    it('return a trunk', done => {
-        chai.request(server)
-            .get(`/api/trunk/${trunk.req._id}`)
-            .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.deep.equal(trunk.res.body);
-                done();
-            });
-    });
+    it('return a trunk', done => testGetTrunkWith(trunk, done));
 
 });
+
+const testGetTrunkWith = (spec, done) => {
+    chai.request(server)
+        .get(`/api/trunk/${spec.req._id}`)
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.deep.equal(spec.res.body);
+            done();
+        });
+};

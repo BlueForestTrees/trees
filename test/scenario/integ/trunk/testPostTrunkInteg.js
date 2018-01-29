@@ -2,9 +2,9 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 
 import server from '../../../../src/index';
-import {assertDb, initDatabase} from "../../../common";
-import {ObjectIDRegex} from "../../../expected/common";
-import {post, clone} from "../../../expected/postTrunk";
+import {assertDb, initDatabase} from "../testIntegPlumbing";
+import {ObjectIDRegex} from "../../../expected/testCommonData";
+import {post, clone} from "../../../expected/trunk/testPostTrunkData";
 
 process.env.NODE_ENV = 'test';
 process.env.PORT = 8081;
@@ -22,8 +22,10 @@ describe('POST Trunks', function () {
             .post('/api/trunk')
             .send(post.req.body)
             .then(async res => {
+
                 res.should.have.status(200);
                 res.body.should.deep.equal(post.res.body(res.body._id));
+
                 await assertDb(post.db.expected(res.body._id));
                 done();
             })
@@ -38,9 +40,11 @@ describe('POST Trunks', function () {
             .send(clone.req.body)
             .then(async res => {
                 res.should.have.status(200);
+
                 res.body.should.have.property('_id');
                 res.body._id.should.match(ObjectIDRegex);
                 res.body.should.deep.equal(clone.res.body(res.body._id));
+
                 await assertDb(clone.db.expected(res.body._id));
                 done();
             })

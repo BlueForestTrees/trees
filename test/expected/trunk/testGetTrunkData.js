@@ -1,5 +1,5 @@
-import {initialTrees, laRoot, rightTrunk, topTrunkQt} from "../data/database";
-import {removeObjects} from "../../src/util/addObjectID";
+import {initialTrees, laRoot, rightTrunk, trunkQtRootsQt} from "../../scenario/integ/testIntegDatabase";
+import {removeObjects} from "../../../src/util/addObjectID";
 import _ from 'lodash';
 
 export const getAll = {
@@ -21,10 +21,10 @@ export const search = {
 
 export const trunk = {};
 trunk.req = {
-    _id: topTrunkQt._id
+    _id: trunkQtRootsQt._id
 };
 trunk.res = {
     body: {
-        ..._.omit(topTrunkQt,'name_lower')
+        ..._.omit(trunkQtRootsQt,'name_lower')
     }
 };

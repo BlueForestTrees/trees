@@ -1,4 +1,5 @@
 export const ID = '_id';
+export const TREE_ID = 'treeId';
 export const TRUNK_ID = 'trunk._id';
 export const ROOT_ID = 'root._id';
 export const SOURCE_ID = 'sourceId';
@@ -8,5 +9,3 @@ export const ROOT_QT = 'root.quantity.qt';
 export const ROOT_UNIT = 'root.quantity.unit';
 export const QUANTITY = 'quantity';
 export const NAME = 'name';
-export const UNIT = 'unit';
-export const QT = 'qt';

@@ -1,7 +1,7 @@
-import {downTrunkNoQt, laRoot, leftTrunk, rightTrunk, topTrunkQt} from "../data/database";
-import {oneModifiedResponse, oneUpsertedResponse} from "./common";
-import {cols} from "../../src/const/collections";
-import _ from 'lodash';
+import {downTrunkNoQt, laRoot, leftTrunk, rightTrunk, trunkQtRootsQt} from "../../scenario/integ/testIntegDatabase";
+import {oneModifiedResponse, oneUpsertedResponse} from "../testCommonData";
+import {cols} from "../../../src/const/collections";
+import {clon} from "../../testUtil";
 
 const trunkId = leftTrunk._id;
 const rootId = rightTrunk._id;
@@ -75,13 +75,13 @@ definingBothQt.db = {
 };
 
 export const updatingTrunkQt = {};
-let updatedRoots = _.cloneDeep(laRoot.roots);
+let updatedRoots = clon(laRoot.roots);
 updatedRoots[1].qt = 10;
 
 updatingTrunkQt.req = {
     body: {
         trunk: {
-            _id: topTrunkQt._id,
+            _id: trunkQtRootsQt._id,
             quantity: {
                 unit: "min",
                 qt: 60
@@ -103,20 +103,20 @@ updatingTrunkQt.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
-            _id: topTrunkQt._id,
+            _id: trunkQtRootsQt._id,
             roots: updatedRoots,
         }
     }
 };
 
 export const differentUnit = {};
-updatedRoots = _.cloneDeep(laRoot.roots);
+updatedRoots = clon(laRoot.roots);
 updatedRoots[1].qt = 100;
 updatedRoots[1].unit = "g";
 differentUnit.req = {
     body: {
         trunk: {
-            _id: topTrunkQt._id,
+            _id: trunkQtRootsQt._id,
             quantity: {
                 unit: "h",
                 qt: 1
@@ -138,7 +138,7 @@ differentUnit.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
-            _id: topTrunkQt._id,
+            _id: trunkQtRootsQt._id,
             roots: updatedRoots,
 
         }

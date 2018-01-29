@@ -5,7 +5,7 @@
     "serve": "node dist/index.js"
   },
   "name": "api",
-  "version": "0.0.0",
+  "version": "0.0.1-SNAPSHOT",
   "private": true,
   "devDependencies": {
     "babel-cli": "^6.26.0",

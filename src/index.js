@@ -3,13 +3,19 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import logger from 'morgan';
 import path from "path";
 import read from 'fs-readdir-recursive';
 import _ from 'lodash';
+import env from "../config/env";
 
 const app = express();
-app.use(logger(':status :method :url :response-time ms - :res[content-length]'));
+
+if(env.env === 'PRODUCTION') {
+    app.use(require('morgan')(':status :method :url :response-time ms - :res[content-length]'));
+}else{
+    app.use(require('morgan')(':status :method :url :response-time ms - :res[content-length]'));
+}
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
@@ -35,9 +41,8 @@ app.use(function (err, req, res, next) {
     }
 });
 
-const port = process.env.PORT || 8080;
-app.listen(port, () => {
-    console.log('App listening on port %s, in environment %s!', port, _.toUpper(process.env.NODE_ENV || ''));
+app.listen(env.port, () => {
+    console.log('App listening on port %s, in environment %s!', env.port, _.toUpper(env.env || ''));
 });
 
 module.exports = app;

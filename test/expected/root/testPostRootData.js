@@ -25,7 +25,7 @@ justIds.db = {
         colname: cols.ROOT,
         doc: {
             _id: trunkId,
-            "roots": [
+            items: [
                 {
                     _id: rootId
                 }
@@ -62,7 +62,7 @@ definingBothQt.db = {
         colname: cols.ROOT,
         doc: {
             _id: trunkId,
-            "roots": [
+            items: [
                 {
                     "_id": rightTrunk._id,
                     "qt": definingBothQt.req.body.root.quantity.qt,
@@ -75,7 +75,7 @@ definingBothQt.db = {
 };
 
 export const updatingTrunkQt = {};
-let updatedRoots = clon(laRoot.roots);
+let updatedRoots = clon(laRoot.items);
 updatedRoots[1].qt = 10;
 
 updatingTrunkQt.req = {
@@ -104,13 +104,13 @@ updatingTrunkQt.db = {
         colname: cols.ROOT,
         doc: {
             _id: trunkQtRootsQt._id,
-            roots: updatedRoots,
+            items: updatedRoots,
         }
     }
 };
 
 export const differentUnit = {};
-updatedRoots = clon(laRoot.roots);
+updatedRoots = clon(laRoot.items);
 updatedRoots[1].qt = 100;
 updatedRoots[1].unit = "g";
 differentUnit.req = {
@@ -139,7 +139,7 @@ differentUnit.db = {
         colname: cols.ROOT,
         doc: {
             _id: trunkQtRootsQt._id,
-            roots: updatedRoots,
+            items: updatedRoots,
 
         }
     }

@@ -3,16 +3,14 @@ import {downTrunkNoQt, laRoot, nameOf, trunkQtRootsQt} from "../../scenario/inte
 import {clon} from "../../testUtil";
 
 export const getRoots = {};
-const trunkId = trunkQtRootsQt._id;
-const rootsWithItsTrunkFields = _.forEach(clon(laRoot.roots), root => root.name = nameOf(root._id));
-
+const rootsWithItsTrunkFields = _.forEach(clon(laRoot.items), root => root.name = nameOf(root._id));
 getRoots.req = {
-    _id: trunkId
+    _id: laRoot._id
 };
 getRoots.res = {
     body: {
-        _id:trunkId,
-        roots:rootsWithItsTrunkFields
+        _id:laRoot._id,
+        items:rootsWithItsTrunkFields
     }
 };
 
@@ -23,6 +21,6 @@ emptyGetRoot.req = {
 emptyGetRoot.res = {
     body: {
         _id:downTrunkNoQt._id,
-        roots:[]
+        items:[]
     }
 };

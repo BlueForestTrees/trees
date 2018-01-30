@@ -1,5 +1,5 @@
-import {existingRootId, existingTrunkId} from "../../const/validations";
 import {removeRoot} from "../../service/root/deleteRootService";
+import {valid} from "../../const/validations";
 
 const run = require('../../util/run');
 const express = require('express');
@@ -9,8 +9,8 @@ module.exports = router;
 
 router.delete('/api/root/:trunkId/:rootId',
     [
-        existingTrunkId,
-        existingRootId,
+        valid("trunkId"),
+        valid("rootId"),
     ],
     run(removeRoot)
 );

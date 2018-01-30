@@ -9,6 +9,7 @@ export const withId = id => ({_id: object(id)});
 export const withIdIn = ids => ({_id: {$in: objects(ids)}});
 export const withQtUnit = (qt, unit) => (qt ? {qt, unit} : {});
 
-export const pullFromFacets = facetIds => ({$pull: {facets: withIdIn(facetIds)}});
-export const pullFromRoots = id => ({$pull: {roots: withId(id)}});
-export const pushRoot = (id, qt, unit) => ({$push: {roots: {...withId(id), ...withQtUnit(qt, unit)}}});
+export const pullFromFacets = facetIds => ({$pull: {items: withIdIn(facetIds)}});
+export const pullFromRoots = id => ({$pull: {items: withId(id)}});
+export const pushRoot = (id, qt, unit) => ({$push: {items: {...withId(id), ...withQtUnit(qt, unit)}}});
+export const pushFacet = ({_id, qt, unit}) => ({$push: {items: {_id: object(_id), qt, unit}}});

@@ -1,5 +1,5 @@
 import {cols} from "../../const/collections";
-import {col} from "../../repo/index";
+import {col} from "../../repo";
 import {withId} from "../../util/query";
 
 const roots = () => col(cols.ROOT);

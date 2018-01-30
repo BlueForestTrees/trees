@@ -31,45 +31,45 @@ export const trunkQtRootsQt = {
 
 export const laRoot = {
     _id: trunkQtRootsQt._id,
-    "roots": [
-        {
-            "_id": rightTrunk._id,
-            "qt": 150,
-            "unit": "g"
-        }, {
-            "_id": downTrunkNoQt._id,
-            "qt": 20,
-            "unit": "kg"
-        }
+    items: [
+        {"_id": rightTrunk._id, "qt": 150, "unit": "g"},
+        {"_id": downTrunkNoQt._id,"qt": 20,"unit": "kg"}
+    ]
+};
+
+const laRoot2 = {
+    _id: rightTrunk._id,
+    items: [
+        {_id: leftTrunk._id}
     ]
 };
 
 export const oneFacetEntry = {
-    _id:"5a6a03c03e77667641d2d2c4",
-    name:"vitamine C",
-    grandeur:"Densité"
+    _id: "5a6a03c03e77667641d2d2c4",
+    name: "vitamine C",
+    grandeur: "Densité"
 };
 export const anotherFacetEntry = {
-    _id:"5a6a03c03e77667641d2d2c5",
-    name:"vitamine B",
-    grandeur:"Longueur"
+    _id: "5a6a03c03e77667641d2d2c5",
+    name: "vitamine B",
+    grandeur: "Longueur"
 };
 export const anoAnotherFacetEntry = {
-    _id:"5a6a03c03e77667641d2d2c6",
-    name:"terrain",
-    grandeur:"Surface"
+    _id: "5a6a03c03e77667641d2d2c6",
+    name: "terrain",
+    grandeur: "Surface"
 };
 
 export const laFacet = {
-    _id:leftTrunk._id,
-    facets:[{
+    _id: leftTrunk._id,
+    items: [{
         _id: oneFacetEntry._id,
         qt: 69,
         unit: "mol"
-    },{
-        _id:anotherFacetEntry._id,
-        qt:3,
-        unit:"km"
+    }, {
+        _id: anotherFacetEntry._id,
+        qt: 3,
+        unit: "km"
     }]
 };
 
@@ -81,9 +81,10 @@ export const database = {
         downTrunkNoQt,
     ],
     [cols.ROOT]: [
-        laRoot
+        laRoot,
+        laRoot2
     ],
-    [cols.FACET_ENTRY]:[
+    [cols.FACET_ENTRY]: [
         oneFacetEntry,
         anotherFacetEntry,
         anoAnotherFacetEntry
@@ -94,12 +95,12 @@ export const database = {
 };
 
 export const nameOf = (_id) => {
-    return _.find(initialTrees,{_id}).name;
+    return _.find(initialTrees, {_id}).name;
 };
 
 
 export const nameOfFacet = (_id) => {
-    return _.find(initialFacetEntries,{_id}).name;
+    return _.find(initialFacetEntries, {_id}).name;
 };
 
 export const initialTrees = database[cols.TRUNK];

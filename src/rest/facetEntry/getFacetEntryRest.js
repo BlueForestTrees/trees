@@ -1,4 +1,4 @@
-const facets = require("../../service/facetsService");
+const facets = require("../../service/facetEntryService");
 const run = require('../../util/run');
 const router = require('express').Router();
 const {check} = require('express-validator/check');

@@ -5,7 +5,7 @@ const run = require('../../util/run');
 const express = require('express');
 const router = express.Router();
 const {check} = require('express-validator/check');
-const facets = require("../../service/facetsService");
+const facets = require("../../service/facetEntryService");
 const grandeursKeys = require("../../service/grandeursService").grandeursKeys;
 
 module.exports = router;

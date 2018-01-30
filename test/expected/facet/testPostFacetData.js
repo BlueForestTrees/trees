@@ -2,6 +2,7 @@ import {anoAnotherFacetEntry, anotherFacetEntry, laFacet, rightTrunk} from "../.
 import {oneModifiedResponse, oneUpsertedResponse} from "../testCommonData";
 import {cols} from "../../../src/const/collections";
 import _ from 'lodash';
+import {replace} from "../../testUtil";
 
 export const firstFacet = {};
 const firstTrunkId = rightTrunk._id;
@@ -26,7 +27,7 @@ firstFacet.db = {
         colname: cols.FACET,
         doc: {
             _id: firstTrunkId,
-            facets: [
+            items: [
                 firstPostedFacet
             ],
 
@@ -57,8 +58,8 @@ thirdFacet.db = {
         colname: cols.FACET,
         doc: {
             _id: trunkId,
-            facets: [
-                ...laFacet.facets,
+            items: [
+                ...laFacet.items,
                 thridPostedFacet
             ],
 
@@ -70,7 +71,7 @@ thirdFacet.db = {
 export const updatingFacet = {};
 const updatingTrunkId = laFacet._id;
 
-let updatePostedFacet = {
+let anotherFacetUpdate = {
     _id: anotherFacetEntry._id,
     qt: 14,
     unit: "m"
@@ -78,7 +79,7 @@ let updatePostedFacet = {
 
 updatingFacet.req = {
     _id: updatingTrunkId,
-    body: {facet: updatePostedFacet}
+    body: {facet: anotherFacetUpdate}
 };
 
 updatingFacet.res = {
@@ -88,13 +89,6 @@ updatingFacet.res = {
 updatingFacet.db = {
     expected: {
         colname: cols.FACET,
-        doc: {
-            _id: updatingTrunkId,
-            facets: [
-                ...(_.without(laFacet.facets, {_id: updatePostedFacet._id})),
-                updatePostedFacet
-            ],
-
-        }
+        doc: replace(laFacet, "items", anotherFacetUpdate)
     }
 };

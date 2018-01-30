@@ -1,5 +1,5 @@
 import {cols} from "../../const/collections";
-import {col} from "../../repo/index";
+import {col} from "../../repo";
 import _ from 'lodash'
 import {peekTrunk, getTrunk} from "./getTrunkService";
 import {updateName} from './putTrunkService';

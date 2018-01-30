@@ -5,18 +5,8 @@ const _ = require('lodash');
 export const addObjects = (data) => {
     _.forEach(data, trunk => {
         trunk._id = object(trunk._id);
-        if (trunk.ressources) {
-            _.forEach(trunk.ressources, root => {
-                root._id = object(root._id);
-            })
-        }
-        if (trunk.roots) {
-            _.forEach(trunk.roots, root => {
-                root._id = object(root._id);
-            })
-        }
-        if (trunk.facets) {
-            _.forEach(trunk.facets, root => {
+        if (trunk.items) {
+            _.forEach(trunk.items, root => {
                 root._id = object(root._id);
             })
         }

@@ -1,4 +1,4 @@
-import {dbname} from "../const/collections";
+import {dbname} from "./const/collections";
 
 const mongo = require('mongodb');
 

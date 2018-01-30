@@ -1,10 +1,11 @@
 {
   "scripts": {
-    "start": "nodemon $NODE_DEBUG_OPTION src/index.js --exec babel-node",
-    "build": "babel lib -d dist",
-    "serve": "node dist/index.js"
+    "dev-api": "nodemon $NODE_DEBUG_OPTION src/index.js --exec babel-node",
+    "build-api": "babel lib -d dist",
+    "serve-api": "node dist/index.js",
+    "test-api": "NODE_ENV=test mocha --exit $(find test -name '*.js') --require babel-register"
   },
-  "name": "api",
+  "env": "api",
   "version": "0.0.1-SNAPSHOT",
   "private": true,
   "devDependencies": {

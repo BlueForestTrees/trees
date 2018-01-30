@@ -5,7 +5,7 @@ import {peekTrunk} from "../service/trunk/getTrunkService";
 import {shortnames} from "../service/grandeursService";
 import _ from 'lodash';
 
-const valid = (field, optional) => {
+export const valid = (field, optional) => {
     let chain = check(field);
     if (optional)
         chain = chain.optional();

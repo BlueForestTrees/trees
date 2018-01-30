@@ -1,16 +1,7 @@
 import chai from 'chai';
-import chaiHttp from 'chai-http';
 import server from '../../../../src/index';
 import {initDatabase} from "../testIntegPlumbing";
-import {getAll, search, trunk} from "../../../expected/trunk/testGetTrunkData";
-
-
-process.env.NODE_ENV = 'test';
-process.env.PORT = 8081;
-
-
-chai.use(chaiHttp);
-chai.should();
+import {getAll, search, getTrunk} from "../../../expected/trunk/testGetTrunkData";
 
 describe('GET Trunks', function () {
 
@@ -38,7 +29,7 @@ describe('GET Trunks', function () {
             });
     });
 
-    it('return a trunk', done => testGetTrunkWith(trunk, done));
+    it('return a trunk', done => testGetTrunkWith(getTrunk, done));
 
 });
 

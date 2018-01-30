@@ -19,11 +19,11 @@ export const search = {
     }
 };
 
-export const trunk = {};
-trunk.req = {
+export const getTrunk = {};
+getTrunk.req = {
     _id: trunkQtRootsQt._id
 };
-trunk.res = {
+getTrunk.res = {
     body: {
         ..._.omit(trunkQtRootsQt,'name_lower')
     }

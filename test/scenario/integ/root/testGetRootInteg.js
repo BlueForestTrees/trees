@@ -1,9 +1,7 @@
 import chai from 'chai';
-import chaiHttp from 'chai-http';
 import server from '../../../../src/index';
 import {initDatabase} from "../testIntegPlumbing";
 import {emptyGetRoot, getRoots} from "../../../expected/root/testGetRootData";
-import {emptyGetFacet} from "../../../expected/facet/testGetFacetData";
 
 describe('GET Root', function () {
 

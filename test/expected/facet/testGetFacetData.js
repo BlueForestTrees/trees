@@ -1,10 +1,10 @@
-import {laFacet, leftTrunk, nameOfFacet, trunkQtRootsQt} from "../../scenario/integ/testIntegDatabase";
+import {laFacet, nameOfFacet, trunkQtRootsQt} from "../../scenario/integ/testIntegDatabase";
 import {clon} from "../../testUtil";
 import _ from 'lodash';
 
 export const getFacet = {};
 
-const laFacetWithItsTrunkFields = _.forEach(clon(laFacet.facets), facet => facet.name = nameOfFacet(facet._id));
+const laFacetWithItsTrunkFields = _.forEach(clon(laFacet.items), facet => facet.name = nameOfFacet(facet._id));
 
 getFacet.req = {
     _id: laFacet._id
@@ -13,7 +13,7 @@ getFacet.req = {
 getFacet.res = {
     body: {
         _id: getFacet.req._id,
-        facets: laFacetWithItsTrunkFields
+        items: laFacetWithItsTrunkFields
     }
 };
 
@@ -27,6 +27,6 @@ emptyGetFacet.req = {
 emptyGetFacet.res = {
     body: {
         _id: emptyGetFacet.req._id,
-        facets:[]
+        items:[]
     }
 };

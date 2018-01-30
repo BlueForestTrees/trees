@@ -1,9 +1,9 @@
 import {GrandeurMismatchError, TrunkUnitInvalidError} from "../../exceptions/Errors";
-import {pullFromRoots, pushRoot, upsert, withId} from "../../util/query";
+import {pushRoot, upsert, withId} from "../../util/query";
 import {qtUnitCoef} from "../grandeursService";
 import {getSertQuantity} from "../trunk/putTrunkService";
 import {cols} from "../../const/collections";
-import {col} from "../../repo/index";
+import {col} from "../../repo";
 import {removeRoot} from "./deleteRootService";
 
 const roots = () => col(cols.ROOT);

@@ -1,14 +1,7 @@
 import chai from 'chai';
-import chaiHttp from 'chai-http';
 import server from '../../../../src/index';
 import {initDatabase} from "../testIntegPlumbing";
 import {getFacet, emptyGetFacet} from "../../../expected/facet/testGetFacetData";
-
-process.env.NODE_ENV = 'test';
-process.env.PORT = 8081;
-
-chai.use(chaiHttp);
-chai.should();
 
 describe('GET Facets', function () {
 

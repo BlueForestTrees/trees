@@ -1,12 +1,6 @@
-import {
-    ALL_OR_NONE, IS_VALID_UNIT, IS_DECIMAL,
-    SHOULD_BE_DEFINED, SHOULD_NOT_BE_DEFINED
-} from "../../const/messages";
+import {ALL_OR_NONE} from "../../const/messages";
 import {ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT} from "../../const/paths";
-import {
-    existingRootId, rootIdIsNotTrunkId, existingTrunkId, optionalUnit,
-    optionalDecimal, present, absent
-} from "../../const/validations";
+import {absent, existingRootId, existingTrunkId, optionalDecimal, optionalUnit, present, rootIdIsNotTrunkId} from "../../const/validations";
 import {upsertRoot} from "../../service/root/postRootService";
 
 const run = require('../../util/run');

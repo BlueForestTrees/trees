@@ -28,4 +28,4 @@ const testPutTrunkWith = (spec,done) => {
         .catch(function (err) {
             done(err);
         });
-}
+};

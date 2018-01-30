@@ -1,17 +1,9 @@
 import chai from 'chai';
-import chaiHttp from 'chai-http';
 
 import server from '../../../../src/index';
 import {assertDb, initDatabase} from "../testIntegPlumbing";
 import {ObjectIDRegex} from "../../../expected/testCommonData";
 import {post, clone} from "../../../expected/trunk/testPostTrunkData";
-
-process.env.NODE_ENV = 'test';
-process.env.PORT = 8081;
-
-
-chai.use(chaiHttp);
-chai.should();
 
 describe('POST Trunks', function () {
 

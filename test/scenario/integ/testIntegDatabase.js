@@ -3,6 +3,15 @@ import {addObjects} from "../../../src/util/addObjectID";
 import _ from 'lodash';
 import {clon} from "../../testUtil";
 
+export const withQuantity = (qt, unit) => ({quantity: {qt, unit}});
+
+export const setQuantity = (trunk, qt, unit) => {
+    unit = unit ? unit : trunk.quantity.unit;
+    trunk.quantity = {qt, unit};
+};
+
+
+
 export const leftTrunk = {
     "_id": "5a6a03c03e77667641d2d2c0",
     "name": "leftTrunk",
@@ -23,17 +32,14 @@ export const trunkQtRootsQt = {
     "_id": "5a6a03c03e77667641d2d2c3",
     "name": "trunkQtRootsQt",
     "name_lower": "trunkqtrootsqt",
-    "quantity": {
-        "qt": 20,
-        "unit": "min"
-    }
+    ...withQuantity(20,"min")
 };
 
 export const laRoot = {
     _id: trunkQtRootsQt._id,
     items: [
-        {"_id": rightTrunk._id, "qt": 150, "unit": "g"},
-        {"_id": downTrunkNoQt._id,"qt": 20,"unit": "kg"}
+        {"_id": rightTrunk._id, ...withQuantity(150,"g")},
+        {"_id": downTrunkNoQt._id, ...withQuantity(20,"kg")}
     ]
 };
 
@@ -64,12 +70,10 @@ export const laFacet = {
     _id: leftTrunk._id,
     items: [{
         _id: oneFacetEntry._id,
-        qt: 69,
-        unit: "mol"
+        ...withQuantity(69,"mol")
     }, {
         _id: anotherFacetEntry._id,
-        qt: 3,
-        unit: "km"
+        ...withQuantity(3,"km")
     }]
 };
 

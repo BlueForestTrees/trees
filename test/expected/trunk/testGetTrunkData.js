@@ -8,14 +8,14 @@ export const getAll = {
     }
 };
 
-const searchResult = _.pick(rightTrunk, ['_id', 'name']);
+const searchResult = [_.pick(rightTrunk, ['_id', 'name'])];
 
 export const search = {
     req: {
         term: rightTrunk.name.substring(0, 3),
     },
     res: {
-        body: [searchResult]
+        body: searchResult
     }
 };
 
@@ -24,7 +24,5 @@ getTrunk.req = {
     _id: trunkQtRootsQt._id
 };
 getTrunk.res = {
-    body: {
-        ..._.omit(trunkQtRootsQt,'name_lower')
-    }
+    body: _.omit(trunkQtRootsQt, 'name_lower')
 };

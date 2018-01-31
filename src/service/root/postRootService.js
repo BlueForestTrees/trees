@@ -13,14 +13,14 @@ const roots = () => col(cols.ROOT);
 export const upsertRoot = async ({trunk, root}) => removeAddRoot({
     trunkId: trunk._id,
     rootId: root._id,
-    ...await adaptQtUnit(trunk, root)
+    quantity: await adaptQtUnit(trunk, root)
 });
 
-const removeAddRoot = async (root) => {
-    await removeRoot(root);
-    return await addRoot(root);
+const removeAddRoot = async ({trunkId,rootId,quantity}) => {
+    await removeRoot({trunkId,rootId});
+    return await addRoot(trunkId, rootId, quantity);
 };
-const addRoot = async ({trunkId, rootId, qt, unit}) => roots().update(withId(trunkId), pushRoot(rootId, qt, unit), upsert);
+const addRoot = async (trunkId, rootId, quantity) => roots().update(withId(trunkId), pushRoot(rootId, quantity), upsert);
 
 const adaptQtUnit = async (trunk, root) => {
     let dbTrunkQt = await getSertQuantity(trunk);

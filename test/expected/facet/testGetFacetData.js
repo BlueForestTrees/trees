@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 export const getFacet = {};
 
-const laFacetWithItsTrunkFields = _.forEach(clon(laFacet.items), facet => facet.name = nameOfFacet(facet._id));
+const laFacetWithItsFacetEntryFields = _.forEach(clon(laFacet.items), facet => facet.name = nameOfFacet(facet._id));
 
 getFacet.req = {
     _id: laFacet._id
@@ -13,7 +13,7 @@ getFacet.req = {
 getFacet.res = {
     body: {
         _id: getFacet.req._id,
-        items: laFacetWithItsTrunkFields
+        items: laFacetWithItsFacetEntryFields
     }
 };
 

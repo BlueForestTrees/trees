@@ -9,8 +9,8 @@ const getFields = {name_lower: 0};
 const qtField = {quantity: 1, _id: 0};
 const searchMixin = {name: 1};
 
-export const peekTrunk = async _id => trunks().findOne(withId(_id), peekFields);
-export const getTrunk = async _id => trunks().findOne(withId(_id), getFields);
+export const peekTrunk = _id => trunks().findOne(withId(_id), peekFields);
+export const getTrunk = _id => trunks().findOne(withId(_id), getFields);
 
 export const searchOrAll = (grandeur, name) => {
     if (grandeur || name) {
@@ -27,6 +27,6 @@ export const search = search => trunks()
     .sort({name_lower: 1})
     .toArray();
 
-export const getQuantity = async (id) => (await ((await trunks()).findOne(withId(id), qtField))).quantity;
+export const getQuantity = async (id) => (await trunks().findOne(withId(id), qtField)).quantity;
 
 export const all = () => trunks().find({}).toArray();

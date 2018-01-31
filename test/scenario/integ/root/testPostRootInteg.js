@@ -31,5 +31,3 @@ const testPostRootWith = (testDef, done) => {
             done(err);
         });
 };
-
-//TODO un test qui valide le update de la collection trunks quand le parent n'a pas de quantité

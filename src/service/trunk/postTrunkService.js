@@ -16,7 +16,7 @@ export const putall = async (data) => {
 
 const create = async trunk => peekTrunk(
     (
-        await (await trunks()).insertOne({
+        await trunks().insertOne({
             ...trunk,
             name_lower: trunk.name.toLowerCase()
         })

@@ -73,8 +73,11 @@ export const units = _.chain(_grandeurs).values().flatten().keyBy('shortname').v
 export const grandeurs = _grandeurs;
 export const grandeursKeys = Object.keys(_grandeurs);
 export const shortnames = Object.keys(units);
-export const unit = shortname => _.find(units, {shortname}) || unitNotFound(shortname);
+
+export const unit = shortname => units[shortname] || unitNotFound(shortname);
+export const unitlongname = shortname => unit(shortname).name;
 export const grandeur = shortname => unit(shortname).grandeur;
+
 export const checkGrandeur = (leftShortname,rightShortname) => unit(leftShortname).grandeur === unit(rightShortname).grandeur || erreurDifferenteGrandeurs(leftShortname, rightShortname);
 export const unitCoef = (leftShortname, rightShortname) => checkGrandeur(leftShortname, rightShortname) && unit(leftShortname).coef / unit(rightShortname).coef;
 export const qtUnitCoef = ({qt:leftQt, unit:leftUnit}, {qt:rightQt, unit:rightUnit}) => leftQt / rightQt * unitCoef(leftUnit, rightUnit);

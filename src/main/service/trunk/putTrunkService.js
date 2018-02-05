@@ -20,7 +20,7 @@ export const getSertQuantity = async trunk => {
     const qt = await getQuantity(trunk._id);
     if (qt) {
         return qt;
-    } else if (trunk.quantity.qt && trunk.quantity.unit) {
+    } else if (trunk.quantity && trunk.quantity.qt && trunk.quantity.unit) {
         await updateQuantity({_id: trunk._id, quantity: trunk.quantity});
         return trunk.quantity;
     } else {

@@ -1,10 +1,10 @@
-import {anoAnotherFacetEntry, anotherFacetEntry, laFacet, rightTrunk} from "../../scenario/integ/testIntegDatabase";
+import {anoAnotherFacetEntry, vitBFacet, bleFacets, farine} from "../../scenario/integ/testIntegDatabase";
 import {oneModifiedResponse, oneUpsertedResponse} from "../testCommonData";
 import {replace} from "../../testUtil";
 import {cols} from "../../../main/const/collections";
 
 export const firstFacet = {};
-const firstTrunkId = rightTrunk._id;
+const firstTrunkId = farine._id;
 
 let firstPostedFacet = {
     _id: anoAnotherFacetEntry._id,
@@ -35,7 +35,7 @@ firstFacet.db = {
 };
 
 export const thirdFacet = {};
-const trunkId = laFacet._id;
+const trunkId = bleFacets._id;
 
 let thridPostedFacet = {
     _id: anoAnotherFacetEntry._id,
@@ -58,7 +58,7 @@ thirdFacet.db = {
         doc: {
             _id: trunkId,
             items: [
-                ...laFacet.items,
+                ...bleFacets.items,
                 thridPostedFacet
             ],
 
@@ -68,10 +68,10 @@ thirdFacet.db = {
 
 
 export const updatingFacet = {};
-const updatingTrunkId = laFacet._id;
+const updatingTrunkId = bleFacets._id;
 
 let anotherFacetUpdate = {
-    _id: anotherFacetEntry._id,
+    _id: vitBFacet._id,
     qt: 14,
     unit: "m"
 };
@@ -88,6 +88,6 @@ updatingFacet.res = {
 updatingFacet.db = {
     expected: {
         colname: cols.FACET,
-        doc: replace(laFacet, "items", anotherFacetUpdate)
+        doc: replace(bleFacets, "items", anotherFacetUpdate)
     }
 };

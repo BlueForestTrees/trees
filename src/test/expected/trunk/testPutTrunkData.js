@@ -1,12 +1,12 @@
 import {oneModifiedResponse} from "../testCommonData";
-import {leftTrunk} from "../../scenario/integ/testIntegDatabase";
+import {ble} from "../../scenario/integ/testIntegDatabase";
 import {cols} from "../../../main/const/collections";
 
 const someNewName = "paPRika" + Math.random();
 
 export const rename = {};
 
-let _id = leftTrunk._id;
+let _id = ble._id;
 rename.req = {
     params: {_id},
     body: {

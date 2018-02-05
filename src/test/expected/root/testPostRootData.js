@@ -1,10 +1,10 @@
-import {downTrunkNoQt, laRoot, leftTrunk, rightTrunk, setQuantity, trunkQtRootsQt} from "../../scenario/integ/testIntegDatabase";
+import {lait, gateauRoot, ble, farine, setQuantity, gateau} from "../../scenario/integ/testIntegDatabase";
 import {oneModifiedResponse, oneUpsertedResponse} from "../testCommonData";
 import {clon} from "../../testUtil";
 import {cols} from "../../../main/const/collections";
 
-const trunkId = leftTrunk._id;
-const rootId = rightTrunk._id;
+const trunkId = ble._id;
+const rootId = farine._id;
 
 export const justIds = {};
 justIds.req = {
@@ -64,7 +64,7 @@ definingBothQt.db = {
             _id: trunkId,
             items: [
                 {
-                    "_id": rightTrunk._id,
+                    "_id": farine._id,
                     quantity: definingBothQt.req.body.root.quantity,
                 }
             ],
@@ -74,22 +74,22 @@ definingBothQt.db = {
 };
 
 export const updatingTrunkQt = {};
-const updatedRoots = clon(laRoot.items);
+const updatedRoots = clon(gateauRoot.items);
 setQuantity(updatedRoots[1], 10);
 
 updatingTrunkQt.req = {
     body: {
         trunk: {
-            _id: trunkQtRootsQt._id,
+            _id: gateau._id,
             quantity: {
-                unit: "min",
-                qt: 60
+                unit: "g",
+                qt: 600
             }
         },
         root: {
-            _id: downTrunkNoQt._id,
+            _id: lait._id,
             quantity: {
-                unit: "kg",
+                unit: "l",
                 qt: 30
             }
         }
@@ -102,30 +102,30 @@ updatingTrunkQt.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
-            _id: trunkQtRootsQt._id,
+            _id: gateau._id,
             items: updatedRoots,
         }
     }
 };
 
 export const differentUnit = {};
-const updatedRootsWithDifferentUnit = clon(laRoot.items);
+const updatedRootsWithDifferentUnit = clon(gateauRoot.items);
 setQuantity(updatedRootsWithDifferentUnit[1], 100, "g");
 
 differentUnit.req = {
     body: {
         trunk: {
-            _id: trunkQtRootsQt._id,
+            _id: gateau._id,
             quantity: {
-                unit: "h",
+                unit: "kg",
                 qt: 1
             }
         },
         root: {
-            _id: downTrunkNoQt._id,
+            _id: lait._id,
             quantity: {
                 unit: "g",
-                qt: 300
+                qt: 500
             }
         }
     }
@@ -137,9 +137,8 @@ differentUnit.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
-            _id: trunkQtRootsQt._id,
+            _id: gateau._id,
             items: updatedRootsWithDifferentUnit,
-
         }
     }
 };

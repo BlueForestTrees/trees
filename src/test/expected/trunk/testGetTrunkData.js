@@ -1,4 +1,4 @@
-import {initialTrees, rightTrunk, trunkQtRootsQt} from "../../scenario/integ/testIntegDatabase";
+import {initialTrees, farine, gateau} from "../../scenario/integ/testIntegDatabase";
 import _ from 'lodash';
 import {removeObjects} from "../../../main/util/addObjectID";
 
@@ -8,11 +8,11 @@ export const getAll = {
     }
 };
 
-const searchResult = [_.pick(rightTrunk, ['_id', 'name'])];
+const searchResult = [_.pick(farine, ['_id', 'name'])];
 
 export const search = {
     req: {
-        term: rightTrunk.name.substring(0, 3),
+        term: farine.name.substring(0, 3),
     },
     res: {
         body: searchResult
@@ -21,8 +21,8 @@ export const search = {
 
 export const getTrunk = {};
 getTrunk.req = {
-    _id: trunkQtRootsQt._id
+    _id: gateau._id
 };
 getTrunk.res = {
-    body: _.omit(trunkQtRootsQt, 'name_lower')
+    body: _.omit(gateau, 'name_lower')
 };

@@ -1,9 +1,9 @@
-import {trunkQtRootsQt} from "../../scenario/integ/testIntegDatabase";
+import {gateau} from "../../scenario/integ/testIntegDatabase";
 import {cols} from "../../../main/const/collections";
 
 export const deletion = {};
 
-const _id = trunkQtRootsQt._id;
+const _id = gateau._id;
 
 deletion.req = {
     _id

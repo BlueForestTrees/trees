@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {match, mock} from 'sinon';
 import {initTools} from "../integ/testIntegPlumbing";
-import {initialDB, trunkQtRootsQt} from "../integ/testIntegDatabase";
+import {initialDB, gateau} from "../integ/testIntegDatabase";
 import mongo from 'mongodb';
 import {addObjects} from "../../../main/util/addObjectID";
 import {cols} from "../../../main/const/collections";
@@ -23,7 +23,7 @@ describe('Unit', function () {
         });
 
         it('seul objectInitialDB doit contenir des mongoID', function(){
-            expect(trunkQtRootsQt._id).to.equal("5a6a03c03e77667641d2d2c3");
+            expect(gateau._id).to.equal("5a6a03c03e77667641d2d2c3");
         });
     });
 

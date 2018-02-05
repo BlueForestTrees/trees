@@ -11,105 +11,111 @@ export const setQuantity = (trunk, qt, unit) => {
 };
 
 
-
-export const leftTrunk = {
-    "_id": "5a6a03c03e77667641d2d2c0",
-    "name": "leftTrunk",
-    "name_lower": "lefttrunk"
-};
-export const rightTrunk = {
-    "_id": "5a6a03c03e77667641d2d2c1",
-    "name": "rightTrunk",
-    "name_lower": "righttrunk"
-};
-
-export const downTrunkNoQt = {
-    "_id": "5a6a03c03e77667641d2d2c2",
-    "name": "ChildNoQt",
-    "name_lower": "childnoqt"
-};
-export const trunkQtRootsQt = {
+//TRUNK
+export const gateau = {
     "_id": "5a6a03c03e77667641d2d2c3",
-    "name": "trunkQtRootsQt",
-    "name_lower": "trunkqtrootsqt",
-    ...withQuantity(20,"min")
+    "name": "Gateau au chocolat",
+    "name_lower": "gateau au chocolat",
+    ...withQuantity(200,"g")
+};
+export const farine = {
+    "_id": "5a6a03c03e77667641d2d2c1",
+    "name": "Farine",
+    "name_lower": "farine"
 };
 
-export const laRoot = {
-    _id: trunkQtRootsQt._id,
+export const lait = {
+    "_id": "5a6a03c03e77667641d2d2c2",
+    "name": "Lait",
+    "name_lower": "lait"
+};
+
+export const ble = {
+    "_id": "5a6a03c03e77667641d2d2c0",
+    "name": "blé",
+    "name_lower": "blé"
+};
+
+//ROOT
+export const gateauRoot = {
+    _id: gateau._id,
     items: [
-        {"_id": rightTrunk._id, ...withQuantity(150,"g")},
-        {"_id": downTrunkNoQt._id, ...withQuantity(20,"kg")}
+        {"_id": farine._id, ...withQuantity(150,"g")},
+        {"_id": lait._id, ...withQuantity(20,"l")}
     ]
 };
 
-const laRoot2 = {
-    _id: rightTrunk._id,
+const farineRoot = {
+    _id: farine._id,
     items: [
-        {_id: leftTrunk._id}
+        {_id: ble._id}
     ]
 };
 
-export const oneFacetEntry = {
+//FACET ENTRY
+export const vitCFacet = {
     _id: "5a6a03c03e77667641d2d2c4",
     name: "vitamine C",
     grandeur: "Densité"
 };
-export const anotherFacetEntry = {
+export const vitBFacet = {
     _id: "5a6a03c03e77667641d2d2c5",
     name: "vitamine B",
-    grandeur: "Longueur"
+    grandeur: "Densité"
 };
 export const anoAnotherFacetEntry = {
     _id: "5a6a03c03e77667641d2d2c6",
-    name: "terrain",
-    grandeur: "Surface"
+    name: "Prix",
+    grandeur: "Coût"
 };
 
-export const laFacet = {
-    _id: leftTrunk._id,
+//FACET
+export const bleFacets = {
+    _id: ble._id,
     items: [{
-        _id: oneFacetEntry._id,
-        ...withQuantity(69,"mol")
+        _id: vitCFacet._id,
+        ...withQuantity(6,"mol")
     }, {
-        _id: anotherFacetEntry._id,
-        ...withQuantity(3,"km")
+        _id: vitBFacet._id,
+        ...withQuantity(150,"mmol")
     }]
 };
 
+
+
+
+
+
 export const database = {
     [cols.TRUNK]: [
-        leftTrunk,
-        rightTrunk,
-        trunkQtRootsQt,
-        downTrunkNoQt,
+        ble,
+        farine,
+        gateau,
+        lait,
     ],
     [cols.ROOT]: [
-        laRoot,
-        laRoot2
+        gateauRoot,
+        farineRoot
     ],
     [cols.FACET_ENTRY]: [
-        oneFacetEntry,
-        anotherFacetEntry,
+        vitCFacet,
+        vitBFacet,
         anoAnotherFacetEntry
     ],
     [cols.FACET]: [
-        laFacet
+        bleFacets
     ]
 };
 
 export const nameOf = (_id) => {
     return _.find(initialTrees, {_id}).name;
 };
-
-
 export const nameOfFacet = (_id) => {
     return _.find(initialFacetEntries, {_id}).name;
 };
 
 export const initialTrees = database[cols.TRUNK];
 export const initialFacetEntries = database[cols.FACET_ENTRY];
-
 export const initialDB = {
     [cols.TRUNK]: addObjects(clon(database[cols.TRUNK])),
     [cols.ROOT]: addObjects(clon(database[cols.ROOT])),

@@ -8,7 +8,7 @@ import {removeRoot} from "./deleteRootService";
 
 const roots = () => col(cols.ROOT);
 
-
+export const insertRoot = async ({trunk, root}) => addRoot(trunk._id, root._id);
 
 export const upsertRoot = async ({trunk, root}) => removeAddRoot({
     trunkId: trunk._id,

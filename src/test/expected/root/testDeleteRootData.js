@@ -1,4 +1,4 @@
-import {laRoot} from "../../scenario/integ/testIntegDatabase";
+import {gateauRoot} from "../../scenario/integ/testIntegDatabase";
 import {oneModifiedResponse} from "../testCommonData";
 import {remove} from "../../testUtil";
 import {cols} from "../../../main/const/collections";
@@ -6,8 +6,8 @@ import {cols} from "../../../main/const/collections";
 export const rootDeletion = {};
 
 rootDeletion.req = {
-    trunkId: laRoot._id,
-    rootId: laRoot.items[0]._id
+    trunkId: gateauRoot._id,
+    rootId: gateauRoot.items[0]._id
 };
 
 rootDeletion.res = {
@@ -17,6 +17,6 @@ rootDeletion.res = {
 rootDeletion.db = {
     expected: {
         colname: cols.ROOT,
-        doc: remove(laRoot, "items", {_id: laRoot.items[0]._id})
+        doc: remove(gateauRoot, "items", {_id: gateauRoot.items[0]._id})
     }
 };

@@ -11,12 +11,14 @@ describe('POST Root', function () {
         await initDatabase();
     });
 
-    it('justIds', done => testPostRootWith(justIds, done));
+    it('definingBothQt', done => testPostRootWith(definingBothQt, done));
+    it('updatingTrunkQt', done => testPostRootWith(updatingTrunkQt, done));
+    it('differentUnit', done => testPostRootWith(differentUnit, done));
 });
 
 const testPostRootWith = (testDef, done) => {
     chai.request(app)
-        .post('/api/root')
+        .put('/api/root')
         .send(testDef.req.body)
         .then(async (res) => {
             res.should.have.status(200);

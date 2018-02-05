@@ -1,33 +1,32 @@
-import {lait, gateauRoot, ble, farine, setQuantity, gateau} from "../../scenario/integ/testIntegDatabase";
+import {lait, gateauRoot, ble, farine, setQuantity, gateau, biere, capsule} from "../../scenario/integ/testIntegDatabase";
 import {oneModifiedResponse, oneUpsertedResponse} from "../testCommonData";
 import {clon} from "../../testUtil";
 import {cols} from "../../../main/const/collections";
 
-const trunkId = ble._id;
-const rootId = farine._id;
-
-export const justIds = {};
-justIds.req = {
+const biereId = biere._id;
+const capsuleId = capsule._id;
+export const newRoot = {};
+newRoot.req = {
     body: {
         trunk: {
-            _id: trunkId
+            _id: biereId
         },
         root: {
-            _id: rootId
+            _id: capsuleId
         }
     }
 };
-justIds.res = {
-    body: oneUpsertedResponse(trunkId)
+newRoot.res = {
+    body: oneUpsertedResponse(biereId)
 };
-justIds.db = {
+newRoot.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
-            _id: trunkId,
+            _id: biereId,
             items: [
                 {
-                    _id: rootId
+                    _id: capsuleId
                 }
             ],
 
@@ -35,110 +34,34 @@ justIds.db = {
     }
 };
 
-export const definingBothQt = {};
-definingBothQt.req = {
+const bleId = ble._id;
+const farineId = farine._id;
+
+export const existingIds = {};
+existingIds.req = {
     body: {
         trunk: {
-            _id: trunkId,
-            quantity: {
-                unit: "min",
-                qt: 20
-            }
+            _id: bleId
         },
         root: {
-            _id: rootId,
-            quantity: {
-                unit: "kg",
-                qt: 10
-            }
+            _id: farineId
         }
     }
 };
-definingBothQt.res = {
-    body: oneUpsertedResponse(trunkId)
+existingIds.res = {
+    body: oneUpsertedResponse(bleId)
 };
-definingBothQt.db = {
+existingIds.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
-            _id: trunkId,
+            _id: bleId,
             items: [
                 {
-                    "_id": farine._id,
-                    quantity: definingBothQt.req.body.root.quantity,
+                    _id: farineId
                 }
             ],
 
-        }
-    }
-};
-
-export const updatingTrunkQt = {};
-const updatedRoots = clon(gateauRoot.items);
-setQuantity(updatedRoots[1], 10);
-
-updatingTrunkQt.req = {
-    body: {
-        trunk: {
-            _id: gateau._id,
-            quantity: {
-                unit: "g",
-                qt: 600
-            }
-        },
-        root: {
-            _id: lait._id,
-            quantity: {
-                unit: "l",
-                qt: 30
-            }
-        }
-    }
-};
-updatingTrunkQt.res = {
-    body: oneModifiedResponse
-};
-updatingTrunkQt.db = {
-    expected: {
-        colname: cols.ROOT,
-        doc: {
-            _id: gateau._id,
-            items: updatedRoots,
-        }
-    }
-};
-
-export const differentUnit = {};
-const updatedRootsWithDifferentUnit = clon(gateauRoot.items);
-setQuantity(updatedRootsWithDifferentUnit[1], 100, "g");
-
-differentUnit.req = {
-    body: {
-        trunk: {
-            _id: gateau._id,
-            quantity: {
-                unit: "kg",
-                qt: 1
-            }
-        },
-        root: {
-            _id: lait._id,
-            quantity: {
-                unit: "g",
-                qt: 500
-            }
-        }
-    }
-};
-differentUnit.res = {
-    body: oneModifiedResponse
-};
-differentUnit.db = {
-    expected: {
-        colname: cols.ROOT,
-        doc: {
-            _id: gateau._id,
-            items: updatedRootsWithDifferentUnit,
         }
     }
 };

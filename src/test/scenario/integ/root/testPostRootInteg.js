@@ -1,7 +1,7 @@
 import chai from 'chai';
 import {match, mock} from 'sinon';
 
-import {definingBothQt, differentUnit, justIds, updatingTrunkQt} from "../../../expected/root/testPostRootData";
+import {existingIds, newRoot} from "../../../expected/root/testPostRootData";
 import {assertDb, initDatabase} from "../testIntegPlumbing";
 import {app} from "../../../../main";
 
@@ -11,7 +11,8 @@ describe('POST Root', function () {
         await initDatabase();
     });
 
-    it('justIds', done => testPostRootWith(justIds, done));
+    it('newRoot', done => testPostRootWith(newRoot, done));
+    it('existingIds', done => testPostRootWith(existingIds, done));
 });
 
 const testPostRootWith = (testDef, done) => {

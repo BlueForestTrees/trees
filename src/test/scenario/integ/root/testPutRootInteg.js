@@ -1,22 +1,22 @@
 import chai from 'chai';
 import {match, mock} from 'sinon';
 
-import {definingBothQt, differentUnit, justIds, updatingTrunkQt} from "../../../expected/root/testPostRootData";
 import {assertDb, initDatabase} from "../testIntegPlumbing";
 import {app} from "../../../../main";
+import {existingsAndUnitChange, existingIdsNewQts, existingIdsAndQts} from "../../../expected/root/testPutRootData";
 
-describe('POST Root', function () {
+describe('PUT Root', function () {
 
     beforeEach(async () => {
         await initDatabase();
     });
 
-    it('definingBothQt', done => testPostRootWith(definingBothQt, done));
-    it('updatingTrunkQt', done => testPostRootWith(updatingTrunkQt, done));
-    it('differentUnit', done => testPostRootWith(differentUnit, done));
+    it('idsAndQts', done => testPutRootWith(existingIdsNewQts, done));
+    it('updatingTrunkQt', done => testPutRootWith(existingIdsAndQts, done));
+    it('differentUnit', done => testPutRootWith(existingsAndUnitChange, done));
 });
 
-const testPostRootWith = (testDef, done) => {
+const testPutRootWith = (testDef, done) => {
     chai.request(app)
         .put('/api/root')
         .send(testDef.req.body)

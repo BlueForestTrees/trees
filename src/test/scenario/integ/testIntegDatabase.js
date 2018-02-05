@@ -12,6 +12,17 @@ export const setQuantity = (trunk, qt, unit) => {
 
 
 //TRUNK
+export const biere = {
+    "_id": "6a6a03c03e77667641d2d2c3",
+    "name": "Bière Heineken",
+    "name_lower": "biere heineken"
+};
+export const capsule = {
+    "_id": "7a6a03c03e77667641d2d2c3",
+    "name": "capsule",
+    "name_lower": "capsule"
+};
+
 export const gateau = {
     "_id": "5a6a03c03e77667641d2d2c3",
     "name": "Gateau au chocolat",
@@ -41,7 +52,7 @@ export const gateauRoot = {
     _id: gateau._id,
     items: [
         {"_id": farine._id, ...withQuantity(150,"g")},
-        {"_id": lait._id, ...withQuantity(20,"l")}
+        {"_id": lait._id, ...withQuantity(20,"L")}
     ]
 };
 
@@ -92,6 +103,7 @@ export const database = {
         farine,
         gateau,
         lait,
+        biere,capsule
     ],
     [cols.ROOT]: [
         gateauRoot,

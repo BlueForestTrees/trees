@@ -1,29 +1,55 @@
 import {oneModifiedResponse} from "../testCommonData";
-import {ble} from "../../scenario/integ/testIntegDatabase";
+import {ble, gateau} from "../../scenario/integ/testIntegDatabase";
 import {cols} from "../../../main/const/collections";
+import _ from 'lodash';
 
 const someNewName = "paPRika" + Math.random();
 
-export const rename = {};
+export const trunkRename = {};
 
 let _id = ble._id;
-rename.req = {
+trunkRename.req = {
     params: {_id},
     body: {
         name: someNewName
     }
 };
-rename.res = {
+trunkRename.res = {
     body: oneModifiedResponse
 };
 
-rename.db = {
+trunkRename.db = {
     expected: {
         colname: cols.TRUNK,
         doc: {
             _id,
-            ...rename.req.body,
-            name_lower: rename.req.body.name.toLowerCase()
+            ...trunkRename.req.body,
+            name_lower: trunkRename.req.body.name.toLowerCase()
+        }
+    }
+};
+
+
+const someQuantity = {qt: 69, unit: "m"};
+
+export const trunkRequantify = {};
+
+trunkRequantify.req = {
+    params: {_id: gateau._id},
+    body: {
+        quantity: someQuantity
+    }
+};
+trunkRequantify.res = {
+    body: oneModifiedResponse
+};
+
+trunkRequantify.db = {
+    expected: {
+        colname: cols.TRUNK,
+        doc: {
+            ...(_.omit(gateau, 'quantity')),
+            quantity: someQuantity
         }
     }
 };

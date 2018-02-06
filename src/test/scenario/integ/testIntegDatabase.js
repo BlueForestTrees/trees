@@ -47,19 +47,96 @@ export const ble = {
     "name_lower": "blé"
 };
 
+export const skate = {
+    "_id": "999903c03e77667641d99990",
+    "name": "skate",
+    "name_lower": "skate",
+    ...withQuantity(10,"")
+};
+
+export const planche = {
+    "_id": "999903c03e77667641d99991",
+    "name": "planche",
+    "name_lower": "planche"
+};
+
+export const roulette = {
+    "_id": "999903c03e77667641d99992",
+    "name": "roulette",
+    "name_lower": "roulette"
+};
+
+export const elec = {
+    "_id": "999903c03e77667641d99993",
+    "name": "elec",
+    "name_lower": "elec"
+};
+
+export const eau = {
+    "_id": "999903c03e77667641d99994",
+    "name": "eau",
+    "name_lower": "eau"
+};
+
 //ROOT
 export const gateauRoot = {
     _id: gateau._id,
+    ...withQuantity(500,"g"),
     items: [
         {"_id": farine._id, ...withQuantity(150,"g")},
         {"_id": lait._id, ...withQuantity(20,"L")}
     ]
 };
 
-const farineRoot = {
+export const farineRoot = {
     _id: farine._id,
     items: [
         {_id: ble._id}
+    ]
+};
+
+const skateRoot = {
+    _id: skate._id,
+    ...withQuantity(1,""),
+    items: [
+        {
+            _id: planche._id,
+            ...withQuantity(1,"")
+        },
+        {
+            _id: roulette._id,
+            ...withQuantity(4,"")
+        }
+    ]
+};
+
+const plancheRoot = {
+    _id: planche._id,
+    ...withQuantity(1000,""),
+    items: [
+        {
+            _id: eau._id,
+            ...withQuantity(1000,"L")
+        },
+        {
+            _id: elec._id,
+            ...withQuantity(10000,"kwh")
+        }
+    ]
+};
+
+const rouletteRoot = {
+    _id: roulette._id,
+    ...withQuantity(1000000,""),
+    items: [
+        {
+            _id: eau._id,
+            ...withQuantity(1500,"L")
+        },
+        {
+            _id: elec._id,
+            ...withQuantity(20000,"kwh")
+        }
     ]
 };
 
@@ -92,7 +169,16 @@ export const bleFacets = {
     }]
 };
 
-
+const gateauFacets = {
+    _id: gateau._id,
+    items: [{
+        _id: vitCFacet._id,
+        ...withQuantity(10,"mol")
+    }, {
+        _id: vitBFacet._id,
+        ...withQuantity(100,"mmol")
+    }]
+};
 
 
 
@@ -103,11 +189,13 @@ export const database = {
         farine,
         gateau,
         lait,
-        biere,capsule
+        biere,capsule,
+        skate, planche, roulette, elec, eau
     ],
     [cols.ROOT]: [
         gateauRoot,
-        farineRoot
+        farineRoot,
+        skateRoot, plancheRoot, rouletteRoot
     ],
     [cols.FACET_ENTRY]: [
         vitCFacet,
@@ -115,7 +203,8 @@ export const database = {
         anoAnotherFacetEntry
     ],
     [cols.FACET]: [
-        bleFacets
+        bleFacets,
+        gateauFacets
     ]
 };
 

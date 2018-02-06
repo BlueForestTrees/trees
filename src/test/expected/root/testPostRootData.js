@@ -1,6 +1,5 @@
-import {lait, gateauRoot, ble, farine, setQuantity, gateau, biere, capsule} from "../../scenario/integ/testIntegDatabase";
-import {oneModifiedResponse, oneUpsertedResponse} from "../testCommonData";
-import {clon} from "../../testUtil";
+import {biere, ble, capsule, farine} from "../../scenario/integ/testIntegDatabase";
+import {oneModifiedResponse, oneResponse, oneUpsertedResponse} from "../testCommonData";
 import {cols} from "../../../main/const/collections";
 
 const biereId = biere._id;
@@ -59,6 +58,38 @@ existingIds.db = {
             items: [
                 {
                     _id: farineId
+                }
+            ],
+
+        }
+    }
+};
+
+
+
+
+export const bleToFarineAdd = {};
+bleToFarineAdd.req = {
+    body: {
+        trunk: {
+            _id: farine._id
+        },
+        root: {
+            _id: ble._id
+        }
+    }
+};
+bleToFarineAdd.res = {
+    body: oneModifiedResponse
+};
+bleToFarineAdd.db = {
+    expected: {
+        colname: cols.ROOT,
+        doc: {
+            _id: farine._id,
+            items: [
+                {
+                    "_id": ble._id,
                 }
             ],
 

@@ -16,7 +16,8 @@ const _grandeurs = {
         _unit("ws", "Watt-Seconde", 0.23923445),
         _unit("J", "joule", 0.23923445),
         _unit("cal", "calorie", 1),
-        _unit("kcal", "kilo-calorie", 1000)
+        _unit("kcal", "kilo-calorie", 1000),
+        _unit("Mcal", "mega-calorie", 1000*1000)
     ],
     "Densité": [
         _unit("μmol", "micro-mole", 0.000001),

@@ -1,7 +1,7 @@
 import chai from 'chai';
 import {match, mock} from 'sinon';
 
-import {assertDb, initDatabase} from "../testIntegPlumbing";
+import {assertDb, initDatabase, run} from "../testIntegPlumbing";
 import {app} from "../../../../main";
 import {existingsAndUnitChange, existingIdsNewQts, existingIdsAndQts} from "../../../expected/root/testPutRootData";
 
@@ -11,22 +11,16 @@ describe('PUT Root', function () {
         await initDatabase();
     });
 
-    it('idsAndQts', done => testPutRootWith(existingIdsNewQts, done));
-    it('updatingTrunkQt', done => testPutRootWith(existingIdsAndQts, done));
-    it('differentUnit', done => testPutRootWith(existingsAndUnitChange, done));
+    it('existingIdsNewQts', run(() => putRoot(existingIdsNewQts)));
+    it('existingIdsAndQts', run(() => putRoot(existingIdsAndQts)));
+    it('differentUnit', run(() => putRoot(existingsAndUnitChange)));
 });
 
-const testPutRootWith = (testDef, done) => {
-    chai.request(app)
-        .put('/api/root')
-        .send(testDef.req.body)
-        .then(async (res) => {
-            res.should.have.status(200);
-            res.body.should.deep.equal(testDef.res.body);
-            await assertDb(testDef.db.expected);
-            done();
-        })
-        .catch(function (err) {
-            done(err);
-        });
-};
+export const putRoot = testDef => chai.request(app)
+    .put('/api/root')
+    .send(testDef.req.body)
+    .then(async (res) => {
+        res.should.have.status(200);
+        await assertDb(testDef.db.expected);
+        res.body.should.deep.equal(testDef.res.body);
+    });

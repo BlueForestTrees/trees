@@ -1,8 +1,9 @@
 import chai from 'chai';
 
-import {assertDb, initDatabase} from "../testIntegPlumbing";
+import {assertDb, run, initDatabase} from "../testIntegPlumbing";
 import {rootDeletion} from "../../../expected/root/testDeleteRootData";
 import {app} from "../../../../main";
+
 
 describe('DELETE Root', function () {
 
@@ -10,18 +11,14 @@ describe('DELETE Root', function () {
         await initDatabase();
     });
 
-    it('delete the root', done => {
-        chai.request(app)
-            .del(`/api/root/${rootDeletion.req.trunkId}/${rootDeletion.req.rootId}`)
-            .then(async res => {
-                res.should.have.status(200);
-                res.body.should.deep.equal(rootDeletion.res.expected);
-                await assertDb(rootDeletion.db.expected);
-                done();
-            })
-            .catch(function (err) {
-                done(err);
-            });
-    });
+    it('delete the root', run(() => deleteRoot(rootDeletion)));
 
 });
+
+export const deleteRoot = rootDeletion => chai.request(app)
+    .del(`/api/root/${rootDeletion.req.trunkId}/${rootDeletion.req.rootId}`)
+    .then(async res => {
+        res.should.have.status(200);
+        res.body.should.deep.equal(rootDeletion.res.expected);
+        await assertDb(rootDeletion.db.expected);
+    });

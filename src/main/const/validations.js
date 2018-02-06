@@ -26,5 +26,5 @@ export const optionalUnit = field => check(field, IS_VALID_UNIT).optional().exis
 export const optionalDecimal = field => check(field, IS_DECIMAL).optional().exists().isDecimal();
 export const present = (...fields) => _.map(fields,field=>check(field, SHOULD_BE_DEFINED).exists());
 export const absent = (...fields) =>  _.map(fields,field=>check(field, SHOULD_NOT_BE_DEFINED).not().exists());
-export const presentUnit = field => check(field, IS_VALID_UNIT).exists().isIn(shortnames);
-export const presentQt = field => check(field, IS_DECIMAL).exists().isDecimal();
+export const optionalValidUnit = field => check(field, IS_VALID_UNIT).optional().exists().isIn(shortnames);
+export const optionalValidQt = field => check(field, IS_DECIMAL).optional().exists().isDecimal().toInt();

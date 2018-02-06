@@ -1,7 +1,8 @@
-import {lait, gateauRoot, ble, farine, setQuantity, gateau, biere, capsule} from "../../scenario/integ/testIntegDatabase";
-import {oneModifiedResponse, oneUpsertedResponse} from "../testCommonData";
+import {ble, farine, gateau, gateauRoot, lait, setQuantity} from "../../scenario/integ/testIntegDatabase";
+import {oneModifiedResponse} from "../testCommonData";
 import {clon} from "../../testUtil";
 import {cols} from "../../../main/const/collections";
+import _ from 'lodash';
 
 export const existingIdsNewQts = {};
 const bleId = ble._id;
@@ -25,13 +26,14 @@ existingIdsNewQts.req = {
     }
 };
 existingIdsNewQts.res = {
-    body: oneUpsertedResponse(bleId)
+    body: oneModifiedResponse
 };
 existingIdsNewQts.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
             _id: bleId,
+            quantity: existingIdsNewQts.req.body.trunk.quantity,
             items: [
                 {
                     "_id": farine._id,
@@ -44,10 +46,9 @@ existingIdsNewQts.db = {
 };
 
 
-//TODO ici ne plus se baser sur la quantité du trunk mais déplacer dans root
 export const existingIdsAndQts = {};
 const updatedRoots = clon(gateauRoot.items);
-setQuantity(updatedRoots[1], 10);
+setQuantity(updatedRoots[1], 60);
 
 existingIdsAndQts.req = {
     body: {
@@ -55,7 +56,7 @@ existingIdsAndQts.req = {
             _id: gateau._id,
             quantity: {
                 unit: "g",
-                qt: 600
+                qt: 250
             }
         },
         root: {
@@ -74,7 +75,7 @@ existingIdsAndQts.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
-            _id: gateau._id,
+            ...(_.omit(gateauRoot,"items")),
             items: updatedRoots,
         }
     }
@@ -82,7 +83,7 @@ existingIdsAndQts.db = {
 
 export const existingsAndUnitChange = {};
 const updatedRootsWithDifferentUnit = clon(gateauRoot.items);
-setQuantity(updatedRootsWithDifferentUnit[1], 100, "g");
+setQuantity(updatedRootsWithDifferentUnit[1], 250, "g");
 
 existingsAndUnitChange.req = {
     body: {
@@ -109,7 +110,7 @@ existingsAndUnitChange.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
-            _id: gateau._id,
+            ...(_.omit(gateauRoot,"items")),
             items: updatedRootsWithDifferentUnit,
         }
     }

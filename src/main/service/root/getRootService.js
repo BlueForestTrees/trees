@@ -4,4 +4,4 @@ import {withId} from "../../util/query";
 
 const roots = () => col(cols.ROOT);
 
-export const getRoots = async _id => roots().findOne(withId(_id));
+export const readRoot = async _id => roots().findOne(withId(_id));

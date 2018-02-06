@@ -1,4 +1,4 @@
-import {bleFacets, nameOfFacet, gateau} from "../../scenario/integ/testIntegDatabase";
+import {bleFacets, nameOfFacet, gateau, farine} from "../../scenario/integ/testIntegDatabase";
 import {clon} from "../../testUtil";
 import _ from 'lodash';
 
@@ -21,7 +21,7 @@ getFacet.res = {
 export const emptyGetFacet = {};
 
 emptyGetFacet.req = {
-    _id: gateau._id
+    _id: farine._id
 };
 
 emptyGetFacet.res = {

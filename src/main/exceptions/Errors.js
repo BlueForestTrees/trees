@@ -20,9 +20,9 @@ export class NoUnitError extends Error {
 }
 
 
-export function TrunkUnitInvalidError(message, nested) {
+export function UnitInvalidError(message, nested) {
     NestedError.call(this, message, nested);
 }
 
-util.inherits(TrunkUnitInvalidError, NestedError);
-TrunkUnitInvalidError.prototype.name = 'TrunkUnitInvalidError';
+util.inherits(UnitInvalidError, NestedError);
+UnitInvalidError.prototype.name = 'TrunkUnitInvalidError';

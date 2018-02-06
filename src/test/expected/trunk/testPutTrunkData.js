@@ -1,5 +1,5 @@
 import {oneModifiedResponse} from "../testCommonData";
-import {ble, gateau} from "../../scenario/integ/testIntegDatabase";
+import {ble, gateau, withQuantity} from "../../scenario/integ/testIntegDatabase";
 import {cols} from "../../../main/const/collections";
 import _ from 'lodash';
 
@@ -30,14 +30,14 @@ trunkRename.db = {
 };
 
 
-const someQuantity = {qt: 69, unit: "m"};
+const newGateauQuantity = withQuantity(1,"kg").quantity;
 
 export const trunkRequantify = {};
 
 trunkRequantify.req = {
     params: {_id: gateau._id},
     body: {
-        quantity: someQuantity
+        quantity: newGateauQuantity
     }
 };
 trunkRequantify.res = {
@@ -49,7 +49,7 @@ trunkRequantify.db = {
         colname: cols.TRUNK,
         doc: {
             ...(_.omit(gateau, 'quantity')),
-            quantity: someQuantity
+            quantity: newGateauQuantity
         }
     }
 };

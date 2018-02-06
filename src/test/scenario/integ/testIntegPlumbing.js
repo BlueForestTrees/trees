@@ -37,3 +37,9 @@ export const assertDb = async ({colname, doc, missingDoc}) => {
 };
 
 export const loadFromDbById = async (colname, _id) => removeObjects(await col(colname).findOne(withId(_id)));
+
+export const run = job => done => {
+    job()
+        .then(() => done())
+        .catch(err => done(err));
+};

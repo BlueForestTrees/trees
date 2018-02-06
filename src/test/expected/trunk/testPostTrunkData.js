@@ -1,6 +1,7 @@
-import {gateau} from "../../scenario/integ/testIntegDatabase";
+import {ble, farine, gateau} from "../../scenario/integ/testIntegDatabase";
 import _ from 'lodash';
 import {cols} from "../../../main/const/collections";
+import {oneModifiedResponse} from "../testCommonData";
 
 const lowerizeName = name => name.toLowerCase();
 const name = "RATtatouille1664";

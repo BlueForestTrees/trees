@@ -1,5 +1,6 @@
-import {existingId} from "../../const/validations";
-import {loadRoots} from "../../topService/getRootTopService";
+import {existingId, optionalValidQt, optionalValidUnit} from "../../const/validations";
+import {loadQuantifiedRoot, loadUnquantifiedRoot} from "../../topService/getRootTopService";
+import {QT, UNIT} from "../../const/paths";
 
 const run = require('../../util/run');
 const router = require('express').Router();
@@ -10,7 +11,22 @@ router.get('/api/root/:_id',
     [
         existingId
     ],
-    run(({_id}) => loadRoots(_id))
+    run(({_id}) => loadUnquantifiedRoot(_id))
 );
 
-//TODO ici un get avec un qt unit
+router.get('/api/root/:qt/:_id',
+    [
+        existingId,
+        optionalValidQt(QT)
+    ],
+    run(({qt, _id}) => loadQuantifiedRoot(qt, "", _id))
+);
+
+router.get('/api/root/:qt/:unit/:_id',
+    [
+        existingId,
+        optionalValidQt(QT),
+        optionalValidUnit(UNIT)
+    ],
+    run(({qt, unit, _id}) => loadQuantifiedRoot(qt, unit, _id))
+);

@@ -2,7 +2,7 @@ import chai from 'chai';
 import {match, mock} from 'sinon';
 
 import {existingIds, newRoot} from "../../../expected/root/testPostRootData";
-import {assertDb, initDatabase} from "../testIntegPlumbing";
+import {assertDb, initDatabase, run} from "../testIntegPlumbing";
 import {app} from "../../../../main";
 
 describe('POST Root', function () {
@@ -11,21 +11,16 @@ describe('POST Root', function () {
         await initDatabase();
     });
 
-    it('newRoot', done => testPostRootWith(newRoot, done));
-    it('existingIds', done => testPostRootWith(existingIds, done));
+    it('newRoot', run(() => postRoot(newRoot)));
+
+    it('existingIds', run(() => postRoot(existingIds)));
 });
 
-const testPostRootWith = (testDef, done) => {
-    chai.request(app)
-        .post('/api/root')
-        .send(testDef.req.body)
-        .then(async (res) => {
-            res.should.have.status(200);
-            res.body.should.deep.equal(testDef.res.body);
-            await assertDb(testDef.db.expected);
-            done();
-        })
-        .catch(function (err) {
-            done(err);
-        });
-};
+export const postRoot = testDef => chai.request(app)
+    .post('/api/root')
+    .send(testDef.req.body)
+    .then(async (res) => {
+        res.should.have.status(200);
+        await assertDb(testDef.db.expected);
+        res.body.should.deep.equal(testDef.res.body);
+    });

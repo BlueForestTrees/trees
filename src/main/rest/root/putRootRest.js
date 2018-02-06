@@ -1,6 +1,6 @@
 import {ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT} from "../../const/paths";
 import {existingRootId, existingTrunkId, present, rootIdIsNotTrunkId} from "../../const/validations";
-import {upsertRoot} from "../../service/root/postRootService";
+import {upsertRoot} from "../../service/root/putRootService";
 
 const run = require('../../util/run');
 const router = require('express').Router();

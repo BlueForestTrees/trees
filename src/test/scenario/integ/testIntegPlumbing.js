@@ -43,3 +43,8 @@ export const run = job => done => {
         .then(() => done())
         .catch(err => done(err));
 };
+
+
+export const debug = (obj) => {
+    console.log(JSON.stringify(obj, null, 4));
+};

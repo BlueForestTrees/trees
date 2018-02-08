@@ -2,15 +2,14 @@ import {initialTrees, farine, gateau} from "../../scenario/integ/testIntegDataba
 import _ from 'lodash';
 import {removeObjects} from "../../../main/util/addObjectID";
 
-export const getAll = {
+export const getAllTrunkSpec = {
     res: {
         body: removeObjects(initialTrees)
     }
 };
 
 const searchResult = [_.pick(farine, ['_id', 'name'])];
-
-export const search = {
+export const searchTrunkSpec = {
     req: {
         term: farine.name.substring(0, 3),
     },
@@ -19,10 +18,10 @@ export const search = {
     }
 };
 
-export const getTrunk = {};
-getTrunk.req = {
+export const getTrunkSpec = {};
+getTrunkSpec.req = {
     _id: gateau._id
 };
-getTrunk.res = {
+getTrunkSpec.res = {
     body: _.omit(gateau, 'name_lower')
 };

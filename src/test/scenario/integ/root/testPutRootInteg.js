@@ -3,7 +3,7 @@ import {match, mock} from 'sinon';
 
 import {assertDb, initDatabase, run} from "../testIntegPlumbing";
 import {app} from "../../../../main";
-import {existingsAndUnitChange, existingIdsNewQts, existingIdsAndQts} from "../../../expected/root/testPutRootData";
+import {existingsAndUnitChangeSpec, existingIdsNewQtsSpec, existingIdsAndQtsSpec} from "../../../expected/root/testPutRootData";
 
 describe('PUT Root', function () {
 
@@ -11,9 +11,9 @@ describe('PUT Root', function () {
         await initDatabase();
     });
 
-    it('existingIdsNewQts', run(() => putRoot(existingIdsNewQts)));
-    it('existingIdsAndQts', run(() => putRoot(existingIdsAndQts)));
-    it('differentUnit', run(() => putRoot(existingsAndUnitChange)));
+    it('existingIdsNewQts', run(() => putRoot(existingIdsNewQtsSpec)));
+    it('existingIdsAndQts', run(() => putRoot(existingIdsAndQtsSpec)));
+    it('differentUnit', run(() => putRoot(existingsAndUnitChangeSpec)));
 });
 
 export const putRoot = testDef => chai.request(app)

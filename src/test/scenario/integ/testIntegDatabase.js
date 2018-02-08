@@ -95,7 +95,7 @@ export const farineRoot = {
     ]
 };
 
-const skateRoot = {
+export const skateRoot = {
     _id: skate._id,
     ...withQuantity(1,""),
     items: [
@@ -141,12 +141,12 @@ const rouletteRoot = {
 };
 
 //FACET ENTRY
-export const vitCFacet = {
+export const vitCFacetEntry = {
     _id: "5a6a03c03e77667641d2d2c4",
     name: "vitamine C",
     grandeur: "Densité"
 };
-export const vitBFacet = {
+export const vitBFacetEntry = {
     _id: "5a6a03c03e77667641d2d2c5",
     name: "vitamine B",
     grandeur: "Densité"
@@ -161,10 +161,10 @@ export const anoAnotherFacetEntry = {
 export const bleFacets = {
     _id: ble._id,
     items: [{
-        _id: vitCFacet._id,
+        _id: vitCFacetEntry._id,
         ...withQuantity(6,"mol")
     }, {
-        _id: vitBFacet._id,
+        _id: vitBFacetEntry._id,
         ...withQuantity(150,"mmol")
     }]
 };
@@ -172,10 +172,10 @@ export const bleFacets = {
 const gateauFacets = {
     _id: gateau._id,
     items: [{
-        _id: vitCFacet._id,
+        _id: vitCFacetEntry._id,
         ...withQuantity(10,"mol")
     }, {
-        _id: vitBFacet._id,
+        _id: vitBFacetEntry._id,
         ...withQuantity(100,"mmol")
     }]
 };
@@ -198,8 +198,8 @@ export const database = {
         skateRoot, plancheRoot, rouletteRoot
     ],
     [cols.FACET_ENTRY]: [
-        vitCFacet,
-        vitBFacet,
+        vitCFacetEntry,
+        vitBFacetEntry,
         anoAnotherFacetEntry
     ],
     [cols.FACET]: [

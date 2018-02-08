@@ -3,20 +3,20 @@ import {oneModifiedResponse} from "../testCommonData";
 import {remove} from "../../testUtil";
 import {cols} from "../../../main/const/collections";
 
-export const facetDeletion = {};
+export const facetDeletionSpec = {};
 
-facetDeletion.req = {
+facetDeletionSpec.req = {
     body: {
         treeId: bleFacets._id,
         facetIds: [bleFacets.items[0]._id]
     }
 };
 
-facetDeletion.res = {
+facetDeletionSpec.res = {
     expected: oneModifiedResponse
 };
 
-facetDeletion.db = {
+facetDeletionSpec.db = {
     expected: {
         colname: cols.FACET,
         doc: remove(bleFacets, "items", {_id: bleFacets.items[0]._id})

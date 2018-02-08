@@ -33,11 +33,9 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
     //erreur de validation.
     if (err.mapped) {
-        console.error(err.stack, "\nResponse: ", err.mapped());
         res.status(422).json(err.mapped());
     } else {
-        console.error(err);
-        res.status(err.status || 500).json({error: err.stack.split("\n")});
+        res.status(err.status || 500).json({message: err.message});
     }
 });
 

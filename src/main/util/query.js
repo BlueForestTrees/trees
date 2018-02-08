@@ -9,6 +9,8 @@ export const withId = id => ({_id: object(id)});
 export const withIdIn = ids => ({_id: {$in: objects(ids)}});
 export const withQuantity = quantity => quantity && quantity.qt && quantity.unit ? {quantity: {qt: quantity.qt, unit: quantity.unit}} : {};
 
+export const matchId = (_id) => ({$match: withId(_id)});
+
 export const pullFromRoots = id => ({$pull: {items: withId(id)}});
 export const pushRoot = (id, quantity) => ({$push: {items: {...withId(id), ...withQuantity(quantity)}}});
 

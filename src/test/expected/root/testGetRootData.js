@@ -1,28 +1,29 @@
 import _ from 'lodash';
-import {farineRoot, gateauRoot, lait, nameOf, setQuantity} from "../../scenario/integ/testIntegDatabase";
+import {farineRoot, gateauRoot, lait, nameOf, setQuantity, skateRoot} from "../../scenario/integ/testIntegDatabase";
 import {clon} from "../../testUtil";
+import {debug} from "../../scenario/integ/testIntegPlumbing";
 
 const withNames = items => _.forEach(items, root => root.name = nameOf(root._id));
 const withDoubleQt = items => _.forEach(items, root => root.quantity.qt *= 2);
 const withoutQuantity = items => _.map(items, item => _.omit(item, "quantity"));
 
-export const getRoots = {};
+export const getRootsSpec = {};
 const gateauItemsWithNames = withoutQuantity(withNames(clon(gateauRoot.items)));
-getRoots.req = {
+getRootsSpec.req = {
     _id: gateauRoot._id
 };
-getRoots.res = {
+getRootsSpec.res = {
     body: {
         ..._.omit(gateauRoot, ["items","quantity"]),
         items: gateauItemsWithNames
     }
 };
 
-export const emptyGetRoot = {};
-emptyGetRoot.req = {
+export const emptyGetRootSpec = {};
+emptyGetRootSpec.req = {
     _id: lait._id
 };
-emptyGetRoot.res = {
+emptyGetRootSpec.res = {
     body: {
         _id: lait._id,
         items: []
@@ -30,13 +31,13 @@ emptyGetRoot.res = {
 };
 
 const sameQtItems = withNames(clon(gateauRoot.items));
-export const sameQtGetRoot = {};
-sameQtGetRoot.req = {
+export const sameQtGetRootSpec = {};
+sameQtGetRootSpec.req = {
     qt: gateauRoot.quantity.qt,
     unit: gateauRoot.quantity.unit,
     _id: gateauRoot._id
 };
-sameQtGetRoot.res = {
+sameQtGetRootSpec.res = {
     body: {
         ..._.omit(gateauRoot, "items"),
         items: sameQtItems
@@ -44,53 +45,85 @@ sameQtGetRoot.res = {
 };
 
 
-export const otherQtGetRoot = {};
-const gateauRootWithDoubleQuantity = clon(gateauRoot);
-withNames(gateauRootWithDoubleQuantity.items);
-withDoubleQt([gateauRootWithDoubleQuantity]);
-withDoubleQt(gateauRootWithDoubleQuantity.items);
+export const gateau1000GGetRootSpec = {};
+const gato1000G = clon(gateauRoot);
+withNames(gato1000G.items);
+withDoubleQt([gato1000G]);
+withDoubleQt(gato1000G.items);
 
-otherQtGetRoot.req = {
-    qt: gateauRootWithDoubleQuantity.quantity.qt,
-    unit: gateauRootWithDoubleQuantity.quantity.unit,
-    _id: gateauRootWithDoubleQuantity._id
+gateau1000GGetRootSpec.req = {
+    qt: gato1000G.quantity.qt,
+    unit: gato1000G.quantity.unit,
+    _id: gato1000G._id
 };
-otherQtGetRoot.res = {
+gateau1000GGetRootSpec.res = {
     body: {
-        ...gateauRootWithDoubleQuantity
+        ...gato1000G
     }
 };
 
+export const skate10GetRootSpec = {};
+const skate10 = clon(skateRoot);
+withNames(skate10.items);
+withDoubleQt([skate10]);
+withDoubleQt(skate10.items);
+skate10GetRootSpec.req = {
+    qt: skate10.quantity.qt,
+    unit: skate10.quantity.unit,
+    _id: skate10._id
+};
+skate10GetRootSpec.res = {
+    body: {
+        ...skate10
+    }
+};
 
-export const otherUnitGetRoot = {};
+export const otherUnitGetRootSpec = {};
 const gateauRoot1Kg = clon(gateauRoot);
 withNames(gateauRoot1Kg.items);
 gateauRoot1Kg.quantity.qt = 1;
 gateauRoot1Kg.quantity.unit = "kg";
 withDoubleQt(gateauRoot1Kg.items);
 
-otherUnitGetRoot.req = {
+otherUnitGetRootSpec.req = {
     qt: gateauRoot1Kg.quantity.qt,
     unit: gateauRoot1Kg.quantity.unit,
     _id: gateauRoot1Kg._id
 };
-otherUnitGetRoot.res = {
+otherUnitGetRootSpec.res = {
     body: {
         ...gateauRoot1Kg
     }
 };
 
-export const farineNoBleQtGetRoot = {};
+
+export const badUnitGetRootSpec = {};
+const gateauRoot1L = clon(gateauRoot);
+withNames(gateauRoot1L.items);
+gateauRoot1L.quantity.unit = "L";
+
+badUnitGetRootSpec.req = {
+    qt: gateauRoot1L.quantity.qt,
+    unit: gateauRoot1L.quantity.unit,
+    _id: gateauRoot1L._id
+};
+badUnitGetRootSpec.res = {
+    status: 400,
+    bodyMessage: "Units mismatch: 'L' and 'g'"
+};
+
+
+export const farineNoBleQtGetRootSpec = {};
 const myFarineRoot = clon(farineRoot);
 withNames(myFarineRoot.items);
 setQuantity(myFarineRoot, 60,"g");
 
-farineNoBleQtGetRoot.req = {
+farineNoBleQtGetRootSpec.req = {
     qt: myFarineRoot.quantity.qt,
     unit: myFarineRoot.quantity.unit,
     _id: myFarineRoot._id
 };
-farineNoBleQtGetRoot.res = {
+farineNoBleQtGetRootSpec.res = {
     body: {
         ...myFarineRoot
     }

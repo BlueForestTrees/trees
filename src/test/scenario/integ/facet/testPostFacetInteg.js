@@ -1,6 +1,6 @@
 import {assertDb, initDatabase} from "../testIntegPlumbing";
 import chai from 'chai';
-import {firstFacet, thirdFacet, updatingFacet} from "../../../expected/facet/testPostFacetData";
+import {firstFacetSpec, thirdFacet, updatingFacetSpec} from "../../../expected/facet/testPostFacetData";
 import {app} from "../../../../main";
 
 describe('POST Facet', function () {
@@ -9,9 +9,9 @@ describe('POST Facet', function () {
         await initDatabase();
     });
 
-    it('firstFacet', done => testPostFacetWith(firstFacet, done));
+    it('firstFacet', done => testPostFacetWith(firstFacetSpec, done));
     it('thirdFacet', done => testPostFacetWith(thirdFacet, done));
-    it('updatingFacet', done => testPostFacetWith(updatingFacet, done));
+    it('updatingFacet', done => testPostFacetWith(updatingFacetSpec, done));
 });
 
 const testPostFacetWith = (testDef, done) => {

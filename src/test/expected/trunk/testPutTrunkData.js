@@ -3,48 +3,44 @@ import {ble, gateau, withQuantity} from "../../scenario/integ/testIntegDatabase"
 import {cols} from "../../../main/const/collections";
 import _ from 'lodash';
 
+
+export const renameTrunkSpec = {};
 const someNewName = "paPRika" + Math.random();
-
-export const trunkRename = {};
-
 let _id = ble._id;
-trunkRename.req = {
+renameTrunkSpec.req = {
     params: {_id},
     body: {
         name: someNewName
     }
 };
-trunkRename.res = {
+renameTrunkSpec.res = {
     body: oneModifiedResponse
 };
-
-trunkRename.db = {
+renameTrunkSpec.db = {
     expected: {
         colname: cols.TRUNK,
         doc: {
             _id,
-            ...trunkRename.req.body,
-            name_lower: trunkRename.req.body.name.toLowerCase()
+            ...renameTrunkSpec.req.body,
+            name_lower: renameTrunkSpec.req.body.name.toLowerCase()
         }
     }
 };
 
 
+
+export const requantifyTrunkSpec = {};
 const newGateauQuantity = withQuantity(1,"kg").quantity;
-
-export const trunkRequantify = {};
-
-trunkRequantify.req = {
+requantifyTrunkSpec.req = {
     params: {_id: gateau._id},
     body: {
         quantity: newGateauQuantity
     }
 };
-trunkRequantify.res = {
+requantifyTrunkSpec.res = {
     body: oneModifiedResponse
 };
-
-trunkRequantify.db = {
+requantifyTrunkSpec.db = {
     expected: {
         colname: cols.TRUNK,
         doc: {

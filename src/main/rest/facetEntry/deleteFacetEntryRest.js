@@ -1,10 +1,11 @@
+import {purgeFacetsEntries} from "../../service/facetEntry/deleteFacetEntries";
+
 const run = require('../../util/run');
 const express = require('express');
 const router = express.Router();
-const facets = require("../../service/facetEntryService");
 
 module.exports = router;
 
-router.delete('/api/facetEntries', run(facets.purgeFacets));
+router.delete('/api/facetEntry', run(purgeFacetsEntries));
 
 

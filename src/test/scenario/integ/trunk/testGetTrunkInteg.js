@@ -1,6 +1,6 @@
 import chai from 'chai';
 import {initDatabase} from "../testIntegPlumbing";
-import {getAll, getTrunk, search} from "../../../expected/trunk/testGetTrunkData";
+import {getAllTrunkSpec, getTrunkSpec, searchTrunkSpec} from "../../../expected/trunk/testGetTrunkData";
 import {app} from "../../../../main";
 
 describe('GET Trunks', function () {
@@ -14,22 +14,22 @@ describe('GET Trunks', function () {
             .get('/api/trunks')
             .end((err, res) => {
                 res.should.have.status(200);
-                res.body.should.deep.equal(getAll.res.body);
+                res.body.should.deep.equal(getAllTrunkSpec.res.body);
                 done();
             });
     });
 
     it('return trunks whose name start by', done => {
         chai.request(app)
-            .get(`/api/trunks?q=${search.req.term}`)
+            .get(`/api/trunks?q=${searchTrunkSpec.req.term}`)
             .end((err, res) => {
                 res.should.have.status(200);
-                res.body.should.deep.equal(search.res.body);
+                res.body.should.deep.equal(searchTrunkSpec.res.body);
                 done();
             });
     });
 
-    it('return a trunk', done => testGetTrunkWith(getTrunk, done));
+    it('return a trunk', done => testGetTrunkWith(getTrunkSpec, done));
 
 });
 

@@ -1,4 +1,4 @@
-import {erreurDifferenteGrandeurs, NoUnitError} from "../exceptions/Errors";
+import {erreurDifferenteGrandeurs, NoUnitError} from "../../exceptions/Errors";
 
 const _ = require('lodash');
 

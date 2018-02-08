@@ -1,10 +1,10 @@
 import chai from 'chai';
 import {assertDb, initDatabase, run} from "../testIntegPlumbing";
-import {getAll, getTrunk, search} from "../../../expected/trunk/testGetTrunkData";
+import {getAllTrunkSpec, getTrunkSpec, searchTrunkSpec} from "../../../expected/trunk/testGetTrunkData";
 import {app} from "../../../../main";
-import {existingIdsNewQts} from "../../../expected/root/testPutRootData";
+import {existingIdsNewQtsSpec} from "../../../expected/root/testPutRootData";
 import {putRoot} from "../root/testPutRootInteg";
-import {normalTank} from "../../../expected/tank/testGetTankData";
+import {normalTankSpec} from "../../../expected/tank/testGetTankData";
 
 describe('GET Tank', function () {
 
@@ -18,9 +18,9 @@ describe('GET Tank', function () {
 });
 
 
-export const getTank = getTankData => chai.request(app)
-    .get(`/api/tank/${getTankData.req._id}`)
+export const getTank = spec => chai.request(app)
+    .get(`/api/tank/${spec.req.qt}${spec.req.unit ? '/'+spec.req.unit : ''}/${spec.req._id}`)
     .then(async (res) => {
         res.should.have.status(200);
-        res.body.should.deep.equal(getTankData.res.body);
+        res.body.should.deep.equal(spec.res.body);
     });

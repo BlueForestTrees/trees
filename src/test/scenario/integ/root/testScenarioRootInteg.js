@@ -1,9 +1,9 @@
 import {match, mock} from 'sinon';
 import {initDatabase, run} from "../testIntegPlumbing";
-import {bleRootDeletion} from "../../../expected/root/testDeleteRootData";
+import {bleRootDeletionSpec} from "../../../expected/root/testDeleteRootData";
 import {deleteRoot} from "./testDeleteRootInteg";
 import {postRoot} from "./testPostRootInteg";
-import {bleToFarineAdd} from "../../../expected/root/testPostRootData";
+import {bleToFarineAddSpec} from "../../../expected/root/testPostRootData";
 
 describe('SCENARIO Root', function () {
 
@@ -12,9 +12,9 @@ describe('SCENARIO Root', function () {
     });
 
     it('suppr puis réajout du blé à la farine',
-        run(() => deleteRoot(bleRootDeletion)
+        run(() => deleteRoot(bleRootDeletionSpec)
             .then(
-                () => postRoot(bleToFarineAdd))
+                () => postRoot(bleToFarineAddSpec))
         ));
 });
 

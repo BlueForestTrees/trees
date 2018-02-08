@@ -4,8 +4,8 @@ import {cols} from "../../../main/const/collections";
 
 const biereId = biere._id;
 const capsuleId = capsule._id;
-export const newRoot = {};
-newRoot.req = {
+export const newRootSpec = {};
+newRootSpec.req = {
     body: {
         trunk: {
             _id: biereId
@@ -15,10 +15,10 @@ newRoot.req = {
         }
     }
 };
-newRoot.res = {
+newRootSpec.res = {
     body: oneUpsertedResponse(biereId)
 };
-newRoot.db = {
+newRootSpec.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
@@ -33,31 +33,29 @@ newRoot.db = {
     }
 };
 
-const bleId = ble._id;
-const farineId = farine._id;
 
-export const existingIds = {};
-existingIds.req = {
+export const existingIdsSpec = {};
+existingIdsSpec.req = {
     body: {
         trunk: {
-            _id: bleId
+            _id: ble._id
         },
         root: {
-            _id: farineId
+            _id: farine._id
         }
     }
 };
-existingIds.res = {
-    body: oneUpsertedResponse(bleId)
+existingIdsSpec.res = {
+    body: oneUpsertedResponse(ble._id)
 };
-existingIds.db = {
+existingIdsSpec.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
-            _id: bleId,
+            _id: ble._id,
             items: [
                 {
-                    _id: farineId
+                    _id: farine._id
                 }
             ],
 
@@ -68,8 +66,8 @@ existingIds.db = {
 
 
 
-export const bleToFarineAdd = {};
-bleToFarineAdd.req = {
+export const bleToFarineAddSpec = {};
+bleToFarineAddSpec.req = {
     body: {
         trunk: {
             _id: farine._id
@@ -79,10 +77,10 @@ bleToFarineAdd.req = {
         }
     }
 };
-bleToFarineAdd.res = {
+bleToFarineAddSpec.res = {
     body: oneModifiedResponse
 };
-bleToFarineAdd.db = {
+bleToFarineAddSpec.db = {
     expected: {
         colname: cols.ROOT,
         doc: {

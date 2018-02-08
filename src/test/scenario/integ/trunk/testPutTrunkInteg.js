@@ -1,4 +1,4 @@
-import {trunkRename, trunkRequantify} from "../../../expected/trunk/testPutTrunkData";
+import {renameTrunkSpec, requantifyTrunkSpec} from "../../../expected/trunk/testPutTrunkData";
 import chai from 'chai';
 import {assertDb, initDatabase} from "../testIntegPlumbing";
 import {app} from "../../../../main";
@@ -9,8 +9,8 @@ describe('PUT Trunks', function () {
         await initDatabase();
     });
 
-    it('rename the trunk', done => testPutTrunkWith(trunkRename, done));
-    it('quantify the trunk', done => testPutTrunkWith(trunkRequantify, done));
+    it('rename the trunk', done => testPutTrunkWith(renameTrunkSpec, done));
+    it('quantify the trunk', done => testPutTrunkWith(requantifyTrunkSpec, done));
 
 });
 

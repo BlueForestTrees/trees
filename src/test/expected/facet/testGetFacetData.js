@@ -1,32 +1,32 @@
-import {bleFacets, nameOfFacet, gateau, farine} from "../../scenario/integ/testIntegDatabase";
+import {bleFacets, farine, nameOfFacet} from "../../scenario/integ/testIntegDatabase";
 import {clon} from "../../testUtil";
 import _ from 'lodash';
 
-export const getFacet = {};
+export const getFacetSpec = {};
 
 const laFacetWithItsFacetEntryFields = _.forEach(clon(bleFacets.items), facet => facet.name = nameOfFacet(facet._id));
 
-getFacet.req = {
+getFacetSpec.req = {
     _id: bleFacets._id
 };
 
-getFacet.res = {
+getFacetSpec.res = {
     body: {
-        _id: getFacet.req._id,
+        _id: getFacetSpec.req._id,
         items: laFacetWithItsFacetEntryFields
     }
 };
 
 
-export const emptyGetFacet = {};
+export const emptyGetFacetSpec = {};
 
-emptyGetFacet.req = {
+emptyGetFacetSpec.req = {
     _id: farine._id
 };
 
-emptyGetFacet.res = {
+emptyGetFacetSpec.res = {
     body: {
-        _id: emptyGetFacet.req._id,
+        _id: emptyGetFacetSpec.req._id,
         items:[]
     }
 };

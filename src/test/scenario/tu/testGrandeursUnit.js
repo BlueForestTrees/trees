@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {match, mock} from 'sinon';
 import {GrandeurMismatchError, NoUnitError} from "../../../main/exceptions/Errors";
-import {qtUnitCoef, unit, unitCoef} from "../../../main/service/grandeursService";
+import {qtUnitCoef, unit, unitCoef} from "../../../main/service/grandeur/grandeursService";
 
 describe('Grandeurs', function () {
 

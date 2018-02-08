@@ -2,8 +2,8 @@ import {ID, NAME, ROOT_ID, SOURCE_ID, TREE_ID, TRUNK_ID} from "./paths";
 import {IS_DECIMAL, IS_NOT_TRUNK_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED, SHOULD_NOT_BE_DEFINED} from "./messages";
 import {check} from 'express-validator/check';
 import {peekTrunk} from "../service/trunk/getTrunkService";
-import {shortnames} from "../service/grandeursService";
 import _ from 'lodash';
+import {shortnames} from "../service/grandeur/grandeursService";
 
 export const valid = (field, optional) => {
     let chain = check(field);
@@ -28,3 +28,5 @@ export const present = (...fields) => _.map(fields,field=>check(field, SHOULD_BE
 export const absent = (...fields) =>  _.map(fields,field=>check(field, SHOULD_NOT_BE_DEFINED).not().exists());
 export const optionalValidUnit = field => check(field, IS_VALID_UNIT).optional().exists().isIn(shortnames);
 export const optionalValidQt = field => check(field, IS_DECIMAL).optional().exists().isDecimal().toInt();
+export const validUnit = field => check(field, IS_VALID_UNIT).optional().exists().isIn(shortnames);
+export const validQt = field => check(field, IS_DECIMAL).optional().exists().isDecimal().toInt();

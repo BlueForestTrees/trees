@@ -1,15 +1,15 @@
 import {gateau} from "../../scenario/integ/testIntegDatabase";
 import {cols} from "../../../main/const/collections";
 
-export const deletion = {};
+export const trunkDeletionSpec = {};
 
 const _id = gateau._id;
 
-deletion.req = {
+trunkDeletionSpec.req = {
     _id
 };
 
-deletion.db = {
+trunkDeletionSpec.db = {
     expected: {
         colname: cols.TRUNK,
         missingDoc: {_id}

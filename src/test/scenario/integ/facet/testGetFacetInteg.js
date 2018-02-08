@@ -1,6 +1,6 @@
 import chai from 'chai';
 import {initDatabase} from "../testIntegPlumbing";
-import {emptyGetFacet, getFacet} from "../../../expected/facet/testGetFacetData";
+import {emptyGetFacetSpec, getFacetSpec} from "../../../expected/facet/testGetFacetData";
 import {app} from "../../../../main";
 
 describe('GET Facets', function () {
@@ -9,8 +9,8 @@ describe('GET Facets', function () {
         await initDatabase();
     });
 
-    it('return facets', done => testGetFacetsWith(getFacet, done));
-    it('return empty facets', done => testGetFacetsWith(emptyGetFacet, done));
+    it('return facets', done => testGetFacetsWith(getFacetSpec, done));
+    it('return empty facets', done => testGetFacetsWith(emptyGetFacetSpec, done));
 
 });
 

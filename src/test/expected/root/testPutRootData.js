@@ -4,10 +4,10 @@ import {clon} from "../../testUtil";
 import {cols} from "../../../main/const/collections";
 import _ from 'lodash';
 
-export const existingIdsNewQts = {};
+export const existingIdsNewQtsSpec = {};
 const bleId = ble._id;
 const farineId = farine._id;
-existingIdsNewQts.req = {
+existingIdsNewQtsSpec.req = {
     body: {
         trunk: {
             _id: bleId,
@@ -25,19 +25,19 @@ existingIdsNewQts.req = {
         }
     }
 };
-existingIdsNewQts.res = {
+existingIdsNewQtsSpec.res = {
     body: oneModifiedResponse
 };
-existingIdsNewQts.db = {
+existingIdsNewQtsSpec.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
             _id: bleId,
-            quantity: existingIdsNewQts.req.body.trunk.quantity,
+            quantity: existingIdsNewQtsSpec.req.body.trunk.quantity,
             items: [
                 {
                     "_id": farine._id,
-                    quantity: existingIdsNewQts.req.body.root.quantity,
+                    quantity: existingIdsNewQtsSpec.req.body.root.quantity,
                 }
             ],
 
@@ -46,11 +46,11 @@ existingIdsNewQts.db = {
 };
 
 
-export const existingIdsAndQts = {};
+export const existingIdsAndQtsSpec = {};
 const updatedRoots = clon(gateauRoot.items);
 setQuantity(updatedRoots[1], 60);
 
-existingIdsAndQts.req = {
+existingIdsAndQtsSpec.req = {
     body: {
         trunk: {
             _id: gateau._id,
@@ -68,10 +68,10 @@ existingIdsAndQts.req = {
         }
     }
 };
-existingIdsAndQts.res = {
+existingIdsAndQtsSpec.res = {
     body: oneModifiedResponse
 };
-existingIdsAndQts.db = {
+existingIdsAndQtsSpec.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
@@ -81,11 +81,11 @@ existingIdsAndQts.db = {
     }
 };
 
-export const existingsAndUnitChange = {};
+export const existingsAndUnitChangeSpec = {};
 const updatedRootsWithDifferentUnit = clon(gateauRoot.items);
 setQuantity(updatedRootsWithDifferentUnit[1], 250, "g");
 
-existingsAndUnitChange.req = {
+existingsAndUnitChangeSpec.req = {
     body: {
         trunk: {
             _id: gateau._id,
@@ -103,10 +103,10 @@ existingsAndUnitChange.req = {
         }
     }
 };
-existingsAndUnitChange.res = {
+existingsAndUnitChangeSpec.res = {
     body: oneModifiedResponse
 };
-existingsAndUnitChange.db = {
+existingsAndUnitChangeSpec.db = {
     expected: {
         colname: cols.ROOT,
         doc: {

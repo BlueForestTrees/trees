@@ -3,36 +3,36 @@ import {oneModifiedResponse} from "../testCommonData";
 import {remove} from "../../testUtil";
 import {cols} from "../../../main/const/collections";
 
-export const rootDeletion = {};
+export const rootDeletionSpec = {};
 
-rootDeletion.req = {
+rootDeletionSpec.req = {
     trunkId: gateauRoot._id,
     rootId: gateauRoot.items[0]._id
 };
 
-rootDeletion.res = {
+rootDeletionSpec.res = {
     expected: oneModifiedResponse
 };
 
-rootDeletion.db = {
+rootDeletionSpec.db = {
     expected: {
         colname: cols.ROOT,
         doc: remove(gateauRoot, "items", {_id: gateauRoot.items[0]._id})
     }
 };
 
-export const bleRootDeletion = {};
+export const bleRootDeletionSpec = {};
 
-bleRootDeletion.req = {
+bleRootDeletionSpec.req = {
     trunkId: farineRoot._id,
     rootId: farineRoot.items[0]._id
 };
 
-bleRootDeletion.res = {
+bleRootDeletionSpec.res = {
     expected: oneModifiedResponse
 };
 
-bleRootDeletion.db = {
+bleRootDeletionSpec.db = {
     expected: {
         colname: cols.ROOT,
         doc: remove(farineRoot, "items", {_id: farineRoot.items[0]._id})

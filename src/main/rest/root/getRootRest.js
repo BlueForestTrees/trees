@@ -1,5 +1,5 @@
 import {existingId, optionalValidQt, optionalValidUnit} from "../../const/validations";
-import {loadQuantifiedRoot, loadUnquantifiedRoot} from "../../topService/getRootTopService";
+import {loadNamedQuantifiedRoot, loadNamedUnquantifiedRoot} from "../../topService/getRootTopService";
 import {QT, UNIT} from "../../const/paths";
 
 const run = require('../../util/run');
@@ -11,7 +11,7 @@ router.get('/api/root/:_id',
     [
         existingId
     ],
-    run(({_id}) => loadUnquantifiedRoot(_id))
+    run(({_id}) => loadNamedUnquantifiedRoot(_id))
 );
 
 router.get('/api/root/:qt/:_id',
@@ -19,7 +19,7 @@ router.get('/api/root/:qt/:_id',
         existingId,
         optionalValidQt(QT)
     ],
-    run(({qt, _id}) => loadQuantifiedRoot(qt, "", _id))
+    run(({qt, _id}) => loadNamedQuantifiedRoot(qt, "", _id))
 );
 
 router.get('/api/root/:qt/:unit/:_id',
@@ -28,5 +28,5 @@ router.get('/api/root/:qt/:unit/:_id',
         optionalValidQt(QT),
         optionalValidUnit(UNIT)
     ],
-    run(({qt, unit, _id}) => loadQuantifiedRoot(qt, unit, _id))
+    run(({qt, unit, _id}) => loadNamedQuantifiedRoot(qt, unit, _id))
 );

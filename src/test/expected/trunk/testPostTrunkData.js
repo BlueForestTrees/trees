@@ -1,43 +1,42 @@
-import {ble, farine, gateau} from "../../scenario/integ/testIntegDatabase";
+import {gateau} from "../../scenario/integ/testIntegDatabase";
 import _ from 'lodash';
 import {cols} from "../../../main/const/collections";
-import {oneModifiedResponse} from "../testCommonData";
 
 const lowerizeName = name => name.toLowerCase();
 const name = "RATtatouille1664";
 
-export const post = {};
+export const postTrunkSpec = {};
 
-post.req = {
+postTrunkSpec.req = {
     body: {name},
 };
-post.res = {
+postTrunkSpec.res = {
     body: _id => ({_id, name})
 };
-post.db = {
+postTrunkSpec.db = {
     expected: _id => ({
         colname: cols.TRUNK,
         doc: {
             _id,
-            ...post.req.body,
-            name_lower: lowerizeName(post.req.body.name)
+            ...postTrunkSpec.req.body,
+            name_lower: lowerizeName(postTrunkSpec.req.body.name)
         }
     })
 };
 
 const clonedName = (newId, tree) => tree.name + newId;
 
-export const clone = {};
+export const cloneTrunkSpec = {};
 
-clone.req = {
+cloneTrunkSpec.req = {
     body: {
         sourceId: gateau._id
     }
 };
-clone.res = {
+cloneTrunkSpec.res = {
     body: _id => ({_id, name: clonedName(_id, gateau)})
 };
-clone.db = {
+cloneTrunkSpec.db = {
     expected: _id => ({
         colname: cols.TRUNK,
         doc: {

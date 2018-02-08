@@ -37,5 +37,5 @@ allreadyExistingFacetEntrySpec.req = {
     }
 };
 allreadyExistingFacetEntrySpec.res = {
-    body : vitCFacetEntry
+    body : _id => vitCFacetEntry
 };

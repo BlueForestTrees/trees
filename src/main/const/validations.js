@@ -13,15 +13,15 @@ export const valid = (field, optional) => {
     return chain.exists().withMessage("missing")
         .isMongoId().withMessage("invalid");
 };
-const found = (field, optional) => valid(field, optional).custom(peekTrunk).withMessage("not found");
+const trunkFound = (field, optional) => valid(field, optional).custom(peekTrunk).withMessage("not found");
 
 export const validId = valid(ID);
 export const validTreeId = valid(TREE_ID);
 export const validGrandeur = field => check(field).isIn(grandeursKeys);
-export const existingId = found(ID);
-export const existingTrunkId = found(TRUNK_ID);
-export const existingRootId = found(ROOT_ID);
-export const optionalExistingSourceId = found(SOURCE_ID, true);
+export const existingId = trunkFound(ID);
+export const existingTrunkId = trunkFound(TRUNK_ID);
+export const existingRootId = trunkFound(ROOT_ID);
+export const optionalExistingSourceId = trunkFound(SOURCE_ID, true);
 export const rootIdIsNotTrunkId = check(ROOT_ID, IS_NOT_TRUNK_ID).custom((root, {req}) => (!root || !req.body.trunk) || (root._id !== req.body.trunk._id));
 export const optionalValidName = check(NAME).optional().matches(/^.+/);
 export const validName = check(NAME).isLength({min:2}).matches(/^.+/);

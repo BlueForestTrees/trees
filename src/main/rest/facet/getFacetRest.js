@@ -1,4 +1,4 @@
-import {existingId} from "../../const/validations";
+import {validId} from "../../const/validations";
 import {loadFacets} from "../../topService/getFacetTopService";
 
 const run = require('../../util/run');
@@ -8,7 +8,7 @@ module.exports = router;
 
 router.get('/api/facet/:_id',
     [
-        existingId
+        validId
     ],
     run(({_id}) => loadFacets(_id))
 );

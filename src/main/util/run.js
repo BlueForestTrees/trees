@@ -12,8 +12,6 @@ function run(work) {
         validationResult(req).throw();
         let result = await work(matchedData(req), req, res, next);
         res.json(result);
-
-        debug("result", result);
     };
 
     return (req, res, next) => {
@@ -23,12 +21,7 @@ function run(work) {
         let result = validResultJson(req, res, next);
         Promise
             .resolve(result)
-            .catch(err=>{
-
-                debug("catch", err);
-
-                return next(err);
-            });
+            .catch(next);
     };
 }
 

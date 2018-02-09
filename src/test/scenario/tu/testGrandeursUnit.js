@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {match, mock} from 'sinon';
-import {GrandeurMismatchError, NoUnitError} from "../../../main/exceptions/Errors";
-import {qtUnitCoef, unit, unitCoef} from "../../../main/service/grandeur/grandeursService";
+import {toBaseQuantity, coef, qtUnitCoef, unit, unitCoef} from "../../../main/service/grandeur/grandeursService";
 
 describe('Grandeurs', function () {
 
@@ -63,5 +62,30 @@ describe('Grandeurs', function () {
         });
 
     });
+
+    describe('coef', function(){
+        it('kg => 1000', function(){
+            expect(coef("kg")).to.equal(1000);
+        });
+        it('g => 1', function(){
+            expect(coef("g")).to.equal(1);
+        });
+        it('"" => 1', function(){
+            expect(coef("")).to.equal(1);
+        });
+    });
+
+    describe('baseQt', function(){
+        it('10kg => 10000g', function(){
+            expect(toBaseQuantity({qt:10,unit:"kg"})).to.deep.equal({qt:10000,unit:"g"});
+        });
+        it('10.5kg => 10500g', function(){
+            expect(toBaseQuantity({qt:10,unit:"kg"})).to.deep.equal({qt:10000,unit:"g"});
+        });
+        it('10g => 10g', function(){
+            expect(toBaseQuantity({qt:10,unit:"g"})).to.deep.equal({qt:10,unit:"g"});
+        });
+    });
+
 
 });

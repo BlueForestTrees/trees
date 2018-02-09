@@ -1,4 +1,4 @@
-import {eau, elec, skate, withQuantity} from "../../scenario/integ/testIntegDatabase";
+import {arbre, eau, elec, skate, withQuantity} from "../../scenario/integ/testIntegDatabase";
 
 export const normalTankSpec = {};
 
@@ -8,19 +8,22 @@ normalTankSpec.req = {
     _id: skate._id
 };
 
-console.log(normalTankSpec);
-
 normalTankSpec.res = {
     body: {
         _id: normalTankSpec.req._id,
+        ...withQuantity(10,""),
         items: [
+            {
+                _id: eau._id,
+                ...withQuantity(11500, "L")
+            },
             {
                 _id: elec._id,
                 ...withQuantity(30000, "kwh")
             },
             {
-                _id: eau._id,
-                ...withQuantity(11500, "L")
+                _id: arbre._id,
+                ...withQuantity(0.005,"")
             }
         ]
     }

@@ -3,6 +3,7 @@ import {col} from "../../repo";
 import {matchId, withId} from "../../util/query";
 import _ from 'lodash';
 import {applyQuantity} from "../../util/calculations";
+import {debug} from "../../../test/scenario/integ/testIntegPlumbing";
 
 const roots = () => col(cols.ROOT);
 
@@ -23,25 +24,34 @@ export const readRootTree = (qt, unit, _id) =>
     getRootGraph(_id)
         .then(graph => treefy({qt, unit}, graph));
 
-const getRootGraph = _id => roots().aggregate([matchId(_id), rootGraphLookup]).next();
 
 const treefy = (quantity, graph) => {
     const cache = graph.cache;
-    const trunk = _.omit(graph, "cache");
+    const tree = _.omit(graph, "cache");
 
-    applyQuantity(quantity, trunk);
+    applyQuantity(quantity, tree);
 
-    // const items = trunk.items;
-    //
-    // _.forEach(items, item => {
-    //     const _id = item._id;
-    //     const quantity = item.quantity;
-    //     item.items = [];
-    //
-    //     const cachedItem = _.cloneDeep((_.find(cache, {_id})));
-    //   //  applyQuantity(quantity.qt, quantity.unit, cachedItem);
-    //
-    // });
+    tree.items = loadFromCache(tree, cache);
 
-    return {quantity: {qt, unit}, trunk, cache};
+    return tree;
 };
+
+const loadFromCache = (tree, cache) => {
+    const items = [];
+    _.forEach(tree.items, item => {
+        item.items = [];
+        let foundInCache = _.find(cache, {_id: item._id});
+        if (foundInCache) {
+            const cachedItem = _.cloneDeep(foundInCache);
+            applyQuantity(item.quantity, cachedItem);
+            cachedItem.items = loadFromCache(cachedItem, cache);
+            items.push(cachedItem);
+        } else {
+            items.push(_.omit(item, "items"));
+        }
+    });
+    return items;
+};
+
+
+const getRootGraph = _id => roots().aggregate([matchId(_id), rootGraphLookup]).next();

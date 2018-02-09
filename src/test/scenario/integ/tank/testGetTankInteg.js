@@ -1,9 +1,6 @@
 import chai from 'chai';
-import {assertDb, initDatabase, run} from "../testIntegPlumbing";
-import {getAllTrunkSpec, getTrunkSpec, searchTrunkSpec} from "../../../expected/trunk/testGetTrunkData";
+import {initDatabase, run} from "../testIntegPlumbing";
 import {app} from "../../../../main";
-import {existingIdsNewQtsSpec} from "../../../expected/root/testPutRootData";
-import {putRoot} from "../root/testPutRootInteg";
 import {normalTankSpec} from "../../../expected/tank/testGetTankData";
 
 describe('GET Tank', function () {
@@ -12,8 +9,7 @@ describe('GET Tank', function () {
         await initDatabase();
     });
 
-    //TODO implement
-    //it('normalTank', run(() => getTank(normalTank)));
+    it('normalTank', run(() => getTank(normalTankSpec)));
 
 });
 

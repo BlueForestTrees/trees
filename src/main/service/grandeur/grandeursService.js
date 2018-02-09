@@ -74,17 +74,23 @@ export const shortnames = Object.keys(units);
 
 export const unit = shortname => {
 
-    debug("unit", shortname);
+    //debug("unit", shortname);
 
-    return _.has(units,shortname) ? units[shortname] : null;
+    return _.has(units, shortname) ? units[shortname] : null;
 };
+
+export const coef = shortname => unit(shortname).coef;
+export const base = grandeur => _.find(grandeurs[grandeur], {coef: 1});
 
 export const unitlongname = shortname => unit(shortname).name;
 export const grandeur = shortname => unit(shortname).grandeur;
 
-export const checkGrandeur = (leftShortname, rightShortname) => {
+/**
+ * @returns faux, ou vrai ssi les unités sont valides et de la même grandeur
+ */
+export const sameGrandeur = (leftShortname, rightShortname) => {
 
-    debug("checkGrandeur",leftShortname, rightShortname);
+    //debug("sameGrandeur",leftShortname, rightShortname);
 
     const leftUnit = unit(leftShortname);
     const rightUnit = unit(rightShortname);
@@ -93,10 +99,28 @@ export const checkGrandeur = (leftShortname, rightShortname) => {
 
 };
 
-export const unitCoef = (leftShortname, rightShortname) => checkGrandeur(leftShortname, rightShortname)
-        ? unit(leftShortname).coef / unit(rightShortname).coef
-        : undefined;
+/**
+ * @returns le coef pour passer d'une unité à l'autre. undefined si les unités ne sont pas compatibles.
+ */
+export const unitCoef = (leftShortname, rightShortname) => sameGrandeur(leftShortname, rightShortname)
+    ? unit(leftShortname).coef / unit(rightShortname).coef
+    : undefined;
 
+/**
+ * @returns le coef pour passer d'une quantité à l'autre. undefined si les unités ne sont pas compatibles.
+ */
 export const qtUnitCoef = (leftQuantity, rightQuantity) => leftQuantity && rightQuantity
-        ? leftQuantity.qt / rightQuantity.qt * unitCoef(leftQuantity.unit, rightQuantity.unit)
-        : undefined;
+    ? leftQuantity.qt / rightQuantity.qt * unitCoef(leftQuantity.unit, rightQuantity.unit)
+    : undefined;
+
+/**
+ *
+ * @param quantity
+ * @returns la quantité en unité de base. (10kg => 10000g)
+ */
+export const toBaseQuantity = quantity => {
+    return {
+        qt: quantity.qt * coef(quantity.unit),
+        unit: base(grandeur(quantity.unit)).shortname
+    };
+};

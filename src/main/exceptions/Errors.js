@@ -12,6 +12,9 @@ export const erreurDifferenteGrandeurs = (leftShortname, rightShortname) => {
 
 export class GrandeurMismatchError extends Error {
     constructor(leftShortname,rightShortname, ...params) {
+
+        debug("GrandeurMismatchError", leftShortname, rightShortname);
+
         const message = `Units mismatch: '${leftShortname}' and '${rightShortname}'`;
         super(message, ...params);
         this.status = 400;

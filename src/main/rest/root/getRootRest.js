@@ -1,4 +1,4 @@
-import {existingId, optionalValidQt, optionalValidUnit} from "../../const/validations";
+import {optionalValidQt, optionalValidUnit, validId} from "../../const/validations";
 import {loadNamedQuantifiedRoot, loadNamedUnquantifiedRoot} from "../../topService/getRootTopService";
 import {QT, UNIT} from "../../const/paths";
 
@@ -9,14 +9,14 @@ module.exports = router;
 
 router.get('/api/root/:_id',
     [
-        existingId
+        validId
     ],
     run(({_id}) => loadNamedUnquantifiedRoot(_id))
 );
 
 router.get('/api/root/:qt/:_id',
     [
-        existingId,
+        validId,
         optionalValidQt(QT)
     ],
     run(({qt, _id}) => loadNamedQuantifiedRoot(qt, "", _id))
@@ -24,7 +24,7 @@ router.get('/api/root/:qt/:_id',
 
 router.get('/api/root/:qt/:unit/:_id',
     [
-        existingId,
+        validId,
         optionalValidQt(QT),
         optionalValidUnit(UNIT)
     ],

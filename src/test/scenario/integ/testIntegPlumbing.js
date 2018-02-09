@@ -46,5 +46,9 @@ export const run = job => done => {
 
 
 export const debug = (...obj) => {
-    console.log(JSON.stringify(obj, null, 4));
+    try {
+        console.log(JSON.stringify(obj, null, 4));
+    }catch(e){
+        console.log(obj);
+    }
 };

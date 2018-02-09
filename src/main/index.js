@@ -33,8 +33,7 @@ app.use(function (req, res, next) {
 
 app.use(function (err, req, res, next) {
 
-    debug("ERROR HANDLER",req, res, err);
-
+    debug("ERROR HANDLER", err);
     //erreur de validation.
     if (err.mapped) {
         res.status(422).json(err.mapped());

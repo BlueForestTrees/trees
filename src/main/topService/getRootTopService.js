@@ -12,11 +12,11 @@ export const loadNamedUnquantifiedRoot = _id =>
 
 export const loadNamedQuantifiedRoot = async (qt, unit, _id) => {
 
-    throw {status:400};
-    //
-    // return loadNamedRoots(_id)
-    //     .then(roots => validateGrandeur({qt, unit}, roots))
-    //     .then(roots => applyQuantity({qt, unit}, roots));
+    //throw {status:400};
+
+    return loadNamedRoots(_id)
+        .then(roots => validateGrandeur({qt, unit}, roots))
+        .then(roots => applyQuantity({qt, unit}, roots));
 };
 
 const loadRoots = _id =>

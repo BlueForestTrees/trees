@@ -44,9 +44,13 @@ const getQuantifiedRoot = spec => chai.request(app)
 const getErrorQuantifiedRoot = spec => chai.request(app)
     .get(`/api/root/${spec.req.qt}/${spec.req.unit}/${spec.req._id}`)
     .then(res => {
-        res.should.have.status(400);
+        res.body.should.deep.equal(spec.res);
     })
     .catch(err => {
-        err.should.have.status(spec.res.status);
-        err.response.body.message.should.equal(spec.res.bodyMessage);
+        if(err.status) {
+            err.should.have.status(spec.res.status);
+            err.response.body.message.should.equal(spec.res.bodyMessage);
+        }else{
+            throw err;
+        }
     });

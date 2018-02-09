@@ -13,8 +13,8 @@ describe('Grandeurs', function () {
         it('"" ok', function(){
             expect(unitCoef('','')).to.equal(1);
         });
-        it('doudou throws error', function(){
-           expect(()=>unit('doudou')).to.throw(NoUnitError);
+        it('unit("doudou") throws error', function(){
+           expect(unit('doudou')).to.be.null;
         });
     });
 
@@ -31,8 +31,8 @@ describe('Grandeurs', function () {
         it('m km == 0.001', function(){
             expect(unitCoef('m','km')).to.equal(0.001);
         });
-        it('sec km throws GrandeurMismatchError', function(){
-            expect(()=>unitCoef('sec','km')).to.throw(GrandeurMismatchError);
+        it('sec km is undefined', function(){
+            expect(unitCoef('sec','km')).to.equal(undefined);
         });
     });
 

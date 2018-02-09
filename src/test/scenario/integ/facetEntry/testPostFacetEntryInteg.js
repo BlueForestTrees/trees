@@ -17,15 +17,21 @@ describe('POST FacetEntry', function () {
     it('postBadGrandeurFacetEntrySpec', run(() => postErrorFacetEntry(postBadGrandeurFacetEntrySpec)));
 
 
-
 });
 
 const postErrorFacetEntry = spec => chai.request(app)
     .post(`/api/facetEntry`)
     .send(spec.req.body)
-    .catch(err=>{
-        err.should.have.status(spec.res.status);
-        err.response.body.grandeur.msg.should.equal(spec.res.bodyMessage);
+    .then(res=>{
+        res.body.should.deep.equal(spec.res);
+    })
+    .catch(err => {
+        if(err.status) {
+            err.should.have.status(spec.res.status);
+            err.response.body.grandeur.msg.should.equal(spec.res.bodyMessage);
+        }else{
+            throw err;
+        }
     });
 
 const postFacetEntry = spec => chai.request(app)

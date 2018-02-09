@@ -7,6 +7,7 @@ import path from "path";
 import read from 'fs-readdir-recursive';
 import _ from 'lodash';
 import env from "../../config/env";
+import {debug} from "../test/scenario/integ/testIntegPlumbing";
 
 export const app = express();
 
@@ -31,6 +32,9 @@ app.use(function (req, res, next) {
 });
 
 app.use(function (err, req, res, next) {
+
+    debug("ERROR HANDLER",req, res, err);
+
     //erreur de validation.
     if (err.mapped) {
         res.status(422).json(err.mapped());

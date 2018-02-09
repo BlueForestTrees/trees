@@ -1,19 +1,19 @@
 import {runraw} from "../../util/runraw";
-import {grandeursKeys} from "../../service/grandeur/grandeursService";
 import {addFacetEntry, replaceAllFacetEntries} from "../../service/facetEntry/postFacetEntryService";
+import {validGrandeur, validName} from "../../const/validations";
+import {GRANDEUR} from "../../const/paths";
 
 const run = require('../../util/run');
 
 const express = require('express');
 const router = express.Router();
-const {check} = require('express-validator/check');
 
 module.exports = router;
 
 router.post('/api/facetEntry',
     [
-        check('name').isLength({min:2}),
-        check('grandeur').isIn(grandeursKeys)
+        validName,
+        validGrandeur(GRANDEUR)
     ],
     run(addFacetEntry)
 );

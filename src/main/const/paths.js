@@ -11,3 +11,4 @@ export const QUANTITY = 'quantity';
 export const NAME = 'name';
 export const QT = 'qt';
 export const UNIT = 'unit';
+export const GRANDEUR = 'grandeur';

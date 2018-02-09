@@ -3,7 +3,8 @@ import {IS_DECIMAL, IS_NOT_TRUNK_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED, SHOULD_NO
 import {check} from 'express-validator/check';
 import {peekTrunk} from "../service/trunk/getTrunkService";
 import _ from 'lodash';
-import {shortnames} from "../service/grandeur/grandeursService";
+import {grandeursKeys, shortnames} from "../service/grandeur/grandeursService";
+import {debug} from "../../test/scenario/integ/testIntegPlumbing";
 
 export const valid = (field, optional) => {
     let chain = check(field);
@@ -16,12 +17,15 @@ const found = (field, optional) => valid(field, optional).custom(peekTrunk).with
 
 export const validId = valid(ID);
 export const validTreeId = valid(TREE_ID);
+export const validGrandeur = field => check(field).isIn(grandeursKeys);
 export const existingId = found(ID);
 export const existingTrunkId = found(TRUNK_ID);
 export const existingRootId = found(ROOT_ID);
 export const optionalExistingSourceId = found(SOURCE_ID, true);
 export const rootIdIsNotTrunkId = check(ROOT_ID, IS_NOT_TRUNK_ID).custom((root, {req}) => (!root || !req.body.trunk) || (root._id !== req.body.trunk._id));
 export const optionalValidName = check(NAME).optional().matches(/^.+/);
+export const validName = check(NAME).isLength({min:2}).matches(/^.+/);
+
 export const optionalUnit = field => check(field, IS_VALID_UNIT).optional().exists().isIn(shortnames);
 export const optionalDecimal = field => check(field, IS_DECIMAL).optional().exists().isDecimal();
 export const present = (...fields) => _.map(fields,field=>check(field, SHOULD_BE_DEFINED).exists());

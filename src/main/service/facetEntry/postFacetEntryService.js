@@ -1,6 +1,7 @@
 import {cols} from "../../const/collections";
 import {col} from "../../repo";
 import {getFacetEntryByName} from "./getFacetEntryService";
+import {debug} from "../../../test/scenario/integ/testIntegPlumbing";
 
 const facetsEntry = () => col(cols.FACET_ENTRY);
 
@@ -13,8 +14,12 @@ export const replaceAllFacetEntries = async (data) => {
 };
 
 export const addFacetEntry = async facetEntry =>
-    await getFacetEntryByName(facetEntry.name) ||
+{
+    debug("addFacetEntry", facetEntry);
+
+    return await getFacetEntryByName(facetEntry.name) ||
     {
         _id: await facetsEntry().insertOne(facetEntry).insertedId,
         ...facetEntry
     };
+};

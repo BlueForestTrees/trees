@@ -7,7 +7,6 @@ const router = require('express').Router();
 
 module.exports = router;
 
-
 router.get('/api/tank/:qt/:_id',
     [
         existingId,

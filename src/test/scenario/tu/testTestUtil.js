@@ -19,13 +19,13 @@ describe('Utils', function () {
     it('replace ok', function () {
         expect(replace(
             {
-                items: [{i: 1}, {i: 3}, {_id: 2,oldVal:7}]
+                items: [{i: 1}, {i: 3}, {_id: 2, oldVal: 7}]
             },
             "items",
-            {_id: 2, newVal:5})
+            {_id: 2, newVal: 5})
         ).to.deep.equal(
             {
-                items: [{i: 1}, {i: 3}, {_id: 2,newVal:5}]
+                items: [{i: 1}, {i: 3}, {_id: 2, newVal: 5}]
             });
     });
 

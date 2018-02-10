@@ -1,4 +1,4 @@
-import {anoAnotherFacetEntry, vitBFacetEntry, bleFacets, farine} from "../../scenario/integ/testIntegDatabase";
+import {anoAnotherFacetEntry, bleFacets, farine, vitBFacetEntry} from "../../scenario/integ/testIntegDatabase";
 import {oneModifiedResponse, oneUpsertedResponse} from "../testCommonData";
 import {replace} from "../../testUtil";
 import {cols} from "../../../main/const/collections";

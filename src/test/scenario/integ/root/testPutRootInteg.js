@@ -3,7 +3,7 @@ import {match, mock} from 'sinon';
 
 import {assertDb, initDatabase, run} from "../testIntegPlumbing";
 import {app} from "../../../../main";
-import {existingsAndUnitChangeSpec, existingIdsNewQtsSpec, existingIdsAndQtsSpec} from "../../../expected/root/testPutRootData";
+import {existingIdsAndQtsSpec, existingIdsNewQtsSpec, existingsAndUnitChangeSpec} from "../../../expected/root/testPutRootData";
 
 describe('PUT Root', function () {
 

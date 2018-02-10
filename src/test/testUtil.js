@@ -10,7 +10,7 @@ export const remove = (obj, prop, criteria) => {
 };
 
 export const replace = (obj, prop, value) => {
-    const result = remove(obj, prop, {_id:value._id});
+    const result = remove(obj, prop, {_id: value._id});
     result[prop].push(value);
     return result;
 };

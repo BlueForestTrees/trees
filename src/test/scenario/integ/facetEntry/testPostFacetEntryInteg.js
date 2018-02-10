@@ -22,14 +22,14 @@ describe('POST FacetEntry', function () {
 const postErrorFacetEntry = spec => chai.request(app)
     .post(`/api/facetEntry`)
     .send(spec.req.body)
-    .then(res=>{
+    .then(res => {
         res.body.should.deep.equal(spec.res);
     })
     .catch(err => {
-        if(err.status) {
+        if (err.status) {
             err.should.have.status(spec.res.status);
             err.response.body.grandeur.msg.should.equal(spec.res.bodyMessage);
-        }else{
+        } else {
             throw err;
         }
     });

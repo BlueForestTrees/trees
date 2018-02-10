@@ -27,6 +27,6 @@ emptyGetFacetSpec.req = {
 emptyGetFacetSpec.res = {
     body: {
         _id: emptyGetFacetSpec.req._id,
-        items:[]
+        items: []
     }
 };

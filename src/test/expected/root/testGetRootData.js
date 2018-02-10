@@ -1,11 +1,7 @@
 import _ from 'lodash';
-import {farineRoot, gateauRoot, lait, nameOf, setQuantity, skateRoot} from "../../scenario/integ/testIntegDatabase";
+import {farineRoot, gateauRoot, lait, setQuantity, skateRoot} from "../../scenario/integ/testIntegDatabase";
 import {clon} from "../../testUtil";
-import {debug} from "../../scenario/integ/testIntegPlumbing";
-
-const withNames = items => _.forEach(items, root => root.name = nameOf(root._id));
-const withDoubleQt = items => _.forEach(items, root => root.quantity.qt *= 2);
-const withoutQuantity = items => _.map(items, item => _.omit(item, "quantity"));
+import {withDoubleQt, withNames, withoutQuantity} from "../../scenario/integ/testIntegPlumbing";
 
 export const getRootsSpec = {};
 const gateauItemsWithNames = withoutQuantity(withNames(clon(gateauRoot.items)));
@@ -14,7 +10,7 @@ getRootsSpec.req = {
 };
 getRootsSpec.res = {
     body: {
-        ..._.omit(gateauRoot, ["items","quantity"]),
+        ..._.omit(gateauRoot, ["items", "quantity"]),
         items: gateauItemsWithNames
     }
 };
@@ -116,7 +112,7 @@ badUnitGetRootSpec.res = {
 export const farineNoBleQtGetRootSpec = {};
 const myFarineRoot = clon(farineRoot);
 withNames(myFarineRoot.items);
-setQuantity(myFarineRoot, 60,"g");
+setQuantity(myFarineRoot, 60, "g");
 
 farineNoBleQtGetRootSpec.req = {
     qt: myFarineRoot.quantity.qt,

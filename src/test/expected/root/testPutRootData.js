@@ -75,7 +75,7 @@ existingIdsAndQtsSpec.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
-            ...(_.omit(gateauRoot,"items")),
+            ...(_.omit(gateauRoot, "items")),
             items: updatedRoots,
         }
     }
@@ -110,7 +110,7 @@ existingsAndUnitChangeSpec.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
-            ...(_.omit(gateauRoot,"items")),
+            ...(_.omit(gateauRoot, "items")),
             items: updatedRootsWithDifferentUnit,
         }
     }

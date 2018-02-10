@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import chai, {expect} from 'chai';
 import chaiHttp from 'chai-http';
-import {initialDB} from "./testIntegDatabase";
+import {initialDB, nameOf} from "./testIntegDatabase";
 import {cols} from "../../../main/const/collections";
 import {col} from "../../../main/repo";
 import {removeObjects} from "../../../main/util/addObjectID";
@@ -48,7 +48,11 @@ export const run = job => done => {
 export const debug = (...obj) => {
     try {
         console.log(JSON.stringify(obj, null, 4));
-    }catch(e){
+    } catch (e) {
         console.log(obj);
     }
 };
+
+export const withNames = items => _.forEach(items, root => root.name = nameOf(root._id));
+export const withDoubleQt = items => _.forEach(items, root => root.quantity.qt *= 2);
+export const withoutQuantity = items => _.map(items, item => _.omit(item, "quantity"));

@@ -1,14 +1,10 @@
 import {readRootTree} from "../service/root/getRootService";
 import _ from 'lodash';
 import {toBaseQuantity} from "../service/grandeur/grandeursService";
-import {debug} from "../../test/scenario/integ/testIntegPlumbing";
 
 export const getTank = (qt, unit, _id) =>
     readRootTree(qt, unit, _id)
         .then(tree => {
-
-            debug("tree found",tree);
-
             tree.items = tankfy(tree.items);
             tree.items = summify(tree.items);
             return tree;

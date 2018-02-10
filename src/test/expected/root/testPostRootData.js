@@ -1,5 +1,5 @@
 import {biere, ble, capsule, farine} from "../../scenario/integ/testIntegDatabase";
-import {oneModifiedResponse, oneResponse, oneUpsertedResponse} from "../testCommonData";
+import {oneModifiedResponse, oneUpsertedResponse} from "../testCommonData";
 import {cols} from "../../../main/const/collections";
 
 const biereId = biere._id;
@@ -62,8 +62,6 @@ existingIdsSpec.db = {
         }
     }
 };
-
-
 
 
 export const bleToFarineAddSpec = {};

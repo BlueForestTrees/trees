@@ -14,7 +14,7 @@ describe('PUT Trunks', function () {
 
 });
 
-const testPutTrunkWith = (spec,done) => {
+const testPutTrunkWith = (spec, done) => {
     chai.request(app)
         .put(`/api/trunk/${spec.req.params._id}`)
         .send(spec.req.body)

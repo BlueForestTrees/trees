@@ -11,7 +11,7 @@ normalTankSpec.req = {
 normalTankSpec.res = {
     body: {
         _id: normalTankSpec.req._id,
-        ...withQuantity(10,""),
+        ...withQuantity(10, ""),
         items: [
             {
                 _id: eau._id,
@@ -23,7 +23,7 @@ normalTankSpec.res = {
             },
             {
                 _id: arbre._id,
-                ...withQuantity(0.005,"")
+                ...withQuantity(0.005, "")
             }
         ]
     }

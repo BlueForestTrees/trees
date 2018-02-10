@@ -28,9 +28,8 @@ renameTrunkSpec.db = {
 };
 
 
-
 export const requantifyTrunkSpec = {};
-const newGateauQuantity = withQuantity(1,"kg").quantity;
+const newGateauQuantity = withQuantity(1, "kg").quantity;
 requantifyTrunkSpec.req = {
     params: {_id: gateau._id},
     body: {

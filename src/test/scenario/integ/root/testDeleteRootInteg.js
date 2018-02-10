@@ -1,6 +1,6 @@
 import chai from 'chai';
 
-import {assertDb, run, initDatabase} from "../testIntegPlumbing";
+import {assertDb, initDatabase, run} from "../testIntegPlumbing";
 import {rootDeletionSpec} from "../../../expected/root/testDeleteRootData";
 import {app} from "../../../../main";
 

@@ -1,4 +1,4 @@
-import {initialTrees, farine, gateau} from "../../scenario/integ/testIntegDatabase";
+import {farine, gateau, initialTrees} from "../../scenario/integ/testIntegDatabase";
 import _ from 'lodash';
 import {removeObjects} from "../../../main/util/addObjectID";
 

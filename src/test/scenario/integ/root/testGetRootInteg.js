@@ -1,7 +1,8 @@
 import chai from 'chai';
 import {initDatabase, run} from "../testIntegPlumbing";
-import {badUnitGetRootSpec, emptyGetRootSpec, farineNoBleQtGetRootSpec, getRootsSpec, gateau1000GGetRootSpec, otherUnitGetRootSpec, quantifiedWithoutQtGetRoot, sameQtGetRootSpec, skate10GetRootSpec} from "../../../expected/root/testGetRootData";
 import {app} from "../../../../main";
+import {badUnitGetRootSpec, emptyGetRootSpec, farineNoBleQtGetRootSpec, gateau1000GGetRootSpec, getRootsSpec, otherUnitGetRootSpec, sameQtGetRootSpec, skate10GetRootSpec} from "../../../expected/root/testGetRootData";
+import {gateauRootTreeSpec} from "../../../expected/root/testGetRootTreeData";
 
 describe('GET Root', function () {
 
@@ -25,6 +26,8 @@ describe('GET Root', function () {
 
     it('return root even with no qt in roots', run(() => getQuantifiedRoot(farineNoBleQtGetRootSpec)));
 
+    it('return a little tree', run(() => getRootTree(gateauRootTreeSpec)));
+
 });
 
 const getRoot = spec => chai.request(app)
@@ -35,7 +38,7 @@ const getRoot = spec => chai.request(app)
     });
 
 const getQuantifiedRoot = spec => chai.request(app)
-    .get(`/api/root/${spec.req.qt}${spec.req.unit ? '/'+spec.req.unit : ''}/${spec.req._id}`)
+    .get(`/api/root/${spec.req.qt}${spec.req.unit ? '/' + spec.req.unit : ''}/${spec.req._id}`)
     .then(res => {
         res.should.have.status(200);
         res.body.should.deep.equal(spec.res.body);
@@ -47,10 +50,17 @@ const getErrorQuantifiedRoot = spec => chai.request(app)
         res.body.should.deep.equal(spec.res);
     })
     .catch(err => {
-        if(err.status) {
+        if (err.status) {
             err.should.have.status(spec.res.status);
             err.response.body.message.should.equal(spec.res.bodyMessage);
-        }else{
+        } else {
             throw err;
         }
+    });
+
+const getRootTree = spec => chai.request(app)
+    .get(`/api/root/tree/${spec.req.qt}${spec.req.unit ? '/' + spec.req.unit : ''}/${spec.req._id}`)
+    .then(res => {
+        res.should.have.status(200);
+        res.body.should.deep.equal(spec.res.body);
     });

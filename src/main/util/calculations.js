@@ -10,9 +10,6 @@ import {GrandeurMismatchError} from "../exceptions/Errors";
  * @returns roots
  */
 export const erreurSiUnitIncompatibles = (quantity, roots) => {
-
-    debug("erreurSiUnitIncompatibles", quantity, roots);
-
     const leftUnit = quantity.unit;
     const rightUnit = roots.quantity && roots.quantity.unit;
     const same = sameGrandeur(leftUnit, rightUnit);
@@ -26,9 +23,6 @@ export const erreurSiUnitIncompatibles = (quantity, roots) => {
 
 
 export const applyQuantity = (quantity, roots) => {
-
-    //debug("applyQuantity", quantity, roots);
-
     const coef = qtUnitCoef(quantity, roots.quantity);
     roots.quantity = quantity;
 

@@ -1,44 +1,49 @@
 import {readRootTree} from "../service/root/getRootService";
 import _ from 'lodash';
 import {toBaseQuantity} from "../service/grandeur/grandeursService";
+import {debug} from "../../test/scenario/integ/testIntegPlumbing";
 
 export const getTank = (qt, unit, _id) =>
     readRootTree(qt, unit, _id)
-        .then(tankfy)
-        .then(summify);
+        .then(tree => {
 
-const tankfy = tree => {
+            debug("tree found",tree);
+
+            tree.items = tankfy(tree.items);
+            tree.items = summify(tree.items);
+            return tree;
+        });
+
+export const tankfy = items => {
     const tank = [];
-
+    const browser = items.slice();
     let i = 0;
-    for (i; i < tree.items.length; i++) {
-        const item = tree.items[i];
+    for (i; i < browser.length; i++) {
+        const item = browser[i];
         if (item.items) {
-            tree.items.push(...item.items);
+            browser.push(...item.items);
         } else {
             tank.push(item);
         }
     }
-
-    tree.items = tank;
-
-    return tree;
+    return tank;
 };
 
-const summify = tree => {
-    tree.items = _(tree.items)
-        .groupBy("_id")
-        .map(sum)
-        .value();
-    return tree;
+export const summify = items => _(items)
+    .groupBy("_id")
+    .map(sum)
+    .value();
+
+export const sum = toSumItems => _(toSumItems)
+    .map(basifyQuantity)
+    .reduce(sumQt);
+
+export const basifyQuantity = toBasifyItem => {
+    toBasifyItem.quantity = toBaseQuantity(toBasifyItem.quantity);
+    return toBasifyItem;
 };
 
-const sum = toSumItems => _(toSumItems)
-    .map(toSumItem => {
-        toSumItem.quantity = toBaseQuantity(toSumItem.quantity);
-        return toSumItem;
-    })
-    .reduce((left, right) => {
-        left.quantity.qt += right.quantity.qt;
-        return left;
-    });
+export const sumQt = (left, right) => {
+    left.quantity.qt += right.quantity.qt;
+    return left;
+};

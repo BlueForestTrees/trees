@@ -4,6 +4,7 @@ import {cols} from "../../../main/const/collections";
 import {addObjects} from "../../../main/util/addObjectID";
 
 export const withQuantity = (qt, unit) => ({quantity: {qt, unit}});
+export const withIdQuantity = (_id, qt, unit) => ({_id,...withQuantity(qt, unit)});
 
 export const setQuantity = (trunk, qt, unit) => {
     unit = unit ? unit : trunk.quantity.unit;

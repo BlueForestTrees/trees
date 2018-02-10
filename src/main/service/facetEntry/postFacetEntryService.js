@@ -13,13 +13,10 @@ export const replaceAllFacetEntries = async (data) => {
     return col.find().toArray();
 };
 
-export const addFacetEntry = async facetEntry =>
-{
-    debug("addFacetEntry", facetEntry);
-
+export const addFacetEntry = async facetEntry => {
     return await getFacetEntryByName(facetEntry.name) ||
-    {
-        _id: await facetsEntry().insertOne(facetEntry).insertedId,
-        ...facetEntry
-    };
+        {
+            _id: await facetsEntry().insertOne(facetEntry).insertedId,
+            ...facetEntry
+        };
 };

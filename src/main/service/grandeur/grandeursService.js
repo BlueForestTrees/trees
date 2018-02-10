@@ -72,13 +72,7 @@ export const grandeurs = _grandeurs;
 export const grandeursKeys = Object.keys(_grandeurs);
 export const shortnames = Object.keys(units);
 
-export const unit = shortname => {
-
-    //debug("unit", shortname);
-
-    return _.has(units, shortname) ? units[shortname] : null;
-};
-
+export const unit = shortname => _.has(units, shortname) ? units[shortname] : null;
 export const coef = shortname => unit(shortname).coef;
 export const base = grandeur => _.find(grandeurs[grandeur], {coef: 1});
 
@@ -89,9 +83,6 @@ export const grandeur = shortname => unit(shortname).grandeur;
  * @returns faux, ou vrai ssi les unités sont valides et de la même grandeur
  */
 export const sameGrandeur = (leftShortname, rightShortname) => {
-
-    //debug("sameGrandeur",leftShortname, rightShortname);
-
     const leftUnit = unit(leftShortname);
     const rightUnit = unit(rightShortname);
 

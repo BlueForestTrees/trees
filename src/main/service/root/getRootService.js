@@ -3,7 +3,6 @@ import {col} from "../../repo";
 import {matchId, withId} from "../../util/query";
 import _ from 'lodash';
 import {applyQuantity} from "../../util/calculations";
-import {debug} from "../../../test/scenario/integ/testIntegPlumbing";
 
 const roots = () => col(cols.ROOT);
 
@@ -22,8 +21,11 @@ export const readRoot = _id => roots().findOne(withId(_id));
 
 export const readRootTree = (qt, unit, _id) =>
     getRootGraph(_id)
-        .then(graph => treefy({qt, unit}, graph));
+        .then(graph => graph && treefy({qt, unit}, graph));
 
+const getRootGraph = _id => {
+    return roots().aggregate([matchId(_id), rootGraphLookup]).next();
+};
 
 const treefy = (quantity, graph) => {
     const cache = graph.cache;
@@ -54,4 +56,3 @@ const loadFromCache = (tree, cache) => {
 };
 
 
-const getRootGraph = _id => roots().aggregate([matchId(_id), rootGraphLookup]).next();

@@ -1,6 +1,7 @@
-import {biere, ble, capsule, farine} from "../../scenario/integ/testIntegDatabase";
 import {oneModifiedResponse, oneUpsertedResponse} from "../testCommonData";
 import {cols} from "../../../main/const/collections";
+import {biere, capsule} from "../../database/biere";
+import {ble, farine} from "../../database/gateau";
 
 const biereId = biere._id;
 const capsuleId = capsule._id;

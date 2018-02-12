@@ -1,7 +1,7 @@
 import chai from 'chai';
-import {initDatabase} from "../testIntegPlumbing";
 import {emptyGetFacetSpec, getFacetSpec} from "../../../expected/facet/testGetFacetData";
 import {app} from "../../../../main";
+import {initDatabase} from "../../../testIntegDatabase";
 
 describe('GET Facets', function () {
 

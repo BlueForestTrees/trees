@@ -1,6 +1,6 @@
-import {gateau} from "../../scenario/integ/testIntegDatabase";
 import _ from 'lodash';
 import {cols} from "../../../main/const/collections";
+import {gateau} from "../../database/gateau";
 
 const lowerizeName = name => name.toLowerCase();
 const name = "RATtatouille1664";

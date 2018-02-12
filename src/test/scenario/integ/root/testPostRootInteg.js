@@ -2,8 +2,9 @@ import chai from 'chai';
 import {match, mock} from 'sinon';
 
 import {existingIdsSpec, newRootSpec} from "../../../expected/root/testPostRootData";
-import {assertDb, initDatabase, run} from "../testIntegPlumbing";
 import {app} from "../../../../main";
+import {run} from "../../../testIntegPlumbing";
+import {assertDb, initDatabase} from "../../../testIntegDatabase";
 
 describe('POST Root', function () {
 

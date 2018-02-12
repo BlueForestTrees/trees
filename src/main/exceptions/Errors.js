@@ -1,6 +1,6 @@
 import util from 'util';
 import NestedError from 'nested-error-stacks';
-import {debug} from "../../test/scenario/integ/testIntegPlumbing";
+import {debug} from "../../test/testIntegPlumbing";
 
 
 export const erreurDifferenteGrandeurs = (leftShortname, rightShortname) => {

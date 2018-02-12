@@ -1,6 +1,7 @@
 import {cols} from "../../const/collections";
 import {col} from "../../repo";
 import {withId} from "../../util/query";
+import _ from 'lodash';
 
 const trunks = () => col(cols.TRUNK);
 
@@ -27,3 +28,10 @@ export const search = search => trunks()
     .toArray();
 
 export const all = () => trunks().find({}).toArray();
+
+
+export const appendNames = items => Promise.all(
+    _.map(items, item => peekTrunk(item._id)
+        .then(t => ({...item, name: (t && t.name) || "inconnu"}))
+    )
+);

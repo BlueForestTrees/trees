@@ -1,9 +1,9 @@
 import chai from 'chai';
 
-import {assertDb, initDatabase, run} from "../testIntegPlumbing";
 import {rootDeletionSpec} from "../../../expected/root/testDeleteRootData";
 import {app} from "../../../../main";
-
+import {assertDb, initDatabase} from "../../../testIntegDatabase";
+import {run} from "../../../testIntegPlumbing";
 
 describe('DELETE Root', function () {
 

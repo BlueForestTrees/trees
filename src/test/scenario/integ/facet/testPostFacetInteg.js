@@ -1,7 +1,7 @@
-import {assertDb, initDatabase} from "../testIntegPlumbing";
 import chai from 'chai';
 import {firstFacetSpec, thirdFacet, updatingFacetSpec} from "../../../expected/facet/testPostFacetData";
 import {app} from "../../../../main";
+import {assertDb, initDatabase} from "../../../testIntegDatabase";
 
 describe('POST Facet', function () {
 

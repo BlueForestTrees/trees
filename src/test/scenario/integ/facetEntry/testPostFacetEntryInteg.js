@@ -1,8 +1,9 @@
-import {initDatabase, run} from "../testIntegPlumbing";
 import chai from 'chai';
 import {app} from "../../../../main";
 import {allreadyExistingFacetEntrySpec, postBadGrandeurFacetEntrySpec, postFacetEntrySpec} from "../../../expected/facetEntry/testPostFacetEntryData";
 import {ObjectIDRegex} from "../../../expected/testCommonData";
+import {initDatabase} from "../../../testIntegDatabase";
+import {run} from "../../../testIntegPlumbing";
 
 describe('POST FacetEntry', function () {
 

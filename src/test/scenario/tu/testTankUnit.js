@@ -1,7 +1,7 @@
 import {match, mock} from 'sinon';
 import chai from 'chai';
-import {basifyQuantity, sum, summify, sumQt} from "../../../main/topService/getTankTopService";
-import {withIdQuantity, withQuantity} from "../integ/testIntegDatabase";
+import {basifyQuantity, sum, summify, mergeItems} from "../../../main/topService/getTankTopService";
+import {withIdQuantity, withQuantity} from "../../testIntegPlumbing";
 
 chai.should();
 
@@ -9,7 +9,7 @@ describe('Tank', function () {
 
     describe('sum qt', function () {
         it('10fake + 6otherfake = 16fake', function () {
-            sumQt(withQuantity(10, "fakeunit"), withQuantity(6, "anotherfakeunit")).should.deep.equal(withQuantity(16, "fakeunit"));
+            mergeItems(withQuantity(10, "fakeunit"), withQuantity(6, "anotherfakeunit")).should.deep.equal(withQuantity(16, "fakeunit"));
         });
     });
 
@@ -64,13 +64,13 @@ describe('Tank', function () {
 
             summify([
                 withIdQuantity("A", 1, "kg"),
-                withIdQuantity("B", 5, ""),
+                withIdQuantity("B", 5, "count"),
                 withIdQuantity("A", 500, "g"),
-                withIdQuantity("B", 3, "")
+                withIdQuantity("B", 3, "count")
 
             ]).should.be.deep.equal([
                 withIdQuantity("A", 1500, "g"),
-                withIdQuantity("B", 8, "")
+                withIdQuantity("B", 8, "count")
             ]);
         });
     });

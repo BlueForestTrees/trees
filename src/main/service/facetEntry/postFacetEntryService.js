@@ -1,7 +1,7 @@
 import {cols} from "../../const/collections";
 import {col} from "../../repo";
 import {getFacetEntryByName} from "./getFacetEntryService";
-import {debug} from "../../../test/scenario/integ/testIntegPlumbing";
+import {debug} from "../../../test/testIntegPlumbing";
 
 const facetsEntry = () => col(cols.FACET_ENTRY);
 

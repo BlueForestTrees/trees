@@ -1,9 +1,9 @@
 import chai from 'chai';
 
-import {assertDb, initDatabase} from "../testIntegPlumbing";
 import {trunkDeletionSpec} from "../../../expected/trunk/testDeleteTrunkData";
 import {oneResponse} from "../../../expected/testCommonData";
 import {app} from "../../../../main";
+import {assertDb, initDatabase} from "../../../testIntegDatabase";
 
 describe('DELETE Trunks', function () {
 

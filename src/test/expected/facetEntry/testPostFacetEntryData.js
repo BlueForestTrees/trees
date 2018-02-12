@@ -1,6 +1,6 @@
-import {vitCFacetEntry} from "../../scenario/integ/testIntegDatabase";
 
 import _ from 'lodash';
+import {vitCFacetEntry} from "../../database/facetEntries";
 
 export const postFacetEntrySpec = {};
 postFacetEntrySpec.req = {

@@ -10,7 +10,7 @@ describe('Grandeurs', function () {
             expect(unitCoef('m', 'm')).to.equal(1);
         });
         it('"" ok', function () {
-            expect(unitCoef('', '')).to.equal(1);
+            expect(unitCoef('count', 'count')).to.equal(1);
         });
         it('unit("doudou") throws error', function () {
             expect(unit('doudou')).to.be.null;
@@ -70,8 +70,8 @@ describe('Grandeurs', function () {
         it('g => 1', function () {
             expect(coef("g")).to.equal(1);
         });
-        it('"" => 1', function () {
-            expect(coef("")).to.equal(1);
+        it('"count" => 1', function () {
+            expect(coef("count")).to.equal(1);
         });
     });
 

@@ -1,7 +1,7 @@
-import {farineRoot, gateauRoot} from "../../scenario/integ/testIntegDatabase";
 import {oneModifiedResponse} from "../testCommonData";
-import {remove} from "../../testUtil";
+import {remove} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
+import {farineRoot, gateauRoot} from "../../database/gateau";
 
 export const rootDeletionSpec = {};
 

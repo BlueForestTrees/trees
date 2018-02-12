@@ -4,7 +4,7 @@ import {check} from 'express-validator/check';
 import {peekTrunk} from "../service/trunk/getTrunkService";
 import _ from 'lodash';
 import {grandeursKeys, shortnames} from "../service/grandeur/grandeursService";
-import {debug} from "../../test/scenario/integ/testIntegPlumbing";
+import {debug} from "../../test/testIntegPlumbing";
 
 export const valid = (field, optional) => {
     let chain = check(field);

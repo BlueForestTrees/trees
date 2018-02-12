@@ -1,9 +1,11 @@
 import {match, mock} from 'sinon';
-import {initDatabase, run} from "../testIntegPlumbing";
 import {bleRootDeletionSpec} from "../../../expected/root/testDeleteRootData";
 import {deleteRoot} from "./testDeleteRootInteg";
 import {postRoot} from "./testPostRootInteg";
 import {bleToFarineAddSpec} from "../../../expected/root/testPostRootData";
+import {initDatabase} from "../../../testIntegDatabase";
+
+import {run} from "../../../testIntegPlumbing";
 
 describe('SCENARIO Root', function () {
 

@@ -1,8 +1,9 @@
-import {ble, farine, gateau, gateauRoot, lait, setQuantity} from "../../scenario/integ/testIntegDatabase";
 import {oneModifiedResponse} from "../testCommonData";
-import {clon} from "../../testUtil";
+import {clon} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
 import _ from 'lodash';
+import {ble, farine, gateau, gateauRoot, lait} from "../../database/gateau";
+import {setQuantity} from "../../testIntegPlumbing";
 
 export const existingIdsNewQtsSpec = {};
 const bleId = ble._id;

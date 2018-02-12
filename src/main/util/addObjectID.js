@@ -2,17 +2,23 @@ const mongo = require('mongodb');
 const object = id => new mongo.ObjectID(id);
 const _ = require('lodash');
 
-export const addObjects = (data) => {
-    _.forEach(data, trunk => {
-        trunk._id = object(trunk._id);
-        if (trunk.items) {
-            _.forEach(trunk.items, root => {
-                root._id = object(root._id);
+export const addObjects = data => {
+    let isArray = _.isArray(data);
+    if(!isArray){
+        data = [data];
+    }
+
+    _.forEach(data, item => {
+        item._id = object(item._id);
+        if (item.items) {
+            _.forEach(item.items, subitem => {
+                subitem._id = object(subitem._id);
             })
         }
-        return trunk;
+        return item;
     });
-    return data;
+
+    return isArray ? data : data[0];
 };
 
 export const removeObjects = data => {

@@ -1,7 +1,8 @@
-import {anoAnotherFacetEntry, bleFacets, farine, vitBFacetEntry} from "../../scenario/integ/testIntegDatabase";
 import {oneModifiedResponse, oneUpsertedResponse} from "../testCommonData";
-import {replace} from "../../testUtil";
+import {replace} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
+import {bleFacets, farine} from "../../database/gateau";
+import {anoAnotherFacetEntry, vitBFacetEntry} from "../../database/facetEntries";
 
 export const firstFacetSpec = {};
 firstFacetSpec.req = {

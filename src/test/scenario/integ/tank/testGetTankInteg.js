@@ -1,7 +1,17 @@
 import chai from 'chai';
-import {initDatabase, run} from "../testIntegPlumbing";
 import {app} from "../../../../main";
-import {normalTankSpec} from "../../../expected/tank/testGetTankData";
+import {avecUneQtManquanteTankSpec, lettreTankSpec} from "../../../expected/tank/testGetTankData";
+import {run} from "../../../testIntegPlumbing";
+import {initDatabase, run2} from "../../../testIntegDatabase";
+
+const getTank = spec => {
+    return chai.request(app)
+        .get(`/api/tank/${spec.req.quantity.qt}${spec.req.quantity.unit ? '/' + spec.req.quantity.unit : ''}/${spec.req._id}`)
+        .then(async (res) => {
+            res.should.have.status(200);
+            res.body.should.deep.equal(spec.res.body);
+        });
+};
 
 describe('GET Tank', function () {
 
@@ -9,15 +19,9 @@ describe('GET Tank', function () {
         await initDatabase();
     });
 
-    it('normalTank', run(() => getTank(normalTankSpec)));
+    it('lettreTankSpec', run(() => getTank(lettreTankSpec)));
 
+    it('avecUneQtManquanteTankSpec', run2(getTank, avecUneQtManquanteTankSpec));
 
 });
 
-
-export const getTank = spec => chai.request(app)
-    .get(`/api/tank/${spec.req.qt}${spec.req.unit ? '/' + spec.req.unit : ''}/${spec.req._id}`)
-    .then(async (res) => {
-        res.should.have.status(200);
-        res.body.should.deep.equal(spec.res.body);
-    });

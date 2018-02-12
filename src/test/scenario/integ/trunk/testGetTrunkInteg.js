@@ -1,7 +1,7 @@
 import chai from 'chai';
-import {initDatabase} from "../testIntegPlumbing";
 import {getAllTrunkSpec, getTrunkSpec, searchTrunkSpec} from "../../../expected/trunk/testGetTrunkData";
 import {app} from "../../../../main";
+import {initDatabase} from "../../../testIntegDatabase";
 
 describe('GET Trunks', function () {
 

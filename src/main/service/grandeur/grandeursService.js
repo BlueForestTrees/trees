@@ -1,5 +1,5 @@
 import {unitNotFound} from "../../exceptions/Errors";
-import {debug} from "../../../test/scenario/integ/testIntegPlumbing";
+import {debug} from "../../../test/testIntegPlumbing";
 
 const _ = require('lodash');
 
@@ -26,7 +26,7 @@ const _grandeurs = {
         _unit("mol", "mole", 1)
     ],
     "Nombre": [
-        _unit("", "", 1)
+        _unit("count", "", 1)
     ],
     "Volume": [
         _unit("m3", "mètre-cube", 1),

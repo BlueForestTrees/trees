@@ -1,8 +1,8 @@
 import chai from 'chai';
 
-import {assertDb, initDatabase} from "../testIntegPlumbing";
 import {facetDeletionSpec} from "../../../expected/facet/testDeleteFacetData";
 import {app} from "../../../../main";
+import {assertDb, initDatabase} from "../../../testIntegDatabase";
 
 describe('DELETE Facet', function () {
 

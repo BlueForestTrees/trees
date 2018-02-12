@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {remove, replace} from "../../testUtil";
+import {remove, replace} from "../../util/testUtil";
 
 describe('Utils', function () {
 

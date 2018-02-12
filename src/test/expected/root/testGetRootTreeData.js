@@ -1,6 +1,7 @@
-import {ble, gateauRoot} from "../../scenario/integ/testIntegDatabase";
-import {clon} from "../../testUtil";
-import {withDoubleQt} from "../../scenario/integ/testIntegPlumbing";
+import {clon} from "../../util/testUtil";
+import {withDoubleQt} from "../../testIntegPlumbing";
+import {ble, gateauRoot} from "../../database/gateau";
+import {arbre} from "../../database/skate";
 
 export const gateauRootTreeSpec = {};
 const gateauRoot2Kg = clon(gateauRoot);
@@ -22,4 +23,12 @@ gateauRootTreeSpec.res = {
     }
 };
 
-//TODO un grand arbre à faire.
+export const noRootsTreeSpec = {};
+noRootsTreeSpec.req = {
+    qt: 3,
+    unit:"count",
+    _id: arbre._id
+};
+noRootsTreeSpec.res = {
+    body: null
+};

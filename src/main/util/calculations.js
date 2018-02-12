@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import {qtUnitCoef, sameGrandeur} from "../service/grandeur/grandeursService";
-import {debug} from "../../test/scenario/integ/testIntegPlumbing";
+import {debug} from "../../test/testIntegPlumbing";
 import {GrandeurMismatchError} from "../exceptions/Errors";
 
 /**
@@ -26,11 +26,10 @@ export const applyQuantity = (quantity, roots) => {
     const coef = qtUnitCoef(quantity, roots.quantity);
     roots.quantity = quantity;
 
-    coef ?
-        _.forEach(roots.items, item => item.quantity.qt *= coef)
+    roots.items = coef ?
+        _.map(roots.items, item => item.quantity ? (item.quantity.qt *= coef) && item : _.omit(item, "quantity"))
         :
-        _.forEach(roots.items, item => _.omit(item, "quantity"))
-    ;
+        _.map(roots.items, item => _.omit(item, "quantity"));
 
     return roots;
 };

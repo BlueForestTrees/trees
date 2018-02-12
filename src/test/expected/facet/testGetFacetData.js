@@ -1,6 +1,7 @@
-import {bleFacets, farine, nameOfFacet} from "../../scenario/integ/testIntegDatabase";
-import {clon} from "../../testUtil";
+import {clon} from "../../util/testUtil";
 import _ from 'lodash';
+import {bleFacets, farine} from "../../database/gateau";
+import {nameOfFacet} from "../../testIntegDatabase";
 
 export const getFacetSpec = {};
 

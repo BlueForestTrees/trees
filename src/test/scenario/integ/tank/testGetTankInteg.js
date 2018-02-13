@@ -1,6 +1,6 @@
 import chai from 'chai';
 import {app} from "../../../../main";
-import {avecUneQtManquanteTankSpec, lettreTankSpec} from "../../../expected/tank/testGetTankData";
+import {avecUneQtManquanteTankSpec, avecUneQtManquanteTankSpec2, lettreTankSpec} from "../../../expected/tank/testGetTankData";
 import {run} from "../../../testIntegPlumbing";
 import {initDatabase, run2} from "../../../testIntegDatabase";
 
@@ -22,6 +22,8 @@ describe('GET Tank', function () {
     it('lettreTankSpec', run(() => getTank(lettreTankSpec)));
 
     it('avecUneQtManquanteTankSpec', run2(getTank, avecUneQtManquanteTankSpec));
+
+    it('avecUneQtManquanteTankSpec2', run2(getTank, avecUneQtManquanteTankSpec2));
 
 });
 

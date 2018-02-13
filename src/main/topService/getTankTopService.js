@@ -2,7 +2,6 @@ import {readRootTree} from "../service/root/getRootService";
 import _ from 'lodash';
 import {toBaseQuantity} from "../service/grandeur/grandeursService";
 import {appendNames} from "../service/trunk/getTrunkService";
-import {debug} from "../../test/testIntegPlumbing";
 
 export const getTank = (qt, unit, _id) =>
     readRootTree(qt, unit, _id)
@@ -19,7 +18,7 @@ export const tankfy = items => {
     let i = 0;
     for (i; i < browser.length; i++) {
         const item = browser[i];
-        if (item.items && quantified(item.items)) {
+        if (item.quantity && item.items && quantified(item.items)) {
             browser.push(...item.items);
         } else {
             tank.push(_.omit(item,"items"));

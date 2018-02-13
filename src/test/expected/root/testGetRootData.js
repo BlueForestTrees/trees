@@ -253,7 +253,7 @@ lettreGetRootSpec.res = {
                                             {
                                                 "_id": "e2e2e2e2e2e2e2e2e2e2e2e2",
                                                 "quantity": {
-                                                    "qt": 0.5,
+                                                    "qt": 1,
                                                     "unit": "kg"
                                                 }
                                             }
@@ -412,7 +412,7 @@ lettreNoDaQtGetRootSpec.res = {
                                             {
                                                 "_id": "e2e2e2e2e2e2e2e2e2e2e2e2",
                                                 "quantity": {
-                                                    "qt": 0.5,
+                                                    "qt": 1,
                                                     "unit": "kg"
                                                 }
                                             }

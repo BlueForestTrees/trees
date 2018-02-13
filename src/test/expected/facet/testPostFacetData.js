@@ -2,14 +2,14 @@ import {oneModifiedResponse, oneUpsertedResponse} from "../testCommonData";
 import {replace} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
 import {bleFacets, farine} from "../../database/gateau";
-import {anoAnotherFacetEntry, vitBFacetEntry} from "../../database/facetEntries";
+import {prixFacetEntry, vitBFacetEntry} from "../../database/facetEntries";
 
 export const firstFacetSpec = {};
 firstFacetSpec.req = {
     _id: farine._id,
     body: {
         facet: {
-            _id: anoAnotherFacetEntry._id, qt: 144, unit: "m2"
+            _id: prixFacetEntry._id, qt: 144, unit: "m2"
         }
     }
 };
@@ -23,7 +23,7 @@ firstFacetSpec.db = {
             _id: farine._id,
             items: [
                 {
-                    _id: anoAnotherFacetEntry._id, qt: 144, unit: "m2"
+                    _id: prixFacetEntry._id, qt: 144, unit: "m2"
                 }
             ],
 
@@ -35,7 +35,7 @@ export const thirdFacet = {};
 const trunkId = bleFacets._id;
 
 let thridPostedFacetSpec = {
-    _id: anoAnotherFacetEntry._id,
+    _id: prixFacetEntry._id,
     qt: 144,
     unit: "m2"
 };

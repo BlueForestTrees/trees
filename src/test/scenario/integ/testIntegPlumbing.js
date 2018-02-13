@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import chai, {expect} from 'chai';
 import chaiHttp from 'chai-http';
-import {initialDB} from "./testIntegDatabase";
 import {cols} from "../../../main/const/collections";
 import {col} from "../../../main/repo";
 import {removeObjects} from "../../../main/util/addObjectID";

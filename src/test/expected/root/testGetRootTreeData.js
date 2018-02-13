@@ -1,5 +1,5 @@
 import {clon} from "../../util/testUtil";
-import {withDoubleQt} from "../../testIntegPlumbing";
+import {withDoubleQt} from "../../testPlumbing";
 import {ble, gateauRoot} from "../../database/gateau";
 import {arbre} from "../../database/skate";
 

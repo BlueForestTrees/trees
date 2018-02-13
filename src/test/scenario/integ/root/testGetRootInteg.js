@@ -1,13 +1,20 @@
-import chai from 'chai';
+import chai, {expect} from 'chai';
 import {app} from "../../../../main";
 import {
-    badUnitGetRootSpec, emptyGetRootSpec, farineNoBleQtGetRootSpec, gateau1000GGetRootSpec, getRootsSpec, lettreGetRootSpec, lettreNoDaQtGetRootSpec, otherUnitGetRootSpec, sameQtGetRootSpec,
+    badUnitGetRootSpec,
+    emptyGetRootSpec,
+    farineNoBleQtGetRootSpec,
+    gateau1000GGetRootSpec,
+    getRootsSpec,
+    lettreGetRootSpec,
+    lettreNoDaQtGetRootSpec,
+    otherUnitGetRootSpec,
+    sameQtGetRootSpec,
     skate10GetRootSpec
 } from "../../../expected/root/testGetRootData";
 import {gateauRootTreeSpec, noRootsTreeSpec} from "../../../expected/root/testGetRootTreeData";
-import {run} from "../../../testIntegPlumbing";
+import {run} from "../../../testPlumbing";
 import {initDatabase, run2} from "../../../testIntegDatabase";
-import {expect} from 'chai';
 
 const getRoot = spec => chai.request(app)
     .get(`/api/root/${spec.req._id}`)

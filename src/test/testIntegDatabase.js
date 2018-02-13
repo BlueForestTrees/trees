@@ -9,7 +9,6 @@ import {col} from "../main/repo";
 import {addObjects, removeObjects} from "../main/util/addObjectID";
 import {withId} from "../main/util/query";
 import {clon} from "./util/testUtil";
-import {debug} from "./testIntegPlumbing";
 
 
 chai.use(chaiHttp);

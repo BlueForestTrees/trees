@@ -1,11 +1,10 @@
 import _ from 'lodash';
 import {clon} from "../../util/testUtil";
-import {removeItemQuantity, setQuantity, withDoubleQt, withoutQuantity} from "../../testIntegPlumbing";
+import {removeItemQuantity, setQuantity, withDoubleQt, withoutQuantity} from "../../testPlumbing";
 import {farineRoot, gateauRoot, lait} from "../../database/gateau";
 import {skateRoot} from "../../database/skate";
 import {a, da, dRoot} from "../../database/lettres";
 import {withNames} from "../../testIntegDatabase";
-import {avecUneQtManquanteTankSpec} from "../tank/testGetTankData";
 import {cols} from "../../../main/const/collections";
 
 export const getRootsSpec = {};

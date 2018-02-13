@@ -3,7 +3,7 @@ import {match, mock} from 'sinon';
 
 import {existingIdsSpec, newRootSpec} from "../../../expected/root/testPostRootData";
 import {app} from "../../../../main";
-import {run} from "../../../testIntegPlumbing";
+import {run} from "../../../testPlumbing";
 import {assertDb, initDatabase} from "../../../testIntegDatabase";
 
 describe('POST Root', function () {

@@ -1,7 +1,7 @@
 import {match, mock} from 'sinon';
 import chai from 'chai';
-import {basifyQuantity, sum, summify, mergeItems} from "../../../main/topService/getTankTopService";
-import {withIdQuantity, withQuantity} from "../../testIntegPlumbing";
+import {basifyQuantity, mergeItems, sum, summify} from "../../../main/topService/getTankTopService";
+import {withIdQuantity, withQuantity} from "../../testPlumbing";
 
 chai.should();
 

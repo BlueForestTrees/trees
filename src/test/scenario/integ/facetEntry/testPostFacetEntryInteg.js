@@ -3,7 +3,7 @@ import {app} from "../../../../main";
 import {allreadyExistingFacetEntrySpec, postBadGrandeurFacetEntrySpec, postFacetEntrySpec} from "../../../expected/facetEntry/testPostFacetEntryData";
 import {ObjectIDRegex} from "../../../expected/testCommonData";
 import {initDatabase} from "../../../testIntegDatabase";
-import {run} from "../../../testIntegPlumbing";
+import {run} from "../../../testPlumbing";
 
 describe('POST FacetEntry', function () {
 

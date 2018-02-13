@@ -3,7 +3,7 @@ import {clon} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
 import _ from 'lodash';
 import {ble, farine, gateau, gateauRoot, lait} from "../../database/gateau";
-import {setQuantity} from "../../testIntegPlumbing";
+import {setQuantity} from "../../testPlumbing";
 
 export const existingIdsNewQtsSpec = {};
 const bleId = ble._id;

@@ -1,4 +1,4 @@
-import {withQuantity} from "../testIntegPlumbing";
+import {withQuantity} from "../testPlumbing";
 import {cols} from "../../main/const/collections";
 
 export const skate = {

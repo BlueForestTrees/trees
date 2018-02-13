@@ -3,7 +3,7 @@ import {match, mock} from 'sinon';
 
 import {app} from "../../../../main";
 
-import {run} from "../../../testIntegPlumbing";
+import {run} from "../../../testPlumbing";
 import {existingIdsAndQtsSpec, existingIdsNewQtsSpec, existingsAndUnitChangeSpec} from "../../../expected/root/testPutRootData";
 import {assertDb, initDatabase} from "../../../testIntegDatabase";
 

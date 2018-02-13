@@ -1,7 +1,7 @@
 import chai from 'chai';
 import {quantified} from "../../../main/topService/getTankTopService";
 import {withId} from "../../../main/util/query";
-import {withIdQuantity} from "../../testIntegPlumbing";
+import {withIdQuantity} from "../../testPlumbing";
 
 chai.should();
 

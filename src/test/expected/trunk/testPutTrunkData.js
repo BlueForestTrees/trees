@@ -2,7 +2,7 @@ import {oneModifiedResponse} from "../testCommonData";
 import {cols} from "../../../main/const/collections";
 import _ from 'lodash';
 import {ble, gateau} from "../../database/gateau";
-import {withQuantity} from "../../testIntegPlumbing";
+import {withQuantity} from "../../testPlumbing";
 
 
 export const renameTrunkSpec = {};

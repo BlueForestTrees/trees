@@ -1,4 +1,4 @@
-import {removeItemQuantity, withQuantity} from "../../testIntegPlumbing";
+import {removeItemQuantity, withQuantity} from "../../testPlumbing";
 import {a, da, db, dRoot, e1, e2} from "../../database/lettres";
 import {cols} from "../../../main/const/collections";
 import {clon} from "../../util/testUtil";

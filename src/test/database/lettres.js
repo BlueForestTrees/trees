@@ -1,7 +1,6 @@
-import {withNameIdQuantity, withQuantity} from "../testIntegPlumbing";
+import {withNameIdQuantity, withQuantity} from "../testPlumbing";
 import {cols} from "../../main/const/collections";
 import {prixFacetEntry, vitBFacetEntry, vitCFacetEntry} from "./facetEntries";
-import {gateau} from "./gateau";
 
 //TRUNKS
 export const a = withNameIdQuantity("a", "aaaaaaaaaaaaaaaaaaaaaaaa", 1, "kg");

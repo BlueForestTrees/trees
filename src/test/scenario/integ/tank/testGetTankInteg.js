@@ -1,7 +1,7 @@
 import chai from 'chai';
 import {app} from "../../../../main";
 import {avecUneQtManquanteTankSpec, avecUneQtManquanteTankSpec2, lettreTankSpec} from "../../../expected/tank/testGetTankData";
-import {run} from "../../../testIntegPlumbing";
+import {run} from "../../../testPlumbing";
 import {initDatabase, run2} from "../../../testIntegDatabase";
 
 const getTank = spec => {

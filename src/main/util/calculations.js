@@ -1,6 +1,5 @@
 import _ from 'lodash'
 import {qtUnitCoef, sameGrandeur} from "../service/grandeur/grandeursService";
-import {debug} from "../../test/testIntegPlumbing";
 import {GrandeurMismatchError} from "../exceptions/Errors";
 
 /**

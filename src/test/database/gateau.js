@@ -1,6 +1,6 @@
 import {cols} from "../../main/const/collections";
 import {vitBFacetEntry, vitCFacetEntry} from "./facetEntries";
-import {withQuantity} from "../testIntegPlumbing";
+import {withQuantity} from "../testPlumbing";
 
 export const gateau = {
     "_id": "5a6a03c03e77667641d2d2c3",

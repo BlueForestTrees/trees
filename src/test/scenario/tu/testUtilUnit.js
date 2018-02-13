@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {match, mock} from 'sinon';
-import {initTools} from "../../testIntegPlumbing";
+import {initTools} from "../../testPlumbing";
 import mongo from 'mongodb';
 import {addObjects} from "../../../main/util/addObjectID";
 import {cols} from "../../../main/const/collections";

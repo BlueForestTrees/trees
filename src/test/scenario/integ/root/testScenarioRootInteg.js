@@ -5,7 +5,7 @@ import {postRoot} from "./testPostRootInteg";
 import {bleToFarineAddSpec} from "../../../expected/root/testPostRootData";
 import {initDatabase} from "../../../testIntegDatabase";
 
-import {run} from "../../../testIntegPlumbing";
+import {run} from "../../../testPlumbing";
 
 describe('SCENARIO Root', function () {
 

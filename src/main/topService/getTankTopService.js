@@ -19,17 +19,16 @@ export const tankfy = items => {
     let i = 0;
     for (i; i < browser.length; i++) {
         const item = browser[i];
-        //TODO il faut voir da sans quantité
         if (item.items && quantified(item.items)) {
             browser.push(...item.items);
         } else {
-            tank.push(item);
+            tank.push(_.omit(item,"items"));
         }
     }
     return tank;
 };
 
-const quantified = items => _.some(items, item => item.quantity !== null);
+export const quantified = items => _.some(items, item => !_.isNil(item.quantity));
 
 export const summify = items => _(items)
     .groupBy("_id")
@@ -46,7 +45,6 @@ export const basifyQuantity = toBasifyItem => {
 };
 
 export const mergeItems = (left, right) => {
-    debug("merge", left, right);
     return left.quantity && right.quantity ?
         (left.quantity.qt += right.quantity.qt) && left
         :

@@ -1,7 +1,7 @@
-import {bleFacets} from "../../scenario/integ/testIntegDatabase";
 import {oneModifiedResponse} from "../testCommonData";
-import {remove} from "../../testUtil";
+import {remove} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
+import {bleFacets} from "../../database/gateau";
 
 export const facetDeletionSpec = {};
 

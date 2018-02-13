@@ -1,6 +1,6 @@
-import {vitCFacetEntry} from "../../scenario/integ/testIntegDatabase";
 
 import _ from 'lodash';
+import {vitCFacetEntry} from "../../database/facetEntries";
 
 export const postFacetEntrySpec = {};
 postFacetEntrySpec.req = {
@@ -10,7 +10,7 @@ postFacetEntrySpec.req = {
     }
 };
 postFacetEntrySpec.res = {
-    body : _id => ({
+    body: _id => ({
         _id,
         name: "nomNewFacetEntry",
         grandeur: "Densité"
@@ -25,17 +25,17 @@ postBadGrandeurFacetEntrySpec.req = {
     }
 };
 postBadGrandeurFacetEntrySpec.res = {
-    status : 422,
-    bodyMessage : "Invalid value"
+    status: 422,
+    bodyMessage: "Invalid value"
 };
 
 
 export const allreadyExistingFacetEntrySpec = {};
 allreadyExistingFacetEntrySpec.req = {
     body: {
-        ..._.omit(vitCFacetEntry,"_id")
+        ..._.omit(vitCFacetEntry, "_id")
     }
 };
 allreadyExistingFacetEntrySpec.res = {
-    body : _id => vitCFacetEntry
+    body: _id => vitCFacetEntry
 };

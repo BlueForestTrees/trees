@@ -1,17 +1,17 @@
-import {peekTrunk} from "../service/trunk/getTrunkService";
+import {appendNames} from "../service/trunk/getTrunkService";
 import {readRoot} from "../service/root/getRootService";
 import _ from 'lodash';
-import {applyCoef} from "../util/calculations";
-import {GrandeurMismatchError} from "../exceptions/Errors";
-import {qtUnitCoef} from "../service/grandeur/grandeursService";
+import {applyQuantity, erreurSiUnitIncompatibles} from "../util/calculations";
 
 export const loadNamedUnquantifiedRoot = _id =>
     loadNamedRoots(_id)
         .then(removeQuantity);
 
 export const loadNamedQuantifiedRoot = async (qt, unit, _id) =>
-    loadNamedRoots(_id)
-        .then(roots => applyQt(qt, unit, roots));
+    loadRoots(_id)
+        .then(roots => erreurSiUnitIncompatibles({qt, unit}, roots))
+        .then(roots => applyQuantity({qt, unit}, roots))
+        .then(namiFy);
 
 const loadRoots = _id =>
     readRoot(_id)
@@ -19,37 +19,18 @@ const loadRoots = _id =>
 
 const loadNamedRoots = _id =>
     loadRoots(_id)
-        .then(populateRootNames);
+        .then(namiFy);
 
-const applyQt = (qt, unit, roots) => {
-    if (qt && roots.quantity && roots.quantity.qt) {
-        const leftQtUnit = {qt, unit};
-        const rightQtUnit = {qt: roots.quantity.qt, unit: roots.quantity.unit};
-        let coef;
-        try {
-            coef = qtUnitCoef(leftQtUnit, rightQtUnit);
-        } catch (e) {
-            if (e instanceof GrandeurMismatchError) {
-                e.status = 400;
-            }
-            throw e;
-        }
-        applyCoef(roots.items, coef);
-    }
-    roots.quantity = {qt, unit};
-    return roots;
-};
-
-const populateRootNames = async roots => ({
-    ..._.omit(roots, "items"),
-    items: await Promise.all(
-        _.map(roots.items, item => peekTrunk(item._id)
-            .then(t => ({...item, name: t.name}))
-        ))
+const namiFy = async item => ({
+    ..._.omit(item, "items"),
+    items: await appendNames(item.items)
 });
+
+
 
 const removeQuantity = roots => {
     delete roots.quantity;
     _.forEach(roots.items, item => delete item.quantity);
     return roots;
 };
+

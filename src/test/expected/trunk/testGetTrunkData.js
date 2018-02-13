@@ -1,6 +1,7 @@
-import {initialTrees, farine, gateau} from "../../scenario/integ/testIntegDatabase";
 import _ from 'lodash';
 import {removeObjects} from "../../../main/util/addObjectID";
+import {initialTrees} from "../../testIntegDatabase";
+import {farine, gateau} from "../../database/gateau";
 
 export const getAllTrunkSpec = {
     res: {

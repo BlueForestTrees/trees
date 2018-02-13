@@ -1,7 +1,7 @@
 import {renameTrunkSpec, requantifyTrunkSpec} from "../../../expected/trunk/testPutTrunkData";
 import chai from 'chai';
-import {assertDb, initDatabase} from "../testIntegPlumbing";
 import {app} from "../../../../main";
+import {assertDb, initDatabase} from "../../../testIntegDatabase";
 
 describe('PUT Trunks', function () {
 
@@ -14,7 +14,7 @@ describe('PUT Trunks', function () {
 
 });
 
-const testPutTrunkWith = (spec,done) => {
+const testPutTrunkWith = (spec, done) => {
     chai.request(app)
         .put(`/api/trunk/${spec.req.params._id}`)
         .send(spec.req.body)

@@ -1,5 +1,5 @@
-import {gateau} from "../../scenario/integ/testIntegDatabase";
 import {cols} from "../../../main/const/collections";
+import {gateau} from "../../database/gateau";
 
 export const trunkDeletionSpec = {};
 

@@ -1,4 +1,5 @@
-import {erreurDifferenteGrandeurs, NoUnitError} from "../../exceptions/Errors";
+import {unitNotFound} from "../../exceptions/Errors";
+import {debug} from "../../../test/testIntegPlumbing";
 
 const _ = require('lodash');
 
@@ -17,7 +18,7 @@ const _grandeurs = {
         _unit("J", "joule", 0.23923445),
         _unit("cal", "calorie", 1),
         _unit("kcal", "kilo-calorie", 1000),
-        _unit("Mcal", "mega-calorie", 1000*1000)
+        _unit("Mcal", "mega-calorie", 1000 * 1000)
     ],
     "Densité": [
         _unit("μmol", "micro-mole", 0.000001),
@@ -25,7 +26,7 @@ const _grandeurs = {
         _unit("mol", "mole", 1)
     ],
     "Nombre": [
-        _unit("", "", 1)
+        _unit("count", "", 1)
     ],
     "Volume": [
         _unit("m3", "mètre-cube", 1),
@@ -66,19 +67,51 @@ _.forEach(_grandeurs, (units, grandeurName) => {
     _.forEach(units, unit => unit.grandeur = grandeurName);
 });
 
-const unitNotFound = shortname => {
-    throw new NoUnitError(shortname);
-};
-
 export const units = _.chain(_grandeurs).values().flatten().keyBy('shortname').value();
 export const grandeurs = _grandeurs;
 export const grandeursKeys = Object.keys(_grandeurs);
 export const shortnames = Object.keys(units);
 
-export const unit = shortname => units[shortname] || unitNotFound(shortname);
+export const unit = shortname => _.has(units, shortname) ? units[shortname] : null;
+export const coef = shortname => unit(shortname).coef;
+export const base = grandeur => _.find(grandeurs[grandeur], {coef: 1});
+
 export const unitlongname = shortname => unit(shortname).name;
 export const grandeur = shortname => unit(shortname).grandeur;
 
-export const checkGrandeur = (leftShortname,rightShortname) => unit(leftShortname).grandeur === unit(rightShortname).grandeur || erreurDifferenteGrandeurs(leftShortname, rightShortname);
-export const unitCoef = (leftShortname, rightShortname) => checkGrandeur(leftShortname, rightShortname) && unit(leftShortname).coef / unit(rightShortname).coef;
-export const qtUnitCoef = ({qt:leftQt, unit:leftUnit}, {qt:rightQt, unit:rightUnit}) => leftQt / rightQt * unitCoef(leftUnit, rightUnit);
+/**
+ * @returns faux, ou vrai ssi les unités sont valides et de la même grandeur
+ */
+export const sameGrandeur = (leftShortname, rightShortname) => {
+    const leftUnit = unit(leftShortname);
+    const rightUnit = unit(rightShortname);
+
+    return leftUnit && rightUnit && leftUnit.grandeur === rightUnit.grandeur;
+
+};
+
+/**
+ * @returns le coef pour passer d'une unité à l'autre. undefined si les unités ne sont pas compatibles.
+ */
+export const unitCoef = (leftShortname, rightShortname) => sameGrandeur(leftShortname, rightShortname)
+    ? unit(leftShortname).coef / unit(rightShortname).coef
+    : undefined;
+
+/**
+ * @returns le coef pour passer d'une quantité à l'autre. undefined si les unités ne sont pas compatibles.
+ */
+export const qtUnitCoef = (leftQuantity, rightQuantity) => leftQuantity && rightQuantity
+    ? leftQuantity.qt / rightQuantity.qt * unitCoef(leftQuantity.unit, rightQuantity.unit)
+    : undefined;
+
+/**
+ *
+ * @param quantity
+ * @returns la quantité en unité de base. (10kg => 10000g)
+ */
+export const toBaseQuantity = quantity => {
+    return {
+        qt: quantity.qt * coef(quantity.unit),
+        unit: base(grandeur(quantity.unit)).shortname
+    };
+};

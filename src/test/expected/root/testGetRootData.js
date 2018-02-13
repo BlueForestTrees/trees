@@ -1,11 +1,12 @@
 import _ from 'lodash';
-import {farineRoot, gateauRoot, lait, nameOf, setQuantity, skateRoot} from "../../scenario/integ/testIntegDatabase";
-import {clon} from "../../testUtil";
-import {debug} from "../../scenario/integ/testIntegPlumbing";
-
-const withNames = items => _.forEach(items, root => root.name = nameOf(root._id));
-const withDoubleQt = items => _.forEach(items, root => root.quantity.qt *= 2);
-const withoutQuantity = items => _.map(items, item => _.omit(item, "quantity"));
+import {clon} from "../../util/testUtil";
+import {removeItemQuantity, setQuantity, withDoubleQt, withoutQuantity} from "../../testIntegPlumbing";
+import {farineRoot, gateauRoot, lait} from "../../database/gateau";
+import {skateRoot} from "../../database/skate";
+import {a, da, dRoot} from "../../database/lettres";
+import {withNames} from "../../testIntegDatabase";
+import {avecUneQtManquanteTankSpec} from "../tank/testGetTankData";
+import {cols} from "../../../main/const/collections";
 
 export const getRootsSpec = {};
 const gateauItemsWithNames = withoutQuantity(withNames(clon(gateauRoot.items)));
@@ -14,7 +15,7 @@ getRootsSpec.req = {
 };
 getRootsSpec.res = {
     body: {
-        ..._.omit(gateauRoot, ["items","quantity"]),
+        ..._.omit(gateauRoot, ["items", "quantity"]),
         items: gateauItemsWithNames
     }
 };
@@ -116,7 +117,7 @@ badUnitGetRootSpec.res = {
 export const farineNoBleQtGetRootSpec = {};
 const myFarineRoot = clon(farineRoot);
 withNames(myFarineRoot.items);
-setQuantity(myFarineRoot, 60,"g");
+setQuantity(myFarineRoot, 60, "g");
 
 farineNoBleQtGetRootSpec.req = {
     qt: myFarineRoot.quantity.qt,
@@ -126,5 +127,323 @@ farineNoBleQtGetRootSpec.req = {
 farineNoBleQtGetRootSpec.res = {
     body: {
         ...myFarineRoot
+    }
+};
+
+export const lettreGetRootSpec = {};
+lettreGetRootSpec.req = {
+    qt: 500,
+    unit: "g",
+    _id: a._id
+};
+lettreGetRootSpec.res = {
+    body: {
+        _id:a._id,
+        items:[
+            {
+                "_id": "bbbbbbbbbbbbbbbbbbbbbbbb",
+                "items": [
+                    {
+                        "_id": "babababababababababababa",
+                        "items": [
+                            {
+                                "_id": "baabaabaabaabaabaabaabaa",
+                                "items": [
+                                    {
+                                        "_id": "e1e1e1e1e1e1e1e1e1e1e1e1",
+                                        "quantity": {
+                                            "qt": 5,
+                                            "unit": "L"
+                                        }
+                                    }
+                                ],
+                                "quantity": {
+                                    "qt": 0.5,
+                                    "unit": "kg"
+                                }
+                            },
+                            {
+                                "_id": "babbabbabbabbabbabbabbab",
+                                "items": [
+                                    {
+                                        "_id": "e1e1e1e1e1e1e1e1e1e1e1e1",
+                                        "quantity": {
+                                            "qt": 0.25,
+                                            "unit": "m3"
+                                        }
+                                    }
+                                ],
+                                "quantity": {
+                                    "qt": 0.5,
+                                    "unit": "kg"
+                                }
+                            }
+                        ],
+                        "quantity": {
+                            "qt": 0.5,
+                            "unit": "kg"
+                        }
+                    },
+                    {
+                        "_id": "b2b2b2b2b2b2b2b2b2b2b2b2",
+                        "items": [
+                            {
+                                "_id": "e2e2e2e2e2e2e2e2e2e2e2e2",
+                                "quantity": {
+                                    "qt": 0.5,
+                                    "unit": "kg"
+                                }
+                            }
+                        ],
+                        "quantity": {
+                            "qt": 0.5,
+                            "unit": "kg"
+                        }
+                    }
+                ],
+                "quantity": {
+                    "qt": 0.5,
+                    "unit": "kg"
+                }
+            },
+            {
+                "_id": "cccccccccccccccccccccccc",
+                "items": [
+                    {
+                        "_id": "e2e2e2e2e2e2e2e2e2e2e2e2",
+                        "quantity": {
+                            "qt": 0.5,
+                            "unit": "kg"
+                        }
+                    }
+                ],
+                "quantity": {
+                    "qt": 0.5,
+                    "unit": "kg"
+                }
+            },
+            {
+                "_id": "dddddddddddddddddddddddd",
+                "items": [
+                    {
+                        "_id": "dadadadadadadadadadadada",
+                        "items": [
+                            {
+                                "_id": "e2e2e2e2e2e2e2e2e2e2e2e2",
+                                "quantity": {
+                                    "qt": 0.5,
+                                    "unit": "kg"
+                                }
+                            }
+                        ],
+                        "quantity": {
+                            "qt": 0.5,
+                            "unit": "kg"
+                        }
+                    },
+                    {
+                        "_id": "dbdbdbdbdbdbdbdbdbdbdbdb",
+                        "items": [
+                            {
+                                "_id": "dbadbadbadbadbadbadbadba",
+                                "items": [
+                                    {
+                                        "_id": "dbaadbaadbaadbaadbaadbaa",
+                                        "items": [
+                                            {
+                                                "_id": "e2e2e2e2e2e2e2e2e2e2e2e2",
+                                                "quantity": {
+                                                    "qt": 0.5,
+                                                    "unit": "kg"
+                                                }
+                                            }
+                                        ],
+                                        "quantity": {
+                                            "qt": 0.5,
+                                            "unit": "kg"
+                                        }
+                                    }
+                                ],
+                                "quantity": {
+                                    "qt": 0.5,
+                                    "unit": "kg"
+                                }
+                            }
+                        ],
+                        "quantity": {
+                            "qt": 0.5,
+                            "unit": "kg"
+                        }
+                    }
+                ],
+                "quantity": {
+                    "qt": 0.5,
+                    "unit": "kg"
+                }
+            }
+        ],
+        "quantity": {
+            qt: 500,
+            unit: "g"
+        }
+    }
+};
+
+export const lettreNoDaQtGetRootSpec = {};
+lettreNoDaQtGetRootSpec.req = {
+    qt: 500,
+    unit: "g",
+    _id: a._id
+};
+lettreNoDaQtGetRootSpec.db = {
+    preChange: {
+        colname: cols.ROOT,
+        doc: {
+            ...removeItemQuantity(clon(dRoot), da._id)
+        }
+    }
+};
+lettreNoDaQtGetRootSpec.res = {
+    body: {
+        _id:a._id,
+        items:[
+            {
+                "_id": "bbbbbbbbbbbbbbbbbbbbbbbb",
+                "items": [
+                    {
+                        "_id": "babababababababababababa",
+                        "items": [
+                            {
+                                "_id": "baabaabaabaabaabaabaabaa",
+                                "items": [
+                                    {
+                                        "_id": "e1e1e1e1e1e1e1e1e1e1e1e1",
+                                        "quantity": {
+                                            "qt": 5,
+                                            "unit": "L"
+                                        }
+                                    }
+                                ],
+                                "quantity": {
+                                    "qt": 0.5,
+                                    "unit": "kg"
+                                }
+                            },
+                            {
+                                "_id": "babbabbabbabbabbabbabbab",
+                                "items": [
+                                    {
+                                        "_id": "e1e1e1e1e1e1e1e1e1e1e1e1",
+                                        "quantity": {
+                                            "qt": 0.25,
+                                            "unit": "m3"
+                                        }
+                                    }
+                                ],
+                                "quantity": {
+                                    "qt": 0.5,
+                                    "unit": "kg"
+                                }
+                            }
+                        ],
+                        "quantity": {
+                            "qt": 0.5,
+                            "unit": "kg"
+                        }
+                    },
+                    {
+                        "_id": "b2b2b2b2b2b2b2b2b2b2b2b2",
+                        "items": [
+                            {
+                                "_id": "e2e2e2e2e2e2e2e2e2e2e2e2",
+                                "quantity": {
+                                    "qt": 0.5,
+                                    "unit": "kg"
+                                }
+                            }
+                        ],
+                        "quantity": {
+                            "qt": 0.5,
+                            "unit": "kg"
+                        }
+                    }
+                ],
+                "quantity": {
+                    "qt": 0.5,
+                    "unit": "kg"
+                }
+            },
+            {
+                "_id": "cccccccccccccccccccccccc",
+                "items": [
+                    {
+                        "_id": "e2e2e2e2e2e2e2e2e2e2e2e2",
+                        "quantity": {
+                            "qt": 0.5,
+                            "unit": "kg"
+                        }
+                    }
+                ],
+                "quantity": {
+                    "qt": 0.5,
+                    "unit": "kg"
+                }
+            },
+            {
+                "_id": "dddddddddddddddddddddddd",
+                "items": [
+                    {
+                        "_id": "dadadadadadadadadadadada",
+                        "items": [
+                            {
+                                "_id": "e2e2e2e2e2e2e2e2e2e2e2e2"
+                            }
+                        ]
+                    },
+                    {
+                        "_id": "dbdbdbdbdbdbdbdbdbdbdbdb",
+                        "items": [
+                            {
+                                "_id": "dbadbadbadbadbadbadbadba",
+                                "items": [
+                                    {
+                                        "_id": "dbaadbaadbaadbaadbaadbaa",
+                                        "items": [
+                                            {
+                                                "_id": "e2e2e2e2e2e2e2e2e2e2e2e2",
+                                                "quantity": {
+                                                    "qt": 0.5,
+                                                    "unit": "kg"
+                                                }
+                                            }
+                                        ],
+                                        "quantity": {
+                                            "qt": 0.5,
+                                            "unit": "kg"
+                                        }
+                                    }
+                                ],
+                                "quantity": {
+                                    "qt": 0.5,
+                                    "unit": "kg"
+                                }
+                            }
+                        ],
+                        "quantity": {
+                            "qt": 0.5,
+                            "unit": "kg"
+                        }
+                    }
+                ],
+                "quantity": {
+                    "qt": 0.5,
+                    "unit": "kg"
+                }
+            }
+        ],
+        "quantity": {
+            qt: 500,
+            unit: "g"
+        }
     }
 };

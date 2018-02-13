@@ -1,7 +1,8 @@
 import {oneModifiedResponse} from "../testCommonData";
-import {ble, gateau, withQuantity} from "../../scenario/integ/testIntegDatabase";
 import {cols} from "../../../main/const/collections";
 import _ from 'lodash';
+import {ble, gateau} from "../../database/gateau";
+import {withQuantity} from "../../testIntegPlumbing";
 
 
 export const renameTrunkSpec = {};
@@ -28,9 +29,8 @@ renameTrunkSpec.db = {
 };
 
 
-
 export const requantifyTrunkSpec = {};
-const newGateauQuantity = withQuantity(1,"kg").quantity;
+const newGateauQuantity = withQuantity(1, "kg").quantity;
 requantifyTrunkSpec.req = {
     params: {_id: gateau._id},
     body: {

@@ -16,7 +16,7 @@ lettreTankSpec.res = {
         items: [
             {
                 "_id": e2._id,
-                "name": "end2",
+                "name": "elec",
                 "quantity": {
                     "qt": 2500,
                     "unit": "g",
@@ -24,7 +24,7 @@ lettreTankSpec.res = {
             },
             {
                 "_id": e1._id,
-                "name": "end1",
+                "name": "eau",
                 "quantity": {
                     "qt": 0.255,
                     "unit": "m3"
@@ -54,7 +54,7 @@ avecUneQtManquanteTankSpec.res = {
         items: [
             {
                 "_id": e2._id,
-                "name": "end2",
+                "name": "elec",
                 "quantity": {
                     "qt": 2000,
                     "unit": "g",
@@ -66,7 +66,7 @@ avecUneQtManquanteTankSpec.res = {
             },
             {
                 "_id": e1._id,
-                "name": "end1",
+                "name": "eau",
                 "quantity": {
                     "qt": 0.255,
                     "unit": "m3"
@@ -96,7 +96,7 @@ avecUneQtManquanteTankSpec2.res = {
         items: [
             {
                 "_id": e2._id,
-                "name": "end2",
+                "name": "elec",
                 "quantity": {
                     "qt": 1500,
                     "unit": "g",
@@ -108,7 +108,7 @@ avecUneQtManquanteTankSpec2.res = {
             },
             {
                 "_id": e1._id,
-                "name": "end1",
+                "name": "eau",
                 "quantity": {
                     "qt": 0.255,
                     "unit": "m3"

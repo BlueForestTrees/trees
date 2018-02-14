@@ -13,8 +13,8 @@ router.post('/api/facet/:treeId',
     [
         validTreeId,
         check('facet._id').isMongoId(),
-        check('facet.qt').isDecimal(),
-        check('facet.unit').isIn(shortnames)
+        check('facet.quantity.qt').isDecimal(),
+        check('facet.quantity.unit').isIn(shortnames)
     ],
     run(setFacet)
 );

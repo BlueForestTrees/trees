@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {remove, replace} from "../../util/testUtil";
+import {remove, replaceItem} from "../../util/testUtil";
 
 describe('Utils', function () {
 
@@ -17,7 +17,7 @@ describe('Utils', function () {
     });
 
     it('replace ok', function () {
-        expect(replace(
+        expect(replaceItem(
             {
                 items: [{i: 1}, {i: 3}, {_id: 2, oldVal: 7}]
             },

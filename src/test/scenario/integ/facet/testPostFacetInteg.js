@@ -1,5 +1,5 @@
 import chai from 'chai';
-import {firstFacetSpec, thirdFacet, updatingFacetSpec} from "../../../expected/facet/testPostFacetData";
+import {firstFacetSpec, thirdFacet, updatingBleFacetSpec} from "../../../expected/facet/testPostFacetData";
 import {app} from "../../../../main";
 import {assertDb, initDatabase} from "../../../testIntegDatabase";
 
@@ -11,7 +11,7 @@ describe('POST Facet', function () {
 
     it('firstFacet', done => testPostFacetWith(firstFacetSpec, done));
     it('thirdFacet', done => testPostFacetWith(thirdFacet, done));
-    it('updatingFacet', done => testPostFacetWith(updatingFacetSpec, done));
+    it('updatingFacet', done => testPostFacetWith(updatingBleFacetSpec, done));
 });
 
 const testPostFacetWith = (testDef, done) => {

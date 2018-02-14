@@ -116,9 +116,23 @@ const aFacets = {
     }]
 };
 
+const bFacets = {
+    _id: b._id,
+    items: [{
+        _id: prixFacetEntry._id,
+        ...withQuantity(40, "€")
+    }, {
+        _id: vitCFacetEntry._id,
+        ...withQuantity(6, "mol")
+    }, {
+        _id: vitBFacetEntry._id,
+        ...withQuantity(60, "mmol")
+    }]
+};
+
 export const database = {
     [cols.TRUNK]: [a, b, c, d, ba, b2, da, db, baa, bab, dba, dbaa, e1, e2],
     [cols.ROOT]: [aRoot, bRoot, baRoot, baaRoot, babRoot, b2Root, cRoot, dRoot, daRoot, dbRoot, dbaRoot, dbaaRoot],
-    [cols.FACET]: [aFacets]
+    [cols.FACET]: [aFacets, bFacets]
 };
 

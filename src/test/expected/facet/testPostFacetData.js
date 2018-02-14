@@ -1,16 +1,15 @@
 import {oneModifiedResponse, oneUpsertedResponse} from "../testCommonData";
-import {replace} from "../../util/testUtil";
+import {replaceItem} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
 import {bleFacets, farine} from "../../database/gateau";
 import {prixFacetEntry, vitBFacetEntry} from "../../database/facetEntries";
+import {withIdQuantity} from "../../testPlumbing";
 
 export const firstFacetSpec = {};
 firstFacetSpec.req = {
     _id: farine._id,
     body: {
-        facet: {
-            _id: prixFacetEntry._id, qt: 144, unit: "m2"
-        }
+        facet: withIdQuantity(prixFacetEntry._id, 144, "m2")
     }
 };
 firstFacetSpec.res = {
@@ -22,9 +21,7 @@ firstFacetSpec.db = {
         doc: {
             _id: farine._id,
             items: [
-                {
-                    _id: prixFacetEntry._id, qt: 144, unit: "m2"
-                }
+                withIdQuantity(prixFacetEntry._id, 144, "m2")
             ],
 
         }
@@ -34,15 +31,9 @@ firstFacetSpec.db = {
 export const thirdFacet = {};
 const trunkId = bleFacets._id;
 
-let thridPostedFacetSpec = {
-    _id: prixFacetEntry._id,
-    qt: 144,
-    unit: "m2"
-};
-
 thirdFacet.req = {
     _id: trunkId,
-    body: {facet: thridPostedFacetSpec}
+    body: {facet: withIdQuantity(prixFacetEntry._id, 144, "m2")}
 };
 
 thirdFacet.res = {
@@ -56,7 +47,7 @@ thirdFacet.db = {
             _id: trunkId,
             items: [
                 ...bleFacets.items,
-                thridPostedFacetSpec
+                withIdQuantity(prixFacetEntry._id, 144, "m2")
             ],
 
         }
@@ -64,27 +55,19 @@ thirdFacet.db = {
 };
 
 
-export const updatingFacetSpec = {};
-const updatingTrunkId = bleFacets._id;
-
-let anotherFacetUpdate = {
-    _id: vitBFacetEntry._id,
-    qt: 14,
-    unit: "m"
+export const updatingBleFacetSpec = {};
+updatingBleFacetSpec.req = {
+    _id: bleFacets._id,
+    body: {
+        facet: withIdQuantity(vitBFacetEntry._id, 14, "m")
+    }
 };
-
-updatingFacetSpec.req = {
-    _id: updatingTrunkId,
-    body: {facet: anotherFacetUpdate}
-};
-
-updatingFacetSpec.res = {
+updatingBleFacetSpec.res = {
     body: oneModifiedResponse
 };
-
-updatingFacetSpec.db = {
+updatingBleFacetSpec.db = {
     expected: {
         colname: cols.FACET,
-        doc: replace(bleFacets, "items", anotherFacetUpdate)
+        doc: replaceItem(bleFacets, "items", withIdQuantity(vitBFacetEntry._id, 14, "m"))
     }
 };

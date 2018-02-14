@@ -9,7 +9,7 @@ export const remove = (obj, prop, criteria) => {
     return clone;
 };
 
-export const replace = (obj, prop, value) => {
+export const replaceItem = (obj, prop, value) => {
     const result = remove(obj, prop, {_id: value._id});
     result[prop].push(value);
     return result;

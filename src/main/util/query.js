@@ -15,4 +15,4 @@ export const pullFromRoots = id => ({$pull: {items: withId(id)}});
 export const pushRoot = (id, quantity) => ({$push: {items: {...withId(id), ...withQuantity(quantity)}}});
 
 export const pullFromFacets = facetIds => ({$pull: {items: withIdIn(facetIds)}});
-export const pushFacet = ({_id, qt, unit}) => ({$push: {items: {_id: object(_id), qt, unit}}});
+export const pushFacet = ({_id, quantity}) => ({$push: {items: {_id: object(_id), quantity}}});

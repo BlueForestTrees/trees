@@ -1,5 +1,6 @@
 import {withQuantity} from "../testPlumbing";
 import {cols} from "../../main/const/collections";
+import {clon} from "../util/testUtil";
 
 export const skate = {
     "_id": "999903c03e77667641d99990",

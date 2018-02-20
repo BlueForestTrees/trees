@@ -2,6 +2,7 @@ import {removeItemQuantity, withQuantity} from "../../testPlumbing";
 import {a, da, db, dRoot, e1, e2} from "../../database/lettres";
 import {cols} from "../../../main/const/collections";
 import {clon} from "../../util/testUtil";
+import {lait} from "../../database/gateau";
 
 export const lettreTankSpec = {};
 lettreTankSpec.req = {
@@ -115,5 +116,18 @@ avecUneQtManquanteTankSpec2.res = {
                 }
             }
         ]
+    }
+};
+
+export const sansTank = {};
+sansTank.req = {
+    _id: lait._id,
+    ...withQuantity(3, "L")
+};
+sansTank.res = {
+    body: {
+        _id: lait._id,
+        ...withQuantity(3, "L"),
+        items: []
     }
 };

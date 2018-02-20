@@ -15,7 +15,17 @@ export const prixFacetEntry = {
     name: "Prix",
     grandeur: "Coût"
 };
+export const vitDFacetEntry = {
+    _id: "5a6a03c03e77667641d2d2c7",
+    name: "vitamine D",
+    grandeur: "Densité"
+};
+export const vitEFacetEntry = {
+    _id: "5a6a03c03e77667641d2d2c8",
+    name: "vitamine E",
+    grandeur: "Densité"
+};
 
-export const database =  {
-    [cols.FACET_ENTRY]: [vitCFacetEntry, vitBFacetEntry, prixFacetEntry]
+export const database = {
+    [cols.FACET_ENTRY]: [vitDFacetEntry, vitEFacetEntry, vitCFacetEntry, vitBFacetEntry, prixFacetEntry]
 };

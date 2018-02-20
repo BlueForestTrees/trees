@@ -2,6 +2,7 @@ import {clon} from "../../util/testUtil";
 import {withDoubleQt} from "../../testPlumbing";
 import {ble, gateauRoot} from "../../database/gateau";
 import {arbre} from "../../database/skate";
+import {withIdQtUnit} from "../../../main/util/query";
 
 export const gateauRootTreeSpec = {};
 const gateauRoot2Kg = clon(gateauRoot);
@@ -26,9 +27,16 @@ gateauRootTreeSpec.res = {
 export const noRootsTreeSpec = {};
 noRootsTreeSpec.req = {
     qt: 3,
-    unit:"count",
+    unit: "count",
     _id: arbre._id
 };
 noRootsTreeSpec.res = {
-    body: null
+    body: {
+        _id: arbre._id,
+        quantity: {
+            qt: 3,
+            unit: "count"
+        },
+        items: []
+    }
 };

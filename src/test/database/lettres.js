@@ -1,6 +1,6 @@
 import {withNameIdQuantity, withQuantity} from "../testPlumbing";
 import {cols} from "../../main/const/collections";
-import {prixFacetEntry, vitBFacetEntry, vitCFacetEntry} from "./facetEntries";
+import {prixFacetEntry, vitBFacetEntry, vitEFacetEntry, vitCFacetEntry, vitDFacetEntry} from "./facetEntries";
 
 //TRUNKS
 export const a = withNameIdQuantity("a", "aaaaaaaaaaaaaaaaaaaaaaaa", 1, "kg");
@@ -113,6 +113,9 @@ const aFacets = {
     }, {
         _id: vitBFacetEntry._id,
         ...withQuantity(100, "mmol")
+    }, {
+        _id: vitEFacetEntry._id,
+        ...withQuantity(120, "mmol")
     }]
 };
 
@@ -127,6 +130,9 @@ const bFacets = {
     }, {
         _id: vitBFacetEntry._id,
         ...withQuantity(60, "mmol")
+    }, {
+        _id: vitDFacetEntry._id,
+        ...withQuantity(80, "mmol")
     }]
 };
 

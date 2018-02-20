@@ -1,5 +1,5 @@
-import {removeRoot} from "../../service/root/deleteRootService";
 import {valid} from "../../const/validations";
+import {removeRoot} from "../../service/root/rootCommands";
 
 const run = require('../../util/run');
 const express = require('express');

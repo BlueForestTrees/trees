@@ -1,4 +1,4 @@
-import {readRootTree} from "../service/root/getRootService";
+import {readRootTree} from "../service/root/rootQueries";
 import _ from 'lodash';
 import {toBaseQuantity} from "../service/grandeur/grandeursService";
 import {appendNames} from "../service/trunk/getTrunkService";
@@ -21,7 +21,7 @@ export const tankfy = items => {
         if (item.quantity && item.items && quantified(item.items)) {
             browser.push(...item.items);
         } else {
-            tank.push(_.omit(item,"items"));
+            tank.push(_.omit(item, "items"));
         }
     }
     return tank;

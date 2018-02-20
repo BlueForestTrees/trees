@@ -1,5 +1,5 @@
 import {appendNames} from "../service/trunk/getTrunkService";
-import {readRoot} from "../service/root/getRootService";
+import {readRoot} from "../service/root/rootQueries";
 import _ from 'lodash';
 import {applyQuantity, erreurSiUnitIncompatibles} from "../util/calculations";
 

@@ -1,6 +1,6 @@
 import {cols} from "../../const/collections";
 import {col} from "../../repo";
-import {matchId, withId} from "../../util/query";
+import {matchId, withId, withIdQtUnit} from "../../util/query";
 import _ from 'lodash';
 import {applyQuantity} from "../../util/calculations";
 
@@ -21,13 +21,15 @@ export const readRoot = _id => roots().findOne(withId(_id));
 
 export const readRootTree = (qt, unit, _id) =>
     getRootGraph(_id)
-        .then(graph => graph && treefy({qt, unit}, graph));
+        .then(graph => graph && treefy({qt, unit}, graph))
+        .then(tree => tree || {...withIdQtUnit(_id, qt, unit), items: []});
 
 const getRootGraph = _id => {
     return roots().aggregate([matchId(_id), rootGraphLookup]).next();
 };
 
 const treefy = (quantity, graph) => {
+
     const cache = graph.cache;
     const tree = _.omit(graph, "cache");
 

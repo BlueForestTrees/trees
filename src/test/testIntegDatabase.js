@@ -48,7 +48,7 @@ export const run2 = (job, spec) => done => {
 };
 
 const before = async spec => {
-    if (spec.db.preChange) {
+    if (spec.db && spec.db.preChange) {
         await updateDb(spec.db.preChange);
     }
     return spec;

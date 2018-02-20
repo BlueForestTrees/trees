@@ -11,9 +11,9 @@ import {debug} from "../test/scenario/integ/testIntegPlumbing";
 
 export const app = express();
 
-if(env.env === 'PRODUCTION') {
+if (env.env === 'PRODUCTION') {
     app.use(require('morgan')(':status :method :url :response-time ms - :res[content-length]'));
-}else{
+} else {
     app.use(require('morgan')(':status :method :url :response-time ms - :res[content-length]'));
 }
 
@@ -33,12 +33,14 @@ app.use(function (req, res, next) {
 
 app.use(function (err, req, res, next) {
 
-    debug("ERROR HANDLER", err);
 
     //erreur de validation.
     if (err.mapped) {
-        res.status(422).json(err.mapped());
+        const mapped = err.mapped();
+        debug("VALIDATION ERROR HANDLER", mapped);
+        res.status(422).json(mapped);
     } else {
+        console.error("ERROR HANDLER", err.stack);
         res.status(err.status || 500).json({message: err.message});
     }
 });

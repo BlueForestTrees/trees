@@ -1,4 +1,4 @@
-import {purgeFacetsEntries} from "../../service/facetEntry/deleteFacetEntries";
+import {purgeFacetsEntries} from "../../service/facetEntry/deleteFacetEntriesService";
 
 const run = require('../../util/run');
 const express = require('express');

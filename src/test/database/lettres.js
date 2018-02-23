@@ -105,6 +105,7 @@ const dbaaRoot = {
 
 const aFacets = {
     _id: a._id,
+    ...withQuantity(1,"kg"),
     items: [{
         _id: prixFacetEntry._id,
         ...withQuantity(100, "€")

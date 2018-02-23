@@ -1,5 +1,5 @@
 import chai from 'chai';
-import {emptyGetFacetSpec, getFacetSpec} from "../../../expected/facet/testGetFacetData";
+import {emptyGetFacetSpec, getFacetSpec, getQuantifiedFacetSpec} from "../../../expected/facet/testGetFacetData";
 import {app} from "../../../../main";
 import {initDatabase} from "../../../testIntegDatabase";
 
@@ -10,13 +10,20 @@ describe('GET Facets', function () {
     });
 
     it('return facets', done => testGetFacetsWith(getFacetSpec, done));
+    it('return quantified facets', done => testGetQuantifiedFacetsWith(getQuantifiedFacetSpec, done));
     it('return empty facets', done => testGetFacetsWith(emptyGetFacetSpec, done));
 
 });
 
-const testGetFacetsWith = (spec, done) => {
+const testGetFacetsWith = (spec, done) =>
+    testFacetsWith(`/api/facet/${spec.req._id}`, spec, done);
+
+const testGetQuantifiedFacetsWith = (spec, done) =>
+    testFacetsWith(`/api/facet/${spec.req.qt}/${spec.req.unit}/${spec.req._id}`, spec, done);
+
+const testFacetsWith = (url, spec, done) => {
     chai.request(app)
-        .get(`/api/facet/${spec.req._id}`)
+        .get(url)
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.deep.equal(spec.res.body);

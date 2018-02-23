@@ -2,6 +2,7 @@ import {appendNames} from "../service/trunk/getTrunkService";
 import {readRoot} from "../service/root/rootQueries";
 import _ from 'lodash';
 import {applyQuantity, erreurSiUnitIncompatibles} from "../util/calculations";
+import {removeQuantity} from "../util/query";
 
 export const loadNamedUnquantifiedRoot = _id =>
     loadNamedRoots(_id)
@@ -28,9 +29,4 @@ const namiFy = async item => ({
 
 
 
-const removeQuantity = roots => {
-    delete roots.quantity;
-    _.forEach(roots.items, item => delete item.quantity);
-    return roots;
-};
 

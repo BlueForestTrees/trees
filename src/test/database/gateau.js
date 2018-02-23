@@ -54,6 +54,7 @@ const gateauFacets = {
 };
 export const bleFacets = {
     _id: ble._id,
+    ...withQuantity(10, "kg"),
     items: [{
         _id: vitCFacetEntry._id,
         ...withQuantity(6, "mol")

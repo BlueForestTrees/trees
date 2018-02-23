@@ -21,14 +21,14 @@ export const erreurSiUnitIncompatibles = (quantity, roots) => {
 };
 
 
-export const applyQuantity = (quantity, roots) => {
-    const coef = qtUnitCoef(quantity, roots.quantity);
-    roots.quantity = quantity;
+export const applyQuantity = (quantity, target) => {
+    const coef = qtUnitCoef(quantity, target.quantity);
+    target.quantity = quantity;
 
-    roots.items = coef ?
-        _.map(roots.items, item => item.quantity ? (item.quantity.qt *= coef) && item : _.omit(item, "quantity"))
+    target.items = coef ?
+        _.map(target.items, item => item.quantity ? (item.quantity.qt *= coef) && item : _.omit(item, "quantity"))
         :
-        _.map(roots.items, item => _.omit(item, "quantity"));
+        _.map(target.items, item => _.omit(item, "quantity"));
 
-    return roots;
+    return target;
 };

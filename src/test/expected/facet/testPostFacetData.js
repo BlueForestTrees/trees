@@ -3,7 +3,7 @@ import {replaceItem} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
 import {bleFacets, farine} from "../../database/gateau";
 import {prixFacetEntry, vitBFacetEntry} from "../../database/facetEntries";
-import {withIdQuantity} from "../../testPlumbing";
+import {withIdQuantity, withQuantity} from "../../testPlumbing";
 
 export const firstFacetSpec = {};
 firstFacetSpec.req = {
@@ -45,6 +45,7 @@ thirdFacet.db = {
         colname: cols.FACET,
         doc: {
             _id: trunkId,
+            ...withQuantity(10,"kg"),
             items: [
                 ...bleFacets.items,
                 withIdQuantity(prixFacetEntry._id, 144, "m2")

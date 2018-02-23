@@ -3,10 +3,10 @@ import {col} from "../../repo";
 import {pullFromItems, withId} from "../../util/query";
 
 
-const facets = () => col(cols.FACET);
+const impacts = () => col(cols.IMPACT);
 
 module.exports = {
 
-    deleteFacets: ({treeId, facetIds}) => facets().update(withId(treeId), pullFromItems(facetIds)),
+    deleteImpacts: ({treeId, impactIds}) => impacts().update(withId(treeId), pullFromItems(impactIds)),
 
 };

@@ -16,5 +16,5 @@ export const matchId = (_id) => ({$match: withId(_id)});
 export const pullFromRoots = id => ({$pull: {items: withId(id)}});
 export const pushRoot = (id, quantity) => ({$push: {items: withIdQuantity(id, quantity)}});
 
-export const pullFromFacets = facetIds => ({$pull: {items: withIdIn(facetIds)}});
-export const pushFacet = ({_id, quantity}) => ({$push: {items: {_id: object(_id), quantity}}});
+export const pullFromItems = itemIds => ({$pull: {items: withIdIn(itemIds)}});
+export const pushItem = ({_id, quantity}) => ({$push: {items: {_id: object(_id), quantity}}});

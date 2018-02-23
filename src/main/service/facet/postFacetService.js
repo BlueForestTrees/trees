@@ -1,4 +1,4 @@
-import {pushFacet, upsert, withId} from "../../util/query";
+import {pushItem, upsert, withId} from "../../util/query";
 import {cols} from "../../const/collections";
 import {col} from "../../repo";
 import {deleteFacets} from "./deleteFacetService";
@@ -10,4 +10,4 @@ export const setFacet = async ({treeId, facet}) => {
     return addFacet({treeId,facet});
 };
 
-const addFacet = ({treeId, facet}) => facets().update(withId(treeId), pushFacet(facet), upsert);
+const addFacet = ({treeId, facet}) => facets().update(withId(treeId), pushItem(facet), upsert);

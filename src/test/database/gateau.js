@@ -1,6 +1,7 @@
 import {cols} from "../../main/const/collections";
 import {vitBFacetEntry, vitCFacetEntry} from "./facetEntries";
 import {withQuantity} from "../testPlumbing";
+import {vitBImpactEntry, vitCImpactEntry} from "./impactEntries";
 
 export const gateau = {
     "_id": "5a6a03c03e77667641d2d2c3",
@@ -62,8 +63,30 @@ export const bleFacets = {
     }]
 };
 
+const gateauImpact = {
+    _id: gateau._id,
+    items: [{
+        _id: vitCImpactEntry._id,
+        ...withQuantity(10, "mol")
+    }, {
+        _id: vitBImpactEntry._id,
+        ...withQuantity(100, "mmol")
+    }]
+};
+export const bleImpacts = {
+    _id: ble._id,
+    items: [{
+        _id: vitCImpactEntry._id,
+        ...withQuantity(6, "mol")
+    }, {
+        _id: vitBImpactEntry._id,
+        ...withQuantity(150, "mmol")
+    }]
+};
+
 export const database =  {
     [cols.TRUNK]: [gateau, lait, farine, ble],
     [cols.ROOT]: [gateauRoot, farineRoot],
-    [cols.FACET]: [gateauFacets, bleFacets]
+    [cols.FACET]: [gateauFacets, bleFacets],
+    [cols.IMPACT]: [gateauImpact, bleImpacts]
 };

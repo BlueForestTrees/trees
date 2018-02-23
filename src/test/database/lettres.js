@@ -1,6 +1,7 @@
 import {withNameIdQuantity, withQuantity} from "../testPlumbing";
 import {cols} from "../../main/const/collections";
 import {prixFacetEntry, vitBFacetEntry, vitEFacetEntry, vitCFacetEntry, vitDFacetEntry} from "./facetEntries";
+import {prixImpactEntry, vitBImpactEntry, vitCImpactEntry, vitDImpactEntry, vitEImpactEntry} from "./impactEntries";
 
 //TRUNKS
 export const a = withNameIdQuantity("a", "aaaaaaaaaaaaaaaaaaaaaaaa", 1, "kg");
@@ -136,9 +137,43 @@ const bFacets = {
     }]
 };
 
+const aImpacts = {
+    _id: a._id,
+    items: [{
+        _id: prixImpactEntry._id,
+        ...withQuantity(100, "€")
+    }, {
+        _id: vitCImpactEntry._id,
+        ...withQuantity(10, "mol")
+    }, {
+        _id: vitBImpactEntry._id,
+        ...withQuantity(100, "mmol")
+    }, {
+        _id: vitEImpactEntry._id,
+        ...withQuantity(120, "mmol")
+    }]
+};
+
+const bImpacts = {
+    _id: b._id,
+    items: [{
+        _id: prixImpactEntry._id,
+        ...withQuantity(40, "€")
+    }, {
+        _id: vitCImpactEntry._id,
+        ...withQuantity(6, "mol")
+    }, {
+        _id: vitBImpactEntry._id,
+        ...withQuantity(60, "mmol")
+    }, {
+        _id: vitDImpactEntry._id,
+        ...withQuantity(80, "mmol")
+    }]
+};
+
 export const database = {
     [cols.TRUNK]: [a, b, c, d, ba, b2, da, db, baa, bab, dba, dbaa, e1, e2],
     [cols.ROOT]: [aRoot, bRoot, baRoot, baaRoot, babRoot, b2Root, cRoot, dRoot, daRoot, dbRoot, dbaRoot, dbaaRoot],
-    [cols.FACET]: [aFacets, bFacets]
+    [cols.FACET]: [aFacets, bFacets],
+    [cols.IMPACT]: [aImpacts, bImpacts]
 };
-

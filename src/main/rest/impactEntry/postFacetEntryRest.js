@@ -1,5 +1,5 @@
 import {runraw} from "../../util/runraw";
-import {addFacetEntry, replaceAllFacetEntries} from "../../service/facetEntry/postFacetEntryService";
+import {addImpactEntry, replaceAllImpactEntries} from "../../service/impactEntry/postImpactEntryService";
 import {validGrandeur, validName} from "../../const/validations";
 import {GRANDEUR} from "../../const/paths";
 
@@ -10,14 +10,14 @@ const router = express.Router();
 
 module.exports = router;
 
-router.post('/api/facetEntry',
+router.post('/api/impactEntry',
     [
         validName,
         validGrandeur(GRANDEUR)
     ],
-    run(addFacetEntry)
+    run(addImpactEntry)
 );
 
-router.post('/api/facetEntry/all',
-    runraw(replaceAllFacetEntries)
+router.post('/api/impactEntry/all',
+    runraw(replaceAllImpactEntries)
 );

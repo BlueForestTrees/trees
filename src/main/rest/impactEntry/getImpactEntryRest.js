@@ -1,4 +1,4 @@
-import {getAllFacetEntries, getFacetEntryByName, searchFacetEntriesByNamepart} from "../../service/facetEntry/getFacetEntryService";
+import {getAllImpactEntries, getImpactEntryByName, searchImpactEntriesByNamepart} from "../../service/impactEntry/getImpactEntryService";
 
 const run = require('../../util/run');
 const router = require('express').Router();
@@ -6,17 +6,17 @@ const {check} = require('express-validator/check');
 
 module.exports = router;
 
-router.get('/api/facetEntry',
+router.get('/api/impactEntry',
     [
         check('q').exists()
     ],
-    run(({q}) => searchFacetEntriesByNamepart(q))
+    run(({q}) => searchImpactEntriesByNamepart(q))
 );
 
-router.get('/api/facetEntry/all',
-    run(getAllFacetEntries)
+router.get('/api/impactEntry/all',
+    run(getAllImpactEntries)
 );
 
-router.get('/api/facetEntry/:name',
-    run(({name}) => getFacetEntryByName(name))
+router.get('/api/impactEntry/:name',
+    run(({name}) => getImpactEntryByName(name))
 );

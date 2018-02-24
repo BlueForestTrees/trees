@@ -1,9 +1,9 @@
 import {cols} from "../../main/const/collections";
-import {withQuantity, withTrunkAuto} from "../testPlumbing";
+import {withQuantity, withTrunk, withTrunkAuto} from "../testPlumbing";
 import {co2eImpact} from "./impactEntries";
 
-export const papierVA = withTrunkAuto("papier version A", 100, "m2");
-const papierVB = withTrunkAuto("papier version B", 50, "m2");
+export const papierVA = withTrunk("papier version A","111111111111111111111111", 100, "m2");
+const papierVB = withTrunk("papier version B","222222222222222222222222", 50, "m2");
 
 const couchePE = withTrunkAuto("couche Plastique Polyéthylène", 1, "t");
 const couchePapier = withTrunkAuto("couche Papier", 1, "t");

@@ -15,7 +15,8 @@ papierAImpactTankSpec.res = {
         quantity: papierVA.quantity,
         items: [{
             _id: co2eImpact._id,
-            ...withQuantity(11696, "kg")
+            name: "équivalent CO2",
+            ...withQuantity(11695999.99999952, "g")
         }]
     }
 };

@@ -1,5 +1,5 @@
 import chai from 'chai';
-import {emptyGetImpactSpec, getImpactSpec} from "../../../expected/impact/testGetImpactData";
+import {emptyGetImpactSpec, getImpactSpec, getQuantifiedImpactSpec} from "../../../expected/impact/testGetImpactData";
 import {app} from "../../../../main";
 import {initDatabase} from "../../../testIntegDatabase";
 
@@ -10,13 +10,20 @@ describe('GET Impacts', function () {
     });
 
     it('return impacts', done => testGetImpactsWith(getImpactSpec, done));
+    it('return quantified impacts', done => testGetQuantifiedImpactsWith(getQuantifiedImpactSpec, done));
     it('return empty impacts', done => testGetImpactsWith(emptyGetImpactSpec, done));
 
 });
 
-const testGetImpactsWith = (spec, done) => {
+const testGetImpactsWith = (spec, done) =>
+    testImpactsWith(`/api/impact/${spec.req._id}`, spec, done);
+
+const testGetQuantifiedImpactsWith = (spec, done) =>
+    testImpactsWith(`/api/impact/${spec.req.qt}/${spec.req.unit}/${spec.req._id}`, spec, done);
+
+const testImpactsWith = (url, spec, done) => {
     chai.request(app)
-        .get(`/api/impact/${spec.req._id}`)
+        .get(url)
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.deep.equal(spec.res.body);

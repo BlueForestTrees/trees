@@ -76,6 +76,7 @@ const gateauImpact = {
 };
 export const bleImpacts = {
     _id: ble._id,
+    ...withQuantity(10, "kg"),
     items: [{
         _id: vitCImpactEntry._id,
         ...withQuantity(6, "mol")

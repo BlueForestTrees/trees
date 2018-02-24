@@ -140,6 +140,7 @@ const bFacets = {
 
 const aImpacts = {
     _id: a._id,
+    ...withQuantity(1,"kg"),
     items: [{
         _id: prixImpactEntry._id,
         ...withQuantity(100, "€")

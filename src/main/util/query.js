@@ -19,7 +19,7 @@ export const pushRoot = (id, quantity) => ({$push: {items: withIdQuantity(id, qu
 export const pullFromItems = itemIds => ({$pull: {items: withIdIn(itemIds)}});
 export const pushItem = ({_id, quantity}) => ({$push: {items: {_id: object(_id), quantity}}});
 
-export const emptyFacet = _id => ({_id, items: []});
+export const emptyGroup = _id => ({_id, items: []});
 
 
 export const removeQuantity = e => {

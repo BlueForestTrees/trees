@@ -3,7 +3,7 @@ import {replaceItem} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
 import {bleImpacts, farine} from "../../database/gateau";
 import {prixImpactEntry, vitBImpactEntry} from "../../database/impactEntries";
-import {withIdQuantity} from "../../testPlumbing";
+import {withIdQuantity, withQuantity} from "../../testPlumbing";
 
 export const firstImpactSpec = {};
 firstImpactSpec.req = {
@@ -45,6 +45,7 @@ thirdImpact.db = {
         colname: cols.IMPACT,
         doc: {
             _id: trunkId,
+            ...withQuantity(10,"kg"),
             items: [
                 ...bleImpacts.items,
                 withIdQuantity(prixImpactEntry._id, 144, "m2")

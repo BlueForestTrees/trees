@@ -1,4 +1,4 @@
-import {debug} from "../../test/scenario/integ/testIntegPlumbing";
+import {debug} from "./debug";
 
 const {validationResult} = require('express-validator/check');
 const {matchedData} = require('express-validator/filter');
@@ -24,9 +24,6 @@ function run(work) {
         Promise
             .resolve(result)
             .catch(err=>{
-
-                debug("catch", err);
-
                 return next(err);
             });
     };

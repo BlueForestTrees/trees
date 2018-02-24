@@ -24,9 +24,9 @@ getImpactSpec.res = {
 
 export const getQuantifiedImpactSpec = {};
 
-const resultItems = _.forEach(clon(bleImpacts.items), impact => {
-    impact.name = nameOfImpact(impact._id);
-    impact.quantity.qt *= 0.5;
+const resultItems = _.forEach(clon(bleImpacts.items), bleImpact => {
+    bleImpact.name = nameOfImpact(bleImpact._id);
+    bleImpact.quantity.qt *= 0.5;
 });
 
 getQuantifiedImpactSpec.req = {
@@ -58,3 +58,18 @@ emptyGetImpactSpec.res = {
 };
 
 
+export const emptyQuantifiedGetImpactSpec = {};
+
+emptyQuantifiedGetImpactSpec.req = {
+    _id: "5a6a03c03e77667641d21234",
+    qt: 15,
+    unit: "g"
+};
+
+emptyQuantifiedGetImpactSpec.res = {
+    body: {
+        _id: emptyQuantifiedGetImpactSpec.req._id,
+        ...withQuantity(15,"g"),
+        items: []
+    }
+};

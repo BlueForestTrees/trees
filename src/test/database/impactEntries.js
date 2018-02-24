@@ -25,7 +25,12 @@ export const vitEImpactEntry = {
     name: "Ivitamine E",
     grandeur: "Densité"
 };
+export const co2eImpact = {
+    _id: "5a6a03c03e77667641d2d2c9",
+    name: "équivalent CO2",
+    grandeur: "Masse"
+};
 
 export const database = {
-    [cols.IMPACT_ENTRY]: [vitDImpactEntry, vitEImpactEntry, vitCImpactEntry, vitBImpactEntry, prixImpactEntry]
+    [cols.IMPACT_ENTRY]: [vitDImpactEntry, vitEImpactEntry, co2eImpact, vitCImpactEntry, vitBImpactEntry, prixImpactEntry]
 };

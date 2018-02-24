@@ -47,12 +47,30 @@ getQuantifiedFacetSpec.res = {
 export const emptyGetFacetSpec = {};
 
 emptyGetFacetSpec.req = {
-    _id: farine._id
+    _id: "5a6a03c03e77667641d21234",
+    qt: 15,
+    unit: "g"
 };
 
 emptyGetFacetSpec.res = {
     body: {
         _id: emptyGetFacetSpec.req._id,
+        items: []
+    }
+};
+
+export const emptyQuantifiedGetFacetSpec = {};
+
+emptyQuantifiedGetFacetSpec.req = {
+    _id: "5a6a03c03e77667641d21234",
+    qt: 15,
+    unit: "g"
+};
+
+emptyQuantifiedGetFacetSpec.res = {
+    body: {
+        _id: emptyQuantifiedGetFacetSpec.req._id,
+        ...withQuantity(15,"g"),
         items: []
     }
 };

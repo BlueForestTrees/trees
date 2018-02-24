@@ -1,4 +1,4 @@
-import {appendNames} from "../service/trunk/getTrunkService";
+import {appendTrunkNames} from "../service/trunk/getTrunkService";
 import {readRoot} from "../service/root/rootQueries";
 import _ from 'lodash';
 import {applyQuantity, erreurSiUnitIncompatibles} from "../util/calculations";
@@ -24,7 +24,7 @@ const loadNamedRoots = _id =>
 
 const namiFy = async item => ({
     ..._.omit(item, "items"),
-    items: await appendNames(item.items)
+    items: await appendTrunkNames(item.items)
 });
 
 

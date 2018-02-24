@@ -1,13 +1,7 @@
 import _ from 'lodash'
-import {qtUnitCoef, sameGrandeur} from "../service/grandeur/grandeursService";
+import {qtUnitCoef, sameGrandeur, toBaseQuantity} from "../service/grandeur/grandeursService";
 import {GrandeurMismatchError} from "../exceptions/Errors";
 
-/**
- * exception si les quantités sont toutes deux fournies mais incompatibles
- * @param quantity
- * @param roots
- * @returns roots
- */
 export const erreurSiUnitIncompatibles = (quantity, roots) => {
     const leftUnit = quantity.unit;
     const rightUnit = roots.quantity && roots.quantity.unit;
@@ -31,4 +25,31 @@ export const applyQuantity = (quantity, target) => {
         _.map(target.items, item => _.omit(item, "quantity"));
 
     return target;
+};
+
+export const flatten = arr =>
+    arr.reduce((flat, toFlatten) =>
+        flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten), []);
+
+export const quantified = items => _.some(items, item => !_.isNil(item.quantity));
+
+export const summify = items => _(items)
+    .groupBy("_id")
+    .map(sum)
+    .value();
+
+export const sum = toSumItems => _(toSumItems)
+    .map(basifyQuantity)
+    .reduce(mergeItems);
+
+export const basifyQuantity = toBasifyItem => {
+    toBasifyItem.quantity && (toBasifyItem.quantity = toBaseQuantity(toBasifyItem.quantity));
+    return toBasifyItem;
+};
+
+export const mergeItems = (left, right) => {
+    return left.quantity && right.quantity ?
+        (left.quantity.qt += right.quantity.qt) && left
+        :
+        left.quantity ? left : right;
 };

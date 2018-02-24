@@ -7,7 +7,7 @@ import path from "path";
 import read from 'fs-readdir-recursive';
 import _ from 'lodash';
 import env from "../../config/env";
-import {debug} from "../test/scenario/integ/testIntegPlumbing";
+import {debug} from "./util/debug";
 
 export const app = express();
 
@@ -32,8 +32,6 @@ app.use(function (req, res, next) {
 });
 
 app.use(function (err, req, res, next) {
-
-
     //erreur de validation.
     if (err.mapped) {
         const mapped = err.mapped();

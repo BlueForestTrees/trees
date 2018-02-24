@@ -1,5 +1,5 @@
 import chai from 'chai';
-import {emptyGetImpactSpec, getImpactSpec, getQuantifiedImpactSpec} from "../../../expected/impact/testGetImpactData";
+import {emptyGetImpactSpec, emptyQuantifiedGetImpactSpec, getImpactSpec, getQuantifiedImpactSpec} from "../../../expected/impact/testGetImpactData";
 import {app} from "../../../../main";
 import {initDatabase} from "../../../testIntegDatabase";
 
@@ -12,6 +12,7 @@ describe('GET Impacts', function () {
     it('return impacts', done => testGetImpactsWith(getImpactSpec, done));
     it('return quantified impacts', done => testGetQuantifiedImpactsWith(getQuantifiedImpactSpec, done));
     it('return empty impacts', done => testGetImpactsWith(emptyGetImpactSpec, done));
+    it('return quantified empty impacts', done => testGetQuantifiedImpactsWith(emptyQuantifiedGetImpactSpec, done));
 
 });
 

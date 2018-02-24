@@ -1,23 +1,23 @@
-import {withNameIdQuantity, withQuantity} from "../testPlumbing";
+import {withTrunk, withQuantity} from "../testPlumbing";
 import {cols} from "../../main/const/collections";
 import {prixFacetEntry, vitBFacetEntry, vitEFacetEntry, vitCFacetEntry, vitDFacetEntry} from "./facetEntries";
-import {prixImpactEntry, vitBImpactEntry, vitCImpactEntry, vitDImpactEntry, vitEImpactEntry} from "./impactEntries";
+import {prixImpactEntry, vitBImpactEntry, vitCImpactEntry, vitDImpactEntry, co2eImpact} from "./impactEntries";
 
 //TRUNKS
-export const a = withNameIdQuantity("a", "aaaaaaaaaaaaaaaaaaaaaaaa", 1, "kg");
-const b = withNameIdQuantity("b", "bbbbbbbbbbbbbbbbbbbbbbbb", 1, "kg");
-const c = withNameIdQuantity("c", "cccccccccccccccccccccccc", 1, "kg");
-const d = withNameIdQuantity("d", "dddddddddddddddddddddddd", 1, "kg");
-const ba = withNameIdQuantity("ba", "babababababababababababa", 1, "kg");
-const b2 = withNameIdQuantity("b2", "b2b2b2b2b2b2b2b2b2b2b2b2", 1, "kg");
-export const da = withNameIdQuantity("da", "dadadadadadadadadadadada", 1, "kg");
-export const db = withNameIdQuantity("db", "dbdbdbdbdbdbdbdbdbdbdbdb", 1, "kg");
-export const e1 = withNameIdQuantity("eau", "e1e1e1e1e1e1e1e1e1e1e1e1", 1, "m3");
-export const e2 = withNameIdQuantity("elec", "e2e2e2e2e2e2e2e2e2e2e2e2", 1, "kg");
-const baa = withNameIdQuantity("baa", "baabaabaabaabaabaabaabaa", 1, "kg");
-const bab = withNameIdQuantity("bab", "babbabbabbabbabbabbabbab", 1, "kg");
-const dba = withNameIdQuantity("dba", "dbadbadbadbadbadbadbadba", 1, "kg");
-const dbaa = withNameIdQuantity("dbaa", "dbaadbaadbaadbaadbaadbaa", 1, "kg");
+export const a = withTrunk("a", "aaaaaaaaaaaaaaaaaaaaaaaa", 1, "kg");
+const b = withTrunk("b", "bbbbbbbbbbbbbbbbbbbbbbbb", 1, "kg");
+const c = withTrunk("c", "cccccccccccccccccccccccc", 1, "kg");
+const d = withTrunk("d", "dddddddddddddddddddddddd", 1, "kg");
+const ba = withTrunk("ba", "babababababababababababa", 1, "kg");
+const b2 = withTrunk("b2", "b2b2b2b2b2b2b2b2b2b2b2b2", 1, "kg");
+export const da = withTrunk("da", "dadadadadadadadadadadada", 1, "kg");
+export const db = withTrunk("db", "dbdbdbdbdbdbdbdbdbdbdbdb", 1, "kg");
+export const e1 = withTrunk("eau", "e1e1e1e1e1e1e1e1e1e1e1e1", 1, "m3");
+export const e2 = withTrunk("elec", "e2e2e2e2e2e2e2e2e2e2e2e2", 1, "kg");
+const baa = withTrunk("baa", "baabaabaabaabaabaabaabaa", 1, "kg");
+const bab = withTrunk("bab", "babbabbabbabbabbabbabbab", 1, "kg");
+const dba = withTrunk("dba", "dbadbadbadbadbadbadbadba", 1, "kg");
+const dbaa = withTrunk("dbaa", "dbaadbaadbaadbaadbaadbaa", 1, "kg");
 
 //ROOTS
 const aRoot = {
@@ -151,7 +151,7 @@ const aImpacts = {
         _id: vitBImpactEntry._id,
         ...withQuantity(100, "mmol")
     }, {
-        _id: vitEImpactEntry._id,
+        _id: co2eImpact._id,
         ...withQuantity(120, "mmol")
     }]
 };

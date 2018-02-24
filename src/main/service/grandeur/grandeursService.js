@@ -39,8 +39,8 @@ const _grandeurs = {
         _unit("an", "année", 60 * 60 * 24 * 30 * 355 * 12)
     ],
     "Masse": [
-        _unit("g", "gramme", 1),
         _unit("mg", "milligramme", 0.001),
+        _unit("g", "gramme", 1),
         _unit("kg", "kilogramme", 1000),
         _unit("t", "tonne", 1000000)
     ],

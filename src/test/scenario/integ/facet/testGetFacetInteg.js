@@ -1,5 +1,5 @@
 import chai from 'chai';
-import {emptyGetFacetSpec, getFacetSpec, getQuantifiedFacetSpec} from "../../../expected/facet/testGetFacetData";
+import {emptyGetFacetSpec, emptyQuantifiedGetFacetSpec, getFacetSpec, getQuantifiedFacetSpec} from "../../../expected/facet/testGetFacetData";
 import {app} from "../../../../main";
 import {initDatabase} from "../../../testIntegDatabase";
 
@@ -12,6 +12,7 @@ describe('GET Facets', function () {
     it('return facets', done => testGetFacetsWith(getFacetSpec, done));
     it('return quantified facets', done => testGetQuantifiedFacetsWith(getQuantifiedFacetSpec, done));
     it('return empty facets', done => testGetFacetsWith(emptyGetFacetSpec, done));
+    it('return quantified empty facets', done => testGetQuantifiedFacetsWith(emptyQuantifiedGetFacetSpec, done));
 
 });
 

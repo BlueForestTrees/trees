@@ -21,5 +21,5 @@ router.get('/api/impact/:qt/:unit/:_id',
         validQt(QT),
         validUnit(UNIT)
     ],
-    run(({qt, unit, _id}) => loadQuantifiedImpacts(qt, unit, _id))
+    run(({qt, unit, _id}) => loadQuantifiedImpacts({qt, unit}, _id))
 );

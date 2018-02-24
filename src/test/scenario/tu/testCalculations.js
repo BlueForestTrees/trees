@@ -1,12 +1,19 @@
 import {match, mock} from 'sinon';
 import chai from 'chai';
-import {basifyQuantity, mergeItems, sum, summify} from "../../../main/topService/getTankTopService";
 import {withIdQuantity, withQuantity} from "../../testPlumbing";
+import {basifyQuantity, mergeItems, quantified, sum, summify} from "../../../main/util/calculations";
+import {withId} from "../../../main/util/query";
 
 chai.should();
 
 describe('Tank', function () {
 
+    describe('long tests', function () {
+        it('add 2 longs', function () {
+            console.log(0.1 * 0.2);
+
+        });
+    });
     describe('sum qt', function () {
         it('10fake + 6otherfake = 16fake', function () {
             mergeItems(withQuantity(10, "fakeunit"), withQuantity(6, "anotherfakeunit")).should.deep.equal(withQuantity(16, "fakeunit"));
@@ -72,6 +79,15 @@ describe('Tank', function () {
                 withIdQuantity("A", 1500, "g"),
                 withIdQuantity("B", 8, "count")
             ]);
+        });
+    });
+
+    describe('test quantified', function () {
+        it('return false', function () {
+            quantified([withId("aaaaaaaaaaaaaaaaaaaaaaaa")]).should.be.false;
+        });
+        it('return true', function () {
+            quantified([withIdQuantity("aaaaaaaaaaaaaaaaaaaaaaaa",3,"kg")]).should.be.true;
         });
     });
 

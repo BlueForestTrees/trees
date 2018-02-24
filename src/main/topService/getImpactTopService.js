@@ -9,6 +9,18 @@ export const loadImpact = _id =>
         .then(populateImpactNames)
         .then(removeQuantity);
 
+export const loadQuantifiedImpacts = (quantity, _id) => {
+    return getImpact(_id)
+        .then(populateImpactNames)
+        .then(impacts => applyQuantity(quantity, impacts));
+};
+
+export const loadDenseQuantifiedImpacts = ({quantity, _id}) => {
+    return getImpact(_id)
+        .then(impact => applyQuantity(quantity, impact))
+        .then(impact => impact.items);
+};
+
 const populateImpactNames = async impact => {
     const names = await peekImpactEntries(_.map(impact.items, "_id"));
     _.forEach(names, e => {
@@ -16,8 +28,3 @@ const populateImpactNames = async impact => {
     });
     return impact;
 };
-
-export const loadQuantifiedImpacts = (qt, unit, _id) =>
-    getImpact(_id)
-        .then(populateImpactNames)
-        .then(impacts => applyQuantity({qt, unit}, impacts));

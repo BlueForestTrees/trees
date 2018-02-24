@@ -30,7 +30,7 @@ export const search = search => trunks()
 export const all = () => trunks().find({}).toArray();
 
 
-export const appendNames = items => Promise.all(
+export const appendTrunkNames = items => Promise.all(
     _.map(items, item => peekTrunk(item._id)
         .then(t => ({...item, name: (t && t.name) || "inconnu"}))
     )

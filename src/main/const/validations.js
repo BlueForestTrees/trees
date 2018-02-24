@@ -25,10 +25,7 @@ export const rootIdIsNotTrunkId = check(ROOT_ID, IS_NOT_TRUNK_ID).custom((root, 
 export const optionalValidName = check(NAME).optional().matches(/^.+/);
 export const validName = check(NAME).isLength({min:2}).matches(/^.+/);
 
-export const optionalUnit = field => check(field, IS_VALID_UNIT).optional().exists().isIn(shortnames);
-export const optionalDecimal = field => check(field, IS_DECIMAL).optional().exists().isDecimal();
 export const present = (...fields) => _.map(fields,field=>check(field, SHOULD_BE_DEFINED).exists());
-export const absent = (...fields) =>  _.map(fields,field=>check(field, SHOULD_NOT_BE_DEFINED).not().exists());
 export const optionalValidUnit = field => check(field, IS_VALID_UNIT).optional().exists().isIn(shortnames);
 export const optionalValidQt = field => check(field, IS_DECIMAL).optional().exists().isDecimal().toInt();
 export const validUnit = field => check(field, IS_VALID_UNIT).optional().exists().isIn(shortnames);

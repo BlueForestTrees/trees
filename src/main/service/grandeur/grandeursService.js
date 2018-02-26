@@ -1,4 +1,5 @@
 const _ = require('lodash');
+import Fraction from "fraction.js";
 
 const _unit = (shortname, name, coef) =>
     ({
@@ -91,14 +92,16 @@ export const sameGrandeur = (leftShortname, rightShortname) => {
  * @returns le coef pour passer d'une unité à l'autre. undefined si les unités ne sont pas compatibles.
  */
 export const unitCoef = (leftShortname, rightShortname) => sameGrandeur(leftShortname, rightShortname)
-    ? unit(leftShortname).coef / unit(rightShortname).coef
+    ? Fraction(unit(leftShortname).coef).div(unit(rightShortname).coef).valueOf()
     : undefined;
 
 /**
  * @returns le coef pour passer d'une quantité à l'autre. undefined si les unités ne sont pas compatibles.
  */
 export const qtUnitCoef = (leftQuantity, rightQuantity) => leftQuantity && rightQuantity
-    ? leftQuantity.qt / rightQuantity.qt * unitCoef(leftQuantity.unit, rightQuantity.unit)
+    ? Fraction(leftQuantity.qt)
+        .div(rightQuantity.qt)
+        .mul(unitCoef(leftQuantity.unit, rightQuantity.unit)).valueOf()
     : undefined;
 
 /**

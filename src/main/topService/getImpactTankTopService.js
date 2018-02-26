@@ -3,22 +3,43 @@ import _ from 'lodash';
 import {loadDenseQuantifiedImpacts} from "./getImpactTopService";
 import {flatten, summify} from "../util/calculations";
 import {peekImpactEntries} from "../service/impactEntry/getImpactEntryService";
+import {debug} from "../util/debug";
 
-export const getImpactTank = (qt, unit, _id) =>
-    readRootTree(qt, unit, _id)
-        .then(async tree => ({
-            _id,
-            quantity: {qt, unit},
-            items: summify(flatten(await Promise.all(_.map(listify(tree), loadDenseQuantifiedImpacts))))
-        }))
-        .then(populateImpactNames);
+export const getImpactTank = async (qt, unit, _id) => {
+    const tree = await readRootTree(qt, unit, _id);
+    debug({tree});
+
+    const treeNodes = listify(tree);
+    debug({treeNodes});
+
+    const impacts = await Promise.all(_.map(treeNodes, loadDenseQuantifiedImpacts));
+    debug({impacts});
+
+    const flattenItems = flatten(impacts);
+    debug({flattenItems});
+
+    const summedItems = summify(flattenItems);
+    debug({summedItems});
+
+    const tank = {
+        _id,
+        quantity: {qt, unit},
+        items: summedItems
+    };
+
+    debug({tank});
+
+    await populateImpactNames(tank);
+
+    return tank;
+};
 
 const listify = tree => {
     const browser = [tree];
     let i = 0;
     for (i; i < browser.length; i++) {
         const item = browser[i];
-        if(item.items) {
+        if (item.items) {
             browser.push(...item.items);
         }
     }

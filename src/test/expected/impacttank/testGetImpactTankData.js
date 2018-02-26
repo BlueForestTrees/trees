@@ -16,7 +16,7 @@ papierAImpactTankSpec.res = {
         items: [{
             _id: co2eImpact._id,
             name: "équivalent CO2",
-            ...withQuantity(11695999.99999952, "g")
+            ...withQuantity(11696000, "g")
         }]
     }
 };

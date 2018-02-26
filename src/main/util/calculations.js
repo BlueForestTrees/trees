@@ -1,6 +1,9 @@
 import _ from 'lodash'
 import {qtUnitCoef, sameGrandeur, toBaseQuantity} from "../service/grandeur/grandeursService";
 import {GrandeurMismatchError} from "../exceptions/Errors";
+import {debug} from "./debug";
+import Fraction from "fraction.js";
+
 
 export const erreurSiUnitIncompatibles = (quantity, roots) => {
     const leftUnit = quantity.unit;
@@ -17,12 +20,16 @@ export const erreurSiUnitIncompatibles = (quantity, roots) => {
 
 export const applyQuantity = (quantity, target) => {
     const coef = qtUnitCoef(quantity, target.quantity);
-    target.quantity = quantity;
+
+    debug({quantity, target, coef});
 
     target.items = coef ?
-        _.map(target.items, item => item.quantity ? (item.quantity.qt *= coef) && item : _.omit(item, "quantity"))
+        _.map(target.items, item => item.quantity ? (item.quantity.qt = Fraction(item.quantity.qt).mul(coef).valueOf()) && item : _.omit(item, "quantity"))
         :
         _.map(target.items, item => _.omit(item, "quantity"));
+
+
+    target.quantity = quantity;
 
     return target;
 };

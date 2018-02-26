@@ -7,27 +7,15 @@ import {debug} from "../util/debug";
 
 export const getImpactTank = async (qt, unit, _id) => {
     const tree = await readRootTree(qt, unit, _id);
-    debug({tree});
-
     const treeNodes = listify(tree);
-    debug({treeNodes});
-
     const impacts = await Promise.all(_.map(treeNodes, loadDenseQuantifiedImpacts));
-    debug({impacts});
-
     const flattenItems = flatten(impacts);
-    debug({flattenItems});
-
     const summedItems = summify(flattenItems);
-    debug({summedItems});
-
     const tank = {
         _id,
         quantity: {qt, unit},
         items: summedItems
     };
-
-    debug({tank});
 
     await populateImpactNames(tank);
 

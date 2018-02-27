@@ -6,11 +6,11 @@ const router = require('express').Router();
 
 module.exports = router;
 
-router.post('/api/link',
-    [
-        existingTrunkId,
-        existingRootId,
-        rootIdIsNotTrunkId
-    ],
-    run(insertLink)
-);
+// router.post('/api/link',
+//     [
+//         existingTrunkId,
+//         existingRootId,
+//         rootIdIsNotTrunkId
+//     ],
+//     run(insertLink)
+// );

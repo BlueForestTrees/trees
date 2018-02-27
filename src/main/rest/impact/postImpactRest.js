@@ -1,6 +1,6 @@
 import {validTreeId} from "../../const/validations";
 import {setImpact} from "../../service/impact/postImpactService";
-import {shortnames} from "../../service/grandeur/grandeursService";
+import {shortnames} from "../../service/unit/unitService";
 
 const run = require('../../util/run');
 const _ = require('lodash');

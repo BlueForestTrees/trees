@@ -1,6 +1,6 @@
 import {existingId} from "../../const/validations";
 import {getTrunk, searchOrAll} from "../../service/trunk/getTrunkService";
-import {grandeurs} from "../../service/grandeur/grandeursService";
+import {grandeurs} from "../../service/unit/unitService";
 
 const run = require('../../util/run');
 const router = require('express').Router();

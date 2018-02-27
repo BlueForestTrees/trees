@@ -1,6 +1,6 @@
 import {validTreeId} from "../../const/validations";
 import {setFacet} from "../../service/facet/postFacetService";
-import {shortnames} from "../../service/grandeur/grandeursService";
+import {shortnames} from "../../service/unit/unitService";
 
 const run = require('../../util/run');
 const _ = require('lodash');

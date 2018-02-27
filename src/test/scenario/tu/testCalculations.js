@@ -1,17 +1,22 @@
 import {match, mock} from 'sinon';
 import chai from 'chai';
 import {withIdQuantity, withQuantity} from "../../testPlumbing";
-import {basifyQuantity, mergeItems, quantified, sum, summify} from "../../../main/util/calculations";
+import {basifyQuantity, bestRound, mergeItems, quantified, sum, summify} from "../../../main/util/calculations";
 import {withId} from "../../../main/util/query";
+import Fraction from "fraction.js";
 
 chai.should();
 
 describe('Tank', function () {
 
     describe('long tests', function () {
-        it('add 2 longs', function () {
-            console.log(0.1 * 0.2);
+        it('multiply', function () {
+            (Fraction(1).mul(410.144927536).mul(2.07)).valueOf().should.equal(849);
+            (0.23923445 * 3600 * 1000).should.equal(861244.02);
 
+            (Fraction(1, 2).mul(Fraction(1, 2))).valueOf().should.equal(0.25);
+
+            Fraction(0.1).mul(0.2).valueOf().should.equal(0.02);
         });
     });
     describe('sum qt', function () {
@@ -87,7 +92,28 @@ describe('Tank', function () {
             quantified([withId("aaaaaaaaaaaaaaaaaaaaaaaa")]).should.be.false;
         });
         it('return true', function () {
-            quantified([withIdQuantity("aaaaaaaaaaaaaaaaaaaaaaaa",3,"kg")]).should.be.true;
+            quantified([withIdQuantity("aaaaaaaaaaaaaaaaaaaaaaaa", 3, "kg")]).should.be.true;
+        });
+    });
+
+    describe('best round', function () {
+        it('999 999', function () {
+            bestRound(999).should.equal(999);
+        });
+        it('999.1 999', function () {
+            bestRound(999.1).should.equal(999);
+        });
+        it('999.6 1000', function () {
+            bestRound(999.6).should.equal(1000);
+        });
+        it('99.61 99.9', function () {
+            bestRound(99.91).should.equal(99.9);
+        });
+        it('9.991 9.99', function () {
+            bestRound(9.991).should.equal(9.99);
+        });
+        it('0.9991 0.999', function () {
+            bestRound(0.9991).should.equal(0.999);
         });
     });
 

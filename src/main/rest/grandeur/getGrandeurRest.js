@@ -1,4 +1,4 @@
-import {grandeurs} from "../../service/grandeur/grandeursService";
+import {grandeurs} from "../../service/unit/unitService";
 
 const express = require('express');
 const router = express.Router();

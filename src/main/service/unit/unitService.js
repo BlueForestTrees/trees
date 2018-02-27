@@ -1,3 +1,6 @@
+import Fraction from "fraction.js";
+import {bestRound} from "../../util/calculations";
+
 const _ = require('lodash');
 
 const _unit = (shortname, name, coef) =>
@@ -9,11 +12,11 @@ const _unit = (shortname, name, coef) =>
 
 const _grandeurs = {
     "Energie": [
-        _unit("kwh", "Watt-Heure", 0.23923445 * 3600 * 1000),
-        _unit("wh", "Watt-Heure", 0.23923445 * 3600),
-        _unit("ws", "Watt-Seconde", 0.23923445),
         _unit("J", "joule", 0.23923445),
+        _unit("ws", "Watt-Seconde", 0.23923445),
         _unit("cal", "calorie", 1),
+        _unit("wh", "Watt-Heure", 0.23923445 * 3600),
+        _unit("kwh", "Watt-Heure", 0.23923445 * 3600 * 1000),
         _unit("kcal", "kilo-calorie", 1000),
         _unit("Mcal", "mega-calorie", 1000 * 1000)
     ],
@@ -42,7 +45,8 @@ const _grandeurs = {
         _unit("mg", "milligramme", 0.001),
         _unit("g", "gramme", 1),
         _unit("kg", "kilogramme", 1000),
-        _unit("t", "tonne", 1000000)
+        _unit("t", "tonne", 1000000),
+        _unit("Mt", "tonne", 1000000000)
     ],
     "Surface": [
         _unit("m2", "mètre-carré", 1),
@@ -62,10 +66,12 @@ const _grandeurs = {
 //apply grandeur field on all units.
 _.forEach(_grandeurs, (units, grandeurName) => {
     _.forEach(units, unit => unit.grandeur = grandeurName);
+    _grandeurs[grandeurName] = _.sortBy(units, 'coef');
 });
 
 export const units = _.chain(_grandeurs).values().flatten().keyBy('shortname').value();
 export const grandeurs = _grandeurs;
+
 export const grandeursKeys = Object.keys(_grandeurs);
 export const shortnames = Object.keys(units);
 
@@ -91,14 +97,16 @@ export const sameGrandeur = (leftShortname, rightShortname) => {
  * @returns le coef pour passer d'une unité à l'autre. undefined si les unités ne sont pas compatibles.
  */
 export const unitCoef = (leftShortname, rightShortname) => sameGrandeur(leftShortname, rightShortname)
-    ? unit(leftShortname).coef / unit(rightShortname).coef
+    ? Fraction(unit(leftShortname).coef).div(unit(rightShortname).coef).valueOf()
     : undefined;
 
 /**
  * @returns le coef pour passer d'une quantité à l'autre. undefined si les unités ne sont pas compatibles.
  */
 export const qtUnitCoef = (leftQuantity, rightQuantity) => leftQuantity && rightQuantity
-    ? leftQuantity.qt / rightQuantity.qt * unitCoef(leftQuantity.unit, rightQuantity.unit)
+    ? Fraction(leftQuantity.qt)
+        .div(rightQuantity.qt)
+        .mul(unitCoef(leftQuantity.unit, rightQuantity.unit)).valueOf()
     : undefined;
 
 /**
@@ -111,4 +119,28 @@ export const toBaseQuantity = quantity => {
         qt: quantity.qt * coef(quantity.unit),
         unit: base(grandeur(quantity.unit)).shortname
     };
+};
+
+//CLONE
+const unitsFromShortname = shortname => grandeurs[unit(shortname).grandeur];
+export const bestQuantity = (quantity) => {
+    const units = unitsFromShortname(quantity.unit);
+    const currentUnit = unit(quantity.unit);
+    const currentUnitIndex = _.findIndex(units, {shortname: quantity.unit});
+    if (currentUnitIndex < units.length - 1) {
+        const upperUnit = units[currentUnitIndex + 1];
+        const uppingCoef = upperUnit.coef / currentUnit.coef;
+        if (quantity.qt >= uppingCoef) {
+            return bestQuantity({qt: quantity.qt / uppingCoef, unit: upperUnit.shortname});
+        }
+    }
+    if (currentUnitIndex > 0) {
+        const lowerUnit = units[currentUnitIndex - 1];
+        const downingCoef = lowerUnit.coef / currentUnit.coef;
+        if (quantity.qt <= downingCoef) {
+            return bestQuantity({qt: quantity.qt / downingCoef, unit: lowerUnit.shortname});
+        }
+    }
+
+    return {qt: bestRound(quantity.qt), unit: quantity.unit};
 };

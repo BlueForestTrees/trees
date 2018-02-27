@@ -2,7 +2,7 @@ import {cols} from "../../const/collections";
 import {col} from "../../repo";
 import {GrandeurMismatchError, UnitInvalidError} from "../../exceptions/Errors";
 import {pullFromRoots, pushRoot, upsert, withId} from "../../util/query";
-import {qtUnitCoef} from "../grandeur/grandeursService";
+import {qtUnitCoef} from "../unit/unitService";
 
 const roots = () => col(cols.ROOT);
 

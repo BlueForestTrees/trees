@@ -1,6 +1,6 @@
 import {clon} from "../../util/testUtil";
 import _ from 'lodash';
-import {bleFacets, farine} from "../../database/gateau";
+import {bleFacets, farineTrunk} from "../../database/gateau";
 import {nameOfFacet} from "../../testIntegDatabase";
 import {withQuantity} from "../../testPlumbing";
 

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import {cols} from "../../../main/const/collections";
-import {gateau} from "../../database/gateau";
-import {a} from "../../database/lettres";
+import {gateauTrunk} from "../../database/gateau";
+import {aTrunk} from "../../database/lettres";
 
 const lowerizeName = name => name.toLowerCase();
 const name = "RATtatouille1664";
@@ -31,20 +31,20 @@ export const cloneTrunkSpec = {};
 
 cloneTrunkSpec.req = {
     body: {
-        sourceId: a._id
+        sourceId: aTrunk._id
     }
 };
 cloneTrunkSpec.res = {
-    body: _id => ({_id, name: clonedName(_id, a)})
+    body: _id => ({_id, name: clonedName(_id, aTrunk)})
 };
 cloneTrunkSpec.db = {
     expected: _id => ({
         colname: cols.TRUNK,
         doc: {
-            ...(_.omit(a, ['_id', 'name', 'name_lower'])),
+            ...(_.omit(aTrunk, ['_id', 'name', 'name_lower'])),
             _id,
-            name: clonedName(_id, a),
-            name_lower: lowerizeName(clonedName(_id, a))
+            name: clonedName(_id, aTrunk),
+            name_lower: lowerizeName(clonedName(_id, aTrunk))
         }
     })
 };

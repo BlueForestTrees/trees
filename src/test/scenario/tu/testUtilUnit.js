@@ -4,7 +4,7 @@ import {initTools} from "../../testPlumbing";
 import mongo from 'mongodb';
 import {addObjects} from "../../../main/util/addObjectID";
 import {cols} from "../../../main/const/collections";
-import {gateau} from "../../database/gateau";
+import {gateauTrunk} from "../../database/gateau";
 import {initialDB} from "../../testIntegDatabase";
 
 describe('Unit', function () {
@@ -24,7 +24,7 @@ describe('Unit', function () {
         });
 
         it('seul objectInitialDB doit contenir des mongoID', function () {
-            expect(gateau._id).to.equal("5a6a03c03e77667641d2d2c3");
+            expect(gateauTrunk._id).to.equal("5a6a03c03e77667641d2d2c3");
         });
     });
 

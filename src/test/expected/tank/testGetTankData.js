@@ -1,22 +1,22 @@
 import {removeItemQuantity, withQuantity} from "../../testPlumbing";
-import {a, da, db, dRoot, e1, e2} from "../../database/lettres";
+import {aTrunk, daTrunk, dbTrunk, dRoot, e1Trunk, e2Trunk} from "../../database/lettres";
 import {cols} from "../../../main/const/collections";
 import {clon} from "../../util/testUtil";
-import {lait} from "../../database/gateau";
+import {laitTrunk} from "../../database/gateau";
 
 export const lettreTankSpec = {};
 lettreTankSpec.req = {
-    _id: a._id,
+    _id: aTrunk._id,
     ...withQuantity(500, "g")
 };
 
 lettreTankSpec.res = {
     body: {
-        _id: a._id,
+        _id: aTrunk._id,
         ...withQuantity(500, "g"),
         items: [
             {
-                "_id": e2._id,
+                "_id": e2Trunk._id,
                 "name": "elec",
                 "quantity": {
                     "qt": 2500,
@@ -24,7 +24,7 @@ lettreTankSpec.res = {
                 }
             },
             {
-                "_id": e1._id,
+                "_id": e1Trunk._id,
                 "name": "eau",
                 "quantity": {
                     "qt": 0.255,
@@ -37,24 +37,24 @@ lettreTankSpec.res = {
 
 export const avecUneQtManquanteTankSpec = {};
 avecUneQtManquanteTankSpec.req = {
-    _id: a._id,
+    _id: aTrunk._id,
     ...withQuantity(500, "g")
 };
 avecUneQtManquanteTankSpec.db = {
     preChange: {
         colname: cols.ROOT,
         doc: {
-            ...removeItemQuantity(clon(dRoot), da._id)
+            ...removeItemQuantity(clon(dRoot), daTrunk._id)
         }
     }
 };
 avecUneQtManquanteTankSpec.res = {
     body: {
-        _id: a._id,
+        _id: aTrunk._id,
         ...withQuantity(500, "g"),
         items: [
             {
-                "_id": e2._id,
+                "_id": e2Trunk._id,
                 "name": "elec",
                 "quantity": {
                     "qt": 2000,
@@ -62,11 +62,11 @@ avecUneQtManquanteTankSpec.res = {
                 }
             },
             {
-                _id: da._id,
+                _id: daTrunk._id,
                 name: "da"
             },
             {
-                "_id": e1._id,
+                "_id": e1Trunk._id,
                 "name": "eau",
                 "quantity": {
                     "qt": 0.255,
@@ -79,24 +79,24 @@ avecUneQtManquanteTankSpec.res = {
 
 export const avecUneQtManquanteTankSpec2 = {};
 avecUneQtManquanteTankSpec2.req = {
-    _id: a._id,
+    _id: aTrunk._id,
     ...withQuantity(500, "g")
 };
 avecUneQtManquanteTankSpec2.db = {
     preChange: {
         colname: cols.ROOT,
         doc: {
-            ...removeItemQuantity(clon(dRoot), db._id)
+            ...removeItemQuantity(clon(dRoot), dbTrunk._id)
         }
     }
 };
 avecUneQtManquanteTankSpec2.res = {
     body: {
-        _id: a._id,
+        _id: aTrunk._id,
         ...withQuantity(500, "g"),
         items: [
             {
-                "_id": e2._id,
+                "_id": e2Trunk._id,
                 "name": "elec",
                 "quantity": {
                     "qt": 1500,
@@ -104,11 +104,11 @@ avecUneQtManquanteTankSpec2.res = {
                 }
             },
             {
-                _id: db._id,
+                _id: dbTrunk._id,
                 name: "db"
             },
             {
-                "_id": e1._id,
+                "_id": e1Trunk._id,
                 "name": "eau",
                 "quantity": {
                     "qt": 0.255,
@@ -121,12 +121,12 @@ avecUneQtManquanteTankSpec2.res = {
 
 export const sansTank = {};
 sansTank.req = {
-    _id: lait._id,
+    _id: laitTrunk._id,
     ...withQuantity(3, "L")
 };
 sansTank.res = {
     body: {
-        _id: lait._id,
+        _id: laitTrunk._id,
         ...withQuantity(3, "L"),
         items: []
     }

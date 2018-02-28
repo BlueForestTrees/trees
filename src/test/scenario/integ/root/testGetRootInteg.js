@@ -8,7 +8,7 @@ import {
     getRootsSpec,
     lettreGetRootSpec,
     lettreNoDaQtGetRootSpec,
-    otherUnitGetRootSpec,
+    otherUnitGetRootSpec, papierAGetRootSpec,
     sameQtGetRootSpec,
     skate10GetRootSpec
 } from "../../../expected/root/testGetRootData";
@@ -80,6 +80,8 @@ describe('GET Root', function () {
     it('return a little tree', run(() => getRootTree(gateauRootTreeSpec)));
 
     it('return the letters tree', run(() => getRootTree(lettreGetRootSpec)));
+
+    it('return the papier tree', run(() => getRootTree(papierAGetRootSpec)));
 
     it('return the letters tree with no da quantity', run2(getRootTree,lettreNoDaQtGetRootSpec));
 

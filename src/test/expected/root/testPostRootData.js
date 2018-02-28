@@ -1,7 +1,7 @@
 import {oneModifiedResponse, oneUpsertedResponse} from "../testCommonData";
 import {cols} from "../../../main/const/collections";
 import {biere, capsule} from "../../database/biere";
-import {ble, farine} from "../../database/gateau";
+import {bleTrunk, farineTrunk} from "../../database/gateau";
 
 const biereId = biere._id;
 const capsuleId = capsule._id;
@@ -39,24 +39,24 @@ export const existingIdsSpec = {};
 existingIdsSpec.req = {
     body: {
         trunk: {
-            _id: ble._id
+            _id: bleTrunk._id
         },
         root: {
-            _id: farine._id
+            _id: farineTrunk._id
         }
     }
 };
 existingIdsSpec.res = {
-    body: oneUpsertedResponse(ble._id)
+    body: oneUpsertedResponse(bleTrunk._id)
 };
 existingIdsSpec.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
-            _id: ble._id,
+            _id: bleTrunk._id,
             items: [
                 {
-                    _id: farine._id
+                    _id: farineTrunk._id
                 }
             ],
 
@@ -69,10 +69,10 @@ export const bleToFarineAddSpec = {};
 bleToFarineAddSpec.req = {
     body: {
         trunk: {
-            _id: farine._id
+            _id: farineTrunk._id
         },
         root: {
-            _id: ble._id
+            _id: bleTrunk._id
         }
     }
 };
@@ -83,10 +83,10 @@ bleToFarineAddSpec.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
-            _id: farine._id,
+            _id: farineTrunk._id,
             items: [
                 {
-                    "_id": ble._id,
+                    "_id": bleTrunk._id,
                 }
             ],
 

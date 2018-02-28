@@ -1,6 +1,6 @@
 import {clon} from "../../util/testUtil";
 import _ from 'lodash';
-import {bleImpacts, farine} from "../../database/gateau";
+import {bleImpacts, farineTrunk} from "../../database/gateau";
 import {nameOfImpact} from "../../testIntegDatabase";
 import {withQuantity} from "../../testPlumbing";
 
@@ -47,7 +47,7 @@ getQuantifiedImpactSpec.res = {
 export const emptyGetImpactSpec = {};
 
 emptyGetImpactSpec.req = {
-    _id: farine._id
+    _id: farineTrunk._id
 };
 
 emptyGetImpactSpec.res = {

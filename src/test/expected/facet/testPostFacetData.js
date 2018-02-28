@@ -1,25 +1,25 @@
 import {oneModifiedResponse, oneUpsertedResponse} from "../testCommonData";
 import {replaceItem} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
-import {bleFacets, farine} from "../../database/gateau";
+import {bleFacets, farineTrunk} from "../../database/gateau";
 import {prixFacetEntry, vitBFacetEntry} from "../../database/facetEntries";
 import {withItem, withQuantity} from "../../testPlumbing";
 
 export const firstFacetSpec = {};
 firstFacetSpec.req = {
-    _id: farine._id,
+    _id: farineTrunk._id,
     body: {
         facet: withItem(prixFacetEntry._id, 144, "m2")
     }
 };
 firstFacetSpec.res = {
-    body: oneUpsertedResponse(farine._id)
+    body: oneUpsertedResponse(farineTrunk._id)
 };
 firstFacetSpec.db = {
     expected: {
         colname: cols.FACET,
         doc: {
-            _id: farine._id,
+            _id: farineTrunk._id,
             items: [
                 withItem(prixFacetEntry._id, 144, "m2")
             ],

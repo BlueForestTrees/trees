@@ -1,9 +1,9 @@
 import {cols} from "../../../main/const/collections";
-import {gateau} from "../../database/gateau";
+import {gateauTrunk} from "../../database/gateau";
 
 export const trunkDeletionSpec = {};
 
-const _id = gateau._id;
+const _id = gateauTrunk._id;
 
 trunkDeletionSpec.req = {
     _id

@@ -2,12 +2,12 @@ import {oneModifiedResponse} from "../testCommonData";
 import {clon} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
 import _ from 'lodash';
-import {ble, farine, gateau, gateauRoot, lait} from "../../database/gateau";
+import {bleTrunk, farineTrunk, gateauTrunk, gateauRoot, laitTrunk} from "../../database/gateau";
 import {setQuantity} from "../../testPlumbing";
 
 export const existingIdsNewQtsSpec = {};
-const bleId = ble._id;
-const farineId = farine._id;
+const bleId = bleTrunk._id;
+const farineId = farineTrunk._id;
 existingIdsNewQtsSpec.req = {
     body: {
         trunk: {
@@ -37,7 +37,7 @@ existingIdsNewQtsSpec.db = {
             quantity: existingIdsNewQtsSpec.req.body.trunk.quantity,
             items: [
                 {
-                    "_id": farine._id,
+                    "_id": farineTrunk._id,
                     quantity: existingIdsNewQtsSpec.req.body.root.quantity,
                 }
             ],
@@ -54,14 +54,14 @@ setQuantity(updatedRoots[1], 60);
 existingIdsAndQtsSpec.req = {
     body: {
         trunk: {
-            _id: gateau._id,
+            _id: gateauTrunk._id,
             quantity: {
                 unit: "g",
                 qt: 250
             }
         },
         root: {
-            _id: lait._id,
+            _id: laitTrunk._id,
             quantity: {
                 unit: "L",
                 qt: 30
@@ -89,14 +89,14 @@ setQuantity(updatedRootsWithDifferentUnit[1], 250, "g");
 existingsAndUnitChangeSpec.req = {
     body: {
         trunk: {
-            _id: gateau._id,
+            _id: gateauTrunk._id,
             quantity: {
                 unit: "kg",
                 qt: 1
             }
         },
         root: {
-            _id: lait._id,
+            _id: laitTrunk._id,
             quantity: {
                 unit: "g",
                 qt: 500

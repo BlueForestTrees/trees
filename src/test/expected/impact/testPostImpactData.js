@@ -1,25 +1,25 @@
 import {oneModifiedResponse, oneUpsertedResponse} from "../testCommonData";
 import {replaceItem} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
-import {bleImpacts, farine} from "../../database/gateau";
+import {bleImpacts, farineTrunk} from "../../database/gateau";
 import {prixImpactEntry, vitBImpactEntry} from "../../database/impactEntries";
 import {withItem, withQuantity} from "../../testPlumbing";
 
 export const firstImpactSpec = {};
 firstImpactSpec.req = {
-    _id: farine._id,
+    _id: farineTrunk._id,
     body: {
         impact: withItem(prixImpactEntry._id, 144, "m2")
     }
 };
 firstImpactSpec.res = {
-    body: oneUpsertedResponse(farine._id)
+    body: oneUpsertedResponse(farineTrunk._id)
 };
 firstImpactSpec.db = {
     expected: {
         colname: cols.IMPACT,
         doc: {
-            _id: farine._id,
+            _id: farineTrunk._id,
             items: [
                 withItem(prixImpactEntry._id, 144, "m2")
             ],

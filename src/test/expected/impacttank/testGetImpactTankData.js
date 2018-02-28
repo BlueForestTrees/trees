@@ -1,7 +1,7 @@
 import {withQuantity} from "../../testPlumbing";
 import {ObjectID} from "mongodb";
 import {papierVA} from "../../database/papier";
-import {co2eImpact} from "../../database/impactEntries";
+import {co2eImpactEntry} from "../../database/impactEntries";
 
 
 export const papierAImpactTankSpec = {};
@@ -14,7 +14,7 @@ papierAImpactTankSpec.res = {
         _id: papierVA._id,
         quantity: papierVA.quantity,
         items: [{
-            _id: co2eImpact._id,
+            _id: co2eImpactEntry._id,
             name: "équivalent CO2",
             ...withQuantity(11696000, "g")
         }]

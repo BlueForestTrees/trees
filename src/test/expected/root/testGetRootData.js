@@ -1,11 +1,12 @@
 import _ from 'lodash';
 import {clon} from "../../util/testUtil";
-import {removeItemQuantity, setQuantity, withDoubleQt, withoutQuantity} from "../../testPlumbing";
-import {farineRoot, gateauRoot, lait} from "../../database/gateau";
+import {removeItemQuantity, setQuantity, withQtCoef, withItem, withoutQuantity} from "../../testPlumbing";
+import {farineRoot, gateauRoot, laitTrunk} from "../../database/gateau";
 import {skateRoot} from "../../database/skate";
-import {a, da, dRoot} from "../../database/lettres";
+import {aTrunk, daTrunk, dRoot} from "../../database/lettres";
 import {withNames} from "../../testIntegDatabase";
 import {cols} from "../../../main/const/collections";
+import {coucheAdhesif, coucheAlu, couchePapier, couchePE, papierVA} from "../../database/papier";
 
 export const getRootsSpec = {};
 const gateauItemsWithNames = withoutQuantity(withNames(clon(gateauRoot.items)));
@@ -21,11 +22,11 @@ getRootsSpec.res = {
 
 export const emptyGetRootSpec = {};
 emptyGetRootSpec.req = {
-    _id: lait._id
+    _id: laitTrunk._id
 };
 emptyGetRootSpec.res = {
     body: {
-        _id: lait._id,
+        _id: laitTrunk._id,
         items: []
     }
 };
@@ -48,8 +49,8 @@ sameQtGetRootSpec.res = {
 export const gateau1000GGetRootSpec = {};
 const gato1000G = clon(gateauRoot);
 withNames(gato1000G.items);
-withDoubleQt([gato1000G]);
-withDoubleQt(gato1000G.items);
+withQtCoef([gato1000G]);
+withQtCoef(gato1000G.items);
 
 gateau1000GGetRootSpec.req = {
     qt: gato1000G.quantity.qt,
@@ -65,8 +66,8 @@ gateau1000GGetRootSpec.res = {
 export const skate10GetRootSpec = {};
 const skate10 = clon(skateRoot);
 withNames(skate10.items);
-withDoubleQt([skate10]);
-withDoubleQt(skate10.items);
+withQtCoef([skate10]);
+withQtCoef(skate10.items);
 skate10GetRootSpec.req = {
     qt: skate10.quantity.qt,
     unit: skate10.quantity.unit,
@@ -83,7 +84,7 @@ const gateauRoot1Kg = clon(gateauRoot);
 withNames(gateauRoot1Kg.items);
 gateauRoot1Kg.quantity.qt = 1;
 gateauRoot1Kg.quantity.unit = "kg";
-withDoubleQt(gateauRoot1Kg.items);
+withQtCoef(gateauRoot1Kg.items);
 
 otherUnitGetRootSpec.req = {
     qt: gateauRoot1Kg.quantity.qt,
@@ -129,15 +130,31 @@ farineNoBleQtGetRootSpec.res = {
     }
 };
 
+export const papierAGetRootSpec = {};
+papierAGetRootSpec.req = {
+    _id:papierVA._id, qt: 100,unit: "m2"
+};
+papierAGetRootSpec.res = {
+    body: {
+        ...withItem(papierVA._id, 100, "m2"),
+        items:[
+            withItem(couchePE._id, 780,"kg"),
+            withItem(couchePapier._id, 2070,"kg"),
+            withItem(coucheAdhesif._id, 80,"kg"),
+            withItem(coucheAlu._id, 890,"kg")
+        ]
+    }
+};
+
 export const lettreGetRootSpec = {};
 lettreGetRootSpec.req = {
     qt: 500,
     unit: "g",
-    _id: a._id
+    _id: aTrunk._id
 };
 lettreGetRootSpec.res = {
     body: {
-        _id:a._id,
+        _id:aTrunk._id,
         items:[
             {
                 "_id": "bbbbbbbbbbbbbbbbbbbbbbbb",
@@ -292,19 +309,19 @@ export const lettreNoDaQtGetRootSpec = {};
 lettreNoDaQtGetRootSpec.req = {
     qt: 500,
     unit: "g",
-    _id: a._id
+    _id: aTrunk._id
 };
 lettreNoDaQtGetRootSpec.db = {
     preChange: {
         colname: cols.ROOT,
         doc: {
-            ...removeItemQuantity(clon(dRoot), da._id)
+            ...removeItemQuantity(clon(dRoot), daTrunk._id)
         }
     }
 };
 lettreNoDaQtGetRootSpec.res = {
     body: {
-        _id:a._id,
+        _id:aTrunk._id,
         items:[
             {
                 "_id": "bbbbbbbbbbbbbbbbbbbbbbbb",

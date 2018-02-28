@@ -1,13 +1,13 @@
 import {oneModifiedResponse} from "../testCommonData";
 import {cols} from "../../../main/const/collections";
 import _ from 'lodash';
-import {ble, gateau} from "../../database/gateau";
+import {bleTrunk, gateauTrunk} from "../../database/gateau";
 import {withQuantity} from "../../testPlumbing";
 
 
 export const renameTrunkSpec = {};
 const someNewName = "paPRika" + Math.random();
-let _id = ble._id;
+let _id = bleTrunk._id;
 renameTrunkSpec.req = {
     params: {_id},
     body: {
@@ -32,7 +32,7 @@ renameTrunkSpec.db = {
 export const requantifyTrunkSpec = {};
 const newGateauQuantity = withQuantity(1, "kg").quantity;
 requantifyTrunkSpec.req = {
-    params: {_id: gateau._id},
+    params: {_id: gateauTrunk._id},
     body: {
         quantity: newGateauQuantity
     }
@@ -44,7 +44,7 @@ requantifyTrunkSpec.db = {
     expected: {
         colname: cols.TRUNK,
         doc: {
-            ...(_.omit(gateau, 'quantity')),
+            ...(_.omit(gateauTrunk, 'quantity')),
             quantity: newGateauQuantity
         }
     }

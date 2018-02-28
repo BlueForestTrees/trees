@@ -19,9 +19,9 @@ describe('GET ImpactTank', function () {
         await initDatabase();
     });
 
-    it('papierATankSpec', run(() => getTank(papierAImpactTankSpec)));
+    it('papierAImpactTankSpec', run(() => getTank(papierAImpactTankSpec)));
 
-    it('sansImpactTank', run2(getTank, sansImpactTankSpec));
+    it('sansImpactTankSpec', run2(getTank, sansImpactTankSpec));
 
 });
 

@@ -3,11 +3,11 @@ import {col} from "../../repo";
 import {matchId, withId, withIdQtUnit} from "../../util/query";
 import {treefy} from "../../util/calculations";
 
-const roots = () => col(cols.ROOT);
+const branches = () => col(cols.BRANCH);
 
-const rootGraphLookup = {
+const branchGraphLookup = {
     $graphLookup: {
-        from: cols.ROOT,
+        from: cols.BRANCH,
         startWith: `$items._id`,
         connectFromField: "items._id",
         connectToField: "_id",
@@ -16,15 +16,15 @@ const rootGraphLookup = {
     }
 };
 
-export const readRoot = _id => roots().findOne(withId(_id));
+export const readBranch = _id => branches().findOne(withId(_id));
 
-export const readRootTree = (qt, unit, _id) =>
-    getRootGraph(_id)
+export const readBranchTree = (qt, unit, _id) =>
+    getBranchGraph(_id)
         .then(graph => graph && treefy({qt, unit}, graph))
         .then(tree => tree || {...withIdQtUnit(_id, qt, unit), items: []});
 
-const getRootGraph = _id => {
-    return roots().aggregate([matchId(_id), rootGraphLookup]).next();
+const getBranchGraph = _id => {
+    return branches().aggregate([matchId(_id), branchGraphLookup]).next();
 };
 
 

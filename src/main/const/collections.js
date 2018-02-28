@@ -7,6 +7,7 @@ export const cols = {
     IMPACT: 'ImpactCollection',
     IMPACT_ENTRY: 'ImpactEntryCollection',
     ROOT: 'RootCollection',
+    BRANCH: 'BranchCollection',
     WASTE: 'WasteCollection',
     IMPACT: 'ImpactCollection',
     USAGE: 'UsageCollection'

@@ -74,3 +74,32 @@ export const bestRound = v =>
             v < 100 ? precisionRound(v,1)
                 :
                 Math.round(v);
+
+export const treefy = (quantity, graph) => {
+
+    const cache = graph.cache;
+    const tree = _.omit(graph, "cache");
+
+    applyQuantity(quantity, tree);
+
+    tree.items = loadFromCache(tree, cache);
+
+    return tree;
+};
+
+const loadFromCache = (tree, cache) => {
+    const items = [];
+    _.forEach(tree.items, item => {
+        item.items = [];
+        let foundInCache = _.find(cache, {_id: item._id});
+        if (foundInCache) {
+            const cachedItem = _.cloneDeep(foundInCache);
+            applyQuantity(item.quantity, cachedItem);
+            cachedItem.items = loadFromCache(cachedItem, cache);
+            items.push(cachedItem);
+        } else {
+            items.push(_.omit(item, "items"));
+        }
+    });
+    return items;
+};

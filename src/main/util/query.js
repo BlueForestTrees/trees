@@ -17,10 +17,11 @@ export const matchId = (_id) => ({$match: withId(_id)});
 export const pullItem = itemId => ({$pull: {items: withId(itemId)}});
 export const pullItems = itemIds => ({$pull: {items: withIdIn(itemIds)}});
 
-export const pushRoot = (id, quantity) => ({$push: {items: withIdQuantity(id, quantity)}});
-export const pushItem = ({_id, quantity}) => ({$push: {items: {_id: object(_id), quantity}}});
+export const pushItem = ({_id, quantity}) => ({$push: {items: withIdQuantity(_id, quantity)}});
 
 export const emptyGroup = _id => ({_id, items: []});
+
+export const quantityField = {quantity:1};
 
 
 export const removeQuantity = e => {

@@ -1,15 +1,12 @@
 import {cols} from "../../const/collections";
 import {col} from "../../repo";
 import {GrandeurMismatchError, UnitInvalidError} from "../../exceptions/Errors";
-import {pullItem, pushRoot, upsert, withId} from "../../util/query";
+import {pullItem, pushItem, quantityField, upsert, withId} from "../../util/query";
 import {qtUnitCoef} from "../unit/unitService";
 
-const roots = () => col(cols.ROOT);
+const branches = () => col(cols.BRANCH);
 
-const quantityField = {quantity:1};
-
-
-const adaptQtUnit = async (trunk, root) => {
+const adaptQtUnit = async (trunk, branch) => {
     let dbTrunkQt = await getSertQuantity(trunk);
     let trunkCoef = 0;
 
@@ -21,12 +18,12 @@ const adaptQtUnit = async (trunk, root) => {
         }
     }
 
-    return {qt: trunkCoef * root.quantity.qt, unit: root.quantity.unit};
+    return {qt: trunkCoef * branch.quantity.qt, unit: branch.quantity.unit};
 };
 
 const getSertQuantity = async trunk => {
     const trunkQuantity = await readForQuantity(trunk._id)
-        .then(root => root && root.quantity || null);
+        .then(branch => branch && branch.quantity || null);
 
     if (trunkQuantity) {
         return trunkQuantity;
@@ -38,24 +35,24 @@ const getSertQuantity = async trunk => {
     }
 };
 
-const readForQuantity = async (id) => roots().findOne(withId(id), quantityField);
+const readForQuantity = async (id) => branches().findOne(withId(id), quantityField);
 
-const setQuantity = ({_id, quantity}) => roots().update(withId(_id), ({$set: {quantity}}), upsert);
+const setQuantity = ({_id, quantity}) => branches().update(withId(_id), ({$set: {quantity}}), upsert);
 
 
-export const insertRoot = ({trunk, root}) => addRoot(trunk._id, root._id);
+export const insertBranch = ({trunk, branch}) => addBranch(trunk._id, branch._id);
 
-export const removeRoot = ({trunkId, rootId}) => roots().update(withId(trunkId), pullItem(rootId));
+export const removeBranch = ({trunkId, branchId}) => branches().update(withId(trunkId), pullItem(branchId));
 
-export const upsertRoot = async ({trunk, root}) => removeAddRoot({
+export const upsertBranch = async ({trunk, branch}) => removeAddBranch({
     trunkId: trunk._id,
-    rootId: root._id,
-    quantity: await adaptQtUnit(trunk, root)
+    branchId: branch._id,
+    quantity: await adaptQtUnit(trunk, branch)
 });
 
-const removeAddRoot = async ({trunkId,rootId,quantity}) => {
-    await removeRoot({trunkId,rootId});
-    return await addRoot(trunkId, rootId, quantity);
+const removeAddBranch = async ({trunkId,branchId,quantity}) => {
+    await removeBranch({trunkId,branchId});
+    return await addBranch(trunkId, branchId, quantity);
 };
 
-const addRoot = async (trunkId, rootId, quantity) => roots().update(withId(trunkId), pushRoot(rootId, quantity), upsert);
+const addBranch = async (trunkId, branchId, quantity) => branches().update(withId(trunkId), pushItem({_id:branchId, quantity}), upsert);

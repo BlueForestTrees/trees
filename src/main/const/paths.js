@@ -1,10 +1,13 @@
 export const ID = '_id';
 export const TREE_ID = 'treeId';
 export const TRUNK_ID = 'trunk._id';
+export const BRANCH_ID = 'branch._id';
 export const ROOT_ID = 'root._id';
 export const SOURCE_ID = 'sourceId';
 export const TRUNK_QT = 'trunk.quantity.qt';
+export const BRANCH_QT = 'branch.quantity.qt';
 export const TRUNK_UNIT = 'trunk.quantity.unit';
+export const BRANCH_UNIT = 'branch.quantity.unit';
 export const ROOT_QT = 'root.quantity.qt';
 export const ROOT_UNIT = 'root.quantity.unit';
 export const QUANTITY = 'quantity';

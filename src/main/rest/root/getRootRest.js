@@ -1,4 +1,4 @@
-import {optionalValidQt, optionalValidUnit, validId, validQt, validUnit} from "../../const/validations";
+import {validId, validQt, validUnit} from "../../const/validations";
 import {loadNamedQuantifiedRoot, loadNamedUnquantifiedRoot} from "../../topService/getRootTopService";
 import {QT, UNIT} from "../../const/paths";
 import {readRootTree} from "../../service/root/rootQueries";

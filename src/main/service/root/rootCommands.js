@@ -1,13 +1,10 @@
 import {cols} from "../../const/collections";
 import {col} from "../../repo";
 import {GrandeurMismatchError, UnitInvalidError} from "../../exceptions/Errors";
-import {pullItem, pushRoot, upsert, withId} from "../../util/query";
+import {pullItem, pushItem, quantityField, upsert, withId} from "../../util/query";
 import {qtUnitCoef} from "../unit/unitService";
 
 const roots = () => col(cols.ROOT);
-
-const quantityField = {quantity:1};
-
 
 const adaptQtUnit = async (trunk, root) => {
     let dbTrunkQt = await getSertQuantity(trunk);
@@ -58,4 +55,4 @@ const removeAddRoot = async ({trunkId,rootId,quantity}) => {
     return await addRoot(trunkId, rootId, quantity);
 };
 
-const addRoot = async (trunkId, rootId, quantity) => roots().update(withId(trunkId), pushRoot(rootId, quantity), upsert);
+const addRoot = async (trunkId, rootId, quantity) => roots().update(withId(trunkId), pushItem({_id:rootId, quantity}), upsert);

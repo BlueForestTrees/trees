@@ -6,20 +6,21 @@ import {app} from "../../../../main";
 import {run} from "../../../testPlumbing";
 import {updateQuantityRootSpec, setQuantityRootSpec, updateQuantityAnotherUnitRootSpec} from "../../../expected/root/testPutRootData";
 import {assertDb, initDatabase} from "../../../testIntegDatabase";
+import {setQuantityLinkSpec, updateQuantityAnotherUnitLinkSpec, updateQuantityLinkSpec} from "../../../expected/link/testPutLinkData";
 
-describe('PUT Root', function () {
+describe('PUT Link', function () {
 
     beforeEach(async () => {
         await initDatabase();
     });
 
-    it('set quantity', run(() => putRoot(setQuantityRootSpec)));
-    it('update quantity', run(() => putRoot(updateQuantityRootSpec)));
-    it('update quantity with another unit', run(() => putRoot(updateQuantityAnotherUnitRootSpec)));
+    it('set quantity', run(() => putLink(setQuantityLinkSpec)));
+    it('update quantity', run(() => putLink(updateQuantityLinkSpec)));
+    it('update quantity with another unit', run(() => putLink(updateQuantityAnotherUnitLinkSpec)));
 });
 
-export const putRoot = testDef => chai.request(app)
-    .put('/api/root')
+export const putLink = testDef => chai.request(app)
+    .put('/api/link')
     .send(testDef.req.body)
     .then(async (res) => {
         res.should.have.status(200);

@@ -1,24 +1,23 @@
 import chai from 'chai';
-
-import {rootDeletionSpec} from "../../../expected/root/testDeleteRootData";
 import {app} from "../../../../main";
 import {assertDb, initDatabase} from "../../../testIntegDatabase";
-import {run} from "../../../testPlumbing";
+import {branchDeletionSpec} from "../../../expected/branch/testDeleteBranchData";
+import {run} from "../testIntegPlumbing";
 
-describe('DELETE Root', function () {
+describe('DELETE branch', function () {
 
     beforeEach(async () => {
         await initDatabase();
     });
 
-    //it('delete the root', run(() => deleteRoot(rootDeletionSpec)));
+    it('delete the branch', run(() => deleteBranch(branchDeletionSpec)));
 
 });
 
-export const deleteRoot = rootDeletion => chai.request(app)
-    .del(`/api/root/${rootDeletion.req.trunkId}/${rootDeletion.req.rootId}`)
+export const deleteBranch = branchDeletion => chai.request(app)
+    .del(`/api/branch/${branchDeletion.req.trunkId}/${branchDeletion.req.branchId}`)
     .then(async res => {
         res.should.have.status(200);
-        res.body.should.deep.equal(rootDeletion.res.expected);
-        await assertDb(rootDeletion.db.expected);
+        res.body.should.deep.equal(branchDeletion.res.expected);
+        await assertDb(branchDeletion.db.expected);
     });

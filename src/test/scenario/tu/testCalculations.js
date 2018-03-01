@@ -7,7 +7,7 @@ import Fraction from "fraction.js";
 
 chai.should();
 
-describe('Tank', function () {
+describe('TU Tank', function () {
 
     describe('long tests', function () {
         it('multiply', function () {

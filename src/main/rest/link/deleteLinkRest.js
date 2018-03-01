@@ -1,5 +1,6 @@
 import {valid} from "../../const/validations";
-import {removeBranch} from "../../service/branch/branchCommands";
+import {removeRoot} from "../../service/root/rootCommands";
+import {removeLink} from "../../topService/linkTopService";
 
 const run = require('../../util/run');
 const express = require('express');
@@ -7,10 +8,10 @@ const router = express.Router();
 
 module.exports = router;
 
-router.delete('/api/branch/:trunkId/:branchId',
+router.delete('/api/link/:trunkId/:rootId',
     [
         valid("trunkId"),
-        valid("branchId"),
+        valid("rootId"),
     ],
-    run(removeBranch)
+    run(removeLink)
 );

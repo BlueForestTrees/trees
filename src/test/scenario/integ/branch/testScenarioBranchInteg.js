@@ -1,22 +1,20 @@
-import {match, mock} from 'sinon';
-import {bleRootDeletionSpec} from "../../../expected/root/testDeleteRootData";
-import {deleteRoot} from "./testDeleteBranchInteg";
-import {postRoot} from "./testPostBranchInteg";
-import {bleToFarineAddSpec} from "../../../expected/root/testPostRootData";
 import {initDatabase} from "../../../testIntegDatabase";
+import {farineBranchDeletionSpec} from "../../../expected/branch/testDeleteBranchData";
+import {farineToBleBranchAddSpec} from "../../../expected/branch/testPostBranchData";
+import {deleteBranch} from "./testDeleteBranchInteg";
+import {postBranch} from "./testPostBranchInteg";
+import {run} from "../testIntegPlumbing";
 
-import {run} from "../../../testPlumbing";
-
-describe('SCENARIO Root', function () {
+describe('SCENARIO Branch', function () {
 
     beforeEach(async () => {
         await initDatabase();
     });
 
-    // it('suppr puis réajout du blé à la farine',
-    //     run(() => deleteRoot(bleRootDeletionSpec)
-    //         .then(
-    //             () => postRoot(bleToFarineAddSpec))
-    //     ));
+    it('suppr puis réajout de la farine au blé',
+        run(() => deleteBranch(farineBranchDeletionSpec)
+            .then(
+                () => postBranch(farineToBleBranchAddSpec))
+        ));
 });
 

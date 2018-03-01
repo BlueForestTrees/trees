@@ -1,25 +1,22 @@
 import chai from 'chai';
-import {match, mock} from 'sinon';
-
 import {app} from "../../../../main";
-
-import {run} from "../../../testPlumbing";
-import {existingIdsAndQtsSpec, existingIdsNewQtsSpec, existingsAndUnitChangeSpec} from "../../../expected/root/testPutRootData";
 import {assertDb, initDatabase} from "../../../testIntegDatabase";
+import {updateQuantityBranchSpec, setQuantityBranchSpec, updateQuantityAnotherUnitBranchSpec} from "../../../expected/branch/testPutBranchData";
+import {run} from "../testIntegPlumbing";
 
-describe('PUT Root', function () {
+describe('PUT Branch', function () {
 
     beforeEach(async () => {
         await initDatabase();
     });
 
-    // it('existingIdsNewQts', run(() => putRoot(existingIdsNewQtsSpec)));
-    // it('existingIdsAndQts', run(() => putRoot(existingIdsAndQtsSpec)));
-    // it('differentUnit', run(() => putRoot(existingsAndUnitChangeSpec)));
+    it('set quantity', run(() => putBranch(setQuantityBranchSpec)));
+    it('update quantity', run(() => putBranch(updateQuantityBranchSpec)));
+    it('differentUnit', run(() => putBranch(updateQuantityAnotherUnitBranchSpec)));
 });
 
-export const putRoot = testDef => chai.request(app)
-    .put('/api/root')
+export const putBranch = testDef => chai.request(app)
+    .put('/api/branch')
     .send(testDef.req.body)
     .then(async (res) => {
         res.should.have.status(200);

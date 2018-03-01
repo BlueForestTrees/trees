@@ -5,41 +5,35 @@ import _ from 'lodash';
 import {bleTrunk, farineTrunk, gateauTrunk, gateauRoot, laitTrunk} from "../../database/gateau";
 import {setQuantity} from "../../testPlumbing";
 
-export const existingIdsNewQtsSpec = {};
-const bleId = bleTrunk._id;
-const farineId = farineTrunk._id;
-existingIdsNewQtsSpec.req = {
+export const setQuantityRootSpec = {};
+setQuantityRootSpec.req = {
     body: {
         trunk: {
-            _id: bleId,
-            quantity: {
-                unit: "min",
-                qt: 20
-            }
-        },
-        root: {
-            _id: farineId,
+            _id: farineTrunk._id,
             quantity: {
                 unit: "kg",
                 qt: 10
             }
+        },
+        root: {
+            _id: bleTrunk._id,
+            quantity: {
+                unit: "min",
+                qt: 20
+            }
         }
     }
 };
-existingIdsNewQtsSpec.res = {
+setQuantityRootSpec.res = {
     body: oneModifiedResponse
 };
-existingIdsNewQtsSpec.db = {
+setQuantityRootSpec.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
-            _id: bleId,
-            quantity: existingIdsNewQtsSpec.req.body.trunk.quantity,
+            ...setQuantityRootSpec.req.body.trunk,
             items: [
-                {
-                    "_id": farineTrunk._id,
-                    quantity: existingIdsNewQtsSpec.req.body.root.quantity,
-                }
+                setQuantityRootSpec.req.body.root
             ],
 
         }
@@ -47,11 +41,11 @@ existingIdsNewQtsSpec.db = {
 };
 
 
-export const existingIdsAndQtsSpec = {};
+export const updateQuantityRootSpec = {};
 const updatedRoots = clon(gateauRoot.items);
 setQuantity(updatedRoots[1], 60);
 
-existingIdsAndQtsSpec.req = {
+updateQuantityRootSpec.req = {
     body: {
         trunk: {
             _id: gateauTrunk._id,
@@ -69,10 +63,10 @@ existingIdsAndQtsSpec.req = {
         }
     }
 };
-existingIdsAndQtsSpec.res = {
+updateQuantityRootSpec.res = {
     body: oneModifiedResponse
 };
-existingIdsAndQtsSpec.db = {
+updateQuantityRootSpec.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
@@ -82,11 +76,11 @@ existingIdsAndQtsSpec.db = {
     }
 };
 
-export const existingsAndUnitChangeSpec = {};
+export const updateQuantityAnotherUnitRootSpec = {};
 const updatedRootsWithDifferentUnit = clon(gateauRoot.items);
-setQuantity(updatedRootsWithDifferentUnit[1], 250, "g");
+setQuantity(updatedRootsWithDifferentUnit[1], 0.01, "m3");
 
-existingsAndUnitChangeSpec.req = {
+updateQuantityAnotherUnitRootSpec.req = {
     body: {
         trunk: {
             _id: gateauTrunk._id,
@@ -98,16 +92,16 @@ existingsAndUnitChangeSpec.req = {
         root: {
             _id: laitTrunk._id,
             quantity: {
-                unit: "g",
-                qt: 500
+                unit: "m3",
+                qt: 0.02
             }
         }
     }
 };
-existingsAndUnitChangeSpec.res = {
+updateQuantityAnotherUnitRootSpec.res = {
     body: oneModifiedResponse
 };
-existingsAndUnitChangeSpec.db = {
+updateQuantityAnotherUnitRootSpec.db = {
     expected: {
         colname: cols.ROOT,
         doc: {

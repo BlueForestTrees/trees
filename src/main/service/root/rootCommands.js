@@ -40,19 +40,14 @@ const readForQuantity = async (id) => roots().findOne(withId(id), quantityField)
 const setQuantity = ({_id, quantity}) => roots().update(withId(_id), ({$set: {quantity}}), upsert);
 
 
-export const insertRoot = ({trunk, root}) => addRoot(trunk._id, root._id);
+export const insertRoot = ({trunk, root}) =>
+    removeRoot({trunkId: trunk._id, rootId: root._id})
+        .then(() => addRoot(trunk._id, root._id));
+
+export const upsertRoot = async ({trunk, root}) =>
+    removeRoot({trunkId: trunk._id, rootId: root._id})
+        .then(() => adaptQtUnit(trunk, root))
+        .then(quantity => addRoot(trunk._id, root._id, quantity));
 
 export const removeRoot = ({trunkId, rootId}) => roots().update(withId(trunkId), pullItem(rootId));
-
-export const upsertRoot = async ({trunk, root}) => removeAddRoot({
-    trunkId: trunk._id,
-    rootId: root._id,
-    quantity: await adaptQtUnit(trunk, root)
-});
-
-const removeAddRoot = async ({trunkId,rootId,quantity}) => {
-    await removeRoot({trunkId,rootId});
-    return await addRoot(trunkId, rootId, quantity);
-};
-
-const addRoot = async (trunkId, rootId, quantity) => roots().update(withId(trunkId), pushItem({_id:rootId, quantity}), upsert);
+const addRoot = async (trunkId, rootId, quantity) => roots().update(withId(trunkId), pushItem({_id: rootId, quantity}), upsert);

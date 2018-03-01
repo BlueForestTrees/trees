@@ -1,22 +1,23 @@
 import chai from 'chai';
-import {app} from "../../../../main";
-import {assertDb, initDatabase} from "../../../testIntegDatabase";
-import {existingBranchPostSpec, newBranchSpec} from "../../../expected/branch/testPostBranchData";
-import {run} from "../testIntegPlumbing";
 
-describe('POST Branch', function () {
+import {app} from "../../../../main";
+import {run} from "../../../testPlumbing";
+import {assertDb, initDatabase} from "../../../testIntegDatabase";
+import {existingLinkPostSpec, newLinkSpec} from "../../../expected/link/testPostLinkData";
+
+describe('POST Link', function () {
 
     beforeEach(async () => {
         await initDatabase();
     });
 
-    it('newBranch', run(() => postBranch(newBranchSpec)));
+    it('newLink', run(() => postLink(newLinkSpec)));
 
-    it('existing branch', run(() => postBranch(existingBranchPostSpec)));
+    it('existing link', run(() => postLink(existingLinkPostSpec)));
 });
 
-export const postBranch = spec => chai.request(app)
-    .post('/api/branch')
+export const postLink = spec => chai.request(app)
+    .post('/api/link')
     .send(spec.req.body)
     .then(async res => {
         res.should.have.status(200);

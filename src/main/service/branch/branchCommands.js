@@ -39,20 +39,14 @@ const readForQuantity = async (id) => branches().findOne(withId(id), quantityFie
 
 const setQuantity = ({_id, quantity}) => branches().update(withId(_id), ({$set: {quantity}}), upsert);
 
+export const insertBranch = ({trunk, branch}) =>
+    removeBranch({trunkId:trunk._id, branchId:branch._id})
+        .then(() => addBranch(trunk._id, branch._id));
 
-export const insertBranch = ({trunk, branch}) => addBranch(trunk._id, branch._id);
+export const upsertBranch = async ({trunk, branch}) =>
+    removeBranch({trunkId:trunk._id, branchId:branch._id})
+        .then(()=>adaptQtUnit(trunk, branch))
+        .then(quantity => addBranch(trunk._id, branch._id, quantity));
 
 export const removeBranch = ({trunkId, branchId}) => branches().update(withId(trunkId), pullItem(branchId));
-
-export const upsertBranch = async ({trunk, branch}) => removeAddBranch({
-    trunkId: trunk._id,
-    branchId: branch._id,
-    quantity: await adaptQtUnit(trunk, branch)
-});
-
-const removeAddBranch = async ({trunkId,branchId,quantity}) => {
-    await removeBranch({trunkId,branchId});
-    return await addBranch(trunkId, branchId, quantity);
-};
-
-const addBranch = async (trunkId, branchId, quantity) => branches().update(withId(trunkId), pushItem({_id:branchId, quantity}), upsert);
+const addBranch = async (trunkId, branchId, quantity) => branches().update(withId(trunkId), pushItem({...withId(branchId), quantity}), upsert);

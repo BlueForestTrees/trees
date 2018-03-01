@@ -1,118 +1,113 @@
-// import {oneModifiedResponse} from "../testCommonData";
-// import {clon} from "../../util/testUtil";
-// import {cols} from "../../../main/const/collections";
-// import _ from 'lodash';
-// import {bleTrunk, farineTrunk, gateauTrunk, gateauBranch, laitTrunk} from "../../database/gateau";
-// import {setQuantity} from "../../testPlumbing";
-//
-// export const existingIdsNewQtsSpec = {};
-// const bleId = bleTrunk._id;
-// const farineId = farineTrunk._id;
-// existingIdsNewQtsSpec.req = {
-//     body: {
-//         trunk: {
-//             _id: bleId,
-//             quantity: {
-//                 unit: "min",
-//                 qt: 20
-//             }
-//         },
-//         branch: {
-//             _id: farineId,
-//             quantity: {
-//                 unit: "kg",
-//                 qt: 10
-//             }
-//         }
-//     }
-// };
-// existingIdsNewQtsSpec.res = {
-//     body: oneModifiedResponse
-// };
-// existingIdsNewQtsSpec.db = {
-//     expected: {
-//         colname: cols.BRANCH,
-//         doc: {
-//             _id: bleId,
-//             quantity: existingIdsNewQtsSpec.req.body.trunk.quantity,
-//             items: [
-//                 {
-//                     "_id": farineTrunk._id,
-//                     quantity: existingIdsNewQtsSpec.req.body.branch.quantity,
-//                 }
-//             ],
-//
-//         }
-//     }
-// };
-//
-//
-// export const existingIdsAndQtsSpec = {};
-// const updatedBranchs = clon(gateauBranch.items);
-// setQuantity(updatedBranchs[1], 60);
-//
-// existingIdsAndQtsSpec.req = {
-//     body: {
-//         trunk: {
-//             _id: gateauTrunk._id,
-//             quantity: {
-//                 unit: "g",
-//                 qt: 250
-//             }
-//         },
-//         branch: {
-//             _id: laitTrunk._id,
-//             quantity: {
-//                 unit: "L",
-//                 qt: 30
-//             }
-//         }
-//     }
-// };
-// existingIdsAndQtsSpec.res = {
-//     body: oneModifiedResponse
-// };
-// existingIdsAndQtsSpec.db = {
-//     expected: {
-//         colname: cols.BRANCH,
-//         doc: {
-//             ...(_.omit(gateauBranch, "items")),
-//             items: updatedBranchs,
-//         }
-//     }
-// };
-//
-// export const existingsAndUnitChangeSpec = {};
-// const updatedBranchsWithDifferentUnit = clon(gateauBranch.items);
-// setQuantity(updatedBranchsWithDifferentUnit[1], 250, "g");
-//
-// existingsAndUnitChangeSpec.req = {
-//     body: {
-//         trunk: {
-//             _id: gateauTrunk._id,
-//             quantity: {
-//                 unit: "kg",
-//                 qt: 1
-//             }
-//         },
-//         branch: {
-//             _id: laitTrunk._id,
-//             quantity: {
-//                 unit: "g",
-//                 qt: 500
-//             }
-//         }
-//     }
-// };
-// existingsAndUnitChangeSpec.res = {
-//     body: oneModifiedResponse
-// };
-// existingsAndUnitChangeSpec.db = {
-//     expected: {
-//         colname: cols.BRANCH,
-//         doc: {
-//             ...(_.omit(gateauBranch, "items")),
-//             items: updatedBranchsWithDifferentUnit,
-//         }
-//     }
-// };
+import {oneModifiedResponse} from "../testCommonData";
+import {cols} from "../../../main/const/collections";
+import {bleTrunk, farineTrunk, gateauTrunk, laitBranch, laitTrunk} from "../../database/gateau";
+import {setQuantity} from "../../testPlumbing";
+import {clon} from "../../util/testUtil";
+import _ from 'lodash';
+
+export const setQuantityBranchSpec = {};
+setQuantityBranchSpec.req = {
+    body: {
+        trunk: {
+            _id: bleTrunk._id,
+            quantity: {
+                unit: "min",
+                qt: 20
+            }
+        },
+        branch: {
+            _id: farineTrunk._id,
+            quantity: {
+                unit: "kg",
+                qt: 10
+            }
+        }
+    }
+};
+setQuantityBranchSpec.res = {
+    body: oneModifiedResponse
+};
+setQuantityBranchSpec.db = {
+    expected: {
+        colname: cols.BRANCH,
+        doc: {
+            ...setQuantityBranchSpec.req.body.trunk,
+            items: [
+                {
+                    ...setQuantityBranchSpec.req.body.branch
+                }
+            ],
+
+        }
+    }
+};
+
+export const updateQuantityBranchSpec = {};
+const updatedBranchs = clon(laitBranch.items);
+setQuantity(updatedBranchs[1], 166.66666666666666);
+
+updateQuantityBranchSpec.req = {
+    body: {
+        trunk: {
+            _id: laitTrunk._id,
+            quantity: {
+                unit: "L",
+                qt: 30
+            }
+        },
+        branch: {
+            _id: gateauTrunk._id,
+            quantity: {
+                unit: "g",
+                qt: 250
+            }
+        }
+    }
+};
+updateQuantityBranchSpec.res = {
+    body: oneModifiedResponse
+};
+updateQuantityBranchSpec.db = {
+    expected: {
+        colname: cols.BRANCH,
+        doc: {
+            ...(_.omit(laitBranch, "items")),
+            items: updatedBranchs,
+        }
+    }
+};
+
+export const updateQuantityAnotherUnitBranchSpec = {};
+const updatedBranchsWithDifferentUnit = clon(laitBranch.items);
+setQuantity(updatedBranchsWithDifferentUnit[1], 1, "kg");
+
+updateQuantityAnotherUnitBranchSpec.req = {
+    body: {
+        trunk: {
+            _id: laitTrunk._id,
+            quantity: {
+                unit: "m3",
+                qt: 0.02
+            }
+        },
+        branch: {
+            _id: gateauTrunk._id,
+            quantity: {
+                unit: "kg",
+                qt: 1
+            }
+        }
+    }
+};
+updateQuantityAnotherUnitBranchSpec.res = {
+    body: oneModifiedResponse
+};
+updateQuantityAnotherUnitBranchSpec.db = {
+    expected: {
+        colname: cols.BRANCH,
+        doc: {
+            ...(_.omit(laitBranch, "items")),
+            items: updatedBranchsWithDifferentUnit,
+        }
+    }
+};

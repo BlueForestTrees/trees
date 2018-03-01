@@ -1,5 +1,5 @@
 import {initDatabase} from "./testIntegDatabase";
 
-describe('Tool', async function () {
+describe('INIT Tool', async function () {
     it('init DB', initDatabase);
 });

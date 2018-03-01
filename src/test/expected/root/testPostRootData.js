@@ -35,28 +35,28 @@ newRootSpec.db = {
 };
 
 
-export const existingIdsSpec = {};
-existingIdsSpec.req = {
+export const existingRootPostSpec = {};
+existingRootPostSpec.req = {
     body: {
         trunk: {
-            _id: bleTrunk._id
+            _id: farineTrunk._id
         },
         root: {
-            _id: farineTrunk._id
+            _id: bleTrunk._id
         }
     }
 };
-existingIdsSpec.res = {
-    body: oneUpsertedResponse(bleTrunk._id)
+existingRootPostSpec.res = {
+    body: oneModifiedResponse
 };
-existingIdsSpec.db = {
+existingRootPostSpec.db = {
     expected: {
         colname: cols.ROOT,
         doc: {
-            _id: bleTrunk._id,
+            _id: farineTrunk._id,
             items: [
                 {
-                    _id: farineTrunk._id
+                    _id: bleTrunk._id
                 }
             ],
 

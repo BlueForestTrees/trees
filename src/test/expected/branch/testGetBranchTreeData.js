@@ -1,25 +1,6 @@
 import {aTrunk} from "../../database/lettres";
-
-// export const gateauBranchTreeSpec = {};
-// const gateauBranch2Kg = clon(gateauBranch);
-// //on fait x4 sur la quantité
-// gateauBranch2Kg.quantity.qt = 2;
-// gateauBranch2Kg.quantity.unit = "kg";
-// withDoubleQt(withDoubleQt(gateauBranch2Kg.items));
-// //on ajoute le blé à la farine
-// gateauBranch2Kg.items[0].items = [{_id: bleTrunk._id}];
-//
-// gateauBranchTreeSpec.req = {
-//     qt: gateauBranch2Kg.quantity.qt,
-//     unit: gateauBranch2Kg.quantity.unit,
-//     _id: gateauBranch2Kg._id
-// };
-// gateauBranchTreeSpec.res = {
-//     body: {
-//         ...gateauBranch2Kg
-//     }
-// };
-//
+import {arbreTrunk} from "../../database/skate";
+import {withItem, withItemRequest} from "../../testPlumbing";
 
 export const noBranchsTreeSpec = {};
 noBranchsTreeSpec.req = {
@@ -35,5 +16,73 @@ noBranchsTreeSpec.res = {
             unit: "kg"
         },
         items: []
+    }
+};
+
+export const branchTreeSpec = {};
+branchTreeSpec.req = withItemRequest(arbreTrunk._id, 100, "count");
+branchTreeSpec.res = {
+    body: {
+        ...withItem(arbreTrunk._id, 100, "count"),
+        items: [
+            {
+                "_id": "999903c03e77667641d99995",
+                "quantity": {
+                    "qt": 100,
+                    "unit": "t"
+                },
+                "items": [
+                    {
+                        "_id": "999903c03e77667641d99991",
+                        "quantity": {
+                            "qt": 200000,
+                            "unit": "count"
+                        },
+                        "items": [
+                            {
+                                "_id": "999903c03e77667641d99990",
+                                "quantity": {
+                                    "qt": 200000,
+                                    "unit": "count"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "_id": "999903c03e77667641d99998",
+                        "quantity": {
+                            "qt": 100000,
+                            "unit": "kg"
+                        },
+                        "items": [
+                            {
+                                "_id": "999903c03e77667641d99999",
+                                "quantity": {
+                                    "qt": 33333.333333333336,
+                                    "unit": "h"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "_id": "999903c03e77667641d99997",
+                "quantity": {
+                    "qt": 0.1,
+                    "unit": "count"
+                },
+                "items": [
+                    {
+                        "_id": "999903c03e77667641d99910",
+                        "items": [
+                            {
+                                "_id": "999903c03e77667641d99911"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
 };

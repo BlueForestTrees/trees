@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {remove, replaceItem} from "../../util/testUtil";
 
-describe('Utils', function () {
+describe('TU Utils', function () {
 
     it('remove ok', function () {
         expect(remove(

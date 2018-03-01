@@ -1,16 +1,16 @@
 import {existingRootId, existingTrunkId, rootIdIsNotTrunkId} from "../../const/validations";
-import {insertRoot} from "../../service/root/rootCommands";
+import {insertLink} from "../../topService/linkTopService";
 
 const run = require('../../util/run');
 const router = require('express').Router();
 
 module.exports = router;
 
-// router.post('/api/link',
-//     [
-//         existingTrunkId,
-//         existingRootId,
-//         rootIdIsNotTrunkId
-//     ],
-//     run(insertLink)
-// );
+router.post('/api/link',
+    [
+        existingTrunkId,
+        existingRootId,
+        rootIdIsNotTrunkId
+    ],
+    run(insertLink)
+);

@@ -27,7 +27,7 @@ const buildDatabase = dbPartPath => {
                 const dbPart = require(path.join(dbPartPath, file)).database;
 
                 _.forEach(cols, colName => {
-                    if(_.has(dbPart, colName)) {
+                    if (_.has(dbPart, colName)) {
                         db[colName].push(...dbPart[colName]);
                     }
                 });
@@ -73,8 +73,10 @@ export const addInitialData = async () => {
     }));
 };
 
-export const assertDb = async ({colname, doc, missingDoc}) => {
-    if (doc) {
+export const assertDb = async ({list, colname, doc, missingDoc}) => {
+    if (list) {
+        return Promise.all(_.map(list, expected => assertDb(expected)));
+    } else if (doc) {
         const dbDoc = await loadFromDbById(colname, doc._id);
         return expect(dbDoc).to.deep.equal(doc);
     } else if (missingDoc) {

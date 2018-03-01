@@ -1,6 +1,6 @@
 import chai from 'chai';
 
-import {existingIdsSpec, newRootSpec} from "../../../expected/root/testPostRootData";
+import {existingRootPostSpec, newRootSpec} from "../../../expected/root/testPostRootData";
 import {app} from "../../../../main";
 import {run} from "../../../testPlumbing";
 import {assertDb, initDatabase} from "../../../testIntegDatabase";
@@ -13,7 +13,7 @@ describe('POST Root', function () {
 
     it('newRoot', run(() => postRoot(newRootSpec)));
 
-    it('existingIds', run(() => postRoot(existingIdsSpec)));
+    it('existing root', run(() => postRoot(existingRootPostSpec)));
 });
 
 export const postRoot = spec => chai.request(app)

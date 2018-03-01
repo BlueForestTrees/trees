@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {match, mock} from 'sinon';
 import {bestQuantity, coef, qtUnitCoef, toBaseQuantity, unit, unitCoef} from "../../../main/service/unit/unitService";
 
-describe('Grandeurs', function () {
+describe('TU Grandeurs', function () {
 
 
     describe('unit', function () {

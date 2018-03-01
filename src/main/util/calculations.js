@@ -21,8 +21,6 @@ export const erreurSiUnitIncompatibles = (quantity, roots) => {
 export const applyQuantity = (quantity, target) => {
     const coef = qtUnitCoef(quantity, target.quantity);
 
-    debug({quantity, target, coef});
-
     target.items = coef ?
         _.map(target.items, item => item.quantity ? (item.quantity.qt = Fraction(item.quantity.qt).mul(coef).valueOf()) && item : _.omit(item, "quantity"))
         :

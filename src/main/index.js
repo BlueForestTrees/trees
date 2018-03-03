@@ -8,6 +8,8 @@ import read from 'fs-readdir-recursive';
 import _ from 'lodash';
 import env from "../../config/env";
 import {debug} from "./util/debug";
+import {toto} from 'trees-common';
+
 
 export const app = express();
 
@@ -30,6 +32,8 @@ app.use(function (req, res, next) {
     err.status = 404;
     next(err);
 });
+
+debug(toto);
 
 app.use(function (err, req, res, next) {
     //erreur de validation.

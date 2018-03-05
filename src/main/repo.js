@@ -4,9 +4,13 @@ const mongo = require('mongodb');
 
 let database = null;
 
-mongo.MongoClient.connect(`mongodb://localhost/${dbname}`, function (err, db) {
-    if (err) {throw err;}
-    database = db;
-});
+export const connect = () => mongo.MongoClient.connect(`mongodb://localhost/${dbname}`)
+    .then(db => {
+        database = db;
+        console.log(`connected to mongodb://localhost/${dbname}`)
+    })
+    .catch(e => {
+        throw e;
+    });
 
 export const col = collectionName => database.collection(collectionName);

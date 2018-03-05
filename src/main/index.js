@@ -8,8 +8,7 @@ import read from 'fs-readdir-recursive';
 import _ from 'lodash';
 import env from "../../config/env";
 import {debug} from "./util/debug";
-import {toto} from 'trees-common';
-
+import {connect} from "./repo";
 
 export const app = express();
 
@@ -33,8 +32,6 @@ app.use(function (req, res, next) {
     next(err);
 });
 
-debug(toto);
-
 app.use(function (err, req, res, next) {
     //erreur de validation.
     if (err.mapped) {
@@ -47,6 +44,8 @@ app.use(function (err, req, res, next) {
     }
 });
 
-app.listen(env.port, () => {
-    console.log('App listening on port %s, in environment %s!', env.port, _.toUpper(env.env || ''));
-});
+connect().then(() =>
+    app.listen(env.port, () => {
+        console.log('App listening on port %s, in environment %s!', env.port, _.toUpper(env.env || ''));
+    })
+);

@@ -1,11 +1,11 @@
-import {grandeurs} from "../../service/unit/unitService";
+import {getGrandeurs} from "trees-common/dist/units";
 
 const express = require('express');
 const router = express.Router();
 const run = require('../../util/run');
 
 router.get('/api/grandeurs',
-    run(() => grandeurs)
+    run(() => getGrandeurs)
 );
 
 module.exports = router;

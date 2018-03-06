@@ -5,7 +5,7 @@ const unit = (shortname, name, coef) =>
         coef: coef
     });
 
-export const unitData = () => Promise.resolve(
+export const loadUnitsData = () => Promise.resolve(
     {
         "Energie": [
             unit("J", "joule", 0.23923445),

@@ -1,14 +1,13 @@
 #!/usr/bin/env node
+import {createExpress, initExpress, listen} from "./express";
+import {dbConnect} from "./db";
+import {initServices} from "./services";
 
+export const express = createExpress();
 
-import {dbConnect} from "./repo";
-import {eagerInit, initErrors, initExpress, listen} from "./server";
-import express from 'express';
+dbConnect()
+    .then(initServices)
+    .then(() => initExpress(express))
+    .then(() => listen(express));
 
-export const app = express();
-
-initExpress(app)
-    .then(initErrors)
-    .then(dbConnect)
-    .then(eagerInit)
-    .then(listen);
+export const app = express;

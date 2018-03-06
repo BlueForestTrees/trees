@@ -1,7 +1,6 @@
 import _ from 'lodash'
-import {qtUnitCoef, sameGrandeur, toBaseQuantity} from "../service/unit/unitService";
+import {qtUnitCoef, sameGrandeur, toBaseQuantity} from "trees-common/dist/units";
 import {GrandeurMismatchError} from "../exceptions/Errors";
-import {debug} from "./debug";
 import Fraction from "fraction.js";
 
 

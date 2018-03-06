@@ -1,8 +1,8 @@
 import {cols} from "../../const/collections";
-import {col} from "../../repo";
+import {col} from "../../db";
 import {GrandeurMismatchError, UnitInvalidError} from "../../exceptions/Errors";
 import {pullItem, pushItem, quantityField, upsert, withId} from "../../util/query";
-import {qtUnitCoef} from "../unit/unitService";
+import {qtUnitCoef} from "trees-common/dist/units";
 
 const roots = () => col(cols.ROOT);
 

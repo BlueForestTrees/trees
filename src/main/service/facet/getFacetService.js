@@ -1,5 +1,5 @@
 import {cols} from "../../const/collections";
-import {col} from "../../repo";
+import {col} from "../../db";
 import {emptyGroup, withId} from "../../util/query";
 import _ from 'lodash';
 

@@ -1,13 +1,13 @@
-import express from 'express';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import path from "path";
 import read from 'fs-readdir-recursive';
 import {debug} from "./util/debug";
 import env from "../../config/env";
+import {initUnits} from "trees-common/dist/units";
+import {unitData} from "./service/unit/grandeurService";
 
-export const initExpress = () => {
-    export const app = express();
+export const initExpress = app => {
 
     app.use(require('morgan')(':status :method :url :response-time ms - :res[content-length]'));
     app.use(bodyParser.json());
@@ -50,7 +50,8 @@ export const listen = app => {
 
 export const eagerInit = app => {
 
-
+   // unitData
+   //     .then(initUnits);
 
     return app;
 };

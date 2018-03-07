@@ -3,7 +3,7 @@ import {IS_DECIMAL, IS_NOT_TRUNK_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "./m
 import {check} from 'express-validator/check';
 import {peekTrunk} from "../service/trunk/getTrunkService";
 import _ from 'lodash';
-import {getGrandeursKeys, getShortnames} from "trees-common/dist/units";
+import {getGrandeursKeys, getShortnames} from "trees-common/dist";
 
 export const valid = (field, optional) => {
     let chain = check(field);
@@ -16,8 +16,8 @@ const trunkFound = (field, optional) => valid(field, optional).custom(peekTrunk)
 
 export const validId = valid(ID);
 export const validTreeId = valid(TREE_ID);
-export const validGrandeur = field => check(field).isIn(getGrandeursKeys);
-export const optionalGrandeur = field => check(field).optional().isIn(getGrandeursKeys);
+export const validGrandeur = field => check(field).isIn(getGrandeursKeys());
+export const optionalGrandeur = field => check(field).optional().isIn(getGrandeursKeys());
 export const existingId = trunkFound(ID);
 export const existingTrunkId = trunkFound(TRUNK_ID);
 export const existingBranchId = trunkFound(BRANCH_ID);
@@ -29,5 +29,5 @@ export const optionalValidName = check(NAME).optional().matches(/^.+/);
 export const validName = check(NAME).isLength({min: 2}).matches(/^.+/);
 
 export const present = (...fields) => _.map(fields, field => check(field, SHOULD_BE_DEFINED).exists());
-export const validUnit = field => check(field, IS_VALID_UNIT).optional().exists().isIn(getShortnames);
+export const validUnit = field => check(field, IS_VALID_UNIT).optional().exists().isIn(getShortnames());
 export const validQt = field => check(field, IS_DECIMAL).optional().exists().isDecimal().toInt();

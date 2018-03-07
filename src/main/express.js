@@ -40,7 +40,5 @@ export const initExpress = app => {
 };
 
 
-export const listen = app => app.listen(env.port, () => {
-    console.log('App listening on port %s, in environment %s!', env.port, _.toUpper(env.env || ''));
-});
+export const listen = app => app.listen(env.port);
 

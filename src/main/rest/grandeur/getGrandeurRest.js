@@ -1,4 +1,4 @@
-import {getGrandeurs} from "trees-common/dist/units";
+import {getGrandeurs} from "trees-common/dist";
 
 const express = require('express');
 const router = express.Router();

@@ -1,7 +1,7 @@
 import {match, mock} from 'sinon';
 import chai from 'chai';
 import {withItem, withQuantity} from "../../testPlumbing";
-import {basifyQuantity, bestRound, mergeItems, quantified, sum, summify} from "../../../main/util/calculations";
+import {basifyQuantity, mergeItems, quantified, sum, summify} from "../../../main/util/calculations";
 import {withId} from "../../../main/util/query";
 import Fraction from "fraction.js";
 
@@ -93,27 +93,6 @@ describe('TU Tank', function () {
         });
         it('return true', function () {
             quantified([withItem("aaaaaaaaaaaaaaaaaaaaaaaa", 3, "kg")]).should.be.true;
-        });
-    });
-
-    describe('best round', function () {
-        it('999 999', function () {
-            bestRound(999).should.equal(999);
-        });
-        it('999.1 999', function () {
-            bestRound(999.1).should.equal(999);
-        });
-        it('999.6 1000', function () {
-            bestRound(999.6).should.equal(1000);
-        });
-        it('99.61 99.9', function () {
-            bestRound(99.91).should.equal(99.9);
-        });
-        it('9.991 9.99', function () {
-            bestRound(9.991).should.equal(9.99);
-        });
-        it('0.9991 0.999', function () {
-            bestRound(0.9991).should.equal(0.999);
         });
     });
 

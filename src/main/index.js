@@ -5,10 +5,10 @@ import {initServices} from "./services";
 
 export const express = createExpress();
 
-dbConnect()
-    .then(initServices)
-    .then(() => initExpress(express))
-    .then(() => listen(express))
-    .then(() => console.log("API started."));
-
-export const app = express;
+export const appPromise =
+    dbConnect()
+        .then(initServices)
+        .then(() => initExpress(express))
+        .then(() => listen(express))
+        .then(() => console.log("API started."))
+        .then(() => express);

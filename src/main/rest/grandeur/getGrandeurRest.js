@@ -5,7 +5,7 @@ const router = express.Router();
 const run = require('../../util/run');
 
 router.get('/api/grandeurs',
-    run(() => getGrandeurs)
+    run(getGrandeurs)
 );
 
 module.exports = router;

@@ -1,5 +1,5 @@
 import {cols} from "../../const/collections";
-import {col} from "../../db";
+import {col} from "../../repo";
 import {withIdIn} from "../../util/query";
 
 const facetEntries = () => col(cols.FACET_ENTRY);

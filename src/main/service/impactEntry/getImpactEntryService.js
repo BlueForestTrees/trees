@@ -1,5 +1,5 @@
 import {cols} from "../../const/collections";
-import {col} from "../../db";
+import {col} from "../../repo";
 import {withIdIn} from "../../util/query";
 
 const impactEntries = () => col(cols.IMPACT_ENTRY);

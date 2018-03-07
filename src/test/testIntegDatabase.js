@@ -5,7 +5,7 @@ import read from 'fs-readdir-recursive';
 import path from 'path';
 
 import {cols} from "../main/const/collections";
-import {col, dbConnect} from "../main/db";
+import {col, connect} from "../main/repo";
 import {addObjects, removeObjects} from "../main/util/addObjectID";
 import {withId} from "../main/util/query";
 import {clon} from "./util/testUtil";
@@ -15,7 +15,7 @@ chai.use(chaiHttp);
 chai.should();
 
 export const initDatabase = async () => {
-    return await dbConnect()
+    return await connect()
         .then(purgeDatabase)
         .then(addInitialData);
 };

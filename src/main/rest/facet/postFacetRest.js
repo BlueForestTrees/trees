@@ -1,5 +1,6 @@
-import {validTreeId, validUnit} from "../../const/validations";
+import {validTreeId} from "../../const/validations";
 import {setFacet} from "../../service/facet/postFacetService";
+import {shortnames} from "../../service/unit/unitService";
 
 const run = require('../../util/run');
 const _ = require('lodash');
@@ -13,7 +14,7 @@ router.post('/api/facet/:treeId',
         validTreeId,
         check('facet._id').isMongoId(),
         check('facet.quantity.qt').isDecimal(),
-        validUnit('facet.quantity.unit')
+        check('facet.quantity.unit').isIn(shortnames)
     ],
     run(setFacet)
 );

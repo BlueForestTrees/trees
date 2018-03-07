@@ -1,9 +1,11 @@
 {
   "scripts": {
-    "dev-api": "nodemon $NODE_DEBUG_OPTION src/main/index.js --exec babel-node",
+    "dev-api": "nodemon src/main/index.js --exec babel-node",
+    "dev-api-win": "nodemon src/main/index.js --exec babel-node",
     "build-api": "babel lib -d dist",
     "serve-api": "node dist/index.js",
     "test-api": "NODE_ENV=test mocha --exit $(find src/test -name '*.js') --require babel-register",
+    "test-init-db-win": "set NODE_ENV=test && mocha --exit src/test/testInitDb.js --require babel-register",
     "test-init-db": "NODE_ENV=test mocha --exit src/test/testInitDb.js --require babel-register"
   },
   "env": "api",
@@ -38,8 +40,7 @@
     "mongodb": "^2.2.33",
     "morgan": "^1.9.0",
     "nested-error-stacks": "^2.0.0",
-    "pick-to-array": "^1.1.0",
-    "trees-common": "^1.0.5"
+    "pick-to-array": "^1.1.0"
   },
   "babel": {
     "presets": [

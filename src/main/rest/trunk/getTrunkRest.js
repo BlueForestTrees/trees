@@ -1,5 +1,6 @@
-import {existingId, optionalGrandeur} from "../../const/validations";
+import {existingId} from "../../const/validations";
 import {getTrunk, searchOrAll} from "../../service/trunk/getTrunkService";
+import {grandeurs} from "../../service/unit/unitService";
 
 const run = require('../../util/run');
 const router = require('express').Router();
@@ -9,7 +10,7 @@ module.exports = router;
 
 router.get('/api/trunks',
     [
-        optionalGrandeur('g'),
+        check('g').optional().isIn(grandeurs),
         check('q').optional().exists()
     ],
     run(({g, q}) => searchOrAll(g, q))

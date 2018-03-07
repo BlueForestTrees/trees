@@ -1,5 +1,6 @@
-import {validTreeId, validUnit} from "../../const/validations";
+import {validTreeId} from "../../const/validations";
 import {setImpact} from "../../service/impact/postImpactService";
+import {shortnames} from "../../service/unit/unitService";
 
 const run = require('../../util/run');
 const _ = require('lodash');
@@ -13,7 +14,7 @@ router.post('/api/impact/:treeId',
         validTreeId,
         check('impact._id').isMongoId(),
         check('impact.quantity.qt').isDecimal(),
-        validUnit('impact.quantity.unit')
+        check('impact.quantity.unit').isIn(shortnames)
     ],
     run(setImpact)
 );

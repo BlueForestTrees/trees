@@ -1,6 +1,6 @@
 import {pushItem, upsert, withId} from "../../util/query";
 import {cols} from "../../const/collections";
-import {col} from "../../db";
+import {col} from "../../repo";
 import {deleteFacets} from "./deleteFacetService";
 
 const facets = () => col(cols.FACET);

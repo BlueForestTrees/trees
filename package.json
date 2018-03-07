@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev-api": "nodemon src/main/index.js --exec babel-node",
+    "dev-api": "nodemon $NODE_DEBUG_OPTION src/main/index.js --exec babel-node",
     "dev-api-win": "nodemon src/main/index.js --exec babel-node",
     "build-api": "babel lib -d dist",
     "serve-api": "node dist/index.js",

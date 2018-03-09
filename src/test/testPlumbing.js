@@ -25,6 +25,7 @@ export const withQuantity = (qt, unit) => ({quantity: {qt, unit}});
 export const withTrunk = (name, _id, qt, unit) => ({name, name_lower: name.toLowerCase(), ...withItem(_id, qt, unit)});
 export const withTrunkNoQt = (name, _id) => ({_id, name, name_lower: name.toLowerCase()});
 export const withTrunkAuto = (name, qt, unit) => withTrunk(name, ObjectID().toString(), qt, unit);
+export const withEntry = (_id, name, grandeur) => ({_id, name, grandeur});
 
 export const setQuantity = (trunk, qt, unit) => {
     unit = unit ? unit : trunk.quantity.unit;

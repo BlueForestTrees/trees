@@ -1,15 +1,12 @@
-import chai from 'chai';
 import {app} from "../../../../main";
 import {allreadyExistingImpactEntrySpec, postBadGrandeurImpactEntrySpec, postImpactEntrySpec} from "../../../expected/impactEntry/testPostImpactEntryData";
 import {ObjectIDRegex} from "../../../expected/testCommonData";
-import {initDatabase} from "../../../testIntegDatabase";
-import {run} from "../../../testPlumbing";
+import {run} from "../../../util/testPlumbing";
+import {init, request} from "../../../util/testIntegApp";
 
 describe('POST ImpactEntry', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('nouvelleImpactEntrySpec', run(() => postImpactEntry(postImpactEntrySpec)));
 
@@ -20,7 +17,7 @@ describe('POST ImpactEntry', function () {
 
 });
 
-const postErrorImpactEntry = spec => chai.request(app)
+const postErrorImpactEntry = spec => request()
     .post(`/api/impactEntry`)
     .send(spec.req.body)
     .then(res => {
@@ -35,7 +32,7 @@ const postErrorImpactEntry = spec => chai.request(app)
         }
     });
 
-const postImpactEntry = spec => chai.request(app)
+const postImpactEntry = spec => request()
     .post(`/api/impactEntry`)
     .send(spec.req.body)
     .then(async res => {

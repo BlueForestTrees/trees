@@ -1,5 +1,5 @@
 import {clon} from "../../util/testUtil";
-import {removeItemQuantity, withItem, withQtCoef} from "../../testPlumbing";
+import {removeItemQuantity, withItem, withQtCoef} from "../../util/testPlumbing";
 import {bleTrunk, gateauRoot} from "../../database/gateau";
 import {arbreTrunk} from "../../database/skate";
 import {withIdQtUnit} from "../../../main/util/query";

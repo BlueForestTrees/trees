@@ -1,13 +1,10 @@
-import chai from 'chai';
 import {firstFacetSpec, thirdFacet, updatingBleFacetSpec} from "../../../expected/facet/testPostFacetData";
 import {app} from "../../../../main";
-import {assertDb, initDatabase} from "../../../testIntegDatabase";
+import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 
 describe('POST Facet', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('firstFacet', done => testPostFacetWith(firstFacetSpec, done));
     it('thirdFacet', done => testPostFacetWith(thirdFacet, done));
@@ -15,7 +12,7 @@ describe('POST Facet', function () {
 });
 
 const testPostFacetWith = (testDef, done) => {
-    chai.request(app)
+    request()
         .post(`/api/facet/${testDef.req._id}`)
         .send(testDef.req.body)
         .then(async (res) => {

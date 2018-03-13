@@ -1,21 +1,18 @@
-import chai from 'chai';
 import {app} from "../../../../main";
-import {assertDb, initDatabase} from "../../../testIntegDatabase";
-import {updateQuantityBranchSpec, setQuantityBranchSpec, updateQuantityAnotherUnitBranchSpec} from "../../../expected/branch/testPutBranchData";
+import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
+import {setQuantityBranchSpec, updateQuantityAnotherUnitBranchSpec, updateQuantityBranchSpec} from "../../../expected/branch/testPutBranchData";
 import {run} from "../testIntegPlumbing";
 
 describe('PUT Branch', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('set quantity', run(() => putBranch(setQuantityBranchSpec)));
     it('update quantity', run(() => putBranch(updateQuantityBranchSpec)));
     it('differentUnit', run(() => putBranch(updateQuantityAnotherUnitBranchSpec)));
 });
 
-export const putBranch = testDef => chai.request(app)
+export const putBranch = testDef => request()
     .put('/api/branch')
     .send(testDef.req.body)
     .then(async (res) => {

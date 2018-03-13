@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import {clon} from "../../util/testUtil";
-import {removeItemQuantity, setQuantity, withQtCoef, withItem, withoutQuantity} from "../../testPlumbing";
+import {removeItemQuantity, setQuantity, withQtCoef, withItem, withoutQuantity} from "../../util/testPlumbing";
 import {farineRoot, gateauRoot, laitTrunk} from "../../database/gateau";
 import {skateRoot} from "../../database/skate";
 import {aTrunk, daTrunk, dRoot} from "../../database/lettres";
-import {withNames} from "../../testIntegDatabase";
+import {withNames} from "../../util/testIntegDatabase";
 import {cols} from "../../../main/const/collections";
 import {coucheAdhesif, coucheAlu, couchePapier, couchePE, papierVA} from "../../database/papier";
 

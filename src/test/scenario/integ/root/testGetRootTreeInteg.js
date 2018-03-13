@@ -1,10 +1,10 @@
-import chai, {expect} from 'chai';
-import {app} from "../../../../main";
+import {expect} from 'chai';
 import {gateauRootTreeSpec, lettreGetRootTreeSpec, lettreNoDaQtGetRootTreeSpec, noRootsTreeSpec, papierAGetRootTreeSpec} from "../../../expected/root/testGetRootTreeData";
-import {run} from "../../../testPlumbing";
-import {initDatabase, run2} from "../../../testIntegDatabase";
+import {run} from "../../../util/testPlumbing";
+import {run2} from "../../../util/testIntegDatabase";
+import {init, request} from "../../../util/testIntegApp";
 
-const getRootTree = spec => chai.request(app)
+const getRootTree = spec => request()
     .get(`/api/root/tree/${spec.req.qt}${spec.req.unit ? '/' + spec.req.unit : ''}/${spec.req._id}`)
     .then(res => {
         res.should.have.status(200);
@@ -17,9 +17,7 @@ const getRootTree = spec => chai.request(app)
 
 describe('GET Root', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('return a little tree', run(() => getRootTree(gateauRootTreeSpec)));
 

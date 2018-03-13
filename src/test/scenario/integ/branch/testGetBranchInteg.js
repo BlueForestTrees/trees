@@ -1,24 +1,22 @@
-import chai, {expect} from 'chai';
-import {app} from "../../../../main";
-import {initDatabase} from "../../../testIntegDatabase";
 import {badUnitGetBranchSpec, branchWithoutQtSpec, emptyGetBranchSpec, farine1000GGetBranchSpec, getBranchsSpec, otherUnitGetBranchSpec, sameQtGetBranchSpec} from "../../../expected/branch/testGetBranchData";
 import {run} from "../testIntegPlumbing";
+import {init, request} from "../../../util/testIntegApp";
 
-const getBranch = spec => chai.request(app)
+const getBranch = spec => request()
     .get(`/api/branch/${spec.req._id}`)
     .then(res => {
         res.should.have.status(200);
         res.body.should.deep.equal(spec.res.body);
     });
 
-const getQuantifiedBranch = spec => chai.request(app)
+const getQuantifiedBranch = spec => request()
     .get(`/api/branch/${spec.req.qt}/${spec.req.unit}/${spec.req._id}`)
     .then(res => {
         res.should.have.status(200);
         res.body.should.deep.equal(spec.res.body);
     });
 
-const getErrorQuantifiedBranch = spec => chai.request(app)
+const getErrorQuantifiedBranch = spec => request()
     .get(`/api/branch/${spec.req.qt}/${spec.req.unit}/${spec.req._id}`)
     .then(res => {
         res.body.should.deep.equal(spec.res);
@@ -34,9 +32,7 @@ const getErrorQuantifiedBranch = spec => chai.request(app)
 
 describe('GET Branch', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('return branchs', run(() => getBranch(getBranchsSpec)));
 

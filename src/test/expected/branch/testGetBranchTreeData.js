@@ -1,6 +1,6 @@
 import {aTrunk} from "../../database/lettres";
 import {arbreTrunk} from "../../database/skate";
-import {withItem, withItemRequest} from "../../testPlumbing";
+import {withItem, withItemRequest} from "../../util/testPlumbing";
 
 export const noBranchsTreeSpec = {};
 noBranchsTreeSpec.req = {

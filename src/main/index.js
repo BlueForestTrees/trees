@@ -3,6 +3,8 @@ import {createExpress, initExpress, listen} from "./express";
 import {dbConnect} from "./db";
 import {initServices} from "./services";
 
+console.log("API starting...");
+
 export const express = createExpress();
 
 export const appPromise =

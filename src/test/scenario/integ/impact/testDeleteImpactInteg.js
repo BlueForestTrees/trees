@@ -1,17 +1,13 @@
-import chai from 'chai';
-
 import {impactDeletionSpec} from "../../../expected/impact/testDeleteImpactData";
 import {app} from "../../../../main";
-import {assertDb, initDatabase} from "../../../testIntegDatabase";
+import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 
 describe('DELETE Impact', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('delete the impact', done => {
-        chai.request(app)
+        request()
             .post(`/api/impact/deletion`)
             .send(impactDeletionSpec.req.body)
             .then(async res => {

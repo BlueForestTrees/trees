@@ -1,8 +1,8 @@
 import {clon} from "../../util/testUtil";
 import _ from 'lodash';
 import {bleImpacts, farineTrunk} from "../../database/gateau";
-import {nameOfImpact} from "../../testIntegDatabase";
-import {withQuantity} from "../../testPlumbing";
+import {nameOfImpact} from "../../util/testIntegDatabase";
+import {withQuantity} from "../../util/testPlumbing";
 
 export const getImpactSpec = {};
 

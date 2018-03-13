@@ -3,7 +3,7 @@ import {replaceItem} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
 import {bleFacets, farineTrunk} from "../../database/gateau";
 import {prixFacetEntry, vitBFacetEntry} from "../../database/facetEntries";
-import {withItem, withQuantity} from "../../testPlumbing";
+import {withItem, withQuantity} from "../../util/testPlumbing";
 
 export const firstFacetSpec = {};
 firstFacetSpec.req = {

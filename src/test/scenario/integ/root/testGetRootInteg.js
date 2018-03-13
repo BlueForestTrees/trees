@@ -1,24 +1,24 @@
-import chai, {expect} from 'chai';
+import {expect} from 'chai';
 import {app} from "../../../../main";
 import {badUnitGetRootSpec, emptyGetRootSpec, farineNoBleQtGetRootSpec, gateau1000GGetRootSpec, getRootsSpec, otherUnitGetRootSpec, sameQtGetRootSpec, skate10GetRootSpec} from "../../../expected/root/testGetRootData";
-import {run} from "../../../testPlumbing";
-import {initDatabase} from "../../../testIntegDatabase";
+import {run} from "../../../util/testPlumbing";
+import {init, request} from "../../../util/testIntegApp";
 
-const getRoot = spec => chai.request(app)
+const getRoot = spec => request()
     .get(`/api/root/${spec.req._id}`)
     .then(res => {
         res.should.have.status(200);
         res.body.should.deep.equal(spec.res.body);
     });
 
-const getQuantifiedRoot = spec => chai.request(app)
+const getQuantifiedRoot = spec => request()
     .get(`/api/root/${spec.req.qt}${spec.req.unit ? '/' + spec.req.unit : ''}/${spec.req._id}`)
     .then(res => {
         res.should.have.status(200);
         res.body.should.deep.equal(spec.res.body);
     });
 
-const getErrorQuantifiedRoot = spec => chai.request(app)
+const getErrorQuantifiedRoot = spec => request()
     .get(`/api/root/${spec.req.qt}/${spec.req.unit}/${spec.req._id}`)
     .then(res => {
         res.body.should.deep.equal(spec.res);
@@ -34,9 +34,7 @@ const getErrorQuantifiedRoot = spec => chai.request(app)
 
 describe('GET Root', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('return roots', run(() => getRoot(getRootsSpec)));
 

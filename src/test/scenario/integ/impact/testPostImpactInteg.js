@@ -1,13 +1,10 @@
-import chai from 'chai';
 import {firstImpactSpec, thirdImpact, updatingBleImpactSpec} from "../../../expected/impact/testPostImpactData";
 import {app} from "../../../../main";
-import {assertDb, initDatabase} from "../../../testIntegDatabase";
+import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 
 describe('POST Impact', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('firstImpact', done => testPostImpactWith(firstImpactSpec, done));
     it('thirdImpact', done => testPostImpactWith(thirdImpact, done));
@@ -15,7 +12,7 @@ describe('POST Impact', function () {
 });
 
 const testPostImpactWith = (testDef, done) => {
-    chai.request(app)
+    request()
         .post(`/api/impact/${testDef.req._id}`)
         .send(testDef.req.body)
         .then(async (res) => {

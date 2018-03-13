@@ -1,5 +1,5 @@
 import {cols} from "../../main/const/collections";
-import {withEntry} from "../testPlumbing";
+import {withEntry} from "../util/testPlumbing";
 
 
 export const vitBFacetEntry = withEntry("5a6a03c03e77667641d2d2c5", "vitamine B", "Densité");

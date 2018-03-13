@@ -1,23 +1,16 @@
-import chai from 'chai';
-import {appPromise} from "../../../../main";
-import {initDatabase} from "../../../testIntegDatabase";
+import {init, request} from "../../../util/testIntegApp";
 import {getGrandeurSpec} from "../../../expected/grandeur/testGetGrandeurData";
-
-let app = null;
 
 describe('GET Grandeurs', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-        app = await appPromise;
-    });
+    beforeEach(init);
 
     it('return grandeurs', done => testGetGrandeursWith(getGrandeurSpec, done));
 
 });
 
 const testGetGrandeursWith = (spec, done) => {
-    chai.request(app)
+    request()
         .get(`/api/grandeurs`)
         .end((err, res) => {
             res.should.have.status(200);

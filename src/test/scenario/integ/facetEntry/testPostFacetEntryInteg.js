@@ -1,15 +1,12 @@
-import chai from 'chai';
 import {app} from "../../../../main";
 import {allreadyExistingFacetEntrySpec, postBadGrandeurFacetEntrySpec, postFacetEntrySpec} from "../../../expected/facetEntry/testPostFacetEntryData";
 import {ObjectIDRegex} from "../../../expected/testCommonData";
-import {initDatabase} from "../../../testIntegDatabase";
-import {run} from "../../../testPlumbing";
+import {run} from "../../../util/testPlumbing";
+import {init, request} from "../../../util/testIntegApp";
 
 describe('POST FacetEntry', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('nouvelleFacetEntrySpec', run(() => postFacetEntry(postFacetEntrySpec)));
 
@@ -20,7 +17,7 @@ describe('POST FacetEntry', function () {
 
 });
 
-const postErrorFacetEntry = spec => chai.request(app)
+const postErrorFacetEntry = spec => request()
     .post(`/api/facetEntry`)
     .send(spec.req.body)
     .then(res => {
@@ -35,7 +32,7 @@ const postErrorFacetEntry = spec => chai.request(app)
         }
     });
 
-const postFacetEntry = spec => chai.request(app)
+const postFacetEntry = spec => request()
     .post(`/api/facetEntry`)
     .send(spec.req.body)
     .then(async res => {

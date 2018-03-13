@@ -1,18 +1,14 @@
-import chai from 'chai';
-
 import {trunkDeletionSpec} from "../../../expected/trunk/testDeleteTrunkData";
 import {oneResponse} from "../../../expected/testCommonData";
 import {app} from "../../../../main";
-import {assertDb, initDatabase} from "../../../testIntegDatabase";
+import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 
 describe('DELETE Trunks', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('delete the trunk', done => {
-        chai.request(app)
+        request()
             .del(`/api/trunk/${trunkDeletionSpec.req._id}`)
             .then(async res => {
                 res.should.have.status(200);

@@ -3,7 +3,7 @@ import {IS_DECIMAL, IS_NOT_TRUNK_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "./m
 import {check} from 'express-validator/check';
 import {peekTrunk} from "../service/trunk/getTrunkService";
 import _ from 'lodash';
-import {getGrandeursKeys, getShortnames} from "trees-common/dist/units";
+import {getGrandeursKeys, getShortnames} from "trees-common/dist";
 
 export const valid = (field, optional) => {
     let chain = check(field);

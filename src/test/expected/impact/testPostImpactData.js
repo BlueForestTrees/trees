@@ -3,7 +3,7 @@ import {replaceItem} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
 import {bleImpacts, farineTrunk} from "../../database/gateau";
 import {prixImpactEntry, vitBImpactEntry} from "../../database/impactEntries";
-import {withItem, withQuantity} from "../../testPlumbing";
+import {withItem, withQuantity} from "../../util/testPlumbing";
 
 export const firstImpactSpec = {};
 firstImpactSpec.req = {

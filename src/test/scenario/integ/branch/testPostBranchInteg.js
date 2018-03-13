@@ -1,21 +1,18 @@
-import chai from 'chai';
-import {app} from "../../../../main";
-import {assertDb, initDatabase} from "../../../testIntegDatabase";
+import {assertDb} from "../../../util/testIntegDatabase";
 import {existingBranchPostSpec, newBranchSpec} from "../../../expected/branch/testPostBranchData";
 import {run} from "../testIntegPlumbing";
+import {init, request} from "../../../util/testIntegApp";
 
 describe('POST Branch', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('newBranch', run(() => postBranch(newBranchSpec)));
 
     it('existing branch', run(() => postBranch(existingBranchPostSpec)));
 });
 
-export const postBranch = spec => chai.request(app)
+export const postBranch = spec => request()
     .post('/api/branch')
     .send(spec.req.body)
     .then(async res => {

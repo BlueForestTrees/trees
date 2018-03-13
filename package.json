@@ -4,9 +4,10 @@
     "dev-api-win": "nodemon src/main/index.js --exec babel-node",
     "build-api": "babel lib -d dist",
     "serve-api": "node dist/index.js",
-    "test-api": "NODE_ENV=test mocha --exit $(find src/test -name '*.js') --require babel-register",
-    "test-init-db-win": "set NODE_ENV=test && mocha --exit src/test/testInitDb.js --require babel-register",
-    "test-init-db": "NODE_ENV=test mocha --exit src/test/testInitDb.js --require babel-register"
+    "test-api": "PORT=9000 mocha --exit $(find src/test -name '*.js') --require babel-register",
+    "test-api-win": "set PORT=9000 && mocha --exit $(find src/test -name '*.js') --require babel-register",
+    "test-init-db-win": "mocha --exit src/test/util/testInitDb.js --require babel-register",
+    "test-init-db": "mocha --exit src/test/util/testInitDb.js --require babel-register"
   },
   "env": "api",
   "version": "0.0.1-SNAPSHOT",

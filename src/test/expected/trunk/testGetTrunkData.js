@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import {removeObjects} from "../../../main/util/addObjectID";
-import {initialTrees} from "../../testIntegDatabase";
+import {initialTrees} from "../../util/testIntegDatabase";
 import {farineTrunk, gateauTrunk} from "../../database/gateau";
 
 export const getAllTrunkSpec = {

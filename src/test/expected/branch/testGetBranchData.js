@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import {clon} from "../../util/testUtil";
-import {setQuantity, withoutQuantity, withQtCoef} from "../../testPlumbing";
+import {setQuantity, withoutQuantity, withQtCoef} from "../../util/testPlumbing";
 import {farineBranch, laitBranch, pizzaTrunk} from "../../database/gateau";
-import {withNames} from "../../testIntegDatabase";
+import {withNames} from "../../util/testIntegDatabase";
 
 export const getBranchsSpec = {};
 const farineItemsWithNames = withoutQuantity(withNames(clon(farineBranch.items)));

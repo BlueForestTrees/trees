@@ -3,7 +3,7 @@ import {clon} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
 import _ from 'lodash';
 import {bleTrunk, farineTrunk, gateauTrunk, gateauRoot, laitTrunk} from "../../database/gateau";
-import {setQuantity} from "../../testPlumbing";
+import {setQuantity} from "../../util/testPlumbing";
 import {setQuantityRootSpec, updateQuantityAnotherUnitRootSpec, updateQuantityRootSpec} from "../root/testPutRootData";
 import {setQuantityBranchSpec, updateQuantityAnotherUnitBranchSpec, updateQuantityBranchSpec} from "../branch/testPutBranchData";
 import {searchTrunkSpec as updateQuantityAnotherUnitSpec} from "../trunk/testGetTrunkData";

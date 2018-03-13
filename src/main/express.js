@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import path from "path";
 import read from 'fs-readdir-recursive';
 import {debug} from "./util/debug";
-import env from "../../config/env";
+import {port} from "../env";
 import express from 'express';
 
 export const createExpress = () => express();
@@ -39,5 +39,5 @@ export const initExpress = app => {
 };
 
 
-export const listen = app => app.listen(env.port);
+export const listen = app => console.log("Listening on " + port + "...") && app.listen(port);
 

@@ -1,6 +1,6 @@
 import {cols} from "../../main/const/collections";
 import {vitBFacetEntry, vitCFacetEntry} from "./facetEntries";
-import {withItem, withTrunk, withTrunkNoQt} from "../testPlumbing";
+import {withItem, withTrunk, withTrunkNoQt} from "../util/testPlumbing";
 import {vitBImpactEntry, vitCImpactEntry} from "./impactEntries";
 
 export const gateauTrunk = withTrunk("Gateau au chocolat", "5a6a03c03e77667641d2d2c3", 200, "g");

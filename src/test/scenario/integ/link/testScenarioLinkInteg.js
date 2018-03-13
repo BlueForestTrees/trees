@@ -1,17 +1,13 @@
-import {match, mock} from 'sinon';
-import {initDatabase} from "../../../testIntegDatabase";
-
-import {run} from "../../../testPlumbing";
+import {run} from "../../../util/testPlumbing";
 import {deleteLink} from "./testDeleteLinkInteg";
 import {postLink} from "./testPostLinkInteg";
 import {bleLinkDeletionSpec} from "../../../expected/link/testDeleteLinkData";
 import {bleToFarineLinkAddSpec} from "../../../expected/link/testPostLinkData";
+import {init} from "../../../util/testIntegApp";
 
 describe('SCENARIO Link', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('suppr puis réajout du blé à la farine',
         run(() => deleteLink(bleLinkDeletionSpec)

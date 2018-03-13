@@ -4,17 +4,17 @@ import chaiHttp from 'chai-http';
 import read from 'fs-readdir-recursive';
 import path from 'path';
 
-import {cols} from "../main/const/collections";
-import {col, dbConnect} from "../main/db";
-import {addObjects, removeObjects} from "../main/util/addObjectID";
-import {withId} from "../main/util/query";
-import {clon} from "./util/testUtil";
-
+import {cols} from "../../main/const/collections";
+import {col, dbConnect} from "../../main/db";
+import {addObjects, removeObjects} from "../../main/util/addObjectID";
+import {withId} from "../../main/util/query";
+import {clon} from "./testUtil";
 
 chai.use(chaiHttp);
 chai.should();
 
 export const initDatabase = async () => {
+    console.log("Init db for Tests...");
     return await dbConnect()
         .then(purgeDatabase)
         .then(addInitialData);
@@ -59,16 +59,20 @@ const updateDb = async ({colname, doc}) => {
     await col(colname).insertOne(addObjects(doc));
 };
 
-const databaseDef = buildDatabase(path.join(__dirname, "database"));
+const databaseDef = buildDatabase(path.join(__dirname, "../database"));
 const database = databaseDef.db;
 export const initialDB = databaseDef.objectDB;
 
-export const purgeDatabase = async () => Promise.all(_.map(cols, colname => col(colname).deleteMany()));
+export const purgeDatabase = async () => Promise.all(_.map(cols, colname => {
+    console.log("Suppression : " + colname);
+    return col(colname).deleteMany();
+}));
 
 export const addInitialData = async () => {
     return Promise.all(_.map(cols, async (colname) => {
         let datas = initialDB[colname];
         if (datas && datas.length > 0) {
+            console.log(`Insertion : ${colname} (${datas.length} documents)`);
             return await col(colname).insert(datas);
         }
     }));

@@ -1,13 +1,11 @@
 import {renameTrunkSpec, requantifyTrunkSpec} from "../../../expected/trunk/testPutTrunkData";
-import chai from 'chai';
+
 import {app} from "../../../../main";
-import {assertDb, initDatabase} from "../../../testIntegDatabase";
+import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 
 describe('PUT Trunks', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('rename the trunk', done => testPutTrunkWith(renameTrunkSpec, done));
     it('quantify the trunk', done => testPutTrunkWith(requantifyTrunkSpec, done));
@@ -15,7 +13,7 @@ describe('PUT Trunks', function () {
 });
 
 const testPutTrunkWith = (spec, done) => {
-    chai.request(app)
+    request()
         .put(`/api/trunk/${spec.req.params._id}`)
         .send(spec.req.body)
         .then(async res => {

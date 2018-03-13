@@ -1,25 +1,18 @@
-import chai from 'chai';
-import {match, mock} from 'sinon';
-
-import {app} from "../../../../main";
-
-import {run} from "../../../testPlumbing";
-import {updateQuantityRootSpec, setQuantityRootSpec, updateQuantityAnotherUnitRootSpec} from "../../../expected/root/testPutRootData";
-import {assertDb, initDatabase} from "../../../testIntegDatabase";
+import {run} from "../../../util/testPlumbing";
+import {assertDb} from "../../../util/testIntegDatabase";
 import {setQuantityLinkSpec, updateQuantityAnotherUnitLinkSpec, updateQuantityLinkSpec} from "../../../expected/link/testPutLinkData";
+import {init, request} from "../../../util/testIntegApp";
 
 describe('PUT Link', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('set quantity', run(() => putLink(setQuantityLinkSpec)));
     it('update quantity', run(() => putLink(updateQuantityLinkSpec)));
     it('update quantity with another unit', run(() => putLink(updateQuantityAnotherUnitLinkSpec)));
 });
 
-export const putLink = testDef => chai.request(app)
+export const putLink = testDef => request()
     .put('/api/link')
     .send(testDef.req.body)
     .then(async (res) => {

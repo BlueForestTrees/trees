@@ -1,11 +1,11 @@
-import chai from 'chai';
 import {app} from "../../../../main";
-import {run} from "../../../testPlumbing";
-import {initDatabase, run2} from "../../../testIntegDatabase";
+import {run} from "../../../util/testPlumbing";
+import {run2} from "../../../util/testIntegDatabase";
 import {papierAImpactTankSpec, sansImpactTankSpec} from "../../../expected/impacttank/testGetImpactTankData";
+import {init, request} from "../../../util/testIntegApp";
 
 const getTank = spec => {
-    return chai.request(app)
+    return request()
         .get(`/api/impacttank/${spec.req.quantity.qt}/${spec.req.quantity.unit}/${spec.req._id}`)
         .then(async (res) => {
             res.should.have.status(200);
@@ -15,9 +15,7 @@ const getTank = spec => {
 
 describe('GET ImpactTank', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('papierAImpactTankSpec', run(() => getTank(papierAImpactTankSpec)));
 

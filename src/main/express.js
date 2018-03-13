@@ -39,5 +39,8 @@ export const initExpress = app => {
 };
 
 
-export const listen = app => console.log("Listening on " + port + "...") && app.listen(port);
+export const listen = app => {
+    console.log("Listening on " + port + "...");
+    return app.listen(port);
+};
 

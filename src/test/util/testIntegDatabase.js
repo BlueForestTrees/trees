@@ -9,6 +9,7 @@ import {col, dbConnect} from "../../main/db";
 import {addObjects, removeObjects} from "../../main/util/addObjectID";
 import {withId} from "../../main/util/query";
 import {clon} from "./testUtil";
+import {debug} from "./testPlumbing";
 
 chai.use(chaiHttp);
 chai.should();
@@ -83,10 +84,12 @@ export const assertDb = async ({list, colname, doc, missingDoc}) => {
         return Promise.all(_.map(list, expected => assertDb(expected)));
     } else if (doc) {
         const dbDoc = await loadFromDbById(colname, doc._id);
-        return expect(dbDoc).to.deep.equal(doc);
+        expect(dbDoc).to.deep.equal(doc);
+        debug("dbDoc", dbDoc);
     } else if (missingDoc) {
         const dbDoc = await loadFromDbById(colname, missingDoc._id);
-        return expect(dbDoc).to.be.null;
+        expect(dbDoc).to.be.null;
+        debug("removed", dbDoc);
     }
 };
 

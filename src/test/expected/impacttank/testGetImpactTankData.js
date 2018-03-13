@@ -7,7 +7,7 @@ import {co2eImpactEntry} from "../../database/impactEntries";
 export const papierAImpactTankSpec = {};
 papierAImpactTankSpec.req = {
     _id: papierVA._id,
-    quantity: papierVA.quantity
+    quantity: {qt: papierVA.quantity.qt, unit: papierVA.quantity.unit}
 };
 papierAImpactTankSpec.res = {
     body: {

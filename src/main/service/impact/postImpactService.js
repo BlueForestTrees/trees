@@ -5,9 +5,9 @@ import {deleteImpacts} from "./deleteImpactService";
 
 const impacts = () => col(cols.IMPACT);
 
-export const setImpact = async ({treeId, impact}) => {
-    await deleteImpacts({treeId, impactIds:[impact._id]});
-    return addImpact({treeId,impact});
+export const setImpact = async ({trunk, impact}) => {
+    await deleteImpacts({trunk, impactIds: [impact._id]});
+    return addImpact({trunk, impact});
 };
 
-const addImpact = ({treeId, impact}) => impacts().update(withId(treeId), pushItem(impact), upsert);
+const addImpact = ({trunk, impact}) => impacts().update(withId(trunk._id), pushItem(impact), upsert);

@@ -14,6 +14,7 @@ export const valid = (field, optional) => {
 };
 const trunkFound = (field, optional) => valid(field, optional).custom(peekTrunk).withMessage("not found");
 
+export const validItem = key => [validId(`${key}._id`), validQt(`${key}.quantity.qt`), validUnit(`${key}.quantity.unit`)];
 export const validId = valid(ID);
 export const validTreeId = valid(TREE_ID);
 export const validGrandeur = field => check(field).isIn(getGrandeursKeys());
@@ -26,7 +27,7 @@ export const optionalExistingSourceId = trunkFound(SOURCE_ID, true);
 export const rootIdIsNotTrunkId = check(ROOT_ID, IS_NOT_TRUNK_ID).custom((root, {req}) => (!root || !req.body.trunk) || (root._id !== req.body.trunk._id));
 export const branchIdIsNotTrunkId = check(BRANCH_ID, IS_NOT_TRUNK_ID).custom((branch, {req}) => (!branch || !req.body.trunk) || (branch._id !== req.body.trunk._id));
 export const optionalValidName = check(NAME).optional().matches(/^.+/);
-export const validName = check(NAME).isLength({min:2}).matches(/^.+/);
+export const validName = check(NAME).isLength({min: 2}).matches(/^.+/);
 
 export const present = (...fields) => _.map(fields, field => check(field, SHOULD_BE_DEFINED).exists());
 export const validUnit = field => check(field, IS_VALID_UNIT).optional().exists().isIn(getShortnames());

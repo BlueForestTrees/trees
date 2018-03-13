@@ -5,17 +5,17 @@ import {bleImpacts, farineTrunk} from "../../database/gateau";
 import {prixImpactEntry, vitBImpactEntry} from "../../database/impactEntries";
 import {withItem, withQuantity} from "../../util/testPlumbing";
 
-export const firstImpactSpec = {};
-firstImpactSpec.req = {
+export const farineCreatingImpactSpec = {};
+farineCreatingImpactSpec.req = {
     _id: farineTrunk._id,
     body: {
         impact: withItem(prixImpactEntry._id, 144, "m2")
     }
 };
-firstImpactSpec.res = {
+farineCreatingImpactSpec.res = {
     body: oneUpsertedResponse(farineTrunk._id)
 };
-firstImpactSpec.db = {
+farineCreatingImpactSpec.db = {
     expected: {
         colname: cols.IMPACT,
         doc: {
@@ -28,24 +28,24 @@ firstImpactSpec.db = {
     }
 };
 
-export const thirdImpact = {};
+export const bleAddingImpactSpec = {};
 const trunkId = bleImpacts._id;
 
-thirdImpact.req = {
+bleAddingImpactSpec.req = {
     _id: trunkId,
     body: {impact: withItem(prixImpactEntry._id, 144, "m2")}
 };
 
-thirdImpact.res = {
+bleAddingImpactSpec.res = {
     body: oneModifiedResponse
 };
 
-thirdImpact.db = {
+bleAddingImpactSpec.db = {
     expected: {
         colname: cols.IMPACT,
         doc: {
             _id: trunkId,
-            ...withQuantity(10,"kg"),
+            ...withQuantity(10, "kg"),
             items: [
                 ...bleImpacts.items,
                 withItem(prixImpactEntry._id, 144, "m2")
@@ -55,18 +55,17 @@ thirdImpact.db = {
     }
 };
 
-
-export const updatingBleImpactSpec = {};
-updatingBleImpactSpec.req = {
+export const bleUpdatingImpactSpec = {};
+bleUpdatingImpactSpec.req = {
     _id: bleImpacts._id,
     body: {
         impact: withItem(vitBImpactEntry._id, 14, "m")
     }
 };
-updatingBleImpactSpec.res = {
+bleUpdatingImpactSpec.res = {
     body: oneModifiedResponse
 };
-updatingBleImpactSpec.db = {
+bleUpdatingImpactSpec.db = {
     expected: {
         colname: cols.IMPACT,
         doc: replaceItem(bleImpacts, "items", withItem(vitBImpactEntry._id, 14, "m"))

@@ -2,7 +2,7 @@ import chai from 'chai';
 import {app} from "../../../../main";
 import {run} from "../../../testPlumbing";
 import {initDatabase, run2} from "../../../testIntegDatabase";
-import {papierAImpactTankSpec, sansImpactTankSpec} from "../../../expected/impacttank/testGetImpactTankData";
+import {papierAImpactTankSpec, sansImpactTankSpec, gateauImpactTankSpec} from "../../../expected/impacttank/testGetImpactTankData";
 
 const getTank = spec => {
     return chai.request(app)
@@ -20,6 +20,8 @@ describe('GET ImpactTank', function () {
     });
 
     it('papierAImpactTankSpec', run(() => getTank(papierAImpactTankSpec)));
+
+    it('gateauImpactTankSpec', run(() => getTank(gateauImpactTankSpec)));
 
     it('sansImpactTankSpec', run2(getTank, sansImpactTankSpec));
 

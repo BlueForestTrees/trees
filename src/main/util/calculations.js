@@ -1,7 +1,6 @@
 import _ from 'lodash'
-import {qtUnitCoef, sameGrandeur, toBaseQuantity} from "../service/unit/unitService";
+import {qtUnitCoef, sameGrandeur, toBaseQuantity} from "trees-common/dist";
 import {GrandeurMismatchError} from "../exceptions/Errors";
-import {debug} from "./debug";
 import Fraction from "fraction.js";
 
 
@@ -60,18 +59,6 @@ export const mergeItems = (left, right) => {
 };
 
 //CLONE
-const precisionRound = (number, precision) => {
-    var factor = Math.pow(10, precision);
-    return Math.round(number * factor) / factor;
-};
-export const bestRound = v =>
-    v < 1 ? precisionRound(v,3)
-        :
-        v < 10 ? precisionRound(v,2)
-            :
-            v < 100 ? precisionRound(v,1)
-                :
-                Math.round(v);
 
 export const treefy = (quantity, graph) => {
 

@@ -40,7 +40,8 @@
     "mongodb": "^2.2.33",
     "morgan": "^1.9.0",
     "nested-error-stacks": "^2.0.0",
-    "pick-to-array": "^1.1.0"
+    "pick-to-array": "^1.1.0",
+    "trees-common": "^1.0.18"
   },
   "babel": {
     "presets": [

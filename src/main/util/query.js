@@ -1,9 +1,9 @@
-import _ from 'lodash';
+import {forEach, map} from 'lodash';
 import mongo from 'mongodb';
 
 export const upsert = {upsert: true};
 export const object = id => new mongo.ObjectID(id);
-export const objects = ids => _.map(ids, object);
+export const objects = ids => map(ids, object);
 
 export const withId = id => ({_id: object(id)});
 export const withIdIn = ids => ({_id: {$in: objects(ids)}});
@@ -21,11 +21,11 @@ export const pushItem = ({_id, quantity}) => ({$push: {items: withIdQuantity(_id
 
 export const emptyGroup = _id => ({_id, items: []});
 
-export const quantityField = {quantity:1};
+export const quantityField = {quantity: 1};
 
 
 export const removeQuantity = e => {
     delete e.quantity;
-    _.forEach(e.items, item => delete item.quantity);
+    forEach(e.items, item => delete item.quantity);
     return e;
 };

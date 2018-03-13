@@ -14,7 +14,7 @@ export const valid = (field, optional) => {
 };
 const trunkFound = (field, optional) => valid(field, optional).custom(peekTrunk).withMessage("not found");
 
-export const validItem = key => [validId(`${key}._id`), validQt(`${key}.quantity.qt`), validUnit(`${key}.quantity.unit`)];
+export const validItem = key => [valid(`${key}._id`), validQt(`${key}.quantity.qt`), validUnit(`${key}.quantity.unit`)];
 export const validId = valid(ID);
 export const validTreeId = valid(TREE_ID);
 export const validGrandeur = field => check(field).isIn(getGrandeursKeys());

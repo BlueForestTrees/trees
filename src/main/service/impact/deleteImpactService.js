@@ -4,4 +4,4 @@ import {pullItems, withId} from "../../util/query";
 
 const impacts = () => col(cols.IMPACT);
 
-export const deleteImpacts = ({trunk, impactIds}) => impacts().update(withId(trunk._id), pullItems(impactIds));
+export const deleteImpacts = ({treeId, impactIds}) => impacts().update(withId(treeId), pullItems(impactIds));

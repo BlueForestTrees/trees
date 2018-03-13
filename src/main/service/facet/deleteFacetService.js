@@ -1,5 +1,5 @@
 import {cols} from "../../const/collections";
-import {col} from "../../repo";
+import {col} from "../../db";
 import {pullItems, withId} from "../../util/query";
 
 

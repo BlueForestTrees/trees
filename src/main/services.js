@@ -1,5 +1,4 @@
 import {loadUnitsData} from "./service/unit/grandeurService";
-import {hey, saloute} from "trees-common/dist";
 import {getShortnames, initUnits, getGrandeursKeys} from "trees-common/dist";
 
 export const initServices = () => {

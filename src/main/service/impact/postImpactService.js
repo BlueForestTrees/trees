@@ -1,6 +1,6 @@
 import {pushItem, upsert, withId} from "../../util/query";
 import {cols} from "../../const/collections";
-import {col} from "../../repo";
+import {col} from "../../db";
 import {deleteImpacts} from "./deleteImpactService";
 
 const impacts = () => col(cols.IMPACT);

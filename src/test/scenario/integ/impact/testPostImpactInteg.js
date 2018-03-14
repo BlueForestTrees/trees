@@ -1,11 +1,10 @@
-import {bleAddingImpactSpec, bleUpdatingImpactSpec, farineCreatingImpactSpec} from "../../../expected/impact/testPostImpactData";
+import {bleAddingImpactSpec, bleAddingImpactSpec2, bleUpdatingImpactSpec, farineCreatingImpactSpec} from "../../../expected/impact/testPostImpactData";
 import {assertDb} from "../../../util/testIntegDatabase";
 import {init, request} from "../../../util/testIntegApp";
 
-
 const by = spec => done => {
     request()
-        .post(`/api/impact/${spec.req._id}`)
+        .post(`/api/impact`)
         .send(spec.req.body)
         .then(async (res) => {
             res.should.have.status(200);
@@ -22,8 +21,8 @@ describe('POST Impact', function () {
 
     beforeEach(init);
 
-    it('create farine impacts', by(farineCreatingImpactSpec));
-    it('firstImpact', by(farineCreatingImpactSpec));
-    it('thirdImpact', by(bleAddingImpactSpec));
-    it('updatingImpact', by(bleUpdatingImpactSpec));
+    it('create impacts to farine', by(farineCreatingImpactSpec));
+    it('adding impact to ble', by(bleAddingImpactSpec));
+    it('adding impact to ble different trunk qt', by(bleAddingImpactSpec2));
+    it('update impact of ble', by(bleUpdatingImpactSpec));
 });

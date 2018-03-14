@@ -1,19 +1,10 @@
-import {firstFacetSpec, thirdFacet, updatingBleFacetSpec} from "../../../expected/facet/testPostFacetData";
+import {createFacetSpec, addingFacet, updatingBleFacetSpec} from "../../../expected/facet/testPostFacetData";
 import {app} from "../../../../main";
 import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 
-describe('POST Facet', function () {
-
-    beforeEach(init);
-
-    it('firstFacet', done => testPostFacetWith(firstFacetSpec, done));
-    it('thirdFacet', done => testPostFacetWith(thirdFacet, done));
-    it('updatingFacet', done => testPostFacetWith(updatingBleFacetSpec, done));
-});
-
-const testPostFacetWith = (testDef, done) => {
+const by = testDef => done => {
     request()
-        .post(`/api/facet/${testDef.req._id}`)
+        .post(`/api/facet`)
         .send(testDef.req.body)
         .then(async (res) => {
             res.should.have.status(200);
@@ -25,3 +16,13 @@ const testPostFacetWith = (testDef, done) => {
             done(err);
         });
 };
+
+describe('POST Facet', function () {
+
+    beforeEach(init);
+
+    it('firstFacet', by(createFacetSpec));
+    it('thirdFacet', by(addingFacet));
+    it('updatingFacet', by(updatingBleFacetSpec));
+});
+

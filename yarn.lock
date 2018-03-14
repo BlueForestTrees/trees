@@ -3588,9 +3588,9 @@ trees-errors@^0.0.0:
   dependencies:
     nested-error-stacks "^2.0.0"
 
-trees-items-service@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/trees-items-service/-/trees-items-service-0.0.8.tgz#482078aad921f98c9dc6e09e33c0fe1dc51d6f5f"
+trees-items-service@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/trees-items-service/-/trees-items-service-0.0.9.tgz#164ef1d933c10633790688a67942efab7d172050"
   dependencies:
     trees-errors "^0.0.0"
     trees-query "^0.0.9"

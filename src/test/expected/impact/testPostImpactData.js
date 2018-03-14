@@ -1,39 +1,39 @@
-import {oneModifiedResponse, oneUpsertedResponse} from "../testCommonData";
+import {oneModifiedResponse} from "../testCommonData";
 import {replaceItem} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
 import {bleImpacts, farineTrunk} from "../../database/gateau";
 import {prixImpactEntry, vitBImpactEntry} from "../../database/impactEntries";
-import {withItem, withQuantity} from "../../util/testPlumbing";
+import {withItem} from "../../util/testPlumbing";
 
 export const farineCreatingImpactSpec = {};
 farineCreatingImpactSpec.req = {
-    _id: farineTrunk._id,
     body: {
+        trunk: withItem(farineTrunk._id, 45, "m2"),
         impact: withItem(prixImpactEntry._id, 144, "m2")
     }
 };
 farineCreatingImpactSpec.res = {
-    body: oneUpsertedResponse(farineTrunk._id)
+    body: oneModifiedResponse
 };
 farineCreatingImpactSpec.db = {
     expected: {
         colname: cols.IMPACT,
         doc: {
-            _id: farineTrunk._id,
+            ...withItem(farineTrunk._id, 45, "m2"),
             items: [
                 withItem(prixImpactEntry._id, 144, "m2")
             ],
-
         }
     }
 };
 
 export const bleAddingImpactSpec = {};
-const trunkId = bleImpacts._id;
 
 bleAddingImpactSpec.req = {
-    _id: trunkId,
-    body: {impact: withItem(prixImpactEntry._id, 144, "m2")}
+    body: {
+        trunk: withItem(bleImpacts._id, 10, "kg"),
+        impact: withItem(prixImpactEntry._id, 144, "m2")
+    }
 };
 
 bleAddingImpactSpec.res = {
@@ -44,8 +44,7 @@ bleAddingImpactSpec.db = {
     expected: {
         colname: cols.IMPACT,
         doc: {
-            _id: trunkId,
-            ...withQuantity(10, "kg"),
+            ...withItem(bleImpacts._id, 10, "kg"),
             items: [
                 ...bleImpacts.items,
                 withItem(prixImpactEntry._id, 144, "m2")
@@ -55,11 +54,38 @@ bleAddingImpactSpec.db = {
     }
 };
 
+export const bleAddingImpactSpec2 = {};
+
+bleAddingImpactSpec2.req = {
+    body: {
+        trunk: withItem(bleImpacts._id, 5, "kg"),
+        impact: withItem(prixImpactEntry._id, 144, "m2")
+    }
+};
+
+bleAddingImpactSpec2.res = {
+    body: oneModifiedResponse
+};
+
+bleAddingImpactSpec2.db = {
+    expected: {
+        colname: cols.IMPACT,
+        doc: {
+            ...withItem(bleImpacts._id, 10, "kg"),
+            items: [
+                ...bleImpacts.items,
+                withItem(prixImpactEntry._id, 288, "m2")
+            ],
+
+        }
+    }
+};
+
 export const bleUpdatingImpactSpec = {};
 bleUpdatingImpactSpec.req = {
-    _id: bleImpacts._id,
     body: {
-        impact: withItem(vitBImpactEntry._id, 14, "m")
+        trunk: withItem(bleImpacts._id, 5, "kg"),
+        impact: withItem(vitBImpactEntry._id, 20, "mmol")
     }
 };
 bleUpdatingImpactSpec.res = {
@@ -68,6 +94,6 @@ bleUpdatingImpactSpec.res = {
 bleUpdatingImpactSpec.db = {
     expected: {
         colname: cols.IMPACT,
-        doc: replaceItem(bleImpacts, "items", withItem(vitBImpactEntry._id, 14, "m"))
+        doc: replaceItem(bleImpacts, "items", withItem(vitBImpactEntry._id, 40, "mmol"))
     }
 };

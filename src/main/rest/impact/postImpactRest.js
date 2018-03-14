@@ -9,7 +9,6 @@ module.exports = router;
 router.post('/api/impact/:treeId',
     [
         valid("treeId"),
-        //...validItem('trunk'),
         ...validItem('impact')
     ],
     run(setImpact)

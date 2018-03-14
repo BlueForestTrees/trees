@@ -3582,6 +3582,20 @@ tough-cookie@~2.3.0:
   dependencies:
     punycode "^1.4.1"
 
+trees-errors@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/trees-errors/-/trees-errors-0.0.0.tgz#f936f6064250fc38d9fcc44119a4cc548dc66308"
+  dependencies:
+    nested-error-stacks "^2.0.0"
+
+trees-items-service@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/trees-items-service/-/trees-items-service-0.0.8.tgz#482078aad921f98c9dc6e09e33c0fe1dc51d6f5f"
+  dependencies:
+    trees-errors "^0.0.0"
+    trees-query "^0.0.9"
+    trees-units "^1.0.0"
+
 trees-query@^0.0.9:
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/trees-query/-/trees-query-0.0.9.tgz#00852392ab93448b99b3855815e062ad93157af3"

@@ -2,7 +2,7 @@ import {peekImpactEntries} from "../service/impactEntry/getImpactEntryService";
 import {getImpact} from "../service/impact/getImpactService";
 import _ from 'lodash';
 import {applyQuantity} from "../util/calculations";
-import {removeQuantity} from "../util/query";
+import {removeQuantity} from "trees-query";
 
 export const loadImpact = _id =>
     getImpact(_id)

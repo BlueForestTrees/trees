@@ -7,7 +7,9 @@
     "test-api": "PORT=9000 mocha --exit $(find src/test -name '*.js') --require babel-register",
     "test-api-win": "set PORT=9000 && mocha --exit $(find src/test -name '*.js') --require babel-register",
     "test-init-db-win": "mocha --exit src/test/util/testInitDb.js --require babel-register",
-    "test-init-db": "mocha --exit src/test/util/testInitDb.js --require babel-register"
+    "test-init-db": "mocha --exit src/test/util/testInitDb.js --require babel-register",
+    "upgrade-query": "yarn upgrade -L trees-query",
+    "upgrade-units": "yarn upgrade -L trees-units"
   },
   "env": "api",
   "version": "0.0.1-SNAPSHOT",
@@ -15,8 +17,8 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-plugin-transform-builtin-extend": "^1.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-3": "^6.24.1",
@@ -41,7 +43,8 @@
     "morgan": "^1.9.0",
     "nested-error-stacks": "^2.0.0",
     "pick-to-array": "^1.1.0",
-    "trees-common": "^1.0.18"
+    "trees-query": "^0.0.9",
+    "trees-units": "^1.0.0"
   },
   "babel": {
     "presets": [

@@ -2,7 +2,7 @@ import {match, mock} from 'sinon';
 
 import {withItem, withQuantity} from "../../util/testPlumbing";
 import {basifyQuantity, mergeItems, quantified, sum, summify} from "../../../main/util/calculations";
-import {withId} from "../../../main/util/query";
+import {withId} from "trees-query";
 import Fraction from "fraction.js";
 import chai from "chai";
 

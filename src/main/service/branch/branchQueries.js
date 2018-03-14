@@ -1,6 +1,6 @@
 import {cols} from "../../const/collections";
 import {col} from "../../db";
-import {matchId, withId, withIdQtUnit} from "../../util/query";
+import {matchId, withId, withIdQtUnit} from "trees-query";
 import {treefy} from "../../util/calculations";
 
 const branches = () => col(cols.BRANCH);

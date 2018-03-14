@@ -1,8 +1,8 @@
 import {cols} from "../../const/collections";
 import {col} from "../../db";
 import {GrandeurMismatchError, UnitInvalidError} from "../../exceptions/Errors";
-import {pullItem, pushItem, quantityField, upsert, withId} from "../../util/query";
-import {qtUnitCoef} from "trees-common/dist";
+import {pullItem, pushItem, quantityField, upsert, withId} from "trees-query";
+import {qtUnitCoef} from "trees-units";
 
 const branches = () => col(cols.BRANCH);
 

@@ -1,5 +1,5 @@
 import _, {cloneDeep, find, forEach, groupBy, isNil, map, omit, some} from 'lodash'
-import {qtUnitCoef, sameGrandeur, toBaseQuantity} from "trees-common/dist";
+import {qtUnitCoef, sameGrandeur, toBaseQuantity} from "trees-units";
 import {GrandeurMismatchError} from "../exceptions/Errors";
 import Fraction from "fraction.js";
 

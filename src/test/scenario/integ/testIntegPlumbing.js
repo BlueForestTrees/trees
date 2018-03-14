@@ -2,7 +2,7 @@ import chai, {expect} from 'chai';
 import chaiHttp from 'chai-http';
 import {col} from "../../../main/db";
 import {removeObjects} from "../../../main/util/addObjectID";
-import {withId} from "../../../main/util/query";
+import {withId} from "trees-query";
 
 chai.use(chaiHttp);
 chai.should();

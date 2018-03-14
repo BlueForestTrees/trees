@@ -2,7 +2,7 @@ import {clon} from "../../util/testUtil";
 import {removeItemQuantity, withItem, withQtCoef} from "../../util/testPlumbing";
 import {bleTrunk, gateauRoot} from "../../database/gateau";
 import {arbreTrunk} from "../../database/skate";
-import {withIdQtUnit} from "../../../main/util/query";
+import {withIdQtUnit} from "trees-query";
 import {coucheAdhesif, coucheAlu, couchePapier, couchePE, papierVA} from "../../database/papier";
 import {aTrunk, daTrunk, dRoot} from "../../database/lettres";
 import {cols} from "../../../main/const/collections";

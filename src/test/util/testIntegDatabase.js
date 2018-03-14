@@ -7,7 +7,7 @@ import path from 'path';
 import {cols} from "../../main/const/collections";
 import {col, dbConnect} from "../../main/db";
 import {addObjects, removeObjects} from "../../main/util/addObjectID";
-import {withId} from "../../main/util/query";
+import {withId} from "trees-query";
 import {clon} from "./testUtil";
 import {debug} from "./testPlumbing";
 

@@ -2,7 +2,7 @@ import {peekFacetEntries} from "../service/facetEntry/getFacetEntryService";
 import {getFacet} from "../service/facet/getFacetService";
 import _ from 'lodash';
 import {applyQuantity} from "../util/calculations";
-import {removeQuantity} from "../util/query";
+import {removeQuantity} from "trees-query";
 
 export const loadFacet = _id =>
     getFacet(_id)

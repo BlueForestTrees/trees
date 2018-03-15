@@ -1,7 +1,7 @@
 FROM node:latest AS api-builder
 
 RUN mkdir -p /build
-COPY package.json ./build/
+COPY package*.json ./build/
 COPY src/ ./build/src
 
 WORKDIR /build

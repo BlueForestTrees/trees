@@ -1,15 +1,15 @@
-FROM arm32v7/node:latest
+FROM node:latest AS api-builder
 
-WORKDIR /usr/api
+RUN mkdir -p /build
+COPY package*.json ./build
+COPY src/ ./build/src
 
-COPY package*.json ./
-
-RUN [ "cross-build-start" ]
+WORKDIR /build
 RUN npm install
-RUN [ "cross-build-end" ]
+RUN npm run build
 
-COPY src/main/index.js .
-COPY src/ ./src
+FROM arm32v7/node:latest
+COPY --from=api-builder /build/dist/ .
 
 EXPOSE 8080
 ENTRYPOINT ["npm","run","start"]

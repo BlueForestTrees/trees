@@ -2,8 +2,8 @@
   "scripts": {
     "dev-api": "nodemon $NODE_DEBUG_OPTION src/main/index.js --exec babel-node",
     "dev-api-win": "nodemon src/main/index.js --exec babel-node",
-    "build-api": "babel lib -d dist",
-    "serve-api": "node dist/index.js",
+    "build": "babel src --out-dir dist",
+    "start": "node dist/main/index.js",
     "test-api": "PORT=9000 mocha --exit $(find src/test -name '*.js') --require babel-register",
     "test-api-win": "set PORT=9000 && mocha --exit $(find src/test -name '*.js') --require babel-register",
     "test-init-db-win": "mocha --exit src/test/util/testInitDb.js --require babel-register",

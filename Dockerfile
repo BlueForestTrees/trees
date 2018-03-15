@@ -3,7 +3,10 @@ FROM hypriot/rpi-node:latest
 WORKDIR /usr/api
 
 COPY package*.json ./
+
+RUN [ "cross-build-start" ]
 RUN npm install
+RUN [ "cross-build-end" ]
 
 COPY src/main/index.js .
 COPY src/ ./src

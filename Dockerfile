@@ -1,5 +1,4 @@
-#FROM arm32v7/node
-FROM node:carbon
+FROM arm32v7/node:latest
 
 WORKDIR /usr/api
 

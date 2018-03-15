@@ -1,4 +1,4 @@
-FROM arm32v7/node:latest
+FROM hypriot/rpi-node:latest
 
 WORKDIR /usr/api
 

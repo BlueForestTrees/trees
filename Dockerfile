@@ -8,7 +8,7 @@ WORKDIR /build
 RUN npm install
 RUN npm run build
 
-FROM arm32v7/node:latest
+FROM arm64v8/node:latest
 COPY --from=api-builder /build/package.json ./
 COPY --from=api-builder /build/dist ./dist
 COPY --from=api-builder /build/node_modules ./node_modules

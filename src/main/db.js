@@ -2,7 +2,7 @@ import ENV from "../env";
 import mongodb from 'mongodb';
 
 const client = mongodb.MongoClient;
-const connectionString = `mongodb://${ENV.dbhost}:${ENV.dbport}/${ENV.dbname}`;
+const connectionString = `mongodb://${ENV.DB_HOST}:${ENV.DB_PORT}/${ENV.DB_NAME}`;
 
 let database = null;
 

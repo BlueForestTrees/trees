@@ -1,11 +1,11 @@
 import {debug} from "./main/util/debug";
 
 const ENV = {
-    port: process.env.PORT || 8080,
-    dbname: process.env.DBNAME || "BlueForestTreesDB",
-    dbhost: process.env.DBHOST || "localhost",
-    dbport: process.env.DBPORT || 27017,
-    node_env: process.env.NODE_ENV || null
+    PORT: process.env.PORT || 8080,
+    DB_NAME: process.env.DB_NAME || "BlueForestTreesDB",
+    DB_HOST: process.env.DB_HOST || "localhost",
+    DB_PORT: process.env.DB_PORT || 27017,
+    NODE_ENV: process.env.NODE_ENV || null
 };
 
 debug({ENV});

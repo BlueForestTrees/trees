@@ -3,11 +3,11 @@ import chai, {expect} from 'chai';
 import chaiHttp from 'chai-http';
 import read from 'fs-readdir-recursive';
 import path from 'path';
+import {withId} from "trees-query";
 
 import {cols} from "../../main/const/collections";
 import {col, dbConnect} from "../../main/db";
 import {addObjects, removeObjects} from "../../main/util/addObjectID";
-import {withId} from "trees-query";
 import {clon} from "./testUtil";
 import {debug} from "./testPlumbing";
 

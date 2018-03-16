@@ -41,7 +41,7 @@ export const initExpress = app => {
 
 
 export const listen = app => {
-    console.log("API listening on " + ENV.port + "...");
-    return app.listen(ENV.port);
+    console.log("API listening on " + ENV.PORT + "...");
+    return app.listen(ENV.PORT);
 };
 

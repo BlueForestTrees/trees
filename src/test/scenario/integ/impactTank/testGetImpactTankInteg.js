@@ -1,8 +1,9 @@
 import {app} from "../../../../main";
-import {run} from "../../../util/testPlumbing";
-import {run2} from "../../../util/testIntegDatabase";
-import {papierAImpactTankSpec, sansImpactTankSpec} from "../../../expected/impacttank/testGetImpactTankData";
+import {run} from "../../../testPlumbing";
+import {run2} from "../../../testIntegDatabase";
+import {papierAImpactTankSpec, sansImpactTankSpec, gateauImpactTankSpec} from "../../../expected/impacttank/testGetImpactTankData";
 import {init, request} from "../../../util/testIntegApp";
+
 
 const getTank = spec => {
     return request()
@@ -18,6 +19,8 @@ describe('GET ImpactTank', function () {
     beforeEach(init);
 
     it('papierAImpactTankSpec', run(() => getTank(papierAImpactTankSpec)));
+
+    it('gateauImpactTankSpec', run(() => getTank(gateauImpactTankSpec)));
 
     it('sansImpactTankSpec', run2(getTank, sansImpactTankSpec));
 

@@ -1,7 +1,8 @@
 import {withQuantity} from "../../util/testPlumbing";
 import {ObjectID} from "mongodb";
 import {papierVA} from "../../database/papier";
-import {co2eImpactEntry} from "../../database/impactEntries";
+import {co2eImpactEntry, vitCImpactEntry} from "../../database/impactEntries";
+import {gateauTrunk} from "../../database/gateau";
 
 
 export const papierAImpactTankSpec = {};
@@ -17,6 +18,23 @@ papierAImpactTankSpec.res = {
             _id: co2eImpactEntry._id,
             name: "équivalent CO2",
             ...withQuantity(11696000, "g")
+        }]
+    }
+};
+
+export const gateauImpactTankSpec = {};
+gateauImpactTankSpec.req = {
+    _id: gateauTrunk._id,
+    quantity: gateauTrunk.quantity
+};
+gateauImpactTankSpec.res = {
+    body: {
+        _id: gateauTrunk._id,
+        quantity: gateauTrunk.quantity,
+        items: [{
+            _id: vitCImpactEntry._id,
+            name: "Vitamine C",
+            ...withQuantity(10, "mol")
         }]
     }
 };

@@ -1,20 +1,15 @@
-import {dbname} from "./../env";
-import {dbhost} from "../env";
+import ENV from "../env";
+import mongodb from 'mongodb';
 
-const mongo = require('mongodb');
+const client = mongodb.MongoClient;
+const connectionString = `mongodb://${ENV.dbhost}:${ENV.dbport}/${ENV.dbname}`;
 
 let database = null;
 
 export const dbConnect = () => {
-    console.log("Connecting mongo on " + dbname + "...");
-    return mongo.MongoClient.connect(`mongodb://${dbhost}/${dbname}`)
-        .then(db => {
-            database = db;
-            console.log(`connected to "mongodb://${dbhost}/${dbname}"`)
-        })
-        .catch(e => {
-            throw e;
-        });
+    console.log("Connecting mongo with '" + connectionString + "'...");
+    return client.connect(connectionString)
+        .then(db => database = db);
 };
 
 export const col = collectionName => database.collection(collectionName);

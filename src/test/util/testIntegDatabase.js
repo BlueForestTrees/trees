@@ -14,12 +14,10 @@ import {debug} from "./testPlumbing";
 chai.use(chaiHttp);
 chai.should();
 
-export const initDatabase = async () => {
-    console.log("Init db for Tests...");
-    return await dbConnect()
+export const initDatabase = () =>
+    dbConnect()
         .then(purgeDatabase)
         .then(addInitialData);
-};
 
 const buildDatabase = dbPartPath => {
     const db = _.fromPairs(_.map(cols, colName => [colName, []]));
@@ -86,7 +84,7 @@ export const assertDb = async ({list, colname, doc, missingDoc}) => {
         const dbDoc = await loadFromDbById(colname, doc._id);
         try {
             expect(dbDoc).to.deep.equal(doc);
-        }catch(e){
+        } catch (e) {
             console.log("assertDB KO");
             throw e;
         }

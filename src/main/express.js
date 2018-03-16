@@ -5,6 +5,7 @@ import read from 'fs-readdir-recursive';
 import {debug} from "./util/debug";
 import {port} from "../env";
 import express from 'express';
+import ENV from "../env";
 
 export const createExpress = () => express();
 
@@ -40,7 +41,7 @@ export const initExpress = app => {
 
 
 export const listen = app => {
-    console.log("Listening on " + port + "...");
-    return app.listen(port);
+    console.log("API listening on " + ENV.port + "...");
+    return app.listen(ENV.port);
 };
 

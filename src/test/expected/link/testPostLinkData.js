@@ -1,8 +1,5 @@
 import {bleToFarineAddSpec, existingRootPostSpec, newRootSpec} from "../root/testPostRootData";
 import {existingBranchPostSpec, farineToBleBranchAddSpec, newBranchSpec} from "../branch/testPostBranchData";
-import {bleTrunk, farineTrunk} from "../../database/gateau";
-import {oneModifiedResponse} from "../testCommonData";
-import {cols} from "../../../main/const/collections";
 
 export const newLinkSpec = {};
 newLinkSpec.req = {

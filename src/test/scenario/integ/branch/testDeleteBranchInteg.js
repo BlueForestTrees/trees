@@ -1,7 +1,7 @@
 import {assertDb} from "../../../util/testIntegDatabase";
-import {init, request} from "../../../util/testIntegApp";
+import {init, request, run} from "../../../util/testIntegApp";
 import {branchDeletionSpec} from "../../../expected/branch/testDeleteBranchData";
-import {run} from "../testIntegPlumbing";
+
 
 describe('DELETE branch', function () {
 

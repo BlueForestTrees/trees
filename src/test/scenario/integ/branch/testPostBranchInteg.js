@@ -1,6 +1,6 @@
 import {assertDb} from "../../../util/testIntegDatabase";
 import {existingBranchPostSpec, newBranchSpec} from "../../../expected/branch/testPostBranchData";
-import {run} from "../testIntegPlumbing";
+import {run} from "../../../util/testIntegApp";
 import {init, request} from "../../../util/testIntegApp";
 
 describe('POST Branch', function () {

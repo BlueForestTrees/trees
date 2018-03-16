@@ -1,7 +1,7 @@
 import {app} from "../../../../main";
 import {avecUneQtManquanteTankSpec, avecUneQtManquanteTankSpec2, lettreTankSpec, sansTank} from "../../../expected/tank/testGetTankData";
-import {run} from "../../../util/testPlumbing";
-import {run2} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
+import {run} from "../../../util/testIntegApp";
+import {run2} from "../../../util/testIntegApp";import {init, request} from "../../../util/testIntegApp";
 
 const getTank = spec =>
     request()

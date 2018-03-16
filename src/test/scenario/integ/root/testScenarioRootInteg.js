@@ -4,7 +4,7 @@ import {deleteRoot} from "./testDeleteRootInteg";
 import {postRoot} from "./testPostRootInteg";
 import {bleToFarineAddSpec} from "../../../expected/root/testPostRootData";
 
-import {run} from "../../../util/testPlumbing";
+import {run} from "../../../util/testIntegApp";
 import {init} from "../../../util/testIntegApp";
 
 describe('SCENARIO Root', function () {

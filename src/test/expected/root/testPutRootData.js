@@ -2,7 +2,7 @@ import {oneModifiedResponse} from "../testCommonData";
 import {clon} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
 import _ from 'lodash';
-import {bleTrunk, farineTrunk, gateauTrunk, gateauRoot, laitTrunk} from "../../database/gateau";
+import {bleTrunk, farineTrunk, gateauRoot, gateauTrunk, laitTrunk} from "../../database/gateau";
 import {setQuantity} from "../../util/testPlumbing";
 
 export const setQuantityRootSpec = {};

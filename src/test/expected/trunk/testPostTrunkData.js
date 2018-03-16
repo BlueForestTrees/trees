@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import {cols} from "../../../main/const/collections";
-import {gateauTrunk} from "../../database/gateau";
 import {aTrunk} from "../../database/lettres";
 
 const lowerizeName = name => name.toLowerCase();

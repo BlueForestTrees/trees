@@ -1,5 +1,5 @@
 import {badUnitGetBranchSpec, branchWithoutQtSpec, emptyGetBranchSpec, farine1000GGetBranchSpec, getBranchsSpec, otherUnitGetBranchSpec, sameQtGetBranchSpec} from "../../../expected/branch/testGetBranchData";
-import {run} from "../testIntegPlumbing";
+import {run} from "../../../util/testIntegApp";
 import {init, request} from "../../../util/testIntegApp";
 
 const getBranch = spec => request()

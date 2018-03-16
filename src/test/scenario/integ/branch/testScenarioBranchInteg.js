@@ -2,7 +2,7 @@ import {farineBranchDeletionSpec} from "../../../expected/branch/testDeleteBranc
 import {farineToBleBranchAddSpec} from "../../../expected/branch/testPostBranchData";
 import {deleteBranch} from "./testDeleteBranchInteg";
 import {postBranch} from "./testPostBranchInteg";
-import {run} from "../testIntegPlumbing";
+import {run} from "../../../util/testIntegApp";
 import {init} from "../../../util/testIntegApp";
 
 describe('SCENARIO Branch', function () {

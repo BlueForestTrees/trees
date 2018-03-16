@@ -1,4 +1,4 @@
-import {run} from "../../../util/testPlumbing";
+import {run} from "../../../util/testIntegApp";
 import {deleteLink} from "./testDeleteLinkInteg";
 import {postLink} from "./testPostLinkInteg";
 import {bleLinkDeletionSpec} from "../../../expected/link/testDeleteLinkData";

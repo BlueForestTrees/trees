@@ -1,7 +1,7 @@
 import {app} from "../../../../main";
 import {allreadyExistingImpactEntrySpec, postBadGrandeurImpactEntrySpec, postImpactEntrySpec} from "../../../expected/impactEntry/testPostImpactEntryData";
 import {ObjectIDRegex} from "../../../expected/testCommonData";
-import {run} from "../../../util/testPlumbing";
+import {run} from "../../../util/testIntegApp";
 import {init, request} from "../../../util/testIntegApp";
 
 describe('POST ImpactEntry', function () {

@@ -2,7 +2,7 @@ import {match, mock} from 'sinon';
 
 import {app} from "../../../../main";
 
-import {run} from "../../../util/testPlumbing";
+import {run} from "../../../util/testIntegApp";
 import {setQuantityRootSpec, updateQuantityAnotherUnitRootSpec, updateQuantityRootSpec} from "../../../expected/root/testPutRootData";
 import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 

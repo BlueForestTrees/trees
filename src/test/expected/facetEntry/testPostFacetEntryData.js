@@ -1,4 +1,3 @@
-
 import _ from 'lodash';
 import {vitCFacetEntry} from "../../database/facetEntries";
 

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {run} from "../testIntegPlumbing";
+import {run} from "../../../util/testIntegApp";
 import {branchTreeSpec, noBranchsTreeSpec} from "../../../expected/branch/testGetBranchTreeData";
 import {init, request} from "../../../util/testIntegApp";
 

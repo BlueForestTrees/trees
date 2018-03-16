@@ -40,20 +40,7 @@ const buildDatabase = dbPartPath => {
     };
 };
 
-export const run2 = (job, spec) => done => {
-    before(spec)
-        .then(spec => job(spec))
-        .then(() => done())
-        .catch(err => done(err));
-};
-
-const before = async spec => {
-    if (spec.db && spec.db.preChange) {
-        await updateDb(spec.db.preChange);
-    }
-    return spec;
-};
-const updateDb = async ({colname, doc}) => {
+export const updateDb = async ({colname, doc}) => {
     await col(colname).deleteOne(withId(doc._id));
     await col(colname).insertOne(addObjects(doc));
 };

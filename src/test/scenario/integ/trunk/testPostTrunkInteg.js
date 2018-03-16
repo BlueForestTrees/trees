@@ -1,7 +1,7 @@
 import {ObjectIDRegex} from "../../../expected/testCommonData";
 import {cloneTrunkSpec, postTrunkSpec} from "../../../expected/trunk/testPostTrunkData";
 import {assertDb, initDatabase} from "../../../util/testIntegDatabase";
-import {run} from "../../../util/testPlumbing";
+import {run} from "../../../util/testIntegApp";
 import {request} from "../../../util/testIntegApp";
 
 describe('POST Trunks', function () {

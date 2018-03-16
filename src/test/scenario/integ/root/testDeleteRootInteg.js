@@ -1,21 +1,17 @@
-import chai from 'chai';
-
 import {rootDeletionSpec} from "../../../expected/root/testDeleteRootData";
 import {app} from "../../../../main";
-import {assertDb, initDatabase} from "../../../testIntegDatabase";
-import {run} from "../../../testPlumbing";
+import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
+import {run} from "../../../util/testPlumbing";
 
 describe('DELETE Root', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('delete the root', run(() => deleteRoot(rootDeletionSpec)));
 
 });
 
-export const deleteRoot = rootDeletion => chai.request(app)
+export const deleteRoot = rootDeletion => request()
     .del(`/api/root/${rootDeletion.req.trunkId}/${rootDeletion.req.rootId}`)
     .then(async res => {
         res.should.have.status(200);

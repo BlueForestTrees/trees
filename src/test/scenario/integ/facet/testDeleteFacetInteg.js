@@ -1,17 +1,13 @@
-import chai from 'chai';
-
 import {facetDeletionSpec} from "../../../expected/facet/testDeleteFacetData";
 import {app} from "../../../../main";
-import {assertDb, initDatabase} from "../../../testIntegDatabase";
+import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 
 describe('DELETE Facet', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('delete the facet', done => {
-        chai.request(app)
+        request()
             .post(`/api/facet/deletion`)
             .send(facetDeletionSpec.req.body)
             .then(async res => {

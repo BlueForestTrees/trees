@@ -1,22 +1,18 @@
-import chai from 'chai';
-
 import {existingRootPostSpec, newRootSpec} from "../../../expected/root/testPostRootData";
 import {app} from "../../../../main";
-import {run} from "../../../testPlumbing";
-import {assertDb, initDatabase} from "../../../testIntegDatabase";
+import {run} from "../../../util/testPlumbing";
+import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 
 describe('POST Root', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('newRoot', run(() => postRoot(newRootSpec)));
 
     it('existing root', run(() => postRoot(existingRootPostSpec)));
 });
 
-export const postRoot = spec => chai.request(app)
+export const postRoot = spec => request()
     .post('/api/root')
     .send(spec.req.body)
     .then(async res => {

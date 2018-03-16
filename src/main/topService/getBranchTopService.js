@@ -2,7 +2,7 @@ import {appendTrunkNames} from "../service/trunk/getTrunkService";
 import {readBranch} from "../service/branch/branchQueries";
 import _ from 'lodash';
 import {applyQuantity, erreurSiUnitIncompatibles} from "../util/calculations";
-import {removeQuantity} from "../util/query";
+import {removeQuantity} from "trees-query";
 
 export const loadNamedUnquantifiedBranch = _id =>
     loadNamedBranchs(_id)

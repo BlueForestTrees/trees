@@ -1,30 +1,28 @@
-import chai from 'chai';
-import {firstImpactSpec, thirdImpact, updatingBleImpactSpec} from "../../../expected/impact/testPostImpactData";
-import {app} from "../../../../main";
-import {assertDb, initDatabase} from "../../../testIntegDatabase";
+import {bleAddingImpactSpec, bleAddingImpactSpec2, bleUpdatingImpactSpec, farineCreatingImpactSpec} from "../../../expected/impact/testPostImpactData";
+import {assertDb} from "../../../util/testIntegDatabase";
+import {init, request} from "../../../util/testIntegApp";
 
-describe('POST Impact', function () {
-
-    beforeEach(async () => {
-        await initDatabase();
-    });
-
-    it('firstImpact', done => testPostImpactWith(firstImpactSpec, done));
-    it('thirdImpact', done => testPostImpactWith(thirdImpact, done));
-    it('updatingImpact', done => testPostImpactWith(updatingBleImpactSpec, done));
-});
-
-const testPostImpactWith = (testDef, done) => {
-    chai.request(app)
-        .post(`/api/impact/${testDef.req._id}`)
-        .send(testDef.req.body)
+const by = spec => done => {
+    request()
+        .post(`/api/impact`)
+        .send(spec.req.body)
         .then(async (res) => {
             res.should.have.status(200);
-            res.body.should.deep.equal(testDef.res.body);
-            await assertDb(testDef.db.expected);
+            res.body.should.deep.equal(spec.res.body);
+            await assertDb(spec.db.expected);
             done();
         })
         .catch(function (err) {
             done(err);
         });
 };
+
+describe('POST Impact', function () {
+
+    beforeEach(init);
+
+    it('create impacts to farine', by(farineCreatingImpactSpec));
+    it('adding impact to ble', by(bleAddingImpactSpec));
+    it('adding impact to ble different trunk qt', by(bleAddingImpactSpec2));
+    it('update impact of ble', by(bleUpdatingImpactSpec));
+});

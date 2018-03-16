@@ -1,5 +1,3 @@
-export const dbname = "BlueForestTreesDB";
-
 export const cols = {
     TRUNK: 'TrunkCollection',
     FACET: 'FacetCollection',

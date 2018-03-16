@@ -1,28 +1,26 @@
-import chai from 'chai';
-
 import {impactDeletionSpec} from "../../../expected/impact/testDeleteImpactData";
-import {app} from "../../../../main";
-import {assertDb, initDatabase} from "../../../testIntegDatabase";
+import {assertDb} from "../../../util/testIntegDatabase";
+import {init, request} from "../../../util/testIntegApp";
+
+const by = spec => done => {
+    request()
+        .post(`/api/impact/deletion`)
+        .send(spec.req.body)
+        .then(async (res) => {
+            res.should.have.status(200);
+            res.body.should.deep.equal(spec.res.expected);
+            await assertDb(spec.db.expected);
+            done();
+        })
+        .catch(function (err) {
+            done(err);
+        });
+};
 
 describe('DELETE Impact', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
-    it('delete the impact', done => {
-        chai.request(app)
-            .post(`/api/impact/deletion`)
-            .send(impactDeletionSpec.req.body)
-            .then(async res => {
-                res.should.have.status(200);
-                res.body.should.deep.equal(impactDeletionSpec.res.expected);
-                await assertDb(impactDeletionSpec.db.expected);
-                done();
-            })
-            .catch(function (err) {
-                done(err);
-            });
-    });
+    it('delete the impact', by(impactDeletionSpec));
 
 });

@@ -1,4 +1,4 @@
-import {withQuantity} from "../../testPlumbing";
+import {withQuantity} from "../../util/testPlumbing";
 import {ObjectID} from "mongodb";
 import {papierVA} from "../../database/papier";
 import {co2eImpactEntry, vitCImpactEntry} from "../../database/impactEntries";
@@ -8,7 +8,7 @@ import {gateauTrunk} from "../../database/gateau";
 export const papierAImpactTankSpec = {};
 papierAImpactTankSpec.req = {
     _id: papierVA._id,
-    quantity: papierVA.quantity
+    quantity: {qt: papierVA.quantity.qt, unit: papierVA.quantity.unit}
 };
 papierAImpactTankSpec.res = {
     body: {

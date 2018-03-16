@@ -1,8 +1,12 @@
 export const ID = '_id';
 export const TREE_ID = 'treeId';
+export const LEFT_ID = 'left._id';
+export const RIGHT_ID = 'right._id';
 export const TRUNK_ID = 'trunk._id';
 export const BRANCH_ID = 'branch._id';
 export const ROOT_ID = 'root._id';
+export const IMPACT_ID = 'impact._id';
+export const FACET_ID = 'facet._id';
 export const SOURCE_ID = 'sourceId';
 export const TRUNK_QT = 'trunk.quantity.qt';
 export const BRANCH_QT = 'branch.quantity.qt';

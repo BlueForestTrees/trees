@@ -1,6 +1,6 @@
 import {cols} from "../../const/collections";
-import {col} from "../../repo";
-import {emptyGroup, withId} from "../../util/query";
+import {col} from "../../db";
+import {emptyGroup, withId} from "trees-query";
 import _ from 'lodash';
 
 const facets = () => col(cols.FACET);

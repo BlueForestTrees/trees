@@ -3,7 +3,7 @@ import {clon} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
 import _ from 'lodash';
 import {bleTrunk, farineTrunk, gateauTrunk, gateauRoot, laitTrunk} from "../../database/gateau";
-import {setQuantity} from "../../testPlumbing";
+import {setQuantity} from "../../util/testPlumbing";
 
 export const setQuantityRootSpec = {};
 setQuantityRootSpec.req = {

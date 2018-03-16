@@ -1,5 +1,5 @@
 import {cols} from "../../const/collections";
-import {col} from "../../repo";
+import {col} from "../../db";
 
 const facetEntries = () => col(cols.FACET_ENTRY);
 

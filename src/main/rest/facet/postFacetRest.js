@@ -1,20 +1,20 @@
-import {validTreeId} from "../../const/validations";
-import {setFacet} from "../../service/facet/postFacetService";
-import {shortnames} from "../../service/unit/unitService";
+import run from '../../util/run';
+import express from "express";
+import {facetIdIsNotTrunkId, validItem} from "../../const/validations";
+import {cols} from "../../const/collections";
+import {col} from "../../db";
+import configure from "trees-items-service";
 
-const run = require('../../util/run');
-const _ = require('lodash');
-const router = require('express').Router();
-const {check} = require('express-validator/check');
+const router = express.Router();
+const insertFacet = configure(() => col(cols.FACET)).upsertItem;
 
 module.exports = router;
 
-router.post('/api/facet/:treeId',
+router.post('/api/facet',
     [
-        validTreeId,
-        check('facet._id').isMongoId(),
-        check('facet.quantity.qt').isDecimal(),
-        check('facet.quantity.unit').isIn(shortnames)
+        validItem("trunk"),
+        validItem("facet"),
+        facetIdIsNotTrunkId
     ],
-    run(setFacet)
+    run(({trunk, facet}) => insertFacet(trunk, facet))
 );

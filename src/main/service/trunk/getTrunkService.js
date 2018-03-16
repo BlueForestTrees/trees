@@ -1,6 +1,6 @@
 import {cols} from "../../const/collections";
-import {col} from "../../repo";
-import {withId} from "../../util/query";
+import {col} from "../../db";
+import {withId} from "trees-query";
 import _ from 'lodash';
 
 const trunks = () => col(cols.TRUNK);

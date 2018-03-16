@@ -1,22 +1,17 @@
-import chai from 'chai';
-
-import {rootDeletionSpec} from "../../../expected/root/testDeleteRootData";
 import {app} from "../../../../main";
-import {assertDb, initDatabase} from "../../../testIntegDatabase";
-import {run} from "../../../testPlumbing";
+import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
+import {run} from "../../../util/testPlumbing";
 import {linkDeletionSpec} from "../../../expected/link/testDeleteLinkData";
 
 describe('DELETE Link', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('delete the link', run(() => deleteLink(linkDeletionSpec)));
 
 });
 
-export const deleteLink = linkDeletion => chai.request(app)
+export const deleteLink = linkDeletion => request()
     .del(`/api/link/${linkDeletion.req.trunkId}/${linkDeletion.req.rootId}`)
     .then(async res => {
         res.should.have.status(200);

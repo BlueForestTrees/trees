@@ -1,6 +1,6 @@
-import {withId} from "../../util/query";
+import {withId} from "trees-query";
 import {cols} from "../../const/collections";
-import {col} from "../../repo";
+import {col} from "../../db";
 
 const trunks = () => col(cols.TRUNK);
 

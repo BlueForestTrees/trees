@@ -1,5 +1,4 @@
 import {valid} from "../../const/validations";
-import {removeRoot} from "../../service/root/rootCommands";
 import {removeLink} from "../../topService/linkTopService";
 
 const run = require('../../util/run');

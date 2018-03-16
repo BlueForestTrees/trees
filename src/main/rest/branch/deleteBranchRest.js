@@ -1,9 +1,12 @@
 import {valid} from "../../const/validations";
-import {removeBranch} from "../../service/branch/branchCommands";
+import {cols} from "../../const/collections";
+import {col} from "../../db";
+import configure from "trees-items-service";
 
 const run = require('../../util/run');
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
+
+const deleteBranch = configure(() => col(cols.BRANCH)).removeItem;
 
 module.exports = router;
 
@@ -12,5 +15,5 @@ router.delete('/api/branch/:trunkId/:branchId',
         valid("trunkId"),
         valid("branchId"),
     ],
-    run(removeBranch)
+    run(({trunkId, branchId}) => deleteBranch(trunkId, branchId))
 );

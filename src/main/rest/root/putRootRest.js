@@ -1,9 +1,14 @@
+import {col} from "../../db";
 import {ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT} from "../../const/paths";
 import {existingRootId, existingTrunkId, present, rootIdIsNotTrunkId} from "../../const/validations";
-import {upsertRoot} from "../../service/root/rootCommands";
+
+import configure from "trees-items-service";
+import {cols} from "../../const/collections";
 
 const run = require('../../util/run');
 const router = require('express').Router();
+
+const upsertRoot = configure(() => col(cols.ROOT)).upsertItem;
 
 module.exports = router;
 
@@ -16,5 +21,5 @@ router.put('/api/root',
         present(ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT)
 
     ],
-    run(upsertRoot)
+    run(({trunk, root}) => upsertRoot(trunk, root))
 );

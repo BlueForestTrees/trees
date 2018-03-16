@@ -1,7 +1,7 @@
 import {oneModifiedResponse} from "../testCommonData";
 import {cols} from "../../../main/const/collections";
 import {bleTrunk, farineTrunk, gateauTrunk, laitBranch, laitTrunk} from "../../database/gateau";
-import {setQuantity} from "../../testPlumbing";
+import {setQuantity} from "../../util/testPlumbing";
 import {clon} from "../../util/testUtil";
 import _ from 'lodash';
 

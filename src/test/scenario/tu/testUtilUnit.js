@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {match, mock} from 'sinon';
-import {initTools} from "../../testPlumbing";
+import {initTools} from "../../util/testPlumbing";
 import mongo from 'mongodb';
 import {addObjects} from "../../../main/util/addObjectID";
 import {cols} from "../../../main/const/collections";
 import {gateauTrunk} from "../../database/gateau";
-import {initialDB} from "../../testIntegDatabase";
+import {initialDB} from "../../util/testIntegDatabase";
 
 describe('TU Unit', function () {
 

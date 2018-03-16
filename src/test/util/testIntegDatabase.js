@@ -4,18 +4,19 @@ import chaiHttp from 'chai-http';
 import read from 'fs-readdir-recursive';
 import path from 'path';
 
-import {cols} from "../main/const/collections";
-import {col, connect} from "../main/repo";
-import {addObjects, removeObjects} from "../main/util/addObjectID";
-import {withId} from "../main/util/query";
-import {clon} from "./util/testUtil";
-
+import {cols} from "../../main/const/collections";
+import {col, dbConnect} from "../../main/db";
+import {addObjects, removeObjects} from "../../main/util/addObjectID";
+import {withId} from "trees-query";
+import {clon} from "./testUtil";
+import {debug} from "./testPlumbing";
 
 chai.use(chaiHttp);
 chai.should();
 
 export const initDatabase = async () => {
-    return await connect()
+    console.log("Init db for Tests...");
+    return await dbConnect()
         .then(purgeDatabase)
         .then(addInitialData);
 };
@@ -59,16 +60,20 @@ const updateDb = async ({colname, doc}) => {
     await col(colname).insertOne(addObjects(doc));
 };
 
-const databaseDef = buildDatabase(path.join(__dirname, "database"));
+const databaseDef = buildDatabase(path.join(__dirname, "../database"));
 const database = databaseDef.db;
 export const initialDB = databaseDef.objectDB;
 
-export const purgeDatabase = async () => Promise.all(_.map(cols, colname => col(colname).deleteMany()));
+export const purgeDatabase = async () => Promise.all(_.map(cols, colname => {
+    console.log("Suppression : " + colname);
+    return col(colname).deleteMany();
+}));
 
 export const addInitialData = async () => {
     return Promise.all(_.map(cols, async (colname) => {
         let datas = initialDB[colname];
         if (datas && datas.length > 0) {
+            console.log(`Insertion : ${colname} (${datas.length} documents)`);
             return await col(colname).insert(datas);
         }
     }));
@@ -79,10 +84,17 @@ export const assertDb = async ({list, colname, doc, missingDoc}) => {
         return Promise.all(_.map(list, expected => assertDb(expected)));
     } else if (doc) {
         const dbDoc = await loadFromDbById(colname, doc._id);
-        return expect(dbDoc).to.deep.equal(doc);
+        try {
+            expect(dbDoc).to.deep.equal(doc);
+        }catch(e){
+            console.log("assertDB KO");
+            throw e;
+        }
+        debug("dbDoc", dbDoc);
     } else if (missingDoc) {
         const dbDoc = await loadFromDbById(colname, missingDoc._id);
-        return expect(dbDoc).to.be.null;
+        expect(dbDoc).to.be.null;
+        debug("removed", dbDoc);
     }
 };
 

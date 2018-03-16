@@ -1,10 +1,13 @@
+import run from '../../util/run';
+import express from "express";
 import {valid} from "../../const/validations";
-import {removeRoot} from "../../service/root/rootCommands";
+import configure from "trees-items-service";
+import {cols} from "../../const/collections";
+import {col} from "../../db";
 
-const run = require('../../util/run');
-const express = require('express');
 const router = express.Router();
 
+const deleteRoot = configure(() => col(cols.ROOT)).removeItem;
 module.exports = router;
 
 router.delete('/api/root/:trunkId/:rootId',
@@ -12,5 +15,5 @@ router.delete('/api/root/:trunkId/:rootId',
         valid("trunkId"),
         valid("rootId"),
     ],
-    run(removeRoot)
+    run(({trunkId, rootId}) => deleteRoot(trunkId, rootId))
 );

@@ -1,22 +1,18 @@
-import chai from 'chai';
-
 import {app} from "../../../../main";
-import {run} from "../../../testPlumbing";
-import {assertDb, initDatabase} from "../../../testIntegDatabase";
+import {run} from "../../../util/testPlumbing";
+import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 import {existingLinkPostSpec, newLinkSpec} from "../../../expected/link/testPostLinkData";
 
 describe('POST Link', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('newLink', run(() => postLink(newLinkSpec)));
 
     it('existing link', run(() => postLink(existingLinkPostSpec)));
 });
 
-export const postLink = spec => chai.request(app)
+export const postLink = spec => request()
     .post('/api/link')
     .send(spec.req.body)
     .then(async res => {

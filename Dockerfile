@@ -1,13 +1,18 @@
-#FROM arm32v7/node
-FROM node:carbon
+FROM node:latest AS api-builder
 
-WORKDIR /usr/api
+RUN mkdir -p /build
+COPY package*.json ./build/
+COPY src/ ./build/src
 
-COPY package*.json ./
+WORKDIR /build
 RUN npm install
+RUN npm run build
 
-COPY src/main/index.js .
-COPY src/ ./src
+FROM arm64v8/node:latest
+COPY --from=api-builder /build/package.json ./
+COPY --from=api-builder /build/dist ./dist
+COPY --from=api-builder /build/node_modules ./node_modules
+
 
 EXPOSE 8080
 ENTRYPOINT ["npm","run","start"]

@@ -2,7 +2,7 @@ import {appendTrunkNames} from "../service/trunk/getTrunkService";
 import {readRoot} from "../service/root/rootQueries";
 import _ from 'lodash';
 import {applyQuantity, erreurSiUnitIncompatibles} from "../util/calculations";
-import {removeQuantity} from "../util/query";
+import {removeQuantity} from "trees-query";
 
 export const loadNamedUnquantifiedRoot = _id =>
     loadNamedRoots(_id)

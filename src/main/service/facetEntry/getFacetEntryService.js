@@ -1,6 +1,6 @@
 import {cols} from "../../const/collections";
-import {col} from "../../repo";
-import {withIdIn} from "../../util/query";
+import {col} from "../../db";
+import {withIdIn} from "trees-query";
 
 const facetEntries = () => col(cols.FACET_ENTRY);
 

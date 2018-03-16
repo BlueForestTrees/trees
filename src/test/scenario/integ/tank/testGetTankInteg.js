@@ -1,23 +1,20 @@
-import chai from 'chai';
 import {app} from "../../../../main";
 import {avecUneQtManquanteTankSpec, avecUneQtManquanteTankSpec2, lettreTankSpec, sansTank} from "../../../expected/tank/testGetTankData";
-import {run} from "../../../testPlumbing";
-import {initDatabase, run2} from "../../../testIntegDatabase";
+import {run} from "../../../util/testPlumbing";
+import {run2} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 
-const getTank = spec => {
-    return chai.request(app)
+const getTank = spec =>
+    request()
         .get(`/api/tank/${spec.req.quantity.qt}/${spec.req.quantity.unit}/${spec.req._id}`)
         .then(async (res) => {
             res.should.have.status(200);
             res.body.should.deep.equal(spec.res.body);
         });
-};
+
 
 describe('GET Tank', function () {
 
-    beforeEach(async () => {
-        await initDatabase();
-    });
+    beforeEach(init);
 
     it('lettreTankSpec', run(() => getTank(lettreTankSpec)));
 

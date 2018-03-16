@@ -1,16 +1,20 @@
-import {existingBranchId, existingTrunkId, branchIdIsNotTrunkId} from "../../const/validations";
-import {insertBranch} from "../../service/branch/branchCommands";
+import {branchIdIsNotTrunkId, existingBranchId, existingTrunkId} from "../../const/validations";
+import configure from "trees-items-service";
+import {cols} from "../../const/collections";
+import {col} from "../../db";
 
 const run = require('../../util/run');
 const router = require('express').Router();
+
+const insertBranch = configure(() => col(cols.BRANCH)).insertItem;
 
 module.exports = router;
 
 router.post('/api/branch',
     [
-        existingBranchId,
         existingTrunkId,
+        existingBranchId,
         branchIdIsNotTrunkId
     ],
-    run(insertBranch)
+    run(({trunk, branch}) => insertBranch(trunk, branch))
 );

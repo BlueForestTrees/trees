@@ -1,5 +1,3 @@
-import {match, mock} from 'sinon';
-
 import {withItem, withQuantity} from "../../util/testPlumbing";
 import {basifyQuantity, mergeItems, quantified, sum, summify} from "../../../main/util/calculations";
 import {withId} from "trees-query";

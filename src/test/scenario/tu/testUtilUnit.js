@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {match, mock} from 'sinon';
+
 import {initTools} from "../../util/testPlumbing";
 import mongo from 'mongodb';
 import {addObjects} from "../../../main/util/addObjectID";

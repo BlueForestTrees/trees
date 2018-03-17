@@ -1,10 +1,8 @@
-import {match, mock} from 'sinon';
-
 import {app} from "../../../../main";
 
-import {run} from "../../../util/testIntegApp";
+import {init, request, run} from "../../../util/testIntegApp";
 import {setQuantityRootSpec, updateQuantityAnotherUnitRootSpec, updateQuantityRootSpec} from "../../../expected/root/testPutRootData";
-import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
+import {assertDb} from "../../../util/testIntegDatabase";
 
 describe('PUT Root', function () {
 

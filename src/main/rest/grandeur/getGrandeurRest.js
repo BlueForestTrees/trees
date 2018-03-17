@@ -1,8 +1,8 @@
 import {getGrandeurs} from "trees-units";
 
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const run = require('../../util/run');
+import {run} from '../../util/run'
 
 router.get('/api/grandeurs',
     run(getGrandeurs)

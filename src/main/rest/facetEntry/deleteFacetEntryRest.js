@@ -1,7 +1,7 @@
 import {purgeFacetsEntries} from "../../service/facetEntry/deleteFacetEntriesService";
 
-const run = require('../../util/run');
-const express = require('express');
+import {run} from '../../util/run'
+import express from 'express';
 const router = express.Router();
 
 module.exports = router;

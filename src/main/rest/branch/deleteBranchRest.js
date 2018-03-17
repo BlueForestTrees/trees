@@ -3,7 +3,7 @@ import {cols} from "../../const/collections";
 import {col} from "../../db";
 import configure from "trees-items-service";
 
-const run = require('../../util/run');
+import {run} from '../../util/run'
 const router = require('express').Router();
 
 const deleteBranch = configure(() => col(cols.BRANCH)).removeItem;

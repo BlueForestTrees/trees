@@ -2,8 +2,8 @@ import {cols} from "../../const/collections";
 import {col} from "../../db";
 import configure from "trees-items-service";
 
-const run = require('../../util/run');
-const express = require('express');
+import {run} from '../../util/run'
+import express from 'express';
 const router = express.Router();
 const {check} = require('express-validator/check');
 

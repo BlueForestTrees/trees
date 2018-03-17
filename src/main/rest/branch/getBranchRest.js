@@ -3,7 +3,7 @@ import {loadNamedQuantifiedBranch, loadNamedUnquantifiedBranch} from "../../topS
 import {QT, UNIT} from "../../const/paths";
 import {readBranchTree} from "../../service/branch/branchQueries";
 
-const run = require('../../util/run');
+import {run} from '../../util/run'
 const router = require('express').Router();
 
 module.exports = router;

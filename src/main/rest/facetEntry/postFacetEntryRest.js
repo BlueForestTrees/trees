@@ -3,9 +3,9 @@ import {addFacetEntry, replaceAllFacetEntries} from "../../service/facetEntry/po
 import {validGrandeur, validName} from "../../const/validations";
 import {GRANDEUR} from "../../const/paths";
 
-const run = require('../../util/run');
+import {run} from '../../util/run'
 
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
 module.exports = router;

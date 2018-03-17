@@ -3,7 +3,7 @@ import {loadNamedQuantifiedRoot, loadNamedUnquantifiedRoot} from "../../topServi
 import {QT, UNIT} from "../../const/paths";
 import {readRootTree} from "../../service/root/rootQueries";
 
-const run = require('../../util/run');
+import {run} from '../../util/run'
 const router = require('express').Router();
 
 module.exports = router;

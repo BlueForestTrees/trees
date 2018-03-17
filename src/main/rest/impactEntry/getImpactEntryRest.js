@@ -1,6 +1,6 @@
 import {getAllImpactEntries, getImpactEntryByName, searchImpactEntriesByNamepart} from "../../service/impactEntry/getImpactEntryService";
 
-const run = require('../../util/run');
+import {run} from '../../util/run'
 const router = require('express').Router();
 const {check} = require('express-validator/check');
 

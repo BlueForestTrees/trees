@@ -3,10 +3,7 @@ import {debug} from "./debug";
 const {validationResult} = require('express-validator/check');
 const {matchedData} = require('express-validator/filter');
 
-module.exports = run;
-
-function run(work) {
-
+export const run = (work) => {
 
     let validResultJson = async (req, res, next) => {
         validationResult(req).throw();
@@ -18,13 +15,13 @@ function run(work) {
 
     return (req, res, next) => {
 
-        debug("run", {url:`${req.method} ${req.url}`}, {params:req.params},{body: req.body});
+        debug("run", {url: `${req.method} ${req.url}`}, {params: req.params}, {body: req.body});
 
         let result = validResultJson(req, res, next);
         Promise
             .resolve(result)
-            .catch(err=>{
+            .catch(err => {
                 return next(err);
             });
     };
-}
+};

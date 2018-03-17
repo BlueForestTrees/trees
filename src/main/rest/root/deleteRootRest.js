@@ -1,4 +1,4 @@
-import run from '../../util/run';
+import {run} from '../../util/run'
 import express from "express";
 import {valid} from "../../const/validations";
 import configure from "trees-items-service";

@@ -1,4 +1,4 @@
-import run from '../../util/run';
+import {run} from '../../util/run'
 import express from "express";
 import {existingRootId, existingTrunkId, rootIdIsNotTrunkId} from "../../const/validations";
 import {cols} from "../../const/collections";

@@ -3,7 +3,7 @@ import {optionalExistingSourceId, optionalValidName} from "../../const/validatio
 import {runraw} from "../../util/runraw";
 import {createOrClone, putall} from "../../service/trunk/postTrunkService";
 
-const run = require('../../util/run');
+import {run} from '../../util/run'
 const router = require('express').Router();
 const {check, oneOf} = require('express-validator/check');
 

@@ -1,8 +1,9 @@
 import {valid} from "../../const/validations";
 import {removeLink} from "../../topService/linkTopService";
+import {run} from '../../util/run'
 
-const run = require('../../util/run');
-const express = require('express');
+import express from 'express';
+
 const router = express.Router();
 
 module.exports = router;

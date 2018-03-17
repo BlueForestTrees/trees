@@ -3,7 +3,7 @@ import configure from "trees-items-service";
 import {cols} from "../../const/collections";
 import {col} from "../../db";
 
-const run = require('../../util/run');
+import {run} from '../../util/run'
 const router = require('express').Router();
 
 const insertBranch = configure(() => col(cols.BRANCH)).insertItem;

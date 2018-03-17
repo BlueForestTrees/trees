@@ -2,7 +2,7 @@ import {validId, validQt, validUnit} from "../../const/validations";
 import {loadFacet, loadQuantifiedFacets} from "../../topService/getFacetTopService";
 import {QT, UNIT} from "../../const/paths";
 
-const run = require('../../util/run');
+import {run} from '../../util/run'
 const router = require('express').Router();
 
 module.exports = router;

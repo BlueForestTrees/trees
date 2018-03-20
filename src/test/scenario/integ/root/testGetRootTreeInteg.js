@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {gateauRootTreeSpec, lettreGetRootTreeSpec, lettreNoDaQtGetRootTreeSpec, noRootsTreeSpec, papierAGetRootTreeSpec} from "../../../expected/root/testGetRootTreeData";
+import {gateauRootTreeSpec, lettreGetRootTreeSpec, lettreNoDaQtGetRootTreeSpec, noRootsTreeSpec, papierAGetRootTreeSpec} from "../../../spec/root/testGetRootTreeSpec";
 import {run} from "../../../util/testIntegApp";
 import {run2} from "../../../util/testIntegApp";
 import {init, request} from "../../../util/testIntegApp";

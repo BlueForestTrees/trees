@@ -1,4 +1,4 @@
-import {existingRootPostSpec, newRootSpec} from "../../../expected/root/testPostRootData";
+import {existingRootPostSpec, newRootSpec} from "../../../spec/root/testPostRootSpec";
 import {app} from "../../../../main";
 import {run} from "../../../util/testIntegApp";
 import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";

@@ -1,4 +1,4 @@
-import {impactDeletionSpec} from "../../../expected/impact/testDeleteImpactData";
+import {impactDeletionSpec} from "../../../spec/impact/testDeleteImpactSpec";
 import {assertDb} from "../../../util/testIntegDatabase";
 import {init, request} from "../../../util/testIntegApp";
 

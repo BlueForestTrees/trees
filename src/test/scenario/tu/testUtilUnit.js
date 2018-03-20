@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 
-import {initTools} from "../../util/testPlumbing";
+import {initTools} from "../../util/testUtil";
 import mongo from 'mongodb';
 import {addObjects} from "../../../main/util/addObjectID";
 import {cols} from "../../../main/const/collections";

@@ -1,4 +1,4 @@
-import {getAllTrunkSpec, getTrunkSpec, searchTrunkSpec} from "../../../expected/trunk/testGetTrunkData";
+import {getAllTrunkSpec, getTrunkSpec, searchTrunkSpec} from "../../../spec/trunk/testGetTrunkSpec";
 import {app} from "../../../../main";
 import {init, request} from "../../../util/testIntegApp";
 

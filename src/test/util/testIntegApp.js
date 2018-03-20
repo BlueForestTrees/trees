@@ -1,6 +1,8 @@
 import {appPromise} from "../../main/index";
-import chai from 'chai';
+import chai, {expect} from 'chai';
 import {initDatabase, updateDb} from "./testIntegDatabase";
+
+import {ObjectID} from "mongodb";
 
 let app = null;
 
@@ -28,3 +30,4 @@ const before = async spec => {
     }
     return spec;
 };
+

@@ -1,4 +1,4 @@
-import {createFacetSpec, addingFacet, updatingBleFacetSpec} from "../../../expected/facet/testPostFacetData";
+import {createFacetSpec, addingFacet, updatingBleFacetSpec} from "../../../spec/facet/testPostFacetSpec";
 import {app} from "../../../../main";
 import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 

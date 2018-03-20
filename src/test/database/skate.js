@@ -1,4 +1,4 @@
-import {withItem, withItemNoQt, withTrunk, withTrunkNoQt} from "../util/testIntegUtil";
+import {withItem, withItemNoQt, withTrunk, withTrunkNoQt} from "../util/testIntegApp";
 import {cols} from "../../main/const/collections";
 
 export const skateTrunk = withTrunk("skate", "999903c03e77667641d99990", 10, "count");

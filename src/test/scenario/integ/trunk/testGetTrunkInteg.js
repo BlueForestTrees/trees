@@ -1,6 +1,6 @@
 import {getAllTrunkSpec, getTrunkSpec, searchTrunkSpec} from "../../../expected/trunk/testGetTrunkData";
 import {app} from "../../../../main";
-import {init, request} from "../../../util/testIntegUtil";
+import {init, request} from "../../../util/testIntegApp";
 
 describe('GET Trunks', function () {
 

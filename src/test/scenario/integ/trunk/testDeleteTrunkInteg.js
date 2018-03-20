@@ -1,7 +1,7 @@
 import {trunkDeletionSpec} from "../../../expected/trunk/testDeleteTrunkData";
 import {oneResponse} from "../../../expected/testCommonData";
 import {app} from "../../../../main";
-import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegUtil";
+import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 
 describe('DELETE Trunks', function () {
 

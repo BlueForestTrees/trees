@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {run} from "../../../util/testIntegUtil";
+import {run} from "../../../util/testIntegApp";
 import {branchTreeSpec, noBranchsTreeSpec} from "../../../expected/branch/testGetBranchTreeData";
-import {init, request} from "../../../util/testIntegUtil";
+import {init, request} from "../../../util/testIntegApp";
 
 const getBranchTree = spec => request()
     .get(`/api/branch/tree/${spec.req.qt}/${spec.req.unit}/${spec.req._id}`)

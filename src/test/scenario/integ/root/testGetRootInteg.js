@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {app} from "../../../../main";
 import {badUnitGetRootSpec, emptyGetRootSpec, farineNoBleQtGetRootSpec, gateau1000GGetRootSpec, getRootsSpec, otherUnitGetRootSpec, sameQtGetRootSpec, skate10GetRootSpec} from "../../../expected/root/testGetRootData";
-import {run} from "../../../util/testIntegUtil";
-import {init, request} from "../../../util/testIntegUtil";
+import {run} from "../../../util/testIntegApp";
+import {init, request} from "../../../util/testIntegApp";
 
 const getRoot = spec => request()
     .get(`/api/root/${spec.req._id}`)

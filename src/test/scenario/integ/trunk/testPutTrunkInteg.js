@@ -1,7 +1,7 @@
 import {renameTrunkSpec, requantifyTrunkSpec} from "../../../expected/trunk/testPutTrunkData";
 
 import {app} from "../../../../main";
-import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegUtil";
+import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 
 describe('PUT Trunks', function () {
 

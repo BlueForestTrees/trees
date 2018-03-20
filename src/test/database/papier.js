@@ -1,5 +1,5 @@
 import {cols} from "../../main/const/collections";
-import {withItem, withTrunk} from "../util/testIntegUtil";
+import {withItem, withTrunk} from "../util/testIntegApp";
 import {co2eImpactEntry} from "./impactEntries";
 
 export const papierVA = withTrunk("papier version A", "111111111111111111111111", 100, "m2");

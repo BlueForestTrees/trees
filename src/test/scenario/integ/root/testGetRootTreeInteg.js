@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {gateauRootTreeSpec, lettreGetRootTreeSpec, lettreNoDaQtGetRootTreeSpec, noRootsTreeSpec, papierAGetRootTreeSpec} from "../../../expected/root/testGetRootTreeData";
-import {run} from "../../../util/testIntegUtil";
-import {run2} from "../../../util/testIntegUtil";
-import {init, request} from "../../../util/testIntegUtil";
+import {run} from "../../../util/testIntegApp";
+import {run2} from "../../../util/testIntegApp";
+import {init, request} from "../../../util/testIntegApp";
 
 const getRootTree = spec => request()
     .get(`/api/root/tree/${spec.req.qt}${spec.req.unit ? '/' + spec.req.unit : ''}/${spec.req._id}`)

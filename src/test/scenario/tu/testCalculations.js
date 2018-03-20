@@ -1,4 +1,4 @@
-import {withItem, withQuantity} from "../../util/testIntegUtil";
+import {withItem, withQuantity} from "../../util/testIntegApp";
 import {basifyQuantity, mergeItems, quantified, sum, summify} from "../../../main/util/calculations";
 import {withId} from "trees-query";
 import Fraction from "fraction.js";

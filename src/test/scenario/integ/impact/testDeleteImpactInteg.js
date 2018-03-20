@@ -1,6 +1,6 @@
 import {impactDeletionSpec} from "../../../expected/impact/testDeleteImpactData";
 import {assertDb} from "../../../util/testIntegDatabase";
-import {init, request} from "../../../util/testIntegUtil";
+import {init, request} from "../../../util/testIntegApp";
 
 const by = spec => done => {
     request()

@@ -1,7 +1,7 @@
 import {existingRootPostSpec, newRootSpec} from "../../../expected/root/testPostRootData";
 import {app} from "../../../../main";
-import {run} from "../../../util/testIntegUtil";
-import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegUtil";
+import {run} from "../../../util/testIntegApp";
+import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 
 describe('POST Root', function () {
 

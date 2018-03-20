@@ -33,15 +33,6 @@ const before = async spec => {
 };
 
 
-export const debug = (...obj) => {
-    try {
-        console.log(JSON.stringify(obj, null, 4));
-    } catch (e) {
-        console.log(obj);
-    }
-    return Promise.resolve(...obj);
-};
-
 export const withQtCoef = (items, coef) => _.forEach(items, root => root.quantity.qt *= coef || 2);
 export const withoutQuantity = items => _.map(items, item => _.omit(item, "quantity"));
 export const withItem = (_id, qt, unit) => ({_id, ...withQuantity(qt, unit)});
@@ -61,14 +52,6 @@ export const removeItemQuantity = (item, subItemId) => ({
     items: _.map(item.items, subitem => subitem._id === subItemId ? _.omit(subitem, "quantity") : subitem)
 });
 
-
-export const clon = obj => _.cloneDeep(obj);
-
-export const remove = (obj, prop, criteria) => {
-    const clone = clon(obj);
-    clone[prop] = _.without(clone[prop], _.find(clone[prop], criteria));
-    return clone;
-};
 
 export const replaceItem = (obj, prop, value) => {
     const result = remove(obj, prop, {_id: value._id});

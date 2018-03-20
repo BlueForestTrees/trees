@@ -1,9 +1,9 @@
 import {oneModifiedResponse} from "../testCommonData";
-import {replaceItem} from "../../util/testIntegUtil";
+import {replaceItem} from "../../util/testIntegApp";
 import {cols} from "../../../main/const/collections";
 import {bleImpacts, farineTrunk} from "../../database/gateau";
 import {prixImpactEntry, vitBImpactEntry} from "../../database/impactEntries";
-import {withItem} from "../../util/testIntegUtil";
+import {withItem} from "../../util/testIntegApp";
 
 export const farineCreatingImpactSpec = {};
 farineCreatingImpactSpec.req = {

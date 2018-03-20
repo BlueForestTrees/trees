@@ -1,8 +1,8 @@
 import {app} from "../../../../main";
 import {allreadyExistingFacetEntrySpec, postBadGrandeurFacetEntrySpec, postFacetEntrySpec} from "../../../expected/facetEntry/testPostFacetEntryData";
 import {ObjectIDRegex} from "../../../expected/testCommonData";
-import {run} from "../../../util/testIntegUtil";
-import {init, request} from "../../../util/testIntegUtil";
+import {run} from "../../../util/testIntegApp";
+import {init, request} from "../../../util/testIntegApp";
 
 describe('POST FacetEntry', function () {
 

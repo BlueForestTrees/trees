@@ -1,5 +1,5 @@
 import {oneModifiedResponse} from "../testCommonData";
-import {remove} from "../../util/testIntegUtil";
+import {remove} from "../../util/testIntegApp";
 import {cols} from "../../../main/const/collections";
 import {farineRoot, gateauRoot} from "../../database/gateau";
 

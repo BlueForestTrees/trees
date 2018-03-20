@@ -1,6 +1,6 @@
 import {createFacetSpec, addingFacet, updatingBleFacetSpec} from "../../../expected/facet/testPostFacetData";
 import {app} from "../../../../main";
-import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegUtil";
+import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 
 const by = testDef => done => {
     request()

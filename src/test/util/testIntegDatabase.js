@@ -8,8 +8,7 @@ import {withId} from "trees-query";
 import {cols} from "../../main/const/collections";
 import {col, dbConnect} from "../../main/db";
 import {addObjects, removeObjects} from "../../main/util/addObjectID";
-import {clon} from "./testIntegUtil";
-import {debug} from "./testIntegUtil";
+import {clon, debug} from "./testUtil";
 
 chai.use(chaiHttp);
 chai.should();

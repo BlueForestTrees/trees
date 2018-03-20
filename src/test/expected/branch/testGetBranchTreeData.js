@@ -1,6 +1,6 @@
 import {aTrunk} from "../../database/lettres";
 import {arbreTrunk} from "../../database/skate";
-import {withItem, withItemRequest} from "../../util/testIntegUtil";
+import {withItem, withItemRequest} from "../../util/testIntegApp";
 
 export const noBranchsTreeSpec = {};
 noBranchsTreeSpec.req = {

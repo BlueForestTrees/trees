@@ -1,5 +1,5 @@
-import {farineBranchDeletionSpec} from "../../../expected/branch/testDeleteBranchData";
-import {farineToBleBranchAddSpec} from "../../../expected/branch/testPostBranchData";
+import {farineBranchDeletionSpec} from "../../../spec/branch/testDeleteBranchSpec";
+import {farineToBleBranchAddSpec} from "../../../spec/branch/testPostBranchSpec";
 import {deleteBranch} from "./testDeleteBranchInteg";
 import {postBranch} from "./testPostBranchInteg";
 import {run} from "../../../util/testIntegApp";

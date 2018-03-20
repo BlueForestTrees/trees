@@ -1,4 +1,4 @@
-import {bleAddingImpactSpec, bleAddingImpactSpec2, bleUpdatingImpactSpec, farineCreatingImpactSpec} from "../../../expected/impact/testPostImpactData";
+import {bleAddingImpactSpec, bleAddingImpactSpec2, bleUpdatingImpactSpec, farineCreatingImpactSpec} from "../../../spec/impact/testPostImpactSpec";
 import {assertDb} from "../../../util/testIntegDatabase";
 import {init, request} from "../../../util/testIntegApp";
 

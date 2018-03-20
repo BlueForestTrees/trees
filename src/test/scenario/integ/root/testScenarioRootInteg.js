@@ -1,7 +1,7 @@
-import {bleRootDeletionSpec} from "../../../expected/root/testDeleteRootData";
+import {bleRootDeletionSpec} from "../../../spec/root/testDeleteRootSpec";
 import {deleteRoot} from "./testDeleteRootInteg";
 import {postRoot} from "./testPostRootInteg";
-import {bleToFarineAddSpec} from "../../../expected/root/testPostRootData";
+import {bleToFarineAddSpec} from "../../../spec/root/testPostRootSpec";
 
 import {init, run} from "../../../util/testIntegApp";
 

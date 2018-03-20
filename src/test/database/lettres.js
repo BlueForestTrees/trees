@@ -1,4 +1,4 @@
-import {withItem, withTrunk} from "../util/testIntegApp";
+import {withItem, withTrunk} from "../util/testUtil";
 import {cols} from "../../main/const/collections";
 import {prixFacetEntry, vitBFacetEntry, vitCFacetEntry, vitEFacetEntry} from "./facetEntries";
 import {co2eImpactEntry, prixImpactEntry, vitBImpactEntry, vitCImpactEntry, vitDImpactEntry} from "./impactEntries";

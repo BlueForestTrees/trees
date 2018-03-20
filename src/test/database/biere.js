@@ -1,5 +1,5 @@
 import {cols} from "../../main/const/collections";
-import {withTrunkNoQt} from "../util/testIntegApp";
+import {withTrunkNoQt} from "../util/testUtil";
 
 
 export const biere = withTrunkNoQt("Bière Heineken", "6a6a03c03e77667641d2d2c3");

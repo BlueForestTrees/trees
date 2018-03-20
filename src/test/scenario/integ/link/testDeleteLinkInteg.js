@@ -1,7 +1,7 @@
 import {app} from "../../../../main";
 import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 import {run} from "../../../util/testIntegApp";
-import {linkDeletionSpec} from "../../../expected/link/testDeleteLinkData";
+import {linkDeletionSpec} from "../../../spec/link/testDeleteLinkSpec";
 
 describe('DELETE Link', function () {
 

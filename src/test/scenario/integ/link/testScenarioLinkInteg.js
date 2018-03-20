@@ -1,8 +1,8 @@
 import {run} from "../../../util/testIntegApp";
 import {deleteLink} from "./testDeleteLinkInteg";
 import {postLink} from "./testPostLinkInteg";
-import {bleLinkDeletionSpec} from "../../../expected/link/testDeleteLinkData";
-import {bleToFarineLinkAddSpec} from "../../../expected/link/testPostLinkData";
+import {bleLinkDeletionSpec} from "../../../spec/link/testDeleteLinkSpec";
+import {bleToFarineLinkAddSpec} from "../../../spec/link/testPostLinkSpec";
 import {init} from "../../../util/testIntegApp";
 
 describe('SCENARIO Link', function () {

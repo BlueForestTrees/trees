@@ -1,7 +1,7 @@
 import {app} from "../../../../main";
 
 import {init, request, run} from "../../../util/testIntegApp";
-import {setQuantityRootSpec, updateQuantityAnotherUnitRootSpec, updateQuantityRootSpec} from "../../../expected/root/testPutRootData";
+import {setQuantityRootSpec, updateQuantityAnotherUnitRootSpec, updateQuantityRootSpec} from "../../../spec/root/testPutRootSpec";
 import {assertDb} from "../../../util/testIntegDatabase";
 
 describe('PUT Root', function () {

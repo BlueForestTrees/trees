@@ -1,5 +1,5 @@
 import {assertDb} from "../../../util/testIntegDatabase";
-import {existingBranchPostSpec, newBranchSpec} from "../../../expected/branch/testPostBranchData";
+import {existingBranchPostSpec, newBranchSpec} from "../../../spec/branch/testPostBranchSpec";
 import {run} from "../../../util/testIntegApp";
 import {init, request} from "../../../util/testIntegApp";
 

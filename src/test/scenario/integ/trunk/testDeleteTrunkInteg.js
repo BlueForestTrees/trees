@@ -1,5 +1,5 @@
-import {trunkDeletionSpec} from "../../../expected/trunk/testDeleteTrunkData";
-import {oneResponse} from "../../../expected/testCommonData";
+import {trunkDeletionSpec} from "../../../spec/trunk/testDeleteTrunkSpec";
+import {oneResponse} from "../../../spec/testCommonSpec";
 import {app} from "../../../../main";
 import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 

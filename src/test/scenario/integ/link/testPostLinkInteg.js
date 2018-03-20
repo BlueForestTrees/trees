@@ -1,7 +1,7 @@
 import {app} from "../../../../main";
 import {run} from "../../../util/testIntegApp";
 import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
-import {existingLinkPostSpec, newLinkSpec} from "../../../expected/link/testPostLinkData";
+import {existingLinkPostSpec, newLinkSpec} from "../../../spec/link/testPostLinkSpec";
 
 describe('POST Link', function () {
 

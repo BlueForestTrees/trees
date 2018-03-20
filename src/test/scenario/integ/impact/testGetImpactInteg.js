@@ -1,4 +1,4 @@
-import {emptyGetImpactSpec, emptyQuantifiedGetImpactSpec, getImpactSpec, getQuantifiedImpactSpec} from "../../../expected/impact/testGetImpactData";
+import {emptyGetImpactSpec, emptyQuantifiedGetImpactSpec, getImpactSpec, getQuantifiedImpactSpec} from "../../../spec/impact/testGetImpactSpec";
 import {app} from "../../../../main";
 import {init, request} from "../../../util/testIntegApp";
 

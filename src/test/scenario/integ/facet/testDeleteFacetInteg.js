@@ -1,4 +1,4 @@
-import {facetDeletionSpec} from "../../../expected/facet/testDeleteFacetData";
+import {facetDeletionSpec} from "../../../spec/facet/testDeleteFacetSpec";
 import {app} from "../../../../main";
 import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 

@@ -1,5 +1,5 @@
-import {ObjectIDRegex} from "../../../expected/testCommonData";
-import {cloneTrunkSpec, postTrunkSpec} from "../../../expected/trunk/testPostTrunkData";
+import {ObjectIDRegex} from "../../../spec/testCommonSpec";
+import {cloneTrunkSpec, postTrunkSpec} from "../../../spec/trunk/testPostTrunkSpec";
 import {assertDb, initDatabase} from "../../../util/testIntegDatabase";
 import {run} from "../../../util/testIntegApp";
 import {request} from "../../../util/testIntegApp";

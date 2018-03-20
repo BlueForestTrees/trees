@@ -1,6 +1,6 @@
 import {app} from "../../../../main";
-import {allreadyExistingImpactEntrySpec, postBadGrandeurImpactEntrySpec, postImpactEntrySpec} from "../../../expected/impactEntry/testPostImpactEntryData";
-import {ObjectIDRegex} from "../../../expected/testCommonData";
+import {allreadyExistingImpactEntrySpec, postBadGrandeurImpactEntrySpec, postImpactEntrySpec} from "../../../spec/impactEntry/testPostImpactEntrySpec";
+import {ObjectIDRegex} from "../../../spec/testCommonSpec";
 import {run} from "../../../util/testIntegApp";
 import {init, request} from "../../../util/testIntegApp";
 

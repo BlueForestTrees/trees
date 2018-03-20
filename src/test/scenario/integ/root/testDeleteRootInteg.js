@@ -1,4 +1,4 @@
-import {rootDeletionSpec} from "../../../expected/root/testDeleteRootData";
+import {rootDeletionSpec} from "../../../spec/root/testDeleteRootSpec";
 import {app} from "../../../../main";
 import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
 import {run} from "../../../util/testIntegApp";

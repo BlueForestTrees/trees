@@ -1,4 +1,4 @@
-import {renameTrunkSpec, requantifyTrunkSpec} from "../../../expected/trunk/testPutTrunkData";
+import {renameTrunkSpec, requantifyTrunkSpec} from "../../../spec/trunk/testPutTrunkSpec";
 
 import {app} from "../../../../main";
 import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {remove, replaceItem} from "../../util/testIntegApp";
+import {remove, replaceItem} from "../../util/testUtil";
 
 describe('TU Utils', function () {
 

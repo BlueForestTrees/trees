@@ -1,6 +1,6 @@
 import {app} from "../../../../main";
-import {allreadyExistingFacetEntrySpec, postBadGrandeurFacetEntrySpec, postFacetEntrySpec} from "../../../expected/facetEntry/testPostFacetEntryData";
-import {ObjectIDRegex} from "../../../expected/testCommonData";
+import {allreadyExistingFacetEntrySpec, postBadGrandeurFacetEntrySpec, postFacetEntrySpec} from "../../../spec/facetEntry/testPostFacetEntrySpec";
+import {ObjectIDRegex} from "../../../spec/testCommonSpec";
 import {run} from "../../../util/testIntegApp";
 import {init, request} from "../../../util/testIntegApp";
 

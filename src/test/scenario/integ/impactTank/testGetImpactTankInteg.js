@@ -1,4 +1,4 @@
-import {gateauImpactTankSpec, papierAImpactTankSpec, sansImpactTankSpec} from "../../../expected/impacttank/testGetImpactTankData";
+import {gateauImpactTankSpec, papierAImpactTankSpec, sansImpactTankSpec} from "../../../spec/impacttank/testGetImpactTankSpec";
 import {init, request, run, run2} from "../../../util/testIntegApp";
 
 

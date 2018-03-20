@@ -2,7 +2,6 @@ import {appPromise} from "../../main/index";
 import chai, {expect} from 'chai';
 import {initDatabase, updateDb} from "./testIntegDatabase";
 
-import _ from 'lodash';
 import {ObjectID} from "mongodb";
 
 let app = null;
@@ -32,29 +31,3 @@ const before = async spec => {
     return spec;
 };
 
-
-export const withQtCoef = (items, coef) => _.forEach(items, root => root.quantity.qt *= coef || 2);
-export const withoutQuantity = items => _.map(items, item => _.omit(item, "quantity"));
-export const withItem = (_id, qt, unit) => ({_id, ...withQuantity(qt, unit)});
-export const withItemNoQt = _id => ({_id});
-export const withItemRequest = (_id, qt, unit) => ({_id, qt, unit});
-export const withQuantity = (qt, unit) => ({quantity: {qt, unit}});
-export const withTrunk = (name, _id, qt, unit) => ({name, name_lower: name.toLowerCase(), ...withItem(_id, qt, unit)});
-export const withTrunkNoQt = (name, _id) => ({_id, name, name_lower: name.toLowerCase()});
-export const withEntry = (_id, name, grandeur) => ({_id, name, grandeur});
-
-export const setQuantity = (trunk, qt, unit) => {
-    unit = unit ? unit : trunk.quantity.unit;
-    trunk.quantity = {qt, unit};
-};
-export const removeItemQuantity = (item, subItemId) => ({
-    ..._.omit(item, "items"),
-    items: _.map(item.items, subitem => subitem._id === subItemId ? _.omit(subitem, "quantity") : subitem)
-});
-
-
-export const replaceItem = (obj, prop, value) => {
-    const result = remove(obj, prop, {_id: value._id});
-    result[prop].push(value);
-    return result;
-};

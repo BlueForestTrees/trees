@@ -1,4 +1,4 @@
-import {badUnitGetBranchSpec, branchWithoutQtSpec, emptyGetBranchSpec, farine1000GGetBranchSpec, getBranchsSpec, otherUnitGetBranchSpec, sameQtGetBranchSpec} from "../../../expected/branch/testGetBranchData";
+import {badUnitGetBranchSpec, branchWithoutQtSpec, emptyGetBranchSpec, farine1000GGetBranchSpec, getBranchsSpec, otherUnitGetBranchSpec, sameQtGetBranchSpec} from "../../../spec/branch/testGetBranchSpec";
 import {run} from "../../../util/testIntegApp";
 import {init, request} from "../../../util/testIntegApp";
 

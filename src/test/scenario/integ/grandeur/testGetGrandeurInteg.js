@@ -1,5 +1,5 @@
 import {init, request} from "../../../util/testIntegApp";
-import {getGrandeurSpec} from "../../../expected/grandeur/testGetGrandeurData";
+import {getGrandeurSpec} from "../../../spec/grandeur/testGetGrandeurSpec";
 
 describe('GET Grandeurs', function () {
 

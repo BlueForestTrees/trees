@@ -1,9 +1,9 @@
 import {oneModifiedResponse} from "../testCommonData";
-import {clon} from "../../util/testUtil";
+import {clon} from "../../util/testIntegUtil";
 import {cols} from "../../../main/const/collections";
 import _ from 'lodash';
 import {bleTrunk, farineTrunk, gateauRoot, gateauTrunk, laitTrunk} from "../../database/gateau";
-import {setQuantity} from "../../util/testPlumbing";
+import {setQuantity} from "../../util/testIntegUtil";
 
 export const setQuantityRootSpec = {};
 setQuantityRootSpec.req = {

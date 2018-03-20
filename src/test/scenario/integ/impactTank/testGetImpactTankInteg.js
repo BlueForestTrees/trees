@@ -1,5 +1,5 @@
 import {gateauImpactTankSpec, papierAImpactTankSpec, sansImpactTankSpec} from "../../../expected/impacttank/testGetImpactTankData";
-import {init, request, run, run2} from "../../../util/testIntegApp";
+import {init, request, run, run2} from "../../../util/testIntegUtil";
 
 
 const getTank = spec => request()

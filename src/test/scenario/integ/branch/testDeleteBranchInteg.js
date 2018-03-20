@@ -1,5 +1,5 @@
 import {assertDb} from "../../../util/testIntegDatabase";
-import {init, request, run} from "../../../util/testIntegApp";
+import {init, request, run} from "../../../util/testIntegUtil";
 import {branchDeletionSpec} from "../../../expected/branch/testDeleteBranchData";
 
 

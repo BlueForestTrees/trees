@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import {clon} from "../../util/testUtil";
-import {setQuantity, withoutQuantity, withQtCoef} from "../../util/testPlumbing";
+import {clon} from "../../util/testIntegUtil";
+import {setQuantity, withoutQuantity, withQtCoef} from "../../util/testIntegUtil";
 import {farineRoot, gateauRoot, laitTrunk} from "../../database/gateau";
 import {skateRoot} from "../../database/skate";
 import {withNames} from "../../util/testIntegDatabase";

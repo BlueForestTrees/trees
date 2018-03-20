@@ -1,6 +1,6 @@
 import {emptyGetImpactSpec, emptyQuantifiedGetImpactSpec, getImpactSpec, getQuantifiedImpactSpec} from "../../../expected/impact/testGetImpactData";
 import {app} from "../../../../main";
-import {init, request} from "../../../util/testIntegApp";
+import {init, request} from "../../../util/testIntegUtil";
 
 describe('GET Impacts', function () {
 

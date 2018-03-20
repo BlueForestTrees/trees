@@ -1,5 +1,5 @@
 import {oneModifiedResponse} from "../testCommonData";
-import {remove} from "../../util/testUtil";
+import {remove} from "../../util/testIntegUtil";
 import {cols} from "../../../main/const/collections";
 import {bleFacets} from "../../database/gateau";
 

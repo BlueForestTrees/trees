@@ -1,6 +1,6 @@
 import {oneModifiedResponse} from "../testCommonData";
 import {cols} from "../../../main/const/collections";
-import {remove} from "../../util/testUtil";
+import {remove} from "../../util/testIntegUtil";
 import {bleBranch, farineBranch} from "../../database/gateau";
 
 export const branchDeletionSpec = {};

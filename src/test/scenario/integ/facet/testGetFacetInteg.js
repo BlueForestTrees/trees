@@ -1,6 +1,6 @@
 import {emptyGetFacetSpec, emptyQuantifiedGetFacetSpec, getFacetSpec, getQuantifiedFacetSpec} from "../../../expected/facet/testGetFacetData";
 import {app} from "../../../../main";
-import {init, request} from "../../../util/testIntegApp";
+import {init, request} from "../../../util/testIntegUtil";
 
 describe('GET Facets', function () {
 

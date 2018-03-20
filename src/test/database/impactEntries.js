@@ -1,5 +1,5 @@
 import {cols} from "../../main/const/collections";
-import {withEntry} from "../util/testPlumbing";
+import {withEntry} from "../util/testIntegUtil";
 
 
 export const vitCImpactEntry = withEntry( "5a6a03c03e77667641d2d2c4", "Ivitamine C", "Densité");

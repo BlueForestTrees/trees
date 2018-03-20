@@ -1,7 +1,7 @@
-import {run} from "../../../util/testIntegApp";
+import {run} from "../../../util/testIntegUtil";
 import {assertDb} from "../../../util/testIntegDatabase";
 import {setQuantityLinkSpec, updateQuantityAnotherUnitLinkSpec, updateQuantityLinkSpec} from "../../../expected/link/testPutLinkData";
-import {init, request} from "../../../util/testIntegApp";
+import {init, request} from "../../../util/testIntegUtil";
 
 describe('PUT Link', function () {
 

@@ -1,9 +1,9 @@
 import {oneModifiedResponse} from "../testCommonData";
-import {replaceItem} from "../../util/testUtil";
+import {replaceItem} from "../../util/testIntegUtil";
 import {cols} from "../../../main/const/collections";
 import {bleFacets, farineTrunk} from "../../database/gateau";
 import {prixFacetEntry, vitBFacetEntry} from "../../database/facetEntries";
-import {withItem} from "../../util/testPlumbing";
+import {withItem} from "../../util/testIntegUtil";
 
 export const createFacetSpec = {};
 createFacetSpec.req = {

@@ -1,6 +1,6 @@
 import {badUnitGetBranchSpec, branchWithoutQtSpec, emptyGetBranchSpec, farine1000GGetBranchSpec, getBranchsSpec, otherUnitGetBranchSpec, sameQtGetBranchSpec} from "../../../expected/branch/testGetBranchData";
-import {run} from "../../../util/testIntegApp";
-import {init, request} from "../../../util/testIntegApp";
+import {run} from "../../../util/testIntegUtil";
+import {init, request} from "../../../util/testIntegUtil";
 
 const getBranch = spec => request()
     .get(`/api/branch/${spec.req._id}`)

@@ -1,4 +1,4 @@
-import {init, request} from "../../../util/testIntegApp";
+import {init, request} from "../../../util/testIntegUtil";
 import {getGrandeurSpec} from "../../../expected/grandeur/testGetGrandeurData";
 
 describe('GET Grandeurs', function () {

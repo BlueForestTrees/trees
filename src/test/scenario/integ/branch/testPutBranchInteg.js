@@ -1,7 +1,7 @@
 import {app} from "../../../../main";
-import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
+import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegUtil";
 import {setQuantityBranchSpec, updateQuantityAnotherUnitBranchSpec, updateQuantityBranchSpec} from "../../../expected/branch/testPutBranchData";
-import {run} from "../../../util/testIntegApp";
+import {run} from "../../../util/testIntegUtil";
 
 describe('PUT Branch', function () {
 

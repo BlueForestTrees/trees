@@ -1,8 +1,8 @@
-import {clon} from "../../util/testUtil";
+import {clon} from "../../util/testIntegUtil";
 import _ from 'lodash';
 import {bleFacets} from "../../database/gateau";
 import {nameOfFacet} from "../../util/testIntegDatabase";
-import {withQuantity} from "../../util/testPlumbing";
+import {withQuantity} from "../../util/testIntegUtil";
 
 export const getFacetSpec = {};
 

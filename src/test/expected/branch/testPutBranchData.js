@@ -1,8 +1,8 @@
 import {oneModifiedResponse} from "../testCommonData";
 import {cols} from "../../../main/const/collections";
 import {bleTrunk, farineTrunk, gateauTrunk, laitBranch, laitTrunk} from "../../database/gateau";
-import {setQuantity} from "../../util/testPlumbing";
-import {clon} from "../../util/testUtil";
+import {setQuantity} from "../../util/testIntegUtil";
+import {clon} from "../../util/testIntegUtil";
 import _ from 'lodash';
 
 export const setQuantityBranchSpec = {};

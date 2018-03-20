@@ -1,7 +1,7 @@
-import {removeItemQuantity, withQuantity} from "../../util/testPlumbing";
+import {removeItemQuantity, withQuantity} from "../../util/testIntegUtil";
 import {aTrunk, daTrunk, dbTrunk, dRoot, e1Trunk, e2Trunk} from "../../database/lettres";
 import {cols} from "../../../main/const/collections";
-import {clon} from "../../util/testUtil";
+import {clon} from "../../util/testIntegUtil";
 import {laitTrunk} from "../../database/gateau";
 
 export const lettreTankSpec = {};

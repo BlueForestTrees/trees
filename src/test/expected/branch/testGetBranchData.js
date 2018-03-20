@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import {clon} from "../../util/testUtil";
-import {withoutQuantity, withQtCoef} from "../../util/testPlumbing";
+import {clon} from "../../util/testIntegUtil";
+import {withoutQuantity, withQtCoef} from "../../util/testIntegUtil";
 import {farineBranch, laitBranch, pizzaTrunk} from "../../database/gateau";
 import {withNames} from "../../util/testIntegDatabase";
 

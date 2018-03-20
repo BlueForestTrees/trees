@@ -1,6 +1,6 @@
 import {app} from "../../../../main";
 
-import {init, request, run} from "../../../util/testIntegApp";
+import {init, request, run} from "../../../util/testIntegUtil";
 import {setQuantityRootSpec, updateQuantityAnotherUnitRootSpec, updateQuantityRootSpec} from "../../../expected/root/testPutRootData";
 import {assertDb} from "../../../util/testIntegDatabase";
 

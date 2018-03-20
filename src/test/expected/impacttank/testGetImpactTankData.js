@@ -1,4 +1,4 @@
-import {withQuantity} from "../../util/testPlumbing";
+import {withQuantity} from "../../util/testIntegUtil";
 import {ObjectID} from "mongodb";
 import {papierVA} from "../../database/papier";
 import {co2eImpactEntry, vitCImpactEntry} from "../../database/impactEntries";

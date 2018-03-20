@@ -1,8 +1,8 @@
 import {withQuantity} from "../../util/testUtil";
 import {ObjectID} from "mongodb";
 import {papierVA} from "../../database/papier";
-import {co2eImpactEntry, vitCImpactEntry} from "../../database/impactEntries";
-import {gateauTrunk} from "../../database/gateau";
+import {co2eImpactEntry, vitBImpactEntry, vitCImpactEntry} from "../../database/impactEntries";
+import {gateauItem, gateauTrunk} from "../../database/gateau";
 
 
 export const papierAImpactTankSpec = {};
@@ -25,17 +25,28 @@ papierAImpactTankSpec.res = {
 export const gateauImpactTankSpec = {};
 gateauImpactTankSpec.req = {
     _id: gateauTrunk._id,
-    quantity: gateauTrunk.quantity
+    quantity: gateauItem.quantity
 };
 gateauImpactTankSpec.res = {
     body: {
         _id: gateauTrunk._id,
-        quantity: gateauTrunk.quantity,
+        quantity: gateauItem.quantity,
         items: [{
-            _id: vitCImpactEntry._id,
-            name: "Vitamine C",
-            ...withQuantity(10, "mol")
-        }]
+            "_id": vitCImpactEntry._id,
+            "quantity": {
+                "qt": 10,
+                "unit": "mol"
+            },
+            "name": "Ivitamine C"
+        },
+            {
+                "_id": vitBImpactEntry._id,
+                "quantity": {
+                    "qt": 0.1,
+                    "unit": "mol"
+                },
+                "name": "Ivitamine B"
+            }]
     }
 };
 

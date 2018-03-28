@@ -5,7 +5,7 @@
     "build": "babel src --out-dir dist",
     "start": "node dist/main/index.js",
     "test-api": "PORT=9000 mocha --exit $(find src/test -name '*.js') --require babel-register",
-    "test-api-win": "set PORT=9000 && mocha --exit $(find src/test -name '*.js') --require babel-register",
+    "test-api-win": "set PORT=9000 && mocha --recursive --require babel-register --exit \"src/test/**/*.js\"",
     "test-init-db-win": "mocha --exit src/test/util/testInitDb.js --require babel-register",
     "test-init-db": "mocha --exit src/test/util/testInitDb.js --require babel-register",
     "upgrade-query": "yarn upgrade -L trees-query",

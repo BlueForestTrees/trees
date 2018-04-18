@@ -1,8 +1,8 @@
 {
   "scripts": {
+    "build": "rimraf dist && babel src --out-dir dist",
     "dev-api": "nodemon $NODE_DEBUG_OPTION src/main/index.js --exec babel-node",
     "dev-api-win": "nodemon src/main/index.js --exec babel-node",
-    "build": "babel src --out-dir dist",
     "start": "node dist/main/index.js",
     "test-api": "PORT=9000 mocha --exit $(find src/test -name '*.js') --require babel-register",
     "test-api-win": "set PORT=9000 && mocha --recursive --require babel-register --exit \"src/test/**/*.js\"",
@@ -13,7 +13,7 @@
     "upgrade-units": "yarn upgrade -L trees-units"
   },
   "env": "api",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "private": true,
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -27,8 +27,9 @@
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "mocha": "^5.0.0",
-    "nodemon": "^1.14.11",
+    "nodemon": "^1.17.3",
     "nyc": "^11.4.1",
+    "rimraf": "^2.6.2",
     "sinon": "^4.2.1"
   },
   "dependencies": {

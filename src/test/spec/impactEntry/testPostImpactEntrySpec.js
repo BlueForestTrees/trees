@@ -5,14 +5,14 @@ export const postImpactEntrySpec = {};
 postImpactEntrySpec.req = {
     body: {
         name: "nomNewImpactEntry",
-        grandeur: "Densité"
+        grandeur: "Dens"
     }
 };
 postImpactEntrySpec.res = {
     body: _id => ({
         _id,
         name: "nomNewImpactEntry",
-        grandeur: "Densité"
+        grandeur: "Dens"
     })
 };
 

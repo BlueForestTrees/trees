@@ -5,14 +5,14 @@ export const postFacetEntrySpec = {};
 postFacetEntrySpec.req = {
     body: {
         name: "nomNewFacetEntry",
-        grandeur: "Densité"
+        grandeur: "Dens"
     }
 };
 postFacetEntrySpec.res = {
     body: _id => ({
         _id,
         name: "nomNewFacetEntry",
-        grandeur: "Densité"
+        grandeur: "Dens"
     })
 };
 

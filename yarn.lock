@@ -3604,13 +3604,13 @@ trees-errors@^0.0.0:
   dependencies:
     nested-error-stacks "^2.0.0"
 
-trees-items-service@^0.1.7:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/trees-items-service/-/trees-items-service-0.1.7.tgz#e26b8cd462cbc4b4cbe01bfc624f875bd5bb0adb"
+trees-items-service@^0.1.13:
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/trees-items-service/-/trees-items-service-0.1.13.tgz#e58a86a385d5074a0bf98d75c04532ca25ae71e7"
   dependencies:
     trees-errors "^0.0.0"
     trees-query "^0.0.9"
-    trees-units "^1.0.4"
+    trees-units "^1.0.9"
 
 trees-query@^0.0.9:
   version "0.0.9"
@@ -3619,16 +3619,9 @@ trees-query@^0.0.9:
     lodash "^4.17.5"
     mongodb "^3.0.4"
 
-trees-units@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/trees-units/-/trees-units-1.0.4.tgz#ba189797aebe9f60a355f5e882f59f6daeb26349"
-  dependencies:
-    fraction.js "^4.0.4"
-    lodash "^4.17.5"
-
-trees-units@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/trees-units/-/trees-units-1.0.5.tgz#76285759dd24ec2c761d827b3008830fd4a0f77b"
+trees-units@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/trees-units/-/trees-units-1.0.9.tgz#67efac19ab0b352b04aa7bbfa1219932979523f0"
   dependencies:
     fraction.js "^4.0.4"
     lodash "^4.17.5"

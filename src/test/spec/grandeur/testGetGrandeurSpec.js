@@ -189,7 +189,7 @@ getGrandeurSpec.res = {
                 {
                     "coef": 1,
                     "grandeur": "Nomb",
-                    "name": "",
+                    "name": "pas d'unité",
                     "shortname": "count",
                 },
             ],

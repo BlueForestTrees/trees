@@ -1,11 +1,9 @@
-import {EITHER_OR} from "../../const/messages";
-import {optionalExistingSourceId, optionalValidName} from "../../const/validations";
 import {runraw} from "../../util/runraw";
-import {createOrClone, putall} from "../../service/trunk/postTrunkService";
+import {create, putall} from "../../service/trunk/postTrunkService";
 
 import {run} from '../../util/run'
+import {validGrandeur, validName} from "../../const/validations";
 const router = require('express').Router();
-const {check, oneOf} = require('express-validator/check');
 
 module.exports = router;
 
@@ -15,13 +13,8 @@ router.post('/api/trunks/all',
 
 router.post('/api/trunk',
     [
-        optionalValidName,
-        optionalExistingSourceId,
-
-        oneOf([
-            [check('name').exists(), check('sourceId').not().exists()],
-            [check('name').not().exists(), check('sourceId').exists()]
-        ],EITHER_OR)
+        validName,
+        validGrandeur
     ],
-    run(createOrClone)
+    run(create)
 );

@@ -13,7 +13,7 @@ module.exports = router;
 router.post('/api/impactEntry',
     [
         validName,
-        validGrandeur(GRANDEUR)
+        validGrandeur
     ],
     run(addImpactEntry)
 );

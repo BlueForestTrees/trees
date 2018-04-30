@@ -26,6 +26,7 @@ export const withQuantity = (qt, unit) => ({quantity: {qt, unit}});
 export const withTrunk = (name, _id, qt, unit) => ({name, name_lower: name.toLowerCase(), ...withItem(_id, qt, unit)});
 export const withTrunkNoQt = (name, _id) => ({_id, name, name_lower: name.toLowerCase()});
 export const withEntry = (_id, name, grandeur) => ({_id, name, grandeur});
+export const withValidationError = (prop, location, msg, value) => ({[prop]: {location, msg, param: prop, value}});
 
 export const setQuantity = (trunk, qt, unit) => {
     unit = unit ? unit : trunk.quantity.unit;

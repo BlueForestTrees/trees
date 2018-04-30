@@ -13,7 +13,7 @@ module.exports = router;
 router.post('/api/facetEntry',
     [
         validName,
-        validGrandeur(GRANDEUR)
+        validGrandeur
     ],
     run(addFacetEntry)
 );

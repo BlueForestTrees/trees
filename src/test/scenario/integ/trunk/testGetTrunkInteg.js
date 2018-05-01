@@ -1,4 +1,4 @@
-import {getAllTrunkSpec, getTrunkSpec, searchTrunkSpec} from "../../../spec/trunk/testGetTrunkSpec";
+import {getTrunkSpec, searchTrunkSpec, searchTrunkSpec2} from "../../../spec/trunk/testGetTrunkSpec";
 import {app} from "../../../../main";
 import {init, request} from "../../../util/testIntegApp";
 
@@ -6,22 +6,22 @@ describe('GET Trunks', function () {
 
     beforeEach(init);
 
-    it('return all trunks', done => {
-        request()
-            .get('/api/trunks')
-            .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.deep.equal(getAllTrunkSpec.res.body);
-                done();
-            });
-    });
-
-    it('return trunks whose name start by', done => {
+    it('search by term', done => {
         request()
             .get(`/api/trunks?q=${searchTrunkSpec.req.term}`)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.deep.equal(searchTrunkSpec.res.body);
+                done();
+            });
+    });
+
+    it('search by term 2', done => {
+        request()
+            .get(`/api/trunks?q=${searchTrunkSpec2.req.term}`)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.deep.equal(searchTrunkSpec2.res.body);
                 done();
             });
     });

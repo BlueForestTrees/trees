@@ -84,7 +84,7 @@ export const assertDb = async ({list, colname, doc, missingDoc}) => {
 
 export const loadFromDbById = async (colname, _id) => removeObjects(await col(colname).findOne(withId(_id)));
 
-export const initialTrees = database[cols.TRUNK];
+const initialTrees = database[cols.TRUNK];
 const initialFacetEntries = database[cols.FACET_ENTRY];
 const initialImpactEntries = database[cols.IMPACT_ENTRY];
 

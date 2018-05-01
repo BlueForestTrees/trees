@@ -1,5 +1,5 @@
 import {existingId, optionalGrandeur} from "../../const/validations";
-import {getTrunk, searchOrAll} from "../../service/trunk/getTrunkService";
+import {getTrunk, search} from "../../service/trunk/getTrunkService";
 
 import {run} from '../../util/run'
 const router = require('express').Router();
@@ -12,7 +12,7 @@ router.get('/api/trunks',
         optionalGrandeur('g'),
         check('q').optional().exists()
     ],
-    run(({g, q}) => searchOrAll(g, q))
+    run(({g, q}) => search(g, q))
 );
 
 router.get('/api/trunk/:_id',

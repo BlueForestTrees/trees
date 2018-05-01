@@ -1,13 +1,7 @@
 import _ from 'lodash';
-import {removeObjects} from "../../../main/util/addObjectID";
-import {initialTrees} from "../../util/testIntegDatabase";
 import {farineTrunk, gateauTrunk} from "../../database/gateau";
-
-export const getAllTrunkSpec = {
-    res: {
-        body: removeObjects(initialTrees)
-    }
-};
+import {eauTrunk} from "../../database/skate";
+import {e1Trunk} from "../../database/lettres";
 
 const searchResult = [_.pick(farineTrunk, ['_id', 'name'])];
 export const searchTrunkSpec = {
@@ -16,6 +10,16 @@ export const searchTrunkSpec = {
     },
     res: {
         body: searchResult
+    }
+};
+
+const searchResult2 = [_.pick(eauTrunk, ['_id', 'name']),_.pick(e1Trunk, ['_id', 'name'])];
+export const searchTrunkSpec2 = {
+    req: {
+        term: eauTrunk.name.substring(0, 2),
+    },
+    res: {
+        body: searchResult2
     }
 };
 

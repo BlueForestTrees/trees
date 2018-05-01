@@ -12,10 +12,9 @@ const searchMixin = {name: 1};
 export const peekTrunk = _id => trunks().findOne(withId(_id), peekFields);
 export const getTrunk = _id => trunks().findOne(withId(_id), getFields);
 
-export const search = (grandeur, name) => trunks()
+export const search = name => trunks()
     .find({
-        name_lower: {$regex: `^${name.toLowerCase()}.*`},
-        grandeur: grandeur || undefined
+        name_lower: {$regex: `^${name.toLowerCase()}.*`}
     }, searchMixin)
     .sort({name_lower: 1})
     .toArray();

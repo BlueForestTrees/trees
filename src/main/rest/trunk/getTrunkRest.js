@@ -1,4 +1,4 @@
-import {existingId, optionalGrandeur} from "../../const/validations";
+import {existingId} from "../../const/validations";
 import {getTrunk, search} from "../../service/trunk/getTrunkService";
 
 import {run} from '../../util/run'
@@ -9,10 +9,9 @@ module.exports = router;
 
 router.get('/api/trunks',
     [
-        optionalGrandeur('g'),
         check('q').optional().exists()
     ],
-    run(({g, q}) => search(g, q))
+    run(({q}) => search(q))
 );
 
 router.get('/api/trunk/:_id',

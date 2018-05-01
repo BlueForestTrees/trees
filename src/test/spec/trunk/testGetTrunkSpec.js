@@ -3,7 +3,7 @@ import {farineTrunk, gateauTrunk} from "../../database/gateau";
 import {eauTrunk} from "../../database/skate";
 import {e1Trunk} from "../../database/lettres";
 
-const searchResult = [_.pick(farineTrunk, ['_id', 'name'])];
+const searchResult = [_.pick(farineTrunk, ['_id', 'name', 'grandeur'])];
 export const searchTrunkSpec = {
     req: {
         term: farineTrunk.name.substring(0, 3),
@@ -13,7 +13,7 @@ export const searchTrunkSpec = {
     }
 };
 
-const searchResult2 = [_.pick(eauTrunk, ['_id', 'name']),_.pick(e1Trunk, ['_id', 'name'])];
+const searchResult2 = [_.pick(e1Trunk, ['_id', 'name', 'grandeur']), _.pick(eauTrunk, ['_id', 'name', 'grandeur'])];
 export const searchTrunkSpec2 = {
     req: {
         term: eauTrunk.name.substring(0, 2),

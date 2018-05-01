@@ -49,7 +49,7 @@
     "pick-to-array": "^1.1.0",
     "trees-items-service": "^0.1.13",
     "trees-query": "^0.0.9",
-    "trees-units": "^1.0.9"
+    "trees-units": "^1.0.11"
   },
   "babel": {
     "presets": [

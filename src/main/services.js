@@ -1,12 +1,12 @@
 import {loadUnitsData} from "./service/unit/grandeurService";
-import {getShortnames, initUnits, getGrandeursKeys} from "trees-units";
+import {getGrandeursKeys, getShortnames, initUnits} from "trees-units";
 
-export const initServices = () => {
+export const initServices = async () => {
     console.log("Init services...");
-    initUnitsEtGrandeurs();
+    await initUnitsEtGrandeurs();
 };
 
 const initUnitsEtGrandeurs = () =>
     loadUnitsData()
         .then(initUnits)
-        .then(()=>console.log(`Unités et grandeurs: ${getShortnames().length} unités dans ${getGrandeursKeys().length} grandeurs`));
+        .then(() => console.log(`Unités et grandeurs: ${getShortnames().length} unités dans ${getGrandeursKeys().length} grandeurs`));

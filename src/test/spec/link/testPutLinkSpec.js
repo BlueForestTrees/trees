@@ -11,7 +11,7 @@ setQuantityLinkSpec.db = {
         list: [setQuantityRootSpec.db.expected, setQuantityBranchSpec.db.expected]
     }
 };
-
+//TODO supprimer postLink, ajouter un test de création ici.
 
 export const updateQuantityLinkSpec = {};
 updateQuantityLinkSpec.req = updateQuantityRootSpec.req;

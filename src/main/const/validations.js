@@ -1,4 +1,4 @@
-import {BRANCH_ID, FACET_ID, GRANDEUR, ID, IMPACT_ID, LEFT_ID, NAME, RIGHT_ID, ROOT_ID, SOURCE_ID, TREE_ID, TRUNK_ID} from "./paths";
+import {BRANCH_ID, FACET_ID, GRANDEUR, ID, IMPACT_ID, NAME, ROOT_ID, SOURCE_ID, TRUNK_ID} from "./paths";
 import {IS_DECIMAL, IS_NOT_RIGHT_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "./messages";
 import {check} from 'express-validator/check';
 import _ from 'lodash';
@@ -14,6 +14,8 @@ export const valid = (field, optional) => {
 };
 const trunkFound = (field, optional) => valid(field, optional).custom(peekTrunk).withMessage("not found");
 
+export const validMessage = check("message").isString().isLength({min: 1, max: 1000}).withMessage('message trop long');
+export const validMail = check("mail").isEmail().withMessage('mail invalid');
 export const validItem = key => [valid(`${key}._id`), validQt(`${key}.quantity.qt`), validUnit(`${key}.quantity.unit`)];
 export const validId = valid(ID);
 export const validGrandeur = check(GRANDEUR).isIn(getGrandeursKeys());

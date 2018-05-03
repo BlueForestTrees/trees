@@ -14,7 +14,8 @@ export const getTrunk = _id => trunks().findOne(withId(_id), getFields);
 
 export const search = name => trunks()
     .find({
-        name_lower: {$regex: `^${name.toLowerCase()}.*`}
+        name_lower: {$regex: `^${name.toLowerCase()}.*`},
+        grandeur: {"$exists": true, "$ne": null}
     }, searchMixin)
     .sort({name_lower: 1})
     .toArray();

@@ -1,25 +1,24 @@
-import _ from 'lodash';
-import {farineTrunk, gateauTrunk} from "../../database/gateau";
-import {eauTrunk} from "../../database/skate";
+import {omit, pick} from 'lodash';
+import {gateauTrunk} from "../../database/gateau";
+import {eauTrunk, skateTrunk} from "../../database/skate";
 import {e1Trunk} from "../../database/lettres";
 
-const searchResult = [_.pick(farineTrunk, ['_id', 'name', 'grandeur'])];
+const notInSearchMixin = ["name_lower", "quantity"];
 export const searchTrunkSpec = {
     req: {
-        term: farineTrunk.name.substring(0, 3),
+        term: skateTrunk.name.substring(0, 3),
     },
     res: {
-        body: searchResult
+        body: [omit(skateTrunk, notInSearchMixin)]
     }
 };
 
-const searchResult2 = [_.pick(e1Trunk, ['_id', 'name', 'grandeur']), _.pick(eauTrunk, ['_id', 'name', 'grandeur'])];
 export const searchTrunkSpec2 = {
     req: {
         term: eauTrunk.name.substring(0, 2),
     },
     res: {
-        body: searchResult2
+        body: [omit(e1Trunk, notInSearchMixin), omit(eauTrunk, notInSearchMixin)]
     }
 };
 
@@ -28,5 +27,5 @@ getTrunkSpec.req = {
     _id: gateauTrunk._id
 };
 getTrunkSpec.res = {
-    body: _.omit(gateauTrunk, 'name_lower')
+    body: omit(gateauTrunk, 'name_lower')
 };

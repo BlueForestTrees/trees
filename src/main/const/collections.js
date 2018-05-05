@@ -2,11 +2,14 @@ export const cols = {
     TRUNK: 'TrunkCollection',
     FACET: 'FacetCollection',
     FACET_ENTRY: 'FacetEntryCollection',
-    FEEDBACK: 'feedbackCollection',
     IMPACT: 'ImpactCollection',
     IMPACT_ENTRY: 'ImpactEntryCollection',
     ROOT: 'RootCollection',
     BRANCH: 'BranchCollection',
     WASTE: 'WasteCollection',
-    USAGE: 'UsageCollection'
+    USAGE: 'UsageCollection',
+
+    FEEDBACK: 'feedbackCollection',
+    FILM: 'filmCollection'
+
 };

@@ -1,7 +1,6 @@
 import {cols} from "../../main/const/collections";
 import {withEntry} from "../util/testUtil";
 
-console.log(withEntry)
 export const vitBFacetEntry = withEntry("5a6a03c03e77667641d2d2c5", "vitamine B", "Dens");
 export const vitCFacetEntry = withEntry("5a6a03c03e77667641d2d2c4", "vitamine C", "Dens");
 export const vitDFacetEntry = withEntry("5a6a03c03e77667641d2d2c7", "vitamine D", "Dens");

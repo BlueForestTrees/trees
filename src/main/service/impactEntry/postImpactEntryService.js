@@ -15,7 +15,11 @@ export const replaceAllImpactEntries = async (data) => {
 export const addImpactEntry = async impactEntry => {
     return await getImpactEntryByName(impactEntry.name) ||
         {
-            _id: await impactsEntry().insertOne(impactEntry).insertedId,
+            _id: await impactsEntry()
+                .insertOne({
+                    ...impactEntry,
+                    name_lower: impactEntry.name.toLowerCase()
+                }).insertedId,
             ...impactEntry
         };
 };

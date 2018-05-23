@@ -11,6 +11,7 @@ const searchMixin = {name: 1, grandeur: 1};
 
 export const peekTrunk = _id => trunks().findOne(withId(_id), peekFields);
 export const getTrunk = _id => trunks().findOne(withId(_id), getFields);
+export const getQuantifiedTrunk = async (qt, unit, _id) => ({...await getTrunk(_id), quantity: {qt, unit}});
 
 export const search = name => trunks()
     .find({

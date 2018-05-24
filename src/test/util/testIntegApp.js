@@ -2,8 +2,6 @@ import {appPromise} from "../../main/index";
 import chai, {expect} from 'chai';
 import {initDatabase, updateDb} from "./testIntegDatabase";
 
-import {ObjectID} from "mongodb";
-
 let app = null;
 
 export const request = () => chai.request(app);

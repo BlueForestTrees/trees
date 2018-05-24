@@ -29,3 +29,13 @@ getTrunkSpec.req = {
 getTrunkSpec.res = {
     body: omit(gateauTrunk, 'name_lower')
 };
+
+export const getQtTrunkSpec = {};
+getQtTrunkSpec.req = {
+    _id: gateauTrunk._id,
+    qt: 5,
+    unit: "kg"
+};
+getQtTrunkSpec.res = {
+    body: {...omit(gateauTrunk, ['name_lower', 'quantity']), quantity: {qt: 5, unit: "kg"}}
+};

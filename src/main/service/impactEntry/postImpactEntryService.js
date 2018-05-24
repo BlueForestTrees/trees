@@ -12,14 +12,16 @@ export const replaceAllImpactEntries = async (data) => {
     return col.find().toArray();
 };
 
-export const addImpactEntry = async impactEntry => {
-    return await getImpactEntryByName(impactEntry.name) ||
-        {
-            _id: await impactsEntry()
-                .insertOne({
-                    ...impactEntry,
-                    name_lower: impactEntry.name.toLowerCase()
-                }).insertedId,
-            ...impactEntry
-        };
+export const addImpactEntry = async ({name, grandeur}) =>{
+    const existing = await getImpactEntryByName(name);
+    if(existing)return existing;
+
+    await impactsEntry()
+        .insertOne({
+            name, grandeur,
+            name_lower: name.toLowerCase()
+        });
+
+    return getImpactEntryByName(name);
+
 };

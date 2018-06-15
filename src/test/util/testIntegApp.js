@@ -6,6 +6,16 @@ let app = null;
 
 export const request = () => chai.request(app);
 
+export const testGet200BodyOk = (url, spec, done) => {
+    request()
+        .get(url)
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.deep.equal(spec.res.body);
+            done();
+        });
+};
+
 export const init = async () => {
     await initDatabase();
     app = await appPromise;

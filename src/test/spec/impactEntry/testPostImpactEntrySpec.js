@@ -32,9 +32,9 @@ postBadGrandeurImpactEntrySpec.res = {
 export const allreadyExistingImpactEntrySpec = {};
 allreadyExistingImpactEntrySpec.req = {
     body: {
-        ..._.omit(vitCImpactEntry, "_id")
+        ..._.omit(vitCImpactEntry, ["_id","name_lower"])
     }
 };
 allreadyExistingImpactEntrySpec.res = {
-    body: _id => vitCImpactEntry
+    body: _id => _.omit(vitCImpactEntry, "name_lower")
 };

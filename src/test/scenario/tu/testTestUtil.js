@@ -39,9 +39,11 @@ describe('TU Utils', function () {
             .to.deep.equal({name: "Eau", name_lower: "eau", _id: "999903c03e77667641d99994"});
     });
 
+    const trunk = withTrunk("Gateau au chocolat", "5a6a03c03e77667641d2d2c3", 200, "g");
     it('withTrunk ok', function () {
-        expect(withTrunk("Gateau au chocolat", "5a6a03c03e77667641d2d2c3", 200, "g"))
+        expect(trunk)
             .to.deep.equal({
+            color: trunk.color,
             _id: "5a6a03c03e77667641d2d2c3",
             grandeur: "Mass",
             name: "Gateau au chocolat",

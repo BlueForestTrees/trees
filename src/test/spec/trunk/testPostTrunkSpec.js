@@ -4,7 +4,7 @@ import {aTrunk} from "../../database/lettres";
 import {withValidationError} from "../../util/testUtil";
 
 export const postTrunkSpec = {};
-postTrunkSpec.req = {body: {name: "RATtatouille1664", grandeur: "Prix"}};
+postTrunkSpec.req = {body: {color:"#FFCC00", name: "RATtatouille1664", grandeur: "Prix"}};
 postTrunkSpec.res = {body: _id => ({_id})};
 postTrunkSpec.db = {
     expected: _id => ({
@@ -17,21 +17,25 @@ postTrunkSpec.db = {
 };
 
 export const postBadGrandeurTrunkSpec = {};
-postBadGrandeurTrunkSpec.req = {body: {name: "RATtatouille1664", grandeur: "bad_grandeur"}};
+postBadGrandeurTrunkSpec.req = {body: {color:"#FFFFFF", name: "RATtatouille1664", grandeur: "bad_grandeur"}};
 postBadGrandeurTrunkSpec.res = {errorCode:422, body: withValidationError("grandeur", "body", "Invalid value", "bad_grandeur")};
 
-const clonedName = (newId, tree) => tree.name + newId;
+export const postBadColorTrunkSpec = {};
+postBadColorTrunkSpec.req = {body: {color:"#FFFFF", name: "RATtatouille1664", grandeur: "Dens"}};
+postBadColorTrunkSpec.res = {errorCode:422, body: withValidationError("color", "body", "Invalid value", "#FFFFF")};
+
+const cloneName = (newId, tree) => tree.name + newId;
 export const cloneTrunkSpec = {};
 cloneTrunkSpec.req = {body: {sourceId: aTrunk._id}};
-cloneTrunkSpec.res = {body: _id => ({_id, name: clonedName(_id, aTrunk)})};
+cloneTrunkSpec.res = {body: _id => ({_id, name: cloneName(_id, aTrunk)})};
 cloneTrunkSpec.db = {
     expected: _id => ({
         colname: cols.TRUNK,
         doc: {
             ...(_.omit(aTrunk, ['_id', 'name', 'name_lower'])),
             _id,
-            name: clonedName(_id, aTrunk),
-            name_lower: lowerizeName(clonedName(_id, aTrunk))
+            name: cloneName(_id, aTrunk),
+            name_lower: lowerizeName(cloneName(_id, aTrunk))
         }
     })
 };

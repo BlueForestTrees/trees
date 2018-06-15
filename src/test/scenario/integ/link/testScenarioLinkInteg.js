@@ -32,7 +32,7 @@ const linkThenGet = async testedGet => {
 
 const postTrunk = async name => request()
     .post('/api/trunk')
-    .send({name, grandeur: "Nomb"})
+    .send({color:"#00F",name, grandeur: "Nomb"})
     .then(res => res.body._id);
 
 const link = (parentId, childId) => request()

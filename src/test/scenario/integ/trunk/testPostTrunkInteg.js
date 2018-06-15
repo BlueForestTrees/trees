@@ -1,5 +1,5 @@
 import {ObjectIDRegex} from "../../../spec/testCommonSpec";
-import {postBadGrandeurTrunkSpec, postTrunkSpec} from "../../../spec/trunk/testPostTrunkSpec";
+import {postBadColorTrunkSpec, postBadGrandeurTrunkSpec, postTrunkSpec} from "../../../spec/trunk/testPostTrunkSpec";
 import {assertDb} from "../../../util/testIntegDatabase";
 import {checkError, init, request, run} from "../../../util/testIntegApp";
 
@@ -10,6 +10,8 @@ describe('POST Trunks', function () {
     it('create the trunk', run(() => createTrunk(postTrunkSpec)));
 
     it('create the trunk grandeur error', run(() => checkError(postTrunk, postBadGrandeurTrunkSpec)));
+
+    it('create the trunk color error', run(() => checkError(postTrunk, postBadColorTrunkSpec)));
 
     //it('clone the trunk', run(() => cloneTrunk(cloneTrunkSpec)));
 

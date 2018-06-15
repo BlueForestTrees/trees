@@ -1,4 +1,4 @@
-import {BRANCH_ID, FACET_ID, GRANDEUR, ID, IMPACT_ID, NAME, ROOT_ID, SOURCE_ID, TRUNK_ID} from "./paths";
+import {BRANCH_ID, COLOR, FACET_ID, GRANDEUR, ID, IMPACT_ID, NAME, ROOT_ID, SOURCE_ID, TRUNK_ID} from "./paths";
 import {IS_DECIMAL, IS_NOT_RIGHT_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "./messages";
 import {check} from 'express-validator/check';
 import _ from 'lodash';
@@ -31,6 +31,7 @@ export const facetIdIsNotTrunkId = check(FACET_ID, IS_NOT_RIGHT_ID).custom((face
 export const branchIdIsNotTrunkId = check(BRANCH_ID, IS_NOT_RIGHT_ID).custom((branch, {req}) => (!branch || !req.body.trunk) || (branch._id !== req.body.trunk._id));
 export const optionalValidName = check(NAME).optional().matches(/^.+/);
 export const validName = check(NAME).isLength({min: 2}).matches(/^.+/);
+export const validColor = check(COLOR).isLength({min: 2}).matches(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/);
 
 export const present = (...fields) => _.map(fields, field => check(field, SHOULD_BE_DEFINED).exists());
 export const validUnit = field => check(field, IS_VALID_UNIT).optional().exists().isIn(getShortnames());

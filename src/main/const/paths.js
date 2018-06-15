@@ -16,6 +16,7 @@ export const ROOT_QT = 'root.quantity.qt';
 export const ROOT_UNIT = 'root.quantity.unit';
 export const QUANTITY = 'quantity';
 export const NAME = 'name';
+export const COLOR = 'color';
 export const QT = 'qt';
 export const UNIT = 'unit';
 export const GRANDEUR = 'grandeur';

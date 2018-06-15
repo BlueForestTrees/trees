@@ -2,7 +2,7 @@ import {runraw} from "../../util/runraw";
 import {create, putall} from "../../service/trunk/postTrunkService";
 
 import {run} from '../../util/run'
-import {validGrandeur, validName} from "../../const/validations";
+import {validColor, validGrandeur, validName} from "../../const/validations";
 const router = require('express').Router();
 
 module.exports = router;
@@ -13,6 +13,7 @@ router.post('/api/trunks/all',
 
 router.post('/api/trunk',
     [
+        validColor,
         validName,
         validGrandeur
     ],

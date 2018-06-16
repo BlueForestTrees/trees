@@ -7,9 +7,8 @@ import {withQuantity} from "../../util/testUtil";
 
 export const renameTrunkSpec = {};
 const someNewName = "paPRika" + Math.random();
-let _id = bleTrunk._id;
 renameTrunkSpec.req = {
-    params: {_id},
+    params: {_id: bleTrunk._id},
     body: {
         name: someNewName
     }
@@ -21,9 +20,10 @@ renameTrunkSpec.db = {
     expected: {
         colname: cols.TRUNK,
         doc: {
-            _id,
-            ...renameTrunkSpec.req.body,
-            name_lower: renameTrunkSpec.req.body.name.toLowerCase()
+            _id: bleTrunk._id,
+            color: bleTrunk.color,
+            name: someNewName,
+            name_lower: someNewName.toLowerCase()
         }
     }
 };

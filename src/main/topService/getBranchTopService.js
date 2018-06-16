@@ -1,4 +1,4 @@
-import {appendTrunkNames} from "../service/trunk/getTrunkService";
+import {appendTrunkInfos} from "../service/trunk/getTrunkService";
 import {readBranch} from "../service/branch/branchQueries";
 import _ from 'lodash';
 import {applyQuantity, erreurSiUnitIncompatibles} from "../util/calculations";
@@ -24,7 +24,7 @@ const loadNamedBranchs = _id =>
 
 const namiFy = async item => ({
     ..._.omit(item, "items"),
-    items: await appendTrunkNames(item.items)
+    items: await appendTrunkInfos(item.items)
 });
 
 

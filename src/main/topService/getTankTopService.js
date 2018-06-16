@@ -1,12 +1,12 @@
 import {readRootTree} from "../service/root/rootQueries";
 import _ from 'lodash';
-import {appendTrunkNames} from "../service/trunk/getTrunkService";
+import {appendTrunkInfos} from "../service/trunk/getTrunkService";
 import {quantified, summify} from "../util/calculations";
 
 export const getTank = (qt, unit, _id) =>
     readRootTree(qt, unit, _id)
         .then(async tree => {
-            tree.items = await appendTrunkNames(summify(tankfy(tree.items)));
+            tree.items = await appendTrunkInfos(summify(tankfy(tree.items)));
             return tree;
         });
 

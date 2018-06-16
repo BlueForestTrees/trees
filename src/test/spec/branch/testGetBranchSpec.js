@@ -2,10 +2,10 @@ import _ from 'lodash';
 import {clon} from "../../util/testUtil";
 import {withoutQuantity, withQtCoef} from "../../util/testUtil";
 import {farineBranch, laitBranch, pizzaTrunk} from "../../database/gateau";
-import {withNames} from "../../util/testIntegDatabase";
+import {withTrunkInfos} from "../../util/testIntegDatabase";
 
 export const getBranchsSpec = {};
-const farineItemsWithNames = withoutQuantity(withNames(clon(farineBranch.items)));
+const farineItemsWithNames = withoutQuantity(withTrunkInfos(clon(farineBranch.items)));
 getBranchsSpec.req = {
     _id: farineBranch._id
 };
@@ -28,7 +28,7 @@ emptyGetBranchSpec.res = {
 };
 
 export const sameQtGetBranchSpec = {};
-const sameQtItems = withNames(clon(farineBranch.items));
+const sameQtItems = withTrunkInfos(clon(farineBranch.items));
 sameQtGetBranchSpec.req = {
     qt: farineBranch.quantity.qt,
     unit: farineBranch.quantity.unit,
@@ -44,7 +44,7 @@ sameQtGetBranchSpec.res = {
 
 export const farine1000GGetBranchSpec = {};
 const farine1000G = clon(farineBranch);
-withNames(farine1000G.items);
+withTrunkInfos(farine1000G.items);
 withQtCoef([farine1000G]);
 withQtCoef(farine1000G.items);
 
@@ -77,7 +77,7 @@ farine1000GGetBranchSpec.res = {
 
 export const otherUnitGetBranchSpec = {};
 const farineBranch1Kg = clon(farineBranch);
-withNames(farineBranch1Kg.items);
+withTrunkInfos(farineBranch1Kg.items);
 farineBranch1Kg.quantity.qt = 1;
 farineBranch1Kg.quantity.unit = "kg";
 withQtCoef(farineBranch1Kg.items,5);
@@ -96,7 +96,7 @@ otherUnitGetBranchSpec.res = {
 
 export const badUnitGetBranchSpec = {};
 const gateauBranch1L = clon(farineBranch);
-withNames(gateauBranch1L.items);
+withTrunkInfos(gateauBranch1L.items);
 gateauBranch1L.quantity.unit = "L";
 
 badUnitGetBranchSpec.req = {
@@ -112,7 +112,7 @@ badUnitGetBranchSpec.res = {
 
 export const branchWithoutQtSpec = {};
 const branchWithoutQt = clon(laitBranch);
-withNames(branchWithoutQt.items);
+withTrunkInfos(branchWithoutQt.items);
 
 branchWithoutQtSpec.req = {
     _id: branchWithoutQt._id,

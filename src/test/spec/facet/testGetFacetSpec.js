@@ -1,13 +1,13 @@
 import {clon} from "../../util/testUtil";
 import _ from 'lodash';
 import {bleFacets} from "../../database/gateau";
-import {nameOfFacet} from "../../util/testIntegDatabase";
+import {facetInfos} from "../../util/testIntegDatabase";
 import {withQuantity} from "../../util/testUtil";
 
 export const getFacetSpec = {};
 
 const laFacetWithItsFacetEntryFields = _.forEach(clon(bleFacets.items), facet => {
-    facet.name = nameOfFacet(facet._id);
+    Object.assign(facet, facetInfos(facet._id));
     delete facet.quantity;
 });
 
@@ -25,7 +25,7 @@ getFacetSpec.res = {
 export const getQuantifiedFacetSpec = {};
 
 const resultItems = _.forEach(clon(bleFacets.items), facet => {
-    facet.name = nameOfFacet(facet._id);
+    Object.assign(facet, facetInfos(facet._id));
     facet.quantity.qt *= 0.5;
 });
 

@@ -88,7 +88,10 @@ const initialTrees = database[cols.TRUNK];
 const initialFacetEntries = database[cols.FACET_ENTRY];
 const initialImpactEntries = database[cols.IMPACT_ENTRY];
 
-export const withNames = items => _.forEach(items, root => root.name = nameOf(root._id));
-export const nameOf = (_id) => _.find(initialTrees, {_id}).name;
-export const nameOfFacet = (_id) => _.find(initialFacetEntries, {_id}).name;
-export const nameOfImpact = (_id) => _.find(initialImpactEntries, {_id}).name;
+export const withTrunkInfos = items => _.map(items, item => Object.assign(item, trunkInfos(item._id)));
+
+export const trunkInfos = (_id) => _.pick(_.find(initialTrees, {_id}), ["name", "color"]);
+
+export const facetInfos = (_id) => _.pick(_.find(initialFacetEntries, {_id}), ["name", "color"]);
+
+export const impactInfos = (_id) => _.pick(_.find(initialImpactEntries, {_id}), ["name", "color"]);

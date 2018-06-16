@@ -30,13 +30,15 @@ describe('TU Utils', function () {
     });
 
     it('withTrunkNoQt G ok', function () {
-        expect(withTrunkNoQt("Eau", "999903c03e77667641d99994", "L"))
-            .to.deep.equal({name: "Eau", name_lower: "eau", _id: "999903c03e77667641d99994", grandeur: "Volu"});
+        let t = withTrunkNoQt("Eau", "999903c03e77667641d99994", "L");
+        expect(t)
+            .to.deep.equal({color: t.color, name: "Eau", name_lower: "eau", _id: "999903c03e77667641d99994", grandeur: "Volu"});
     });
 
     it('withTrunkNoQt ok', function () {
-        expect(withTrunkNoQt("Eau", "999903c03e77667641d99994"))
-            .to.deep.equal({name: "Eau", name_lower: "eau", _id: "999903c03e77667641d99994"});
+        let t = withTrunkNoQt("Eau", "999903c03e77667641d99994");
+        expect(t)
+            .to.deep.equal({color: t.color, name: "Eau", name_lower: "eau", _id: "999903c03e77667641d99994"});
     });
 
     const trunk = withTrunk("Gateau au chocolat", "5a6a03c03e77667641d2d2c3", 200, "g");

@@ -1,13 +1,13 @@
 import {clon} from "../../util/testUtil";
 import _ from 'lodash';
 import {bleImpacts, farineTrunk} from "../../database/gateau";
-import {nameOfImpact} from "../../util/testIntegDatabase";
+import {facetInfos, impactInfos} from "../../util/testIntegDatabase";
 import {withQuantity} from "../../util/testUtil";
 
 export const getImpactSpec = {};
 
 const laImpactWithItsImpactEntryFields = _.forEach(clon(bleImpacts.items), impact => {
-    impact.name = nameOfImpact(impact._id);
+    Object.assign(impact, impactInfos(impact._id));
     delete impact.quantity;
 });
 
@@ -25,7 +25,7 @@ getImpactSpec.res = {
 export const getQuantifiedImpactSpec = {};
 
 const resultItems = _.forEach(clon(bleImpacts.items), bleImpact => {
-    bleImpact.name = nameOfImpact(bleImpact._id);
+    Object.assign(bleImpact, impactInfos(bleImpact._id));
     bleImpact.quantity.qt *= 0.5;
 });
 

@@ -1,19 +1,18 @@
 import _ from 'lodash';
-import {clon} from "../../util/testUtil";
-import {setQuantity, withoutQuantity, withQtCoef} from "../../util/testUtil";
+import {clon, setQuantity, withoutQuantity, withQtCoef} from "../../util/testUtil";
 import {farineRoot, gateauRoot, laitTrunk} from "../../database/gateau";
 import {skateRoot} from "../../database/skate";
-import {withNames} from "../../util/testIntegDatabase";
+import {withTrunkInfos} from "../../util/testIntegDatabase";
 
 export const getRootsSpec = {};
-const gateauItemsWithNames = withoutQuantity(withNames(clon(gateauRoot.items)));
+const gateauItemsWithTrunkInfos = withoutQuantity(withTrunkInfos(clon(gateauRoot.items)));
 getRootsSpec.req = {
     _id: gateauRoot._id
 };
 getRootsSpec.res = {
     body: {
-        ..._.omit(gateauRoot, ["items", "quantity"]),
-        items: gateauItemsWithNames
+        _id: getRootsSpec.req._id,
+        items: gateauItemsWithTrunkInfos
     }
 };
 
@@ -28,7 +27,7 @@ emptyGetRootSpec.res = {
     }
 };
 
-const sameQtItems = withNames(clon(gateauRoot.items));
+const sameQtItems = withTrunkInfos(clon(gateauRoot.items));
 export const sameQtGetRootSpec = {};
 sameQtGetRootSpec.req = {
     qt: gateauRoot.quantity.qt,
@@ -45,7 +44,7 @@ sameQtGetRootSpec.res = {
 
 export const gateau1000GGetRootSpec = {};
 const gato1000G = clon(gateauRoot);
-withNames(gato1000G.items);
+withTrunkInfos(gato1000G.items);
 withQtCoef([gato1000G]);
 withQtCoef(gato1000G.items);
 
@@ -62,7 +61,7 @@ gateau1000GGetRootSpec.res = {
 
 export const skate10GetRootSpec = {};
 const skate10 = clon(skateRoot);
-withNames(skate10.items);
+withTrunkInfos(skate10.items);
 withQtCoef([skate10]);
 withQtCoef(skate10.items);
 skate10GetRootSpec.req = {
@@ -78,7 +77,7 @@ skate10GetRootSpec.res = {
 
 export const otherUnitGetRootSpec = {};
 const gateauRoot1Kg = clon(gateauRoot);
-withNames(gateauRoot1Kg.items);
+withTrunkInfos(gateauRoot1Kg.items);
 gateauRoot1Kg.quantity.qt = 1;
 gateauRoot1Kg.quantity.unit = "kg";
 withQtCoef(gateauRoot1Kg.items);
@@ -97,7 +96,7 @@ otherUnitGetRootSpec.res = {
 
 export const badUnitGetRootSpec = {};
 const gateauRoot1L = clon(gateauRoot);
-withNames(gateauRoot1L.items);
+withTrunkInfos(gateauRoot1L.items);
 gateauRoot1L.quantity.unit = "L";
 
 badUnitGetRootSpec.req = {
@@ -113,7 +112,7 @@ badUnitGetRootSpec.res = {
 
 export const farineNoBleQtGetRootSpec = {};
 const myFarineRoot = clon(farineRoot);
-withNames(myFarineRoot.items);
+withTrunkInfos(myFarineRoot.items);
 setQuantity(myFarineRoot, 60, "g");
 
 farineNoBleQtGetRootSpec.req = {

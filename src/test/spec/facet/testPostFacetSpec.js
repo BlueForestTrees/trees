@@ -3,13 +3,13 @@ import {replaceItem} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
 import {bleFacets, farineTrunk} from "../../database/gateau";
 import {prixFacetEntry, vitBFacetEntry} from "../../database/facetEntries";
-import {withItem} from "../../util/testUtil";
+import {withIdQuantity} from "../../util/testUtil";
 
 export const createFacetSpec = {};
 createFacetSpec.req = {
     body: {
-        trunk: withItem(farineTrunk._id, 2, "kg"),
-        facet: withItem(prixFacetEntry._id, 144, "m2")
+        trunk: withIdQuantity(farineTrunk._id, 2, "kg"),
+        facet: withIdQuantity(prixFacetEntry._id, 144, "m2")
     }
 };
 createFacetSpec.res = {
@@ -19,9 +19,9 @@ createFacetSpec.db = {
     expected: {
         colname: cols.FACET,
         doc: {
-            ...withItem(farineTrunk._id, 2, "kg"),
+            ...withIdQuantity(farineTrunk._id, 2, "kg"),
             items: [
-                withItem(prixFacetEntry._id, 144, "m2")
+                withIdQuantity(prixFacetEntry._id, 144, "m2")
             ],
 
         }
@@ -32,8 +32,8 @@ export const addingFacet = {};
 
 addingFacet.req = {
     body: {
-        trunk: withItem(bleFacets._id, 10, "kg"),
-        facet: withItem(prixFacetEntry._id, 144, "€")
+        trunk: withIdQuantity(bleFacets._id, 10, "kg"),
+        facet: withIdQuantity(prixFacetEntry._id, 144, "€")
     }
 };
 
@@ -45,10 +45,10 @@ addingFacet.db = {
     expected: {
         colname: cols.FACET,
         doc: {
-            ...withItem(bleFacets._id, 10, "kg"),
+            ...withIdQuantity(bleFacets._id, 10, "kg"),
             items: [
                 ...bleFacets.items,
-                withItem(prixFacetEntry._id, 144, "€")
+                withIdQuantity(prixFacetEntry._id, 144, "€")
             ],
 
         }
@@ -59,8 +59,8 @@ addingFacet.db = {
 export const updatingBleFacetSpec = {};
 updatingBleFacetSpec.req = {
     body: {
-        trunk: withItem(bleFacets._id, 5, "kg"),
-        facet: withItem(vitBFacetEntry._id, 14, "m")
+        trunk: withIdQuantity(bleFacets._id, 5, "kg"),
+        facet: withIdQuantity(vitBFacetEntry._id, 14, "m")
     }
 };
 updatingBleFacetSpec.res = {
@@ -69,6 +69,6 @@ updatingBleFacetSpec.res = {
 updatingBleFacetSpec.db = {
     expected: {
         colname: cols.FACET,
-        doc: replaceItem(bleFacets, "items", withItem(vitBFacetEntry._id, 28, "m"))
+        doc: replaceItem(bleFacets, "items", withIdQuantity(vitBFacetEntry._id, 28, "m"))
     }
 };

@@ -1,5 +1,5 @@
 import {cols} from "../../main/const/collections";
-import {withItem, withTrunk} from "../util/testUtil";
+import {withIdQuantity, withTrunk} from "../util/testUtil";
 import {co2eImpactEntry} from "./impactEntries";
 
 export const papierVA = withTrunk("papier version A", "111111111111111111111111", 100, "m2");
@@ -9,12 +9,12 @@ export const couchePapier = withTrunk("couche Papier", "444444444444444444444444
 export const coucheAdhesif = withTrunk("couche Adhésif", "555555555555555555555555", 1, "t");
 export const coucheAlu = withTrunk("couche Alu", "666666666666666666666666", 1, "t");
 
-const papierVAItem = withItem(papierVA._id, 100, "m2");
-const papierVBItem = withItem(papierVB._id, 100, "m2");
-const couchePEItem = withItem(couchePE._id, 780, "kg");
-const couchePapierItem = withItem(couchePapier._id, 2070, "kg");
-const coucheAdhesifItem = withItem(coucheAdhesif._id, 80, "kg");
-const coucheAluItem = withItem(coucheAlu._id, 890, "kg");
+const papierVAItem = withIdQuantity(papierVA._id, 100, "m2");
+const papierVBItem = withIdQuantity(papierVB._id, 100, "m2");
+const couchePEItem = withIdQuantity(couchePE._id, 780, "kg");
+const couchePapierItem = withIdQuantity(couchePapier._id, 2070, "kg");
+const coucheAdhesifItem = withIdQuantity(coucheAdhesif._id, 80, "kg");
+const coucheAluItem = withIdQuantity(coucheAlu._id, 890, "kg");
 
 const papierVARoot = {...papierVAItem, items: [couchePEItem, couchePapierItem, coucheAdhesifItem, coucheAluItem]};
 const papierVBRoot = {...papierVBItem, items: [couchePEItem, couchePapierItem, coucheAdhesifItem]};
@@ -24,10 +24,10 @@ const couchePapierBranch = {...couchePapierItem, items: [papierVAItem, papierVBI
 const coucheAdhesifBranch = {...coucheAdhesifItem, items: [papierVAItem, papierVBItem]};
 const coucheAluBranch = {...coucheAluItem, items: [papierVAItem]};
 
-const couchePEImpact = {...withItem(couchePE._id, 1, "t"), items: [withItem(co2eImpactEntry._id, 1920.512820513, "kg")]};
-const couchePapierImpact = {...withItem(couchePapier._id, 1, "t"), items: [withItem(co2eImpactEntry._id, 410.144927536, "kg")]};
-const coucheAdhesifImpact = {...withItem(coucheAdhesif._id, 1, "kg"), items: [withItem(co2eImpactEntry._id, 7.45, "kg")]};
-const coucheAluImpact = {...withItem(coucheAlu._id, 1, "t"), items: [withItem(co2eImpactEntry._id, 9834.831460674, "kg")]};
+const couchePEImpact = {...withIdQuantity(couchePE._id, 1, "t"), items: [withIdQuantity(co2eImpactEntry._id, 1920.512820513, "kg")]};
+const couchePapierImpact = {...withIdQuantity(couchePapier._id, 1, "t"), items: [withIdQuantity(co2eImpactEntry._id, 410.144927536, "kg")]};
+const coucheAdhesifImpact = {...withIdQuantity(coucheAdhesif._id, 1, "kg"), items: [withIdQuantity(co2eImpactEntry._id, 7.45, "kg")]};
+const coucheAluImpact = {...withIdQuantity(coucheAlu._id, 1, "t"), items: [withIdQuantity(co2eImpactEntry._id, 9834.831460674, "kg")]};
 
 export const database = {
     [cols.TRUNK]: [papierVA, papierVB, coucheAdhesif, coucheAlu, couchePapier, couchePE],

@@ -1,5 +1,5 @@
 import {clon} from "../../util/testUtil";
-import {removeItemQuantity, withItem, withQtCoef} from "../../util/testUtil";
+import {removeItemQuantity, withIdQuantity, withQtCoef} from "../../util/testUtil";
 import {bleTrunk, gateauRoot} from "../../database/gateau";
 import {arbreTrunk} from "../../database/skate";
 import {withIdQtUnit} from "trees-query";
@@ -51,12 +51,12 @@ papierAGetRootTreeSpec.req = {
 };
 papierAGetRootTreeSpec.res = {
     body: {
-        ...withItem(papierVA._id, 100, "m2"),
+        ...withIdQuantity(papierVA._id, 100, "m2"),
         items:[
-            withItem(couchePE._id, 780,"kg"),
-            withItem(couchePapier._id, 2070,"kg"),
-            withItem(coucheAdhesif._id, 80,"kg"),
-            withItem(coucheAlu._id, 890,"kg")
+            withIdQuantity(couchePE._id, 780,"kg"),
+            withIdQuantity(couchePapier._id, 2070,"kg"),
+            withIdQuantity(coucheAdhesif._id, 80,"kg"),
+            withIdQuantity(coucheAlu._id, 890,"kg")
         ]
     }
 };

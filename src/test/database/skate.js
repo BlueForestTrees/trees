@@ -1,4 +1,4 @@
-import {withItem, withItemNoQt, withTrunk, withTrunkNoQt} from "../util/testUtil";
+import {withIdQuantity, withId, withTrunk, withTrunkNoQt} from "../util/testUtil";
 import {cols} from "../../main/const/collections";
 
 export const skateTrunk = withTrunk("skate", "999903c03e77667641d99990", 10, "count");
@@ -16,20 +16,20 @@ export const refugeBioTrunk = withTrunkNoQt("Refuge de biodiversité", "999903c0
 export const planeteTrunk = withTrunkNoQt("Planète", "999903c03e77667641d99912");
 export const systemeTrunk = withTrunkNoQt("Système", "999903c03e77667641d99913");
 
-export const skateRoot = {...withItem(skateTrunk._id, 1, "count"), items: [withItem(plancheTrunk._id, 1, "count"), withItem(rouletteTrunk._id, 4, "count")]};
-const plancheRoot = {...withItem(plancheTrunk._id, 1000, "count"), items: [withItem(eauTrunk._id, 1000, "L"), withItem(elecTrunk._id, 10000, "kwh"), withItem(boisTrunk._id, 500, "kg")]};
-const boisRoot = {...withItem(boisTrunk._id, 1, "t"), items: [withItem(arbreTrunk._id, 1, "count")]};
-const rouletteRoot = {...withItem(rouletteTrunk._id, 1000000, "count"), items: [withItem(eauTrunk._id, 1500, "L"), withItem(elecTrunk._id, 20000, "kwh")]};
+export const skateRoot = {...withIdQuantity(skateTrunk._id, 1, "count"), items: [withIdQuantity(plancheTrunk._id, 1, "count"), withIdQuantity(rouletteTrunk._id, 4, "count")]};
+const plancheRoot = {...withIdQuantity(plancheTrunk._id, 1000, "count"), items: [withIdQuantity(eauTrunk._id, 1000, "L"), withIdQuantity(elecTrunk._id, 10000, "kwh"), withIdQuantity(boisTrunk._id, 500, "kg")]};
+const boisRoot = {...withIdQuantity(boisTrunk._id, 1, "t"), items: [withIdQuantity(arbreTrunk._id, 1, "count")]};
+const rouletteRoot = {...withIdQuantity(rouletteTrunk._id, 1000000, "count"), items: [withIdQuantity(eauTrunk._id, 1500, "L"), withIdQuantity(elecTrunk._id, 20000, "kwh")]};
 
-const plancheBranch = {...withItem(plancheTrunk._id, 1, "count"), items: [withItem(skateTrunk._id, 1, "count")]};
-const rouletteBranch = {...withItem(rouletteTrunk._id, 1, "count"), items: [withItem(skateTrunk._id, 0.25, "count")]};
-const eauBranch = {...withItem(eauTrunk._id, 1500, "L"), items: [withItem(plancheTrunk._id, 1500, "count"), withItem(rouletteTrunk._id, 1000000, "count")]};
-const elecBranch = {...withItem(elecTrunk._id, 10, "kwh"), items: [withItem(plancheTrunk._id, 1, "count"), withItem(rouletteTrunk._id, 50, "count")]};
-export const boisBranch = {...withItem(boisTrunk._id, 500, "kg"), items: [withItem(plancheTrunk._id, 1000, "count"), withItem(bucheTrunk._id, 500, "kg")]};
-const arbreBranch = {...withItem(arbreTrunk._id, 1, "count"), items: [withItem(boisTrunk._id, 1, "t"), withItem(foretTrunk._id, 0.001, "count")]};
-const bucheBranch = {...withItem(bucheTrunk._id, 3, "kg"), items: [withItem(chauffageTrunk._id, 1, "h")]};
-const foretBranch = {...withItem(foretTrunk._id, 3, "count"), items: [withItemNoQt(grandeForetTrunk._id)]};
-const grandeForetBranch = {...withItem(grandeForetTrunk._id, 10, "count"), items: [withItem(refugeBioTrunk._id, 1, "count")]};
+const plancheBranch = {...withIdQuantity(plancheTrunk._id, 1, "count"), items: [withIdQuantity(skateTrunk._id, 1, "count")]};
+const rouletteBranch = {...withIdQuantity(rouletteTrunk._id, 1, "count"), items: [withIdQuantity(skateTrunk._id, 0.25, "count")]};
+const eauBranch = {...withIdQuantity(eauTrunk._id, 1500, "L"), items: [withIdQuantity(plancheTrunk._id, 1500, "count"), withIdQuantity(rouletteTrunk._id, 1000000, "count")]};
+const elecBranch = {...withIdQuantity(elecTrunk._id, 10, "kwh"), items: [withIdQuantity(plancheTrunk._id, 1, "count"), withIdQuantity(rouletteTrunk._id, 50, "count")]};
+export const boisBranch = {...withIdQuantity(boisTrunk._id, 500, "kg"), items: [withIdQuantity(plancheTrunk._id, 1000, "count"), withIdQuantity(bucheTrunk._id, 500, "kg")]};
+const arbreBranch = {...withIdQuantity(arbreTrunk._id, 1, "count"), items: [withIdQuantity(boisTrunk._id, 1, "t"), withIdQuantity(foretTrunk._id, 0.001, "count")]};
+const bucheBranch = {...withIdQuantity(bucheTrunk._id, 3, "kg"), items: [withIdQuantity(chauffageTrunk._id, 1, "h")]};
+const foretBranch = {...withIdQuantity(foretTrunk._id, 3, "count"), items: [withId(grandeForetTrunk._id)]};
+const grandeForetBranch = {...withIdQuantity(grandeForetTrunk._id, 10, "count"), items: [withIdQuantity(refugeBioTrunk._id, 1, "count")]};
 
 export const database = {
     [cols.TRUNK]: [skateTrunk, plancheTrunk, boisTrunk, arbreTrunk, rouletteTrunk, elecTrunk, eauTrunk, foretTrunk, bucheTrunk, chauffageTrunk, grandeForetTrunk, refugeBioTrunk, planeteTrunk, systemeTrunk],

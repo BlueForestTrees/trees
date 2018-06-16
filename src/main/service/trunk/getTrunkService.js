@@ -5,9 +5,9 @@ import _ from 'lodash';
 
 const trunks = () => col(cols.TRUNK);
 
-const peekFields = {name: 1};
+const peekFields = {name: 1, color: 1};
 const getFields = {name_lower: 0};
-const searchMixin = {color:1, name: 1, grandeur: 1};
+const searchMixin = {color: 1, name: 1, grandeur: 1};
 
 export const peekTrunk = _id => trunks().findOne(withId(_id), peekFields);
 export const getTrunk = _id => trunks().findOne(withId(_id), getFields);
@@ -21,8 +21,12 @@ export const search = name => trunks()
     .sort({name_lower: 1})
     .toArray();
 
-export const appendTrunkNames = items => Promise.all(
+export const appendTrunkInfos = items => Promise.all(
     _.map(items, item => peekTrunk(item._id)
-        .then(t => ({...item, name: (t && t.name) || "inconnu"}))
+        .then(t => ({
+            ...item,
+            name: (t && t.name) || "inconnu",
+            color: (t && t.color) || "#B6B6B6"
+        }))
     )
 );

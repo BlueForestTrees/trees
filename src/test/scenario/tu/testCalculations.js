@@ -1,4 +1,4 @@
-import {withItem, withQuantity} from "../../util/testUtil";
+import {withIdQuantity, withQuantity} from "../../util/testUtil";
 import {basifyQuantity, mergeItems, quantified, sum, summify} from "../../../main/util/calculations";
 import {withId} from "trees-query";
 import Fraction from "fraction.js";
@@ -60,28 +60,28 @@ describe('TU Tank', function () {
 
     describe('summify tank', function () {
         it('[A10g,A5g] => [A15g]', function () {
-            summify([withItem("A", 10, "g"), withItem("A", 5, "g")])
-                .should.be.deep.equal([withItem("A", 15, "g")]);
+            summify([withIdQuantity("A", 10, "g"), withIdQuantity("A", 5, "g")])
+                .should.be.deep.equal([withIdQuantity("A", 15, "g")]);
         });
         it('[A10kg,A5000g] => [A15000g]', function () {
-            summify([withItem("A", 10, "kg"), withItem("A", 5000, "g")])
-                .should.be.deep.equal([withItem("A", 15000, "g")]);
+            summify([withIdQuantity("A", 10, "kg"), withIdQuantity("A", 5000, "g")])
+                .should.be.deep.equal([withIdQuantity("A", 15000, "g")]);
         });
         it('[A10kg,B5000g] => [A10000g,B5000g]', function () {
-            summify([withItem("A", 10, "kg"), withItem("B", 5000, "g")])
-                .should.be.deep.equal([withItem("A", 10000, "g"), withItem("B", 5000, "g")]);
+            summify([withIdQuantity("A", 10, "kg"), withIdQuantity("B", 5000, "g")])
+                .should.be.deep.equal([withIdQuantity("A", 10000, "g"), withIdQuantity("B", 5000, "g")]);
         });
         it('[A1kg,B5,A500g,B3] => [A1500g,B8g]', function () {
 
             summify([
-                withItem("A", 1, "kg"),
-                withItem("B", 5, "count"),
-                withItem("A", 500, "g"),
-                withItem("B", 3, "count")
+                withIdQuantity("A", 1, "kg"),
+                withIdQuantity("B", 5, "count"),
+                withIdQuantity("A", 500, "g"),
+                withIdQuantity("B", 3, "count")
 
             ]).should.be.deep.equal([
-                withItem("A", 1500, "g"),
-                withItem("B", 8, "count")
+                withIdQuantity("A", 1500, "g"),
+                withIdQuantity("B", 8, "count")
             ]);
         });
     });
@@ -91,7 +91,7 @@ describe('TU Tank', function () {
             quantified([withId("aaaaaaaaaaaaaaaaaaaaaaaa")]).should.be.false;
         });
         it('return true', function () {
-            quantified([withItem("aaaaaaaaaaaaaaaaaaaaaaaa", 3, "kg")]).should.be.true;
+            quantified([withIdQuantity("aaaaaaaaaaaaaaaaaaaaaaaa", 3, "kg")]).should.be.true;
         });
     });
 

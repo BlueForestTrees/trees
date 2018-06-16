@@ -1,6 +1,6 @@
 import {aTrunk} from "../../database/lettres";
 import {arbreTrunk} from "../../database/skate";
-import {withItem, withItemRequest} from "../../util/testUtil";
+import {withIdQuantity, withIdQtUnit} from "../../util/testUtil";
 
 export const noBranchsTreeSpec = {};
 noBranchsTreeSpec.req = {
@@ -20,10 +20,10 @@ noBranchsTreeSpec.res = {
 };
 
 export const branchTreeSpec = {};
-branchTreeSpec.req = withItemRequest(arbreTrunk._id, 100, "count");
+branchTreeSpec.req = withIdQtUnit(arbreTrunk._id, 100, "count");
 branchTreeSpec.res = {
     body: {
-        ...withItem(arbreTrunk._id, 100, "count"),
+        ...withIdQuantity(arbreTrunk._id, 100, "count"),
         items: [
             {
                 "_id": "999903c03e77667641d99995",

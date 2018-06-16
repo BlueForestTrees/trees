@@ -3,6 +3,7 @@ import {aTrunk, daTrunk, dbTrunk, dRoot, e1Trunk, e2Trunk} from "../../database/
 import {cols} from "../../../main/const/collections";
 import {clon} from "../../util/testUtil";
 import {laitTrunk} from "../../database/gateau";
+import _ from 'lodash';
 
 export const lettreTankSpec = {};
 lettreTankSpec.req = {
@@ -16,16 +17,14 @@ lettreTankSpec.res = {
         ...withQuantity(500, "g"),
         items: [
             {
-                "_id": e2Trunk._id,
-                "name": "elec",
+                ..._.pick(e2Trunk,['_id','name','color']),
                 "quantity": {
                     "qt": 2500,
                     "unit": "g",
                 }
             },
             {
-                "_id": e1Trunk._id,
-                "name": "eau",
+                ..._.pick(e1Trunk,['_id','name','color']),
                 "quantity": {
                     "qt": 0.255,
                     "unit": "m3"
@@ -54,20 +53,17 @@ avecUneQtManquanteTankSpec.res = {
         ...withQuantity(500, "g"),
         items: [
             {
-                "_id": e2Trunk._id,
-                "name": "elec",
+                ..._.pick(e2Trunk,['_id','name','color']),
                 "quantity": {
                     "qt": 2000,
                     "unit": "g",
                 }
             },
             {
-                _id: daTrunk._id,
-                name: "da"
+                ..._.pick(daTrunk,['_id','name','color']),
             },
             {
-                "_id": e1Trunk._id,
-                "name": "eau",
+                ..._.pick(e1Trunk,['_id','name','color']),
                 "quantity": {
                     "qt": 0.255,
                     "unit": "m3"
@@ -96,20 +92,17 @@ avecUneQtManquanteTankSpec2.res = {
         ...withQuantity(500, "g"),
         items: [
             {
-                "_id": e2Trunk._id,
-                "name": "elec",
+                ..._.pick(e2Trunk,['_id','name','color']),
                 "quantity": {
                     "qt": 1500,
                     "unit": "g",
                 }
             },
             {
-                _id: dbTrunk._id,
-                name: "db"
+                ..._.pick(dbTrunk,['_id','name','color']),
             },
             {
-                "_id": e1Trunk._id,
-                "name": "eau",
+                ..._.pick(e1Trunk,['_id','name','color']),
                 "quantity": {
                     "qt": 0.255,
                     "unit": "m3"

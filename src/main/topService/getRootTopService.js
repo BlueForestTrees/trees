@@ -1,4 +1,4 @@
-import {appendTrunkNames} from "../service/trunk/getTrunkService";
+import {appendTrunkInfos} from "../service/trunk/getTrunkService";
 import {readRoot} from "../service/root/rootQueries";
 import _ from 'lodash';
 import {applyQuantity, erreurSiUnitIncompatibles} from "../util/calculations";
@@ -12,7 +12,7 @@ export const loadNamedQuantifiedRoot = async (qt, unit, _id) =>
     loadRoots(_id)
         .then(roots => erreurSiUnitIncompatibles({qt, unit}, roots))
         .then(roots => applyQuantity({qt, unit}, roots))
-        .then(namiFy);
+        .then(addTrunkInfos);
 
 const loadRoots = _id =>
     readRoot(_id)
@@ -20,11 +20,11 @@ const loadRoots = _id =>
 
 const loadNamedRoots = _id =>
     loadRoots(_id)
-        .then(namiFy);
+        .then(addTrunkInfos);
 
-const namiFy = async item => ({
+const addTrunkInfos = async item => ({
     ..._.omit(item, "items"),
-    items: await appendTrunkNames(item.items)
+    items: await appendTrunkInfos(item.items)
 });
 
 

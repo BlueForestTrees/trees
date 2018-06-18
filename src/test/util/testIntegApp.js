@@ -6,14 +6,24 @@ let app = null;
 
 export const request = () => chai.request(app);
 
-export const testGet200BodyOk = (url, spec, done) => {
-    request()
-        .get(url)
-        .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.deep.equal(spec.res.body);
-            done();
-        });
+export const withTest = spec => () => {
+    if (spec.req.url) {
+        const req = request();
+        if (spec.req.url.startsWith("GET ")) {
+            let reqUrl = spec.req.url.substring(4);
+            return req.get(reqUrl)
+                .then(res => {
+                    res.should.have.status(spec.res.code || 200);
+                    if (spec.res.body) {
+                        res.body.should.deep.equal(spec.res.body);
+                    }
+                });
+        } else {
+            throw new Error("le test ne défini pas de méthode d'url (GET/POST/PUT...)")
+        }
+    } else {
+        throw Error("le test ne défini pas d'url");
+    }
 };
 
 export const init = async () => {

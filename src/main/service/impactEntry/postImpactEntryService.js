@@ -1,6 +1,6 @@
 import {cols} from "../../const/collections";
 import {col} from "../../db";
-import {getImpactEntryByName} from "./getImpactEntryService";
+import {getImpactEntryByName, getImpactEntryIdByName} from "./getImpactEntryService";
 
 const impactsEntry = () => col(cols.IMPACT_ENTRY);
 
@@ -12,16 +12,12 @@ export const replaceAllImpactEntries = async (data) => {
     return col.find().toArray();
 };
 
-export const addImpactEntry = async ({name, grandeur}) =>{
-    const existing = await getImpactEntryByName(name);
-    if(existing)return existing;
+export const addImpactEntry = async entry =>
+    await getImpactEntryIdByName(entry.name)
+    ||
+    ({_id: (await insertEntry(entry)).insertedId});
 
-    await impactsEntry()
-        .insertOne({
-            name, grandeur,
-            name_lower: name.toLowerCase()
-        });
-
-    return getImpactEntryByName(name);
-
+export const insertEntry = async entry => {
+    entry.name_lower = entry.name.toLowerCase();
+    return impactsEntry().insertOne(entry);
 };

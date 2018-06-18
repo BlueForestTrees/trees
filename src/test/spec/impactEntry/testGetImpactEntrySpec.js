@@ -1,7 +1,9 @@
+import {prixImpactEntry} from "../../database/impactEntries";
+
 export const getImpactEntrySpec = {};
 
 getImpactEntrySpec.req = {
-    term: "IP"
+    url: "GET /api/impactEntry?q=IP"
 };
 
 getImpactEntrySpec.res = {
@@ -10,7 +12,7 @@ getImpactEntrySpec.res = {
             "_id": "5a6a03c03e77667641d2d2c6",
             "name": "IPrix",
             "grandeur": "Coût",
-            "name_lower": "iprix"
+            "color": prixImpactEntry.color
         }
     ]
 };

@@ -6,18 +6,20 @@ import {removeQuantity} from "trees-query";
 
 export const loadFacet = _id =>
     getFacet(_id)
-        .then(populateFacetNames)
+        .then(addFacetEntryInfos)
         .then(removeQuantity);
 
-const populateFacetNames = async facet => {
-    const names = await peekFacetEntries(_.map(facet.items, "_id"));
-    _.forEach(names, e => {
-        _.find(facet.items, {_id: e._id}).name = e.name;
-    });
-    return facet;
-};
 
 export const loadQuantifiedFacets = (qt, unit, _id) =>
     getFacet(_id)
-        .then(populateFacetNames)
+        .then(addFacetEntryInfos)
         .then(facets => applyQuantity({qt, unit}, facets));
+
+const addFacetEntryInfos = async facet => {
+    const infos = await peekFacetEntries(_.map(facet.items, "_id"));
+    _.forEach(infos, e => {
+        _.find(facet.items, {_id: e._id}).name = e.name;
+        _.find(facet.items, {_id: e._id}).color = e.color;
+    });
+    return facet;
+};

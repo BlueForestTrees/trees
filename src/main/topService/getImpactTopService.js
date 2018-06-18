@@ -6,12 +6,12 @@ import {removeQuantity} from "trees-query";
 
 export const loadImpact = _id =>
     getImpact(_id)
-        .then(populateImpactNames)
+        .then(addImpactInfos)
         .then(removeQuantity);
 
 export const loadQuantifiedImpacts = (quantity, _id) => {
     return getImpact(_id)
-        .then(populateImpactNames)
+        .then(addImpactInfos)
         .then(impacts => applyQuantity(quantity, impacts));
 };
 
@@ -21,10 +21,11 @@ export const loadDenseQuantifiedImpacts = ({quantity, _id}) => {
         .then(impact => impact.items);
 };
 
-const populateImpactNames = async impact => {
-    const names = await peekImpactEntries(_.map(impact.items, "_id"));
-    _.forEach(names, e => {
+const addImpactInfos = async impact => {
+    const infos = await peekImpactEntries(_.map(impact.items, "_id"));
+    _.forEach(infos, e => {
         _.find(impact.items, {_id: e._id}).name = e.name;
+        _.find(impact.items, {_id: e._id}).color = e.color;
     });
     return impact;
 };

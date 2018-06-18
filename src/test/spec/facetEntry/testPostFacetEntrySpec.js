@@ -1,18 +1,28 @@
 import _ from 'lodash';
 import {vitCFacetEntry} from "../../database/facetEntries";
+import {cols} from "../../../main/const/collections";
 
 export const postFacetEntrySpec = {};
 postFacetEntrySpec.req = {
     body: {
         name: "nomNewFacetEntry",
-        grandeur: "Dens"
+        grandeur: "Dens",
+        color: "#FF0000"
     }
 };
 postFacetEntrySpec.res = {
-    body: _id => ({
-        _id,
-        name: "nomNewFacetEntry",
-        grandeur: "Dens"
+    body: _id => ({_id})
+};
+postFacetEntrySpec.db = {
+    expected: _id => ({
+        colname: cols.FACET_ENTRY,
+        doc: {
+            _id,
+            name: "nomNewFacetEntry",
+            grandeur: "Dens",
+            color: "#FF0000",
+            name_lower: "nomnewfacetentry"
+        }
     })
 };
 
@@ -36,5 +46,5 @@ allreadyExistingFacetEntrySpec.req = {
     }
 };
 allreadyExistingFacetEntrySpec.res = {
-    body: _id => vitCFacetEntry
+    body: _id => ({_id})
 };

@@ -6,7 +6,7 @@ import {withQuantity} from "../../util/testUtil";
 
 export const getImpactSpec = {};
 
-const laImpactWithItsImpactEntryFields = _.forEach(clon(bleImpacts.items), impact => {
+const bleImpactWithImpactEntryFields = _.forEach(clon(bleImpacts.items), impact => {
     Object.assign(impact, impactInfos(impact._id));
     delete impact.quantity;
 });
@@ -18,7 +18,7 @@ getImpactSpec.req = {
 getImpactSpec.res = {
     body: {
         _id: getImpactSpec.req._id,
-        items: laImpactWithItsImpactEntryFields
+        items: bleImpactWithImpactEntryFields
     }
 };
 

@@ -1,11 +1,11 @@
 import {runraw} from "../../util/runraw";
 import {addFacetEntry, replaceAllFacetEntries} from "../../service/facetEntry/postFacetEntryService";
-import {validGrandeur, validName} from "../../const/validations";
-import {GRANDEUR} from "../../const/paths";
+import {validColor, validGrandeur, validName} from "../../const/validations";
 
 import {run} from '../../util/run'
 
 import express from 'express';
+
 const router = express.Router();
 
 module.exports = router;
@@ -13,7 +13,8 @@ module.exports = router;
 router.post('/api/facetEntry',
     [
         validName,
-        validGrandeur
+        validGrandeur,
+        validColor
     ],
     run(addFacetEntry)
 );

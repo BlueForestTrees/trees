@@ -1,6 +1,6 @@
 import {runraw} from "../../util/runraw";
 import {addImpactEntry, replaceAllImpactEntries} from "../../service/impactEntry/postImpactEntryService";
-import {validGrandeur, validName} from "../../const/validations";
+import {validColor, validGrandeur, validName} from "../../const/validations";
 
 import {run} from '../../util/run'
 
@@ -12,7 +12,8 @@ module.exports = router;
 router.post('/api/impactEntry',
     [
         validName,
-        validGrandeur
+        validGrandeur,
+        validColor
     ],
     run(addImpactEntry)
 );

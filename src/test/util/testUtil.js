@@ -42,8 +42,8 @@ export const withId = _id => ({_id});
 export const withIdQtUnit = (_id, qt, unit) => ({_id, qt, unit});
 export const withQuantity = (qt, unit) => ({quantity: {qt, unit}});
 export const withTrunk = (name, _id, qt, unit) => ({color: getRandomColor(), name, name_lower: name.toLowerCase(), ...withIdQuantity(_id, qt, unit), ...grandeurOf(unit)});
-export const withTrunkNoQt = (name, _id, unit) => ({_id,color: getRandomColor(), name, name_lower: name.toLowerCase(), ...grandeurOf(unit)});
-export const withEntry = (_id, name, grandeur) => ({_id, name, grandeur, name_lower: name.toLowerCase()});
+export const withTrunkNoQt = (name, _id, unit) => ({_id, color: getRandomColor(), name, name_lower: name.toLowerCase(), ...grandeurOf(unit)});
+export const withEntry = (_id, name, grandeur) => ({_id, color: getRandomColor(), name, grandeur, name_lower: name.toLowerCase()});
 export const withValidationError = (prop, location, msg, value) => ({[prop]: {location, msg, param: prop, value}});
 
 export const setQuantity = (trunk, qt, unit) => {

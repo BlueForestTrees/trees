@@ -1,6 +1,6 @@
 import {cols} from "../../const/collections";
 import {col} from "../../db";
-import {getFacetEntryByName} from "./getFacetEntryService";
+import {getFacetEntryIdByName} from "./getFacetEntryService";
 
 const facetsEntry = () => col(cols.FACET_ENTRY);
 
@@ -12,10 +12,12 @@ export const replaceAllFacetEntries = async (data) => {
     return col.find().toArray();
 };
 
-export const addFacetEntry = async facetEntry => {
-    return await getFacetEntryByName(facetEntry.name) ||
-        {
-            _id: await facetsEntry().insertOne(facetEntry).insertedId,
-            ...facetEntry
-        };
+export const addFacetEntry = async facetEntry =>
+    await getFacetEntryIdByName(facetEntry.name)
+    ||
+    ({_id: (await insertEntry(facetEntry)).insertedId});
+
+export const insertEntry = async entry => {
+    entry.name_lower = entry.name.toLowerCase();
+    return facetsEntry().insertOne(entry);
 };

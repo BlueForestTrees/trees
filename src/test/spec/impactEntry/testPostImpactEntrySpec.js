@@ -1,18 +1,28 @@
 import _ from 'lodash';
 import {vitCImpactEntry} from "../../database/impactEntries";
+import {cols} from "../../../main/const/collections";
 
 export const postImpactEntrySpec = {};
 postImpactEntrySpec.req = {
     body: {
         name: "nomNewImpactEntry",
-        grandeur: "Dens"
+        grandeur: "Dens",
+        color:"#FFFFFF"
     }
 };
 postImpactEntrySpec.res = {
-    body: _id => ({
-        _id,
-        name: "nomNewImpactEntry",
-        grandeur: "Dens"
+    body: _id => ({_id})
+};
+postImpactEntrySpec.db = {
+    expected: _id => ({
+        colname: cols.IMPACT_ENTRY,
+        doc: {
+            _id,
+            name: "nomNewImpactEntry",
+            name_lower: "nomnewimpactentry",
+            grandeur: "Dens",
+            color: "#FFFFFF",
+        }
     })
 };
 
@@ -36,5 +46,5 @@ allreadyExistingImpactEntrySpec.req = {
     }
 };
 allreadyExistingImpactEntrySpec.res = {
-    body: _id => _.omit(vitCImpactEntry, "name_lower")
+    body: _id => ({_id})
 };

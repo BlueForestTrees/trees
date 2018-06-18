@@ -2,8 +2,8 @@ import {omit, pick} from 'lodash';
 import {gateauTrunk} from "../../database/gateau";
 import {eauTrunk, skateTrunk} from "../../database/skate";
 import {e1Trunk} from "../../database/lettres";
+import {notInSearchMixin} from "../testCommonSpec";
 
-const notInSearchMixin = ["name_lower", "quantity"];
 export const searchTrunkSpec = {
     req: {
         term: skateTrunk.name.substring(0, 3),

@@ -6,25 +6,23 @@ describe('GET Trunks', function () {
 
     beforeEach(init);
 
-    it('search by term', done => {
+    it('search by term', () =>
         request()
             .get(`/api/trunks?q=${searchTrunkSpec.req.term}`)
-            .end((err, res) => {
+            .then(res => {
                 res.should.have.status(200);
                 res.body.should.deep.equal(searchTrunkSpec.res.body);
-                done();
-            });
-    });
+            })
+    );
 
-    it('search by term 2', done => {
-        request()
+    it('search by term 2', () =>
+         request()
             .get(`/api/trunks?q=${searchTrunkSpec2.req.term}`)
-            .end((err, res) => {
+            .then(res => {
                 res.should.have.status(200);
                 res.body.should.deep.equal(searchTrunkSpec2.res.body);
-                done();
-            });
-    });
+            })
+    );
 
     it('return a trunk', done => testGetTrunkWith(getTrunkSpec, done));
 

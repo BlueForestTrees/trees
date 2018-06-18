@@ -1,11 +1,12 @@
 import {app} from "../../../../main";
-import {init, testGet200BodyOk} from "../../../util/testIntegApp";
+import {init, testGet200BodyOk, withTest} from "../../../util/testIntegApp";
 import {getImpactEntrySpec} from "../../../spec/impactEntry/testGetImpactEntrySpec";
+import {searchFacetEntrySpec} from "../../../spec/facetEntry/testGetFacetEntrySpec";
 
 describe('GET Impacts entries', function () {
 
     beforeEach(init);
 
-    it('return impact entries', done => testGet200BodyOk(`/api/impactEntry?q=${getImpactEntrySpec.req.term}`, getImpactEntrySpec, done));
+    it('search facet entry', withTest(getImpactEntrySpec));
 
 });

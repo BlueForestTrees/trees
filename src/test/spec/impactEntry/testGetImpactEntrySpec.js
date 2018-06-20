@@ -3,7 +3,7 @@ import {prixImpactEntry} from "../../database/impactEntries";
 export const getImpactEntrySpec = {};
 
 getImpactEntrySpec.req = {
-    url: "GET /api/impactEntry?q=IP"
+    url: "/api/impactEntry?q=IP"
 };
 
 getImpactEntrySpec.res = {

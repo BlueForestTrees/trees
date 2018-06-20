@@ -4,7 +4,7 @@ import {vitBFacetEntry, vitCFacetEntry, vitDFacetEntry, vitEFacetEntry} from "..
 
 export const searchFacetEntrySpec = {
     req: {
-        url: "GET /api/facetEntry?q=ami"
+        url: "/api/facetEntry?q=Vitami"
     },
     res: {
         body: [

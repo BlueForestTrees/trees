@@ -18,6 +18,6 @@ export const getFacetEntryIdByName = async name => facetEntries().findOne({name}
 export const getAllFacetEntries = async () => facetEntries().find({}).toArray();
 
 export const searchFacetEntriesByNamepart = namePart => facetEntries()
-    .find({name_lower: {$regex: `.*${namePart}.*`}}, searchMixin)
+    .find({name_lower: {$regex: `.*${namePart.toLowerCase()}.*`}}, searchMixin)
     .sort({name: 1})
     .toArray();

@@ -6,15 +6,35 @@ let app = null;
 
 export const request = () => chai.request(app);
 
-export const withTest = spec => () => before(spec)
-    .then(spec => request().get(spec.req.url)
-        .then(res => {
-            res.should.have.status(spec.res.code || 200);
-            if (spec.res.body) {
-                res.body.should.deep.equal(spec.res.body);
-            }
-        })
-    );
+export const withTest = spec => async () => {
+    if (Array.isArray(spec)) {
+        const results = [];
+        for (let i = 0; i < spec.length; i++) {
+            const rez = await withTest(spec[i])();
+            results.push(rez)
+        }
+        return Promise.all(results);
+    } else {
+        return before(spec)
+            .then(spec => {
+                const m = spec.req.method || "GET";
+                switch (m) {
+                    case "GET":
+                        return request().get(spec.req.url);
+                    case "PUT":
+                        return request().put(spec.req.url).send(spec.req.body);
+                    case "POST":
+                        return request().post(spec.req.url).send(spec.req.body);
+                }
+            })
+            .then(res => res.should.have.status(spec.res && spec.res.code || 200) && res)
+            .then(res => {
+                if (spec.res && spec.res.body) {
+                    res.body.should.deep.equal(spec.res.body);
+                }
+            });
+    }
+};
 
 export const init = async () => {
     await initDatabase();

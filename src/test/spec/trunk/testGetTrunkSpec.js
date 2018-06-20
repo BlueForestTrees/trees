@@ -1,7 +1,7 @@
 import {omit, pick} from 'lodash';
 import {gateauTrunk} from "../../database/gateau";
 import {eauTrunk, skateTrunk} from "../../database/skate";
-import {e1Trunk} from "../../database/lettres";
+import {e1Trunk, e2Trunk} from "../../database/lettres";
 import {notInSearchMixin} from "../testCommonSpec";
 
 export const searchTrunkSpec = {
@@ -15,10 +15,10 @@ export const searchTrunkSpec = {
 
 export const searchTrunkSpec2 = {
     req: {
-        term: eauTrunk.name.substring(0, 2),
+        term: eauTrunk.name.substring(0, 1),
     },
     res: {
-        body: [omit(e1Trunk, notInSearchMixin), omit(eauTrunk, notInSearchMixin)]
+        body: [omit(e1Trunk, notInSearchMixin), omit(e2Trunk, notInSearchMixin), omit(eauTrunk, notInSearchMixin)]
     }
 };
 

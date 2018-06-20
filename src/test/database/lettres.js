@@ -15,8 +15,8 @@ const baaTrunk = withTrunk("baa", "baabaabaabaabaabaabaabaa", 1, "kg");
 const babTrunk = withTrunk("bab", "babbabbabbabbabbabbabbab", 1, "kg");
 const dbaTrunk = withTrunk("dba", "dbadbadbadbadbadbadbadba", 1, "kg");
 const dbaaTrunk = withTrunk("dbaa", "dbaadbaadbaadbaadbaadbaa", 1, "kg");
-export const e1Trunk = withTrunk("eau", "e1e1e1e1e1e1e1e1e1e1e1e1", 1, "m3");
-export const e2Trunk = withTrunk("elec", "e2e2e2e2e2e2e2e2e2e2e2e2", 1, "kg");
+export const e1Trunk = withTrunk("e1", "e1e1e1e1e1e1e1e1e1e1e1e1", 1, "m3");
+export const e2Trunk = withTrunk("e2", "e2e2e2e2e2e2e2e2e2e2e2e2", 1, "kg");
 
 const aRoot = {...withIdQuantity(aTrunk._id, 1, "kg"), items: [withIdQuantity(bTrunk._id, 1, "kg"), withIdQuantity(cTrunk._id, 1, "kg"), withIdQuantity(dTrunk._id, 1, "kg")]};
 const bRoot = {...withIdQuantity(bTrunk._id, 1, "kg"), items: [withIdQuantity(baTrunk._id, 1, "kg"), withIdQuantity(b2Trunk._id, 1, "kg")]};

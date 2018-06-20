@@ -4,7 +4,7 @@ const {validationResult} = require('express-validator/check');
 const {matchedData} = require('express-validator/filter');
 
 export const run = work => (req, res, next) => {
-    debug("run", {url: `${req.method} ${req.url}`}, {params: req.params}, {body: req.body});
+    debug("request", {url: `${req.method} ${req.url}`}, {params: req.params}, {body: req.body});
     Promise
         .resolve(doWork(req, res, next, work))
         .catch(err => {

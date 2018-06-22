@@ -3,63 +3,60 @@ import {ObjectID} from "mongodb";
 import {papierVA} from "../../database/papier";
 import {co2eImpactEntry, vitBImpactEntry, vitCImpactEntry} from "../../database/impactEntries";
 import {gateauItem, gateauTrunk} from "../../database/gateau";
+import _ from 'lodash';
 
-
-export const papierAImpactTankSpec = {};
-papierAImpactTankSpec.req = {
-    _id: papierVA._id,
-    quantity: {qt: papierVA.quantity.qt, unit: papierVA.quantity.unit}
-};
-papierAImpactTankSpec.res = {
-    body: {
-        _id: papierVA._id,
-        quantity: papierVA.quantity,
-        items: [{
-            _id: co2eImpactEntry._id,
-            name: "équivalent CO2",
-            ...withQuantity(11696000, "g")
-        }]
-    }
-};
-
-export const gateauImpactTankSpec = {};
-gateauImpactTankSpec.req = {
-    _id: gateauTrunk._id,
-    quantity: gateauItem.quantity
-};
-gateauImpactTankSpec.res = {
-    body: {
-        _id: gateauTrunk._id,
-        quantity: gateauItem.quantity,
-        items: [{
-            "_id": vitCImpactEntry._id,
-            "quantity": {
-                "qt": 10,
-                "unit": "mol"
-            },
-            "name": "Ivitamine C"
-        },
-            {
-                "_id": vitBImpactEntry._id,
-                "quantity": {
-                    "qt": 0.1,
-                    "unit": "mol"
-                },
-                "name": "Ivitamine B"
+export const papierAImpactTankSpec = {
+    req: {
+        url: `/api/impacttank/${papierVA.quantity.qt}/${papierVA.quantity.unit}/${papierVA._id}`
+    },
+    res: {
+        body: {
+            _id: papierVA._id,
+            quantity: papierVA.quantity,
+            items: [{
+                ..._.pick(co2eImpactEntry, ['_id', 'name', 'color']),
+                ...withQuantity(11696000, "g")
             }]
+        }
     }
 };
 
-export const sansImpactTankSpec = {};
-const unknownId = ObjectID().toString();
-sansImpactTankSpec.req = {
-    _id: unknownId,
-    ...withQuantity(3, "L")
+export const gateauImpactTankSpec = {
+    req: {
+        url: `/api/impacttank/${gateauItem.quantity.qt}/${gateauItem.quantity.unit}/${gateauTrunk._id}`,
+    },
+    res: {
+        body: {
+            _id: gateauTrunk._id,
+            quantity: gateauItem.quantity,
+            items: [{
+                ..._.pick(vitCImpactEntry, ['_id', 'name', 'color']),
+                "quantity": {
+                    "qt": 10,
+                    "unit": "mol"
+                }
+            },
+                {
+                    ..._.pick(vitBImpactEntry, ['_id', 'name', 'color']),
+                    "quantity": {
+                        "qt": 0.1,
+                        "unit": "mol"
+                    }
+                }]
+        }
+    }
 };
-sansImpactTankSpec.res = {
-    body: {
-        _id: unknownId,
-        ...withQuantity(3, "L"),
-        items: []
+
+const unknownId = ObjectID().toString();
+export const sansImpactTankSpec = {
+    req: {
+        url: `/api/impacttank/3/L/${unknownId}`
+    },
+    res: {
+        body: {
+            _id: unknownId,
+            ...withQuantity(3, "L"),
+            items: []
+        }
     }
 };

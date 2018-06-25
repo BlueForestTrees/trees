@@ -1,6 +1,6 @@
-import {appPromise} from "../../main/index";
 import chai, {expect} from 'chai';
-import {initDatabase, updateDb} from "./testIntegDatabase";
+import {appPromise} from "../../main/index";
+import {assertDb, initDatabase, updateDb} from "./testIntegDatabase";
 
 let app = null;
 
@@ -28,6 +28,11 @@ export const withTest = spec => async () => {
                 }
             })
             .then(res => res.should.have.status(spec.res && spec.res.code || 200) && res)
+            .then(async res => {
+                if (spec.db && spec.db.expected)
+                    await assertDb(spec.db.expected);
+                return res;
+            })
             .then(res => {
                 if (spec.res && spec.res.body) {
                     res.body.should.deep.equal(spec.res.body);

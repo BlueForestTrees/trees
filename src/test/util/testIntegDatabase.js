@@ -1,10 +1,9 @@
 import _ from 'lodash';
-import chai, {expect} from 'chai';
-import chaiHttp from 'chai-http';
 import read from 'fs-readdir-recursive';
 import path from 'path';
 import {withId} from "trees-query";
-
+import chai, {expect} from 'chai';
+import chaiHttp from 'chai-http';
 import {cols} from "../../main/const/collections";
 import {col, dbConnect} from "../../main/db";
 import {addObjects, removeObjects} from "../../main/util/addObjectID";
@@ -84,14 +83,8 @@ export const assertDb = async ({list, colname, doc, missingDoc}) => {
 
 export const loadFromDbById = async (colname, _id) => removeObjects(await col(colname).findOne(withId(_id)));
 
-const initialTrees = database[cols.TRUNK];
-const initialFacetEntries = database[cols.FACET_ENTRY];
-const initialImpactEntries = database[cols.IMPACT_ENTRY];
 
 export const withTrunkInfos = items => _.map(items, item => Object.assign(item, trunkInfos(item._id)));
-
-export const trunkInfos = (_id) => _.pick(_.find(initialTrees, {_id}), ["name", "color"]);
-
-export const facetInfos = (_id) => _.pick(_.find(initialFacetEntries, {_id}), ["name", "color"]);
-
-export const impactInfos = (_id) => _.pick(_.find(initialImpactEntries, {_id}), ["name", "color"]);
+export const trunkInfos = (_id) => _.pick(_.find(database[cols.TRUNK], {_id}), ["name", "color"]);
+export const facetInfos = (_id) => _.pick(_.find(database[cols.FACET_ENTRY], {_id}), ["name", "color"]);
+export const impactInfos = (_id) => _.pick(_.find(database[cols.IMPACT_ENTRY], {_id}), ["name", "color"]);

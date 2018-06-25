@@ -19,13 +19,11 @@ const grandeurOf = unit => {
 };
 
 export const clon = obj => _.cloneDeep(obj);
-
 export const remove = (obj, prop, criteria) => {
     const clone = clon(obj);
     clone[prop] = _.without(clone[prop], _.find(clone[prop], criteria));
     return clone;
 };
-
 export const debug = (...obj) => {
     try {
         console.log(JSON.stringify(obj, null, 4));
@@ -33,6 +31,27 @@ export const debug = (...obj) => {
         console.log(obj);
     }
     return Promise.resolve(...obj);
+};
+export const setQuantity = (trunk, qt, unit) => {
+    unit = unit ? unit : trunk.quantity.unit;
+    trunk.quantity = {qt, unit};
+};
+export const removeItemQuantity = (item, subItemId) => ({
+    ..._.omit(item, "items"),
+    items: _.map(item.items, subitem => subitem._id === subItemId ? _.omit(subitem, "quantity") : subitem)
+});
+export const replaceItem = (obj, prop, value) => {
+    const result = remove(obj, prop, {_id: value._id});
+    result[prop].push(value);
+    return result;
+};
+export const getRandomColor = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 };
 
 export const withQtCoef = (items, coef) => _.forEach(items, root => root.quantity.qt *= coef || 2);
@@ -45,28 +64,3 @@ export const withTrunk = (name, _id, qt, unit) => ({color: getRandomColor(), nam
 export const withTrunkNoQt = (name, _id, unit) => ({_id, color: getRandomColor(), name, name_lower: name.toLowerCase(), ...grandeurOf(unit)});
 export const withEntry = (_id, name, grandeur) => ({_id, color: getRandomColor(), name, grandeur, name_lower: name.toLowerCase()});
 export const withValidationError = (prop, location, msg, value) => ({[prop]: {location, msg, param: prop, value}});
-
-export const setQuantity = (trunk, qt, unit) => {
-    unit = unit ? unit : trunk.quantity.unit;
-    trunk.quantity = {qt, unit};
-};
-export const removeItemQuantity = (item, subItemId) => ({
-    ..._.omit(item, "items"),
-    items: _.map(item.items, subitem => subitem._id === subItemId ? _.omit(subitem, "quantity") : subitem)
-});
-
-
-export const replaceItem = (obj, prop, value) => {
-    const result = remove(obj, prop, {_id: value._id});
-    result[prop].push(value);
-    return result;
-};
-
-export const getRandomColor = () => {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-};

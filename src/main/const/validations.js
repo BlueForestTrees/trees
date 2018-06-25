@@ -1,4 +1,4 @@
-import {BRANCH_ID, COLOR, FACET_ID, GRANDEUR, ID, IMPACT_ID, NAME, ROOT_ID, SOURCE_ID, TRUNK_ID} from "./paths";
+import {BRANCH_ID, COLOR, FACET_ID, GRANDEUR, ID, IMPACT_ID, NAME, ROOT_ID, ROOT_RELATIVE_TO, SOURCE_ID, TRUNK_ID} from "./paths";
 import {IS_DECIMAL, IS_NOT_RIGHT_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "./messages";
 import {check} from 'express-validator/check';
 import _ from 'lodash';
@@ -24,6 +24,7 @@ export const existingId = trunkFound(ID);
 export const existingTrunkId = trunkFound(TRUNK_ID);
 export const existingBranchId = trunkFound(BRANCH_ID);
 export const existingRootId = trunkFound(ROOT_ID);
+export const optionalRelativeTo = trunkFound(ROOT_RELATIVE_TO, true);
 export const optionalExistingSourceId = trunkFound(SOURCE_ID, true);
 export const rootIdIsNotTrunkId = check(ROOT_ID, IS_NOT_RIGHT_ID).custom((root, {req}) => (!root || !req.body.trunk) || (root._id !== req.body.trunk._id));
 export const impactIdIsNotTrunkId = check(IMPACT_ID, IS_NOT_RIGHT_ID).custom((root, {req}) => (!root || !req.body.trunk) || (root._id !== req.body.trunk._id));

@@ -1,41 +1,57 @@
 import {oneModifiedResponse} from "../testCommonSpec";
-import {clon} from "../../util/testUtil";
+import {clon, setQuantity} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
 import _ from 'lodash';
-import {bleTrunk, farineTrunk, gateauRoot, gateauTrunk, laitTrunk} from "../../database/gateau";
-import {setQuantity} from "../../util/testUtil";
+import {bleTrunk, farineRoot, farineTrunk, gateauRoot, gateauTrunk, laitTrunk} from "../../database/gateau";
+import {withIdQuantity} from "../../../../../web/src/test/testPlumbing";
 
-export const setQuantityRootSpec = {};
-setQuantityRootSpec.req = {
-    body: {
-        trunk: {
-            _id: farineTrunk._id,
-            quantity: {
-                unit: "kg",
-                qt: 10
-            }
-        },
-        root: {
-            _id: bleTrunk._id,
-            quantity: {
-                unit: "min",
-                qt: 20
+let someFarine = withIdQuantity(farineTrunk._id, 10, "kg");
+let someBle = withIdQuantity(bleTrunk._id, 20, "min");
+
+const putRootUrl = {method: "PUT", url: '/api/root',};
+
+export const setQuantityRootSpec = {
+    req: {
+        ...putRootUrl,
+        body: {
+            trunk: someFarine,
+            root: someBle
+        }
+    },
+    res: {
+        body: oneModifiedResponse
+    },
+    db: {
+        expected: {
+            colname: cols.ROOT,
+            doc: {
+                ...someFarine,
+                items: [someBle],
             }
         }
     }
 };
-setQuantityRootSpec.res = {
-    body: oneModifiedResponse
-};
-setQuantityRootSpec.db = {
-    expected: {
-        colname: cols.ROOT,
-        doc: {
-            ...setQuantityRootSpec.req.body.trunk,
-            items: [
-                setQuantityRootSpec.req.body.root
-            ],
 
+let someLaitWithRelativeTo = {relativeTo: bleTrunk._id, ...withIdQuantity(laitTrunk._id, 1, "L")};
+
+export const putRelativeToRootSpec = {
+    req: {
+        ...putRootUrl,
+        body: {
+            trunk: someFarine,
+            root: someLaitWithRelativeTo
+        }
+    },
+    res: {
+        body: oneModifiedResponse
+    },
+    db: {
+        expected: {
+            colname: cols.ROOT,
+            doc: {
+                ...someFarine,
+                items: [...farineRoot.items, someLaitWithRelativeTo],
+            }
         }
     }
 };
@@ -46,6 +62,7 @@ const updatedRoots = clon(gateauRoot.items);
 setQuantity(updatedRoots[1], 60);
 
 updateQuantityRootSpec.req = {
+    ...putRootUrl,
     body: {
         trunk: {
             _id: gateauTrunk._id,
@@ -81,6 +98,7 @@ const updatedRootsWithDifferentUnit = clon(gateauRoot.items);
 setQuantity(updatedRootsWithDifferentUnit[1], 0.01, "m3");
 
 updateQuantityAnotherUnitRootSpec.req = {
+    ...putRootUrl,
     body: {
         trunk: {
             _id: gateauTrunk._id,

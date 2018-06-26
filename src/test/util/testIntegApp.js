@@ -1,6 +1,7 @@
 import chai, {expect} from 'chai';
 import {appPromise} from "../../main/index";
 import {assertDb, initDatabase, updateDb} from "./testIntegDatabase";
+import jsonpath from 'jsonpath';
 
 let app = null;
 
@@ -15,7 +16,7 @@ export const withTest = spec => async () => {
         }
         return Promise.all(results);
     } else {
-        return before(spec)
+        const pipe = before(spec)
             .then(spec => {
                 const m = spec.req.method || "GET";
                 switch (m) {
@@ -26,18 +27,37 @@ export const withTest = spec => async () => {
                     case "POST":
                         return request().post(spec.req.url).send(spec.req.body);
                 }
-            })
-            .then(res => res.should.have.status(spec.res && spec.res.code || 200) && res)
-            .then(async res => {
-                if (spec.db && spec.db.expected)
-                    await assertDb(spec.db.expected);
-                return res;
-            })
-            .then(res => {
-                if (spec.res && spec.res.body) {
-                    res.body.should.deep.equal(spec.res.body);
-                }
             });
+
+        if (spec.res && spec.res.code >= 400) {
+            return pipe
+                .catch(res => res.should.have.status(spec.res.code) && res)
+                .then(res => {
+                    if (spec.res) {
+                        if (spec.res.errorMessage) {
+                            res.response.body.should.deep.equal({message:spec.res.errorMessage});
+                        }
+                    }
+                });
+        } else {
+            return pipe
+                .then(res => res.should.have.status(spec.res && spec.res.code || 200) && res)
+                .then(async res => {
+                    if (spec.db && spec.db.expected)
+                        await assertDb(spec.db.expected);
+                    return res;
+                })
+                .then(res => {
+                    if (spec.res) {
+                        if (spec.res.body) {
+                            res.body.should.deep.equal(spec.res.body);
+                        }
+                        if (spec.res.bodypath) {
+                            jsonpath.query(res.body, spec.res.bodypath.path)[0].should.deep.equal(spec.res.bodypath.value);
+                        }
+                    }
+                });
+        }
     }
 };
 

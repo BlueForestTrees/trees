@@ -6,6 +6,7 @@ import {addObjects} from "../../../main/util/addObjectID";
 import {cols} from "../../../main/const/collections";
 import {gateauTrunk} from "../../database/gateau";
 import {initialDB} from "../../util/testIntegDatabase";
+import _ from 'lodash';
 
 describe('TU Unit', function () {
 
@@ -20,7 +21,7 @@ describe('TU Unit', function () {
             expect(docs).to.deep.equal(expected);
         });
         it('add ObjectID 2', function () {
-            expect(initialDB[cols.TRUNK][0]._id).to.deep.equal(new mongo.ObjectID("6a6a03c03e77667641d2d2c3"));
+            expect(_.find(initialDB[cols.TRUNK],{name:"Bière Heineken"})._id).to.deep.equal(new mongo.ObjectID("6a6a03c03e77667641d2d2c3"));
         });
 
         it('seul objectInitialDB doit contenir des mongoID', function () {

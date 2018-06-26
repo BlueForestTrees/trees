@@ -1,36 +1,94 @@
 import {setQuantityRootSpec, updateQuantityAnotherUnitRootSpec, updateQuantityRootSpec} from "../root/testPutRootSpec";
 import {setQuantityBranchSpec, updateQuantityAnotherUnitBranchSpec, updateQuantityBranchSpec} from "../branch/testPutBranchSpec";
+import {withIdQuantity} from "../../../../../web/src/test/testPlumbing";
+import {bleTrunk, farineTrunk} from "../../database/gateau";
+import {oneModifiedResponse} from "../testCommonSpec";
+import {skateTrunk} from "../../database/skate";
+import {cols} from "../../../main/const/collections";
 
-export const setQuantityLinkSpec = {};
-setQuantityLinkSpec.req = setQuantityRootSpec.req;
-setQuantityLinkSpec.res = {
-    body: [setQuantityRootSpec.res.body, setQuantityBranchSpec.res.body]
-};
-setQuantityLinkSpec.db = {
-    expected: {
-        list: [setQuantityRootSpec.db.expected, setQuantityBranchSpec.db.expected]
+export const putLinkRelativeToSpec = {
+    req: {
+        method: "PUT",
+        url: "/api/link",
+        body: {
+            trunk: withIdQuantity(farineTrunk._id, 10, "kg"),
+            root: {relativeTo: bleTrunk._id, ...withIdQuantity(skateTrunk._id, 3, "count")}
+        }
+    },
+    res: {
+        body: [oneModifiedResponse, oneModifiedResponse]
+    },
+    db: {
+        expected: {
+            list: [
+                {
+                    colname: cols.ROOT,
+                    doc: {
+                        ...withIdQuantity(farineTrunk._id, 10, "kg"),
+                        items: [
+                            {_id:bleTrunk._id},
+                            {relativeTo: bleTrunk._id, ...withIdQuantity(skateTrunk._id, 3, "count")}
+                            ],
+                    }
+                },
+                {
+                    colname: cols.BRANCH,
+                    doc: {
+                        ...withIdQuantity(skateTrunk._id, 3, "count"),
+                        items: [
+                            {
+                                ...withIdQuantity(farineTrunk._id, 10, "kg")
+                            }
+                        ],
+                    }
+                }
+            ]
+        }
     }
 };
-//TODO supprimer postLink, ajouter un test de création ici.
 
-export const updateQuantityLinkSpec = {};
-updateQuantityLinkSpec.req = updateQuantityRootSpec.req;
-updateQuantityLinkSpec.res = {
-    body: [updateQuantityRootSpec.res.body, updateQuantityBranchSpec.res.body]
-};
-updateQuantityLinkSpec.db = {
-    expected: {
-        list: [updateQuantityRootSpec.db.expected, updateQuantityRootSpec.db.expected]
+export const setQuantityLinkSpec = {
+    req: {
+        method: "PUT",
+        url: "/api/link",
+        body: setQuantityRootSpec.req.body
+    },
+    res: {
+        body: [setQuantityRootSpec.res.body, setQuantityBranchSpec.res.body]
+    },
+    db: {
+        expected: {
+            list: [setQuantityRootSpec.db.expected, setQuantityBranchSpec.db.expected]
+        }
     }
 };
-
-export const updateQuantityAnotherUnitLinkSpec = {};
-updateQuantityAnotherUnitLinkSpec.req = updateQuantityAnotherUnitRootSpec.req;
-updateQuantityAnotherUnitLinkSpec.res = {
-    body: [updateQuantityAnotherUnitRootSpec.res.body, updateQuantityAnotherUnitBranchSpec.res.body]
+export const updateQuantityLinkSpec = {
+    req: {
+        method: "PUT",
+        url: "/api/link",
+        body: updateQuantityRootSpec.req.body
+    },
+    res: {
+        body: [updateQuantityRootSpec.res.body, updateQuantityBranchSpec.res.body]
+    },
+    db: {
+        expected: {
+            list: [updateQuantityRootSpec.db.expected, updateQuantityRootSpec.db.expected]
+        }
+    }
 };
-updateQuantityAnotherUnitLinkSpec.db = {
-    expected: {
-        list: [updateQuantityAnotherUnitRootSpec.db.expected, updateQuantityAnotherUnitBranchSpec.db.expected]
+export const updateQuantityAnotherUnitLinkSpec = {
+    req: {
+        method: "PUT",
+        url: "/api/link",
+        body: updateQuantityAnotherUnitRootSpec.req.body
+    },
+    res: {
+        body: [updateQuantityAnotherUnitRootSpec.res.body, updateQuantityAnotherUnitBranchSpec.res.body]
+    },
+    db: {
+        expected: {
+            list: [updateQuantityAnotherUnitRootSpec.db.expected, updateQuantityAnotherUnitBranchSpec.db.expected]
+        }
     }
 };

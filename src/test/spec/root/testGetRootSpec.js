@@ -3,126 +3,139 @@ import {clon, setQuantity, withoutQuantity, withQtCoef} from "../../util/testUti
 import {farineRoot, gateauRoot, laitTrunk} from "../../database/gateau";
 import {skateRoot} from "../../database/skate";
 import {withTrunkInfos} from "../../util/testIntegDatabase";
+import {banane, bananeBC, transport} from "../../database/banane";
 
-export const getRootsSpec = {};
-const gateauItemsWithTrunkInfos = withoutQuantity(withTrunkInfos(clon(gateauRoot.items)));
-getRootsSpec.req = {
-    _id: gateauRoot._id
-};
-getRootsSpec.res = {
-    body: {
-        _id: getRootsSpec.req._id,
-        items: gateauItemsWithTrunkInfos
+export const getBananeRootSpec = {
+    req: {
+        method: "GET",
+        url: `/api/root/1/count/${bananeBC._id}`
+    },
+    res: {
+        bodypath: {path: `$.items[?(@.name==="${transport.name}")].relativeTo`, value: banane._id}
     }
 };
 
-export const emptyGetRootSpec = {};
-emptyGetRootSpec.req = {
-    _id: laitTrunk._id
-};
-emptyGetRootSpec.res = {
-    body: {
-        _id: laitTrunk._id,
-        items: []
+export const getRootsSpec = {
+    req: {
+        method: "GET",
+        url: `/api/root/${gateauRoot._id}`
+    },
+    res: {
+        body: {
+            _id: gateauRoot._id,
+            items: withoutQuantity(withTrunkInfos(clon(gateauRoot.items)))
+        }
     }
 };
 
-const sameQtItems = withTrunkInfos(clon(gateauRoot.items));
-export const sameQtGetRootSpec = {};
-sameQtGetRootSpec.req = {
-    qt: gateauRoot.quantity.qt,
-    unit: gateauRoot.quantity.unit,
-    _id: gateauRoot._id
+export const emptyGetRootSpec = {
+    req: {
+        method: "GET",
+        url: `/api/root/${laitTrunk._id}`
+    },
+    res: {
+        body: {
+            _id: laitTrunk._id,
+            items: []
+        }
+    }
 };
-sameQtGetRootSpec.res = {
-    body: {
-        ..._.omit(gateauRoot, "items"),
-        items: sameQtItems
+
+export const sameQtGetRootSpec = {
+    req: {
+        method: "GET",
+        url: `/api/root/${gateauRoot.quantity.qt}/${gateauRoot.quantity.unit}/${gateauRoot._id}`
+    },
+    res: {
+        body: {
+            ..._.omit(gateauRoot, "items"),
+            items: withTrunkInfos(clon(gateauRoot.items))
+        }
     }
 };
 
 
-export const gateau1000GGetRootSpec = {};
 const gato1000G = clon(gateauRoot);
 withTrunkInfos(gato1000G.items);
 withQtCoef([gato1000G]);
 withQtCoef(gato1000G.items);
 
-gateau1000GGetRootSpec.req = {
-    qt: gato1000G.quantity.qt,
-    unit: gato1000G.quantity.unit,
-    _id: gato1000G._id
-};
-gateau1000GGetRootSpec.res = {
-    body: {
-        ...gato1000G
+export const gateau1000GGetRootSpec = {
+    req: {
+        method: "GET",
+        url: `/api/root/${gato1000G.quantity.qt}/${gato1000G.quantity.unit}/${gato1000G._id}`
+    },
+    res: {
+        body: {
+            ...gato1000G
+        }
     }
 };
 
-export const skate10GetRootSpec = {};
+
 const skate10 = clon(skateRoot);
 withTrunkInfos(skate10.items);
 withQtCoef([skate10]);
 withQtCoef(skate10.items);
-skate10GetRootSpec.req = {
-    qt: skate10.quantity.qt,
-    unit: skate10.quantity.unit,
-    _id: skate10._id
-};
-skate10GetRootSpec.res = {
-    body: {
-        ...skate10
+export const skate10GetRootSpec = {
+    req: {
+        method: "GET",
+        url: `/api/root/${skate10.quantity.qt}/${skate10.quantity.unit}/${skate10._id}`
+    },
+    res: {
+        body: {
+            ...skate10
+        }
     }
 };
 
-export const otherUnitGetRootSpec = {};
 const gateauRoot1Kg = clon(gateauRoot);
 withTrunkInfos(gateauRoot1Kg.items);
 gateauRoot1Kg.quantity.qt = 1;
 gateauRoot1Kg.quantity.unit = "kg";
 withQtCoef(gateauRoot1Kg.items);
 
-otherUnitGetRootSpec.req = {
-    qt: gateauRoot1Kg.quantity.qt,
-    unit: gateauRoot1Kg.quantity.unit,
-    _id: gateauRoot1Kg._id
-};
-otherUnitGetRootSpec.res = {
-    body: {
-        ...gateauRoot1Kg
+export const otherUnitGetRootSpec = {
+    req: {
+        method: "GET",
+        url: `/api/root/${gateauRoot1Kg.quantity.qt}/${gateauRoot1Kg.quantity.unit}/${gateauRoot1Kg._id}`
+    },
+    res: {
+        body: {
+            ...gateauRoot1Kg
+        }
     }
 };
 
 
-export const badUnitGetRootSpec = {};
 const gateauRoot1L = clon(gateauRoot);
 withTrunkInfos(gateauRoot1L.items);
 gateauRoot1L.quantity.unit = "L";
 
-badUnitGetRootSpec.req = {
-    qt: gateauRoot1L.quantity.qt,
-    unit: gateauRoot1L.quantity.unit,
-    _id: gateauRoot1L._id
-};
-badUnitGetRootSpec.res = {
-    status: 400,
-    bodyMessage: "Units mismatch: 'L' and 'g'"
+export const badUnitGetRootSpec = {
+    req: {
+        method: "GET",
+        url: `/api/root/${gateauRoot1L.quantity.qt}/${gateauRoot1L.quantity.unit}/${gateauRoot1L._id}`
+    },
+    res: {
+        code: 400,
+        errorMessage: "Units mismatch: 'L' and 'g'"
+    }
 };
 
 
-export const farineNoBleQtGetRootSpec = {};
 const myFarineRoot = clon(farineRoot);
 withTrunkInfos(myFarineRoot.items);
 setQuantity(myFarineRoot, 60, "g");
-
-farineNoBleQtGetRootSpec.req = {
-    qt: myFarineRoot.quantity.qt,
-    unit: myFarineRoot.quantity.unit,
-    _id: myFarineRoot._id
-};
-farineNoBleQtGetRootSpec.res = {
-    body: {
-        ...myFarineRoot
+export const farineNoBleQtGetRootSpec = {
+    req: {
+        method: "GET",
+        url: `/api/root/${myFarineRoot.quantity.qt}/${myFarineRoot.quantity.unit}/${myFarineRoot._id}`
+    },
+    res: {
+        body: {
+            ...myFarineRoot
+        }
     }
 };
 

@@ -7,9 +7,7 @@ export const run = work => (req, res, next) => {
     debug("request", {url: `${req.method} ${req.url}`}, {params: req.params}, {body: req.body});
     Promise
         .resolve(doWork(req, res, next, work))
-        .catch(err => {
-            return next(err);
-        });
+        .catch(err => next(err));
 
 };
 

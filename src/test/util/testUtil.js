@@ -57,6 +57,7 @@ export const getRandomColor = () => {
 export const withQtCoef = (items, coef) => _.forEach(items, root => root.quantity.qt *= coef || 2);
 export const withoutQuantity = items => _.map(items, item => _.omit(item, "quantity"));
 export const withIdQuantity = (_id, qt, unit) => ({_id, ...withQuantity(qt, unit)});
+export const withIdQuantityRelativeTo = (_id, qt, unit, relativeTo) => ({...withIdQuantity(_id, qt, unit), relativeTo});
 export const withId = _id => ({_id});
 export const withIdQtUnit = (_id, qt, unit) => ({_id, qt, unit});
 export const withQuantity = (qt, unit) => ({quantity: {qt, unit}});

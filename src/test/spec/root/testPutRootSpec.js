@@ -8,7 +8,7 @@ import {withIdQuantity} from "../../../../../web/src/test/testPlumbing";
 let someFarine = withIdQuantity(farineTrunk._id, 10, "kg");
 let someBle = withIdQuantity(bleTrunk._id, 20, "min");
 
-const putRootUrl = {method: "PUT", url: '/api/root',};
+const putRootUrl = {method: "PUT", url: '/api/root'};
 
 export const setQuantityRootSpec = {
     req: {

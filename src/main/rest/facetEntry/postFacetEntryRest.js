@@ -1,4 +1,3 @@
-import {runraw} from "../../util/runraw";
 import {addFacetEntry, replaceAllFacetEntries} from "../../service/facetEntry/postFacetEntryService";
 import {validColor, validGrandeur, validName} from "../../const/validations";
 
@@ -17,8 +16,4 @@ router.post('/api/facetEntry',
         validColor
     ],
     run(addFacetEntry)
-);
-
-router.post('/api/facetEntry/all',
-    runraw(replaceAllFacetEntries)
 );

@@ -35,7 +35,6 @@
     "sinon": "^4.2.1"
   },
   "dependencies": {
-    "args-parser": "^1.1.0",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
@@ -43,12 +42,14 @@
     "express-validator": "^5.1.2",
     "fraction.js": "^4.0.4",
     "fs-readdir-recursive": "^1.1.0",
+    "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.4",
     "mongodb": "^2.2.33",
     "morgan": "^1.9.0",
     "nested-error-stacks": "^2.0.0",
     "pick-to-array": "^1.1.0",
     "regex-escape": "^3.4.8",
+    "sha1": "^1.1.1",
     "trees-items-service": "^0.1.18",
     "trees-query": "^0.0.10",
     "trees-units": "^1.0.11"

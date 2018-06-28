@@ -18,11 +18,11 @@ postTrunkSpec.db = {
 
 export const postBadGrandeurTrunkSpec = {};
 postBadGrandeurTrunkSpec.req = {body: {color:"#FFFFFF", name: "RATtatouille1664", grandeur: "bad_grandeur"}};
-postBadGrandeurTrunkSpec.res = {errorCode:422, body: withValidationError("grandeur", "body", "Invalid value", "bad_grandeur")};
+postBadGrandeurTrunkSpec.res = {errorCode:400, body: withValidationError("grandeur", "body", "Invalid value", "bad_grandeur")};
 
 export const postBadColorTrunkSpec = {};
 postBadColorTrunkSpec.req = {body: {color:"#FFFFF", name: "RATtatouille1664", grandeur: "Dens"}};
-postBadColorTrunkSpec.res = {errorCode:422, body: withValidationError("color", "body", "Invalid value", "#FFFFF")};
+postBadColorTrunkSpec.res = {errorCode:400, body: withValidationError("color", "body", "Invalid value", "#FFFFF")};
 
 const cloneName = (newId, tree) => tree.name + newId;
 export const cloneTrunkSpec = {};

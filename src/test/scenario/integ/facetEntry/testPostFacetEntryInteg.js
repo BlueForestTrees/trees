@@ -1,7 +1,7 @@
 import {app} from "../../../../main";
 import {allreadyExistingFacetEntrySpec, postBadGrandeurFacetEntrySpec, postFacetEntrySpec} from "../../../spec/facetEntry/testPostFacetEntrySpec";
 import {ObjectIDRegex} from "../../../spec/testCommonSpec";
-import {init, request, run} from "../../../util/testIntegApp";
+import {init, request, run, withTest} from "../../../util/testIntegApp";
 import {assertDb} from "../../../util/testIntegDatabase";
 
 describe('POST FacetEntry', function () {
@@ -12,25 +12,10 @@ describe('POST FacetEntry', function () {
 
     it('allreadyExistingFacetEntrySpec', run(() => postFacetEntry(allreadyExistingFacetEntrySpec)));
 
-    it('postBadGrandeurFacetEntrySpec', run(() => postErrorFacetEntry(postBadGrandeurFacetEntrySpec)));
+    it('postBadGrandeurFacetEntrySpec', withTest(postBadGrandeurFacetEntrySpec));
 
 
 });
-
-const postErrorFacetEntry = spec => request()
-    .post(`/api/facetEntry`)
-    .send(spec.req.body)
-    .then(res => {
-        res.body.should.deep.equal(spec.res);
-    })
-    .catch(err => {
-        if (err.status) {
-            err.should.have.status(spec.res.status);
-            err.response.body.grandeur.msg.should.equal(spec.res.bodyMessage);
-        } else {
-            throw err;
-        }
-    });
 
 const postFacetEntry = spec => request()
     .post(`/api/facetEntry`)

@@ -14,6 +14,8 @@ export const valid = (field, optional) => {
 };
 const trunkFound = (field, optional) => valid(field, optional).custom(peekTrunk).withMessage("not found");
 
+export const validUsername = check('name').exists().withMessage("name is missing");
+export const validPassword = check('password').exists().withMessage("password is missing");
 export const validMessage = check("message").isString().isLength({min: 1, max: 1000}).withMessage('message trop long');
 export const validMail = check("mail").isEmail().withMessage('mail invalid');
 export const validItem = key => [valid(`${key}._id`), validQt(`${key}.quantity.qt`), validUnit(`${key}.quantity.unit`)];

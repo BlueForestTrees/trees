@@ -8,7 +8,7 @@ export const cols = {
     BRANCH: 'BranchCollection',
     WASTE: 'WasteCollection',
     USAGE: 'UsageCollection',
-
+    USER: 'UserCollection',
     FEEDBACK: 'feedbackCollection',
     FILM: 'filmCollection'
 

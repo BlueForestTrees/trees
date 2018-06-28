@@ -34,7 +34,7 @@ postBadGrandeurImpactEntrySpec.req = {
     }
 };
 postBadGrandeurImpactEntrySpec.res = {
-    status: 422,
+    status: 400,
     bodyMessage: "Invalid value"
 };
 

@@ -4,6 +4,7 @@ import {cols} from "../../const/collections";
 import {col} from "../../db";
 
 import {run} from '../../util/run'
+import {checkToken} from "../../service/auth/authService";
 const router = require('express').Router();
 
 const insertBranch = configure(() => col(cols.BRANCH)).insertItem;
@@ -11,6 +12,7 @@ const insertBranch = configure(() => col(cols.BRANCH)).insertItem;
 module.exports = router;
 
 router.post('/api/branch',
+    checkToken,
     [
         existingTrunkId,
         existingBranchId,

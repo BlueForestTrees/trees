@@ -35,7 +35,10 @@ export const withTest = spec => async () => {
                 .then(res => {
                     if (spec.res) {
                         if (spec.res.errorMessage) {
-                            res.response.body.should.deep.equal({message:spec.res.errorMessage});
+                            res.response.body.should.deep.equal({error:spec.res.errorMessage});
+                        }
+                        if (spec.res.bodypath) {
+                            jsonpath.query(res.response.body, spec.res.bodypath.path)[0].should.deep.equal(spec.res.bodypath.value);
                         }
                     }
                 });

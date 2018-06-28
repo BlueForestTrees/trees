@@ -26,16 +26,19 @@ postFacetEntrySpec.db = {
     })
 };
 
-export const postBadGrandeurFacetEntrySpec = {};
-postBadGrandeurFacetEntrySpec.req = {
-    body: {
-        name: "nomNewFacetEntry",
-        grandeur: "Dens   ité"
+export const postBadGrandeurFacetEntrySpec = {
+    req: {
+        method: "POST",
+        url: "/api/facetEntry",
+        body: {
+            name: "nomNewFacetEntry",
+            grandeur: "Dens   ité"
+        }
+    },
+    res: {
+        code: 400,
+        bodypath: {path: "$.grandeur.msg", value: "Invalid value"}
     }
-};
-postBadGrandeurFacetEntrySpec.res = {
-    status: 422,
-    bodyMessage: "Invalid value"
 };
 
 

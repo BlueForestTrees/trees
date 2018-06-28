@@ -24,7 +24,7 @@ const getErrorQuantifiedBranch = spec => request()
     .catch(err => {
         if (err.status) {
             err.should.have.status(spec.res.status);
-            err.response.body.message.should.equal(spec.res.bodyMessage);
+            err.response.body.error.should.equal(spec.res.bodyMessage);
         } else {
             throw err;
         }

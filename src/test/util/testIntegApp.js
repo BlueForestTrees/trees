@@ -2,74 +2,90 @@ import chai, {expect} from 'chai';
 import {appPromise} from "../../main/index";
 import {assertDb, initDatabase, updateDb} from "./testIntegDatabase";
 import jsonpath from 'jsonpath';
+import {debug} from "./testUtil";
 
 let app = null;
 
 export const request = () => chai.request(app);
 
-export const withTest = spec => async () => {
-    if (Array.isArray(spec)) {
+export const withTest = test => async () => {
+    if (Array.isArray(test)) {
         const results = [];
-        for (let i = 0; i < spec.length; i++) {
-            const rez = await withTest(spec[i])();
+        for (let i = 0; i < test.length; i++) {
+            const rez = await withTest(test[i])();
             results.push(rez)
         }
         return Promise.all(results);
     } else {
-        const pipe = before(spec)
-            .then(spec => {
-                const m = spec.req.method || "GET";
-                switch (m) {
-                    case "GET":
-                        return request().get(spec.req.url);
-                    case "PUT":
-                        return request().put(spec.req.url).send(spec.req.body);
-                    case "POST":
-                        return request().post(spec.req.url).send(spec.req.body);
-                }
-            });
+        return makeDbPrechanges(test)
+            .then(makeRequest)
+            .then(assertHttpCode)
+            .then(assertDbChanges)
+            .then(assertHeaders)
+            .then(assertBody)
+            .then(assertBodypath);
+    }
+};
 
-        if (spec.res && spec.res.code >= 400) {
-            return pipe
-                .catch(res => res.should.have.status(spec.res.code) && res)
-                .then(async res => {
-                    if (spec.db && spec.db.expected)
-                        await assertDb(spec.db.expected);
-                    return res;
-                })
-                .then(res => {
-                    if (spec.res) {
-                        if (spec.res.body) {
-                            res.response.body.should.deep.equal(spec.res.body);
-                        }
-                        if (spec.res.errorMessage) {
-                            res.response.body.should.deep.equal({error:spec.res.errorMessage});
-                        }
-                        if (spec.res.bodypath) {
-                            jsonpath.query(res.response.body, spec.res.bodypath.path)[0].should.deep.equal(spec.res.bodypath.value);
-                        }
-                    }
-                });
-        } else {
-            return pipe
-                .then(res => res.should.have.status(spec.res && spec.res.code || 200) && res)
-                .then(async res => {
-                    if (spec.db && spec.db.expected)
-                        await assertDb(spec.db.expected);
-                    return res;
-                })
-                .then(res => {
-                    if (spec.res) {
-                        if (spec.res.body) {
-                            res.body.should.deep.equal(spec.res.body);
-                        }
-                        if (spec.res.bodypath) {
-                            jsonpath.query(res.body, spec.res.bodypath.path)[0].should.deep.equal(spec.res.bodypath.value);
-                        }
-                    }
-                });
+const makeDbPrechanges = async spec => {
+    if (spec.db && spec.db.preChange) {
+        await updateDb(spec.db.preChange);
+        debug("db prechange:", spec.db.preChange);
+    }
+    return spec;
+};
+const secure = req => req.catch(res => res.response);
+const makeRequest = async test => {
+    const m = test.req.method || "GET";
+    switch (m) {
+        case "GET":
+            return {...test, actual: await secure(request().get(test.req.url))};
+        case "PUT":
+            return {...test, actual: await secure(request().put(test.req.url).send(test.req.body))};
+        case "POST":
+            return {...test, actual: await secure(request().post(test.req.url).send(test.req.body))};
+    }
+};
+const assertHttpCode = test => test.actual.should.have.status(test.res && test.res.code || 200) && test;
+const assertDbChanges = async test => {
+    if (test.db && test.db.expected)
+        await assertDb(test.db.expected);
+    return test;
+};
+const assertHeaders = test => {
+
+    if (test.res && test.res.headers) {
+        for (let i = 0; i < test.res.headers.length; i++) {
+            const header = test.res.headers[i];
+            if (header.key) {
+                const expectedValue = header.value;
+                if (expectedValue !== undefined) {
+                    expect(test.actual.headers[header.key]).to.equal(expectedValue);
+                } else {
+                    expect(test.actual.headers[header.key]).to.be.not.null;
+                }
+            }
         }
     }
+
+    return test;
+};
+const assertBody = test => {
+    if (test.res) {
+        if (test.res.body !== undefined) {
+            expect(test.actual.body).to.deep.equal(test.res.body);
+        }
+    }
+    return test;
+};
+
+const assertBodypath = test => {
+    if (test.res) {
+        if (test.res.bodypath) {
+            expect(jsonpath.query(test.actual.body, test.res.bodypath.path)[0]).to.deep.equal(test.res.bodypath.value);
+        }
+    }
+    return test;
 };
 
 export const init = async () => {
@@ -82,22 +98,13 @@ export const run = job => done => {
         .catch(err => done(err));
 };
 export const run2 = (job, spec) => done => {
-    before(spec)
+    makeDbPrechanges(spec)
         .then(spec => job(spec))
         .then(() => done())
         .catch(err => done(err));
 };
 
-const before = async spec => {
-    if (spec.db && spec.db.preChange) {
-        await updateDb(spec.db.preChange);
-    }
-    return spec;
-};
-
-export const checkError = (call, spec) =>
-    call(spec)
-        .catch(err => {
+export const checkError = (call, spec) => call(spec).catch(err => {
             err.response.should.have.status(spec.res.errorCode);
             let resbody = null;
             try {

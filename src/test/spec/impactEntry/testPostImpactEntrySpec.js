@@ -26,16 +26,19 @@ postImpactEntrySpec.db = {
     })
 };
 
-export const postBadGrandeurImpactEntrySpec = {};
-postBadGrandeurImpactEntrySpec.req = {
-    body: {
-        name: "nomNewImpactEntry",
-        grandeur: "Dens   ité"
+export const postBadGrandeurImpactEntrySpec = {
+    req: {
+        url: "/api/impactEntry",
+        method: "POST",
+        body: {
+            name: "nomNewImpactEntry",
+            grandeur: "Dens   ité"
+        }
+    },
+    res: {
+        code: 400,
+        bodypath: {path: "$.errors.grandeur.msg", value: "Invalid value"}
     }
-};
-postBadGrandeurImpactEntrySpec.res = {
-    status: 400,
-    bodyMessage: "Invalid value"
 };
 
 

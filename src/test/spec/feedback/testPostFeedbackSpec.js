@@ -1,5 +1,6 @@
 import {oneResponse} from "../testCommonSpec";
 import {cols} from "../../../main/const/collections";
+import {withValidationError} from "../../util/testUtil";
 
 export const postFeedbackOkSpec = {
     req: {
@@ -35,14 +36,7 @@ export const postFeedbadBadMailSpec = {
     },
     res: {
         code: 400,
-        body: {
-            "mail": {
-                "location": "body",
-                "param": "mail",
-                "value": "slimane.mediniglueforest.org",
-                "msg": "mail invalid"
-            }
-        }
+        body: withValidationError("mail", "body", "mail invalid", "slimane.mediniglueforest.org")
     },
     db: {
         expected: {

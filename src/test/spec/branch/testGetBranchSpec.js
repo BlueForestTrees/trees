@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {clon} from "../../util/testUtil";
+import {clon, withError, withValidationError} from "../../util/testUtil";
 import {withoutQuantity, withQtCoef} from "../../util/testUtil";
 import {farineBranch, laitBranch, pizzaTrunk} from "../../database/gateau";
 import {withTrunkInfos} from "../../util/testIntegDatabase";
@@ -94,19 +94,17 @@ otherUnitGetBranchSpec.res = {
 };
 
 
-export const badUnitGetBranchSpec = {};
 const gateauBranch1L = clon(farineBranch);
 withTrunkInfos(gateauBranch1L.items);
 gateauBranch1L.quantity.unit = "L";
-
-badUnitGetBranchSpec.req = {
-    qt: gateauBranch1L.quantity.qt,
-    unit: gateauBranch1L.quantity.unit,
-    _id: gateauBranch1L._id
-};
-badUnitGetBranchSpec.res = {
-    status: 400,
-    bodyMessage: "Units mismatch: 'L' and 'g'"
+export const badUnitGetBranchSpec = {
+    req: {
+        url: `/api/branch/${gateauBranch1L.quantity.qt}/${gateauBranch1L.quantity.unit}/${gateauBranch1L._id}`
+    },
+    res: {
+        code: 400,
+        body: withError(3, "Units mismatch: 'L' and 'g'")
+    }
 };
 
 

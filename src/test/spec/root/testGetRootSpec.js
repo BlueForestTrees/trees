@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {clon, setQuantity, withoutQuantity, withQtCoef} from "../../util/testUtil";
+import {clon, setQuantity, withError, withoutQuantity, withQtCoef} from "../../util/testUtil";
 import {farineRoot, gateauRoot, laitTrunk} from "../../database/gateau";
 import {skateRoot} from "../../database/skate";
 import {withTrunkInfos} from "../../util/testIntegDatabase";
@@ -107,19 +107,14 @@ export const otherUnitGetRootSpec = {
     }
 };
 
-
-const gateauRoot1L = clon(gateauRoot);
-withTrunkInfos(gateauRoot1L.items);
-gateauRoot1L.quantity.unit = "L";
-
 export const badUnitGetRootSpec = {
     req: {
         method: "GET",
-        url: `/api/root/${gateauRoot1L.quantity.qt}/${gateauRoot1L.quantity.unit}/${gateauRoot1L._id}`
+        url: `/api/root/1/L/${gateauRoot._id}`
     },
     res: {
         code: 400,
-        errorMessage: "Units mismatch: 'L' and 'g'"
+        body: withError(3, "Units mismatch: 'L' and 'g'")
     }
 };
 

@@ -1,19 +1,29 @@
 import ENV from "../../../env";
-import {UnauthorizedError} from "../../exceptions/Errors";
-import {findUserByName} from "../user/userService";
+import {LoginExistError, UnauthorizedError} from "../../exceptions/Errors";
+import {findUserByLogin, insertUser} from "../user/userService";
 import sha1 from 'sha1';
 import jwt from "jsonwebtoken";
 
-export const authenticate = async function ({name, password}, req, res) {
-    const user = await findUserByName(name);
+export const suscribe = async function ({login, password}) {
+    const user = await findUserByLogin(login);
+    if (user) {
+        throw new LoginExistError();
+    } else {
+        return {_id: (await insertUser(login, password, false)).insertedId};
+    }
+};
+
+export const authenticate = async function ({login, password}, req, res) {
+    const user = await findUserByLogin(login);
     if (!user) {
-        throw new UnauthorizedError("unknown login");
+        throw new UnauthorizedError();
     } else if (user.password !== sha1(password)) {
-        throw new UnauthorizedError("bad password");
+        throw new UnauthorizedError();
     } else {
         delete user.password;
         const token = jwt.sign({user}, ENV.TOKEN_SECRET, {expiresIn: "1d"});
         res.header("x-access-token", token);
+        return null;
     }
 };
 

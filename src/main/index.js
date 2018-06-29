@@ -11,15 +11,15 @@ import ENV from "../env";
 import morgan from 'morgan';
 import {dbConnect} from "./db";
 import {initServices} from "./services";
-import {findUserByName, insertUser} from "./service/user/userService";
+import {findUserByLogin, insertUser} from "./service/user/userService";
 
 console.log("API starting...");
 
 const app = express();
 
 const preFetchDatas = async () => {
-    if (!await findUserByName(ENV.USER_NAME)) {
-        await insertUser({name: ENV.USER_NAME, password: ENV.USER_PASSWORD, admin: ENV.USER_ADMIN});
+    if (!await findUserByLogin(ENV.USER_NAME)) {
+        await insertUser(ENV.USER_NAME, ENV.USER_PASSWORD, ENV.USER_ADMIN);
         debug(`user '${ENV.USER_NAME}' added`);
     } else {
         debug(`user '${ENV.USER_NAME}' exists`);

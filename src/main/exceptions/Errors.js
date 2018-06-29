@@ -1,11 +1,12 @@
 import {inherits} from 'util';
 import NestedError from 'nested-error-stacks';
+import {LOGIN_EXISTS, UNIT_MISMATCH_ERROR, VALIDATION_ERROR} from "./errorCatalog";
 
 export class GrandeurMismatchError extends Error {
-    constructor(leftShortname, rightShortname, ...params) {
-        const message = `Units mismatch: '${leftShortname}' and '${rightShortname}'`;
-        super(message, ...params);
+    constructor(leftShortname, rightShortname) {
+        super();
         this.status = 400;
+        this.body = UNIT_MISMATCH_ERROR(leftShortname, rightShortname)
     }
 }
 
@@ -25,14 +26,24 @@ UnitInvalidError.prototype.name = 'UnitInvalidError';
 export function ValidationError(errors, nested) {
     NestedError.call(this, "Validation Error", nested);
     this.status = 400;
-    this.body = errors;
+    this.body = VALIDATION_ERROR(errors);
 }
 inherits(ValidationError, NestedError);
 ValidationError.prototype.name = 'ValidationError';
 
-export function UnauthorizedError(message, nested) {
-    NestedError.call(this, message, nested);
+
+export function UnauthorizedError(nested) {
+    NestedError.call(this, "", nested);
     this.status = 401;
 }
 inherits(UnauthorizedError, NestedError);
 UnauthorizedError.prototype.name = 'UnauthorizedError';
+
+
+export function LoginExistError(nested) {
+    NestedError.call(this, "", nested);
+    this.status = 400;
+    this.body = LOGIN_EXISTS;
+}
+inherits(LoginExistError, NestedError);
+LoginExistError.prototype.name = 'LoginExistError';

@@ -7,10 +7,8 @@ const router = require('express').Router();
 module.exports = router;
 
 router.post('/api/link',
-    [
-        existingTrunkId,
-        existingRootId,
-        rootIdIsNotTrunkId
-    ],
+    existingTrunkId,
+    existingRootId,
+    rootIdIsNotTrunkId,
     run(insertLink)
 );

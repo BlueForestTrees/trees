@@ -8,9 +8,7 @@ const router = express.Router();
 module.exports = router;
 
 router.delete('/api/trunk/:_id',
-    [
-        validId
-    ],
+    validId,
     run(({_id})=>remove(_id))
 );
 

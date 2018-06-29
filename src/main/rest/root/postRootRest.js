@@ -11,10 +11,8 @@ const insertRoot = configure(() => col(cols.ROOT)).insertItem;
 module.exports = router;
 
 router.post('/api/root',
-    [
-        existingTrunkId,
-        existingRootId,
-        rootIdIsNotTrunkId
-    ],
+    existingTrunkId,
+    existingRootId,
+    rootIdIsNotTrunkId,
     run(({trunk, root}) => insertRoot(trunk, root))
 );

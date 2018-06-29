@@ -9,9 +9,7 @@ const router = express.Router();
 module.exports = router;
 
 router.delete('/api/link/:trunkId/:rootId',
-    [
-        valid("trunkId"),
-        valid("rootId"),
-    ],
+    valid("trunkId"),
+    valid("rootId"),
     run(removeLink)
 );

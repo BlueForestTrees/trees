@@ -11,9 +11,7 @@ const deleteBranch = configure(() => col(cols.BRANCH)).removeItem;
 module.exports = router;
 
 router.delete('/api/branch/:trunkId/:branchId',
-    [
-        valid("trunkId"),
-        valid("branchId"),
-    ],
+    valid("trunkId"),
+    valid("branchId"),
     run(({trunkId, branchId}) => deleteBranch(trunkId, branchId))
 );

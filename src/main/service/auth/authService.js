@@ -17,7 +17,7 @@ export const authenticate = async function ({name, password}, req, res) {
     }
 };
 
-export const checkToken = function (req, res, next) {
+export const loggedIn = function (req, res, next) {
     const token = req.headers['x-access-token'];
     if (token) {
         try {

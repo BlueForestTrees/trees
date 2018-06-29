@@ -12,11 +12,9 @@ const upsertBranch = configure(() => col(cols.BRANCH)).upsertItem;
 module.exports = router;
 
 router.put('/api/branch',
-    [
-        existingBranchId,
-        existingTrunkId,
-        branchIdIsNotTrunkId,
-        present(BRANCH_QT, BRANCH_UNIT, TRUNK_QT, TRUNK_UNIT)
-    ],
+    existingBranchId,
+    existingTrunkId,
+    branchIdIsNotTrunkId,
+    present(BRANCH_QT, BRANCH_UNIT, TRUNK_QT, TRUNK_UNIT),
     run(({trunk, branch}) => upsertBranch(trunk, branch))
 );

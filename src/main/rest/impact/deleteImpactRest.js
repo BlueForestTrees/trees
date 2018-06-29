@@ -11,9 +11,7 @@ const deleteImpacts = configure(() => col(cols.IMPACT)).deleteItems;
 module.exports = router;
 
 router.post('/api/impact/deletion',
-    [
-        check('treeId').exists().isMongoId(),
-        check('impactIds.*').exists().isMongoId()
-    ],
+    check('treeId').exists().isMongoId(),
+    check('impactIds.*').exists().isMongoId(),
     run(({treeId, impactIds}) => deleteImpacts(treeId, impactIds))
 );

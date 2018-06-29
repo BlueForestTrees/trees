@@ -11,9 +11,7 @@ router.get('/api/impactEntry/all',
 );
 
 router.get('/api/impactEntry',
-    [
-        check('q').exists()
-    ],
+    check('q').exists(),
     run(({q}) => searchImpactEntriesByNamepart(q))
 );
 

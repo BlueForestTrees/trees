@@ -32,8 +32,16 @@ export const withTest = spec => async () => {
         if (spec.res && spec.res.code >= 400) {
             return pipe
                 .catch(res => res.should.have.status(spec.res.code) && res)
+                .then(async res => {
+                    if (spec.db && spec.db.expected)
+                        await assertDb(spec.db.expected);
+                    return res;
+                })
                 .then(res => {
                     if (spec.res) {
+                        if (spec.res.body) {
+                            res.response.body.should.deep.equal(spec.res.body);
+                        }
                         if (spec.res.errorMessage) {
                             res.response.body.should.deep.equal({error:spec.res.errorMessage});
                         }

@@ -8,9 +8,7 @@ const router = express.Router();
 module.exports = router;
 
 router.post('/api/feedback',
-    [
-        validMail,
-        validMessage
-    ],
+    validMail,
+    validMessage,
     run(addFeedback)
 );

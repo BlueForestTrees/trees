@@ -10,10 +10,8 @@ const router = express.Router();
 module.exports = router;
 
 router.post('/api/facetEntry',
-    [
-        validName,
-        validGrandeur,
-        validColor
-    ],
+    validName,
+    validGrandeur,
+    validColor,
     run(addFacetEntry)
 );

@@ -11,10 +11,8 @@ const insertFacet = configure(() => col(cols.FACET)).upsertItem;
 module.exports = router;
 
 router.post('/api/facet',
-    [
-        validItem("trunk"),
-        validItem("facet"),
-        facetIdIsNotTrunkId
-    ],
+    validItem("trunk"),
+    validItem("facet"),
+    facetIdIsNotTrunkId,
     run(({trunk, facet}) => insertFacet(trunk, facet))
 );

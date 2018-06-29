@@ -65,23 +65,38 @@ export const addInitialData = async () => {
 export const assertDb = async ({list, colname, doc, missingDoc}) => {
     if (list) {
         return Promise.all(_.map(list, expected => assertDb(expected)));
-    } else if (doc) {
-        const dbDoc = await loadFromDbById(colname, doc._id);
-        try {
-            expect(dbDoc).to.deep.equal(doc);
-        } catch (e) {
-            console.log("assertDB KO");
-            throw e;
+    }
+    if (doc) {
+        if (doc._id) {
+            const dbDoc = await loadFromDbById(colname, doc._id);
+            try {
+                expect(dbDoc).to.deep.equal(doc);
+            } catch (e) {
+                console.log("assertDB KO");
+                throw e;
+            }
+            debug("dbDoc", dbDoc);
+        } else {
+            const dbDoc = await loadFromDbByDoc(colname, doc);
+            expect(dbDoc).to.be.not.null;
+            debug("dbDoc", dbDoc);
         }
-        debug("dbDoc", dbDoc);
-    } else if (missingDoc) {
-        const dbDoc = await loadFromDbById(colname, missingDoc._id);
-        expect(dbDoc).to.be.null;
-        debug("removed", dbDoc);
+    }
+    if (missingDoc) {
+        if (missingDoc._id) {
+            const dbDoc = await loadFromDbById(colname, missingDoc._id);
+            expect(dbDoc).to.be.null;
+            debug("not in db", dbDoc);
+        } else {
+            const dbDoc = await loadFromDbByDoc(colname, missingDoc);
+            expect(dbDoc).to.be.null;
+            debug("not in db", missingDoc);
+        }
     }
 };
 
 export const loadFromDbById = async (colname, _id) => removeObjects(await col(colname).findOne(withId(_id)));
+export const loadFromDbByDoc = async (colname, doc) => await col(colname).findOne(doc);
 
 
 export const withTrunkInfos = items => _.map(items, item => Object.assign(item, trunkInfos(item._id)));

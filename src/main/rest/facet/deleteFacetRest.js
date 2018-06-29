@@ -11,9 +11,7 @@ const deleteFacets = configure(() => col(cols.FACET)).deleteItems;
 module.exports = router;
 
 router.post('/api/facet/deletion',
-    [
-        check('treeId').exists().isMongoId(),
-        check('facetIds.*').exists().isMongoId()
-    ],
+    check('treeId').exists().isMongoId(),
+    check('facetIds.*').exists().isMongoId(),
     run(({treeId, facetIds}) => deleteFacets(treeId, facetIds))
 );

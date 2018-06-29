@@ -7,9 +7,7 @@ const {check} = require('express-validator/check');
 module.exports = router;
 
 router.get('/api/facetEntry',
-    [
-        check('q').exists()
-    ],
+    check('q').exists(),
     run(({q}) => searchFacetEntriesByNamepart(q))
 );
 

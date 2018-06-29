@@ -13,13 +13,10 @@ const upsertRoot = configure(() => col(cols.ROOT)).upsertItem;
 module.exports = router;
 
 router.put('/api/root',
-    [
-        //ID LOGIC
-        existingTrunkId,
-        existingRootId,
-        optionalRelativeTo,
-        rootIdIsNotTrunkId,
-        present(ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT)
-    ],
+    existingTrunkId,
+    existingRootId,
+    optionalRelativeTo,
+    rootIdIsNotTrunkId,
+    present(ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT),
     run(({trunk, root}) => upsertRoot(trunk, root))
 );

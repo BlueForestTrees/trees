@@ -12,18 +12,16 @@ const trunks = require('../../service/trunk/putTrunkService');
 module.exports = router;
 
 router.put('/api/trunk/:_id',
-    [
-        validId,
-        oneOf([
-            [
-                check(NAME, SHOULD_BE_DEFINED).exists().matches(/^.+/),
-                check(QUANTITY, SHOULD_NOT_BE_DEFINED).not().exists()
-            ],
-            [
-                check(NAME, SHOULD_NOT_BE_DEFINED).not().exists(),
-                check(QUANTITY, SHOULD_BE_DEFINED).exists(),
-            ],
-        ])
-    ],
+    validId,
+    oneOf([
+        [
+            check(NAME, SHOULD_BE_DEFINED).exists().matches(/^.+/),
+            check(QUANTITY, SHOULD_NOT_BE_DEFINED).not().exists()
+        ],
+        [
+            check(NAME, SHOULD_NOT_BE_DEFINED).not().exists(),
+            check(QUANTITY, SHOULD_BE_DEFINED).exists(),
+        ],
+    ]),
     run(trunks.update)
 );

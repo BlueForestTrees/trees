@@ -11,10 +11,8 @@ const insertImpact = configure(() => col(cols.IMPACT)).upsertItem;
 module.exports = router;
 
 router.post('/api/impact',
-    [
-        validItem("trunk"),
-        validItem("impact"),
-        impactIdIsNotTrunkId
-    ],
+    validItem("trunk"),
+    validItem("impact"),
+    impactIdIsNotTrunkId,
     run(({trunk, impact}) => insertImpact(trunk, impact))
 );

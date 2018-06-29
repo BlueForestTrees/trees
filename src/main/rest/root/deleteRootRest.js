@@ -11,9 +11,7 @@ const deleteRoot = configure(() => col(cols.ROOT)).removeItem;
 module.exports = router;
 
 router.delete('/api/root/:trunkId/:rootId',
-    [
-        valid("trunkId"),
-        valid("rootId"),
-    ],
+    valid("trunkId"),
+    valid("rootId"),
     run(({trunkId, rootId}) => deleteRoot(trunkId, rootId))
 );

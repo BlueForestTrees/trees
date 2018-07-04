@@ -1,28 +1,14 @@
-import {renameTrunkSpec, requantifyTrunkSpec} from "../../../spec/trunk/testPutTrunkSpec";
+import {noUnitPutTrunkSpec, renameTrunkSpec, requantifyTrunkSpec} from "../../../spec/trunk/testPutTrunkSpec";
 
 import {app} from "../../../../main";
-import {assertDb} from "../../../util/testIntegDatabase";import {init, request} from "../../../util/testIntegApp";
+import {init, withTest} from "../../../util/testIntegApp";
 
 describe('PUT Trunks', function () {
 
     beforeEach(init);
 
-    it('rename the trunk', done => testPutTrunkWith(renameTrunkSpec, done));
-    it('quantify the trunk', done => testPutTrunkWith(requantifyTrunkSpec, done));
+    it('rename the trunk', withTest(renameTrunkSpec));
+    it('quantify the trunk', withTest(requantifyTrunkSpec));
+    it('put trunk quantity .missingUnit', withTest(noUnitPutTrunkSpec));
 
 });
-
-const testPutTrunkWith = (spec, done) => {
-    request()
-        .put(`/api/trunk/${spec.req.params._id}`)
-        .send(spec.req.body)
-        .then(async res => {
-            res.should.have.status(200);
-            res.body.should.deep.equal(spec.res.body);
-            await assertDb(spec.db.expected);
-            done();
-        })
-        .catch(function (err) {
-            done(err);
-        });
-};

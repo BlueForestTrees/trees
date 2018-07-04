@@ -5,47 +5,61 @@ import {bleTrunk, gateauTrunk} from "../../database/gateau";
 import {withQuantity} from "../../util/testUtil";
 
 
-export const renameTrunkSpec = {};
 const someNewName = "paPRika" + Math.random();
-renameTrunkSpec.req = {
-    params: {_id: bleTrunk._id},
-    body: {
-        name: someNewName
-    }
-};
-renameTrunkSpec.res = {
-    body: oneModifiedResponse
-};
-renameTrunkSpec.db = {
-    expected: {
-        colname: cols.TRUNK,
-        doc: {
-            _id: bleTrunk._id,
-            color: bleTrunk.color,
-            name: someNewName,
-            name_lower: someNewName.toLowerCase()
+export const renameTrunkSpec = {
+    req: {
+        method: "PUT",
+        url: `/api/trunk/${bleTrunk._id}`,
+        body: {
+            name: someNewName
+        }
+    },
+    res: {
+        body: oneModifiedResponse
+    },
+    db: {
+        expected: {
+            colname: cols.TRUNK,
+            doc: {
+                _id: bleTrunk._id,
+                color: bleTrunk.color,
+                name: someNewName,
+                name_lower: someNewName.toLowerCase()
+            }
         }
     }
 };
 
 
-export const requantifyTrunkSpec = {};
 const newGateauQuantity = withQuantity(1, "kg").quantity;
-requantifyTrunkSpec.req = {
-    params: {_id: gateauTrunk._id},
-    body: {
-        quantity: newGateauQuantity
-    }
-};
-requantifyTrunkSpec.res = {
-    body: oneModifiedResponse
-};
-requantifyTrunkSpec.db = {
-    expected: {
-        colname: cols.TRUNK,
-        doc: {
-            ...(_.omit(gateauTrunk, 'quantity')),
+export const requantifyTrunkSpec = {
+    req: {
+        method: "PUT",
+        url: `/api/trunk/${gateauTrunk._id}`,
+        body: {
             quantity: newGateauQuantity
         }
+    }, res: {
+        body: oneModifiedResponse
+    }, db: {
+        expected: {
+            colname: cols.TRUNK,
+            doc: {
+                ...(_.omit(gateauTrunk, 'quantity')),
+                quantity: newGateauQuantity
+            }
+        }
+    }
+};
+
+export const noUnitPutTrunkSpec = {
+    req: {
+        method: "PUT",
+        url: `/api/trunk/${gateauTrunk._id}`,
+        body: {
+            quantity: {qt: 4}
+        }
+    }, res: {
+        code:400
     }
 };

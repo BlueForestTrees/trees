@@ -1,5 +1,5 @@
 import {cols} from "../../const/collections";
-import {col} from "../../db";
+import {col} from "../../db/db";
 import configure from "trees-items-service";
 
 import {run} from '../../util/run'

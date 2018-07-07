@@ -10,6 +10,6 @@ export const cols = {
     USAGE: 'UsageCollection',
     USER: 'UserCollection',
     FEEDBACK: 'feedbackCollection',
-    FILM: 'filmCollection'
-
+    FILM: 'filmCollection',
+    VERSION: 'versionCollection'
 };

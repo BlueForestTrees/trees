@@ -36,17 +36,26 @@ const makeDbPrechanges = async spec => {
 };
 const secure = req => req.catch(res => res.response);
 const makeRequest = async test => {
-    const m = test.req.method || "GET";
-    switch (m) {
-        case "GET":
-            return {...test, actual: await secure(request().get(test.req.url))};
-        case "PUT":
-            return {...test, actual: await secure(request().put(test.req.url).send(test.req.body))};
-        case "POST":
-            return {...test, actual: await secure(request().post(test.req.url).send(test.req.body))};
+    if (test.req) {
+        const m = test.req.method || "GET";
+        switch (m) {
+            case "GET":
+                return {...test, actual: await secure(request().get(test.req.url))};
+            case "PUT":
+                return {...test, actual: await secure(request().put(test.req.url).send(test.req.body))};
+            case "POST":
+                return {...test, actual: await secure(request().post(test.req.url).send(test.req.body))};
+        }
+    } else {
+        return {...test};
     }
 };
-const assertHttpCode = test => test.actual.should.have.status(test.res && test.res.code || 200) && test;
+const assertHttpCode = test => {
+    if (test.actual) {
+        test.actual.should.have.status(test.res && test.res.code || 200);
+    }
+    return test;
+};
 const assertDbChanges = async test => {
     if (test.db && test.db.expected)
         await assertDb(test.db.expected);

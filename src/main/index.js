@@ -9,9 +9,10 @@ import {port} from "../env";
 import express from 'express';
 import ENV from "../env";
 import morgan from 'morgan';
-import {dbConnect} from "./db";
+import {dbConnect} from "./db/db";
 import {initServices} from "./services";
 import {findUserByLogin, insertUser} from "./service/user/userService";
+import {upgradeDb} from "./db/dbUpgrade";
 
 console.log("API starting...");
 
@@ -80,6 +81,7 @@ const started = () => {
 
 export const appPromise =
     dbConnect()
+        .then(upgradeDb)
         .then(preFetchDatas)
         .then(initServices)
         .then(httpConf)

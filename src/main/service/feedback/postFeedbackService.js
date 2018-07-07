@@ -1,5 +1,5 @@
 import {cols} from "../../const/collections";
-import {col} from "../../db";
+import {col} from "../../db/db";
 
 const feedbacks = () => col(cols.FEEDBACK);
 

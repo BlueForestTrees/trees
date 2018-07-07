@@ -14,10 +14,12 @@ export const valid = (field, optional) => {
 };
 const trunkFound = (field, optional) => valid(field, optional).custom(peekTrunk).withMessage("not found");
 
-export const validLogin = check('login').isLength({min: 2}).matches(/^.+/);
-export const validPassword = check('password').isLength({min: 2}).matches(/^.+/);
-export const validMessage = check("message").isString().isLength({min: 1, max: 1000}).withMessage('message trop long');
+export const validFullname = check('fullname').isLength({min: 1, max: 100}).matches(/^.+/);
+export const validPseudo = check('pseudo').isLength({min: 1, max: 100}).matches(/^.+/);
 export const validMail = check("mail").isEmail().withMessage('mail invalid');
+export const validWelcomeToken = check('t').exists();
+export const validPassword = check('password').isLength({min: 1, max: 100}).matches(/^.+/);
+export const validMessage = check("message").isString().isLength({min: 1, max: 1000}).withMessage('message trop long');
 export const validItem = key => [valid(`${key}._id`), validQt(`${key}.quantity.qt`), validUnit(`${key}.quantity.unit`)];
 export const validId = valid(ID);
 export const validGrandeur = check(GRANDEUR).isIn(getGrandeursKeys());

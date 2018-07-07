@@ -1,5 +1,5 @@
 import {cols} from "../../const/collections";
-import {col} from "../../db";
+import {col} from "../../db/db";
 import {matchId, withId, withIdQtUnit} from "trees-query";
 import {treefy} from "../../util/calculations";
 

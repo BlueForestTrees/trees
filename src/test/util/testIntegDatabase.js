@@ -5,7 +5,7 @@ import {withId} from "trees-query";
 import chai, {expect} from 'chai';
 import chaiHttp from 'chai-http';
 import {cols} from "../../main/const/collections";
-import {col, dbConnect} from "../../main/db";
+import {col, dbConnect} from "../../main/db/db";
 import {addObjects, removeObjects} from "../../main/util/addObjectID";
 import {clon, debug} from "./testUtil";
 

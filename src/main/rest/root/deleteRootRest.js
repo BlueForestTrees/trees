@@ -3,7 +3,7 @@ import express from "express";
 import {valid} from "../../const/validations";
 import configure from "trees-items-service";
 import {cols} from "../../const/collections";
-import {col} from "../../db";
+import {col} from "../../db/db";
 
 const router = express.Router();
 

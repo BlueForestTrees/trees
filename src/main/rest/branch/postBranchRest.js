@@ -1,7 +1,7 @@
 import {branchIdIsNotTrunkId, existingBranchId, existingTrunkId} from "../../const/validations";
 import configure from "trees-items-service";
 import {cols} from "../../const/collections";
-import {col} from "../../db";
+import {col} from "../../db/db";
 
 import {run} from '../../util/run'
 import {loggedIn} from "../../service/auth/authService";

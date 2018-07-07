@@ -1,4 +1,4 @@
-import {col} from "../../db";
+import {col} from "../../db/db";
 import {ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT} from "../../const/paths";
 import {optionalRelativeTo, existingRootId, existingTrunkId, present, rootIdIsNotTrunkId} from "../../const/validations";
 

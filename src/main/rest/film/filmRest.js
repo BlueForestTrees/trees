@@ -1,7 +1,7 @@
 import express from 'express';
 import {run} from '../../util/run';
 import {cols} from "../../const/collections";
-import {col} from "../../db";
+import {col} from "../../db/db";
 import {check} from 'express-validator/check';
 
 const router = express.Router();

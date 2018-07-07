@@ -1,6 +1,6 @@
 import {inherits} from 'util';
 import NestedError from 'nested-error-stacks';
-import {LOGIN_EXISTS, UNIT_MISMATCH_ERROR, VALIDATION_ERROR} from "./errorCatalog";
+import {MAIL_EXISTS, UNIT_MISMATCH_ERROR, VALIDATION_ERROR} from "./errorCatalog";
 
 export class GrandeurMismatchError extends Error {
     constructor(leftShortname, rightShortname) {
@@ -40,10 +40,10 @@ inherits(UnauthorizedError, NestedError);
 UnauthorizedError.prototype.name = 'UnauthorizedError';
 
 
-export function LoginExistError(nested) {
+export function MailAllreadyExistError(nested) {
     NestedError.call(this, "", nested);
     this.status = 400;
-    this.body = LOGIN_EXISTS;
+    this.body = MAIL_EXISTS;
 }
-inherits(LoginExistError, NestedError);
-LoginExistError.prototype.name = 'LoginExistError';
+inherits(MailAllreadyExistError, NestedError);
+MailAllreadyExistError.prototype.name = 'MailAllreadyExistError';

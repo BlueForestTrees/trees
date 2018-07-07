@@ -1,5 +1,5 @@
 import {cols} from "../const/collections";
-import {col} from "../db";
+import {col} from "../db/db";
 import configure from "trees-items-service";
 
 const upsertBranch = configure(() => col(cols.BRANCH)).upsertItem;

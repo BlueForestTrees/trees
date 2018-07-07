@@ -2,7 +2,7 @@ import {run} from '../../util/run'
 import express from "express";
 import {facetIdIsNotTrunkId, validItem} from "../../const/validations";
 import {cols} from "../../const/collections";
-import {col} from "../../db";
+import {col} from "../../db/db";
 import configure from "trees-items-service";
 
 const router = express.Router();

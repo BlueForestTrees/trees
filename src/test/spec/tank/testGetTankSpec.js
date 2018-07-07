@@ -81,6 +81,7 @@ export const avecUneQtManquanteTankSpec2 = {
         preChange: {
             colname: cols.ROOT,
             doc: {
+                titi:"tutu",
                 ...removeItemQuantity(clon(dRoot), dbTrunk._id)
             }
         }

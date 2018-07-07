@@ -1,5 +1,5 @@
 import {cols} from "../../const/collections";
-import {col} from "../../db";
+import {col} from "../../db/db";
 import {withIdIn} from "trees-query";
 
 const facetEntries = () => col(cols.FACET_ENTRY);

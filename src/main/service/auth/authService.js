@@ -1,6 +1,6 @@
 import ENV from "../../../env";
 import {MailAllreadyExistError, UnauthorizedError} from "../../exceptions/Errors";
-import {findUserByLogin, insertNewUser, insertUser} from "../user/userService";
+import {findUserByMail, insertNewUser, insertUser, confirmUser} from "../user/userService";
 import sha1 from 'sha1';
 import jwt from "jsonwebtoken";
 import {doMail} from "../mail/mailService";
@@ -29,25 +29,15 @@ const sendWelcomeMail = mail => doMail({
     templates.WANT_SUSCRIBE);
 
 
-export const confirmSuscribe = ({t, fullname, pseudo, password}) => {
+export const confirmSuscribe = async ({t, fullname, password}, req, res) => {
     const token = jwt.verify(t, ENV.MAIL_CONFIG.welcomeTokenSecret);
-
-    console.log(token);
-
-    suscribe({mail: token.mail, fullname, pseudo, password});
+    const mail = token.mail;
+    await confirmUser({mail, fullname, password});
+    return authenticate({mail, password}, req, res);
 };
 
-export const suscribe = async function ({login, password}) {
-    const user = await findUserByLogin(login);
-    if (user) {
-        throw new MailAllreadyExistError();
-    } else {
-        return {_id: (await insertUser(login, password, false)).insertedId};
-    }
-};
-
-export const authenticate = async function ({login, password}, req, res) {
-    const user = await findUserByLogin(login);
+export const authenticate = async function ({mail, password}, req, res) {
+    const user = await findUserByMail(mail);
     if (!user) {
         throw new UnauthorizedError();
     } else if (user.password !== sha1(password)) {

@@ -15,7 +15,6 @@ export const valid = (field, optional) => {
 const trunkFound = (field, optional) => valid(field, optional).custom(peekTrunk).withMessage("not found");
 
 export const validFullname = check('fullname').isLength({min: 1, max: 100}).matches(/^.+/);
-export const validPseudo = check('pseudo').isLength({min: 1, max: 100}).matches(/^.+/);
 export const validMail = check("mail").isEmail().withMessage('mail invalid');
 export const validWelcomeToken = check('t').exists();
 export const validPassword = check('password').isLength({min: 1, max: 100}).matches(/^.+/);

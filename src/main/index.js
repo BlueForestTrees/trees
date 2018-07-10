@@ -11,7 +11,7 @@ import ENV from "../env";
 import morgan from 'morgan';
 import {dbConnect} from "./db/db";
 import {initServices} from "./services";
-import {findUserByLogin, insertUser} from "./service/user/userService";
+import {findUserByMail, insertUser} from "./service/user/userService";
 import {upgradeDb} from "./db/dbUpgrade";
 
 console.log("API starting...");
@@ -19,7 +19,7 @@ console.log("API starting...");
 const app = express();
 
 const preFetchDatas = async () => {
-    if (!await findUserByLogin(ENV.USER_NAME)) {
+    if (!await findUserByMail(ENV.USER_NAME)) {
         await insertUser(ENV.USER_NAME, ENV.USER_PASSWORD, ENV.USER_ADMIN);
         debug(`user '${ENV.USER_NAME}' added`);
     } else {

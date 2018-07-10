@@ -1,4 +1,4 @@
 export const status = {
-    NEW: -1,
-    MAIL_VALIDATED: 0
+    WANT_SUSCRIBE: 0,
+    CONFIRMED: 1
 };

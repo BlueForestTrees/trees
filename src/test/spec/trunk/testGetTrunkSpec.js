@@ -6,7 +6,7 @@ import {notInSearchMixin} from "../testCommonSpec";
 
 export const searchTrunkSpec = {
     req: {
-        term: skateTrunk.name.substring(0, 3),
+        url:`/api/trunks?q=${skateTrunk.name.substring(0, 3)}`,
     },
     res: {
         body: [omit(skateTrunk, notInSearchMixin)]
@@ -15,7 +15,7 @@ export const searchTrunkSpec = {
 
 export const searchTrunkSpec2 = {
     req: {
-        term: eauTrunk.name.substring(0, 1),
+        url:`/api/trunks?q=${eauTrunk.name.substring(0, 1)}`,
     },
     res: {
         body: [omit(e1Trunk, notInSearchMixin), omit(e2Trunk, notInSearchMixin), omit(eauTrunk, notInSearchMixin)]

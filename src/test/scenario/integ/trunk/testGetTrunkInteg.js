@@ -1,28 +1,14 @@
 import {getQtTrunkSpec, getTrunkSpec, searchTrunkSpec, searchTrunkSpec2} from "../../../spec/trunk/testGetTrunkSpec";
 import {app} from "../../../../main";
-import {init, request} from "../../../util/testIntegApp";
+import {init, request, withTest} from "../../../util/testIntegApp";
 
 describe('GET Trunks', function () {
 
     beforeEach(init);
 
-    it('search by term', () =>
-        request()
-            .get(`/api/trunks?q=${searchTrunkSpec.req.term}`)
-            .then(res => {
-                res.should.have.status(200);
-                res.body.should.deep.equal(searchTrunkSpec.res.body);
-            })
-    );
+    it('search by term', withTest(searchTrunkSpec));
 
-    it('search by term 2', () =>
-         request()
-            .get(`/api/trunks?q=${searchTrunkSpec2.req.term}`)
-            .then(res => {
-                res.should.have.status(200);
-                res.body.should.deep.equal(searchTrunkSpec2.res.body);
-            })
-    );
+    it('search by term 2', withTest(searchTrunkSpec2));
 
     it('return a trunk', done => testGetTrunkWith(getTrunkSpec, done));
 

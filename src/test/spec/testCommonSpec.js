@@ -16,4 +16,4 @@ export const oneUpsertedResponse = _id => ({
 
 export const ObjectIDRegex = /^[a-fA-F0-9]{24}$/;
 
-export const notInSearchMixin = ["name_lower", "quantity"];
+export const notInSearchMixin = ["name_lower"];

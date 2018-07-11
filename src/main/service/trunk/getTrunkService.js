@@ -7,7 +7,7 @@ const trunks = () => col(cols.TRUNK);
 
 const peekFields = {name: 1, color: 1};
 const getFields = {name_lower: 0};
-const searchMixin = {color: 1, name: 1, grandeur: 1};
+const searchMixin = {color: 1, name: 1, grandeur: 1, quantity: 1};
 
 export const peekTrunk = _id => trunks().findOne(withId(_id), peekFields);
 export const getTrunk = _id => trunks().findOne(withId(_id), getFields);

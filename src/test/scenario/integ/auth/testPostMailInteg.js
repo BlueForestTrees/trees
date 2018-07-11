@@ -1,5 +1,4 @@
-import {init, run, withTest} from "../../../util/testIntegApp";
-import {badLoginAuthentSpec, badPasswordAuthentSpec, validAuthentSpec} from "../../../spec/auth/postAuthentSpec";
+import {init, withTest} from "../../../util/testIntegApp";
 import {existingPostMailSpec, invalidPostMailSpec, validPostMailSpec} from "../../../spec/auth/postMailSpec";
 
 describe('POST Mail', function () {

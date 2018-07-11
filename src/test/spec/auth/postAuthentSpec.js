@@ -1,12 +1,13 @@
 import {cols} from "../../../main/const/collections";
 import sha1 from "sha1";
+import {X_ACCESS_TOKEN} from "../../../main/const/headers";
 
 export const validAuthentSpec = {
     db: {
         preChange: {
             colname: cols.USER,
             doc: {
-                login: "authentLoginTest",
+                mail: "toto@titi.tu",
                 password: sha1("verySecretPasswordLoginTest")
             }
         }
@@ -15,12 +16,12 @@ export const validAuthentSpec = {
         method: "POST",
         url: "/api/auth",
         body: {
-            login: "authentLoginTest",
+            mail: "toto@titi.tu",
             password: "verySecretPasswordLoginTest"
         }
     },
     res: {
-        headers: [{key: "x-access-token"}],
+        headers: [{key: X_ACCESS_TOKEN}],
         body: null
     }
 };
@@ -30,7 +31,7 @@ export const badPasswordAuthentSpec = {
         preChange: {
             colname: cols.USER,
             doc: {
-                login: "authentLoginTest",
+                mail: "toto@titi.tu",
                 password: sha1("verySecretPasswordLoginTest")
             }
         }
@@ -39,7 +40,7 @@ export const badPasswordAuthentSpec = {
         method: "POST",
         url: "/api/auth",
         body: {
-            login: "authentLoginTest",
+            mail: "toto@titi.tu",
             password: "BAD_PASSWORD"
         }
     },
@@ -53,7 +54,7 @@ export const badLoginAuthentSpec = {
         preChange: {
             colname: cols.USER,
             doc: {
-                login: "authentLoginTest",
+                mail: "toto@titi.tu",
                 password: sha1("verySecretPasswordLoginTest")
             }
         }
@@ -62,7 +63,7 @@ export const badLoginAuthentSpec = {
         method: "POST",
         url: "/api/auth",
         body: {
-            login: "BAD_LOGIN",
+            mail: "bad@mail.com",
             password: "verySecretPasswordLoginTest"
         }
     },

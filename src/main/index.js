@@ -53,7 +53,7 @@ const rest = () => {
 
 const notFoundMiddleware = () => {
     app.use(function (req, res, next) {
-        const err = new Error('Not Found');
+        const err = new Error();
         err.status = 404;
         next(err);
     });
@@ -86,7 +86,6 @@ const started = () => {
 export const appPromise =
     dbConnect()
         .then(upgradeDb)
-        .then(preFetchDatas)
         .then(initServices)
         .then(httpConf)
         .then(logRequest)

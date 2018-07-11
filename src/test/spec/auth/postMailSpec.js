@@ -1,5 +1,6 @@
 import {cols} from "../../../main/const/collections";
 import {withError} from "../../util/testUtil";
+import {userStatus} from "../../../main/const/userStatus";
 
 export const validPostMailSpec = {
     req: {
@@ -11,6 +12,15 @@ export const validPostMailSpec = {
     },
     res: {
         body: null
+    },
+    db: {
+        expected: {
+            colname: cols.USER,
+            doc: {
+                mail: "smedini@gmail.com",
+                status: userStatus.WANT_SUSCRIBE
+            }
+        }
     }
 };
 

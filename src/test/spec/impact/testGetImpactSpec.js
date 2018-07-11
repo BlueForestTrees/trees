@@ -1,75 +1,63 @@
 import {clon} from "../../util/testUtil";
 import _ from 'lodash';
 import {bleImpacts, farineTrunk} from "../../database/gateau";
-import {facetInfos, impactInfos} from "../../util/testIntegDatabase";
+import {impactInfos} from "../../util/testIntegDatabase";
 import {withQuantity} from "../../util/testUtil";
 
-export const getImpactSpec = {};
 
 const bleImpactWithImpactEntryFields = _.forEach(clon(bleImpacts.items), impact => {
     Object.assign(impact, impactInfos(impact._id));
     delete impact.quantity;
 });
-
-getImpactSpec.req = {
-    _id: bleImpacts._id
-};
-
-getImpactSpec.res = {
-    body: {
-        _id: getImpactSpec.req._id,
-        items: bleImpactWithImpactEntryFields
+export const getImpactSpec = {
+    req: {
+        url: `/api/impact/${bleImpacts._id}`
+    },
+    res: {
+        body: {
+            _id: bleImpacts._id,
+            items: bleImpactWithImpactEntryFields
+        }
     }
 };
-
-export const getQuantifiedImpactSpec = {};
 
 const resultItems = _.forEach(clon(bleImpacts.items), bleImpact => {
     Object.assign(bleImpact, impactInfos(bleImpact._id));
     bleImpact.quantity.qt *= 0.5;
 });
-
-getQuantifiedImpactSpec.req = {
-    _id: bleImpacts._id,
-    qt: 5000,
-    unit: "g"
-};
-
-getQuantifiedImpactSpec.res = {
+export const getQuantifiedImpactSpec = {
+    req: {
+        url: `/api/impact/5000/g/${bleImpacts._id}`
+    }, res: {
     body: {
-        _id: getImpactSpec.req._id,
+        _id: bleImpacts._id,
         ...withQuantity(5000,"g"),
         items: resultItems
     }
+    }
 };
 
-
-export const emptyGetImpactSpec = {};
-
-emptyGetImpactSpec.req = {
-    _id: farineTrunk._id
-};
-
-emptyGetImpactSpec.res = {
+export const emptyGetImpactSpec = {
+    req: {
+        url: `/api/impact/${farineTrunk._id}`
+    },
+    res: {
     body: {
-        _id: emptyGetImpactSpec.req._id,
+        _id: farineTrunk._id,
         items: []
+    }
     }
 };
 
 
-export const emptyQuantifiedGetImpactSpec = {};
-
-emptyQuantifiedGetImpactSpec.req = {
-    _id: "5a6a03c03e77667641d21234",
-    qt: 15,
-    unit: "g"
-};
-
-emptyQuantifiedGetImpactSpec.res = {
-    body: {
-        _id: emptyQuantifiedGetImpactSpec.req._id,
-        ...withQuantity(15,"g"),
-        items: []
+export const emptyQuantifiedGetImpactSpec = {
+    req: {
+        url: `/api/impact/15/g/5a6a03c03e77667641d21234`
+    }, res: {
+        body: {
+            _id: "5a6a03c03e77667641d21234",
+            ...withQuantity(15, "g"),
+            items: []
+        }
     }
 };

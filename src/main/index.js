@@ -20,8 +20,12 @@ const app = express();
 
 const preFetchDatas = async () => {
     if (!await findUserByMail(ENV.USER_NAME)) {
-        await insertUser(ENV.USER_NAME, ENV.USER_PASSWORD, ENV.USER_ADMIN);
-        debug(`user '${ENV.USER_NAME}' added`);
+        try {
+            await insertUser(ENV.USER_NAME, ENV.USER_PASSWORD, ENV.USER_ADMIN);
+            debug(`user '${ENV.USER_NAME}' added`);
+        } catch (e) {
+            console.error("error while adding user 0", e);
+        }
     } else {
         debug(`user '${ENV.USER_NAME}' exists`);
     }

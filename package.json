@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "rimraf dist && babel src --out-dir dist",
+    "build": "rimraf dist && babel src --out-dir dist/trees-api/js && copyfiles -u 1 templates/* dist/etc/trees-api/templates",
     "dev-api": "nodemon $NODE_DEBUG_OPTION src/main/index.js --exec babel-node",
     "dev-api-win": "cross-env DB_UPGRADE=LAST MAIL_CONFIG_PATH=./templates nodemon src/main/index.js --exec babel-node",
     "start": "node dist/main/index.js",
@@ -26,6 +26,7 @@
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
+    "copyfiles": "^2.0.0",
     "jsonpath": "^1.0.0",
     "mocha": "^5.0.0",
     "nodemon": "^1.17.3",

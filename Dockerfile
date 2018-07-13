@@ -10,7 +10,7 @@ RUN npm run build
 
 FROM node:latest
 COPY --from=api-builder /build/package.json ./
-COPY --from=api-builder /build/dist ./dist
+COPY --from=api-builder /build/dist/trees-api/js ./dist
 COPY --from=api-builder /build/node_modules ./node_modules
 
 EXPOSE 8080

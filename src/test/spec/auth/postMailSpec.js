@@ -56,6 +56,6 @@ export const invalidPostMailSpec = {
     },
     res: {
         code: 400,
-        bodypath: {path: "$.errors.mail.msg", value: "mail invalid"}
+        bodypath: {axisD: "$.errors.mail.msg", value: "mail invalid"}
     }
 };

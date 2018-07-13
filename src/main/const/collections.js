@@ -9,7 +9,7 @@ export const cols = {
     WASTE: 'WasteCollection',
     USAGE: 'UsageCollection',
     USER: 'UserCollection',
-    FEEDBACK: 'feedbackCollection',
-    FILM: 'filmCollection',
-    VERSION: 'versionCollection'
+    FEEDBACK: 'FeedbackCollection',
+    FILM: 'FilmCollection',
+    VERSION: 'VersionCollection'
 };

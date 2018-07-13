@@ -91,7 +91,7 @@ const assertBody = test => {
 const assertBodypath = test => {
     if (test.res) {
         if (test.res.bodypath) {
-            expect(jsonpath.query(test.actual.body, test.res.bodypath.path)[0]).to.deep.equal(test.res.bodypath.value);
+            expect(jsonpath.query(test.actual.body, test.res.bodypath.axisD)[0]).to.deep.equal(test.res.bodypath.value);
         }
     }
     return test;

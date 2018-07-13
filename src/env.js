@@ -23,15 +23,7 @@ const ENV = {
     MAIL_CONFIG_PATH: process.env.MAIL_CONFIG_PATH || path.join(__dirname, "templates")
 };
 
-try {
-    ENV.MAIL_CONFIG = JSON.parse(fs.readFileSync(path.join(ENV.MAIL_CONFIG_PATH, "mailConfig.json"), 'utf8'));
-} catch (e) {
-    if (ENV.NODE_ENV === "test") {
-        console.log("ignore mailConfig since test mode");
-    } else {
-        throw e;
-    }
-}
+ENV.MAIL_CONFIG = JSON.parse(fs.readFileSync(path.join(ENV.MAIL_CONFIG_PATH, "mailConfig.json"), 'utf8'));
 
 ENV.VERSION = version;
 

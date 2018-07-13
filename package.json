@@ -13,7 +13,7 @@
     "yarn": "yarn"
   },
   "env": "api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "devDependencies": {
     "babel-cli": "^6.26.0",

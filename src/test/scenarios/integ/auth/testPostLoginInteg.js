@@ -1,7 +1,7 @@
 import {init, run, withTest} from "../../../util/testIntegApp";
 import {badLoginAuthentSpec, badPasswordAuthentSpec, validAuthentSpec} from "../../../spec/auth/postAuthentSpec";
 
-describe('POST Login', function () {
+describe('POST Auth', function () {
 
     beforeEach(init);
 

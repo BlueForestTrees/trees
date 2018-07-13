@@ -20,10 +20,11 @@ const ENV = {
     MORGAN: process.env.MORGAN || ':status :method :url :response-time ms - :res[content-length]',
     AUTH_TOKEN_SECRET: process.env.AUTH_TOKEN_SECRET || 'fqse6}@@@#{tc\'uauauaua_f\'}_^@{}@_{{}#~@26nt8/z(_ic;ç(_q206az\'\"tct;çp_²²\\\\\\\"',
 
-    MAIL_CONFIG_PATH: process.env.MAIL_CONFIG_PATH || path.join(__dirname, "templates")
+    MAIL_CONFIG_PATH: process.env.MAIL_CONFIG_PATH ? path.resolve(process.env.MAIL_CONFIG_PATH,"mailConfig.json") : path.join(__dirname, "mailConfig.json"),
+    MAIL_TEMPLATE_PATH: process.env.MAIL_TEMPLATE_PATH || path.join(__dirname, "../templates")
 };
 
-ENV.MAIL_CONFIG = JSON.parse(fs.readFileSync(path.join(ENV.MAIL_CONFIG_PATH, "mailConfig.json"), 'utf8'));
+ENV.MAIL_CONFIG = JSON.parse(fs.readFileSync(ENV.MAIL_CONFIG_PATH, 'utf8'));
 
 ENV.VERSION = version;
 

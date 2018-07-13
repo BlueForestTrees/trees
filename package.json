@@ -1,12 +1,10 @@
 {
   "scripts": {
-    "build": "rimraf dist && babel src --out-dir dist/trees-api/js && copyfiles -u 1 templates/* dist/etc/trees-api/templates",
-    "dev-api": "nodemon $NODE_DEBUG_OPTION src/main/index.js --exec babel-node",
-    "dev-api-win": "cross-env DB_UPGRADE=LAST MAIL_CONFIG_PATH=./templates nodemon src/main/index.js --exec babel-node",
     "start": "node dist/main/index.js",
-    "test-api": "PORT=9000 mocha --exit $(find src/test -name '*.js') --require babel-register",
-    "test-api-win": "set PORT=9000 && mocha --recursive --require babel-register --exit \"src/test/**/*.js\"",
-    "test-init-db": "cross-env cross-env NODE_ENV=test mocha --exit src/test/util/testInitDb.js --require babel-register",
+    "build": "rimraf dist && babel src --out-dir dist/trees-api/js && copyfiles -u 1 templates/* dist/etc/trees-api/templates",
+    "dev-api": "cross-env DB_UPGRADE=LAST MAIL_CONFIG_PATH=../../secured/trees-api nodemon src/main/index.js --exec babel-node",
+    "test-api": "cross-env NODE_ENV=test PORT=9000 MAIL_CONFIG_PATH=../../secured/trees-api mocha --recursive --require babel-register --exit \"src/test/**/*.js\"",
+    "test-init-db": "cross-env NODE_ENV=test MAIL_CONFIG_PATH=../../secured/trees-api mocha --exit src/test/util/testInitDb.js --require babel-register",
     "upgrade-query": "yarn upgrade -L trees-query",
     "upgrade-items-service": "yarn upgrade -L trees-items-service",
     "upgrade-units": "yarn upgrade -L trees-units",

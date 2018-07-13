@@ -2,7 +2,7 @@ import chai, {expect} from 'chai';
 
 import {genMail, sendMail} from "../../../main/service/mail/mailService";
 
-describe('mail', function () {
+describe('TU mail', function () {
 
     it('generate', function () {
         const mail = genMail({link: "blue.org/ds1f984"}, "testTemplate.html");

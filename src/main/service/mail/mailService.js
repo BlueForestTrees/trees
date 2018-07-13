@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport(ENV.MAIL_CONFIG.options);
 export const doMail = (context, templateFile) => sendMail(context.to, context.subject, genMail(context, templateFile));
 
 export const genMail = (context, templateFile) => {
-    const source = fs.readFileSync(path.join(ENV.MAIL_CONFIG_PATH, templateFile), 'utf8');
+    const source = fs.readFileSync(path.join(ENV.MAIL_TEMPLATE_PATH, templateFile), 'utf8');
     const template = handlebars.compile(source);
     return template(context);
 };

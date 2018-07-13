@@ -6,7 +6,7 @@ import chai from "chai";
 
 chai.should();
 
-describe('TU Tank', function () {
+describe('TU Calculations', function () {
 
     describe('long tests', function () {
         it('multiply', function () {

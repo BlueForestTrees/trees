@@ -2,13 +2,9 @@
   "scripts": {
     "start": "node dist/main/index.js",
     "build": "rimraf dist && babel src --out-dir dist/trees-api/js && copyfiles -u 1 templates/* dist/etc/trees-api/templates",
-    "dev-api": "cross-env DB_UPGRADE=LAST MAIL_CONFIG_PATH=../../secured/trees-api nodemon src/main/index.js --exec babel-node",
+    "dev-api": "node --version && cross-env DB_UPGRADE=LAST MAIL_CONFIG_PATH=../../secured/trees-api nodemon src/main/index.js --exec babel-node",
     "test-api": "cross-env NODE_ENV=test PORT=9000 MAIL_CONFIG_PATH=../../secured/trees-api mocha --recursive --require babel-register --exit \"src/test/**/*.js\"",
-    "test-init-db": "cross-env NODE_ENV=test MAIL_CONFIG_PATH=../../secured/trees-api mocha --exit src/test/util/testInitDb.js --require babel-register",
-    "upgrade-query": "yarn upgrade -L trees-query",
-    "upgrade-items-service": "yarn upgrade -L trees-items-service",
-    "upgrade-units": "yarn upgrade -L trees-units",
-    "yarn": "yarn"
+    "test-init-db": "cross-env NODE_ENV=test MAIL_CONFIG_PATH=../../secured/trees-api mocha --exit src/test/util/testInitDb.js --require babel-register"
   },
   "env": "api",
   "version": "0.0.2",
@@ -54,7 +50,7 @@
     "sha1": "^1.1.1",
     "trees-items-service": "^0.1.18",
     "trees-query": "^0.0.10",
-    "trees-units": "^1.0.23"
+    "trees-units": "^1.0.37"
   },
   "babel": {
     "presets": [

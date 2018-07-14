@@ -229,10 +229,28 @@ getGrandeurSpec.res = {
             "label": "Volume (L, m3...)",
             "units": [
                 {
+                    "coef": 0.000001,
+                    "grandeur": "Volu",
+                    "name": "Milli-litre (mL)",
+                    "shortname": "mL"
+                },
+                {
+                    "coef": 0.00001,
+                    "grandeur": "Volu",
+                    "name": "Centi-litre (cL)",
+                    "shortname": "cL"
+                },
+                {
+                    "coef": 0.0001,
+                    "grandeur": "Volu",
+                    "name": "Déci-litre (dL)",
+                    "shortname": "dL"
+                },
+                {
                     "coef": 0.001,
                     "grandeur": "Volu",
                     "name": "Litre (L)",
-                    "shortname": "L",
+                    "shortname": "L"
                 },
                 {
                     "coef": 1,

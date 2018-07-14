@@ -31,9 +31,12 @@ export const loadUnitsData = () => Promise.resolve(
             unit("count", "pas d'unité", 1)
         ]),
         grandeur("Volu", "Volume (L, m3...)", [
-            unit("m3", "Mètre-cube (m3)", 1),
+            unit("goutte", "Goutte", 0.001 * 20000),
             unit("L", "Litre (L)", 0.001),
-            unit("goutte", "Goutte", 0.001 * 20000)
+            unit("dL", "Déci-litre (dL)", 0.001 * 0.1),
+            unit("cL", "Centi-litre (cL)", 0.001 * 0.01),
+            unit("mL", "Milli-litre (mL)", 0.001 * 0.001),
+            unit("m3", "Mètre-cube (m3)", 1),
         ]),
         grandeur("Duré", "Durée (sec, min, h...)", [
             unit("sec", "Seconde (sec)", 1),

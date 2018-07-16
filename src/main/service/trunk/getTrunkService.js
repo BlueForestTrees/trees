@@ -15,8 +15,7 @@ export const getQuantifiedTrunk = async (qt, unit, _id) => ({...await getTrunk(_
 
 export const search = name => trunks()
     .find({
-        name_lower: {$regex: `^${name.toLowerCase()}.*`},
-        grandeur: {"$exists": true, "$ne": null}
+        name_lower: {$regex: `^${name.toLowerCase()}.*`}
     }, searchMixin)
     .sort({name_lower: 1})
     .toArray();

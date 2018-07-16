@@ -4,7 +4,7 @@ import {aTrunk} from "../../database/lettres";
 import {withValidationError} from "../../util/testUtil";
 
 export const postTrunkSpec = {};
-postTrunkSpec.req = {body: {color:"#FFCC00", name: "RATtatouille1664", grandeur: "Prix"}};
+postTrunkSpec.req = {body: {color:"#FFCC00", name: "RATtatouille1664"}};
 postTrunkSpec.res = {body: _id => ({_id})};
 postTrunkSpec.db = {
     expected: _id => ({

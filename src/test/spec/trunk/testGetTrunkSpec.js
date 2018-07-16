@@ -1,6 +1,6 @@
 import {omit, pick} from 'lodash';
 import {gateauTrunk} from "../../database/gateau";
-import {eauTrunk, skateTrunk} from "../../database/skate";
+import {eauTrunk, elecTrunk, skateTrunk} from "../../database/skate";
 import {e1Trunk, e2Trunk} from "../../database/lettres";
 import {notInSearchMixin} from "../testCommonSpec";
 
@@ -18,7 +18,12 @@ export const searchTrunkSpec2 = {
         url:`/api/trunks?q=${eauTrunk.name.substring(0, 1)}`,
     },
     res: {
-        body: [omit(e1Trunk, notInSearchMixin), omit(e2Trunk, notInSearchMixin), omit(eauTrunk, notInSearchMixin)]
+        body: [
+            omit(e1Trunk, notInSearchMixin),
+            omit(e2Trunk, notInSearchMixin),
+            omit(eauTrunk, notInSearchMixin),
+            omit(elecTrunk, notInSearchMixin)
+        ]
     }
 };
 

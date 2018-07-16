@@ -61,8 +61,11 @@ export const withIdQuantityRelativeTo = (_id, qt, unit, relativeTo) => ({...with
 export const withId = _id => ({_id});
 export const withIdQtUnit = (_id, qt, unit) => ({_id, qt, unit});
 export const withQuantity = (qt, unit) => ({quantity: {qt, unit}});
-export const withTrunk = (name, _id, qt, unit) => ({color: getRandomColor(), name, name_lower: name.toLowerCase(), ...withIdQuantity(_id, qt, unit), ...grandeurOf(unit)});
-export const withTrunkNoQt = (name, _id, unit) => ({_id, color: getRandomColor(), name, name_lower: name.toLowerCase(), ...grandeurOf(unit)});
+
+
+export const withTrunk = (name, _id, qt, unit) => ({color: getRandomColor(), name, _id, name_lower: name.toLowerCase(), ...withQuantity(qt, unit)});
+
+export const withTrunkNoQt = (name, _id) => ({_id, color: getRandomColor(), name, name_lower: name.toLowerCase()});
 export const withEntry = (_id, name, grandeur) => ({_id, color: getRandomColor(), name, grandeur, name_lower: name.toLowerCase()});
 export const withValidationError = (prop, location, msg, value) => ({"errorCode": 2, errors: {[prop]: {location, msg, param: prop, value}}, message: "validation error(s)"});
 export const withError = (errorCode, message) => ({errorCode, message});

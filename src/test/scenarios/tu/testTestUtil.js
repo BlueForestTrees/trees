@@ -29,12 +29,6 @@ describe('TU Utils', function () {
             });
     });
 
-    it('withTrunkNoQt G ok', function () {
-        let t = withTrunkNoQt("Eau", "999903c03e77667641d99994", "L");
-        expect(t)
-            .to.deep.equal({color: t.color, name: "Eau", name_lower: "eau", _id: "999903c03e77667641d99994", grandeur: "Volu"});
-    });
-
     it('withTrunkNoQt ok', function () {
         let t = withTrunkNoQt("Eau", "999903c03e77667641d99994");
         expect(t)

@@ -23,8 +23,5 @@ export const readRootTree = (qt, unit, _id) =>
         .then(graph => graph && treefy({qt, unit}, graph))
         .then(tree => tree || {...withIdQtUnit(_id, qt, unit), items: []});
 
-const getRootGraph = _id => {
-    return roots().aggregate([matchId(_id), rootGraphLookup]).next();
-};
-
+const getRootGraph = _id => roots().aggregate([matchId(_id), rootGraphLookup]).next();
 

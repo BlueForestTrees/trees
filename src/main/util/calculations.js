@@ -3,21 +3,6 @@ import {qtUnitCoef, sameGrandeur, toBaseQuantity} from "trees-units";
 import {GrandeurMismatchError} from "../exceptions/Errors";
 import Fraction from "fraction.js";
 
-export const tankfy = items => {
-    const tank = [];
-    const browser = items.slice();
-    let i = 0;
-    for (i; i < browser.length; i++) {
-        const item = browser[i];
-        if (item.quantity && item.items && quantified(item.items)) {
-            browser.push(...item.items);
-        } else {
-            tank.push(_.omit(item, "items"));
-        }
-    }
-    return tank;
-};
-
 export const listify = tree => {
     const browser = [tree];
     let i = 0;
@@ -46,7 +31,6 @@ export const erreurSiUnitIncompatibles = (quantity, roots) => {
 
 export const applyQuantity = (quantity, target) => {
     const coef = qtUnitCoef(quantity, target.quantity);
-    //TODO bug qt
 
     target.items = coef ?
         map(target.items, item => item.quantity ? (item.quantity.qt = Fraction(item.quantity.qt).mul(coef).valueOf()) && item : omit(item, "quantity"))

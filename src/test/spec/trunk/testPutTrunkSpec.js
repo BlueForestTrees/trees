@@ -31,13 +31,13 @@ export const renameTrunkSpec = {
 };
 
 
-const newGateauQuantity = withQuantity(1, "kg").quantity;
+const newGateauQuantity = withQuantity(1, "kg");
 export const requantifyTrunkSpec = {
     req: {
         method: "PUT",
         url: `/api/trunk/${gateauTrunk._id}`,
         body: {
-            quantity: newGateauQuantity
+            ...newGateauQuantity
         }
     }, res: {
         body: oneModifiedResponse
@@ -46,7 +46,7 @@ export const requantifyTrunkSpec = {
             colname: cols.TRUNK,
             doc: {
                 ...(_.omit(gateauTrunk, 'quantity')),
-                quantity: newGateauQuantity
+                ...newGateauQuantity
             }
         }
     }

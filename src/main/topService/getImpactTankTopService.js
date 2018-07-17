@@ -8,12 +8,10 @@ export const getImpactTank = async (qt, unit, _id) => {
     const tree = await readRootTree(qt, unit, _id);
     const treeNodes = listify(tree);
     const impacts = await Promise.all(_.map(treeNodes, loadDenseQuantifiedImpacts));
-    const flattenItems = flatten(impacts);
-    const summedItems = summify(flattenItems);
     const tank = {
         _id,
         quantity: {qt, unit},
-        items: summedItems
+        items: summify(flatten(impacts))
     };
 
     await addImpactInfos(tank);

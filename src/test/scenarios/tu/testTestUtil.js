@@ -41,7 +41,6 @@ describe('TU Utils', function () {
             .to.deep.equal({
             color: trunk.color,
             _id: "5a6a03c03e77667641d2d2c3",
-            grandeur: "Mass",
             name: "Gateau au chocolat",
             name_lower: "gateau au chocolat",
             quantity: {

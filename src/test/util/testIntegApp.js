@@ -40,11 +40,13 @@ const makeRequest = async test => {
         const m = test.req.method || "GET";
         switch (m) {
             case "GET":
-                return {...test, actual: await secure(request().get(test.req.url))};
+                return {...test, actual: await secure(request().get(makeUrl(test.req)))};
             case "PUT":
-                return {...test, actual: await secure(request().put(test.req.url).send(test.req.body))};
+                return {...test, actual: await secure(request().put(makeUrl(test.req)).send(test.req.body))};
             case "POST":
-                return {...test, actual: await secure(request().post(test.req.url).send(test.req.body))};
+                return {...test, actual: await secure(request().post(makeUrl(test.req)).send(test.req.body))};
+            case "DELETE":
+                return {...test, actual: await secure(request().del(makeUrl(test.req)).send(test.req.body))};
         }
     } else {
         return {...test};
@@ -113,13 +115,4 @@ export const run2 = (job, spec) => done => {
         .catch(err => done(err));
 };
 
-export const checkError = (call, spec) => call(spec).catch(err => {
-            err.response.should.have.status(spec.res.errorCode);
-            let resbody = null;
-            try {
-                resbody = JSON.parse(err.response.text)
-            } catch (e) {
-                throw new Error("response is not json");
-            }
-            resbody.should.deep.equal(spec.res.body);
-        });
+const makeUrl = ({url, path, param}) => url ? url : path ? path + (param ? param : '') : "test url (url or path+param) not defined";

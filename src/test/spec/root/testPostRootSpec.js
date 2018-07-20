@@ -5,91 +5,63 @@ import {bleTrunk, farineTrunk} from "../../database/gateau";
 
 const biereId = biere._id;
 const capsuleId = capsule._id;
-export const newRootSpec = {};
-newRootSpec.req = {
-    body: {
-        trunk: {
-            _id: biereId
-        },
-        root: {
-            _id: capsuleId
-        }
-    }
-};
-newRootSpec.res = {
-    body: oneUpsertedResponse(biereId)
-};
-newRootSpec.db = {
-    expected: {
-        colname: cols.ROOT,
-        doc: {
-            _id: biereId,
-            items: [
-                {
-                    _id: capsuleId
-                }
-            ],
-
+export const newRootSpec = {
+    req: {
+        url: `/api/root`,
+        method: "POST",
+        body: {trunk: {_id: biereId}, root: {_id: capsuleId}}
+    },
+    res: {
+        body: oneUpsertedResponse(biereId)
+    },
+    db: {
+        expected: {
+            colname: cols.ROOT,
+            doc: {
+                _id: biereId,
+                items: [{_id: capsuleId}],
+            }
         }
     }
 };
 
 
-export const existingRootPostSpec = {};
-existingRootPostSpec.req = {
-    body: {
-        trunk: {
-            _id: farineTrunk._id
-        },
-        root: {
-            _id: bleTrunk._id
-        }
-    }
-};
-existingRootPostSpec.res = {
-    body: oneModifiedResponse
-};
-existingRootPostSpec.db = {
-    expected: {
-        colname: cols.ROOT,
-        doc: {
-            _id: farineTrunk._id,
-            items: [
-                {
-                    _id: bleTrunk._id
-                }
-            ],
-
+export const existingRootPostSpec = {
+    req: {
+        url: `/api/root`,
+        method: "POST",
+        body: {trunk: {_id: farineTrunk._id}, root: {_id: bleTrunk._id}}
+    },
+    res: {
+        body: oneModifiedResponse
+    },
+    db: {
+        expected: {
+            colname: cols.ROOT,
+            doc: {
+                _id: farineTrunk._id,
+                items: [{_id: bleTrunk._id}],
+            }
         }
     }
 };
 
-
-export const bleToFarineAddSpec = {};
-bleToFarineAddSpec.req = {
-    body: {
-        trunk: {
-            _id: farineTrunk._id
-        },
-        root: {
-            _id: bleTrunk._id
-        }
-    }
-};
-bleToFarineAddSpec.res = {
-    body: oneModifiedResponse
-};
-bleToFarineAddSpec.db = {
-    expected: {
-        colname: cols.ROOT,
-        doc: {
-            _id: farineTrunk._id,
-            items: [
-                {
-                    "_id": bleTrunk._id,
-                }
-            ],
-
+export const postRootFarineBle = {
+    req: {
+        method: "POST",
+        path: `/api/root`,
+        body: {trunk: {_id: farineTrunk._id}, root: {_id: bleTrunk._id}}
+    },
+    res: {
+        body: oneModifiedResponse
+    },
+    db: {
+        expected: {
+            colname: cols.ROOT,
+            doc: {
+                _id: farineTrunk._id,
+                items: [{_id: bleTrunk._id}],
+            }
         }
     }
 };

@@ -12,7 +12,7 @@ export const cremeTrunk = withTrunkNoQt("creme", "5a6a03c03e77667641d2d2c5");
 
 export const gateauItem = withIdQuantity(gateauTrunk._id, 500, "g");
 const pizzaItem = withIdQuantity(pizzaTrunk._id, 500, "g");
-const farineItem = withIdQuantity(farineTrunk._id, 200, "g");
+export const farineItem = withIdQuantity(farineTrunk._id, 200, "g");
 const laitItem = withIdQuantity(laitTrunk._id, 20, "L");
 
 export const gateauRoot = {...gateauItem, items: [farineItem, laitItem]};

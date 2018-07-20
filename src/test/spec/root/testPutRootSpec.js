@@ -32,14 +32,20 @@ export const setQuantityRootSpec = {
     }
 };
 
-let someLaitWithRelativeTo = {relativeTo: bleTrunk._id, ...withIdQuantity(laitTrunk._id, 1, "L")};
 
 export const putRelativeToRootSpec = {
     req: {
         ...putRootUrl,
         body: {
             trunk: someFarine,
-            root: someLaitWithRelativeTo
+            root: {
+                ...withIdQuantity(laitTrunk._id, 1, "L"),
+                relativeTo: {
+                    _id: bleTrunk._id,
+                    refqt: {qt: 50.32, unit: "kg"},
+                    disqt: {qt: 1000, unit: "km"}
+                }
+            }
         }
     },
     res: {
@@ -50,7 +56,17 @@ export const putRelativeToRootSpec = {
             colname: cols.ROOT,
             doc: {
                 ...someFarine,
-                items: [...farineRoot.items, someLaitWithRelativeTo],
+                items: [
+                    ...farineRoot.items,
+                    {
+                        ...withIdQuantity(laitTrunk._id, 1, "L"),
+                        relativeTo: {
+                            _id: bleTrunk._id,
+                            refqt: {qt: 50.32, unit: "kg"},
+                            disqt: {qt: 1000, unit: "km"}
+                        }
+                    }
+                ],
             }
         }
     }

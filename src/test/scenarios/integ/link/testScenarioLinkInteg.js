@@ -1,19 +1,10 @@
 import {init, request, run} from "../../../util/testIntegApp";
-import {deleteLink} from "./testDeleteLinkInteg";
-import {postLink} from "./testPostLinkInteg";
-import {bleLinkDeletionSpec} from "../../../spec/link/testDeleteLinkSpec";
-import {bleToFarineLinkAddSpec} from "../../../spec/link/testPostLinkSpec";
 import {withQuantity} from "../../../util/testUtil";
+import {putLinkBleFarine} from "../../../spec/link/testPutLinkSpec";
 
 describe('SCENARIO Link', function () {
 
     beforeEach(init);
-
-    it('suppr puis réajout du blé à la farine',
-        run(() => deleteLink(bleLinkDeletionSpec)
-            .then(
-                () => postLink(bleToFarineLinkAddSpec))
-        ));
 
     it('post parent, post enfant, put link, get parent tree',
         run(

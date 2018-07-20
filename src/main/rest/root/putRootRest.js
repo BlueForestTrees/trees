@@ -1,6 +1,6 @@
 import {col} from "../../db/db";
 import {ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT} from "../../const/paths";
-import {optionalRelativeTo, existingRootId, existingTrunkId, present, rootIdIsNotTrunkId} from "../../const/validations";
+import {existingRootId, existingTrunkId, present, rootIdIsNotTrunkId, validRelativeTo} from "../../const/validations";
 
 import configure from "trees-items-service";
 import {cols} from "../../const/collections";
@@ -15,8 +15,15 @@ module.exports = router;
 router.put('/api/root',
     existingTrunkId,
     existingRootId,
-    optionalRelativeTo,
+    validRelativeTo,
     rootIdIsNotTrunkId,
     present(ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT),
-    run(({trunk, root}) => upsertRoot(trunk, root))
+    run(({trunk, root}) => cleanUpsert(trunk, root))
 );
+
+const cleanUpsert = (trunk, root) => {
+    if (!root.relativeTo) {
+        delete root.relativeTo;
+    }
+    return upsertRoot(trunk, root);
+};

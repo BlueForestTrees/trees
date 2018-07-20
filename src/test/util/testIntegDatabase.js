@@ -71,15 +71,15 @@ export const assertDb = async ({list, colname, doc, missingDoc}) => {
             const dbDoc = await loadFromDbById(colname, doc._id);
             try {
                 expect(dbDoc).to.deep.equal(doc);
-                debug("db doc", dbDoc);
+                debug("assertDb OK, doc by id", dbDoc);
             } catch (e) {
-                console.log("assertDB KO");
+                console.log(`assertDB KO ${colname}`);
                 throw e;
             }
         } else {
             const dbDoc = await loadFromDbByDoc(colname, doc);
             expect(dbDoc).to.be.not.null;
-            debug("db doc", dbDoc);
+            debug("assertDb OK, doc by fields", dbDoc);
         }
     }
     if (missingDoc) {

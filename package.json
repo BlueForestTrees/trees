@@ -35,7 +35,7 @@
     "cross-env": "^5.2.0",
     "debug": "~2.6.9",
     "express": "~4.15.5",
-    "express-validator": "^5.1.2",
+    "express-validator": "^5.2.0",
     "fraction.js": "^4.0.4",
     "fs-readdir-recursive": "^1.1.0",
     "handlebars": "^4.0.11",

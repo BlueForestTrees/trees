@@ -16,13 +16,29 @@ postTrunkSpec.db = {
     })
 };
 
-export const postBadGrandeurTrunkSpec = {};
-postBadGrandeurTrunkSpec.req = {body: {color:"#FFFFFF", name: "RATtatouille1664", grandeur: "bad_grandeur"}};
-postBadGrandeurTrunkSpec.res = {errorCode:400, body: withValidationError("grandeur", "body", "Invalid value", "bad_grandeur")};
+export const postTransportTrunkSpec = {};
+postTransportTrunkSpec.req = {body: {color:"#FFCC00", name: "RATtatouille1664", type:"TR"}};
+postTransportTrunkSpec.res = {body: _id => ({_id})};
+postTransportTrunkSpec.db = {
+    expected: _id => ({
+        colname: cols.TRUNK,
+        doc: {
+            _id, ...postTransportTrunkSpec.req.body,
+            name_lower: postTransportTrunkSpec.req.body.name.toLowerCase()
+        }
+    })
+};
 
-export const postBadColorTrunkSpec = {};
-postBadColorTrunkSpec.req = {body: {color:"#FFFFF", name: "RATtatouille1664", grandeur: "Dens"}};
-postBadColorTrunkSpec.res = {errorCode:400, body: withValidationError("color", "body", "Invalid value", "#FFFFF")};
+export const postBadColorTrunkSpec = {
+    req: {
+        url: "/api/trunk",
+        method: "POST",
+        body: {color: "#FFFFF", name: "RATtatouille1664", grandeur: "Dens"}
+    },
+    res: {
+        code: 400, body: withValidationError("color", "body", "Invalid value", "#FFFFF")
+    }
+};
 
 const cloneName = (newId, tree) => tree.name + newId;
 export const cloneTrunkSpec = {};

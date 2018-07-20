@@ -4,7 +4,6 @@ import {farineRoot, gateauRoot, laitTrunk} from "../../database/gateau";
 import {skateRoot} from "../../database/skate";
 import {withTrunkInfos} from "../../util/testIntegDatabase";
 import {banane, bananeBC, transport} from "../../database/banane";
-import {cols} from "../../../main/const/collections";
 
 export const getBananeRootSpec = {
     req: {

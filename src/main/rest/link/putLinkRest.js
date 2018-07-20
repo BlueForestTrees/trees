@@ -1,5 +1,5 @@
 import {ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT} from "../../const/paths";
-import {existingRootId, existingTrunkId, optionalRelativeTo, present, rootIdIsNotTrunkId, validQt, validUnit} from "../../const/validations";
+import {existingRootId, existingTrunkId, present, rootIdIsNotTrunkId, validQt, validRelativeTo, validUnit} from "../../const/validations";
 import {upsertLink} from "../../topService/linkTopService";
 
 import {run} from '../../util/run'
@@ -7,15 +7,22 @@ const router = require('express').Router();
 
 module.exports = router;
 
+const cleanUpsert = ({trunk, root}) => {
+    if (!root.relativeTo) {
+        delete root.relativeTo;
+    }
+    return upsertLink({trunk, root});
+};
+
 router.put('/api/link',
     existingTrunkId,
     existingRootId,
-    optionalRelativeTo,
+    validRelativeTo,
     rootIdIsNotTrunkId,
     present(ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT),
     validUnit(ROOT_UNIT),
     validUnit(TRUNK_UNIT),
     validQt(ROOT_QT),
     validQt(TRUNK_QT),
-    run(upsertLink)
+    run(cleanUpsert)
 );

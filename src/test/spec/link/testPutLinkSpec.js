@@ -12,7 +12,14 @@ export const putLinkRelativeToSpec = {
         url: "/api/link",
         body: {
             trunk: withIdQuantity(farineTrunk._id, 10, "kg"),
-            root: {relativeTo: bleTrunk._id, ...withIdQuantity(skateTrunk._id, 3, "count")}
+            root: {
+                ...withIdQuantity(skateTrunk._id, 3, "count"),
+                relativeTo: {
+                    _id: bleTrunk._id,
+                    refqt: {qt: 104, unit: "kg"},
+                    disqt: {qt: 1000, unit: "km"}
+                },
+            }
         }
     },
     res: {
@@ -27,7 +34,14 @@ export const putLinkRelativeToSpec = {
                         ...withIdQuantity(farineTrunk._id, 10, "kg"),
                         items: [
                             {_id:bleTrunk._id},
-                            {relativeTo: bleTrunk._id, ...withIdQuantity(skateTrunk._id, 3, "count")}
+                            {
+                                ...withIdQuantity(skateTrunk._id, 3, "count"),
+                                relativeTo: {
+                                    _id: bleTrunk._id,
+                                    refqt: {qt: 104, unit: "kg"},
+                                    disqt: {qt: 1000, unit: "km"}
+                                },
+                            }
                             ],
                     }
                 },

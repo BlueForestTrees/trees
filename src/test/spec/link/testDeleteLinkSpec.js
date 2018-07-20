@@ -1,32 +1,14 @@
-import {bleRootDeletionSpec, rootDeletionSpec} from "../root/testDeleteRootSpec";
-import {branchDeletionSpec, farineBranchDeletionSpec} from "../branch/testDeleteBranchSpec";
+import {deleteFarineRootBleSpec, rootDeletionSpec} from "../root/testDeleteRootSpec";
+import {branchDeletionSpec, deleteBleBranchFarineSpec} from "../branch/testDeleteBranchSpec";
 
-export const linkDeletionSpec = {};
-
-linkDeletionSpec.req = rootDeletionSpec.req;
-
-linkDeletionSpec.res = {
-    expected: [rootDeletionSpec.res.expected, branchDeletionSpec.res.expected]
-};
-
-linkDeletionSpec.db = {
-    expected: {
-        list: [rootDeletionSpec.db.expected, branchDeletionSpec.db.expected]
-    }
-};
-
-
-
-export const bleLinkDeletionSpec = {};
-
-bleLinkDeletionSpec.req = bleRootDeletionSpec.req;
-
-bleLinkDeletionSpec.res = {
-    expected: [bleRootDeletionSpec.res.expected, farineBranchDeletionSpec.res.expected]
-};
-
-bleLinkDeletionSpec.db = {
-    expected: {
-        list: [bleRootDeletionSpec.db.expected, farineBranchDeletionSpec.db.expected]
+export const linkDeletionSpec = {
+    req: {...rootDeletionSpec.req, path: "/api/link"},
+    res: {
+        expected: [rootDeletionSpec.res.expected, branchDeletionSpec.res.expected]
+    },
+    db: {
+        expected: {
+            list: [rootDeletionSpec.db.expected, branchDeletionSpec.db.expected]
+        }
     }
 };

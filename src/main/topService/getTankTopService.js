@@ -1,6 +1,7 @@
 import {readRootTree} from "../service/root/rootQueries";
 import {appendTrunkInfos} from "../service/trunk/getTrunkService";
 import {quantified, summify} from "../util/calculations";
+import {omit} from 'lodash';
 
 export const getTank = (qt, unit, _id) =>
     readRootTree(qt, unit, _id)
@@ -19,7 +20,7 @@ const tankfy = items => {
         if (item.quantity && item.items && quantified(item.items)) {
             browser.push(...item.items);
         } else {
-            tank.push(_.omit(item, "items"));
+            tank.push(omit(item, "items"));
         }
     }
     return tank;

@@ -1,9 +1,12 @@
-import {BRANCH_ID, COLOR, FACET_ID, GRANDEUR, ID, IMPACT_ID, NAME, ROOT_ID, ROOT_RELATIVE_TO, SOURCE_ID, TRUNK_ID} from "./paths";
+import {BRANCH_ID, COLOR, FACET_ID, GRANDEUR, ID, IMPACT_ID, NAME, ROOT_ID, ROOT_RELATIVE_TO, ROOT_RELATIVE_TO_DISQT, ROOT_RELATIVE_TO_DISQT_QT, ROOT_RELATIVE_TO_DISQT_UNIT, ROOT_RELATIVE_TO_ID, ROOT_RELATIVE_TO_REFQT, ROOT_RELATIVE_TO_REFQT_QT, ROOT_RELATIVE_TO_REFQT_UNIT, ROOTID, SOURCE_ID, TRUNK_ID, TRUNKID, TYPE} from "./paths";
 import {IS_DECIMAL, IS_NOT_RIGHT_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "./messages";
-import {check} from 'express-validator/check';
+import {check, body, oneOf} from 'express-validator/check';
 import _ from 'lodash';
 import {getGrandeursKeys, getShortnames} from "trees-units";
 import {peekTrunk} from "../service/trunk/getTrunkService";
+import {trunksType} from "./trunks";
+
+const unitsShortnames = getShortnames();
 
 export const valid = (field, optional) => {
     let chain = check(field);
@@ -15,28 +18,46 @@ export const valid = (field, optional) => {
 const trunkFound = (field, optional) => valid(field, optional).custom(peekTrunk).withMessage("not found");
 
 export const validFullname = check('fullname').isLength({min: 1, max: 100}).matches(/^.+/);
-export const validMail = check("mail").isEmail().withMessage('mail invalid');
+export const validMail = check("mail").isEmail().normalizeEmail().withMessage('mail invalid');
 export const validWelcomeToken = check('t').exists();
 export const validPassword = check('password').isLength({min: 1, max: 100}).matches(/^.+/);
 export const validMessage = check("message").isString().isLength({min: 1, max: 1000}).withMessage('message trop long');
 export const validItem = key => [valid(`${key}._id`), validQt(`${key}.quantity.qt`), validUnit(`${key}.quantity.unit`)];
 export const validId = valid(ID);
 export const validGrandeur = check(GRANDEUR).isIn(getGrandeursKeys());
-export const optionalGrandeur = field => check(field).optional().isIn(getGrandeursKeys());
 export const existingId = trunkFound(ID);
 export const existingTrunkId = trunkFound(TRUNK_ID);
 export const existingBranchId = trunkFound(BRANCH_ID);
 export const existingRootId = trunkFound(ROOT_ID);
-export const optionalRelativeTo = trunkFound(ROOT_RELATIVE_TO, true);
-export const optionalExistingSourceId = trunkFound(SOURCE_ID, true);
+
+export const noRelativeTo = check(ROOT_RELATIVE_TO).not().exists();
+
+export const validRelativeTo = oneOf([
+    [
+        noRelativeTo
+    ],
+    [
+        body(ROOT_RELATIVE_TO).exists(),
+        body(ROOT_RELATIVE_TO_ID).isMongoId(),
+        body(ROOT_RELATIVE_TO_REFQT).exists(),
+        body(ROOT_RELATIVE_TO_REFQT_QT).isNumeric(),
+        body(ROOT_RELATIVE_TO_REFQT_UNIT).isIn(unitsShortnames),
+        body(ROOT_RELATIVE_TO_DISQT).exists(),
+        body(ROOT_RELATIVE_TO_DISQT_QT).isNumeric(),
+        body(ROOT_RELATIVE_TO_DISQT_UNIT).isIn(unitsShortnames),
+    ]
+]);
+
 export const rootIdIsNotTrunkId = check(ROOT_ID, IS_NOT_RIGHT_ID).custom((root, {req}) => (!root || !req.body.trunk) || (root._id !== req.body.trunk._id));
 export const impactIdIsNotTrunkId = check(IMPACT_ID, IS_NOT_RIGHT_ID).custom((root, {req}) => (!root || !req.body.trunk) || (root._id !== req.body.trunk._id));
 export const facetIdIsNotTrunkId = check(FACET_ID, IS_NOT_RIGHT_ID).custom((facet, {req}) => (!facet || !req.body.trunk) || (facet._id !== req.body.trunk._id));
 export const branchIdIsNotTrunkId = check(BRANCH_ID, IS_NOT_RIGHT_ID).custom((branch, {req}) => (!branch || !req.body.trunk) || (branch._id !== req.body.trunk._id));
-export const optionalValidName = check(NAME).optional().matches(/^.+/);
 export const validName = check(NAME).isLength({min: 2}).matches(/^.+/);
 export const validColor = check(COLOR).isLength({min: 2}).matches(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/);
+export const validQ = check('q').optional().exists();
+export const validT = check("t").optional().isIn(Object.values(trunksType));
+export const validType = check(TYPE).optional().isIn(Object.values(trunksType));
 
 export const present = (...fields) => _.map(fields, field => check(field, SHOULD_BE_DEFINED).exists());
-export const validUnit = field => check(field, IS_VALID_UNIT).optional().exists().isIn(getShortnames());
-export const validQt = field => check(field, IS_DECIMAL).optional().exists().isDecimal().toInt();
+export const validUnit = field => check(field, IS_VALID_UNIT).optional().isIn(unitsShortnames);
+export const validQt = field => check(field, IS_DECIMAL).optional().isDecimal().toFloat();

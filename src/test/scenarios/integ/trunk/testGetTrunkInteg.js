@@ -1,35 +1,25 @@
-import {getQtTrunkSpec, getTrunkSpec, searchTrunkSpec, searchTrunkSpec2} from "../../../spec/trunk/testGetTrunkSpec";
+import {getQtTrunkBateauSpec, getQtTrunkGateauSpec, getTrunkBaaSpec, getTrunkGateauSpec, searchTrunkSpec, searchTrunkSpec2, typedSearchTrunkSpec, typedSearchTrunkSpec2} from "../../../spec/trunk/testGetTrunkSpec";
 import {app} from "../../../../main";
-import {init, request, withTest} from "../../../util/testIntegApp";
+import {init, withTest} from "../../../util/testIntegApp";
 
 describe('GET Trunks', function () {
 
     beforeEach(init);
 
-    it('search by term', withTest(searchTrunkSpec));
+    it('search by name', withTest(searchTrunkSpec));
 
-    it('search by term 2', withTest(searchTrunkSpec2));
+    it('search by name 2', withTest(searchTrunkSpec2));
 
-    it('return a trunk', done => testGetTrunkWith(getTrunkSpec, done));
+    it('search by type', withTest(typedSearchTrunkSpec));
 
-    it('return a quantified trunk', done => testGetQtTrunkWith(getQtTrunkSpec, done));
+    it('search by name and type', withTest(typedSearchTrunkSpec2));
+
+    it('get gateau trunk', withTest(getTrunkGateauSpec));
+
+    it('get baa trunk with decimal qt', withTest(getTrunkBaaSpec));
+
+    it('get gateau trunk with qt', withTest(getQtTrunkGateauSpec));
+
+    it('get bateau trunk with qt', withTest(getQtTrunkBateauSpec));
 
 });
-
-const bodyOk = (spec, done) => (err, res) => {
-    res.should.have.status(200);
-    res.body.should.deep.equal(spec.res.body);
-    done();
-};
-
-const testGetTrunkWith = (spec, done) => {
-    request()
-        .get(`/api/trunk/${spec.req._id}`)
-        .end(bodyOk(spec, done));
-};
-
-const testGetQtTrunkWith = (spec, done) => {
-    request()
-        .get(`/api/trunk/${spec.req.qt}/${spec.req.unit}/${spec.req._id}`)
-        .end(bodyOk(spec, done));
-};

@@ -1,4 +1,4 @@
-import {existingId, validId, validQt, validUnit} from "../../const/validations";
+import {existingId, validId, validQ, validQt, validT, validUnit} from "../../const/validations";
 import {getQuantifiedTrunk, getTrunk, search} from "../../service/trunk/getTrunkService";
 
 import {run} from '../../util/run'
@@ -10,8 +10,9 @@ const {check} = require('express-validator/check');
 module.exports = router;
 
 router.get('/api/trunks',
-    check('q').optional().exists(),
-    run(({q}) => search(q))
+    validQ,
+    validT,
+    run(({q, t}) => search(q, t))
 );
 
 router.get('/api/trunk/:_id',

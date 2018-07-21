@@ -1,4 +1,5 @@
 export const cols = {
+    LINK: 'LinkCollection',
     TRUNK: 'TrunkCollection',
     FACET: 'FacetCollection',
     FACET_ENTRY: 'FacetEntryCollection',

@@ -4,5 +4,4 @@ import {col} from "../../db/db";
 
 const trunks = () => col(cols.TRUNK);
 
-export const purgeTrunks = () => trunks().deleteMany();
 export const remove = id => trunks().deleteOne(withId(id));

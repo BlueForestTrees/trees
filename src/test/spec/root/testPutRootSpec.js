@@ -1,9 +1,8 @@
 import {oneModifiedResponse} from "../testCommonSpec";
-import {clon, setQuantity} from "../../util/testUtil";
+import {clon, setQuantity, withIdQuantity} from "../../util/testUtil";
 import {cols} from "../../../main/const/collections";
 import _ from 'lodash';
 import {bleTrunk, farineRoot, farineTrunk, gateauRoot, gateauTrunk, laitTrunk} from "../../database/gateau";
-import {withIdQuantity} from "../../../../../web/src/test/testPlumbing";
 
 let someFarine = withIdQuantity(farineTrunk._id, 10, "kg");
 let someBle = withIdQuantity(bleTrunk._id, 20, "min");

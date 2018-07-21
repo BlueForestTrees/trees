@@ -1,10 +1,10 @@
 import {setQuantityRootSpec, updateQuantityAnotherUnitRootSpec, updateQuantityRootSpec} from "../root/testPutRootSpec";
 import {setQuantityBranchSpec, updateQuantityAnotherUnitBranchSpec, updateQuantityBranchSpec} from "../branch/testPutBranchSpec";
-import {withIdQuantity} from "../../../../../web/src/test/testPlumbing";
 import {bleTrunk, farineTrunk} from "../../database/gateau";
 import {oneModifiedResponse} from "../testCommonSpec";
 import {skateTrunk} from "../../database/skate";
 import {cols} from "../../../main/const/collections";
+import {withIdQuantity} from "../../util/testUtil";
 
 export const putLinkRelativeToSpec = {
     req: {

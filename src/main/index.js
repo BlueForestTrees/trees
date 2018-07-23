@@ -9,10 +9,9 @@ import {port} from "../env";
 import express from 'express';
 import ENV from "../env";
 import morgan from 'morgan';
-import {dbConnect} from "./db/db";
+import {dbInit} from "trees-db-version";
 import {initServices} from "./services";
-import {findUserByMail, insertUser} from "./service/user/userService";
-import {upgradeDb} from "./db/dbUpgrade";
+import {registry} from "./db/dbRegistry";
 
 console.log("API starting...");
 
@@ -71,8 +70,7 @@ const started = () => {
 };
 
 export const appPromise =
-    dbConnect()
-        .then(upgradeDb)
+    dbInit(ENV, registry)
         .then(initServices)
         .then(httpConf)
         .then(logRequest)

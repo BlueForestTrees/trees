@@ -4,7 +4,9 @@
     "build": "rimraf dist && babel src --out-dir dist/trees-api/js && copyfiles -u 1 templates/* dist/etc/trees-api/templates",
     "dev-api": "node --version && cross-env DB_UPGRADE=LAST MAIL_CONFIG_PATH=../secured/trees-api nodemon src/main/index.js --exec babel-node",
     "test-api": "cross-env NODE_ENV=test PORT=9000 MAIL_CONFIG_PATH=../secured/trees-api mocha --recursive --require babel-register --exit \"src/test/**/*.js\"",
-    "test-init-db": "cross-env NODE_ENV=test MAIL_CONFIG_PATH=../secured/trees-api mocha --exit src/test/util/testInitDb.js --require babel-register"
+    "test-init-db": "cross-env NODE_ENV=test MAIL_CONFIG_PATH=../secured/trees-api mocha --exit src/test/util/testInitDb.js --require babel-register",
+    "upgrade-db": "yarn upgrade -L trees-db",
+    "yarn": "yarn"
   },
   "env": "api",
   "version": "0.0.2",
@@ -41,13 +43,13 @@
     "handlebars": "^4.0.11",
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.10",
-    "mongodb": "^2.2.33",
     "morgan": "^1.9.0",
     "nested-error-stacks": "^2.0.0",
     "nodemailer": "^4.6.7",
     "pick-to-array": "^1.1.0",
     "regex-escape": "^3.4.8",
     "sha1": "^1.1.1",
+    "trees-db-version": "file:../trees-db-version",
     "trees-items-service": "^0.1.18",
     "trees-query": "^0.0.10",
     "trees-units": "^1.0.37"

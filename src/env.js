@@ -4,10 +4,6 @@ import fs from 'fs';
 import {version} from './../package.json';
 
 const ENV = {
-    USER_NAME: process.env.USER_NAME || "blue",
-    USER_PASSWORD: process.env.USER_PASSWORD || "forest",
-    USER_ADMIN: process.env.USER_ADMIN || true,
-
     PORT: process.env.PORT || 8080,
 
     DB_NAME: process.env.DB_NAME || "BlueForestTreesDB",

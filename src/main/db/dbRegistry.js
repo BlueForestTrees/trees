@@ -1,6 +1,5 @@
 import {cols} from "../const/collections";
-import {col} from "./db";
-import {getRandomColor} from "../util/calculations";
+import {col} from "trees-db";
 import {userStatus} from "../const/userStatus";
 import sha1 from "sha1";
 

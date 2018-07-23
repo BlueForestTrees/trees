@@ -48,7 +48,7 @@ export const allreadyExistingFacetEntrySpec = {
             ..._.omit(vitCFacetEntry, "_id")
         }
     }, res: {
-        code: 412,
+        code: 400,
         bodypath: {axisD: "$.errors.grandeur.msg", value: "Existe Déjà"}
     }
 };

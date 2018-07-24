@@ -1,4 +1,4 @@
-import {allreadyExistingImpactEntrySpec, postBadGrandeurImpactEntrySpec, postImpactEntrySpec} from "../../../spec/impactEntry/testPostImpactEntrySpec";
+import {allreadyExistingImpactEntrySpec, postBadGrandeurImpactEntrySpec, postBadIdImpactEntrySpec, postImpactEntrySpec} from "../../../spec/impactEntry/testPostImpactEntrySpec";
 import {init, withTest} from "trees-test/dist/api";
 import api from "../../../../src";
 import ENV from "../../../../src/env";
@@ -8,11 +8,12 @@ describe('POST ImpactEntry', function () {
 
     beforeEach(init(api, ENV, cols));
 
-    it('nouvelleImpactEntrySpec', withTest(postImpactEntrySpec));
+    it('normal post', withTest(postImpactEntrySpec));
 
-    it('allreadyExistingImpactEntrySpec', withTest(allreadyExistingImpactEntrySpec));
+    it('refuse bad id', withTest(postBadIdImpactEntrySpec));
+
+    it('refuse to post since same id exist', withTest(allreadyExistingImpactEntrySpec));
 
     it('postBadGrandeurImpactEntrySpec', withTest(postBadGrandeurImpactEntrySpec));
-
 
 });

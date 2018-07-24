@@ -18,16 +18,11 @@ gateauRoot2Kg.items[0].items = [{_id: bleTrunk._id}];
 export const gateauRootTreeSpec = {
     req: {
         url: `/api/root/tree/${gateauRoot2Kg.quantity.qt}/${gateauRoot2Kg.quantity.unit}/${gateauRoot2Kg._id}`,
-    }
-};
-gateauRootTreeSpec.req = {
-    qt: gateauRoot2Kg.quantity.qt,
-    unit: gateauRoot2Kg.quantity.unit,
-    _id: gateauRoot2Kg._id
-};
-gateauRootTreeSpec.res = {
-    body: {
-        ...gateauRoot2Kg
+    },
+    res:{
+        body: {
+            ...gateauRoot2Kg
+        }
     }
 };
 

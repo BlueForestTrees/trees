@@ -2,31 +2,61 @@ import _ from 'lodash';
 import {cols} from "../../../src/const/collections";
 import {aTrunk} from "../../database/lettres";
 import {withValidationError} from "trees-test/dist/domain";
+import {createStringObjectId} from "trees-test/dist/util";
 
-export const postTrunkSpec = {};
-postTrunkSpec.req = {body: {color:"#FFCC00", name: "RATtatouille1664"}};
-postTrunkSpec.res = {body: _id => ({_id})};
-postTrunkSpec.db = {
-    expected: _id => ({
-        colname: cols.TRUNK,
-        doc: {
-            _id, ...postTrunkSpec.req.body,
-            name_lower: postTrunkSpec.req.body.name.toLowerCase()
+const trunk = {_id: createStringObjectId(), color: "#FFCC00", name: "RATtatouille1664"};
+export const postTrunkSpec = {
+    req: {
+        url: "/api/trunk",
+        method: "POST",
+        body: trunk
+    },
+    db: {
+        expected: {
+            colname: cols.TRUNK,
+            doc: {
+                ...trunk,
+                name_lower: trunk.name.toLowerCase()
+            }
         }
-    })
+    }
 };
 
-export const postTransportTrunkSpec = {};
-postTransportTrunkSpec.req = {body: {color:"#FFCC00", name: "RATtatouille1664", type:"TR"}};
-postTransportTrunkSpec.res = {body: _id => ({_id})};
-postTransportTrunkSpec.db = {
-    expected: _id => ({
-        colname: cols.TRUNK,
-        doc: {
-            _id, ...postTransportTrunkSpec.req.body,
-            name_lower: postTransportTrunkSpec.req.body.name.toLowerCase()
+const badTrunk = {_id: createStringObjectId() + "m", color: "#FFCC00", name: "RATtatouille1664"};
+export const postBadIdTrunkSpec = {
+    req: {
+        url: "/api/trunk",
+        method: "POST",
+        body: badTrunk
+    },
+    res: {
+        code: 400,
+        bodypath: {path: "$.errors._id.msg", value: "invalid"}
+    },
+    db: {
+        expected: {
+            colname: cols.TRUNK,
+            missingDoc: badTrunk
         }
-    })
+    }
+};
+
+const transportTrunk = {_id: createStringObjectId(), color: "#FFCC00", name: "RATtatouille1664", type: "TR"};
+export const postTransportTrunkSpec = {
+    req: {
+        url: "/api/trunk",
+        method: "POST",
+        body: transportTrunk
+    },
+    db: {
+        expected: {
+            colname: cols.TRUNK,
+            doc: {
+                ...transportTrunk,
+                name_lower: transportTrunk.name.toLowerCase()
+            }
+        }
+    }
 };
 
 export const postBadColorTrunkSpec = {
@@ -36,7 +66,11 @@ export const postBadColorTrunkSpec = {
         body: {color: "#FFFFF", name: "RATtatouille1664", grandeur: "Dens"}
     },
     res: {
-        code: 400, body: withValidationError("color", "body", "Invalid value", "#FFFFF")
+        code: 400,
+        bodypath: [
+            {path: "$.errors.color.msg", value: "Invalid value"},
+            {path: "$.errors.color.value", value: "#FFFFF"},
+        ]
     }
 };
 

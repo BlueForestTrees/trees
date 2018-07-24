@@ -1,27 +1,19 @@
-import {postBadColorTrunkSpec, postBadGrandeurTrunkSpec, postTransportTrunkSpec, postTrunkSpec} from "../../../spec/trunk/testPostTrunkSpec";
-import {assertDb} from "trees-test/dist/db";
-import {checkError, init, request, run, withTest} from "trees-test/dist/api";
+import {postBadColorTrunkSpec, postBadGrandeurTrunkSpec, postBadIdTrunkSpec, postTransportTrunkSpec, postTrunkSpec} from "../../../spec/trunk/testPostTrunkSpec";
+import {init, withTest} from "trees-test/dist/api";
 import api from "../../../../src";
 import ENV from "../../../../src/env";
 import {cols} from "../../../../src/const/collections";
+
 describe('POST Trunks', function () {
 
     beforeEach(init(api, ENV, cols));
 
-    it('create the trunk', run(() => createTrunk(postTrunkSpec)));
+    it('create the trunk', withTest(postTrunkSpec));
 
-    it('create a transport trunk', run(() => createTrunk(postTransportTrunkSpec)));
+    it('refuse to create a trunk with bad id', withTest(postBadIdTrunkSpec));
 
-    it('create the trunk color error', withTest(postBadColorTrunkSpec));
+    it('create a transport trunk', withTest(postTransportTrunkSpec));
+
+    it('refuse to create a trunk with color error', withTest(postBadColorTrunkSpec));
 
 });
-
-const createTrunk = spec =>
-    request()
-        .post('/api/trunk')
-        .send(spec.req.body)
-        .then(async res => {
-            res.should.have.status(200);
-            res.body.should.deep.equal(spec.res.body(res.body._id));
-            await assertDb(spec.db.expected(res.body._id));
-        });

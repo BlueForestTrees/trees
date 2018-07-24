@@ -1,17 +1,15 @@
 import {cols} from "../../../src/const/collections";
 import {gateauTrunk} from "../../database/gateau";
 
-export const trunkDeletionSpec = {};
-
-const _id = gateauTrunk._id;
-
-trunkDeletionSpec.req = {
-    _id
-};
-
-trunkDeletionSpec.db = {
-    expected: {
-        colname: cols.TRUNK,
-        missingDoc: {_id}
+export const trunkDeletionSpec = {
+    req: {
+        url: `/api/trunk/${gateauTrunk._id}`,
+        method: "DELETE"
+    },
+    db: {
+        expected: {
+            colname: cols.TRUNK,
+            missingDoc: {_id: gateauTrunk._id}
+        }
     }
 };

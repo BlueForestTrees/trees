@@ -12,12 +12,4 @@ export const replaceAllImpactEntries = async (data) => {
     return col.find().toArray();
 };
 
-export const addImpactEntry = async entry =>
-    await getImpactEntryIdByName(entry.name)
-    ||
-    ({_id: (await insertEntry(entry)).insertedId});
-
-export const insertEntry = async entry => {
-    entry.name_lower = entry.name.toLowerCase();
-    return impactsEntry().insertOne(entry);
-};
+export const addImpactEntry = entry => impactsEntry().insertOne({...entry, name_lower: entry.name.toLowerCase()});

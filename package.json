@@ -38,7 +38,7 @@
     "cross-env": "^5.2.0",
     "debug": "~2.6.9",
     "express": "~4.15.5",
-    "express-validator": "^5.2.0",
+    "express-validator": "^5.3.0",
     "fraction.js": "^4.0.4",
     "fs-readdir-recursive": "^1.1.0",
     "handlebars": "^4.0.11",
@@ -52,7 +52,7 @@
     "sha1": "^1.1.1",
     "trees-db-version": "file:../trees-db-version",
     "trees-items-service": "^0.1.18",
-    "trees-query": "^0.0.10",
+    "trees-query": "file:../trees-query",
     "trees-units": "^1.0.37"
   },
   "babel": {

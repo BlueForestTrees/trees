@@ -1,10 +1,12 @@
 import {BRANCH_ID, COLOR, FACET_ID, GRANDEUR, ID, IMPACT_ID, NAME, ROOT_ID, ROOT_RELATIVE_TO, ROOT_RELATIVE_TO_DISQT, ROOT_RELATIVE_TO_DISQT_QT, ROOT_RELATIVE_TO_DISQT_UNIT, ROOT_RELATIVE_TO_ID, ROOT_RELATIVE_TO_REFQT, ROOT_RELATIVE_TO_REFQT_QT, ROOT_RELATIVE_TO_REFQT_UNIT, ROOTID, SOURCE_ID, TRUNK_ID, TRUNKID, TYPE} from "./paths";
 import {IS_DECIMAL, IS_NOT_RIGHT_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "./messages";
 import {check, body, oneOf} from 'express-validator/check';
+const { sanitize } = require('express-validator/filter');
 import _ from 'lodash';
 import {getGrandeursKeys, getShortnames} from "trees-units";
 import {peekTrunk} from "../service/trunk/getTrunkService";
 import {trunksType} from "./trunks";
+import {object} from "trees-query";
 
 const unitsShortnames = getShortnames();
 
@@ -23,7 +25,9 @@ export const validWelcomeToken = check('t').exists();
 export const validPassword = check('password').isLength({min: 1, max: 100}).matches(/^.+/);
 export const validMessage = check("message").isString().isLength({min: 1, max: 1000}).withMessage('message trop long');
 export const validItem = key => [valid(`${key}._id`), validQt(`${key}.quantity.qt`), validUnit(`${key}.quantity.unit`)];
-export const validId = valid(ID);
+
+export const validId = [valid(ID),sanitize(ID).customSanitizer(value => object(value))];
+
 export const validGrandeur = check(GRANDEUR).isIn(getGrandeursKeys());
 export const existingId = trunkFound(ID);
 export const existingTrunkId = trunkFound(TRUNK_ID);
@@ -61,3 +65,4 @@ export const validType = check(TYPE).optional().isIn(Object.values(trunksType));
 export const present = (...fields) => _.map(fields, field => check(field, SHOULD_BE_DEFINED).exists());
 export const validUnit = field => check(field, IS_VALID_UNIT).optional().isIn(unitsShortnames);
 export const validQt = field => check(field, IS_DECIMAL).optional().isDecimal().toFloat();
+

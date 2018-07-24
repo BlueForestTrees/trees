@@ -4,110 +4,76 @@ import {bleTrunk, farineTrunk, gateauTrunk, laitBranch, laitTrunk} from "../../d
 import {setQuantity} from "trees-test/dist/domain";
 import {clon} from "trees-test/dist/util";
 import _ from 'lodash';
+import {withIdQuantity} from "trees-test/dist/domain";
 
-export const setQuantityBranchSpec = {};
-setQuantityBranchSpec.req = {
-    body: {
-        trunk: {
-            _id: bleTrunk._id,
-            quantity: {
-                unit: "min",
-                qt: 20
-            }
-        },
-        branch: {
-            _id: farineTrunk._id,
-            quantity: {
-                unit: "kg",
-                qt: 10
+const trunk = withIdQuantity(bleTrunk._id, 20, "min");
+const branch = withIdQuantity(farineTrunk._id, 10, "kg");
+export const setQuantityBranchSpec = {
+    req: {
+        url: `/api/branch`,
+        method: "PUT",
+        body: {trunk, branch}
+    },
+    res: {
+        body: oneModifiedResponse
+    },
+    db: {
+        expected: {
+            colname: cols.BRANCH,
+            doc: {
+                ...trunk,
+                items: [branch],
             }
         }
     }
 };
-setQuantityBranchSpec.res = {
-    body: oneModifiedResponse
-};
-setQuantityBranchSpec.db = {
-    expected: {
-        colname: cols.BRANCH,
-        doc: {
-            ...setQuantityBranchSpec.req.body.trunk,
-            items: [
-                {
-                    ...setQuantityBranchSpec.req.body.branch
-                }
-            ],
 
-        }
-    }
-};
-
-export const updateQuantityBranchSpec = {};
 const updatedBranchs = clon(laitBranch.items);
 setQuantity(updatedBranchs[1], 166.66666666666666);
-
-updateQuantityBranchSpec.req = {
-    body: {
-        trunk: {
-            _id: laitTrunk._id,
-            quantity: {
-                unit: "L",
-                qt: 30
-            }
-        },
-        branch: {
-            _id: gateauTrunk._id,
-            quantity: {
-                unit: "g",
-                qt: 250
+export const updateQuantityBranchSpec = {
+    req:{
+        url:"/api/branch",
+        method:"PUT",
+        body: {
+            trunk: withIdQuantity(laitTrunk._id, 30,"L"),
+            branch: withIdQuantity(gateauTrunk._id, 250,"g")
+        }
+    },
+    res:{
+        body: oneModifiedResponse
+    },
+    db:{
+        expected: {
+            colname: cols.BRANCH,
+            doc: {
+                ...(_.omit(laitBranch, "items")),
+                items: updatedBranchs,
             }
         }
     }
 };
-updateQuantityBranchSpec.res = {
-    body: oneModifiedResponse
-};
-updateQuantityBranchSpec.db = {
-    expected: {
-        colname: cols.BRANCH,
-        doc: {
-            ...(_.omit(laitBranch, "items")),
-            items: updatedBranchs,
-        }
-    }
-};
 
-export const updateQuantityAnotherUnitBranchSpec = {};
 const updatedBranchsWithDifferentUnit = clon(laitBranch.items);
 setQuantity(updatedBranchsWithDifferentUnit[1], 1, "kg");
-
-updateQuantityAnotherUnitBranchSpec.req = {
-    body: {
-        trunk: {
-            _id: laitTrunk._id,
-            quantity: {
-                unit: "m3",
-                qt: 0.02
-            }
-        },
-        branch: {
-            _id: gateauTrunk._id,
-            quantity: {
-                unit: "kg",
-                qt: 1
-            }
+export const updateQuantityAnotherUnitBranchSpec = {
+    req:{
+        url:"/api/branch",
+        method:"PUT",
+        body: {
+            trunk: withIdQuantity(laitTrunk._id, 0.02, "m3"),
+            branch: withIdQuantity(gateauTrunk._id, 1, "kg"),
         }
-    }
-};
-updateQuantityAnotherUnitBranchSpec.res = {
-    body: oneModifiedResponse
-};
-updateQuantityAnotherUnitBranchSpec.db = {
-    expected: {
-        colname: cols.BRANCH,
-        doc: {
-            ...(_.omit(laitBranch, "items")),
-            items: updatedBranchsWithDifferentUnit,
+    },
+    res:{
+        body: oneModifiedResponse
+    },
+    db:{
+        expected: {
+            colname: cols.BRANCH,
+            doc: {
+                ...(_.omit(laitBranch, "items")),
+                items: updatedBranchsWithDifferentUnit,
+            }
         }
     }
 };

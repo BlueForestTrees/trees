@@ -22,7 +22,7 @@ export const postTrunkSpec = {
     }
 };
 
-const badTrunk = {_id: createStringObjectId() + "m", color: "#FFCC00", name: "RATtatouille1664"};
+const badTrunk = {_id: createStringObjectId()+"ee", color: "#FFCC00", name: "RATtatouille1664"};
 export const postBadIdTrunkSpec = {
     req: {
         url: "/api/trunk",

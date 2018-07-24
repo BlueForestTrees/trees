@@ -1,5 +1,5 @@
 import ENV from "../../env";
-import {MailAllreadyExistError, UnauthorizedError} from "../../exceptions/Errors";
+import {UnauthorizedError} from "../../exceptions/Errors";
 import {findUserByMail, insertNewUser, confirmUser} from "../user/userService";
 import sha1 from 'sha1';
 import jwt from "jsonwebtoken";
@@ -8,18 +8,9 @@ import {templates} from "../../const/templates";
 import {X_ACCESS_TOKEN} from "../../const/headers";
 
 export const startSuscribe = async ({mail}) => {
-    try {
-        await insertNewUser(mail);
-        await sendWelcomeMail(mail);
-        return null;
-    } catch (e) {
-        if (e.code === 11000) {
-            throw new MailAllreadyExistError(mail);
-        } else {
-            throw e;
-        }
-    }
-
+    await insertNewUser(mail);
+    await sendWelcomeMail(mail);
+    return null;
 };
 
 const sendWelcomeMail = mail => doMail({

@@ -10,7 +10,7 @@ describe('POST FacetEntry', function () {
 
     beforeEach(init(api, ENV, cols));
 
-    it('nouvelleFacetEntrySpec', withTest(postFacetEntrySpec));
+    it('add new facet entry', withTest(postFacetEntrySpec));
 
     it('allreadyExistingFacetEntrySpec', withTest(allreadyExistingFacetEntrySpec));
 

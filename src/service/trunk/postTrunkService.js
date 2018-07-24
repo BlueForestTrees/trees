@@ -14,7 +14,10 @@ export const putall = async (data) => {
     return trunks().find().toArray();
 };
 
-export const create = async trunk => trunks().insertOne({trunk, name_lower: trunk.name.toLowerCase()});
+export const create = async (trunk,req) => {
+    console.log("insertion de", trunk);
+    return trunks().insertOne({...trunk, name_lower: trunk.name.toLowerCase()});
+};
 
 const clone = async sourceId => {
     const clone = await create(_.omit(await getTrunk(sourceId), '_id'));

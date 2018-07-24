@@ -9,6 +9,8 @@ import morgan from 'morgan';
 import {dbInit} from "trees-db-version/dist";
 import {initServices} from "./services";
 import {registry} from "./db/dbRegistry";
+import {AllreadyExistError} from "./exceptions/Errors";
+import {ALLREADY_EXISTS} from "./exceptions/errorCatalog";
 
 console.log("API starting...");
 
@@ -44,6 +46,12 @@ const notFoundMiddleware = () => {
 
 const errorMiddleware = () => {
     api.use(function (err, req, res, next) {
+
+        if (err.code === 11000) {
+            err.status = 400;
+            err.body = ALLREADY_EXISTS;
+        }
+
         res.status(err.status || 500);
         let responseBody = null;
         if (err.body) {

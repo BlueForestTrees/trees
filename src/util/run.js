@@ -4,12 +4,10 @@ import {ValidationError} from "../exceptions/Errors";
 const {validationResult} = require('express-validator/check');
 const {matchedData} = require('express-validator/filter');
 
-export const run = work => (req, res, next) => {
+export const run = work => (req, res, next) =>
     Promise
         .resolve(doWork(req, res, next, work))
         .catch(err => next(err));
-
-};
 
 const doWork = async (req, res, next, work) => {
     const validationErrors = validationResult(req);

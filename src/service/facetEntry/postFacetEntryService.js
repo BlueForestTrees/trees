@@ -12,10 +12,7 @@ export const replaceAllFacetEntries = async (data) => {
     return col.find().toArray();
 };
 
-export const addFacetEntry = async facetEntry =>
-    await getFacetEntryIdByName(facetEntry.name)
-    ||
-    ({_id: (await insertEntry(facetEntry)).insertedId});
+export const addFacetEntry = entry => facetsEntry().insertOne({...entry, name_lower: entry.name.toLowerCase()});
 
 export const insertEntry = async entry => {
     entry.name_lower = entry.name.toLowerCase();

@@ -1,3 +1,4 @@
+import {withError} from "trees-test/dist/domain";
 import _ from 'lodash';
 import {vitCImpactEntry} from "../../database/impactEntries";
 import {cols} from "../../../src/const/collections";
@@ -74,6 +75,7 @@ export const allreadyExistingImpactEntrySpec = {
         }
     },
     res: {
-        code: 400
+        code: 400,
+        body: withError(1,"allready exists")
     }
 };

@@ -1,11 +1,15 @@
-import _ from 'lodash';
 import {vitCFacetEntry} from "../../database/facetEntries";
 import {cols} from "../../../src/const/collections";
+import {createStringObjectId} from "trees-test/dist/util";
+import {withError} from "trees-test/dist/domain";
 
 export const postFacetEntrySpec = {};
+let _id = createStringObjectId();
 postFacetEntrySpec.req = {
+    url:"/api/facetEntry",
+    method:"POST",
     body: {
-        _id: "152",
+        _id,
         name: "nomNewFacetEntry",
         grandeur: "Dens",
         color: "#FF0000"
@@ -15,7 +19,7 @@ postFacetEntrySpec.db = {
     expected: {
         colname: cols.FACET_ENTRY,
         doc: {
-            _id: "152",
+            _id,
             name: "nomNewFacetEntry",
             grandeur: "Dens",
             color: "#FF0000",
@@ -39,16 +43,13 @@ export const postBadGrandeurFacetEntrySpec = {
     }
 };
 
-
 export const allreadyExistingFacetEntrySpec = {
     req: {
         method: "POST",
         url: "/api/facetEntry",
-        body: {
-            ..._.omit(vitCFacetEntry, "_id")
-        }
+        body: vitCFacetEntry
     }, res: {
         code: 400,
-        bodypath: {path: "$.errors.grandeur.msg", value: "Existe Déjà"}
+        body: withError(1,"allready exists")
     }
 };

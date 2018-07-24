@@ -42,7 +42,7 @@ export const existingPostMailSpec = {
     },
     res: {
         code: 400,
-        body: withError(1,"mail allready exists")
+        body: withError(1,"allready exists")
     }
 };
 

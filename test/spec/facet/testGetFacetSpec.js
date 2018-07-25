@@ -28,7 +28,7 @@ export const getQuantifiedFacetSpec = {
     },
     res: {
         body: {
-            _id: getFacetSpec.req._id,
+            _id: bleFacets._id,
             ...withQuantity(5000, "g"),
             items: resultItems
         }

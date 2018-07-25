@@ -1,29 +1,12 @@
-import {readRootTree} from "../service/root/rootQueries";
 import _ from 'lodash';
-import {loadDenseQuantifiedImpacts} from "./getImpactTopService";
 import {flatten, listify, summify} from "../util/calculations";
-import {peekImpactEntries} from "../service/impactEntry/getImpactEntryService";
+import {readRootTree} from "../service/root/rootService";
+import {loadDenseQuantifiedImpacts} from "../service/impact/getImpactService";
 
-export const getImpactTank = async (qt, unit, _id) => {
-    const tree = await readRootTree(qt, unit, _id);
-    const treeNodes = listify(tree);
-    const impacts = await Promise.all(_.map(treeNodes, loadDenseQuantifiedImpacts));
-    const tank = {
+export const getImpactTank = async (qt, unit, _id) => (
+    {
         _id,
         quantity: {qt, unit},
-        items: summify(flatten(impacts))
-    };
-
-    await addImpactInfos(tank);
-
-    return tank;
-};
-
-const addImpactInfos = async impact => {
-    const names = await peekImpactEntries(_.map(impact.items, "_id"));
-    _.forEach(names, e => {
-        _.find(impact.items, {_id: e._id}).name = e.name;
-        _.find(impact.items, {_id: e._id}).color = e.color;
-    });
-    return impact;
-};
+        items: summify(flatten(await Promise.all(_.map(listify(await readRootTree(qt, unit, _id)), loadDenseQuantifiedImpacts))))
+    }
+);

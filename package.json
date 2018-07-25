@@ -4,7 +4,7 @@
     "build": "rimraf dist && babel src --out-dir dist/trees-api/js && copyfiles -u 1 templates/* dist/etc/trees-api/templates",
     "dev-api": "node --version && cross-env DB_UPGRADE=LAST MAIL_CONFIG_PATH=../secured/trees-api nodemon src/index.js --exec babel-node",
     "test-api": "cross-env NODE_ENV=test PORT=9000 MAIL_CONFIG_PATH=../secured/trees-api mocha --recursive --require babel-register --exit \"test/**/*.js\"",
-    "test-init-db": "cross-env NODE_ENV=test MAIL_CONFIG_PATH=../secured/trees-api mocha --exit src/test/scenarios/tu/testInitDb.js --require babel-register",
+    "test-init-db": "cross-env NODE_ENV=test MAIL_CONFIG_PATH=../secured/trees-api mocha --exit test/scenarios/tu/testInitDb.js --require babel-register",
     "upgrade-db": "yarn upgrade -L trees-db",
     "yarn": "yarn"
   },
@@ -43,6 +43,7 @@
     "fs-readdir-recursive": "^1.1.0",
     "handlebars": "^4.0.11",
     "jsonwebtoken": "^8.3.0",
+    "localforage": "^1.7.2",
     "lodash": "^4.17.10",
     "morgan": "^1.9.0",
     "nested-error-stacks": "^2.0.0",

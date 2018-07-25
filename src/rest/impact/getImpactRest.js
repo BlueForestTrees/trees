@@ -1,9 +1,8 @@
 import {validId, validQt, validUnit} from "../../const/validations";
-import {loadImpact} from "../../topService/getImpactTopService";
-import {loadQuantifiedImpacts} from "../../topService/getImpactTopService";
 import {QT, UNIT} from "../../const/paths";
 
 import {run} from '../../util/run'
+import {loadImpact, loadQuantifiedImpacts} from "../../service/impact/getImpactService";
 const router = require('express').Router();
 
 module.exports = router;

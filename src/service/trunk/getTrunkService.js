@@ -11,7 +11,10 @@ const getFields = {name_lower: 0};
 const searchMixin = {color: 1, name: 1, grandeur: 1, quantity: 1, type: 1};
 
 export const peekTrunk = _id => trunks().findOne(withId(_id), peekFields);
-export const getTrunk = _id => trunks().findOne(withId(_id), getFields);
+export const getTrunk = _id => trunks().findOne({_id}, getFields);
+export const getTrunks = _ids => {
+    return _ids;
+};
 export const getQuantifiedTrunk = async (qt, unit, _id) => ({...await getTrunk(_id), quantity: {qt, unit}});
 
 export const search = (name, type) => trunks()
@@ -30,13 +33,3 @@ const prepareQuery = (name, type) => {
     debug("query", query);
     return query;
 };
-
-export const appendTrunkInfos = items => Promise.all(
-    _.map(items, item => peekTrunk(item._id)
-        .then(t => ({
-            ...item,
-            name: (t && t.name) || "inconnu",
-            color: (t && t.color) || "#B6B6B6"
-        }))
-    )
-);

@@ -42,7 +42,6 @@ export const existingBranchPostSpec = {
             doc: {
                 _id: bleTrunk._id,
                 items: [{_id: farineTrunk._id}],
-
             }
         }
     }

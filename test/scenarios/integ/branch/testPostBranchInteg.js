@@ -10,7 +10,7 @@ describe('POST Branch', function () {
 
     beforeEach(init(api, ENV, cols));
 
-    it('newBranch', run(() => withTest(newBranchSpec)));
+    it('newBranch', withTest(newBranchSpec));
 
-    it('existing branch', run(() => withTest(existingBranchPostSpec)));
+    it('existing branch', withTest(existingBranchPostSpec));
 });

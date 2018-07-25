@@ -11,7 +11,7 @@ export const getBananeRootSpec = {
         url: `/api/root/1/count/${bananeBC._id}`
     },
     res: {
-        bodypath: {path: `$.items[?(@.name==="${transport.name}")].relativeTo`, value: banane._id}
+        bodypath: {path: `$.items[?(@._id==="${transport._id}")].relativeTo`, value: banane._id}
     }
 };
 

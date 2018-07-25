@@ -1,13 +1,11 @@
 import {BRANCH_ID, COLOR, FACET_ID, GRANDEUR, ID, IMPACT_ID, NAME, ROOT_ID, ROOT_RELATIVE_TO, ROOT_RELATIVE_TO_DISQT, ROOT_RELATIVE_TO_DISQT_QT, ROOT_RELATIVE_TO_DISQT_UNIT, ROOT_RELATIVE_TO_ID, ROOT_RELATIVE_TO_REFQT, ROOT_RELATIVE_TO_REFQT_QT, ROOT_RELATIVE_TO_REFQT_UNIT, ROOTID, SOURCE_ID, TRUNK_ID, TRUNKID, TYPE} from "./paths";
 import {IS_DECIMAL, IS_NOT_RIGHT_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "./messages";
 import {check, body, oneOf} from 'express-validator/check';
-import {sanitize} from 'express-validator/filter';
 import _ from 'lodash';
 import {getGrandeursKeys, getShortnames} from "trees-units";
 import {peekTrunk} from "../service/trunk/getTrunkService";
 import {trunksType} from "./trunks";
-import {object} from "trees-query";
-import mongo from 'mongodb';
+import {isValidIds, objectNoEx, objectsNoEx} from "trees-query";
 
 const unitsShortnames = getShortnames();
 
@@ -29,16 +27,27 @@ export const validItem = key => [valid(`${key}._id`), validQt(`${key}.quantity.q
 
 export const validId = check("_id").exists().withMessage("missing")
     .isMongoId().withMessage("invalid")
-    .customSanitizer(id => {
-        try{
-            return new mongo.ObjectID(id);
-        }catch(e){
-            return "BAD_ID";
+    .customSanitizer(objectNoEx);
+
+export const validIds = check("_ids").exists().withMessage("missing")
+    .custom(_ids => {
+        console.log("validation!!!");
+        if (!Array.isArray(_ids)) {
+            _ids = [_ids];
+        }
+        return isValidIds(_ids);
+    })
+    .withMessage("invalid")
+    .customSanitizer(_ids => {
+        console.log("sanitization!!!");
+        if (Array.isArray(_ids)) {
+            return objectsNoEx(_ids);
+        } else {
+            return [objectNoEx(_ids)];
         }
     });
 
 export const validGrandeur = check(GRANDEUR).isIn(getGrandeursKeys());
-export const existingId = trunkFound(ID);
 export const existingTrunkId = trunkFound(TRUNK_ID);
 export const existingBranchId = trunkFound(BRANCH_ID);
 export const existingRootId = trunkFound(ROOT_ID);

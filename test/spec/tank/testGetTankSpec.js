@@ -16,14 +16,14 @@ export const lettreTankSpec = {
             ...withQuantity(500, "g"),
             items: [
                 {
-                    ..._.pick(e2Trunk, ['_id', 'name', 'color']),
+                    ..._.pick(e2Trunk, ['_id']),
                     "quantity": {
                         "qt": 2500,
                         "unit": "g",
                     }
                 },
                 {
-                    ..._.pick(e1Trunk, ['_id', 'name', 'color']),
+                    ..._.pick(e1Trunk, ['_id']),
                     "quantity": {
                         "qt": 0.255,
                         "unit": "m3"
@@ -52,17 +52,17 @@ export const avecUneQtManquanteTankSpec = {
             ...withQuantity(500, "g"),
             items: [
                 {
-                    ..._.pick(e2Trunk, ['_id', 'name', 'color']),
+                    ..._.pick(e2Trunk, ['_id']),
                     "quantity": {
                         "qt": 2000,
                         "unit": "g",
                     }
                 },
                 {
-                    ..._.pick(daTrunk, ['_id', 'name', 'color']),
+                    ..._.pick(daTrunk, ['_id']),
                 },
                 {
-                    ..._.pick(e1Trunk, ['_id', 'name', 'color']),
+                    ..._.pick(e1Trunk, ['_id']),
                     "quantity": {
                         "qt": 0.255,
                         "unit": "m3"
@@ -93,17 +93,17 @@ export const avecUneQtManquanteTankSpec2 = {
             ...withQuantity(500, "g"),
             items: [
                 {
-                    ..._.pick(e2Trunk, ['_id', 'name', 'color']),
+                    ..._.pick(e2Trunk, ['_id']),
                     "quantity": {
                         "qt": 1500,
                         "unit": "g",
                     }
                 },
                 {
-                    ..._.pick(dbTrunk, ['_id', 'name', 'color']),
+                    ..._.pick(dbTrunk, ['_id']),
                 },
                 {
-                    ..._.pick(e1Trunk, ['_id', 'name', 'color']),
+                    ..._.pick(e1Trunk, ['_id']),
                     "quantity": {
                         "qt": 0.255,
                         "unit": "m3"
@@ -148,35 +148,35 @@ export const linkAToSkateThenTank = [
                 ...withQuantity(10, "count"),
                 items: [
                     {
-                        ..._.pick(eauTrunk, ['_id', 'name', 'color']),
+                        ..._.pick(eauTrunk, ['_id']),
                         "quantity": {
                             "qt": 0.01006,
                             "unit": "m3"
                         }
                     },
                     {
-                        ..._.pick(elecTrunk, ['_id', 'name', 'color']),
+                        ..._.pick(elecTrunk, ['_id']),
                         "quantity": {
                             "qt": 86813397.216,
                             "unit": "cal"
                         }
                     },
                     {
-                        ..._.pick(arbreTrunk, ['_id', 'name', 'color']),
+                        ..._.pick(arbreTrunk, ['_id']),
                         "quantity": {
                             "qt": 0.005,
                             "unit": "count",
                         }
                     },
                     {
-                        ..._.pick(e2Trunk, ['_id', 'name', 'color']),
+                        ..._.pick(e2Trunk, ['_id']),
                         "quantity": {
                             "qt": 5000,
                             "unit": "g",
                         }
                     },
                     {
-                        ..._.pick(e1Trunk, ['_id', 'name', 'color']),
+                        ..._.pick(e1Trunk, ['_id']),
                         "quantity": {
                             "qt": 0.51,
                             "unit": "m3"

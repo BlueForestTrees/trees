@@ -1,9 +1,8 @@
 import {validId, validQt, validUnit} from "../../const/validations";
-import {loadNamedQuantifiedRoot, loadNamedUnquantifiedRoot} from "../../topService/getRootTopService";
 import {QT, UNIT} from "../../const/paths";
-import {readRootTree} from "../../service/root/rootQueries";
 
 import {run} from '../../util/run'
+import {loadNamedQuantifiedRoot, loadNamedUnquantifiedRoot, readRootTree} from "../../service/root/rootService";
 const router = require('express').Router();
 
 module.exports = router;

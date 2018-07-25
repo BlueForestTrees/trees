@@ -1,8 +1,8 @@
 import {validId, validQt, validUnit} from "../../const/validations";
-import {loadFacet, loadQuantifiedFacets} from "../../topService/getFacetTopService";
 import {QT, UNIT} from "../../const/paths";
 
 import {run} from '../../util/run'
+import {loadFacet, loadQuantifiedFacets} from "../../service/facet/getFacetService";
 const router = require('express').Router();
 
 module.exports = router;

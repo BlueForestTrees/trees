@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import {withError, withValidationError} from "trees-test/dist/domain";
 import {clon} from "trees-test/dist/util";
-import {withoutQuantity, withQtCoef} from "trees-test/dist/domain";
+import {withoutQuantity, withQtCoef, withIds} from "trees-test/dist/domain";
 
 import {farineBranch, laitBranch, pizzaTrunk} from "../../database/gateau";
 

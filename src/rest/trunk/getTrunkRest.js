@@ -1,5 +1,5 @@
-import {existingId, validId, validQ, validQt, validT, validUnit} from "../../const/validations";
-import {getQuantifiedTrunk, getTrunk, search} from "../../service/trunk/getTrunkService";
+import {validId, validIds, validQ, validQt, validT, validUnit} from "../../const/validations";
+import {getQuantifiedTrunk, getTrunk, getTrunks, search} from "../../service/trunk/getTrunkService";
 
 import {run} from '../../util/run'
 import {QT, UNIT} from "../../const/paths";
@@ -16,8 +16,13 @@ router.get('/api/trunks',
 );
 
 router.get('/api/trunk/:_id',
-    existingId,
+    validId,
     run(({_id}) => getTrunk(_id))
+);
+
+router.get('/api/trunk',
+    validIds,
+    run(({_ids}) => getTrunks(_ids))
 );
 
 router.get('/api/trunk/:qt/:unit/:_id',

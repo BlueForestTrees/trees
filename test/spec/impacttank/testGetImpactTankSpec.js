@@ -14,7 +14,7 @@ export const papierAImpactTankSpec = {
             _id: papierVA._id,
             quantity: papierVA.quantity,
             items: [{
-                ..._.pick(co2eImpactEntry, ['_id', 'name', 'color']),
+                ..._.pick(co2eImpactEntry, ['_id']),
                 ...withQuantity(11696000, "g")
             }]
         }
@@ -30,14 +30,14 @@ export const gateauImpactTankSpec = {
             _id: gateauTrunk._id,
             quantity: gateauItem.quantity,
             items: [{
-                ..._.pick(vitCImpactEntry, ['_id', 'name', 'color']),
+                ..._.pick(vitCImpactEntry, ['_id']),
                 "quantity": {
                     "qt": 10,
                     "unit": "mol"
                 }
             },
                 {
-                    ..._.pick(vitBImpactEntry, ['_id', 'name', 'color']),
+                    ..._.pick(vitBImpactEntry, ['_id']),
                     "quantity": {
                         "qt": 0.1,
                         "unit": "mol"

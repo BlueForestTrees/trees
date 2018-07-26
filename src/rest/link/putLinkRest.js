@@ -3,7 +3,7 @@ import {validRootId, validTrunkId, present, rootIdIsNotTrunkId, validQt, validRe
 import {upsertLink} from "../../topService/linkTopService";
 
 import {run} from '../../util/run'
-const router = require('express').Router();
+import {Router} from "express"; const router = Router();
 
 module.exports = router;
 

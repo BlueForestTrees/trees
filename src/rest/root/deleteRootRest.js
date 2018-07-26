@@ -1,11 +1,11 @@
 import {run} from '../../util/run'
-import express from "express";
+import {Router} from "express";
 import {valid} from "../../const/validations";
 import configure from "trees-items-service";
 import {cols} from "../../const/collections";
 import {col} from "trees-db-version/dist";
 
-const router = express.Router();
+const router = Router();
 
 const deleteRoot = configure(() => col(cols.ROOT)).removeItem;
 module.exports = router;

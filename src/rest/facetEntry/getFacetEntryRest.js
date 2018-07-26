@@ -1,7 +1,7 @@
 import {getAllFacetEntries, getFacetEntryByName, searchFacetEntriesByNamepart} from "../../service/facetEntry/getFacetEntryService";
 
 import {run} from '../../util/run'
-const router = require('express').Router();
+import {Router} from "express"; const router = Router();
 const {check} = require('express-validator/check');
 
 module.exports = router;

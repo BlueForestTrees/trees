@@ -2,8 +2,8 @@ import {validId} from "../../const/validations";
 import {remove} from "../../service/trunk/deleteTrunkService";
 
 import {run} from '../../util/run'
-import express from 'express';
-const router = express.Router();
+import {Router} from "express";
+const router = Router();
 
 module.exports = router;
 

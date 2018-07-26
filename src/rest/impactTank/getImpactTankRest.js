@@ -3,7 +3,7 @@ import {QT, UNIT} from "../../const/paths";
 import {getImpactTank} from "../../topService/getImpactTankTopService";
 
 import {run} from '../../util/run'
-const router = require('express').Router();
+import {Router} from "express"; const router = Router();
 
 module.exports = router;
 

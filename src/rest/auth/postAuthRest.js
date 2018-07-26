@@ -1,7 +1,8 @@
 import {run} from '../../util/run'
 import {validPassword, validMail, validWelcomeToken, validFullname} from "../../const/validations";
 import {authenticate, confirmSuscribe, startSuscribe} from "../../service/auth/authService";
-const router = require('express').Router();
+import {Router} from "express";
+const router = Router();
 
 module.exports = router;
 

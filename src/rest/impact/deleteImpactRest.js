@@ -3,8 +3,8 @@ import {col} from "trees-db-version/dist";
 import configure from "trees-items-service";
 
 import {run} from '../../util/run'
-import express from 'express';
-const router = express.Router();
+import {Router} from "express";
+const router = Router();
 const {check} = require('express-validator/check');
 
 const deleteImpacts = configure(() => col(cols.IMPACT)).deleteItems;

@@ -2,9 +2,9 @@ import {valid} from "../../const/validations";
 import {removeLink} from "../../topService/linkTopService";
 import {run} from '../../util/run'
 
-import express from 'express';
+import {Router} from "express";
 
-const router = express.Router();
+const router = Router();
 
 module.exports = router;
 

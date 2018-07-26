@@ -1,7 +1,7 @@
 import {getGrandeurs} from "trees-units";
 
-import express from 'express';
-const router = express.Router();
+import {Router} from "express";
+const router = Router();
 import {run} from '../../util/run'
 
 router.get('/api/grandeurs',

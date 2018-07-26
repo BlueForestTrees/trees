@@ -1,11 +1,11 @@
 import {run} from '../../util/run'
-import express from "express";
+import {Router} from "express";
 import {facetIdIsNotTrunkId, validItem} from "../../const/validations";
 import {cols} from "../../const/collections";
 import {col} from "trees-db-version/dist";
 import configure from "trees-items-service";
 
-const router = express.Router();
+const router = Router();
 const insertFacet = configure(() => col(cols.FACET)).upsertItem;
 
 module.exports = router;

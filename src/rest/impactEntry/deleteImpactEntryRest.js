@@ -1,8 +1,8 @@
 import {purgeImpactsEntries} from "../../service/impactEntry/deleteImpactEntriesService";
 
 import {run} from '../../util/run'
-import express from 'express';
-const router = express.Router();
+import {Router} from "express";
+const router = Router();
 
 module.exports = router;
 

@@ -2,7 +2,7 @@ import {valid} from "../../const/validations";
 import {removeLink} from "../../topService/linkTopService";
 import {run} from '../../util/run'
 
-import {Router} from "express";
+import {Router} from "trees-express";
 
 const router = Router();
 

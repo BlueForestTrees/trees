@@ -4,7 +4,7 @@ import {col} from "trees-db-version/dist";
 import configure from "trees-items-service";
 
 import {run} from '../../util/run'
-const router = require("express").Router();
+const router = require("trees-express").Router();
 
 const deleteBranch = configure(() => col(cols.BRANCH)).removeItem;
 

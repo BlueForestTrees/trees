@@ -3,7 +3,7 @@ import {QT, UNIT} from "../../const/paths";
 import {getImpactTank} from "../../topService/getImpactTankTopService";
 
 import {run} from '../../util/run'
-import {Router} from "express"; const router = Router();
+import {Router} from "trees-express"; const router = Router();
 
 module.exports = router;
 

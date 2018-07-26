@@ -1,4 +1,4 @@
-import {Router} from "express";
+import {Router} from "trees-express";
 import {run} from '../../util/run';
 import {cols} from "../../const/collections";
 import {col} from "trees-db-version/dist";

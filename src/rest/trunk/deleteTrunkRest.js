@@ -2,7 +2,7 @@ import {validId} from "../../const/validations";
 import {remove} from "../../service/trunk/deleteTrunkService";
 
 import {run} from '../../util/run'
-import {Router} from "express";
+import {Router} from "trees-express";
 const router = Router();
 
 module.exports = router;

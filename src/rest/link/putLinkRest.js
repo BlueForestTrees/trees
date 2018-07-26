@@ -3,7 +3,7 @@ import {validRootId, validTrunkId, present, rootIdIsNotTrunkId, validQt, validRe
 import {upsertLink} from "../../topService/linkTopService";
 
 import {run} from '../../util/run'
-import {Router} from "express"; const router = Router();
+import {Router} from "trees-express"; const router = Router();
 
 module.exports = router;
 

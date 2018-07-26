@@ -1,7 +1,7 @@
 import {run} from '../../util/run'
 import {validPassword, validMail, validWelcomeToken, validFullname} from "../../const/validations";
 import {authenticate, confirmSuscribe, startSuscribe} from "../../service/auth/authService";
-import {Router} from "express";
+import {Router} from "trees-express";
 const router = Router();
 
 module.exports = router;

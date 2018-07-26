@@ -5,7 +5,7 @@ import {SHOULD_BE_DEFINED, SHOULD_NOT_BE_DEFINED} from "../../const/messages";
 const {oneOf} = require('express-validator/check');
 
 import {run} from '../../util/run'
-import {Router} from "express"; const router = Router();
+import {Router} from "trees-express"; const router = Router();
 const {check} = require('express-validator/check');
 const trunks = require('../../service/trunk/putTrunkService');
 

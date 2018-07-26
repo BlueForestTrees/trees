@@ -3,7 +3,7 @@ import {col} from "trees-db-version/dist";
 import configure from "trees-items-service";
 
 import {run} from '../../util/run'
-import {Router} from 'express';
+import {Router} from "trees-express";
 const router = Router();
 const {check} = require('express-validator/check');
 

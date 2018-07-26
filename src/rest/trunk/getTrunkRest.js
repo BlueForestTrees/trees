@@ -4,7 +4,7 @@ import {getQuantifiedTrunk, getTrunk, getTrunks, search} from "../../service/tru
 import {run} from '../../util/run'
 import {QT, UNIT} from "../../const/paths";
 
-import {Router} from "express"; const router = Router();
+import {Router} from "trees-express"; const router = Router();
 const {check} = require('express-validator/check');
 
 module.exports = router;

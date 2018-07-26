@@ -6,7 +6,7 @@ import configure from "trees-items-service";
 import {cols} from "../../const/collections";
 
 import {run} from '../../util/run'
-import {Router} from "express"; const router = Router();
+import {Router} from "trees-express"; const router = Router();
 
 const upsertRoot = configure(() => col(cols.ROOT)).upsertItem;
 

@@ -4,7 +4,7 @@ import {cols} from "../../const/collections";
 import {col} from "trees-db-version/dist";
 
 import {run} from '../../util/run'
-import {Router} from "express"; const router = Router();
+import {Router} from "trees-express"; const router = Router();
 
 const insertBranch = configure(() => col(cols.BRANCH)).insertItem;
 

@@ -1,5 +1,5 @@
 import {run} from '../../util/run'
-import {Router} from "express";
+import {Router} from "trees-express";
 import {valid} from "../../const/validations";
 import configure from "trees-items-service";
 import {cols} from "../../const/collections";

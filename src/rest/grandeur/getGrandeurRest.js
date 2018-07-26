@@ -1,6 +1,6 @@
 import {getGrandeurs} from "trees-units";
 
-import {Router} from "express";
+import {Router} from "trees-express";
 const router = Router();
 import {run} from '../../util/run'
 

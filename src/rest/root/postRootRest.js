@@ -1,6 +1,6 @@
 import {run} from '../../util/run'
 import express from "express";
-import {existingRootId, existingTrunkId, rootIdIsNotTrunkId} from "../../const/validations";
+import {validRootId, validTrunkId, rootIdIsNotTrunkId} from "../../const/validations";
 import {cols} from "../../const/collections";
 import {col} from "trees-db-version/dist";
 import configure from "trees-items-service";
@@ -11,8 +11,8 @@ const insertRoot = configure(() => col(cols.ROOT)).insertItem;
 module.exports = router;
 
 router.post('/api/root',
-    existingTrunkId,
-    existingRootId,
+    validTrunkId,
+    validRootId,
     rootIdIsNotTrunkId,
     run(({trunk, root}) => insertRoot(trunk, root))
 );

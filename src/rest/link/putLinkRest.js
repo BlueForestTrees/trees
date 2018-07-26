@@ -1,5 +1,5 @@
 import {ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT} from "../../const/paths";
-import {existingRootId, existingTrunkId, present, rootIdIsNotTrunkId, validQt, validRelativeTo, validUnit} from "../../const/validations";
+import {validRootId, validTrunkId, present, rootIdIsNotTrunkId, validQt, validRelativeTo, validUnit} from "../../const/validations";
 import {upsertLink} from "../../topService/linkTopService";
 
 import {run} from '../../util/run'
@@ -15,8 +15,8 @@ const cleanUpsert = ({trunk, root}) => {
 };
 
 router.put('/api/link',
-    existingTrunkId,
-    existingRootId,
+    validTrunkId,
+    validRootId,
     validRelativeTo,
     rootIdIsNotTrunkId,
     present(ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT),

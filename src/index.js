@@ -47,8 +47,6 @@ const notFoundMiddleware = () => {
 const errorMiddleware = () => {
     api.use(function (err, req, res, next) {
 
-        console.error(err);
-
         if (err.code === 11000) {
             err.status = 400;
             err.body = ALLREADY_EXISTS;

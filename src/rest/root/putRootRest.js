@@ -1,6 +1,6 @@
 import {col} from "trees-db-version/dist";
 import {ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT} from "../../const/paths";
-import {existingRootId, existingTrunkId, present, rootIdIsNotTrunkId, validRelativeTo} from "../../const/validations";
+import {validRootId, validTrunkId, present, rootIdIsNotTrunkId, validRelativeTo} from "../../const/validations";
 
 import configure from "trees-items-service";
 import {cols} from "../../const/collections";
@@ -13,8 +13,8 @@ const upsertRoot = configure(() => col(cols.ROOT)).upsertItem;
 module.exports = router;
 
 router.put('/api/root',
-    existingTrunkId,
-    existingRootId,
+    validTrunkId,
+    validRootId,
     validRelativeTo,
     rootIdIsNotTrunkId,
     present(ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT),

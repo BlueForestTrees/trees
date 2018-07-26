@@ -5,6 +5,35 @@ import {baaTrunk, e1Trunk, e2Trunk} from "../../database/lettres";
 import {notInSearchMixin} from "trees-test/dist/domain";
 import {bateauTrunk, voitureTrunk} from "../../database/transports";
 
+export const getManyTrunkSpec = {
+    req: {
+        url: `/api/trunk?_ids=${skateTrunk._id}`,
+    },
+    res: {
+        body: [omit(skateTrunk, notInSearchMixin)]
+    }
+};
+
+export const getManyTrunkSpec2 = {
+    req: {
+        url: `/api/trunk?_ids=${skateTrunk._id}&_ids=${e1Trunk._id}`,
+    },
+    res: {
+        body: [omit(skateTrunk, notInSearchMixin),omit(e1Trunk, notInSearchMixin)]
+    }
+};
+
+
+export const badIdGetManyTrunkSpec = {
+    req: {
+        url: `/api/trunk?_ids=blabla`,
+    },
+    res: {
+        code: 400,
+        bodypath: {path: "$.errorCode", value: 2}
+    }
+};
+
 export const searchTrunkSpec = {
     req: {
         url:`/api/trunks?q=${skateTrunk.name.substring(0, 3)}`,

@@ -3,9 +3,9 @@ import {IS_DECIMAL, IS_NOT_RIGHT_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "./m
 import {check, body, oneOf} from 'express-validator/check';
 import _ from 'lodash';
 import {getGrandeursKeys, getShortnames} from "trees-units";
-import {peekTrunk} from "../service/trunk/getTrunkService";
 import {trunksType} from "./trunks";
-import {isValidIds, objectNoEx, objectsNoEx} from "trees-query";
+import {isValidIds, objectNoEx, objects} from "trees-query";
+import {ValidationError} from "../exceptions/Errors";
 
 const unitsShortnames = getShortnames();
 
@@ -16,7 +16,6 @@ export const valid = (field, optional) => {
     return chain.exists().withMessage("missing")
         .isMongoId().withMessage("invalid");
 };
-const trunkFound = (field, optional) => valid(field, optional).custom(peekTrunk).withMessage("not found");
 
 export const validFullname = check('fullname').isLength({min: 1, max: 100}).matches(/^.+/);
 export const validMail = check("mail").isEmail().normalizeEmail().withMessage('mail invalid');
@@ -25,32 +24,27 @@ export const validPassword = check('password').isLength({min: 1, max: 100}).matc
 export const validMessage = check("message").isString().isLength({min: 1, max: 1000}).withMessage('message trop long');
 export const validItem = key => [valid(`${key}._id`), validQt(`${key}.quantity.qt`), validUnit(`${key}.quantity.unit`)];
 
-export const validId = check("_id").exists().withMessage("missing")
-    .isMongoId().withMessage("invalid")
-    .customSanitizer(objectNoEx);
-
-export const validIds = check("_ids").exists().withMessage("missing")
-    .custom(_ids => {
-        console.log("validation!!!");
-        if (!Array.isArray(_ids)) {
-            _ids = [_ids];
-        }
-        return isValidIds(_ids);
-    })
-    .withMessage("invalid")
-    .customSanitizer(_ids => {
-        console.log("sanitization!!!");
-        if (Array.isArray(_ids)) {
-            return objectsNoEx(_ids);
-        } else {
-            return [objectNoEx(_ids)];
-        }
-    });
+export const validIds = (req, res, next) => {
+    check("_ids").exists()(req, res, next);
+    let _ids = req.query._ids;
+    if (!_ids) {
+        throw new ValidationError("_ids query params is missing");
+    }
+    if (!isValidIds(_ids)) {
+        throw new ValidationError("_ids query params are invalid");
+    }
+    req.query._ids = objects(_ids);
+};
 
 export const validGrandeur = check(GRANDEUR).isIn(getGrandeursKeys());
-export const existingTrunkId = trunkFound(TRUNK_ID);
-export const existingBranchId = trunkFound(BRANCH_ID);
-export const existingRootId = trunkFound(ROOT_ID);
+
+const validMongoId = field => check(field).exists().withMessage("missing")
+    .isMongoId().withMessage("invalid")
+    .customSanitizer(objectNoEx);
+export const validBranchId = validMongoId(BRANCH_ID);
+export const validRootId = validMongoId(ROOT_ID);
+export const validTrunkId = validMongoId(TRUNK_ID);
+export const validId = validMongoId(ID);
 
 export const noRelativeTo = check(ROOT_RELATIVE_TO).not().exists();
 

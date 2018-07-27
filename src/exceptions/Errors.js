@@ -1,6 +1,6 @@
 import {inherits} from 'util';
 import NestedError from 'nested-error-stacks';
-import {ALLREADY_EXISTS, UNIT_MISMATCH_ERROR, VALIDATION_ERROR} from "./errorCatalog";
+import {UNIT_MISMATCH_ERROR} from "./errorCatalog";
 
 export class GrandeurMismatchError extends Error {
     constructor(leftShortname, rightShortname) {
@@ -21,15 +21,6 @@ export function UnitInvalidError(message, nested) {
 }
 inherits(UnitInvalidError, NestedError);
 UnitInvalidError.prototype.name = 'UnitInvalidError';
-
-
-export function ValidationError(errors, nested) {
-    NestedError.call(this, "Validation Error", nested);
-    this.status = 400;
-    this.body = VALIDATION_ERROR(errors);
-}
-inherits(ValidationError, NestedError);
-ValidationError.prototype.name = 'ValidationError';
 
 
 export function UnauthorizedError(nested) {

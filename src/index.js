@@ -1,4 +1,3 @@
-import {debug} from "trees-test/dist/util";
 import ENV from "./env";
 import {dbInit} from "trees-db-version/dist";
 import {initServices} from "./services";

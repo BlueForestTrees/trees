@@ -5,7 +5,7 @@ import _ from 'lodash';
 import {getGrandeursKeys, getShortnames} from "trees-units";
 import {trunksType} from "./trunks";
 import {isValidIds, objectNoEx, objects} from "trees-query";
-import {ValidationError} from "../exceptions/Errors";
+import {errors} from "trees-express";
 
 const unitsShortnames = getShortnames();
 
@@ -28,10 +28,10 @@ export const validIds = (req, res, next) => {
     check("_ids").exists()(req, res, next);
     let _ids = req.query._ids;
     if (!_ids) {
-        throw new ValidationError("_ids query params is missing");
+        throw new errors.ValidationError("_ids query params is missing");
     }
     if (!isValidIds(_ids)) {
-        throw new ValidationError("_ids query params are invalid");
+        throw new errors.ValidationError("_ids query params are invalid");
     }
     req.query._ids = objects(_ids);
 };
@@ -72,7 +72,7 @@ export const validName = check(NAME).isLength({min: 2}).matches(/^.+/);
 export const validColor = check(COLOR).isLength({min: 2}).matches(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/);
 export const validQ = check('q').optional().exists();
 export const validT = check("t").optional().isIn(Object.values(trunksType));
-export const validType = check(TYPE).optional().isIn(Object.values(trunksType));
+export const optionalValidType = check(TYPE).optional().isIn(Object.values(trunksType));
 
 export const present = (...fields) => _.map(fields, field => check(field, SHOULD_BE_DEFINED).exists());
 export const validUnit = field => check(field, IS_VALID_UNIT).optional().isIn(unitsShortnames);

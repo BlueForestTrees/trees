@@ -1,4 +1,4 @@
-import {error} from "trees-express";
+import {errors} from "trees-express";
 
-export const ALLREADY_EXISTS = error(1, "allready exists");
-export const UNIT_MISMATCH_ERROR = (left, right) => error(3, `Units mismatch: '${left}' and '${right}'`);
+export const ALLREADY_EXISTS = errors.error(1, "allready exists");
+export const UNIT_MISMATCH_ERROR = (left, right) => errors.error(3, `Units mismatch: '${left}' and '${right}'`);

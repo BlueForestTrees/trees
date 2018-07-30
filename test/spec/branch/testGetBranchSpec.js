@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import {withError, withValidationError} from "trees-test/dist/domain";
 import {clon} from "trees-test/dist/util";
-import {withoutQuantity, withQtCoef, withIds} from "trees-test/dist/domain";
+import {withoutQuantity, withQtCoef} from "trees-test/dist/domain";
+import {withTrunkInfos} from "trees-test/dist/db";
 
 import {farineBranch, laitBranch, pizzaTrunk} from "../../database/gateau";
 
@@ -12,7 +13,7 @@ export const getBranchsSpec = {
     res: {
         body: {
             ..._.omit(farineBranch, ["items", "quantity"]),
-            items: withoutQuantity(clon(farineBranch.items))
+            items: withoutQuantity(clon(farineBranch.items)),
         }
     }
 };
@@ -55,22 +56,6 @@ export const farine1000GGetBranchSpec = {
     }
 };
 
-
-// export const skate10GetBranchSpec = {};
-// const skate10 = clon(skateBranch);
-// withNames(skate10.items);
-// withDoubleQt([skate10]);
-// withDoubleQt(skate10.items);
-// skate10GetBranchSpec.req = {
-//     qt: skate10.quantity.qt,
-//     unit: skate10.quantity.unit,
-//     _id: skate10._id
-// };
-// skate10GetBranchSpec.res = {
-//     body: {
-//         ...skate10
-//     }
-// };
 const farineBranch1Kg = clon(farineBranch);
 farineBranch1Kg.quantity.qt = 1;
 farineBranch1Kg.quantity.unit = "kg";

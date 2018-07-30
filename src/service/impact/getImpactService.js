@@ -5,10 +5,10 @@ import {isNil} from 'lodash';
 import {removeQuantity} from "trees-query";
 import {applyQuantity} from "../../util/calculations";
 
-const impacts = () => col(cols.IMPACT);
+const collection = () => col(cols.IMPACT);
 
 export const getImpact = _id =>
-    impacts()
+    collection()
         .findOne(withId(_id))
         .then(impact => isNil(impact) ? emptyGroup(_id) : impact);
 

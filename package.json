@@ -9,7 +9,7 @@
     "yarn": "yarn"
   },
   "env": "api",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -37,6 +37,7 @@
     "cookie-parser": "~1.4.3",
     "cross-env": "^5.2.0",
     "debug": "~2.6.9",
+    "exceljs": "^1.5.1",
     "express-validator": "^5.3.0",
     "fraction.js": "^4.0.4",
     "fs-readdir-recursive": "^1.1.0",

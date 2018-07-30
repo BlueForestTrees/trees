@@ -37,5 +37,10 @@ export const registry = [
             clearpassword: "tirlititi",
             color: "#1565c0"
         })
+    },
+    {
+        version: "0.0.3",
+        log: "Impact entry unique by externId",
+        script: () => col(cols.IMPACT_ENTRY).createIndex({"externId": 1}, {unique: true, partialFilterExpression: {externId: {$exists: true}}})
     }
 ]

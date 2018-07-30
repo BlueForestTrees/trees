@@ -5,7 +5,7 @@ import {validRootId, validTrunkId, present, rootIdIsNotTrunkId, validRelativeTo}
 import configure from "trees-items-service";
 import {cols} from "../../const/collections";
 
-import {run} from '../../util/run'
+import {run} from 'trees-express'
 import {Router} from "trees-express"; const router = Router();
 
 const upsertRoot = configure(() => col(cols.ROOT)).upsertItem;

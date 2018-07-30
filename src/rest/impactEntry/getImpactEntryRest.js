@@ -1,6 +1,6 @@
 import {getAllImpactEntries, getImpactEntryByName, searchImpactEntriesByNamepart} from "../../service/impactEntry/getImpactEntryService";
 
-import {run} from '../../util/run'
+import {run} from 'trees-express'
 import {Router} from "trees-express"; const router = Router();
 const {check} = require('express-validator/check');
 

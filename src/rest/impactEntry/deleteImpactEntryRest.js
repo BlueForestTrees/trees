@@ -1,6 +1,6 @@
 import {purgeImpactsEntries} from "../../service/impactEntry/deleteImpactEntriesService";
 
-import {run} from '../../util/run'
+import {run} from 'trees-express'
 import {Router} from "trees-express";
 const router = Router();
 

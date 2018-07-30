@@ -2,7 +2,7 @@ import {ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT} from "../../const/paths";
 import {validRootId, validTrunkId, present, rootIdIsNotTrunkId, validQt, validRelativeTo, validUnit} from "../../const/validations";
 import {upsertLink} from "../../topService/linkTopService";
 
-import {run} from '../../util/run'
+import {run} from 'trees-express'
 import {Router} from "trees-express"; const router = Router();
 
 module.exports = router;

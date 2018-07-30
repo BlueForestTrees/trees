@@ -1,7 +1,7 @@
 import {addFacetEntry, replaceAllFacetEntries} from "../../service/facetEntry/postFacetEntryService";
 import {validColor, validGrandeur, validId, validName} from "../../const/validations";
 
-import {run} from '../../util/run'
+import {run} from 'trees-express'
 
 import {Router} from "trees-express";
 

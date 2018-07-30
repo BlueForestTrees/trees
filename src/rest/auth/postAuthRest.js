@@ -1,4 +1,4 @@
-import {run} from '../../util/run'
+import {run} from 'trees-express'
 import {validPassword, validMail, validWelcomeToken, validFullname} from "../../const/validations";
 import {authenticate, confirmSuscribe, startSuscribe} from "../../service/auth/authService";
 import {Router} from "trees-express";

@@ -1,6 +1,6 @@
 import {valid} from "../../const/validations";
 import {removeLink} from "../../topService/linkTopService";
-import {run} from '../../util/run'
+import {run} from 'trees-express'
 
 import {Router} from "trees-express";
 

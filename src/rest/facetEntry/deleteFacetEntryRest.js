@@ -1,6 +1,6 @@
 import {purgeFacetsEntries} from "../../service/facetEntry/deleteFacetEntriesService";
 
-import {run} from '../../util/run'
+import {run} from 'trees-express'
 import {Router} from "trees-express";
 const router = Router();
 

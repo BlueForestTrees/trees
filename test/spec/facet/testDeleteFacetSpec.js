@@ -1,7 +1,7 @@
-import {oneModifiedResponse} from "trees-test/dist/domain";
-import {remove} from "trees-test/dist/util";
-import {cols} from "../../../src/const/collections";
-import {bleFacets} from "../../database/gateau";
+import {oneModifiedResponse} from "trees-test/dist/domain"
+import {remove} from "trees-test/dist/util"
+import {cols} from "../../../src/const/collections"
+import {bleFacets} from "../../database/gateau"
 
 export const facetDeletionSpec = {
     req: {
@@ -21,4 +21,4 @@ export const facetDeletionSpec = {
             doc: remove(bleFacets, "items", {_id: bleFacets.items[0]._id})
         }
     }
-};
+}

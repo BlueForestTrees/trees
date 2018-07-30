@@ -1,6 +1,6 @@
-import {cols} from "../../../src/const/collections";
-import {withError} from "trees-test/dist/domain";
-import {userStatus} from "../../../src/const/userStatus";
+import {cols} from "../../../src/const/collections"
+import {withError} from "trees-test/dist/domain"
+import {userStatus} from "../../../src/const/userStatus"
 
 export const validPostMailSpec = {
     req: {
@@ -22,7 +22,7 @@ export const validPostMailSpec = {
             }
         }
     }
-};
+}
 
 export const existingPostMailSpec = {
     db: {
@@ -44,7 +44,7 @@ export const existingPostMailSpec = {
         code: 400,
         body: withError(1,"allready exists")
     }
-};
+}
 
 export const invalidPostMailSpec = {
     req: {
@@ -58,4 +58,4 @@ export const invalidPostMailSpec = {
         code: 400,
         bodypath: {path: "$.errors.mail.msg", value: "mail invalid"}
     }
-};
+}

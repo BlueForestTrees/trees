@@ -1,10 +1,10 @@
-import {prixImpactEntry} from "../../database/impactEntries";
+import {prixImpactEntry} from "../../database/impactEntries"
 
-export const getImpactEntrySpec = {};
+export const getImpactEntrySpec = {}
 
 getImpactEntrySpec.req = {
     url: "/api/impactEntry?q=IP"
-};
+}
 
 getImpactEntrySpec.res = {
     body: [
@@ -15,4 +15,4 @@ getImpactEntrySpec.res = {
             "color": prixImpactEntry.color
         }
     ]
-};
+}

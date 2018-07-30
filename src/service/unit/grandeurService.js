@@ -2,14 +2,14 @@ const grandeur = (key, label, units) => ({
     key,
     label,
     units
-});
+})
 
 const unit = (shortname, name, coef) =>
     ({
         shortname: shortname,
         name: name,
         coef: coef
-    });
+    })
 
 export const loadUnitsData = () => Promise.resolve(
     [
@@ -70,4 +70,4 @@ export const loadUnitsData = () => Promise.resolve(
             unit("t*km", "Tonne Kilomètre (t*km)", 1),
             unit("kg*km", "Kilogramme Kilomètre (kg*km)", 0.001)
         ])
-    ]);
+    ])

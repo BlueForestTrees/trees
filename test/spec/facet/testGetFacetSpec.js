@@ -1,11 +1,11 @@
-import {clon} from "trees-test/dist/util";
-import _ from 'lodash';
-import {bleFacets} from "../../database/gateau";
-import {withQuantity} from "trees-test/dist/domain";
+import {clon} from "trees-test/dist/util"
+import _ from 'lodash'
+import {bleFacets} from "../../database/gateau"
+import {withQuantity} from "trees-test/dist/domain"
 
 const laFacetWithItsFacetEntryFields = _.forEach(clon(bleFacets.items), facet => {
-    delete facet.quantity;
-});
+    delete facet.quantity
+})
 export const getFacetSpec = {
     req: {
         url: `/api/facet/${bleFacets._id}`
@@ -16,12 +16,12 @@ export const getFacetSpec = {
             items: laFacetWithItsFacetEntryFields
         }
     }
-};
+}
 
 
 const resultItems = _.forEach(clon(bleFacets.items), facet => {
-    facet.quantity.qt *= 0.5;
-});
+    facet.quantity.qt *= 0.5
+})
 export const getQuantifiedFacetSpec = {
     req: {
         url: `/api/facet/5000/g/${bleFacets._id}`,
@@ -33,7 +33,7 @@ export const getQuantifiedFacetSpec = {
             items: resultItems
         }
     }
-};
+}
 
 
 export const emptyGetFacetSpec = {
@@ -46,7 +46,7 @@ export const emptyGetFacetSpec = {
             items: []
         }
     }
-};
+}
 
 export const emptyQuantifiedGetFacetSpec = {
     req: {
@@ -59,5 +59,5 @@ export const emptyQuantifiedGetFacetSpec = {
             items: []
         }
     }
-};
+}
 

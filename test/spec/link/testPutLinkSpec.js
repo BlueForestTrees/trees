@@ -1,10 +1,10 @@
-import {setQuantityRootSpec, updateQuantityAnotherUnitRootSpec, updateQuantityRootSpec} from "../root/testPutRootSpec";
-import {setQuantityBranchSpec, updateQuantityAnotherUnitBranchSpec, updateQuantityBranchSpec} from "../branch/testPutBranchSpec";
-import {bleTrunk, farineTrunk} from "../../database/gateau";
-import {oneModifiedResponse} from "trees-test/dist/domain";
-import {skateTrunk} from "../../database/skate";
-import {cols} from "../../../src/const/collections";
-import {withIdQuantity} from "trees-test/dist/domain";
+import {setQuantityRootSpec, updateQuantityAnotherUnitRootSpec, updateQuantityRootSpec} from "../root/testPutRootSpec"
+import {setQuantityBranchSpec, updateQuantityAnotherUnitBranchSpec, updateQuantityBranchSpec} from "../branch/testPutBranchSpec"
+import {bleTrunk, farineTrunk} from "../../database/gateau"
+import {oneModifiedResponse} from "trees-test/dist/domain"
+import {skateTrunk} from "../../database/skate"
+import {cols} from "../../../src/const/collections"
+import {withIdQuantity} from "trees-test/dist/domain"
 
 export const putLinkRelativeToSpec = {
     req: {
@@ -59,7 +59,7 @@ export const putLinkRelativeToSpec = {
             ]
         }
     }
-};
+}
 
 export const setQuantityLinkSpec = {
     req: {
@@ -75,7 +75,7 @@ export const setQuantityLinkSpec = {
             list: [setQuantityRootSpec.db.expected, setQuantityBranchSpec.db.expected]
         }
     }
-};
+}
 export const updateQuantityLinkSpec = {
     req: {
         method: "PUT",
@@ -90,7 +90,7 @@ export const updateQuantityLinkSpec = {
             list: [updateQuantityRootSpec.db.expected, updateQuantityRootSpec.db.expected]
         }
     }
-};
+}
 export const updateQuantityAnotherUnitLinkSpec = {
     req: {
         method: "PUT",
@@ -105,4 +105,4 @@ export const updateQuantityAnotherUnitLinkSpec = {
             list: [updateQuantityAnotherUnitRootSpec.db.expected, updateQuantityAnotherUnitBranchSpec.db.expected]
         }
     }
-};
+}

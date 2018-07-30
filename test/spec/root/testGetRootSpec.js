@@ -1,9 +1,9 @@
-import _ from 'lodash';
-import {setQuantity, withError, withoutQuantity, withQtCoef} from "trees-test/dist/domain";
-import {clon} from "trees-test/dist/util";
-import {farineRoot, gateauRoot, laitTrunk} from "../../database/gateau";
-import {skateRoot} from "../../database/skate";
-import {banane, bananeBC, transport} from "../../database/banane";
+import _ from 'lodash'
+import {setQuantity, withError, withoutQuantity, withQtCoef} from "trees-test/dist/domain"
+import {clon} from "trees-test/dist/util"
+import {farineRoot, gateauRoot, laitTrunk} from "../../database/gateau"
+import {skateRoot} from "../../database/skate"
+import {banane, bananeBC, transport} from "../../database/banane"
 
 export const getBananeRootSpec = {
     req: {
@@ -13,7 +13,7 @@ export const getBananeRootSpec = {
     res: {
         bodypath: {path: `$.items[?(@._id==="${transport._id}")].relativeTo`, value: banane._id}
     }
-};
+}
 
 export const getRootsSpec = {
     req: {
@@ -26,7 +26,7 @@ export const getRootsSpec = {
             items: withoutQuantity(clon(gateauRoot.items))
         }
     }
-};
+}
 
 export const emptyGetRootSpec = {
     req: {
@@ -39,7 +39,7 @@ export const emptyGetRootSpec = {
             items: []
         }
     }
-};
+}
 
 export const sameQtGetRootSpec = {
     req: {
@@ -52,12 +52,12 @@ export const sameQtGetRootSpec = {
             items: clon(gateauRoot.items)
         }
     }
-};
+}
 
 
-const gato1000G = clon(gateauRoot);
-withQtCoef([gato1000G]);
-withQtCoef(gato1000G.items);
+const gato1000G = clon(gateauRoot)
+withQtCoef([gato1000G])
+withQtCoef(gato1000G.items)
 
 export const gateau1000GGetRootSpec = {
     req: {
@@ -69,12 +69,12 @@ export const gateau1000GGetRootSpec = {
             ...gato1000G
         }
     }
-};
+}
 
 
-const skate10 = clon(skateRoot);
-withQtCoef([skate10]);
-withQtCoef(skate10.items);
+const skate10 = clon(skateRoot)
+withQtCoef([skate10])
+withQtCoef(skate10.items)
 export const skate10GetRootSpec = {
     req: {
         method: "GET",
@@ -85,12 +85,12 @@ export const skate10GetRootSpec = {
             ...skate10
         }
     }
-};
+}
 
-const gateauRoot1Kg = clon(gateauRoot);
-gateauRoot1Kg.quantity.qt = 1;
-gateauRoot1Kg.quantity.unit = "kg";
-withQtCoef(gateauRoot1Kg.items);
+const gateauRoot1Kg = clon(gateauRoot)
+gateauRoot1Kg.quantity.qt = 1
+gateauRoot1Kg.quantity.unit = "kg"
+withQtCoef(gateauRoot1Kg.items)
 
 export const otherUnitGetRootSpec = {
     req: {
@@ -102,7 +102,7 @@ export const otherUnitGetRootSpec = {
             ...gateauRoot1Kg
         }
     }
-};
+}
 
 export const badUnitGetRootSpec = {
     req: {
@@ -113,11 +113,11 @@ export const badUnitGetRootSpec = {
         code: 400,
         body: withError(3, "Units mismatch: 'L' and 'g'")
     }
-};
+}
 
 
-const myFarineRoot = clon(farineRoot);
-setQuantity(myFarineRoot, 60, "g");
+const myFarineRoot = clon(farineRoot)
+setQuantity(myFarineRoot, 60, "g")
 export const farineNoBleQtGetRootSpec = {
     req: {
         method: "GET",
@@ -128,5 +128,5 @@ export const farineNoBleQtGetRootSpec = {
             ...myFarineRoot
         }
     }
-};
+}
 

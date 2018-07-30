@@ -13,4 +13,4 @@ export const cols = {
     FEEDBACK: 'FeedbackCollection',
     FILM: 'FilmCollection',
     VERSION: 'VersionCollection'
-};
+}

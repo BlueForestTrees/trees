@@ -1,7 +1,7 @@
-import {oneModifiedResponse} from "trees-test/dist/domain";
-import {remove} from "trees-test/dist/util";
-import {cols} from "../../../src/const/collections";
-import {bleImpacts} from "../../database/gateau";
+import {oneModifiedResponse} from "trees-test/dist/domain"
+import {remove} from "trees-test/dist/util"
+import {cols} from "../../../src/const/collections"
+import {bleImpacts} from "../../database/gateau"
 
 export const impactDeletionSpec = {
     req: {
@@ -21,4 +21,4 @@ export const impactDeletionSpec = {
             doc: remove(bleImpacts, "items", {_id: bleImpacts.items[0]._id})
         }
     }
-};
+}

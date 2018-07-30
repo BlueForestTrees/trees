@@ -1,11 +1,11 @@
-import {create} from "../../service/trunk/postTrunkService";
+import {create} from "../../service/trunk/postTrunkService"
 
 import {run} from 'trees-express'
-import {validColor, validId, validName, optionalValidType} from "../../const/validations";
+import {validColor, validId, validName, optionalValidType} from "../../const/validations"
 
-import {Router} from "trees-express"; const router = Router();
+import {Router} from "trees-express"; const router = Router()
 
-module.exports = router;
+module.exports = router
 
 router.post('/api/trunk',
     validId,
@@ -13,4 +13,4 @@ router.post('/api/trunk',
     validName,
     optionalValidType,
     run(create)
-);
+)

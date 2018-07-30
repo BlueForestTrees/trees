@@ -1,10 +1,10 @@
-import {oneModifiedResponse, oneUpsertedResponse} from "trees-test/dist/domain";
-import {cols} from "../../../src/const/collections";
-import {biere, capsule} from "../../database/biere";
-import {bleTrunk, farineTrunk} from "../../database/gateau";
+import {oneModifiedResponse, oneUpsertedResponse} from "trees-test/dist/domain"
+import {cols} from "../../../src/const/collections"
+import {biere, capsule} from "../../database/biere"
+import {bleTrunk, farineTrunk} from "../../database/gateau"
 
-const biereId = biere._id;
-const capsuleId = capsule._id;
+const biereId = biere._id
+const capsuleId = capsule._id
 export const newRootSpec = {
     req: {
         url: `/api/root`,
@@ -23,7 +23,7 @@ export const newRootSpec = {
             }
         }
     }
-};
+}
 
 
 export const existingRootPostSpec = {
@@ -44,7 +44,7 @@ export const existingRootPostSpec = {
             }
         }
     }
-};
+}
 
 export const postRootFarineBle = {
     req: {
@@ -64,4 +64,4 @@ export const postRootFarineBle = {
             }
         }
     }
-};
+}

@@ -1,6 +1,6 @@
-import {oneResponse} from "trees-test/dist/domain";
-import {cols} from "../../../src/const/collections";
-import {withValidationError} from "trees-test/dist/domain";
+import {oneResponse} from "trees-test/dist/domain"
+import {cols} from "../../../src/const/collections"
+import {withValidationError} from "trees-test/dist/domain"
 
 export const postFeedbackOkSpec = {
     req: {
@@ -23,7 +23,7 @@ export const postFeedbackOkSpec = {
             }
         }
     }
-};
+}
 
 export const postFeedbadBadMailSpec = {
     req: {
@@ -47,4 +47,4 @@ export const postFeedbadBadMailSpec = {
             }
         }
     }
-};
+}

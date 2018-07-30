@@ -1,7 +1,7 @@
-import {oneModifiedResponse} from "trees-test/dist/domain";
-import {remove} from "trees-test/dist/util";
-import {cols} from "../../../src/const/collections";
-import {bleTrunk, farineItem, farineRoot, gateauRoot} from "../../database/gateau";
+import {oneModifiedResponse} from "trees-test/dist/domain"
+import {remove} from "trees-test/dist/util"
+import {cols} from "../../../src/const/collections"
+import {bleTrunk, farineItem, farineRoot, gateauRoot} from "../../database/gateau"
 
 export const rootDeletionSpec = {
     req: {
@@ -18,7 +18,7 @@ export const rootDeletionSpec = {
             doc: remove(gateauRoot, "items", {_id: farineItem._id})
         }
     }
-};
+}
 
 export const deleteFarineRootBleSpec = {
     req: {
@@ -35,4 +35,4 @@ export const deleteFarineRootBleSpec = {
             doc: remove(farineRoot, "items", {_id: bleTrunk._id})
         }
     }
-};
+}

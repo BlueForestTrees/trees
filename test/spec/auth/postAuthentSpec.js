@@ -1,6 +1,6 @@
-import {cols} from "../../../src/const/collections";
-import sha1 from "sha1";
-import {X_ACCESS_TOKEN} from "../../../src/const/headers";
+import {cols} from "../../../src/const/collections"
+import sha1 from "sha1"
+import {X_ACCESS_TOKEN} from "../../../src/const/headers"
 
 export const validAuthentSpec = {
     db: {
@@ -24,7 +24,7 @@ export const validAuthentSpec = {
         headers: [{key: X_ACCESS_TOKEN}],
         body: null
     }
-};
+}
 
 export const badPasswordAuthentSpec = {
     db: {
@@ -48,7 +48,7 @@ export const badPasswordAuthentSpec = {
         code: 401,
         body: null
     }
-};
+}
 export const badLoginAuthentSpec = {
     db: {
         preChange: {
@@ -71,4 +71,4 @@ export const badLoginAuthentSpec = {
         code: 401,
         body: null
     }
-};
+}

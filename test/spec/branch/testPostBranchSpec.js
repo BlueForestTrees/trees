@@ -1,7 +1,7 @@
-import {oneModifiedResponse, oneUpsertedResponse} from "trees-test/dist/domain";
-import {cols} from "../../../src/const/collections";
-import {biere, capsule} from "../../database/biere";
-import {bleTrunk, farineTrunk} from "../../database/gateau";
+import {oneModifiedResponse, oneUpsertedResponse} from "trees-test/dist/domain"
+import {cols} from "../../../src/const/collections"
+import {biere, capsule} from "../../database/biere"
+import {bleTrunk, farineTrunk} from "../../database/gateau"
 
 export const newBranchSpec = {
     req:{
@@ -23,7 +23,7 @@ export const newBranchSpec = {
             }
         }
     }
-};
+}
 
 export const existingBranchPostSpec = {
     req:{
@@ -45,7 +45,7 @@ export const existingBranchPostSpec = {
             }
         }
     }
-};
+}
 
 export const farineToBleBranchAddSpec = {
     req: {
@@ -67,4 +67,4 @@ export const farineToBleBranchAddSpec = {
             }
         }
     }
-};
+}

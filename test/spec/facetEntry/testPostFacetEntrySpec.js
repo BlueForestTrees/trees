@@ -1,10 +1,10 @@
-import {vitCFacetEntry} from "../../database/facetEntries";
-import {cols} from "../../../src/const/collections";
-import {createStringObjectId} from "trees-test/dist/util";
-import {withError} from "trees-test/dist/domain";
+import {vitCFacetEntry} from "../../database/facetEntries"
+import {cols} from "../../../src/const/collections"
+import {createStringObjectId} from "trees-test/dist/util"
+import {withError} from "trees-test/dist/domain"
 
-export const postFacetEntrySpec = {};
-let _id = createStringObjectId();
+export const postFacetEntrySpec = {}
+let _id = createStringObjectId()
 postFacetEntrySpec.req = {
     url:"/api/facetEntry",
     method:"POST",
@@ -14,7 +14,7 @@ postFacetEntrySpec.req = {
         grandeur: "Dens",
         color: "#FF0000"
     }
-};
+}
 postFacetEntrySpec.db = {
     expected: {
         colname: cols.FACET_ENTRY,
@@ -26,7 +26,7 @@ postFacetEntrySpec.db = {
             name_lower: "nomnewfacetentry"
         }
     }
-};
+}
 
 export const postBadGrandeurFacetEntrySpec = {
     req: {
@@ -41,7 +41,7 @@ export const postBadGrandeurFacetEntrySpec = {
         code: 400,
         bodypath: {path: "$.errors.grandeur.msg", value: "Invalid value"}
     }
-};
+}
 
 export const allreadyExistingFacetEntrySpec = {
     req: {
@@ -52,4 +52,4 @@ export const allreadyExistingFacetEntrySpec = {
         code: 400,
         body: withError(1,"allready exists")
     }
-};
+}

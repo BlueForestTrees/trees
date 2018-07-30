@@ -1,15 +1,15 @@
-import {validId} from "../../const/validations";
-import {NAME, QUANTITY, QUANTITY_QT, QUANTITY_UNIT} from "../../const/paths";
-import {SHOULD_BE_DEFINED, SHOULD_NOT_BE_DEFINED} from "../../const/messages";
+import {validId} from "../../const/validations"
+import {NAME, QUANTITY, QUANTITY_QT, QUANTITY_UNIT} from "../../const/paths"
+import {SHOULD_BE_DEFINED, SHOULD_NOT_BE_DEFINED} from "../../const/messages"
 
-const {oneOf} = require('express-validator/check');
+const {oneOf} = require('express-validator/check')
 
 import {run} from 'trees-express'
-import {Router} from "trees-express"; const router = Router();
-const {check} = require('express-validator/check');
-const trunks = require('../../service/trunk/putTrunkService');
+import {Router} from "trees-express"; const router = Router()
+const {check} = require('express-validator/check')
+const trunks = require('../../service/trunk/putTrunkService')
 
-module.exports = router;
+module.exports = router
 
 router.put('/api/trunk/:_id',
     validId,
@@ -26,4 +26,4 @@ router.put('/api/trunk/:_id',
         ],
     ]),
     run(trunks.update)
-);
+)

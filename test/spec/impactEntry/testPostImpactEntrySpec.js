@@ -1,15 +1,15 @@
-import {withError} from "trees-test/dist/domain";
-import _ from 'lodash';
-import {vitCImpactEntry} from "../../database/impactEntries";
-import {cols} from "../../../src/const/collections";
-import {createStringObjectId} from "trees-test/dist/util";
+import {withError} from "trees-test/dist/domain"
+import _ from 'lodash'
+import {vitCImpactEntry} from "../../database/impactEntries"
+import {cols} from "../../../src/const/collections"
+import {createStringObjectId} from "trees-test/dist/util"
 
 const impactEntry = {
     _id: createStringObjectId(),
     name: "nomNewImpactEntry",
     grandeur: "Dens",
     color: "#FFFFFF"
-};
+}
 export const postImpactEntrySpec = {
     req: {
         url: `/api/impactEntry`,
@@ -25,13 +25,13 @@ export const postImpactEntrySpec = {
             }
         }
     }
-};
+}
 const badImpactEntry = {
     _id: createStringObjectId() + "984",
     name: "nomNewImpactEntry",
     grandeur: "Dens",
     color: "#FFFFFF"
-};
+}
 export const postBadIdImpactEntrySpec = {
     req: {
         url: `/api/impactEntry`,
@@ -48,7 +48,7 @@ export const postBadIdImpactEntrySpec = {
             missingDoc: badImpactEntry
         }
     }
-};
+}
 
 export const postBadGrandeurImpactEntrySpec = {
     req: {
@@ -63,7 +63,7 @@ export const postBadGrandeurImpactEntrySpec = {
         code: 400,
         bodypath: {path: "$.errors.grandeur.msg", value: "Invalid value"}
     }
-};
+}
 
 
 export const allreadyExistingImpactEntrySpec = {
@@ -78,4 +78,4 @@ export const allreadyExistingImpactEntrySpec = {
         code: 400,
         body: withError(1,"allready exists")
     }
-};
+}

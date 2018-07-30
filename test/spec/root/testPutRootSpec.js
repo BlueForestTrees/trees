@@ -1,14 +1,14 @@
-import {oneModifiedResponse} from "trees-test/dist/domain";
-import {setQuantity, withIdQuantity} from "trees-test/dist/domain";
-import {clon} from "trees-test/dist/util";
-import {cols} from "../../../src/const/collections";
-import _ from 'lodash';
-import {bleTrunk, farineRoot, farineTrunk, gateauRoot, gateauTrunk, laitTrunk} from "../../database/gateau";
+import {oneModifiedResponse} from "trees-test/dist/domain"
+import {setQuantity, withIdQuantity} from "trees-test/dist/domain"
+import {clon} from "trees-test/dist/util"
+import {cols} from "../../../src/const/collections"
+import _ from 'lodash'
+import {bleTrunk, farineRoot, farineTrunk, gateauRoot, gateauTrunk, laitTrunk} from "../../database/gateau"
 
-let someFarine = withIdQuantity(farineTrunk._id, 10, "kg");
-let someBle = withIdQuantity(bleTrunk._id, 20, "min");
+let someFarine = withIdQuantity(farineTrunk._id, 10, "kg")
+let someBle = withIdQuantity(bleTrunk._id, 20, "min")
 
-const putRootUrl = {method: "PUT", url: '/api/root'};
+const putRootUrl = {method: "PUT", url: '/api/root'}
 
 export const setQuantityRootSpec = {
     req: {
@@ -30,7 +30,7 @@ export const setQuantityRootSpec = {
             }
         }
     }
-};
+}
 
 
 export const putRelativeToRootSpec = {
@@ -70,12 +70,12 @@ export const putRelativeToRootSpec = {
             }
         }
     }
-};
+}
 
 
-export const updateQuantityRootSpec = {};
-const updatedRoots = clon(gateauRoot.items);
-setQuantity(updatedRoots[1], 60);
+export const updateQuantityRootSpec = {}
+const updatedRoots = clon(gateauRoot.items)
+setQuantity(updatedRoots[1], 60)
 
 updateQuantityRootSpec.req = {
     ...putRootUrl,
@@ -95,10 +95,10 @@ updateQuantityRootSpec.req = {
             }
         }
     }
-};
+}
 updateQuantityRootSpec.res = {
     body: oneModifiedResponse
-};
+}
 updateQuantityRootSpec.db = {
     expected: {
         colname: cols.ROOT,
@@ -107,11 +107,11 @@ updateQuantityRootSpec.db = {
             items: updatedRoots,
         }
     }
-};
+}
 
-export const updateQuantityAnotherUnitRootSpec = {};
-const updatedRootsWithDifferentUnit = clon(gateauRoot.items);
-setQuantity(updatedRootsWithDifferentUnit[1], 0.01, "m3");
+export const updateQuantityAnotherUnitRootSpec = {}
+const updatedRootsWithDifferentUnit = clon(gateauRoot.items)
+setQuantity(updatedRootsWithDifferentUnit[1], 0.01, "m3")
 
 updateQuantityAnotherUnitRootSpec.req = {
     ...putRootUrl,
@@ -131,10 +131,10 @@ updateQuantityAnotherUnitRootSpec.req = {
             }
         }
     }
-};
+}
 updateQuantityAnotherUnitRootSpec.res = {
     body: oneModifiedResponse
-};
+}
 updateQuantityAnotherUnitRootSpec.db = {
     expected: {
         colname: cols.ROOT,
@@ -143,4 +143,4 @@ updateQuantityAnotherUnitRootSpec.db = {
             items: updatedRootsWithDifferentUnit,
         }
     }
-};
+}

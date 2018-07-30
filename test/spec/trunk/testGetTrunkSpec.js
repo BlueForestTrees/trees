@@ -1,9 +1,9 @@
-import {omit, pick} from 'lodash';
-import {gateauTrunk} from "../../database/gateau";
-import {eauTrunk, elecTrunk, skateTrunk} from "../../database/skate";
-import {baaTrunk, e1Trunk, e2Trunk} from "../../database/lettres";
-import {notInSearchMixin} from "trees-test/dist/domain";
-import {bateauTrunk, voitureTrunk} from "../../database/transports";
+import {omit, pick} from 'lodash'
+import {gateauTrunk} from "../../database/gateau"
+import {eauTrunk, elecTrunk, skateTrunk} from "../../database/skate"
+import {baaTrunk, e1Trunk, e2Trunk} from "../../database/lettres"
+import {notInSearchMixin} from "trees-test/dist/domain"
+import {bateauTrunk, voitureTrunk} from "../../database/transports"
 
 export const getManyTrunkSpec = {
     req: {
@@ -12,7 +12,7 @@ export const getManyTrunkSpec = {
     res: {
         body: [omit(skateTrunk, notInSearchMixin)]
     }
-};
+}
 
 export const getManyTrunkSpec2 = {
     req: {
@@ -21,7 +21,7 @@ export const getManyTrunkSpec2 = {
     res: {
         body: [omit(skateTrunk, notInSearchMixin),omit(e1Trunk, notInSearchMixin)]
     }
-};
+}
 
 
 export const badIdGetManyTrunkSpec = {
@@ -32,7 +32,7 @@ export const badIdGetManyTrunkSpec = {
         code: 400,
         bodypath: {path: "$.errorCode", value: 2}
     }
-};
+}
 
 export const searchTrunkSpec = {
     req: {
@@ -41,7 +41,7 @@ export const searchTrunkSpec = {
     res: {
         body: [omit(skateTrunk, notInSearchMixin)]
     }
-};
+}
 
 export const searchTrunkSpec2 = {
     req: {
@@ -55,7 +55,7 @@ export const searchTrunkSpec2 = {
             omit(elecTrunk, notInSearchMixin)
         ]
     }
-};
+}
 
 export const typedSearchTrunkSpec = {
     req: {
@@ -67,7 +67,7 @@ export const typedSearchTrunkSpec = {
             omit(voitureTrunk, notInSearchMixin),
         ]
     }
-};
+}
 
 export const typedSearchTrunkSpec2 = {
     req: {
@@ -78,7 +78,7 @@ export const typedSearchTrunkSpec2 = {
             omit(voitureTrunk, notInSearchMixin),
         ]
     }
-};
+}
 
 export const getTrunkGateauSpec = {
     req: {
@@ -87,7 +87,7 @@ export const getTrunkGateauSpec = {
     res: {
         body: omit(gateauTrunk, 'name_lower')
     }
-};
+}
 
 export const getTrunkBaaSpec = {
     req: {
@@ -96,7 +96,7 @@ export const getTrunkBaaSpec = {
     res: {
         body: {...omit(baaTrunk, ['name_lower', 'quantity']), quantity: {qt: 0.1, unit: "kg"}}
     }
-};
+}
 
 export const getQtTrunkGateauSpec = {
     req: {
@@ -105,7 +105,7 @@ export const getQtTrunkGateauSpec = {
     res: {
         body: {...omit(gateauTrunk, ['name_lower', 'quantity']), quantity: {qt: 5, unit: "kg"}}
     }
-};
+}
 
 export const getQtTrunkBateauSpec = {
     req: {
@@ -114,4 +114,4 @@ export const getQtTrunkBateauSpec = {
     res: {
         body: {...omit(bateauTrunk, ['name_lower', 'quantity']), quantity: {qt: 7, unit: "t*km"}}
     }
-};
+}

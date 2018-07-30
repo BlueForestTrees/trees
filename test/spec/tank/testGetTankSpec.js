@@ -1,10 +1,10 @@
-import {removeItemQuantity, withQuantity} from "trees-test/dist/domain";
-import {clon} from "trees-test/dist/util";
-import {aTrunk, daTrunk, dbTrunk, dRoot, e1Trunk, e2Trunk} from "../../database/lettres";
-import {cols} from "../../../src/const/collections";
-import {laitTrunk} from "../../database/gateau";
-import _ from 'lodash';
-import {arbreTrunk, eauTrunk, elecTrunk, skateTrunk} from "../../database/skate";
+import {removeItemQuantity, withQuantity} from "trees-test/dist/domain"
+import {clon} from "trees-test/dist/util"
+import {aTrunk, daTrunk, dbTrunk, dRoot, e1Trunk, e2Trunk} from "../../database/lettres"
+import {cols} from "../../../src/const/collections"
+import {laitTrunk} from "../../database/gateau"
+import _ from 'lodash'
+import {arbreTrunk, eauTrunk, elecTrunk, skateTrunk} from "../../database/skate"
 
 export const lettreTankSpec = {
     req: {
@@ -32,7 +32,7 @@ export const lettreTankSpec = {
             ]
         }
     }
-};
+}
 
 export const avecUneQtManquanteTankSpec = {
     req: {
@@ -71,7 +71,7 @@ export const avecUneQtManquanteTankSpec = {
             ]
         }
     }
-};
+}
 
 
 export const avecUneQtManquanteTankSpec2 = {
@@ -112,7 +112,7 @@ export const avecUneQtManquanteTankSpec2 = {
             ]
         }
     }
-};
+}
 
 export const sansTank = {
     req: {
@@ -125,7 +125,7 @@ export const sansTank = {
             items: []
         }
     }
-};
+}
 
 export const linkAToSkateThenTank = [
     {
@@ -186,4 +186,4 @@ export const linkAToSkateThenTank = [
             }
         }
     }
-];
+]

@@ -1,12 +1,12 @@
-import {clon} from "trees-test/dist/util";
-import _ from 'lodash';
-import {bleImpacts, farineTrunk} from "../../database/gateau";
-import {withQuantity} from "trees-test/dist/domain";
+import {clon} from "trees-test/dist/util"
+import _ from 'lodash'
+import {bleImpacts, farineTrunk} from "../../database/gateau"
+import {withQuantity} from "trees-test/dist/domain"
 
 
 const bleImpactWithImpactEntryFields = _.forEach(clon(bleImpacts.items), impact => {
-    delete impact.quantity;
-});
+    delete impact.quantity
+})
 export const getImpactSpec = {
     req: {
         url: `/api/impact/${bleImpacts._id}`
@@ -17,11 +17,11 @@ export const getImpactSpec = {
             items: bleImpactWithImpactEntryFields
         }
     }
-};
+}
 
 const resultItems = _.forEach(clon(bleImpacts.items), bleImpact => {
-    bleImpact.quantity.qt *= 0.5;
-});
+    bleImpact.quantity.qt *= 0.5
+})
 export const getQuantifiedImpactSpec = {
     req: {
         url: `/api/impact/5000/g/${bleImpacts._id}`
@@ -32,7 +32,7 @@ export const getQuantifiedImpactSpec = {
         items: resultItems
     }
     }
-};
+}
 
 export const emptyGetImpactSpec = {
     req: {
@@ -44,7 +44,7 @@ export const emptyGetImpactSpec = {
         items: []
     }
     }
-};
+}
 
 
 export const emptyQuantifiedGetImpactSpec = {
@@ -57,4 +57,4 @@ export const emptyQuantifiedGetImpactSpec = {
             items: []
         }
     }
-};
+}

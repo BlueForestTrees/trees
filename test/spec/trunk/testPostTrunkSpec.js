@@ -1,10 +1,10 @@
-import _ from 'lodash';
-import {cols} from "../../../src/const/collections";
-import {aTrunk} from "../../database/lettres";
-import {withValidationError} from "trees-test/dist/domain";
-import {createStringObjectId} from "trees-test/dist/util";
+import _ from 'lodash'
+import {cols} from "../../../src/const/collections"
+import {aTrunk} from "../../database/lettres"
+import {withValidationError} from "trees-test/dist/domain"
+import {createStringObjectId} from "trees-test/dist/util"
 
-const trunk = {_id: createStringObjectId(), color: "#FFCC00", name: "RATtatouille1664"};
+const trunk = {_id: createStringObjectId(), color: "#FFCC00", name: "RATtatouille1664"}
 export const postTrunkSpec = {
     req: {
         url: "/api/trunk",
@@ -20,9 +20,9 @@ export const postTrunkSpec = {
             }
         }
     }
-};
+}
 
-const badTrunk = {_id: "XXX"+createStringObjectId()+"XXX", color: "#FFCC00", name: "RATtatouille1664"};
+const badTrunk = {_id: "XXX"+createStringObjectId()+"XXX", color: "#FFCC00", name: "RATtatouille1664"}
 export const postBadIdTrunkSpec = {
     req: {
         url: "/api/trunk",
@@ -39,9 +39,9 @@ export const postBadIdTrunkSpec = {
             missingDoc: badTrunk
         }
     }
-};
+}
 
-const transportTrunk = {_id: createStringObjectId(), color: "#FFCC00", name: "RATtatouille1664", type: "TR"};
+const transportTrunk = {_id: createStringObjectId(), color: "#FFCC00", name: "RATtatouille1664", type: "TR"}
 export const postTransportTrunkSpec = {
     req: {
         url: "/api/trunk",
@@ -57,7 +57,7 @@ export const postTransportTrunkSpec = {
             }
         }
     }
-};
+}
 
 export const postBadColorTrunkSpec = {
     req: {
@@ -72,12 +72,12 @@ export const postBadColorTrunkSpec = {
             {path: "$.errors.color.value", value: "#FFFFF"},
         ]
     }
-};
+}
 
-const cloneName = (newId, tree) => tree.name + newId;
-export const cloneTrunkSpec = {};
-cloneTrunkSpec.req = {body: {sourceId: aTrunk._id}};
-cloneTrunkSpec.res = {body: _id => ({_id, name: cloneName(_id, aTrunk)})};
+const cloneName = (newId, tree) => tree.name + newId
+export const cloneTrunkSpec = {}
+cloneTrunkSpec.req = {body: {sourceId: aTrunk._id}}
+cloneTrunkSpec.res = {body: _id => ({_id, name: cloneName(_id, aTrunk)})}
 cloneTrunkSpec.db = {
     expected: _id => ({
         colname: cols.TRUNK,
@@ -88,4 +88,4 @@ cloneTrunkSpec.db = {
             name_lower: lowerizeName(cloneName(_id, aTrunk))
         }
     })
-};
+}

@@ -1,11 +1,11 @@
-import {addImpactEntry} from "../../service/impactEntry/postImpactEntryService";
-import {validColor, validGrandeur, validId, validName} from "../../const/validations";
+import {addImpactEntry} from "../../service/impactEntry/postImpactEntryService"
+import {validColor, validGrandeur, validId, validName} from "../../const/validations"
 import {run} from 'trees-express'
 
-import {Router} from "trees-express";
-const router = Router();
+import {Router} from "trees-express"
+const router = Router()
 
-module.exports = router;
+module.exports = router
 
 router.post('/api/impactEntry',
     validId,
@@ -13,4 +13,4 @@ router.post('/api/impactEntry',
     validGrandeur,
     validColor,
     run(addImpactEntry)
-);
+)

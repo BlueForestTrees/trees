@@ -1,11 +1,11 @@
-import {purgeImpactsEntries} from "../../service/impactEntry/deleteImpactEntriesService";
+import {purgeImpactsEntries} from "../../service/impactEntry/deleteImpactEntriesService"
 
 import {run} from 'trees-express'
-import {Router} from "trees-express";
-const router = Router();
+import {Router} from "trees-express"
+const router = Router()
 
-module.exports = router;
+module.exports = router
 
-router.delete('/api/impactEntry', run(purgeImpactsEntries));
+router.delete('/api/impactEntry', run(purgeImpactsEntries))
 
 

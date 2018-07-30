@@ -288,6 +288,6 @@ export const getGrandeurSpec = {
             }
         ]
     }
-};
+}
 
 

@@ -1,9 +1,9 @@
-import {oneModifiedResponse} from "trees-test/dist/domain";
-import {replaceItem} from "trees-test/dist/domain";
-import {cols} from "../../../src/const/collections";
-import {bleImpacts, farineTrunk} from "../../database/gateau";
-import {prixImpactEntry, vitBImpactEntry} from "../../database/impactEntries";
-import {withIdQuantity} from "trees-test/dist/domain";
+import {oneModifiedResponse} from "trees-test/dist/domain"
+import {replaceItem} from "trees-test/dist/domain"
+import {cols} from "../../../src/const/collections"
+import {bleImpacts, farineTrunk} from "../../database/gateau"
+import {prixImpactEntry, vitBImpactEntry} from "../../database/impactEntries"
+import {withIdQuantity} from "trees-test/dist/domain"
 
 export const farineCreatingImpactSpec = {
     req: {
@@ -28,7 +28,7 @@ export const farineCreatingImpactSpec = {
             }
         }
     }
-};
+}
 
 export const bleAddingImpactSpec = {
     req: {
@@ -55,7 +55,7 @@ export const bleAddingImpactSpec = {
             }
         }
     }
-};
+}
 
 export const bleAddingImpactSpec2 = {
     req: {
@@ -82,7 +82,7 @@ export const bleAddingImpactSpec2 = {
             }
         }
     }
-};
+}
 
 
 export const bleUpdatingImpactSpec = {
@@ -103,4 +103,4 @@ export const bleUpdatingImpactSpec = {
             doc: replaceItem(bleImpacts, "items", withIdQuantity(vitBImpactEntry._id, 40, "mmol"))
         }
     }
-};
+}

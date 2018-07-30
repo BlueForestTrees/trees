@@ -1,11 +1,11 @@
-import {init, withTest} from "trees-test/dist/api";
-import api from "../../../../src";
-import ENV from "../../../../src/env";
-import {cols} from "../../../../src/const/collections";
+import {init, withTest} from "trees-test/dist/api"
+import api from "../../../../src"
+import ENV from "../../../../src/env"
+import {cols} from "../../../../src/const/collections"
 
 describe('POST fake address', function () {
 
-    beforeEach(init(api, ENV, cols));
+    beforeEach(init(api, ENV, cols))
 
     it('valid confirm test', withTest({
         req: {
@@ -15,7 +15,7 @@ describe('POST fake address', function () {
             code: 404,
             body: null
         }
-    }));
+    }))
 
 
-});
+})

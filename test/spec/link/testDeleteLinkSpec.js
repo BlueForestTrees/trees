@@ -1,5 +1,5 @@
-import {deleteFarineRootBleSpec, rootDeletionSpec} from "../root/testDeleteRootSpec";
-import {branchDeletionSpec, deleteBleBranchFarineSpec} from "../branch/testDeleteBranchSpec";
+import {deleteFarineRootBleSpec, rootDeletionSpec} from "../root/testDeleteRootSpec"
+import {branchDeletionSpec, deleteBleBranchFarineSpec} from "../branch/testDeleteBranchSpec"
 
 export const linkDeletionSpec = {
     req: {...rootDeletionSpec.req, path: "/api/link"},
@@ -11,4 +11,4 @@ export const linkDeletionSpec = {
             list: [rootDeletionSpec.db.expected, branchDeletionSpec.db.expected]
         }
     }
-};
+}

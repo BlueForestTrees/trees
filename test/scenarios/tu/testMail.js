@@ -1,13 +1,13 @@
-import {expect} from 'chai';
+import {expect} from 'chai'
 
-import {genMail, sendMail} from "../../../src/service/mail/mailService";
+import {genMail, sendMail} from "../../../src/service/mail/mailService"
 
 describe('TU mail', function () {
 
     it('generate', function () {
-        const mail = genMail({link: "blue.org/ds1f984"}, "testTemplate.html");
-        expect(mail).to.equal("salut blue.org/ds1f984");
-    });
+        const mail = genMail({link: "blue.org/ds1f984"}, "testTemplate.html")
+        expect(mail).to.equal("salut blue.org/ds1f984")
+    })
 
     it('send', function (done) {
         sendMail("smedini@gmail.com", "subject", "html")
@@ -16,4 +16,4 @@ describe('TU mail', function () {
                 throw e
             })
     })
-});
+})

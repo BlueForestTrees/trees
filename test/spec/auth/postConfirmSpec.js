@@ -1,8 +1,8 @@
-import {col, cols} from "../../../src/const/collections";
-import jwt from "jsonwebtoken";
-import {userStatus} from "../../../src/const/userStatus";
-import sha1 from "sha1";
-import ENV from "../../../src/env";
+import {col, cols} from "../../../src/const/collections"
+import jwt from "jsonwebtoken"
+import {userStatus} from "../../../src/const/userStatus"
+import sha1 from "sha1"
+import ENV from "../../../src/env"
 
 export const validConfirmSpec = {
     req: {
@@ -37,4 +37,4 @@ export const validConfirmSpec = {
             }
         }
     }
-};
+}

@@ -1,5 +1,5 @@
-import {cols} from "../../../src/const/collections";
-import {gateauTrunk} from "../../database/gateau";
+import {cols} from "../../../src/const/collections"
+import {gateauTrunk} from "../../database/gateau"
 
 export const trunkDeletionSpec = {
     req: {
@@ -12,4 +12,4 @@ export const trunkDeletionSpec = {
             missingDoc: {_id: gateauTrunk._id}
         }
     }
-};
+}

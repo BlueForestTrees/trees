@@ -1,10 +1,10 @@
-import {cols} from "../../src/const/collections";
-import {withTrunkNoQt} from "trees-test/dist/domain";
+import {cols} from "../../src/const/collections"
+import {withTrunk} from "trees-test/dist/domain"
 
 
-export const biere = withTrunkNoQt("Bière Heineken", "6a6a03c03e77667641d2d2c3");
-export const capsule = withTrunkNoQt("capsule", "7a6a03c03e77667641d2d2c3");
+export const biere = withTrunk("Bière Heineken", "6a6a03c03e77667641d2d2c3",6,"count")
+export const capsule = withTrunk("capsule", "7a6a03c03e77667641d2d2c3",12,"count")
 
 export const database = {
     [cols.TRUNK]: [biere, capsule]
-};
+}

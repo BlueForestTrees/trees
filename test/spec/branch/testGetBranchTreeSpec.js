@@ -1,6 +1,6 @@
-import {aTrunk} from "../../database/lettres";
-import {arbreTrunk} from "../../database/skate";
-import {withIdQuantity, withIdQtUnit} from "trees-test/dist/domain";
+import {aTrunk} from "../../database/lettres"
+import {arbreTrunk} from "../../database/skate"
+import {withIdQuantity, withIdQtUnit} from "trees-test/dist/domain"
 
 export const noBranchsTreeSpec = {
     req:{
@@ -13,7 +13,7 @@ export const noBranchsTreeSpec = {
             items: []
         }
     }
-};
+}
 
 export const branchTreeSpec = {
     req:{
@@ -84,4 +84,4 @@ export const branchTreeSpec = {
             ]
         }
     }
-};
+}

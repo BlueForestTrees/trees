@@ -1,9 +1,9 @@
-import {withQuantity} from "trees-test/dist/domain";
-import {ObjectID} from "mongodb";
-import {papierVA} from "../../database/papier";
-import {co2eImpactEntry, vitBImpactEntry, vitCImpactEntry} from "../../database/impactEntries";
-import {gateauItem, gateauTrunk} from "../../database/gateau";
-import _ from 'lodash';
+import {withQuantity} from "trees-test/dist/domain"
+import {ObjectID} from "mongodb"
+import {papierVA} from "../../database/papier"
+import {co2eImpactEntry, vitBImpactEntry, vitCImpactEntry} from "../../database/impactEntries"
+import {gateauItem, gateauTrunk} from "../../database/gateau"
+import _ from 'lodash'
 
 export const papierAImpactTankSpec = {
     req: {
@@ -19,7 +19,7 @@ export const papierAImpactTankSpec = {
             }]
         }
     }
-};
+}
 
 export const gateauImpactTankSpec = {
     req: {
@@ -45,9 +45,9 @@ export const gateauImpactTankSpec = {
                 }]
         }
     }
-};
+}
 
-const unknownId = ObjectID().toString();
+const unknownId = ObjectID().toString()
 export const sansImpactTankSpec = {
     req: {
         url: `/api/impacttank/3/L/${unknownId}`
@@ -59,4 +59,4 @@ export const sansImpactTankSpec = {
             items: []
         }
     }
-};
+}

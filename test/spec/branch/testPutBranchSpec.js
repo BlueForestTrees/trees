@@ -1,13 +1,13 @@
-import {oneModifiedResponse} from "trees-test/dist/domain";
-import {cols} from "../../../src/const/collections";
-import {bleTrunk, farineTrunk, gateauTrunk, laitBranch, laitTrunk} from "../../database/gateau";
-import {setQuantity} from "trees-test/dist/domain";
-import {clon} from "trees-test/dist/util";
-import _ from 'lodash';
-import {withIdQuantity} from "trees-test/dist/domain";
+import {oneModifiedResponse} from "trees-test/dist/domain"
+import {cols} from "../../../src/const/collections"
+import {bleTrunk, farineTrunk, gateauTrunk, laitBranch, laitTrunk} from "../../database/gateau"
+import {setQuantity} from "trees-test/dist/domain"
+import {clon} from "trees-test/dist/util"
+import _ from 'lodash'
+import {withIdQuantity} from "trees-test/dist/domain"
 
-const trunk = withIdQuantity(bleTrunk._id, 20, "min");
-const branch = withIdQuantity(farineTrunk._id, 10, "kg");
+const trunk = withIdQuantity(bleTrunk._id, 20, "min")
+const branch = withIdQuantity(farineTrunk._id, 10, "kg")
 export const setQuantityBranchSpec = {
     req: {
         url: `/api/branch`,
@@ -26,10 +26,10 @@ export const setQuantityBranchSpec = {
             }
         }
     }
-};
+}
 
-const updatedBranchs = clon(laitBranch.items);
-setQuantity(updatedBranchs[1], 166.66666666666666);
+const updatedBranchs = clon(laitBranch.items)
+setQuantity(updatedBranchs[1], 166.66666666666666)
 export const updateQuantityBranchSpec = {
     req:{
         url:"/api/branch",
@@ -51,10 +51,10 @@ export const updateQuantityBranchSpec = {
             }
         }
     }
-};
+}
 
-const updatedBranchsWithDifferentUnit = clon(laitBranch.items);
-setQuantity(updatedBranchsWithDifferentUnit[1], 1, "kg");
+const updatedBranchsWithDifferentUnit = clon(laitBranch.items)
+setQuantity(updatedBranchsWithDifferentUnit[1], 1, "kg")
 export const updateQuantityAnotherUnitBranchSpec = {
     req:{
         url:"/api/branch",
@@ -76,4 +76,4 @@ export const updateQuantityAnotherUnitBranchSpec = {
             }
         }
     }
-};
+}

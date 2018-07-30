@@ -1,10 +1,10 @@
-import {removeQuantity} from "trees-query";
-import {cols} from "../../const/collections";
-import {col} from "trees-db-version/dist";
-import {matchId, withId, withIdQtUnit} from "trees-query";
-import {applyQuantity, erreurSiUnitIncompatibles, treefy} from "../../util/calculations";
+import {removeQuantity} from "trees-query"
+import {cols} from "../../const/collections"
+import {col} from "trees-db-version/dist"
+import {matchId, withId, withIdQtUnit} from "trees-query"
+import {applyQuantity, erreurSiUnitIncompatibles, treefy} from "../../util/calculations"
 
-const branches = () => col(cols.BRANCH);
+const branches = () => col(cols.BRANCH)
 
 const branchGraphLookup = {
     $graphLookup: {
@@ -15,27 +15,27 @@ const branchGraphLookup = {
         maxDepth: 10,
         as: "cache"
     }
-};
+}
 
 const getBranchGraph = _id => {
-    return branches().aggregate([matchId(_id), branchGraphLookup]).next();
-};
+    return branches().aggregate([matchId(_id), branchGraphLookup]).next()
+}
 
 const loadBranchs = _id =>
     branches().findOne(withId(_id))
-        .then(i => i || {_id, items: []});
+        .then(i => i || {_id, items: []})
 
 export const readBranchTree = (qt, unit, _id) =>
     getBranchGraph(_id)
         .then(graph => graph && treefy({qt, unit}, graph))
-        .then(tree => tree || {...withIdQtUnit(_id, qt, unit), items: []});
+        .then(tree => tree || {...withIdQtUnit(_id, qt, unit), items: []})
 
 export const loadNamedUnquantifiedBranch = _id =>
     loadBranchs(_id)
-        .then(removeQuantity);
+        .then(removeQuantity)
 
 export const loadNamedQuantifiedBranch = async (qt, unit, _id) =>
     loadBranchs(_id)
         .then(branchs => erreurSiUnitIncompatibles({qt, unit}, branchs))
-        .then(branchs => applyQuantity({qt, unit}, branchs));
+        .then(branchs => applyQuantity({qt, unit}, branchs))
 

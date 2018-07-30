@@ -1,35 +1,35 @@
-import {cols} from "../../const/collections";
-import {col} from "trees-db-version/dist";
-import {withIdIn} from "trees-query";
-import {debug} from "../../util/debug";
-import {appendItemsInfos} from "../common/commonService";
+import {cols} from "../../const/collections"
+import {col} from "trees-db-version/dist"
+import {withIdIn} from "trees-query"
+import {debug} from "../../util/debug"
+import {appendItemsInfos} from "../common/commonService"
 
-const collection = () => col(cols.TRUNK);
+const collection = () => col(cols.TRUNK)
 
-const getFields = {name_lower: 0};
-const searchMixin = {color: 1, name: 1, grandeur: 1, quantity: 1, type: 1};
+const getFields = {name_lower: 0}
+const searchMixin = {color: 1, name: 1, grandeur: 1, quantity: 1, type: 1}
 
-export const appendTrunkInfos = appendItemsInfos(cols.TRUNK, {name: 1, color: 1});
-export const getTrunk = _id => collection().findOne({_id}, getFields);
+export const appendTrunkInfos = appendItemsInfos(cols.TRUNK, {name: 1, color: 1})
+export const getTrunk = _id => collection().findOne({_id}, getFields)
 export const getTrunks = _ids => {
-    return collection().find(withIdIn(_ids), getFields).toArray();
-};
+    return collection().find(withIdIn(_ids), getFields).toArray()
+}
 
-export const getQuantifiedTrunk = async (qt, unit, _id) => ({...await getTrunk(_id), quantity: {qt, unit}});
+export const getQuantifiedTrunk = async (qt, unit, _id) => ({...await getTrunk(_id), quantity: {qt, unit}})
 
 export const search = (name, type) => collection()
     .find(prepareQuery(name, type), searchMixin)
     .sort({name_lower: 1})
-    .toArray();
+    .toArray()
 
 const prepareQuery = (name, type) => {
-    const query = {};
+    const query = {}
     if (name) {
         query.name_lower = {$regex: `^${name.toLowerCase()}.*`}
     }
     if (type) {
-        query.type = type;
+        query.type = type
     }
-    debug("query", query);
-    return query;
-};
+    debug("query", query)
+    return query
+}

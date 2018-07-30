@@ -1,7 +1,7 @@
-import {oneModifiedResponse} from "trees-test/dist/domain";
-import {cols} from "../../../src/const/collections";
-import {remove} from "trees-test/dist/util";
-import {bleBranch, farineBranch, farineItem} from "../../database/gateau";
+import {oneModifiedResponse} from "trees-test/dist/domain"
+import {cols} from "../../../src/const/collections"
+import {remove} from "trees-test/dist/util"
+import {bleBranch, farineBranch, farineItem} from "../../database/gateau"
 
 export const branchDeletionSpec = {
     req: {
@@ -17,7 +17,7 @@ export const branchDeletionSpec = {
             doc: remove(farineBranch, "items", {_id: farineBranch.items[0]._id})
         }
     }
-};
+}
 
 export const deleteBleBranchFarineSpec = {
     req: {
@@ -34,4 +34,4 @@ export const deleteBleBranchFarineSpec = {
             doc: remove(bleBranch, "items", {_id: farineItem._id})
         }
     }
-};
+}

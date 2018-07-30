@@ -1,11 +1,11 @@
-import {oneModifiedResponse} from "trees-test/dist/domain";
-import {cols} from "../../../src/const/collections";
-import _ from 'lodash';
-import {bleTrunk, gateauTrunk} from "../../database/gateau";
-import {withQuantity} from "trees-test/dist/domain";
+import {oneModifiedResponse} from "trees-test/dist/domain"
+import {cols} from "../../../src/const/collections"
+import _ from 'lodash'
+import {bleTrunk, gateauTrunk} from "../../database/gateau"
+import {withQuantity} from "trees-test/dist/domain"
 
 
-const someNewName = "paPRika" + Math.random();
+const someNewName = "paPRika" + Math.random()
 export const renameTrunkSpec = {
     req: {
         method: "PUT",
@@ -21,17 +21,15 @@ export const renameTrunkSpec = {
         expected: {
             colname: cols.TRUNK,
             doc: {
-                _id: bleTrunk._id,
-                color: bleTrunk.color,
                 name: someNewName,
                 name_lower: someNewName.toLowerCase()
             }
         }
     }
-};
+}
 
 
-const newGateauQuantity = withQuantity(1, "kg");
+const newGateauQuantity = withQuantity(1, "kg")
 export const requantifyTrunkSpec = {
     req: {
         method: "PUT",
@@ -50,7 +48,7 @@ export const requantifyTrunkSpec = {
             }
         }
     }
-};
+}
 
 export const noUnitPutTrunkSpec = {
     req: {
@@ -62,4 +60,4 @@ export const noUnitPutTrunkSpec = {
     }, res: {
         code:400
     }
-};
+}

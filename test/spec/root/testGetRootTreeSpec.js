@@ -1,20 +1,20 @@
-import {clon} from "trees-test/dist/util";
-import {removeItemQuantity, withIdQuantity, withQtCoef} from "trees-test/dist/domain";
-import {bleTrunk, gateauRoot} from "../../database/gateau";
-import {arbreTrunk} from "../../database/skate";
-import {withIdQtUnit} from "trees-query";
-import {coucheAdhesif, coucheAlu, couchePapier, couchePE, papierVA} from "../../database/papier";
-import {aTrunk, daTrunk, dRoot} from "../../database/lettres";
-import {cols} from "../../../src/const/collections";
+import {clon} from "trees-test/dist/util"
+import {removeItemQuantity, withIdQuantity, withQtCoef} from "trees-test/dist/domain"
+import {bleTrunk, gateauRoot} from "../../database/gateau"
+import {arbreTrunk} from "../../database/skate"
+import {withIdQtUnit} from "trees-query"
+import {coucheAdhesif, coucheAlu, couchePapier, couchePE, papierVA} from "../../database/papier"
+import {aTrunk, daTrunk, dRoot} from "../../database/lettres"
+import {cols} from "../../../src/const/collections"
 
 
-const gateauRoot2Kg = clon(gateauRoot);
+const gateauRoot2Kg = clon(gateauRoot)
 //on fait x4 sur la quantité
-gateauRoot2Kg.quantity.qt = 2;
-gateauRoot2Kg.quantity.unit = "kg";
-withQtCoef(withQtCoef(gateauRoot2Kg.items));
+gateauRoot2Kg.quantity.qt = 2
+gateauRoot2Kg.quantity.unit = "kg"
+withQtCoef(withQtCoef(gateauRoot2Kg.items))
 //on ajoute le blé à la farine
-gateauRoot2Kg.items[0].items = [{_id: bleTrunk._id}];
+gateauRoot2Kg.items[0].items = [{_id: bleTrunk._id}]
 export const gateauRootTreeSpec = {
     req: {
         url: `/api/root/tree/${gateauRoot2Kg.quantity.qt}/${gateauRoot2Kg.quantity.unit}/${gateauRoot2Kg._id}`,
@@ -24,7 +24,7 @@ export const gateauRootTreeSpec = {
             ...gateauRoot2Kg
         }
     }
-};
+}
 
 export const noRootsTreeSpec = {
     req: {
@@ -40,7 +40,7 @@ export const noRootsTreeSpec = {
             items: []
         }
     }
-};
+}
 
 
 export const papierAGetRootTreeSpec = {
@@ -58,7 +58,7 @@ export const papierAGetRootTreeSpec = {
             ]
         }
     }
-};
+}
 
 export const lettreGetRootTreeSpec = {
     req: {
@@ -216,7 +216,7 @@ export const lettreGetRootTreeSpec = {
             }
         }
     }
-};
+}
 
 export const lettreNoDaQtGetRootTreeSpec = {
     req: {
@@ -374,4 +374,4 @@ export const lettreNoDaQtGetRootTreeSpec = {
             }
         }
     }
-};
+}

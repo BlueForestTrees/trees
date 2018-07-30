@@ -1,10 +1,10 @@
-import _ from 'lodash';
-import {withError, withValidationError} from "trees-test/dist/domain";
-import {clon} from "trees-test/dist/util";
-import {withoutQuantity, withQtCoef} from "trees-test/dist/domain";
-import {withTrunkInfos} from "trees-test/dist/db";
+import _ from 'lodash'
+import {withError, withValidationError} from "trees-test/dist/domain"
+import {clon} from "trees-test/dist/util"
+import {withoutQuantity, withQtCoef} from "trees-test/dist/domain"
+import {withTrunkInfos} from "trees-test/dist/db"
 
-import {farineBranch, laitBranch, pizzaTrunk} from "../../database/gateau";
+import {farineBranch, laitBranch, pizzaTrunk} from "../../database/gateau"
 
 export const getBranchsSpec = {
     req: {
@@ -16,7 +16,7 @@ export const getBranchsSpec = {
             items: withoutQuantity(clon(farineBranch.items)),
         }
     }
-};
+}
 
 export const emptyGetBranchSpec = {
     req: {
@@ -28,7 +28,7 @@ export const emptyGetBranchSpec = {
             items: []
         }
     }
-};
+}
 
 export const sameQtGetBranchSpec = {
     req: {
@@ -40,11 +40,11 @@ export const sameQtGetBranchSpec = {
             items: farineBranch.items
         }
     }
-};
+}
 
-const farine1000G = clon(farineBranch);
-withQtCoef([farine1000G]);
-withQtCoef(farine1000G.items);
+const farine1000G = clon(farineBranch)
+withQtCoef([farine1000G])
+withQtCoef(farine1000G.items)
 export const farine1000GGetBranchSpec = {
     req: {
         url: `/api/branch/${farine1000G.quantity.qt}/${farine1000G.quantity.unit}/${farine1000G._id}`
@@ -54,12 +54,12 @@ export const farine1000GGetBranchSpec = {
             ...farine1000G
         }
     }
-};
+}
 
-const farineBranch1Kg = clon(farineBranch);
-farineBranch1Kg.quantity.qt = 1;
-farineBranch1Kg.quantity.unit = "kg";
-withQtCoef(farineBranch1Kg.items,5);
+const farineBranch1Kg = clon(farineBranch)
+farineBranch1Kg.quantity.qt = 1
+farineBranch1Kg.quantity.unit = "kg"
+withQtCoef(farineBranch1Kg.items,5)
 export const otherUnitGetBranchSpec = {
     req: {
         url: `/api/branch/${farineBranch1Kg.quantity.qt}/${farineBranch1Kg.quantity.unit}/${farineBranch1Kg._id}`
@@ -69,11 +69,11 @@ export const otherUnitGetBranchSpec = {
             ...farineBranch1Kg
         }
     }
-};
+}
 
 
-const gateauBranch1L = clon(farineBranch);
-gateauBranch1L.quantity.unit = "L";
+const gateauBranch1L = clon(farineBranch)
+gateauBranch1L.quantity.unit = "L"
 export const badUnitGetBranchSpec = {
     req: {
         url: `/api/branch/${gateauBranch1L.quantity.qt}/${gateauBranch1L.quantity.unit}/${gateauBranch1L._id}`
@@ -82,10 +82,10 @@ export const badUnitGetBranchSpec = {
         code: 400,
         body: withError(3, "Units mismatch: 'L' and 'g'")
     }
-};
+}
 
 
-const branchWithoutQt = clon(laitBranch);
+const branchWithoutQt = clon(laitBranch)
 export const branchWithoutQtSpec = {
     req: {
         url: `/api/branch/${branchWithoutQt.quantity.qt}/${branchWithoutQt.quantity.unit}/${branchWithoutQt._id}`
@@ -95,4 +95,4 @@ export const branchWithoutQtSpec = {
             ...branchWithoutQt
         }
     }
-};
+}

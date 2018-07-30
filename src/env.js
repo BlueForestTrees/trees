@@ -1,7 +1,7 @@
-import {debug} from "trees-test/dist/util";
-import path from 'path';
-import fs from 'fs';
-import {version} from './../package.json';
+import {debug} from "trees-test/dist/util"
+import path from 'path'
+import fs from 'fs'
+import {version} from './../package.json'
 
 const ENV = {
     PORT: process.env.PORT || 8080,
@@ -20,13 +20,13 @@ const ENV = {
 
     MAIL_CONFIG_PATH: process.env.MAIL_CONFIG_PATH ? path.resolve(process.env.MAIL_CONFIG_PATH,"mailConfig.json") : path.join(__dirname, "mailConfig.json"),
     MAIL_TEMPLATE_PATH: process.env.MAIL_TEMPLATE_PATH || path.join(__dirname, "../templates")
-};
+}
 
-ENV.MAIL_CONFIG = JSON.parse(fs.readFileSync(ENV.MAIL_CONFIG_PATH, 'utf8'));
+ENV.MAIL_CONFIG = JSON.parse(fs.readFileSync(ENV.MAIL_CONFIG_PATH, 'utf8'))
 
-ENV.VERSION = version;
+ENV.VERSION = version
 
 
-debug({ENV});
+debug({ENV})
 
-export default ENV;
+export default ENV

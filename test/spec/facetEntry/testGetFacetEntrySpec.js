@@ -1,6 +1,6 @@
-import {omit} from 'lodash';
-import {notInSearchMixin} from "trees-test/dist/domain";
-import {vitBFacetEntry, vitCFacetEntry, vitDFacetEntry, vitEFacetEntry} from "../../database/facetEntries";
+import {omit} from 'lodash'
+import {notInSearchMixin} from "trees-test/dist/domain"
+import {vitBFacetEntry, vitCFacetEntry, vitDFacetEntry, vitEFacetEntry} from "../../database/facetEntries"
 
 export const searchFacetEntrySpec = {
     req: {
@@ -14,4 +14,4 @@ export const searchFacetEntrySpec = {
             omit(vitEFacetEntry, notInSearchMixin),
         ]
     }
-};
+}

@@ -1,13 +1,13 @@
-import {addFacetEntry, replaceAllFacetEntries} from "../../service/facetEntry/postFacetEntryService";
-import {validColor, validGrandeur, validId, validName} from "../../const/validations";
+import {addFacetEntry, replaceAllFacetEntries} from "../../service/facetEntry/postFacetEntryService"
+import {validColor, validGrandeur, validId, validName} from "../../const/validations"
 
 import {run} from 'trees-express'
 
-import {Router} from "trees-express";
+import {Router} from "trees-express"
 
-const router = Router();
+const router = Router()
 
-module.exports = router;
+module.exports = router
 
 router.post('/api/facetEntry',
     validId,
@@ -15,4 +15,4 @@ router.post('/api/facetEntry',
     validGrandeur,
     validColor,
     run(addFacetEntry)
-);
+)

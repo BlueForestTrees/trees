@@ -6,7 +6,7 @@ export const getGrandeurSpec = {
         body: [
             {
                 "key": "CTUe",
-                "label": "Comparative Toxic Unit for ecosystems",
+                "label": "CTUe - Comparative Toxic Unit for ecosystems",
                 "units": [
                     {
                         "coef": 1,
@@ -18,7 +18,7 @@ export const getGrandeurSpec = {
             },
             {
                 "key": "CTUh",
-                "label": "Comparative Toxic Unit for humans",
+                "label": "CTUh - Comparative Toxic Unit for humans",
                 "units": [
                     {
                         "coef": 1,
@@ -30,7 +30,7 @@ export const getGrandeurSpec = {
             },
             {
                 "key": "DALY",
-                "label": "DALY calculations adapted to USEtox midpoint (Huijbregts et al., 2005).",
+                "label": "DALY - Disability Adjusted Life Years - Calculations adapted to USEtox midpoint (Huijbregts et al., 2005).",
                 "units": [
                     {
                         "coef": 1,
@@ -241,7 +241,7 @@ export const getGrandeurSpec = {
             },
             {
                 "key": "PDF",
-                "label": "Potentially Disappeared Number of plant species in terrestrial ecosystems * time",
+                "label": "PDF - Potentially Disappeared Number of plant species in terrestrial ecosystems * time",
                 "units": [
                     {
                         "coef": 1,
@@ -253,7 +253,7 @@ export const getGrandeurSpec = {
             },
             {
                 "key": "PNOF",
-                "label": "Potentially Not Occuring Number of plant species in terrestrial ecosystems * time",
+                "label": "PNOF - Potentially Not Occuring Number of plant species in terrestrial ecosystems * time",
                 "units": [
                     {
                         "coef": 1,

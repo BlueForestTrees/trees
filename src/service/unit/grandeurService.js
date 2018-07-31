@@ -13,19 +13,19 @@ const unit = (shortname, name, coef) =>
 
 export const loadUnitsData = () => Promise.resolve(
     [
-        grandeur("PNOF", "Potentially Not Occuring Number of plant species in terrestrial ecosystems * time", [
+        grandeur("PNOF", "PNOF - Potentially Not Occuring Number of plant species in terrestrial ecosystems * time", [
             unit("PNOF", "Potentially Not Occuring Number of plant species in terrestrial ecosystems * time (PNOF)", 1)
         ]),
-        grandeur("PDF", "Potentially Disappeared Number of plant species in terrestrial ecosystems * time", [
+        grandeur("PDF", "PDF - Potentially Disappeared Number of plant species in terrestrial ecosystems * time", [
             unit("PDF", "Potentially Disappeared Number of plant species in terrestrial ecosystems * time (PDF)", 1)
         ]),
-        grandeur("DALY", "DALY calculations adapted to USEtox midpoint (Huijbregts et al., 2005).", [
+        grandeur("DALY", "DALY - Disability Adjusted Life Years - Calculations adapted to USEtox midpoint (Huijbregts et al., 2005).", [
             unit("DALY", "Disability Adjusted Life Years (DALY)", 1)
         ]),
-        grandeur("CTUh", "Comparative Toxic Unit for humans", [
+        grandeur("CTUh", "CTUh - Comparative Toxic Unit for humans", [
             unit("CTUh", "Comparative Toxic Unit for humans (CTUh) * volume * time", 1)
         ]),
-        grandeur("CTUe", "Comparative Toxic Unit for ecosystems", [
+        grandeur("CTUe", "CTUe - Comparative Toxic Unit for ecosystems", [
             unit("CTUe", "Comparative Toxic Unit for ecosystems (CTUe) * volume * time", 1)
         ]),
         grandeur("Ener", "Energie (wh, J, cal...)", [

@@ -4,6 +4,8 @@ import {AllreadyExistError} from "../../exceptions/Errors"
 import {parse} from "../../util/excel"
 import {grandeur} from "trees-units"
 import {map} from 'lodash'
+import {createObjectId} from "trees-query"
+import {oneImpactEntryFrom} from "./getImpactEntryService"
 
 const impactsEntry = () => col(cols.IMPACT_ENTRY)
 
@@ -29,8 +31,8 @@ const parseDesc = {
     ]
 }
 
-export const ademeToBlueforest = raws => map(raws, raw => ({
-    _id: null,
+export const ademeToBlueforest = raws => map(raws, async raw => ({
+    _id: (await oneImpactEntryFrom({externId: raw.externId}, {_id: 1}))._id || createObjectId(),
     externId: raw.externId,
     name: raw.nom,
     name_lower: raw.nom.toLowerCase(),
@@ -50,7 +52,6 @@ export const ademeUnitToGrandeurEq = ademeUnit => {
 }
 
 export const importAdemeEntries = async filename => {
-
     try {
         const res = await impactsEntry().insertMany(ademeToBlueforest(await parse(filename, parseDesc)), {ordered: false})
         console.log(res.result)

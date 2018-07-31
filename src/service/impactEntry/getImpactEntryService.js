@@ -1,11 +1,9 @@
 import {cols} from "../../const/collections"
 import {col} from "trees-db-version/dist"
-import {withIdIn} from "trees-query"
 import regexEscape from "regex-escape"
 import {appendItemsInfos} from "../common/commonService"
 
 const getFields = {name_lower: 0}
-const idField = {_id:1}
 
 const collection = () => col(cols.IMPACT_ENTRY)
 
@@ -19,3 +17,4 @@ export const searchImpactEntriesByNamepart = namePart => collection()
     .sort({name: 1})
     .toArray()
 
+export const oneImpactEntryFrom = (mixin, query) => collection().findOne(query, mixin)

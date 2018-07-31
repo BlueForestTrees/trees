@@ -6,18 +6,20 @@ import path from 'path'
 import {expect} from "chai"
 import {countFromDbByDoc} from "trees-test/dist/db"
 import api from "../../../../src"
+import fs from 'fs'
 
 describe('Imports', function () {
+    const impactBuffer = fs.readFileSync(path.resolve("test/files/BI_1.09__06_CatImpacts_Details.xlsx"))
 
     beforeEach(init(api, ENV, cols))
 
     it('first impact imports', async () => {
-        await importAdemeEntries(path.resolve("test/files/BI_1.09__06_CatImpacts_Details.xlsx"))
+        await importAdemeEntries(impactBuffer)
         expect(await countFromDbByDoc(cols.IMPACT_ENTRY, {origin: "ADEME"})).to.equal(27)
     })
     it('two impact imports', async () => {
-        await importAdemeEntries(path.resolve("test/files/BI_1.09__06_CatImpacts_Details.xlsx"))
-        await importAdemeEntries(path.resolve("test/files/BI_1.09__06_CatImpacts_Details.xlsx"))
+        await importAdemeEntries(impactBuffer)
+        await importAdemeEntries(impactBuffer)
 
         expect(await countFromDbByDoc(cols.IMPACT_ENTRY, {origin: "ADEME"})).to.equal(27)
     })

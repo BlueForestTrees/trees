@@ -2,6 +2,7 @@ import Excel from "exceljs"
 
 import {expect} from "chai"
 import {mapFromDescription, parse, parseDocument} from "../../../src/util/excel"
+import fs from "fs"
 
 describe('xlsx read', function () {
 
@@ -30,7 +31,6 @@ describe('xlsx read', function () {
             .then(() => {
                 const headerColumnIdx = 1
                 const column = workbook.getWorksheet(1).getColumn(headerColumnIdx).values
-                console.log(column)
             })
     })
 
@@ -113,7 +113,7 @@ describe('xlsx read', function () {
             ]
         }
 
-        const docs = await parse(filename, parseDesc)
+        const docs = await parse(fs.readFileSync(filename), parseDesc)
 
         expect(docs.length).to.equal(27)
         expect(docs[1].externId).to.equal("865c4fbe-11cc-4905-9b0a-80a99d94f7e6")

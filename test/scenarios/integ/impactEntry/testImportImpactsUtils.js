@@ -31,15 +31,24 @@ describe('Imports utils', function () {
             datasetVersion: '01.00.000'
         }
         const blueforest = {
-            _id: null,
-            "externId": "370960f4-0a3a-415d-bf3e-e5ce63160bb9",
-            name: ademe.nom,
-            name_lower: ademe.nom.toLowerCase(),
-            grandeur: "Mass",
-            eq: "CO2",
-            color: "#696969",
-            origin: "ADEME",
-            raw: ademe
+            updateOne: {
+                filter: {
+                    externId: "370960f4-0a3a-415d-bf3e-e5ce63160bb9"
+                },
+                update: {
+                    $set: {
+                        color: "#696969",
+                        eq: "CO2",
+                        externId: "370960f4-0a3a-415d-bf3e-e5ce63160bb9",
+                        grandeur: "Mass",
+                        name: "Changement climatique",
+                        name_lower: "changement climatique",
+                        origin: "ADEME",
+                        raw: ademe
+                    }
+                },
+                upsert: true
+            }
         }
         expect(ademeToBlueforest([ademe])).to.deep.equal([blueforest])
     })

@@ -5,6 +5,42 @@ export const getGrandeurSpec = {
     res: {
         body: [
             {
+                "key": "CTUe",
+                "label": "Comparative Toxic Unit for ecosystems",
+                "units": [
+                    {
+                        "coef": 1,
+                        "grandeur": "CTUe",
+                        "name": "Comparative Toxic Unit for ecosystems (CTUe) * volume * time",
+                        "shortname": "CTUe"
+                    }
+                ]
+            },
+            {
+                "key": "CTUh",
+                "label": "Comparative Toxic Unit for humans",
+                "units": [
+                    {
+                        "coef": 1,
+                        "grandeur": "CTUh",
+                        "name": "Comparative Toxic Unit for humans (CTUh) * volume * time",
+                        "shortname": "CTUh"
+                    }
+                ]
+            },
+            {
+                "key": "DALY",
+                "label": "DALY calculations adapted to USEtox midpoint (Huijbregts et al., 2005).",
+                "units": [
+                    {
+                        "coef": 1,
+                        "grandeur": "DALY",
+                        "name": "Disability Adjusted Life Years (DALY)",
+                        "shortname": "DALY"
+                    }
+                ]
+            },
+            {
                 "key": "Dens",
                 "label": "Densité (mol, mmol...)",
                 "units": [
@@ -25,9 +61,16 @@ export const getGrandeurSpec = {
                         "grandeur": "Dens",
                         "name": "Mole (mol)",
                         "shortname": "mol"
+                    },
+                    {
+                        "coef": 1000,
+                        "grandeur": "Dens",
+                        "name": "Kilo-Mole (mol)",
+                        "shortname": "kmol"
                     }
                 ]
             },
+
             {
                 "key": "Duré",
                 "label": "Durée (sec, min, h...)",
@@ -197,6 +240,30 @@ export const getGrandeurSpec = {
                 ],
             },
             {
+                "key": "PDF",
+                "label": "Potentially Disappeared Number of plant species in terrestrial ecosystems * time",
+                "units": [
+                    {
+                        "coef": 1,
+                        "grandeur": "PDF",
+                        "name": "Potentially Disappeared Number of plant species in terrestrial ecosystems * time (PDF)",
+                        "shortname": "PDF"
+                    }
+                ]
+            },
+            {
+                "key": "PNOF",
+                "label": "Potentially Not Occuring Number of plant species in terrestrial ecosystems * time",
+                "units": [
+                    {
+                        "coef": 1,
+                        "grandeur": "PNOF",
+                        "name": "Potentially Not Occuring Number of plant species in terrestrial ecosystems * time (PNOF)",
+                        "shortname": "PNOF"
+                    }
+                ]
+            },
+            {
                 "key": "Prix",
                 "label": "Prix/Coût (€...)",
                 "units": [
@@ -205,6 +272,12 @@ export const getGrandeurSpec = {
                         "grandeur": "Prix",
                         "name": "euro (€)",
                         "shortname": "€"
+                    },
+                    {
+                        "coef": 1.17,
+                        "grandeur": "Prix",
+                        "name": "dollar ($)",
+                        "shortname": "$"
                     }
                 ]
             },

@@ -1,20 +1,21 @@
-import _ from 'lodash'
+import {omit} from 'lodash'
 import {withError, withValidationError} from "trees-test/dist/domain"
 import {clon} from "trees-test/dist/util"
 import {withoutQuantity, withQtCoef} from "trees-test/dist/domain"
-import {withTrunkInfos} from "trees-test/dist/db"
+import {withInfos} from "trees-test/dist/db"
 
 import {farineBranch, laitBranch, pizzaTrunk} from "../../database/gateau"
+import {cols} from "../../../src/const/collections"
 
 export const getBranchsSpec = {
     req: {
         url: `/api/branch/${farineBranch._id}`
     },
     res: {
-        body: {
-            ..._.omit(farineBranch, ["items", "quantity"]),
-            items: withoutQuantity(clon(farineBranch.items)),
-        }
+        body: () => ({
+            ...omit(farineBranch, ['items', 'quantity']),
+            items: withInfos(cols.TRUNK, withoutQuantity(clon(farineBranch.items)))
+        })
     }
 }
 
@@ -35,10 +36,10 @@ export const sameQtGetBranchSpec = {
         url: `/api/branch/${farineBranch.quantity.qt}/${farineBranch.quantity.unit}/${farineBranch._id}`
     },
     res: {
-        body: {
-            ..._.omit(farineBranch, "items"),
-            items: farineBranch.items
-        }
+        body: () => ({
+            ...omit(farineBranch, 'items'),
+            items: withInfos(cols.TRUNK, clon(farineBranch.items))
+        })
     }
 }
 
@@ -50,9 +51,10 @@ export const farine1000GGetBranchSpec = {
         url: `/api/branch/${farine1000G.quantity.qt}/${farine1000G.quantity.unit}/${farine1000G._id}`
     },
     res: {
-        body: {
-            ...farine1000G
-        }
+        body: () => ({
+            ...omit(farine1000G, 'items'),
+            items: withInfos(cols.TRUNK, clon(farine1000G.items))
+        })
     }
 }
 
@@ -65,9 +67,10 @@ export const otherUnitGetBranchSpec = {
         url: `/api/branch/${farineBranch1Kg.quantity.qt}/${farineBranch1Kg.quantity.unit}/${farineBranch1Kg._id}`
     },
     res: {
-        body: {
-            ...farineBranch1Kg
-        }
+        body: () => ({
+            ...omit(farineBranch1Kg, 'items'),
+            items: withInfos(cols.TRUNK, clon(farineBranch1Kg.items))
+        })
     }
 }
 
@@ -84,15 +87,14 @@ export const badUnitGetBranchSpec = {
     }
 }
 
-
-const branchWithoutQt = clon(laitBranch)
 export const branchWithoutQtSpec = {
     req: {
-        url: `/api/branch/${branchWithoutQt.quantity.qt}/${branchWithoutQt.quantity.unit}/${branchWithoutQt._id}`
+        url: `/api/branch/${laitBranch.quantity.qt}/${laitBranch.quantity.unit}/${laitBranch._id}`
     },
     res: {
-        body: {
-            ...branchWithoutQt
-        }
+        body: () => ({
+            ...omit(laitBranch, 'items'),
+            items: withInfos(cols.TRUNK, clon(laitBranch.items))
+        })
     }
 }

@@ -3,6 +3,7 @@ import _ from 'lodash'
 import {vitCImpactEntry} from "../../database/impactEntries"
 import {cols} from "../../../src/const/collections"
 import {createStringObjectId} from "trees-test/dist/util"
+import path from "path"
 
 const impactEntry = {
     _id: createStringObjectId(),
@@ -62,6 +63,24 @@ export const postBadGrandeurImpactEntrySpec = {
     res: {
         code: 400,
         bodypath: {path: "$.errors.grandeur.msg", value: "Invalid value"}
+    }
+}
+
+export const postAdemeImpactFileSpec = {
+    req: {
+        url: "/api/impactEntryBulk/ademe",
+        method: "POST",
+        file: {
+            field: "xlsx.ademe.impact",
+            path: path.resolve("test/files/BI_1.09__06_CatImpacts_Details.xlsx")
+        }
+    },
+    res: {
+        bodypath: [
+            {path: "$.ok", value: true},
+            {path: "$.upsertions", value: 27},
+            {path: "$.insertions", value: 0},
+        ]
     }
 }
 

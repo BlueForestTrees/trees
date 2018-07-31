@@ -1,4 +1,4 @@
-import {allreadyExistingImpactEntrySpec, postBadGrandeurImpactEntrySpec, postBadIdImpactEntrySpec, postImpactEntrySpec} from "../../../spec/impactEntry/testPostImpactEntrySpec"
+import {allreadyExistingImpactEntrySpec, postAdemeImpactFileSpec, postBadGrandeurImpactEntrySpec, postBadIdImpactEntrySpec, postImpactEntrySpec} from "../../../spec/impactEntry/testPostImpactEntrySpec"
 import {init, withTest} from "trees-test/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
@@ -15,5 +15,7 @@ describe('POST ImpactEntry', function () {
     it('refuse to post since same id exist', withTest(allreadyExistingImpactEntrySpec))
 
     it('postBadGrandeurImpactEntrySpec', withTest(postBadGrandeurImpactEntrySpec))
+
+    it('post ademe impact file', withTest(postAdemeImpactFileSpec))
 
 })

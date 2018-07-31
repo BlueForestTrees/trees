@@ -1,9 +1,11 @@
-import _ from 'lodash'
+import {omit} from 'lodash'
 import {setQuantity, withError, withoutQuantity, withQtCoef} from "trees-test/dist/domain"
 import {clon} from "trees-test/dist/util"
-import {farineRoot, gateauRoot, laitTrunk} from "../../database/gateau"
+import {farineBranch, farineRoot, gateauRoot, laitTrunk} from "../../database/gateau"
 import {skateRoot} from "../../database/skate"
 import {banane, bananeBC, transport} from "../../database/banane"
+import {cols} from "../../../src/const/collections"
+import {withInfos} from "trees-test/dist/db"
 
 export const getBananeRootSpec = {
     req: {
@@ -21,10 +23,10 @@ export const getRootsSpec = {
         url: `/api/root/${gateauRoot._id}`
     },
     res: {
-        body: {
-            _id: gateauRoot._id,
-            items: withoutQuantity(clon(gateauRoot.items))
-        }
+        body: () => ({
+            ...omit(gateauRoot, ['items','quantity']),
+            items: withInfos(cols.TRUNK, withoutQuantity(clon(gateauRoot.items)))
+        })
     }
 }
 
@@ -47,10 +49,10 @@ export const sameQtGetRootSpec = {
         url: `/api/root/${gateauRoot.quantity.qt}/${gateauRoot.quantity.unit}/${gateauRoot._id}`
     },
     res: {
-        body: {
-            ..._.omit(gateauRoot, "items"),
-            items: clon(gateauRoot.items)
-        }
+        body: () => ({
+            ...omit(gateauRoot, 'items'),
+            items: withInfos(cols.TRUNK, clon(gateauRoot.items))
+        })
     }
 }
 
@@ -65,9 +67,10 @@ export const gateau1000GGetRootSpec = {
         url: `/api/root/${gato1000G.quantity.qt}/${gato1000G.quantity.unit}/${gato1000G._id}`
     },
     res: {
-        body: {
-            ...gato1000G
-        }
+        body: () => ({
+            ...omit(gato1000G, 'items'),
+            items: withInfos(cols.TRUNK, clon(gato1000G.items))
+        })
     }
 }
 
@@ -81,9 +84,10 @@ export const skate10GetRootSpec = {
         url: `/api/root/${skate10.quantity.qt}/${skate10.quantity.unit}/${skate10._id}`
     },
     res: {
-        body: {
-            ...skate10
-        }
+        body: () => ({
+            ...omit(skate10, 'items'),
+            items: withInfos(cols.TRUNK, clon(skate10.items))
+        })
     }
 }
 
@@ -98,9 +102,10 @@ export const otherUnitGetRootSpec = {
         url: `/api/root/${gateauRoot1Kg.quantity.qt}/${gateauRoot1Kg.quantity.unit}/${gateauRoot1Kg._id}`
     },
     res: {
-        body: {
-            ...gateauRoot1Kg
-        }
+        body: () => ({
+            ...omit(gateauRoot1Kg, 'items'),
+            items: withInfos(cols.TRUNK, clon(gateauRoot1Kg.items))
+        })
     }
 }
 
@@ -124,9 +129,10 @@ export const farineNoBleQtGetRootSpec = {
         url: `/api/root/${myFarineRoot.quantity.qt}/${myFarineRoot.quantity.unit}/${myFarineRoot._id}`
     },
     res: {
-        body: {
-            ...myFarineRoot
-        }
+        body: () => ({
+            ...omit(myFarineRoot, 'items'),
+            items: withInfos(cols.TRUNK, clon(myFarineRoot.items))
+        })
     }
 }
 

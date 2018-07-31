@@ -1,20 +1,21 @@
 import {clon} from "trees-test/dist/util"
 import _ from 'lodash'
-import {bleFacets} from "../../database/gateau"
+import {bleFacets, gateauRoot} from "../../database/gateau"
 import {withQuantity} from "trees-test/dist/domain"
+import {cols} from "../../../src/const/collections"
+import {omit} from 'lodash';
+import {withInfos} from "trees-test/dist/db"
+import {withoutQuantity} from "trees-test/dist/domain"
 
-const laFacetWithItsFacetEntryFields = _.forEach(clon(bleFacets.items), facet => {
-    delete facet.quantity
-})
 export const getFacetSpec = {
     req: {
         url: `/api/facet/${bleFacets._id}`
     },
     res: {
-        body: {
-            _id: bleFacets._id,
-            items: laFacetWithItsFacetEntryFields
-        }
+        body: () => ({
+            ...omit(bleFacets, ['items','quantity']),
+            items: withInfos(cols.FACET_ENTRY, withoutQuantity(clon(bleFacets.items)))
+        })
     }
 }
 
@@ -27,11 +28,11 @@ export const getQuantifiedFacetSpec = {
         url: `/api/facet/5000/g/${bleFacets._id}`,
     },
     res: {
-        body: {
+        body: () => ({
             _id: bleFacets._id,
             ...withQuantity(5000, "g"),
-            items: resultItems
-        }
+            items: withInfos(cols.FACET_ENTRY, clon(resultItems))
+        })
     }
 }
 

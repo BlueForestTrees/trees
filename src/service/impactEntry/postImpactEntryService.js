@@ -57,4 +57,14 @@ export const ademeUnitToGrandeurEq = ademeUnit => {
     }
 }
 
-export const importAdemeEntries = async filename => await impactsEntry().bulkWrite(ademeToBlueforest(await parse(filename, parseDesc)), {ordered: false})
+export const importAdemeEntries = async buffer => {
+    const result = await impactsEntry().bulkWrite(ademeToBlueforest(await parse(buffer, parseDesc)), {ordered: false})
+    return {
+        ok: result.ok === 1,
+        insertions: result.nInserted,
+        upsertions: result.nUpserted,
+        matches: result.nMatched,
+        modifieds: result.nModified,
+        removeds: result.nRemoved
+    }
+}

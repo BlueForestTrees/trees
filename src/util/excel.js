@@ -1,9 +1,10 @@
 import Excel from "exceljs"
+import {streamIt} from "./streams"
 
-export const parse = (filename, desc) => {
-    const docs = []
+export const parse = (buffer, desc) => {
     const workbook = new Excel.Workbook()
-    return workbook.xlsx.readFile(filename).then(() => {
+    const docs = []
+    return workbook.xlsx.read(streamIt(buffer)).then(() => {
         const startAt = desc.firstDocAt
         const endAt = workbook.getWorksheet(1).getRow(1).values.length
         const map = mapFromDescription(workbook, desc.fields)

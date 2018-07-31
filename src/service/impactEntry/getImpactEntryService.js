@@ -16,5 +16,3 @@ export const searchImpactEntriesByNamepart = namePart => collection()
     .find({name_lower: {$regex: `.*${regexEscape(namePart.toLowerCase())}.*`}}, getFields)
     .sort({name: 1})
     .toArray()
-
-export const oneImpactEntryFrom = (mixin, query) => collection().findOne(query, mixin)

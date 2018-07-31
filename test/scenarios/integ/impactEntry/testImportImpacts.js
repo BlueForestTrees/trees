@@ -17,8 +17,7 @@ describe('Imports', function () {
     })
     it('two impact imports', async () => {
         await importAdemeEntries(path.resolve("test/files/BI_1.09__06_CatImpacts_Details.xlsx"))
-        //TODO devrait pouvoir importer plusieurs fois de suite sans doublon!
-        // await importAdemeEntries(path.resolve("test/files/BI_1.09__06_CatImpacts_Details.xlsx"))
+        await importAdemeEntries(path.resolve("test/files/BI_1.09__06_CatImpacts_Details.xlsx"))
 
         expect(await countFromDbByDoc(cols.IMPACT_ENTRY, {origin: "ADEME"})).to.equal(27)
     })

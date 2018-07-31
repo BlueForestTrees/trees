@@ -5,7 +5,6 @@ import {parse} from "../../util/excel"
 import {grandeur} from "trees-units"
 import {map} from 'lodash'
 import {createObjectId} from "trees-query"
-import {oneImpactEntryFrom} from "./getImpactEntryService"
 
 const impactsEntry = () => col(cols.IMPACT_ENTRY)
 
@@ -31,15 +30,22 @@ const parseDesc = {
     ]
 }
 
-export const ademeToBlueforest = raws => map(raws, async raw => ({
-    _id: (await oneImpactEntryFrom({externId: raw.externId}, {_id: 1}))._id || createObjectId(),
-    externId: raw.externId,
-    name: raw.nom,
-    name_lower: raw.nom.toLowerCase(),
-    ...ademeUnitToGrandeurEq(raw.unit),
-    color: "#696969",
-    origin: "ADEME",
-    raw
+export const ademeToBlueforest = raws => map(raws, raw => ({
+    updateOne: {
+        filter: {externId: raw.externId},
+        update: {
+            $set: {
+                externId: raw.externId,
+                name: raw.nom,
+                name_lower: raw.nom.toLowerCase(),
+                ...ademeUnitToGrandeurEq(raw.unit),
+                color: "#696969",
+                origin: "ADEME",
+                raw
+            }
+        },
+        upsert: true
+    }
 }))
 
 export const ademeUnitToGrandeurEq = ademeUnit => {
@@ -51,14 +57,4 @@ export const ademeUnitToGrandeurEq = ademeUnit => {
     }
 }
 
-export const importAdemeEntries = async filename => {
-    try {
-        const res = await impactsEntry().insertMany(ademeToBlueforest(await parse(filename, parseDesc)), {ordered: false})
-        console.log(res.result)
-        return res
-    } catch (e) {
-        console.log(e)
-        throw e
-    }
-
-}
+export const importAdemeEntries = async filename => await impactsEntry().bulkWrite(ademeToBlueforest(await parse(filename, parseDesc)), {ordered: false})

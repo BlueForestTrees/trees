@@ -13,6 +13,21 @@ const unit = (shortname, name, coef) =>
 
 export const loadUnitsData = () => Promise.resolve(
     [
+        grandeur("PNOF", "Potentially Not Occuring Number of plant species in terrestrial ecosystems * time", [
+            unit("PNOF", "Potentially Not Occuring Number of plant species in terrestrial ecosystems * time (PNOF)", 1)
+        ]),
+        grandeur("PDF", "Potentially Disappeared Number of plant species in terrestrial ecosystems * time", [
+            unit("PDF", "Potentially Disappeared Number of plant species in terrestrial ecosystems * time (PDF)", 1)
+        ]),
+        grandeur("DALY", "DALY calculations adapted to USEtox midpoint (Huijbregts et al., 2005).", [
+            unit("DALY", "Disability Adjusted Life Years (DALY)", 1)
+        ]),
+        grandeur("CTUh", "Comparative Toxic Unit for humans", [
+            unit("CTUh", "Comparative Toxic Unit for humans (CTUh) * volume * time", 1)
+        ]),
+        grandeur("CTUe", "Comparative Toxic Unit for ecosystems", [
+            unit("CTUe", "Comparative Toxic Unit for ecosystems (CTUe) * volume * time", 1)
+        ]),
         grandeur("Ener", "Energie (wh, J, cal...)", [
             unit("J", "Joule (J)", 0.23923445),
             unit("ws", "Watt-Seconde (ws)", 0.23923445),
@@ -25,7 +40,8 @@ export const loadUnitsData = () => Promise.resolve(
         grandeur("Dens", "Densité (mol, mmol...)", [
             unit("μmol", "Micro-mole (umol)", 0.000001),
             unit("mmol", "Milli-mole (mmol)", 0.001),
-            unit("mol", "Mole (mol)", 1)
+            unit("mol", "Mole (mol)", 1),
+            unit("kmol", "Kilo-Mole (mol)", 1000)
         ]),
         grandeur("Nomb", "Nombre (pas d'unité)", [
             unit("count", "pas d'unité", 1)
@@ -64,7 +80,8 @@ export const loadUnitsData = () => Promise.resolve(
             unit("km", "Kilo-mètre (km)", 1000)
         ]),
         grandeur("Prix", "Prix/Coût (€...)", [
-            unit("€", "euro (€)", 1)
+            unit("€", "euro (€)", 1),
+            unit("$", "dollar ($)", 1.17),
         ]),
         grandeur("Tran", "Transport (t*km...)", [
             unit("t*km", "Tonne Kilomètre (t*km)", 1),

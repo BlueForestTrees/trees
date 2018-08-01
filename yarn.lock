@@ -3978,7 +3978,7 @@ items-service@^0.1.18:
   dependencies:
     errors-blueforest "^0.0.0"
     mongo-queries-blueforest "^0.0.10"
-    units-manip "^1.0.11"
+    unit-manip "^1.0.11"
 
 mongo-queries-blueforest@^0.0.10:
   version "0.0.10"
@@ -4003,9 +4003,9 @@ mongo-queries-blueforest@^0.0.10:
     lodash "^4.17.10"
     mongo-connexion "file:../../AppData/Local/Yarn/Cache/v1/mongo-connexion"
 
-units-manip@^1.0.11, units-manip@^1.0.37:
+unit-manip@^1.0.11, unit-manip@^1.0.37:
   version "1.0.38"
-  resolved "https://registry.yarnpkg.com/units-manip/-/units-manip-1.0.38.tgz#761200ded2d9e742c946ebe936aecabc6dd9b0d4"
+  resolved "https://registry.yarnpkg.com/unit-manip/-/unit-manip-1.0.38.tgz#761200ded2d9e742c946ebe936aecabc6dd9b0d4"
   dependencies:
     fraction.js "^4.0.4"
     lodash "^4.17.5"

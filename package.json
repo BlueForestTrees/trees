@@ -51,7 +51,7 @@
     "mongo-registry": "1.0.0",
     "items-service": "1.0.0",
     "mongo-queries-blueforest": "1.0.0",
-    "unit-manip": "1.0.0"
+    "unit-manip": "1.0.1"
   },
   "babel": {
     "presets": [

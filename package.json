@@ -1,6 +1,7 @@
 {
   "name": "api-tree",
   "version": "0.0.3",
+  "license": "ISC",
   "scripts": {
     "start": "node dist/index.js",
     "build": "rimraf dist && babel src --out-dir dist/api-tree/js && copyfiles -u 1 templates/* dist/etc/api-tree/templates",
@@ -26,7 +27,7 @@
     "nyc": "11.4.1",
     "rimraf": "2.6.2",
     "sinon": "4.2.1",
-    "test-api-express-mongo": "1.0.2"
+    "test-api-express-mongo": "1.0.1"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -48,9 +49,9 @@
     "pick-to-array": "1.1.0",
     "regex-escape": "3.4.8",
     "sha1": "1.1.1",
-    "mongo-registry": "1.0.0",
+    "mongo-registry": "1.0.1",
     "items-service": "1.0.4",
-    "mongo-queries-blueforest": "1.0.0",
+    "mongo-queries-blueforest": "1.0.1",
     "unit-manip": "1.0.1",
     "express-blueforest": "1.0.2"
   },

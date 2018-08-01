@@ -1,6 +1,6 @@
-import {oneResponse} from "api-test/dist/domain"
+import {oneResponse} from "test-api-express-mongo/dist/domain"
 import {cols} from "../../../src/const/collections"
-import {withValidationError} from "api-test/dist/domain"
+import {withValidationError} from "test-api-express-mongo/dist/domain"
 
 export const postFeedbackOkSpec = {
     req: {

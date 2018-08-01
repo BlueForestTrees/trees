@@ -1,8 +1,8 @@
-import {oneModifiedResponse} from "api-test/dist/domain"
+import {oneModifiedResponse} from "test-api-express-mongo/dist/domain"
 import {cols} from "../../../src/const/collections"
 import _ from 'lodash'
 import {bleTrunk, gateauTrunk} from "../../database/gateau"
-import {withQuantity} from "api-test/dist/domain"
+import {withQuantity} from "test-api-express-mongo/dist/domain"
 
 
 const someNewName = "paPRika" + Math.random()

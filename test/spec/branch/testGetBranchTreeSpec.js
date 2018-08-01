@@ -1,6 +1,6 @@
 import {aTrunk} from "../../database/lettres"
 import {arbreTrunk} from "../../database/skate"
-import {withIdQuantity, withIdQtUnit} from "api-test/dist/domain"
+import {withIdQuantity, withIdQtUnit} from "test-api-express-mongo/dist/domain"
 
 export const noBranchsTreeSpec = {
     req:{

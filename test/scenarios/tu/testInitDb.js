@@ -1,4 +1,4 @@
-import {initDatabase} from "api-test/dist/db"
+import {initDatabase} from "test-api-express-mongo/dist/db"
 import {cols} from "../../../src/const/collections"
 import ENV from "../../../src/env"
 

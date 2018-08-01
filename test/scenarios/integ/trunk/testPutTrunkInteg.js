@@ -2,7 +2,7 @@ import {noUnitPutTrunkSpec, renameTrunkSpec, requantifyTrunkSpec} from "../../..
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {init, withTest} from "api-test/dist/api"
+import {init, withTest} from "test-api-express-mongo/dist/api"
 
 describe('PUT Trunks', function () {
 

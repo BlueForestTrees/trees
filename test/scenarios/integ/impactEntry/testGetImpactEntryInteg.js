@@ -1,4 +1,4 @@
-import {init, testGet200BodyOk, withTest} from "api-test/dist/api"
+import {init, testGet200BodyOk, withTest} from "test-api-express-mongo/dist/api"
 import {getImpactEntrySpec} from "../../../spec/impactEntry/testGetImpactEntrySpec"
 import api from "../../../../src"
 import ENV from "../../../../src/env"

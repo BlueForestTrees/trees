@@ -1,4 +1,4 @@
-import {withIdQuantity, withTrunk} from "api-test/dist/domain"
+import {withIdQuantity, withTrunk} from "test-api-express-mongo/dist/domain"
 import {cols} from "../../src/const/collections"
 import {prixFacetEntry, vitBFacetEntry, vitCFacetEntry, vitEFacetEntry} from "./facetEntries"
 import {co2eImpactEntry, prixImpactEntry, vitBImpactEntry, vitCImpactEntry, vitDImpactEntry} from "./impactEntries"

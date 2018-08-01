@@ -1,5 +1,5 @@
 import {allreadyExistingImpactEntrySpec, postAdemeImpactFileSpec, postBadGrandeurImpactEntrySpec, postBadIdImpactEntrySpec, postImpactEntrySpec} from "../../../spec/impactEntry/testPostImpactEntrySpec"
-import {init, withTest} from "api-test/dist/api"
+import {init, withTest} from "test-api-express-mongo/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"

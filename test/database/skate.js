@@ -1,4 +1,4 @@
-import {withIdQuantity, withId, withTrunk} from "api-test/dist/domain"
+import {withIdQuantity, withId, withTrunk} from "test-api-express-mongo/dist/domain"
 import {cols} from "../../src/const/collections"
 
 export const skateTrunk = withTrunk("skate", "999903c03e77667641d99990", 10, "count")

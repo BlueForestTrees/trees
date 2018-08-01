@@ -1,9 +1,9 @@
-import {oneModifiedResponse} from "api-test/dist/domain"
-import {replaceItem} from "api-test/dist/domain"
+import {oneModifiedResponse} from "test-api-express-mongo/dist/domain"
+import {replaceItem} from "test-api-express-mongo/dist/domain"
 import {cols} from "../../../src/const/collections"
 import {bleFacets, farineTrunk} from "../../database/gateau"
 import {prixFacetEntry, vitBFacetEntry} from "../../database/facetEntries"
-import {withIdQuantity} from "api-test/dist/domain"
+import {withIdQuantity} from "test-api-express-mongo/dist/domain"
 
 export const createFacetSpec = {}
 createFacetSpec.req = {

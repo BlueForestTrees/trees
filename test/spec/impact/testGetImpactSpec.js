@@ -1,11 +1,11 @@
-import {clon} from "api-test/dist/util"
+import {clon} from "test-api-express-mongo/dist/util"
 import _ from 'lodash'
 import {bleFacets, bleImpacts, farineTrunk} from "../../database/gateau"
-import {withQuantity} from "api-test/dist/domain"
+import {withQuantity} from "test-api-express-mongo/dist/domain"
 import {cols} from "../../../src/const/collections"
 import {omit} from 'lodash'
-import {withInfos} from "api-test/dist/db"
-import {withoutQuantity} from "api-test/dist/domain"
+import {withInfos} from "test-api-express-mongo/dist/db"
+import {withoutQuantity} from "test-api-express-mongo/dist/domain"
 
 export const getImpactSpec = {
     req: {

@@ -1,5 +1,5 @@
-import {removeItemQuantity, withQuantity} from "api-test/dist/domain"
-import {clon} from "api-test/dist/util"
+import {removeItemQuantity, withQuantity} from "test-api-express-mongo/dist/domain"
+import {clon} from "test-api-express-mongo/dist/util"
 import {aTrunk, daTrunk, dbTrunk, dRoot, e1Trunk, e2Trunk} from "../../database/lettres"
 import {cols} from "../../../src/const/collections"
 import {laitTrunk} from "../../database/gateau"

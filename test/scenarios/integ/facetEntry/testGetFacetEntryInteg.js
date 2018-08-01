@@ -1,4 +1,4 @@
-import {init, withTest} from "api-test/dist/api"
+import {init, withTest} from "test-api-express-mongo/dist/api"
 import {searchFacetEntrySpec} from "../../../spec/facetEntry/testGetFacetEntrySpec"
 import api from "../../../../src"
 import ENV from "../../../../src/env"

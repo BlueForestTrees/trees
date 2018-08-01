@@ -1,4 +1,4 @@
-import {withQuantity} from "api-test/dist/domain"
+import {withQuantity} from "test-api-express-mongo/dist/domain"
 import {ObjectID} from "mongodb"
 import {papierVA} from "../../database/papier"
 import {co2eImpactEntry, vitBImpactEntry, vitCImpactEntry} from "../../database/impactEntries"

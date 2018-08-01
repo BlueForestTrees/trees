@@ -1,4 +1,4 @@
-import {withIdQuantity, withQuantity} from "api-test/dist/domain"
+import {withIdQuantity, withQuantity} from "test-api-express-mongo/dist/domain"
 import {basifyQuantity, mergeItems, quantified, sum, summify} from "../../../src/util/calculations"
 import {withId} from "mongo-queries-blueforest"
 import Fraction from "fraction.js"

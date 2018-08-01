@@ -1,5 +1,5 @@
 import {omit} from 'lodash'
-import {notInSearchMixin} from "api-test/dist/domain"
+import {notInSearchMixin} from "test-api-express-mongo/dist/domain"
 import {vitBFacetEntry, vitCFacetEntry, vitDFacetEntry, vitEFacetEntry} from "../../database/facetEntries"
 
 export const searchFacetEntrySpec = {

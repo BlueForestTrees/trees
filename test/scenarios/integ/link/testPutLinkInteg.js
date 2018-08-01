@@ -1,6 +1,6 @@
-import {withTest} from "api-test/dist/api"
+import {withTest} from "test-api-express-mongo/dist/api"
 import {putLinkRelativeToSpec, setQuantityLinkSpec, updateQuantityAnotherUnitLinkSpec, updateQuantityLinkSpec} from "../../../spec/link/testPutLinkSpec"
-import {init} from "api-test/dist/api"
+import {init} from "test-api-express-mongo/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"

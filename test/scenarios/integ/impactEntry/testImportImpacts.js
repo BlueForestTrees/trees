@@ -1,10 +1,10 @@
-import {init} from "api-test/dist/api"
+import {init} from "test-api-express-mongo/dist/api"
 import {importAdemeEntries} from "../../../../src/service/impactEntry/postImpactEntryService"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
 import path from 'path'
 import {expect} from "chai"
-import {countFromDbByDoc} from "api-test/dist/db"
+import {countFromDbByDoc} from "test-api-express-mongo/dist/db"
 import api from "../../../../src"
 import fs from 'fs'
 

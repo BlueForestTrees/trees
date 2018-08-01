@@ -1,6 +1,6 @@
-import {oneModifiedResponse} from "api-test/dist/domain"
+import {oneModifiedResponse} from "test-api-express-mongo/dist/domain"
 import {cols} from "../../../src/const/collections"
-import {remove} from "api-test/dist/util"
+import {remove} from "test-api-express-mongo/dist/util"
 import {bleBranch, farineBranch, farineItem} from "../../database/gateau"
 
 export const branchDeletionSpec = {

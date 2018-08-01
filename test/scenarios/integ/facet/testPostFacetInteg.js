@@ -1,6 +1,6 @@
 import {createFacetSpec, addingFacet, updatingBleFacetSpec} from "../../../spec/facet/testPostFacetSpec"
-import {assertDb} from "api-test/dist/db"
-import {withTest, init, request} from "api-test/dist/api"
+import {assertDb} from "test-api-express-mongo/dist/db"
+import {withTest, init, request} from "test-api-express-mongo/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"

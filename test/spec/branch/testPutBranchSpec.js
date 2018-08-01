@@ -1,10 +1,10 @@
-import {oneModifiedResponse} from "api-test/dist/domain"
+import {oneModifiedResponse} from "test-api-express-mongo/dist/domain"
 import {cols} from "../../../src/const/collections"
 import {bleTrunk, farineTrunk, gateauTrunk, laitBranch, laitTrunk} from "../../database/gateau"
-import {setQuantity} from "api-test/dist/domain"
-import {clon} from "api-test/dist/util"
+import {setQuantity} from "test-api-express-mongo/dist/domain"
+import {clon} from "test-api-express-mongo/dist/util"
 import _ from 'lodash'
-import {withIdQuantity} from "api-test/dist/domain"
+import {withIdQuantity} from "test-api-express-mongo/dist/domain"
 
 const trunk = withIdQuantity(bleTrunk._id, 20, "min")
 const branch = withIdQuantity(farineTrunk._id, 10, "kg")

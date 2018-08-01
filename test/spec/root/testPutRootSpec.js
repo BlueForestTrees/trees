@@ -1,6 +1,6 @@
-import {oneModifiedResponse} from "api-test/dist/domain"
-import {setQuantity, withIdQuantity} from "api-test/dist/domain"
-import {clon} from "api-test/dist/util"
+import {oneModifiedResponse} from "test-api-express-mongo/dist/domain"
+import {setQuantity, withIdQuantity} from "test-api-express-mongo/dist/domain"
+import {clon} from "test-api-express-mongo/dist/util"
 import {cols} from "../../../src/const/collections"
 import _ from 'lodash'
 import {bleTrunk, farineRoot, farineTrunk, gateauRoot, gateauTrunk, laitTrunk} from "../../database/gateau"

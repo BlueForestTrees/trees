@@ -2,7 +2,7 @@ import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
 import {avecUneQtManquanteTankSpec, avecUneQtManquanteTankSpec2, lettreTankSpec, linkAToSkateThenTank, sansTank} from "../../../spec/tank/testGetTankSpec"
-import {init, withTest} from "api-test/dist/api"
+import {init, withTest} from "test-api-express-mongo/dist/api"
 
 describe('GET Tank', function () {
 

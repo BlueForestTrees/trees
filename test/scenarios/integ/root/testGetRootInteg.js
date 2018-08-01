@@ -1,8 +1,8 @@
 import {expect} from 'chai'
 
 import {badUnitGetRootSpec, emptyGetRootSpec, farineNoBleQtGetRootSpec, gateau1000GGetRootSpec, getBananeRootSpec, getRootsSpec, otherUnitGetRootSpec, sameQtGetRootSpec, skate10GetRootSpec} from "../../../spec/root/testGetRootSpec"
-import {run, withTest} from "api-test/dist/api"
-import {init, request} from "api-test/dist/api"
+import {run, withTest} from "test-api-express-mongo/dist/api"
+import {init, request} from "test-api-express-mongo/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"

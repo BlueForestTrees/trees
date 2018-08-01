@@ -1,4 +1,4 @@
-import {init, run, withTest} from "api-test/dist/api"
+import {init, run, withTest} from "test-api-express-mongo/dist/api"
 import {validConfirmSpec} from "../../../spec/auth/postConfirmSpec"
 import api from "../../../../src"
 import ENV from "../../../../src/env"

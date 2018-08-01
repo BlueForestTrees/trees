@@ -2,7 +2,7 @@ import {omit, pick} from 'lodash'
 import {gateauTrunk} from "../../database/gateau"
 import {eauTrunk, elecTrunk, skateTrunk} from "../../database/skate"
 import {baaTrunk, e1Trunk, e2Trunk} from "../../database/lettres"
-import {notInSearchMixin} from "api-test/dist/domain"
+import {notInSearchMixin} from "test-api-express-mongo/dist/domain"
 import {bateauTrunk, voitureTrunk} from "../../database/transports"
 
 export const getManyTrunkSpec = {

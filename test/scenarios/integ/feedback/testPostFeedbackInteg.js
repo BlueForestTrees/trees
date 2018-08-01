@@ -1,4 +1,4 @@
-import {init, withTest} from "api-test/dist/api"
+import {init, withTest} from "test-api-express-mongo/dist/api"
 import {postFeedbadBadMailSpec, postFeedbackOkSpec} from "../../../spec/feedback/testPostFeedbackSpec"
 import api from "../../../../src"
 import ENV from "../../../../src/env"

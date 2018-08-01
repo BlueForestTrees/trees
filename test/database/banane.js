@@ -1,5 +1,5 @@
 import {cols} from "../../src/const/collections"
-import {withIdQuantity, withIdQuantityRelativeTo, withTrunk} from "api-test/dist/domain"
+import {withIdQuantity, withIdQuantityRelativeTo, withTrunk} from "test-api-express-mongo/dist/domain"
 
 
 export const bananeBC = withTrunk("Banane BC", "6b6a03c03e77667641d2d2c3", 1, "count")

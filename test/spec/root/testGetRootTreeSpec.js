@@ -1,5 +1,5 @@
-import {clon} from "api-test/dist/util"
-import {removeItemQuantity, withIdQuantity, withQtCoef} from "api-test/dist/domain"
+import {clon} from "test-api-express-mongo/dist/util"
+import {removeItemQuantity, withIdQuantity, withQtCoef} from "test-api-express-mongo/dist/domain"
 import {bleTrunk, gateauRoot} from "../../database/gateau"
 import {arbreTrunk} from "../../database/skate"
 import {withIdQtUnit} from "mongo-queries-blueforest"

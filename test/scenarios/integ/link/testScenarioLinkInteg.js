@@ -1,5 +1,5 @@
-import {init, request, run} from "api-test/dist/api"
-import {withQuantity} from "api-test/dist/domain"
+import {init, request, run} from "test-api-express-mongo/dist/api"
+import {withQuantity} from "test-api-express-mongo/dist/domain"
 import {putLinkBleFarine} from "../../../spec/link/testPutLinkSpec"
 import api from "../../../../src"
 import ENV from "../../../../src/env"

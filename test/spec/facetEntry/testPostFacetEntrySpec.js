@@ -1,7 +1,7 @@
 import {vitCFacetEntry} from "../../database/facetEntries"
 import {cols} from "../../../src/const/collections"
-import {createStringObjectId} from "api-test/dist/util"
-import {withError} from "api-test/dist/domain"
+import {createStringObjectId} from "test-api-express-mongo/dist/util"
+import {withError} from "test-api-express-mongo/dist/domain"
 
 export const postFacetEntrySpec = {}
 let _id = createStringObjectId()

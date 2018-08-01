@@ -1,4 +1,4 @@
-import {init, request, withTest} from "api-test/dist/api"
+import {init, request, withTest} from "test-api-express-mongo/dist/api"
 import {getGrandeurSpec} from "../../../spec/grandeur/testGetGrandeurSpec"
 import api from "../../../../src"
 import ENV from "../../../../src/env"

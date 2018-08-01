@@ -3993,7 +3993,7 @@ mongo-queries-blueforest@^0.0.10:
     lodash "^4.17.5"
     mongodb "^2.2.36"
 
-"api-test@file:../api-test":
+"test-api-express-mongo@file:../test-api-express-mongo":
   version "1.0.0"
   dependencies:
     chai "^4.1.2"

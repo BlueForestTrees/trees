@@ -1,10 +1,10 @@
 import {setQuantityRootSpec, updateQuantityAnotherUnitRootSpec, updateQuantityRootSpec} from "../root/testPutRootSpec"
 import {setQuantityBranchSpec, updateQuantityAnotherUnitBranchSpec, updateQuantityBranchSpec} from "../branch/testPutBranchSpec"
 import {bleTrunk, farineTrunk} from "../../database/gateau"
-import {oneModifiedResponse} from "api-test/dist/domain"
+import {oneModifiedResponse} from "test-api-express-mongo/dist/domain"
 import {skateTrunk} from "../../database/skate"
 import {cols} from "../../../src/const/collections"
-import {withIdQuantity} from "api-test/dist/domain"
+import {withIdQuantity} from "test-api-express-mongo/dist/domain"
 
 export const putLinkRelativeToSpec = {
     req: {

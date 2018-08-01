@@ -1,8 +1,8 @@
-import {withError} from "api-test/dist/domain"
+import {withError} from "test-api-express-mongo/dist/domain"
 import _ from 'lodash'
 import {vitCImpactEntry} from "../../database/impactEntries"
 import {cols} from "../../../src/const/collections"
-import {createStringObjectId} from "api-test/dist/util"
+import {createStringObjectId} from "test-api-express-mongo/dist/util"
 import path from "path"
 
 const impactEntry = {

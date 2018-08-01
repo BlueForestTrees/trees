@@ -1,5 +1,5 @@
 import _, {cloneDeep, find, forEach, groupBy, isNil, map, omit, some} from 'lodash'
-import {qtUnitCoef, sameGrandeur, toBaseQuantity} from "units-manip"
+import {qtUnitCoef, sameGrandeur, toBaseQuantity} from "unit-manip"
 import {GrandeurMismatchError} from "../exceptions/Errors"
 import Fraction from "fraction.js"
 

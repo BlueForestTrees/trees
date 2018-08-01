@@ -2,7 +2,7 @@ import {cols} from "../../const/collections"
 import {col} from "mongo-registry/dist"
 import {AllreadyExistError} from "../../exceptions/Errors"
 import {parse} from "../../util/excel"
-import {grandeur} from "units-manip"
+import {grandeur} from "unit-manip"
 import {map} from 'lodash'
 import {createObjectId} from "mongo-queries-blueforest"
 

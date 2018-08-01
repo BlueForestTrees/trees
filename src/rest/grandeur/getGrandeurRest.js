@@ -1,4 +1,4 @@
-import {getGrandeurs} from "units-manip"
+import {getGrandeurs} from "unit-manip"
 
 import {Router} from "express-blueforest"
 const router = Router()

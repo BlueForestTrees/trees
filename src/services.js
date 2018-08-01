@@ -1,5 +1,5 @@
 import {loadUnitsData} from "./service/unit/grandeurService"
-import {getGrandeursKeys, getShortnames, initUnits} from "units-manip"
+import {getGrandeursKeys, getShortnames, initUnits} from "unit-manip"
 
 export const initServices = async () => {
     console.log("Init services...")

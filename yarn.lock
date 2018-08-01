@@ -1624,9 +1624,9 @@ expand-range@^1.8.1:
   dependencies:
     fill-range "^2.1.0"
 
-express-blueforest@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/express-blueforest/-/express-blueforest-1.0.2.tgz#54e97caff77116be0064a30a4472fd995635257f"
+express-blueforest@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/express-blueforest/-/express-blueforest-1.0.3.tgz#632f61e1d6a16aac180177220b7a0656f5b73aa4"
   dependencies:
     body-parser "1.18.3"
     express "4.16.3"
@@ -2915,9 +2915,9 @@ mongo-queries-blueforest@1.0.1:
     lodash "^4.17.5"
     mongodb "^2.2.36"
 
-mongo-registry@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/mongo-registry/-/mongo-registry-1.0.1.tgz#52720b1bddf77a75ad930287e260959b8d48efd0"
+mongo-registry@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/mongo-registry/-/mongo-registry-1.0.2.tgz#aa2e2d58759c4e6a47ee35fb22b290b3c200e3d1"
   dependencies:
     compare-versions "3.3.0"
     fraction.js "4.0.4"

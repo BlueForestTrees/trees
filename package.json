@@ -49,7 +49,7 @@
     "pick-to-array": "1.1.0",
     "regex-escape": "3.4.8",
     "sha1": "1.1.1",
-    "mongo-registry": "1.0.1",
+    "mongo-registry": "1.0.2",
     "items-service": "1.0.4",
     "mongo-queries-blueforest": "1.0.1",
     "unit-manip": "1.0.1",

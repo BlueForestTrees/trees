@@ -1,4 +1,4 @@
-import {valid} from "../../const/validations"
+import {valid, validMongoId} from "../../const/validations"
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry/dist"
 import configure from "items-service"
@@ -11,7 +11,7 @@ const deleteBranch = configure(() => col(cols.BRANCH)).removeItem
 module.exports = router
 
 router.delete('/api/branch/:trunkId/:branchId',
-    valid("trunkId"),
-    valid("branchId"),
+    validMongoId("trunkId"),
+    validMongoId("branchId"),
     run(({trunkId, branchId}) => deleteBranch(trunkId, branchId))
 )

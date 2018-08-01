@@ -3959,9 +3959,9 @@ touch@^3.1.0:
     compare-versions "^3.3.0"
     fraction.js "^4.0.4"
     lodash "^4.17.5"
-    mongo-connect "file:../../AppData/Local/Yarn/Cache/v1/mongo-connect"
+    mongo-connexion "file:../../AppData/Local/Yarn/Cache/v1/mongo-connexion"
 
-"mongo-connect@file:../mongo-connect":
+"mongo-connexion@file:../mongo-connexion":
   version "0.0.21"
   dependencies:
     mongodb "^2.2.36"
@@ -4001,7 +4001,7 @@ mongo-queries-blueforest@^0.0.10:
     fs-readdir-recursive "^1.1.0"
     jsonpath "^1.0.0"
     lodash "^4.17.10"
-    mongo-connect "file:../../AppData/Local/Yarn/Cache/v1/mongo-connect"
+    mongo-connexion "file:../../AppData/Local/Yarn/Cache/v1/mongo-connexion"
 
 units-manip@^1.0.11, units-manip@^1.0.37:
   version "1.0.38"

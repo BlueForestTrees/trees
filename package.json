@@ -48,10 +48,10 @@
     "pick-to-array": "^1.1.0",
     "regex-escape": "^3.4.8",
     "sha1": "^1.1.1",
-    "mongo-registry": "file:../mongo-registry",
-    "items-service": "^0.1.18",
-    "mongo-queries-blueforest": "file:../mongo-queries-blueforest",
-    "unit-manip": "^1.0.37"
+    "mongo-registry": "1.0.0",
+    "items-service": "1.0.0",
+    "mongo-queries-blueforest": "1.0.0",
+    "unit-manip": "1.0.0"
   },
   "babel": {
     "presets": [

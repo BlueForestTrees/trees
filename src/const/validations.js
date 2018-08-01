@@ -5,7 +5,7 @@ import _ from 'lodash'
 import {getGrandeursKeys, getShortnames} from "units-manip"
 import {trunksType} from "./trunks"
 import {isValidIds, objectNoEx, objects} from "mongo-queries-blueforest"
-import {errors} from "express-json-api"
+import {errors} from "express-blueforest"
 
 const unitsShortnames = getShortnames()
 

@@ -1,7 +1,7 @@
 import {getAllImpactEntries, getImpactEntryByName, searchImpactEntriesByNamepart} from "../../service/impactEntry/getImpactEntryService"
 
-import {run} from 'express-json-api'
-import {Router} from "express-json-api"; const router = Router()
+import {run} from 'express-blueforest'
+import {Router} from "express-blueforest"; const router = Router()
 const {check} = require('express-validator/check')
 
 module.exports = router

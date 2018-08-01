@@ -1,7 +1,7 @@
 import {validId, validQt, validUnit} from "../../const/validations"
 import {QT, UNIT} from "../../const/paths"
 
-import {Router, run} from 'express-json-api'
+import {Router, run} from 'express-blueforest'
 import {loadNamedQuantifiedBranch, loadNamedUnquantifiedBranch, readBranchTree} from "../../service/branch/branchService"
 import {appendTrunkInfos} from "../../service/trunk/getTrunkService"
 

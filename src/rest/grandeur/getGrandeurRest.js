@@ -1,8 +1,8 @@
 import {getGrandeurs} from "units-manip"
 
-import {Router} from "express-json-api"
+import {Router} from "express-blueforest"
 const router = Router()
-import {run} from 'express-json-api'
+import {run} from 'express-blueforest'
 
 router.get('/api/grandeurs',
     run(getGrandeurs)

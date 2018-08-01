@@ -4,8 +4,8 @@ import {SHOULD_BE_DEFINED, SHOULD_NOT_BE_DEFINED} from "../../const/messages"
 
 const {oneOf} = require('express-validator/check')
 
-import {run} from 'express-json-api'
-import {Router} from "express-json-api"; const router = Router()
+import {run} from 'express-blueforest'
+import {Router} from "express-blueforest"; const router = Router()
 const {check} = require('express-validator/check')
 const trunks = require('../../service/trunk/putTrunkService')
 

@@ -1,6 +1,6 @@
-import {run} from 'express-json-api'
+import {run} from 'express-blueforest'
 
-import {Router} from "express-json-api"
+import {Router} from "express-blueforest"
 import {addFeedback} from "../../service/feedback/postFeedbackService"
 import {validMail, validMessage} from "../../const/validations"
 const router = Router()

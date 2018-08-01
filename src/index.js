@@ -3,7 +3,7 @@ import {dbInit} from "mongo-registry/dist"
 import {initServices} from "./services"
 import {registry} from "./db/dbRegistry"
 import {ALLREADY_EXISTS} from "./exceptions/errorCatalog"
-import startExpress from "express-json-api"
+import startExpress from "express-blueforest"
 
 
 

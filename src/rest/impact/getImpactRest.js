@@ -1,9 +1,9 @@
 import {validId, validQt, validUnit} from "../../const/validations"
 import {QT, UNIT} from "../../const/paths"
 
-import {run} from 'express-json-api'
+import {run} from 'express-blueforest'
 import {loadImpact, loadQuantifiedImpacts} from "../../service/impact/getImpactService"
-import {Router} from "express-json-api"
+import {Router} from "express-blueforest"
 import {appendImpactInfos} from "../../service/impactEntry/getImpactEntryService"
 
 const router = Router()

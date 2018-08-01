@@ -6,7 +6,7 @@ import {version} from './../package.json'
 const ENV = {
     PORT: process.env.PORT || 8080,
 
-    REST_PATH: process.env.DB_NAME || "src/rest",
+    REST_PATH: process.env.REST_PATH || "src/rest",
 
     DB_NAME: process.env.DB_NAME || "BlueForestTreesDB",
     DB_HOST: process.env.DB_HOST || "localhost",

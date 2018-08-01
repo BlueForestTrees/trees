@@ -1,6 +1,6 @@
-import {withId} from "trees-query"
+import {withId} from "mongo-queries-blueforest"
 import {cols} from "../../const/collections"
-import {col} from "trees-db-version/dist"
+import {col} from "mongo-registry/dist"
 
 const trunks = () => col(cols.TRUNK)
 

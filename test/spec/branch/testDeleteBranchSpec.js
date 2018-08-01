@@ -1,6 +1,6 @@
-import {oneModifiedResponse} from "trees-test/dist/domain"
+import {oneModifiedResponse} from "api-test/dist/domain"
 import {cols} from "../../../src/const/collections"
-import {remove} from "trees-test/dist/util"
+import {remove} from "api-test/dist/util"
 import {bleBranch, farineBranch, farineItem} from "../../database/gateau"
 
 export const branchDeletionSpec = {

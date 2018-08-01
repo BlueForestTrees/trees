@@ -1,9 +1,9 @@
-import {run} from 'trees-express'
-import {Router} from "trees-express"
+import {run} from 'express-json-api'
+import {Router} from "express-json-api"
 import {valid} from "../../const/validations"
-import configure from "trees-items-service"
+import configure from "items-service"
 import {cols} from "../../const/collections"
-import {col} from "trees-db-version/dist"
+import {col} from "mongo-registry/dist"
 
 const router = Router()
 

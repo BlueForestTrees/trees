@@ -1,6 +1,6 @@
 import {cols} from "../../const/collections"
-import {col} from "trees-db-version/dist"
-import {matchId, withId, withIdQtUnit} from "trees-query"
+import {col} from "mongo-registry/dist"
+import {matchId, withId, withIdQtUnit} from "mongo-queries-blueforest"
 import {applyQuantity, erreurSiUnitIncompatibles, treefy} from "../../util/calculations"
 
 const roots = () => col(cols.ROOT)
@@ -25,7 +25,7 @@ export const readRootTree = (qt, unit, _id) =>
 
 const getRootGraph = _id => roots().aggregate([matchId(_id), rootGraphLookup]).next()
 
-import {removeQuantity} from "trees-query"
+import {removeQuantity} from "mongo-queries-blueforest"
 
 export const loadNamedUnquantifiedRoot = _id =>
     loadRoots(_id)

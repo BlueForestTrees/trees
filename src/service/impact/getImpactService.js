@@ -1,8 +1,8 @@
 import {cols} from "../../const/collections"
-import {col} from "trees-db-version/dist"
-import {emptyGroup, withId} from "trees-query"
+import {col} from "mongo-registry/dist"
+import {emptyGroup, withId} from "mongo-queries-blueforest"
 import {isNil} from 'lodash'
-import {removeQuantity} from "trees-query"
+import {removeQuantity} from "mongo-queries-blueforest"
 import {applyQuantity} from "../../util/calculations"
 
 const collection = () => col(cols.IMPACT)

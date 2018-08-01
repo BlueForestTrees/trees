@@ -1,5 +1,5 @@
-import {removeItemQuantity, withQuantity} from "trees-test/dist/domain"
-import {clon} from "trees-test/dist/util"
+import {removeItemQuantity, withQuantity} from "api-test/dist/domain"
+import {clon} from "api-test/dist/util"
 import {aTrunk, daTrunk, dbTrunk, dRoot, e1Trunk, e2Trunk} from "../../database/lettres"
 import {cols} from "../../../src/const/collections"
 import {laitTrunk} from "../../database/gateau"

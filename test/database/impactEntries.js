@@ -1,5 +1,5 @@
 import {cols} from "../../src/const/collections"
-import {withEntry} from "trees-test/dist/domain"
+import {withEntry} from "api-test/dist/domain"
 
 
 export const vitCImpactEntry = withEntry("5a6a03c03e77667641d2d2c4", "Ivitamine C", "Dens")

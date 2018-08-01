@@ -1,9 +1,9 @@
-import {oneModifiedResponse} from "trees-test/dist/domain"
-import {replaceItem} from "trees-test/dist/domain"
+import {oneModifiedResponse} from "api-test/dist/domain"
+import {replaceItem} from "api-test/dist/domain"
 import {cols} from "../../../src/const/collections"
 import {bleFacets, farineTrunk} from "../../database/gateau"
 import {prixFacetEntry, vitBFacetEntry} from "../../database/facetEntries"
-import {withIdQuantity} from "trees-test/dist/domain"
+import {withIdQuantity} from "api-test/dist/domain"
 
 export const createFacetSpec = {}
 createFacetSpec.req = {

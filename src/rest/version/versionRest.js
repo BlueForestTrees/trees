@@ -1,7 +1,7 @@
-import {run} from 'trees-express'
+import {run} from 'express-json-api'
 import ENV from "../../env"
 
-import {Router} from "trees-express"; const router = Router()
+import {Router} from "express-json-api"; const router = Router()
 module.exports = router
 
 router.get('/api/version', run(() => ({version: ENV.VERSION})))

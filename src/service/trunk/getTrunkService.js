@@ -1,6 +1,6 @@
 import {cols} from "../../const/collections"
-import {col} from "trees-db-version/dist"
-import {withIdIn} from "trees-query"
+import {col} from "mongo-registry/dist"
+import {withIdIn} from "mongo-queries-blueforest"
 import {debug} from "../../util/debug"
 import {appendItemsInfos} from "../common/commonService"
 

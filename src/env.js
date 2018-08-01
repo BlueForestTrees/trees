@@ -1,4 +1,4 @@
-import {debug} from "trees-test/dist/util"
+import {debug} from "api-test/dist/util"
 import path from 'path'
 import fs from 'fs'
 import {version} from './../package.json'

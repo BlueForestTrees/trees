@@ -1,8 +1,8 @@
 import {validId} from "../../const/validations"
 import {remove} from "../../service/trunk/deleteTrunkService"
 
-import {run} from 'trees-express'
-import {Router} from "trees-express"
+import {run} from 'express-json-api'
+import {Router} from "express-json-api"
 const router = Router()
 
 module.exports = router

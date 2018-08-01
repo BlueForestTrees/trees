@@ -1,7 +1,7 @@
-import {removeQuantity} from "trees-query"
+import {removeQuantity} from "mongo-queries-blueforest"
 import {cols} from "../../const/collections"
-import {col} from "trees-db-version/dist"
-import {matchId, withId, withIdQtUnit} from "trees-query"
+import {col} from "mongo-registry/dist"
+import {matchId, withId, withIdQtUnit} from "mongo-queries-blueforest"
 import {applyQuantity, erreurSiUnitIncompatibles, treefy} from "../../util/calculations"
 
 const branches = () => col(cols.BRANCH)

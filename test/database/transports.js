@@ -1,4 +1,4 @@
-import {withIdQuantity, withTrunk} from "trees-test/dist/domain"
+import {withIdQuantity, withTrunk} from "api-test/dist/domain"
 import {cols} from "../../src/const/collections"
 import {co2eImpactEntry} from "./impactEntries"
 import {trunksType} from "../../src/const/trunks"

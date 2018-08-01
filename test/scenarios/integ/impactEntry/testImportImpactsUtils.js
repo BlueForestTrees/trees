@@ -1,7 +1,7 @@
 import {initServices} from "../../../../src/services"
 import {ademeToBlueforest, ademeUnitToGrandeurEq} from "../../../../src/service/impactEntry/postImpactEntryService"
 import {expect} from "chai"
-import {countFromDbByDoc} from "trees-test/dist/db"
+import {countFromDbByDoc} from "api-test/dist/db"
 
 describe('Imports utils', function () {
 

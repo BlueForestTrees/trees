@@ -1,5 +1,5 @@
-import {oneModifiedResponse} from "trees-test/dist/domain"
-import {remove} from "trees-test/dist/util"
+import {oneModifiedResponse} from "api-test/dist/domain"
+import {remove} from "api-test/dist/util"
 import {cols} from "../../../src/const/collections"
 import {bleImpacts} from "../../database/gateau"
 

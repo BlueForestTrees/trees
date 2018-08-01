@@ -1,11 +1,11 @@
 import {omit} from 'lodash'
-import {setQuantity, withError, withoutQuantity, withQtCoef} from "trees-test/dist/domain"
-import {clon} from "trees-test/dist/util"
+import {setQuantity, withError, withoutQuantity, withQtCoef} from "api-test/dist/domain"
+import {clon} from "api-test/dist/util"
 import {farineBranch, farineRoot, gateauRoot, laitTrunk} from "../../database/gateau"
 import {skateRoot} from "../../database/skate"
 import {banane, bananeBC, transport} from "../../database/banane"
 import {cols} from "../../../src/const/collections"
-import {withInfos} from "trees-test/dist/db"
+import {withInfos} from "api-test/dist/db"
 
 export const getBananeRootSpec = {
     req: {

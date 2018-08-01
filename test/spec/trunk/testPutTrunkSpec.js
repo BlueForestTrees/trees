@@ -1,8 +1,8 @@
-import {oneModifiedResponse} from "trees-test/dist/domain"
+import {oneModifiedResponse} from "api-test/dist/domain"
 import {cols} from "../../../src/const/collections"
 import _ from 'lodash'
 import {bleTrunk, gateauTrunk} from "../../database/gateau"
-import {withQuantity} from "trees-test/dist/domain"
+import {withQuantity} from "api-test/dist/domain"
 
 
 const someNewName = "paPRika" + Math.random()

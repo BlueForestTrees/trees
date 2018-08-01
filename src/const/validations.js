@@ -2,10 +2,10 @@ import {BRANCH_ID, COLOR, FACET_ID, GRANDEUR, ID, IMPACT_ID, NAME, ROOT_ID, ROOT
 import {IS_DECIMAL, IS_NOT_RIGHT_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "./messages"
 import {check, body, oneOf} from 'express-validator/check'
 import _ from 'lodash'
-import {getGrandeursKeys, getShortnames} from "trees-units"
+import {getGrandeursKeys, getShortnames} from "units-manip"
 import {trunksType} from "./trunks"
-import {isValidIds, objectNoEx, objects} from "trees-query"
-import {errors} from "trees-express"
+import {isValidIds, objectNoEx, objects} from "mongo-queries-blueforest"
+import {errors} from "express-json-api"
 
 const unitsShortnames = getShortnames()
 

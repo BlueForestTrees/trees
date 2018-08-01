@@ -1,6 +1,6 @@
-import {oneResponse} from "trees-test/dist/domain"
+import {oneResponse} from "api-test/dist/domain"
 import {cols} from "../../../src/const/collections"
-import {withValidationError} from "trees-test/dist/domain"
+import {withValidationError} from "api-test/dist/domain"
 
 export const postFeedbackOkSpec = {
     req: {

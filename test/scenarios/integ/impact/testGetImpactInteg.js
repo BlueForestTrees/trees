@@ -1,5 +1,5 @@
 import {emptyGetImpactSpec, emptyQuantifiedGetImpactSpec, getImpactSpec, getQuantifiedImpactSpec} from "../../../spec/impact/testGetImpactSpec"
-import {init, request, withTest} from "trees-test/dist/api"
+import {init, request, withTest} from "api-test/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"

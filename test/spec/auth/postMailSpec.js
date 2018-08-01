@@ -1,5 +1,5 @@
 import {cols} from "../../../src/const/collections"
-import {withError} from "trees-test/dist/domain"
+import {withError} from "api-test/dist/domain"
 import {userStatus} from "../../../src/const/userStatus"
 
 export const validPostMailSpec = {

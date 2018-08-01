@@ -1,8 +1,8 @@
 import _ from 'lodash'
 import {cols} from "../../../src/const/collections"
 import {aTrunk} from "../../database/lettres"
-import {withValidationError} from "trees-test/dist/domain"
-import {createStringObjectId} from "trees-test/dist/util"
+import {withValidationError} from "api-test/dist/domain"
+import {createStringObjectId} from "api-test/dist/util"
 
 const trunk = {_id: createStringObjectId(), color: "#FFCC00", name: "RATtatouille1664"}
 export const postTrunkSpec = {

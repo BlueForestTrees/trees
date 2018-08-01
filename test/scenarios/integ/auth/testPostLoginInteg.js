@@ -1,4 +1,4 @@
-import {init, run, withTest} from "trees-test/dist/api"
+import {init, run, withTest} from "api-test/dist/api"
 import {badLoginAuthentSpec, badPasswordAuthentSpec, validAuthentSpec} from "../../../spec/auth/postAuthentSpec"
 import api from "../../../../src"
 import ENV from "../../../../src/env"

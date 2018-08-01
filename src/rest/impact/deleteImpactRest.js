@@ -1,9 +1,9 @@
 import {cols} from "../../const/collections"
-import {col} from "trees-db-version/dist"
-import configure from "trees-items-service"
+import {col} from "mongo-registry/dist"
+import configure from "items-service"
 
-import {run} from 'trees-express'
-import {Router} from "trees-express"
+import {run} from 'express-json-api'
+import {Router} from "express-json-api"
 const router = Router()
 const {check} = require('express-validator/check')
 

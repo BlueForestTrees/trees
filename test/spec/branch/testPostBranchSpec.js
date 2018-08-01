@@ -1,4 +1,4 @@
-import {oneModifiedResponse, oneUpsertedResponse} from "trees-test/dist/domain"
+import {oneModifiedResponse, oneUpsertedResponse} from "api-test/dist/domain"
 import {cols} from "../../../src/const/collections"
 import {biere, capsule} from "../../database/biere"
 import {bleTrunk, farineTrunk} from "../../database/gateau"

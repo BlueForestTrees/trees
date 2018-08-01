@@ -2,8 +2,8 @@ import {existingRootPostSpec, newRootSpec} from "../../../spec/root/testPostRoot
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {run, withTest} from "trees-test/dist/api"
-import {init} from "trees-test/dist/api"
+import {run, withTest} from "api-test/dist/api"
+import {init} from "api-test/dist/api"
 
 describe('POST Root', function () {
 

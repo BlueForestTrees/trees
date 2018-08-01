@@ -1,5 +1,5 @@
 import {cols} from "../../src/const/collections"
-import {withIdQuantity, withTrunk} from "trees-test/dist/domain"
+import {withIdQuantity, withTrunk} from "api-test/dist/domain"
 import {co2eImpactEntry} from "./impactEntries"
 
 export const papierVA = withTrunk("papier version A", "111111111111111111111111", 100, "m2")

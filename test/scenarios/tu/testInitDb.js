@@ -1,4 +1,4 @@
-import {initDatabase} from "trees-test/dist/db"
+import {initDatabase} from "api-test/dist/db"
 import {cols} from "../../../src/const/collections"
 import ENV from "../../../src/env"
 

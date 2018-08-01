@@ -1,5 +1,5 @@
 import {badUnitGetBranchSpec, branchWithoutQtSpec, emptyGetBranchSpec, farine1000GGetBranchSpec, getBranchsSpec, otherUnitGetBranchSpec, sameQtGetBranchSpec} from "../../../spec/branch/testGetBranchSpec"
-import {run, withTest, init, request} from "trees-test/dist/api"
+import {run, withTest, init, request} from "api-test/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"

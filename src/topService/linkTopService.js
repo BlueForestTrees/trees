@@ -1,6 +1,6 @@
 import {cols} from "../const/collections"
-import {col} from "trees-db-version/dist"
-import configure from "trees-items-service"
+import {col} from "mongo-registry/dist"
+import configure from "items-service"
 
 const upsertBranch = configure(() => col(cols.BRANCH)).upsertItem
 const upsertRoot = configure(() => col(cols.ROOT)).upsertItem

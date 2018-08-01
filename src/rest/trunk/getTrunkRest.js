@@ -1,10 +1,10 @@
 import {validId, validIds, validQ, validQt, validT, validUnit} from "../../const/validations"
 import {getQuantifiedTrunk, getTrunk, getTrunks, search} from "../../service/trunk/getTrunkService"
 
-import {run} from 'trees-express'
+import {run} from 'express-json-api'
 import {QT, UNIT} from "../../const/paths"
 
-import {Router} from "trees-express"; const router = Router()
+import {Router} from "express-json-api"; const router = Router()
 const {check} = require('express-validator/check')
 
 module.exports = router

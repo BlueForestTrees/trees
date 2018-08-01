@@ -1,11 +1,11 @@
-import {clon} from "trees-test/dist/util"
+import {clon} from "api-test/dist/util"
 import _ from 'lodash'
 import {bleFacets, gateauRoot} from "../../database/gateau"
-import {withQuantity} from "trees-test/dist/domain"
+import {withQuantity} from "api-test/dist/domain"
 import {cols} from "../../../src/const/collections"
 import {omit} from 'lodash';
-import {withInfos} from "trees-test/dist/db"
-import {withoutQuantity} from "trees-test/dist/domain"
+import {withInfos} from "api-test/dist/db"
+import {withoutQuantity} from "api-test/dist/domain"
 
 export const getFacetSpec = {
     req: {

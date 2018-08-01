@@ -1,6 +1,6 @@
-import {withIdQuantity, withQuantity} from "trees-test/dist/domain"
+import {withIdQuantity, withQuantity} from "api-test/dist/domain"
 import {basifyQuantity, mergeItems, quantified, sum, summify} from "../../../src/util/calculations"
-import {withId} from "trees-query"
+import {withId} from "mongo-queries-blueforest"
 import Fraction from "fraction.js"
 import chai from "chai"
 

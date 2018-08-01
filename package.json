@@ -1,16 +1,13 @@
 {
+  "name": "api-tree",
+  "version": "0.0.3",
   "scripts": {
     "start": "node dist/index.js",
-    "build": "rimraf dist && babel src --out-dir dist/trees-api/js && copyfiles -u 1 templates/* dist/etc/trees-api/templates",
-    "dev-api": "node --version && cross-env DB_UPGRADE=LAST MAIL_CONFIG_PATH=../secured/trees-api nodemon src/index.js --exec babel-node",
-    "test-api": "cross-env NODE_ENV=test PORT=9000 MAIL_CONFIG_PATH=../secured/trees-api mocha --recursive --require babel-register --exit \"test/**/*.js\"",
-    "test-init-db": "cross-env NODE_ENV=test MAIL_CONFIG_PATH=../secured/trees-api mocha --exit test/scenarios/tu/testInitDb.js --require babel-register",
-    "upgrade-db": "yarn upgrade -L trees-db",
-    "yarn": "yarn"
+    "build": "rimraf dist && babel src --out-dir dist/api-tree/js && copyfiles -u 1 templates/* dist/etc/api-tree/templates",
+    "dev-api": "node --version && cross-env DB_UPGRADE=LAST MAIL_CONFIG_PATH=../secured/api-tree nodemon src/index.js --exec babel-node",
+    "test-api": "cross-env NODE_ENV=test PORT=9000 MAIL_CONFIG_PATH=../secured/api-tree mocha --recursive --require babel-register --exit \"test/**/*.js\"",
+    "test-init-db": "cross-env NODE_ENV=test MAIL_CONFIG_PATH=../secured/api-tree mocha --exit test/scenarios/tu/testInitDb.js --require babel-register"
   },
-  "env": "api",
-  "version": "0.0.3",
-  "private": true,
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -29,7 +26,7 @@
     "nyc": "^11.4.1",
     "rimraf": "^2.6.2",
     "sinon": "^4.2.1",
-    "trees-test": "file:../trees-test"
+    "api-test": "file:../api-test"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -51,10 +48,10 @@
     "pick-to-array": "^1.1.0",
     "regex-escape": "^3.4.8",
     "sha1": "^1.1.1",
-    "trees-db-version": "file:../trees-db-version",
-    "trees-items-service": "^0.1.18",
-    "trees-query": "file:../trees-query",
-    "trees-units": "^1.0.37"
+    "mongo-registry": "file:../mongo-registry",
+    "items-service": "^0.1.18",
+    "mongo-queries-blueforest": "file:../mongo-queries-blueforest",
+    "unit-manip": "^1.0.37"
   },
   "babel": {
     "presets": [

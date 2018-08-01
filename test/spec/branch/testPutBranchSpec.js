@@ -1,10 +1,10 @@
-import {oneModifiedResponse} from "trees-test/dist/domain"
+import {oneModifiedResponse} from "api-test/dist/domain"
 import {cols} from "../../../src/const/collections"
 import {bleTrunk, farineTrunk, gateauTrunk, laitBranch, laitTrunk} from "../../database/gateau"
-import {setQuantity} from "trees-test/dist/domain"
-import {clon} from "trees-test/dist/util"
+import {setQuantity} from "api-test/dist/domain"
+import {clon} from "api-test/dist/util"
 import _ from 'lodash'
-import {withIdQuantity} from "trees-test/dist/domain"
+import {withIdQuantity} from "api-test/dist/domain"
 
 const trunk = withIdQuantity(bleTrunk._id, 20, "min")
 const branch = withIdQuantity(farineTrunk._id, 10, "kg")

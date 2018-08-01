@@ -1,5 +1,5 @@
 import {cols} from "../../src/const/collections"
-import {withTrunk} from "trees-test/dist/domain"
+import {withTrunk} from "api-test/dist/domain"
 
 
 export const biere = withTrunk("Bière Heineken", "6a6a03c03e77667641d2d2c3",6,"count")

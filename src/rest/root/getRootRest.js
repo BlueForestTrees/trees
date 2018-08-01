@@ -1,7 +1,7 @@
 import {validId, validQt, validUnit} from "../../const/validations"
 import {QT, UNIT} from "../../const/paths"
 
-import {Router, run} from 'trees-express'
+import {Router, run} from 'express-json-api'
 import {loadNamedQuantifiedRoot, loadNamedUnquantifiedRoot, readRootTree} from "../../service/root/rootService"
 import {appendTrunkInfos} from "../../service/trunk/getTrunkService"
 

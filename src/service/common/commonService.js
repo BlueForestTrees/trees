@@ -1,6 +1,6 @@
-import {withIdIn} from "trees-query"
+import {withIdIn} from "mongo-queries-blueforest"
 import _ from 'lodash'
-import {col} from "trees-db-version/dist"
+import {col} from "mongo-registry/dist"
 
 export const appendItemsInfos = (colname, fields) => async item => {
     const items = item.items

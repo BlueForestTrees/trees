@@ -1,9 +1,9 @@
 import {validId, validQt, validUnit} from "../../const/validations"
 import {QT, UNIT} from "../../const/paths"
 
-import {run} from 'trees-express'
+import {run} from 'express-json-api'
 import {loadFacet, loadQuantifiedFacets} from "../../service/facet/getFacetService"
-import {Router} from "trees-express"
+import {Router} from "express-json-api"
 import {appendFacetInfos} from "../../service/facetEntry/getFacetEntryService"
 
 const router = Router()

@@ -3953,47 +3953,47 @@ touch@^3.1.0:
   version "0.3.9"
   resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.3.9.tgz#717b8f220cc0bb7b44e40514c22b2e8bbc70d8b9"
 
-"trees-db-version@file:../trees-db-version":
+"mongo-registry@file:../mongo-registry":
   version "1.0.2"
   dependencies:
     compare-versions "^3.3.0"
     fraction.js "^4.0.4"
     lodash "^4.17.5"
-    trees-db "file:../../AppData/Local/Yarn/Cache/v1/trees-db"
+    mongo-connect "file:../../AppData/Local/Yarn/Cache/v1/mongo-connect"
 
-"trees-db@file:../trees-db":
+"mongo-connect@file:../mongo-connect":
   version "0.0.21"
   dependencies:
     mongodb "^2.2.36"
 
-trees-errors@^0.0.0:
+errors-blueforest@^0.0.0:
   version "0.0.0"
-  resolved "https://registry.yarnpkg.com/trees-errors/-/trees-errors-0.0.0.tgz#f936f6064250fc38d9fcc44119a4cc548dc66308"
+  resolved "https://registry.yarnpkg.com/errors-blueforest/-/errors-blueforest-0.0.0.tgz#f936f6064250fc38d9fcc44119a4cc548dc66308"
   dependencies:
     nested-error-stacks "^2.0.0"
 
-trees-items-service@^0.1.18:
+items-service@^0.1.18:
   version "0.1.18"
-  resolved "https://registry.yarnpkg.com/trees-items-service/-/trees-items-service-0.1.18.tgz#321942efc175b695a005104313850e038ba3f7aa"
+  resolved "https://registry.yarnpkg.com/items-service/-/items-service-0.1.18.tgz#321942efc175b695a005104313850e038ba3f7aa"
   dependencies:
-    trees-errors "^0.0.0"
-    trees-query "^0.0.10"
-    trees-units "^1.0.11"
+    errors-blueforest "^0.0.0"
+    mongo-queries-blueforest "^0.0.10"
+    units-manip "^1.0.11"
 
-trees-query@^0.0.10:
+mongo-queries-blueforest@^0.0.10:
   version "0.0.10"
-  resolved "https://registry.yarnpkg.com/trees-query/-/trees-query-0.0.10.tgz#670e0e0db030c74b46e0ab5fda170aae265df69d"
+  resolved "https://registry.yarnpkg.com/mongo-queries-blueforest/-/mongo-queries-blueforest-0.0.10.tgz#670e0e0db030c74b46e0ab5fda170aae265df69d"
   dependencies:
     lodash "^4.17.5"
     mongodb "^3.0.4"
 
-"trees-query@file:../trees-query":
+"mongo-queries-blueforest@file:../mongo-queries-blueforest":
   version "0.0.10"
   dependencies:
     lodash "^4.17.5"
     mongodb "^2.2.36"
 
-"trees-test@file:../trees-test":
+"api-test@file:../api-test":
   version "1.0.0"
   dependencies:
     chai "^4.1.2"
@@ -4001,11 +4001,11 @@ trees-query@^0.0.10:
     fs-readdir-recursive "^1.1.0"
     jsonpath "^1.0.0"
     lodash "^4.17.10"
-    trees-db "file:../../AppData/Local/Yarn/Cache/v1/trees-db"
+    mongo-connect "file:../../AppData/Local/Yarn/Cache/v1/mongo-connect"
 
-trees-units@^1.0.11, trees-units@^1.0.37:
+units-manip@^1.0.11, units-manip@^1.0.37:
   version "1.0.38"
-  resolved "https://registry.yarnpkg.com/trees-units/-/trees-units-1.0.38.tgz#761200ded2d9e742c946ebe936aecabc6dd9b0d4"
+  resolved "https://registry.yarnpkg.com/units-manip/-/units-manip-1.0.38.tgz#761200ded2d9e742c946ebe936aecabc6dd9b0d4"
   dependencies:
     fraction.js "^4.0.4"
     lodash "^4.17.5"

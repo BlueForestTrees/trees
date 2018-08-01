@@ -1,8 +1,8 @@
-import {getGrandeurs} from "trees-units"
+import {getGrandeurs} from "units-manip"
 
-import {Router} from "trees-express"
+import {Router} from "express-json-api"
 const router = Router()
-import {run} from 'trees-express'
+import {run} from 'express-json-api'
 
 router.get('/api/grandeurs',
     run(getGrandeurs)

@@ -1,5 +1,5 @@
 import {cols} from "../../const/collections"
-import {col} from "trees-db-version/dist"
+import {col} from "mongo-registry/dist"
 import {getFacetEntryIdByName} from "./getFacetEntryService"
 
 const facetsEntry = () => col(cols.FACET_ENTRY)

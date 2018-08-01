@@ -1,5 +1,5 @@
 import {cols} from "../../const/collections"
-import {col} from "trees-db-version/dist"
+import {col} from "mongo-registry/dist"
 import _ from 'lodash'
 import {getTrunk} from "./getTrunkService"
 import {updateName} from './putTrunkService'

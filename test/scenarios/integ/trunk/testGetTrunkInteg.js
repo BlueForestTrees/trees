@@ -1,5 +1,5 @@
 import {badIdGetManyTrunkSpec, getManyTrunkSpec, getManyTrunkSpec2, getQtTrunkBateauSpec, getQtTrunkGateauSpec, getTrunkBaaSpec, getTrunkGateauSpec, searchTrunkSpec, searchTrunkSpec2, typedSearchTrunkSpec, typedSearchTrunkSpec2} from "../../../spec/trunk/testGetTrunkSpec"
-import {init, withTest} from "trees-test/dist/api"
+import {init, withTest} from "api-test/dist/api"
 import api from "../../../../src"
 import {cols} from "../../../../src/const/collections"
 import ENV from "../../../../src/env"

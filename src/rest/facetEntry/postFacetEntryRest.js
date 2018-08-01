@@ -1,9 +1,9 @@
 import {addFacetEntry, replaceAllFacetEntries} from "../../service/facetEntry/postFacetEntryService"
 import {validColor, validGrandeur, validId, validName} from "../../const/validations"
 
-import {run} from 'trees-express'
+import {run} from 'express-json-api'
 
-import {Router} from "trees-express"
+import {Router} from "express-json-api"
 
 const router = Router()
 

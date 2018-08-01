@@ -1,6 +1,6 @@
-import {run} from 'trees-express'
+import {run} from 'express-json-api'
 
-import {Router} from "trees-express"
+import {Router} from "express-json-api"
 import {addFeedback} from "../../service/feedback/postFeedbackService"
 import {validMail, validMessage} from "../../const/validations"
 const router = Router()

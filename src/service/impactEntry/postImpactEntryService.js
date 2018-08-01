@@ -1,10 +1,10 @@
 import {cols} from "../../const/collections"
-import {col} from "trees-db-version/dist"
+import {col} from "mongo-registry/dist"
 import {AllreadyExistError} from "../../exceptions/Errors"
 import {parse} from "../../util/excel"
-import {grandeur} from "trees-units"
+import {grandeur} from "units-manip"
 import {map} from 'lodash'
-import {createObjectId} from "trees-query"
+import {createObjectId} from "mongo-queries-blueforest"
 
 const impactsEntry = () => col(cols.IMPACT_ENTRY)
 

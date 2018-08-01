@@ -1,5 +1,5 @@
 import {branchTreeSpec, noBranchsTreeSpec} from "../../../spec/branch/testGetBranchTreeSpec"
-import {init, withTest} from "trees-test/dist/api"
+import {init, withTest} from "api-test/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"

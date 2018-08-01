@@ -1,11 +1,11 @@
 import {BRANCH_QT, BRANCH_UNIT, TRUNK_QT, TRUNK_UNIT} from "../../const/paths"
 import {branchIdIsNotTrunkId, validBranchId, validTrunkId, present} from "../../const/validations"
 import {cols} from "../../const/collections"
-import {col} from "trees-db-version/dist"
-import configure from "trees-items-service"
+import {col} from "mongo-registry/dist"
+import configure from "items-service"
 
-import {run} from 'trees-express'
-import {Router} from "trees-express"; const router = Router()
+import {run} from 'express-json-api'
+import {Router} from "express-json-api"; const router = Router()
 
 const upsertBranch = configure(() => col(cols.BRANCH)).upsertItem
 

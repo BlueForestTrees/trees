@@ -1,6 +1,6 @@
-import {oneModifiedResponse} from "trees-test/dist/domain"
-import {setQuantity, withIdQuantity} from "trees-test/dist/domain"
-import {clon} from "trees-test/dist/util"
+import {oneModifiedResponse} from "api-test/dist/domain"
+import {setQuantity, withIdQuantity} from "api-test/dist/domain"
+import {clon} from "api-test/dist/util"
 import {cols} from "../../../src/const/collections"
 import _ from 'lodash'
 import {bleTrunk, farineRoot, farineTrunk, gateauRoot, gateauTrunk, laitTrunk} from "../../database/gateau"

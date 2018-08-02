@@ -1,5 +1,5 @@
 import {init} from "test-api-express-mongo/dist/api"
-import {importAdemeEntries} from "../../../../src/service/impactEntry/postImpactEntryService"
+import {importAdemeImpactEntries} from "../../../../src/service/impactEntry/postImpactEntryService"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
 import path from 'path'
@@ -14,12 +14,12 @@ describe('Imports', function () {
     beforeEach(init(api, ENV, cols))
 
     it('first impact imports', async () => {
-        await importAdemeEntries(impactBuffer)
+        await importAdemeImpactEntries(impactBuffer)
         expect(await countFromDbByDoc(cols.IMPACT_ENTRY, {origin: "ADEME"})).to.equal(27)
     })
     it('two impact imports', async () => {
-        await importAdemeEntries(impactBuffer)
-        await importAdemeEntries(impactBuffer)
+        await importAdemeImpactEntries(impactBuffer)
+        await importAdemeImpactEntries(impactBuffer)
 
         expect(await countFromDbByDoc(cols.IMPACT_ENTRY, {origin: "ADEME"})).to.equal(27)
     })

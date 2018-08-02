@@ -1,4 +1,4 @@
-import {postBadColorTrunkSpec, postBadGrandeurTrunkSpec, postBadIdTrunkSpec, postTransportTrunkSpec, postTrunkSpec} from "../../../spec/trunk/testPostTrunkSpec"
+import {postAdemeTrunkFileSpec, postBadColorTrunkSpec, postBadIdTrunkSpec, postTransportTrunkSpec, postTrunkSpec} from "../../../spec/trunk/testPostTrunkSpec"
 import {init, withTest} from "test-api-express-mongo/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
@@ -16,4 +16,5 @@ describe('POST Trunks', function () {
 
     it('refuse to create a trunk with color error', withTest(postBadColorTrunkSpec))
 
+    it('post ademe trunk file', withTest(postAdemeTrunkFileSpec))
 })

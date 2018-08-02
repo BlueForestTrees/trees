@@ -7,9 +7,8 @@ export const parse = (buffer, desc) => {
     return workbook.xlsx.read(streamIt(buffer)).then(() => {
         const startAt = desc.firstDocAt
         const endAt = workbook.getWorksheet(1).getRow(1).values.length
-        const map = mapFromDescription(workbook, desc.fields)
         for (let i = startAt; i < endAt; i++) {
-            docs.push(parseDocument(workbook, map, i))
+            docs.push(parseDocument(workbook, desc.fields, i))
         }
     }).then(() => docs)
 }
@@ -18,21 +17,38 @@ export const parseDocument = (workbook, map, idx) => {
     const obj = {}
     const values = workbook.getWorksheet(1).getColumn(idx).values
     for (let i = 0; i < map.length; i++) {
-        let value = values[map[i].idx]
-        value = value ? value.trim() : null
-        if (map[i].type === "array") {
-            obj[map[i].fieldName] = value ? value.split(map[i].sep) : []
-        } else {
-            obj[map[i].fieldName] = value
-        }
+        assign(obj, map[i], parseValue(map[i], values[map[i].idx]))
     }
     return obj
 }
 
-export const mapFromDescription = (workbook, desc) => {
-    const values = workbook.getWorksheet(1).getColumn(1).values
-    for (let i = 0; i < desc.length; i++) {
-        desc[i].idx = values.indexOf(desc[i].xlsName)
+const parseValue = (field, rawValue) => {
+    rawValue = rawValue ? rawValue.trim() : null
+    if (rawValue) {
+        if (field.type === "array") {
+            return rawValue.split(field.sep)
+        } else {
+            return rawValue
+        }
+    } else {
+        return "pas de valeur"
     }
-    return desc
+}
+
+const assign = (obj, field, value) => {
+    if (field.under) {
+        if (!obj[field.under]) {
+            obj[field.under] = {}
+        }
+        if (field.subunder) {
+            if (!obj[field.under][field.subunder]) {
+                obj[field.under][field.subunder] = {}
+            }
+            obj[field.under][field.subunder][field.fieldName] = value
+        } else {
+            obj[field.under][field.fieldName] = value
+        }
+    } else {
+        obj[field.fieldName] = value
+    }
 }

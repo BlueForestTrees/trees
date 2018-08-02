@@ -30,7 +30,7 @@ const parseDesc = {
     ]
 }
 
-export const ademeToBlueforest = raws => map(raws, raw => ({
+export const ademeToBlueforestImpact = raws => map(raws, raw => ({
     updateOne: {
         filter: {externId: raw.externId},
         update: {
@@ -57,8 +57,8 @@ export const ademeUnitToGrandeurEq = ademeUnit => {
     }
 }
 
-export const importAdemeEntries = async buffer => {
-    const result = await impactsEntry().bulkWrite(ademeToBlueforest(await parse(buffer, parseDesc)), {ordered: false})
+export const importAdemeImpactEntries = async buffer => {
+    const result = await impactsEntry().bulkWrite(ademeToBlueforestImpact(await parse(buffer, parseDesc)), {ordered: false})
     return {
         ok: result.ok === 1,
         insertions: result.nInserted,

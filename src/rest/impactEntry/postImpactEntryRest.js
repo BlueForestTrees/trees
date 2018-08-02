@@ -1,4 +1,4 @@
-import {addImpactEntry, importAdemeEntries} from "../../service/impactEntry/postImpactEntryService"
+import {addImpactEntry, importAdemeImpactEntries} from "../../service/impactEntry/postImpactEntryService"
 import {validColor, validGrandeur, validId, validName} from "../../const/validations"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
@@ -19,5 +19,5 @@ router.post('/api/impactEntry',
 
 router.post('/api/impactEntryBulk/ademe',
     fileUpload({files: 1, limits: {fileSize: 5 * 1024 * 1024}}),
-    run(({}, req) => importAdemeEntries(req.files.file && req.files.file.data || req.files['xlsx.ademe.impact'].data))
+    run(({}, req) => importAdemeImpactEntries(req.files.file && req.files.file.data || req.files['xlsx.ademe.impact'].data))
 )

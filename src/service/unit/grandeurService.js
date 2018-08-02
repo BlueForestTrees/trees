@@ -71,7 +71,8 @@ export const loadUnitsData = () => Promise.resolve(
         ]),
         grandeur("Surf", "Surface (m2, hec...)", [
             unit("m2", "Mètre-carré (m2)", 1),
-            unit("hec", "hectare (hec)", 10000)
+            unit("cm2", "Centimètre-carré (m2)", 1),
+            unit("hec", "Hectare (hec)", 10000)
         ]),
         grandeur("Long", "Longueur (mm, m, km...)", [
             unit("mm", "Millimètre (mm)", 0.001),

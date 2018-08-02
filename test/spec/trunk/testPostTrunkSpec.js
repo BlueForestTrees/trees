@@ -3,6 +3,7 @@ import {cols} from "../../../src/const/collections"
 import {aTrunk} from "../../database/lettres"
 import {withValidationError} from "test-api-express-mongo/dist/domain"
 import {createStringObjectId} from "test-api-express-mongo/dist/util"
+import path from 'path'
 
 const trunk = {_id: createStringObjectId(), color: "#FFCC00", name: "RATtatouille1664"}
 export const postTrunkSpec = {
@@ -88,4 +89,22 @@ cloneTrunkSpec.db = {
             name_lower: lowerizeName(cloneName(_id, aTrunk))
         }
     })
+}
+
+export const postAdemeTrunkFileSpec = {
+    req: {
+        url: "/api/trunkBulk/ademe",
+        method: "POST",
+        file: {
+            field: "xlsx.ademe.trunk",
+            path: path.resolve("test/files/CUT_BIG_BI_1.09__02_Procedes_Details.xlsx")
+        }
+    },
+    res: {
+        bodypath: [
+            {path: "$.ok", value: true},
+            {path: "$.upsertions", value: 28},
+            {path: "$.insertions", value: 0},
+        ]
+    }
 }

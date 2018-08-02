@@ -292,9 +292,15 @@ export const getGrandeurSpec = {
                         "shortname": "m2",
                     },
                     {
+                        "coef": 1,
+                        "grandeur": "Surf",
+                        "name": "Centimètre-carré (m2)",
+                        "shortname": "cm2",
+                    },
+                    {
                         "coef": 10000,
                         "grandeur": "Surf",
-                        "name": "hectare (hec)",
+                        "name": "Hectare (hec)",
                         "shortname": "hec",
                     }
                 ]

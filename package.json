@@ -3,11 +3,11 @@
   "version": "0.0.3",
   "license": "ISC",
   "scripts": {
-    "start": "node dist/index.js",
-    "build": "rimraf dist && babel src --out-dir dist/api-tree/js && copyfiles -u 1 templates/* dist/etc/api-tree/templates",
-    "dev-api": "node --version && cross-env DB_UPGRADE=LAST MAIL_CONFIG_PATH=../secured/api-tree nodemon src/index.js --exec babel-node",
-    "test-api": "cross-env NODE_ENV=test PORT=9000 MAIL_CONFIG_PATH=../secured/api-tree mocha --recursive --require babel-register --exit \"test/**/*.js\"",
-    "test-init-db": "cross-env NODE_ENV=test MAIL_CONFIG_PATH=../secured/api-tree mocha --exit test/scenarios/tu/testInitDb.js --require babel-register"
+    "start": "node index.js",
+    "build": "rimraf dist && babel src --out-dir dist/js && copyfiles etc/** dist",
+    "dev-api": "node --version && cross-env MAIL_TEMPLATE_PATH=etc/api-tree/templates MAIL_CONFIG_PATH=../secured/api-tree REST_PATH=src/rest nodemon src/index.js --exec babel-node",
+    "test-api": "cross-env NODE_ENV=test PORT=9000 MAIL_TEMPLATE_PATH=etc/api-tree/templates MAIL_CONFIG_PATH=../secured/api-tree REST_PATH=src/rest mocha --recursive --require babel-register --exit \"test/**/*.js\"",
+    "test-init-db": "cross-env NODE_ENV=test mocha --exit test/scenarios/tu/testInitDb.js --require babel-register"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
@@ -36,24 +36,24 @@
     "cross-env": "5.2.0",
     "debug": "~2.6.9",
     "exceljs": "1.5.1",
+    "express-blueforest": "1.0.3",
     "express-fileupload": "0.4.0",
     "express-validator": "5.3.0",
     "fraction.js": "4.0.4",
     "fs-readdir-recursive": "1.1.0",
     "handlebars": "4.0.11",
+    "items-service": "1.0.4",
     "jsonwebtoken": "8.3.0",
     "lodash": "4.17.10",
-    "morgan": "1.9.0",
+    "mongo-queries-blueforest": "1.0.1",
+    "mongo-registry": "1.0.2",
+    "morgan": "^1.9.0",
     "nested-error-stacks": "2.0.0",
     "nodemailer": "4.6.7",
     "pick-to-array": "1.1.0",
     "regex-escape": "3.4.8",
     "sha1": "1.1.1",
-    "mongo-registry": "1.0.2",
-    "items-service": "1.0.4",
-    "mongo-queries-blueforest": "1.0.1",
-    "unit-manip": "1.0.1",
-    "express-blueforest": "1.0.3"
+    "unit-manip": "1.0.1"
   },
   "babel": {
     "presets": [

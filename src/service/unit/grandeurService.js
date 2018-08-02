@@ -29,11 +29,12 @@ export const loadUnitsData = () => Promise.resolve(
             unit("CTUe", "Comparative Toxic Unit for ecosystems (CTUe) * volume * time", 1)
         ]),
         grandeur("Ener", "Energie (wh, J, cal...)", [
+            unit("MJ", "Méga-Joule (MJ)", 239234.45),
             unit("J", "Joule (J)", 0.23923445),
             unit("ws", "Watt-Seconde (ws)", 0.23923445),
             unit("cal", "calorie (cal)", 1),
             unit("wh", "Watt-Heure (wh)", 0.23923445 * 3600),
-            unit("kwh", "KiloWatt-Heure (kwh)", 0.23923445 * 3600 * 1000),
+            unit("kWh", "KiloWatt-Heure (kWh)", 0.23923445 * 3600 * 1000),
             unit("kcal", "Kilo-Calorie (kcal)", 1000),
             unit("Mcal", "Mega-calorie (Mcal)", 1000 * 1000)
         ]),
@@ -44,7 +45,8 @@ export const loadUnitsData = () => Promise.resolve(
             unit("kmol", "Kilo-Mole (mol)", 1000)
         ]),
         grandeur("Nomb", "Nombre (pas d'unité)", [
-            unit("count", "pas d'unité", 1)
+            unit("count", "pas d'unité", 1),
+            unit("Item(s)", "items", 1)
         ]),
         grandeur("Volu", "Volume (L, m3...)", [
             unit("goutte", "Goutte", 0.001 * 20000),

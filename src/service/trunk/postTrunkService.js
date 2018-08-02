@@ -101,5 +101,7 @@ export const importAdemeTrunkEntries = async buffer => {
 }
 
 const erreurGrandeur = shortname => {
-    throw `grandeur non trouvée pour l'unité "${shortname}"`
+    const error = new Error(`grandeur non trouvée pour l'unité "${shortname}"`)
+    error.status = 422
+    throw error
 }

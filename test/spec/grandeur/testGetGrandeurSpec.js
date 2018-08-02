@@ -150,8 +150,8 @@ export const getGrandeurSpec = {
                     {
                         "coef": 861244.02,
                         "grandeur": "Ener",
-                        "name": "KiloWatt-Heure (kwh)",
-                        "shortname": "kwh"
+                        "name": "KiloWatt-Heure (kWh)",
+                        "shortname": "kWh"
                     },
                     {
                         "coef": 1000000,

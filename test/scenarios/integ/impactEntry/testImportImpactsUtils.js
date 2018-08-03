@@ -20,7 +20,7 @@ describe('Imports utils', function () {
             'nom origine ILCD': 'ILCD2011; Climate change; midpoint; GWP100; IPCC2007',
             commentaire: 'Factors issued from the baseline model of the IPCC (2007)',
             'Niveau de recommendation': 'I',
-            unit: 'kg éq. CO2',
+            'Unité de référence': 'kg éq. CO2',
             unitDescription: 'Mass CO2-equivalents',
             referenceYear: 'no time reference',
             validUntil: '100 years',

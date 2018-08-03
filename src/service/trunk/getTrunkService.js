@@ -17,18 +17,22 @@ export const getTrunks = _ids => {
 
 export const getQuantifiedTrunk = async (qt, unit, _id) => ({...await getTrunk(_id), quantity: {qt, unit}})
 
-export const search = (name, type) => collection()
-    .find(prepareQuery(name, type), searchMixin)
+export const search = (name, type, pageSize, afterIdx) => collection()
+    .find(prepareQuery(name, type, afterIdx), searchMixin)
     .sort({name_lower: 1})
+    .limit(pageSize)
     .toArray()
 
-const prepareQuery = (name, type) => {
+const prepareQuery = (name, type, afterIdx) => {
     const query = {}
     if (name) {
         query.name_lower = {$regex: `^${name.toLowerCase()}.*`}
     }
     if (type) {
         query.type = type
+    }
+    if (afterIdx) {
+        query._id = {$lt: afterIdx}
     }
     debug("query", query)
     return query

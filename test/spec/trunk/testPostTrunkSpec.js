@@ -2,8 +2,10 @@ import _ from 'lodash'
 import {cols} from "../../../src/const/collections"
 import {aTrunk} from "../../database/lettres"
 import {withValidationError} from "test-api-express-mongo/dist/domain"
-import {createStringObjectId} from "test-api-express-mongo/dist/util"
 import path from 'path'
+import {createStringObjectId} from "test-api-express-mongo/dist/util"
+
+
 
 const trunk = {_id: createStringObjectId(), color: "#FFCC00", name: "RATtatouille1664"}
 export const postTrunkSpec = {
@@ -19,25 +21,6 @@ export const postTrunkSpec = {
                 ...trunk,
                 name_lower: trunk.name.toLowerCase()
             }
-        }
-    }
-}
-
-const badTrunk = {_id: "XXX"+createStringObjectId()+"XXX", color: "#FFCC00", name: "RATtatouille1664"}
-export const postBadIdTrunkSpec = {
-    req: {
-        url: "/api/trunk",
-        method: "POST",
-        body: badTrunk
-    },
-    res: {
-        code: 400,
-        bodypath: {path: "$.errors._id.msg", value: "invalid"}
-    },
-    db: {
-        expected: {
-            colname: cols.TRUNK,
-            missingDoc: badTrunk
         }
     }
 }
@@ -69,8 +52,8 @@ export const postBadColorTrunkSpec = {
     res: {
         code: 400,
         bodypath: [
-            {path: "$.errors.color.msg", value: "Invalid value"},
-            {path: "$.errors.color.value", value: "#FFFFF"},
+            {path: "$.errors.color.msg", value: ["Invalid value"]},
+            {path: "$.errors.color.value", value: ["#FFFFF"]},
         ]
     }
 }
@@ -102,9 +85,9 @@ export const postAdemeTrunkFileSpec = {
     },
     res: {
         bodypath: [
-            {path: "$.ok", value: true},
-            {path: "$.upsertions", value: 28},
-            {path: "$.insertions", value: 0},
+            {path: "$.ok", value: [true]},
+            {path: "$.upsertions", value: [28]},
+            {path: "$.insertions", value: [0]},
         ]
     }
 }

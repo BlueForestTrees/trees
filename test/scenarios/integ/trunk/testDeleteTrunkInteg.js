@@ -1,13 +1,24 @@
-import {trunkDeletionSpec} from "../../../spec/trunk/testDeleteTrunkSpec"
 import {init, request, withTest} from "test-api-express-mongo/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
+import {gateauTrunk} from "../../../database/gateau"
 
 describe('DELETE Trunks', function () {
 
     beforeEach(init(api, ENV, cols))
 
-    it('delete the trunk', withTest(trunkDeletionSpec))
+    it('DELETE A TRUNK', withTest({
+        req: {
+            url: `/api/trunk/${gateauTrunk._id}`,
+            method: "DELETE"
+        },
+        db: {
+            expected: {
+                colname: cols.TRUNK,
+                missingDoc: {_id: gateauTrunk._id}
+            }
+        }
+    }))
 
 })

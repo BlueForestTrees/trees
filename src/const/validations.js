@@ -1,7 +1,7 @@
 import {BRANCH_ID, COLOR, FACET_ID, FACETSIDS, GRANDEUR, ID, IMPACT_ID, NAME, ROOT_ID, ROOT_RELATIVE_TO, ROOT_RELATIVE_TO_DISQT, ROOT_RELATIVE_TO_DISQT_QT, ROOT_RELATIVE_TO_DISQT_UNIT, ROOT_RELATIVE_TO_ID, ROOT_RELATIVE_TO_REFQT, ROOT_RELATIVE_TO_REFQT_QT, ROOT_RELATIVE_TO_REFQT_UNIT, ROOTID, SOURCE_ID, TREEID, TRUNK_ID, TRUNKID, TYPE} from "./paths"
 import {IS_DECIMAL, IS_NOT_RIGHT_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "./messages"
 import {check, body, oneOf} from 'express-validator/check'
-import _ from 'lodash'
+import {isNil, map} from 'lodash'
 import {getGrandeursKeys, getShortnames} from "unit-manip"
 import {trunksType} from "./trunks"
 import {isValidIds, objectNoEx, objects} from "mongo-queries-blueforest"
@@ -38,9 +38,9 @@ export const validIds = (req, res, next) => {
 
 export const validGrandeur = check(GRANDEUR).isIn(getGrandeursKeys())
 
-export const validMongoId = field => check(field).exists().withMessage("missing")
-    .isMongoId().withMessage("invalid")
-    .customSanitizer(objectNoEx)
+const mongoId = chain => chain.exists().withMessage("missing").isMongoId().withMessage("invalid mongo id").customSanitizer(objectNoEx)
+export const optionalValidMongoId = field => mongoId(check(field).optional())
+export const validMongoId = field =>mongoId(check(field))
 export const validBranchId = validMongoId(BRANCH_ID)
 export const validRootId = validMongoId(ROOT_ID)
 export const validTrunkId = validMongoId(TRUNK_ID)
@@ -77,7 +77,18 @@ export const validQ = check('q').optional().exists()
 export const validT = check("t").optional().isIn(Object.values(trunksType))
 export const optionalValidType = check(TYPE).optional().isIn(Object.values(trunksType))
 
-export const present = (...fields) => _.map(fields, field => check(field, SHOULD_BE_DEFINED).exists())
+export const present = (...fields) => map(fields, field => check(field, SHOULD_BE_DEFINED).exists())
 export const validUnit = field => check(field, IS_VALID_UNIT).optional().isIn(unitsShortnames)
 export const validQt = field => check(field, IS_DECIMAL).optional().isDecimal().toFloat()
 
+const defaultPS = 20
+export const optionnalPageSize = [
+    (req, res, next) => {
+        if (isNil(req.params.ps)) {
+            req.params.ps = defaultPS
+        }
+        next()
+    },
+    check("ps").isInt({min: 1, max: 200}).withMessage(`must be an integer between 1 and 200 (default to ${defaultPS})`).toInt()
+]
+export const optionnalAfterIdx = optionalValidMongoId("aidx")

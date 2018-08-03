@@ -1,4 +1,4 @@
-import {validId, validIds, validQ, validQt, validT, validUnit} from "../../const/validations"
+import {optionnalAfterIdx, optionnalPageSize, validId, validIds, validQ, validQt, validT, validUnit} from "../../const/validations"
 import {getQuantifiedTrunk, getTrunk, getTrunks, search} from "../../service/trunk/getTrunkService"
 
 import {run} from 'express-blueforest'
@@ -12,7 +12,9 @@ module.exports = router
 router.get('/api/trunks',
     validQ,
     validT,
-    run(({q, t}) => search(q, t))
+    optionnalPageSize,
+    optionnalAfterIdx,
+    run(({q, t, ps, aidx}) => search(q, t, ps, aidx))
 )
 
 router.get('/api/trunk/:_id',

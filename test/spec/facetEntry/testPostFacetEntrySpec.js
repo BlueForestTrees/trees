@@ -39,7 +39,7 @@ export const postBadGrandeurFacetEntrySpec = {
     },
     res: {
         code: 400,
-        bodypath: {path: "$.errors.grandeur.msg", value: "Invalid value"}
+        bodypath: {path: "$.errors.grandeur.msg", value: ["Invalid value"]}
     }
 }
 

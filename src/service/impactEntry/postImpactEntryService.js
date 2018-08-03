@@ -30,7 +30,9 @@ const parseDesc = {
     ]
 }
 
-export const ademeToBlueforestImpact = raws => map(raws, raw => ({
+export const ademeToBlueforestImpact = raws => map(raws, raw => {
+    console.log(raw)
+    return ({
     updateOne: {
         filter: {externId: raw.externId},
         update: {
@@ -38,7 +40,7 @@ export const ademeToBlueforestImpact = raws => map(raws, raw => ({
                 externId: raw.externId,
                 name: raw.nom,
                 name_lower: raw.nom.toLowerCase(),
-                ...ademeUnitToGrandeurEq(raw.unit),
+                ...ademeUnitToGrandeurEq(raw['Unité de référence']),
                 color: "#696969",
                 origin: "ADEME",
                 raw
@@ -46,9 +48,11 @@ export const ademeToBlueforestImpact = raws => map(raws, raw => ({
         },
         upsert: true
     }
-}))
+    })
+})
 
 export const ademeUnitToGrandeurEq = ademeUnit => {
+    // if (!ademeUnit) return null
     const splitted = ademeUnit.split("éq.")
     if (splitted.length === 1) {
         return {grandeur: grandeur(ademeUnit)}

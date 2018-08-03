@@ -7,15 +7,6 @@ import {banane, bananeBC, transport} from "../../database/banane"
 import {cols} from "../../../src/const/collections"
 import {withInfos} from "test-api-express-mongo/dist/db"
 
-export const getBananeRootSpec = {
-    req: {
-        method: "GET",
-        url: `/api/root/1/count/${bananeBC._id}`
-    },
-    res: {
-        bodypath: {path: `$.items[?(@._id==="${transport._id}")].relativeTo`, value: banane._id}
-    }
-}
 
 export const getRootsSpec = {
     req: {

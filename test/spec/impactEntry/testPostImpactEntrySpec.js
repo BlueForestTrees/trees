@@ -27,29 +27,6 @@ export const postImpactEntrySpec = {
         }
     }
 }
-const badImpactEntry = {
-    _id: createStringObjectId() + "984",
-    name: "nomNewImpactEntry",
-    grandeur: "Dens",
-    color: "#FFFFFF"
-}
-export const postBadIdImpactEntrySpec = {
-    req: {
-        url: `/api/impactEntry`,
-        method: "POST",
-        body: badImpactEntry
-    },
-    res: {
-        code: 400,
-        bodypath: {path: "$.errors._id.msg", value: "invalid"}
-    },
-    db: {
-        expected: {
-            colname: cols.IMPACT_ENTRY,
-            missingDoc: badImpactEntry
-        }
-    }
-}
 
 export const postBadGrandeurImpactEntrySpec = {
     req: {
@@ -62,7 +39,7 @@ export const postBadGrandeurImpactEntrySpec = {
     },
     res: {
         code: 400,
-        bodypath: {path: "$.errors.grandeur.msg", value: "Invalid value"}
+        bodypath: {path: "$.errors.grandeur.msg", value: ["Invalid value"]}
     }
 }
 
@@ -77,9 +54,9 @@ export const postAdemeImpactFileSpec = {
     },
     res: {
         bodypath: [
-            {path: "$.ok", value: true},
-            {path: "$.upsertions", value: 27},
-            {path: "$.insertions", value: 0},
+            {path: "$.ok", value: [true]},
+            {path: "$.upsertions", value: [27]},
+            {path: "$.insertions", value: [0]},
         ]
     }
 }

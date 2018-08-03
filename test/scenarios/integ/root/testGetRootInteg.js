@@ -6,12 +6,21 @@ import {init, request} from "test-api-express-mongo/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
+import {banane, bananeBC, transport} from "../../../database/banane"
 
 describe('GET Root', function () {
 
     beforeEach(init(api, ENV, cols))
 
-    it('return banane with roots & relativeTo', withTest(getBananeRootSpec))
+    it('return banane with roots & relativeTo', withTest({
+        req: {
+            method: "GET",
+            url: `/api/root/1/count/${bananeBC._id}`
+        },
+        res: {
+            bodypath: {path: `$.items[?(@._id==="${transport._id}")].relativeTo`, value: [banane._id]}
+        }
+    }))
 
     it('return roots', withTest(getRootsSpec))
 

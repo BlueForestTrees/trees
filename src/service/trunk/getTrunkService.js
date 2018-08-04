@@ -1,7 +1,6 @@
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry/dist"
 import {withIdIn} from "mongo-queries-blueforest"
-import {debug} from "../../util/debug"
 import {appendItemsInfos} from "../common/commonService"
 
 const collection = () => col(cols.TRUNK)
@@ -26,7 +25,7 @@ export const search = (name, type, pageSize, afterIdx) => collection()
 const prepareQuery = (name, type, afterIdx) => {
     const query = {}
     if (name) {
-        query.name_lower = {$regex: `^${name.toLowerCase()}.*`}
+        query.name_lower = {$regex: `^.*${name.toLowerCase()}.*`}
     }
     if (type) {
         query.type = type

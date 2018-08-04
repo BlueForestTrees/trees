@@ -32,8 +32,7 @@ const prepareQuery = (name, type, afterIdx) => {
         query.type = type
     }
     if (afterIdx) {
-        query._id = {$lt: afterIdx}
+        query._id = {$gt: afterIdx}
     }
-    debug("query", query)
     return query
 }

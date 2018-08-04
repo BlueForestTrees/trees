@@ -3,20 +3,20 @@ import {cols} from "../../src/const/collections"
 import {prixFacetEntry, vitBFacetEntry, vitCFacetEntry, vitEFacetEntry} from "./facetEntries"
 import {co2eImpactEntry, prixImpactEntry, vitBImpactEntry, vitCImpactEntry, vitDImpactEntry} from "./impactEntries"
 
-export const aTrunk = withTrunk("a", "aaaaaaaaaaaaaaaaaaaaaaaa", 1, "kg")
-const bTrunk = withTrunk("b", "bbbbbbbbbbbbbbbbbbbbbbbb", 1, "kg")
-const cTrunk = withTrunk("c", "cccccccccccccccccccccccc", 1, "kg")
-const dTrunk = withTrunk("d", "dddddddddddddddddddddddd", 1, "kg")
-const baTrunk = withTrunk("ba", "babababababababababababa", 1, "kg")
-const b2Trunk = withTrunk("b2", "b2b2b2b2b2b2b2b2b2b2b2b2", 1, "kg")
-export const daTrunk = withTrunk("da", "dadadadadadadadadadadada", 1, "kg")
-export const dbTrunk = withTrunk("db", "dbdbdbdbdbdbdbdbdbdbdbdb", 1, "kg")
-export const baaTrunk = withTrunk("baa", "baabaabaabaabaabaabaabaa", 1, "kg")
-const babTrunk = withTrunk("bab", "babbabbabbabbabbabbabbab", 1, "kg")
-const dbaTrunk = withTrunk("dba", "dbadbadbadbadbadbadbadba", 1, "kg")
-const dbaaTrunk = withTrunk("dbaa", "dbaadbaadbaadbaadbaadbaa", 1, "kg")
-export const e1Trunk = withTrunk("e1", "e1e1e1e1e1e1e1e1e1e1e1e1", 1, "m3")
-export const e2Trunk = withTrunk("e2", "e2e2e2e2e2e2e2e2e2e2e2e2", 1, "kg")
+export const aTrunk = withTrunk("a", 1, "kg")
+export const bTrunk = withTrunk("b", 1, "kg")
+export const cTrunk = withTrunk("c", 1, "kg")
+export const dTrunk = withTrunk("d", 1, "kg")
+export const baTrunk = withTrunk("ba", 1, "kg")
+export const b2Trunk = withTrunk("b2", 1, "kg")
+export const daTrunk = withTrunk("da", 1, "kg")
+export const dbTrunk = withTrunk("db", 1, "kg")
+export const baaTrunk = withTrunk("baa", 1, "kg")
+export const babTrunk = withTrunk("bab", 1, "kg")
+export const dbaTrunk = withTrunk("dba", 1, "kg")
+export const dbaaTrunk = withTrunk("dbaa", 1, "kg")
+export const e1Trunk = withTrunk("e1", 1, "m3")
+export const e2Trunk = withTrunk("e2", 1, "kg")
 
 const aRoot = {...withIdQuantity(aTrunk._id, 1, "kg"), items: [withIdQuantity(bTrunk._id, 1, "kg"), withIdQuantity(cTrunk._id, 1, "kg"), withIdQuantity(dTrunk._id, 1, "kg")]}
 const bRoot = {...withIdQuantity(bTrunk._id, 1, "kg"), items: [withIdQuantity(baTrunk._id, 1, "kg"), withIdQuantity(b2Trunk._id, 1, "kg")]}

@@ -6,6 +6,7 @@ import {getGrandeursKeys, getShortnames} from "unit-manip"
 import {trunksType} from "./trunks"
 import {isValidIds, objectNoEx, objects} from "mongo-queries-blueforest"
 import {errors} from "express-blueforest"
+import {debug} from "../util/debug"
 
 const unitsShortnames = getShortnames()
 
@@ -39,7 +40,7 @@ export const validIds = (req, res, next) => {
 export const validGrandeur = check(GRANDEUR).isIn(getGrandeursKeys())
 
 const mongoId = chain => chain.exists().withMessage("missing").isMongoId().withMessage("invalid mongo id").customSanitizer(objectNoEx)
-export const optionalValidMongoId = field => mongoId(check(field).optional())
+export const optionalMongoId = field => mongoId(check(field).optional())
 export const validMongoId = field =>mongoId(check(field))
 export const validBranchId = validMongoId(BRANCH_ID)
 export const validRootId = validMongoId(ROOT_ID)
@@ -91,4 +92,4 @@ export const optionnalPageSize = [
     },
     check("ps").isInt({min: 1, max: 200}).withMessage(`must be an integer between 1 and 200 (default to ${defaultPS})`).toInt()
 ]
-export const optionnalAfterIdx = optionalValidMongoId("aidx")
+export const optionnalAfterIdx = optionalMongoId("aidx")

@@ -3,12 +3,12 @@ import {vitBFacetEntry, vitCFacetEntry} from "./facetEntries"
 import {withIdQuantity, withTrunk} from "test-api-express-mongo/dist/domain"
 import {vitBImpactEntry, vitCImpactEntry} from "./impactEntries"
 
-export const gateauTrunk = withTrunk("Gateau au chocolat", "5a6a03c03e77667641d2d2c3", 200, "g")
-export const farineTrunk = withTrunk("Farine", "5a6a03c03e77667641d2d2c1","100","g")
-export const laitTrunk = withTrunk("Lait", "5a6a03c03e77667641d2d2c2",1,"L")
-export const bleTrunk = withTrunk("blé", "5a6a03c03e77667641d2d2c0",1,"kg")
-export const pizzaTrunk = withTrunk("pizza", "5a6a03c03e77667641d2d2c4",2,"count")
-export const cremeTrunk = withTrunk("creme", "5a6a03c03e77667641d2d2c5",100,"mL")
+export const gateauTrunk = withTrunk("Gateau au chocolat",  200, "g")
+export const farineTrunk = withTrunk("Farine", "100","g")
+export const laitTrunk = withTrunk("Lait", 1,"L")
+export const bleTrunk = withTrunk("blé", 1,"kg")
+export const pizzaTrunk = withTrunk("pizza", 2,"count")
+export const cremeTrunk = withTrunk("creme", 100,"mL")
 
 export const gateauItem = withIdQuantity(gateauTrunk._id, 500, "g")
 const pizzaItem = withIdQuantity(pizzaTrunk._id, 500, "g")

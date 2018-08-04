@@ -1,5 +1,5 @@
 import {aTrunk} from "../../database/lettres"
-import {arbreTrunk} from "../../database/skate"
+import {arbreTrunk, boisTrunk, bucheTrunk, chauffageTrunk, foretTrunk, grandeForetTrunk, plancheTrunk, refugeBioTrunk, skateTrunk} from "../../database/skate"
 import {withIdQuantity, withIdQtUnit} from "test-api-express-mongo/dist/domain"
 
 export const noBranchsTreeSpec = {
@@ -24,21 +24,21 @@ export const branchTreeSpec = {
             ...withIdQuantity(arbreTrunk._id, 100, "count"),
             items: [
                 {
-                    "_id": "999903c03e77667641d99995",
+                    "_id": boisTrunk._id,
                     "quantity": {
                         "qt": 100,
                         "unit": "t"
                     },
                     "items": [
                         {
-                            "_id": "999903c03e77667641d99991",
+                            "_id": plancheTrunk._id,
                             "quantity": {
                                 "qt": 200000,
                                 "unit": "count"
                             },
                             "items": [
                                 {
-                                    "_id": "999903c03e77667641d99990",
+                                    "_id": skateTrunk._id,
                                     "quantity": {
                                         "qt": 200000,
                                         "unit": "count"
@@ -47,14 +47,14 @@ export const branchTreeSpec = {
                             ]
                         },
                         {
-                            "_id": "999903c03e77667641d99998",
+                            "_id": bucheTrunk._id,
                             "quantity": {
                                 "qt": 100000,
                                 "unit": "kg"
                             },
                             "items": [
                                 {
-                                    "_id": "999903c03e77667641d99999",
+                                    "_id": chauffageTrunk._id,
                                     "quantity": {
                                         "qt": 33333.333333333336,
                                         "unit": "h"
@@ -65,17 +65,17 @@ export const branchTreeSpec = {
                     ]
                 },
                 {
-                    "_id": "999903c03e77667641d99997",
+                    "_id": foretTrunk._id,
                     "quantity": {
                         "qt": 0.1,
                         "unit": "count"
                     },
                     "items": [
                         {
-                            "_id": "999903c03e77667641d99910",
+                            "_id": grandeForetTrunk._id,
                             "items": [
                                 {
-                                    "_id": "999903c03e77667641d99911"
+                                    "_id": refugeBioTrunk._id
                                 }
                             ]
                         }

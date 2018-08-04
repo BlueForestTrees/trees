@@ -4,7 +4,7 @@ import {bleTrunk, gateauRoot} from "../../database/gateau"
 import {arbreTrunk} from "../../database/skate"
 import {withIdQtUnit} from "mongo-queries-blueforest"
 import {coucheAdhesif, coucheAlu, couchePapier, couchePE, papierVA} from "../../database/papier"
-import {aTrunk, daTrunk, dRoot} from "../../database/lettres"
+import {aTrunk, b2Trunk, baaTrunk, babTrunk, baTrunk, bTrunk, cTrunk, daTrunk, dbaaTrunk, dbaTrunk, dbTrunk, dRoot, dTrunk, e1Trunk, e2Trunk} from "../../database/lettres"
 import {cols} from "../../../src/const/collections"
 
 
@@ -69,16 +69,16 @@ export const lettreGetRootTreeSpec = {
             _id: aTrunk._id,
             items: [
                 {
-                    "_id": "bbbbbbbbbbbbbbbbbbbbbbbb",
+                    "_id": bTrunk._id,
                     "items": [
                         {
-                            "_id": "babababababababababababa",
+                            "_id": baTrunk._id,
                             "items": [
                                 {
-                                    "_id": "baabaabaabaabaabaabaabaa",
+                                    "_id": baaTrunk._id,
                                     "items": [
                                         {
-                                            "_id": "e1e1e1e1e1e1e1e1e1e1e1e1",
+                                            "_id": e1Trunk._id,
                                             "quantity": {
                                                 "qt": 5,
                                                 "unit": "L"
@@ -91,10 +91,10 @@ export const lettreGetRootTreeSpec = {
                                     }
                                 },
                                 {
-                                    "_id": "babbabbabbabbabbabbabbab",
+                                    "_id": babTrunk._id,
                                     "items": [
                                         {
-                                            "_id": "e1e1e1e1e1e1e1e1e1e1e1e1",
+                                            "_id": e1Trunk._id,
                                             "quantity": {
                                                 "qt": 0.25,
                                                 "unit": "m3"
@@ -113,10 +113,10 @@ export const lettreGetRootTreeSpec = {
                             }
                         },
                         {
-                            "_id": "b2b2b2b2b2b2b2b2b2b2b2b2",
+                            "_id": b2Trunk._id,
                             "items": [
                                 {
-                                    "_id": "e2e2e2e2e2e2e2e2e2e2e2e2",
+                                    "_id": e2Trunk._id,
                                     "quantity": {
                                         "qt": 0.5,
                                         "unit": "kg"
@@ -135,10 +135,10 @@ export const lettreGetRootTreeSpec = {
                     }
                 },
                 {
-                    "_id": "cccccccccccccccccccccccc",
+                    "_id": cTrunk._id,
                     "items": [
                         {
-                            "_id": "e2e2e2e2e2e2e2e2e2e2e2e2",
+                            "_id": e2Trunk._id,
                             "quantity": {
                                 "qt": 0.5,
                                 "unit": "kg"
@@ -151,13 +151,13 @@ export const lettreGetRootTreeSpec = {
                     }
                 },
                 {
-                    "_id": "dddddddddddddddddddddddd",
+                    "_id": dTrunk._id,
                     "items": [
                         {
-                            "_id": "dadadadadadadadadadadada",
+                            "_id": daTrunk._id,
                             "items": [
                                 {
-                                    "_id": "e2e2e2e2e2e2e2e2e2e2e2e2",
+                                    "_id": e2Trunk._id,
                                     "quantity": {
                                         "qt": 0.5,
                                         "unit": "kg"
@@ -170,16 +170,16 @@ export const lettreGetRootTreeSpec = {
                             }
                         },
                         {
-                            "_id": "dbdbdbdbdbdbdbdbdbdbdbdb",
+                            "_id": dbTrunk._id,
                             "items": [
                                 {
-                                    "_id": "dbadbadbadbadbadbadbadba",
+                                    "_id": dbaTrunk._id,
                                     "items": [
                                         {
-                                            "_id": "dbaadbaadbaadbaadbaadbaa",
+                                            "_id": dbaaTrunk._id,
                                             "items": [
                                                 {
-                                                    "_id": "e2e2e2e2e2e2e2e2e2e2e2e2",
+                                                    "_id": e2Trunk._id,
                                                     "quantity": {
                                                         "qt": 1,
                                                         "unit": "kg"
@@ -227,16 +227,16 @@ export const lettreNoDaQtGetRootTreeSpec = {
             _id: aTrunk._id,
             items: [
                 {
-                    "_id": "bbbbbbbbbbbbbbbbbbbbbbbb",
+                    "_id": bTrunk._id,
                     "items": [
                         {
-                            "_id": "babababababababababababa",
+                            "_id": baTrunk._id,
                             "items": [
                                 {
-                                    "_id": "baabaabaabaabaabaabaabaa",
+                                    "_id": baaTrunk._id,
                                     "items": [
                                         {
-                                            "_id": "e1e1e1e1e1e1e1e1e1e1e1e1",
+                                            "_id": e1Trunk._id,
                                             "quantity": {
                                                 "qt": 5,
                                                 "unit": "L"
@@ -249,10 +249,10 @@ export const lettreNoDaQtGetRootTreeSpec = {
                                     }
                                 },
                                 {
-                                    "_id": "babbabbabbabbabbabbabbab",
+                                    "_id": babTrunk._id,
                                     "items": [
                                         {
-                                            "_id": "e1e1e1e1e1e1e1e1e1e1e1e1",
+                                            "_id": e1Trunk._id,
                                             "quantity": {
                                                 "qt": 0.25,
                                                 "unit": "m3"
@@ -271,10 +271,10 @@ export const lettreNoDaQtGetRootTreeSpec = {
                             }
                         },
                         {
-                            "_id": "b2b2b2b2b2b2b2b2b2b2b2b2",
+                            "_id": b2Trunk._id,
                             "items": [
                                 {
-                                    "_id": "e2e2e2e2e2e2e2e2e2e2e2e2",
+                                    "_id": e2Trunk._id,
                                     "quantity": {
                                         "qt": 0.5,
                                         "unit": "kg"
@@ -293,10 +293,10 @@ export const lettreNoDaQtGetRootTreeSpec = {
                     }
                 },
                 {
-                    "_id": "cccccccccccccccccccccccc",
+                    "_id": cTrunk._id,
                     "items": [
                         {
-                            "_id": "e2e2e2e2e2e2e2e2e2e2e2e2",
+                            "_id": e2Trunk._id,
                             "quantity": {
                                 "qt": 0.5,
                                 "unit": "kg"
@@ -309,27 +309,27 @@ export const lettreNoDaQtGetRootTreeSpec = {
                     }
                 },
                 {
-                    "_id": "dddddddddddddddddddddddd",
+                    "_id": dTrunk._id,
                     "items": [
                         {
-                            "_id": "dadadadadadadadadadadada",
+                            "_id": daTrunk._id,
                             "items": [
                                 {
-                                    "_id": "e2e2e2e2e2e2e2e2e2e2e2e2"
+                                    "_id": e2Trunk._id
                                 }
                             ]
                         },
                         {
-                            "_id": "dbdbdbdbdbdbdbdbdbdbdbdb",
+                            "_id": dbTrunk._id,
                             "items": [
                                 {
-                                    "_id": "dbadbadbadbadbadbadbadba",
+                                    "_id": dbaTrunk._id,
                                     "items": [
                                         {
-                                            "_id": "dbaadbaadbaadbaadbaadbaa",
+                                            "_id": dbaaTrunk._id,
                                             "items": [
                                                 {
-                                                    "_id": "e2e2e2e2e2e2e2e2e2e2e2e2",
+                                                    "_id": e2Trunk._id,
                                                     "quantity": {
                                                         "qt": 1,
                                                         "unit": "kg"

@@ -4,7 +4,7 @@ import {cols} from "../../../../src/const/collections"
 import ENV from "../../../../src/env"
 import {eauTrunk, elecTrunk, skateTrunk} from "../../../database/skate"
 import {notInSearchMixin} from "test-api-express-mongo/dist/domain"
-import {baaTrunk, e1Trunk, e2Trunk} from "../../../database/lettres"
+import {b2Trunk, baaTrunk, e1Trunk, e2Trunk} from "../../../database/lettres"
 import {bateauTrunk, voitureTrunk} from "../../../database/transports"
 import {omit, pick} from 'lodash'
 import {gateauTrunk} from "../../../database/gateau"
@@ -13,21 +13,34 @@ describe('GET Trunks', function () {
 
     beforeEach(init(api, ENV, cols))
 
-    it('search by name ps=2', withTest({
+    it('search ps=10', withTest({
         req: {
-            url: `/api/trunks?ps=2`,
+            url: `/api/trunks?ps=10`,
         },
         res: {
-            bodypath: [{path: "$..name", value: ["a", "arbre"]}]
+            bodypath: [{
+                path: "$..name", value: [
+                    "a",
+                    "arbre",
+                    "b",
+                    "b2",
+                    "ba",
+                    "baa",
+                    "bab",
+                    "Banane BC",
+                    "banane canaries",
+                    "bateau"
+                ]
+            }]
         }
     }))
 
-    it('search by name ps=1 aidx=a', withTest({
+    it('search 5 after b2', withTest({
         req: {
-            url: `/api/trunks?ps=1&aidx=aaaaaaaaaaaaaaaaaaaaaaaa`,
+            url: `/api/trunks?ps=5&aidx=${b2Trunk._id}`,
         },
         res: {
-            bodypath: [{path: "$..name", value: ["arbre"]}]
+            bodypath: [{path: "$..name", value: ["ba", "baa", "bab", "Banane BC", "banane canaries"]}]
         }
     }))
 

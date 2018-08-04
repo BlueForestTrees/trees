@@ -1,6 +1,6 @@
 import {vitCFacetEntry} from "../../database/facetEntries"
 import {cols} from "../../../src/const/collections"
-import {createStringObjectId} from "test-api-express-mongo/dist/util"
+import {createStringObjectId, object} from "test-api-express-mongo/dist/util"
 import {withError} from "test-api-express-mongo/dist/domain"
 
 export const postFacetEntrySpec = {}
@@ -19,7 +19,7 @@ postFacetEntrySpec.db = {
     expected: {
         colname: cols.FACET_ENTRY,
         doc: {
-            _id,
+            _id: object(_id),
             name: "nomNewFacetEntry",
             grandeur: "Dens",
             color: "#FF0000",

@@ -218,6 +218,8 @@ export const lettreGetRootTreeSpec = {
     }
 }
 
+const dodo = removeItemQuantity(clon(dRoot), daTrunk._id)
+console.log("remove qt from ", daTrunk._id, dodo)
 export const lettreNoDaQtGetRootTreeSpec = {
     req: {
         url: `/api/root/tree/500/g/${aTrunk._id}`,
@@ -370,7 +372,7 @@ export const lettreNoDaQtGetRootTreeSpec = {
         preChange: {
             colname: cols.ROOT,
             doc: {
-                ...removeItemQuantity(clon(dRoot), daTrunk._id)
+                ...dodo
             }
         }
     }

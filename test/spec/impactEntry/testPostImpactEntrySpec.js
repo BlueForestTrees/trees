@@ -2,11 +2,11 @@ import {withError} from "test-api-express-mongo/dist/domain"
 import _ from 'lodash'
 import {vitCImpactEntry} from "../../database/impactEntries"
 import {cols} from "../../../src/const/collections"
-import {createStringObjectId} from "test-api-express-mongo/dist/util"
+import {createObjectId} from "test-api-express-mongo/dist/util"
 import path from "path"
 
 const impactEntry = {
-    _id: createStringObjectId(),
+    _id: createObjectId(),
     name: "nomNewImpactEntry",
     grandeur: "Dens",
     color: "#FFFFFF"

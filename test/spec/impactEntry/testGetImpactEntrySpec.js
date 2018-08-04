@@ -9,7 +9,7 @@ getImpactEntrySpec.req = {
 getImpactEntrySpec.res = {
     body: [
         {
-            "_id": "5a6a03c03e77667641d2d2c6",
+            "_id": prixImpactEntry._id,
             "name": "IPrix",
             "grandeur": "Coût",
             "color": prixImpactEntry.color

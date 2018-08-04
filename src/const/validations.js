@@ -58,7 +58,7 @@ export const validRelativeTo = oneOf([
     ],
     [
         body(ROOT_RELATIVE_TO).exists(),
-        body(ROOT_RELATIVE_TO_ID).isMongoId(),
+        mongoId(body(ROOT_RELATIVE_TO_ID)),
         body(ROOT_RELATIVE_TO_REFQT).exists(),
         body(ROOT_RELATIVE_TO_REFQT_QT).isNumeric(),
         body(ROOT_RELATIVE_TO_REFQT_UNIT).isIn(unitsShortnames),

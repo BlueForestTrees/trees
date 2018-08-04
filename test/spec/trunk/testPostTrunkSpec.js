@@ -3,11 +3,10 @@ import {cols} from "../../../src/const/collections"
 import {aTrunk} from "../../database/lettres"
 import {withValidationError} from "test-api-express-mongo/dist/domain"
 import path from 'path'
-import {createStringObjectId} from "test-api-express-mongo/dist/util"
+import {createObjectId} from "test-api-express-mongo/dist/util"
 
 
-
-const trunk = {_id: createStringObjectId(), color: "#FFCC00", name: "RATtatouille1664"}
+const trunk = {_id: createObjectId(), color: "#FFCC00", name: "RATtatouille1664"}
 export const postTrunkSpec = {
     req: {
         url: "/api/trunk",
@@ -25,7 +24,7 @@ export const postTrunkSpec = {
     }
 }
 
-const transportTrunk = {_id: createStringObjectId(), color: "#FFCC00", name: "RATtatouille1664", type: "TR"}
+const transportTrunk = {_id: createObjectId(), color: "#FFCC00", name: "RATtatouille1664", type: "TR"}
 export const postTransportTrunkSpec = {
     req: {
         url: "/api/trunk",

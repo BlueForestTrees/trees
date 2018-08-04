@@ -2,9 +2,9 @@ import {init, withTest} from "test-api-express-mongo/dist/api"
 import api from "../../../../src"
 import {cols} from "../../../../src/const/collections"
 import ENV from "../../../../src/env"
-import {eauTrunk, elecTrunk, skateTrunk} from "../../../database/skate"
+import {arbreTrunk, eauTrunk, elecTrunk, skateTrunk} from "../../../database/skate"
 import {notInSearchMixin} from "test-api-express-mongo/dist/domain"
-import {b2Trunk, baaTrunk, e1Trunk, e2Trunk} from "../../../database/lettres"
+import {aTrunk, b2Trunk, baaTrunk, bTrunk, e1Trunk, e2Trunk} from "../../../database/lettres"
 import {bateauTrunk, voitureTrunk} from "../../../database/transports"
 import {omit, pick} from 'lodash'
 import {gateauTrunk} from "../../../database/gateau"
@@ -19,30 +19,29 @@ describe('GET Trunks', function () {
         },
         res: {
             bodypath: [{
-                path: "$..name", value: [
-                    "a",
-                    "arbre",
-                    "b",
-                    "b2",
-                    "ba",
-                    "baa",
-                    "bab",
-                    "Banane BC",
-                    "banane canaries",
-                    "bateau"
-                ]
+                path: "$..name", value: ["a", "arbre", "b", "b2", "ba", "baa", "bab", "Banane BC", "banane canaries", "bateau"]
             }]
         }
     }))
 
-    it('search 5 after b2', withTest({
+    it('search with aidx', withTest({
         req: {
-            url: `/api/trunks?ps=5&aidx=${b2Trunk._id}`,
+            url: `/api/trunks?ps=9&aidx=${arbreTrunk._id}`,
         },
         res: {
-            bodypath: [{path: "$..name", value: ["ba", "baa", "bab", "Banane BC", "banane canaries"]}]
+            bodypath: [{path: "$..name", value: ["a", "b", "b2", "ba", "baa", "bab", "Banane BC", "banane canaries", "bateau"]}]
         }
     }))
+
+    it('search with aidx 2', withTest({
+        req: {
+            url: `/api/trunks?ps=8&aidx=${aTrunk._id}`,
+        },
+        res: {
+            bodypath: [{path: "$..name", value: ["b", "b2", "ba", "baa", "bab", "Banane BC", "banane canaries", "bateau"]}]
+        }
+    }))
+
 
     it('return the asked trees', withTest({
         req: {
@@ -58,7 +57,7 @@ describe('GET Trunks', function () {
             url: `/api/trunk?_ids=${skateTrunk._id}&_ids=${e1Trunk._id}`,
         },
         res: {
-            body: [omit(skateTrunk, notInSearchMixin), omit(e1Trunk, notInSearchMixin)]
+            body: [omit(e1Trunk, notInSearchMixin), omit(skateTrunk, notInSearchMixin)]
         }
     }))
 

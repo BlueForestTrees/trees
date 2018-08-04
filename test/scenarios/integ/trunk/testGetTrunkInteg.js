@@ -10,6 +10,7 @@ import {omit, pick} from 'lodash'
 import {gateauTrunk} from "../../../database/gateau"
 import {bananeBC} from "../../../database/banane"
 import {biere} from "../../../database/biere"
+import {papierVA, papierVB} from "../../../database/papier"
 
 describe('GET Trunks', function () {
 
@@ -22,15 +23,15 @@ describe('GET Trunks', function () {
             },
             res: {
                 bodypath: [{
-                    path: "$..name", value: ["skate", "planche", "bois", "arbre", "roulette", "elec", "eau", "foret", "buche", "chauffage"]
+                    path: "$..name", value: ["papier version A", "papier version B", "couche Plastique Polyéthylène", "couche Papier", "bateau", "voiture", "couche Adhésif", "blé", "Farine", "Lait"]
                 }]
             }
         }, {
             req: {
-                url: `/api/trunks?ps=9&aidx=${skateTrunk._id}`,
+                url: `/api/trunks?ps=9&aidx=${papierVA._id}`,
             },
             res: {
-                bodypath: [{path: "$..name", value: ["planche", "bois", "arbre", "roulette", "elec", "eau", "foret", "buche", "chauffage"]}]
+                bodypath: [{path: "$..name", value: ["papier version B", "couche Plastique Polyéthylène", "couche Papier", "bateau", "voiture", "couche Adhésif", "blé", "Farine", "Lait"]}]
             }
         }
     ]))

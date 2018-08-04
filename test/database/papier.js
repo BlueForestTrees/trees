@@ -2,12 +2,12 @@ import {cols} from "../../src/const/collections"
 import {withIdQuantity, withTrunk} from "test-api-express-mongo/dist/domain"
 import {co2eImpactEntry} from "./impactEntries"
 
-export const papierVA = withTrunk("papier version A", 100, "m2")
-const papierVB = withTrunk("papier version B", 50, "m2")
-export const couchePE = withTrunk("couche Plastique Polyéthylène", 1, "t")
-export const couchePapier = withTrunk("couche Papier", 1, "t")
-export const coucheAdhesif = withTrunk("couche Adhésif", 1, "t")
-export const coucheAlu = withTrunk("couche Alu", 1, "t")
+export const papierVA = withTrunk("papier version A", "111111111111111111111111", 100, "m2")
+export const papierVB = withTrunk("papier version B", "222222222222222222222222", 50, "m2")
+export const couchePE = withTrunk("couche Plastique Polyéthylène", "333333333333333333333333", 1, "t")
+export const couchePapier = withTrunk("couche Papier", "444444444444444444444444", 1, "t")
+export const coucheAdhesif = withTrunk("couche Adhésif", "555555555555555555555555", 1, "t")
+export const coucheAlu = withTrunk("couche Alu", "666666666666666666666666", 1, "t")
 
 const papierVAItem = withIdQuantity(papierVA._id, 100, "m2")
 const papierVBItem = withIdQuantity(papierVB._id, 100, "m2")

@@ -4,44 +4,36 @@ import {cols} from "../../../../src/const/collections"
 import ENV from "../../../../src/env"
 import {arbreTrunk, eauTrunk, elecTrunk, skateTrunk} from "../../../database/skate"
 import {notInSearchMixin} from "test-api-express-mongo/dist/domain"
-import {aTrunk, b2Trunk, baaTrunk, bTrunk, e1Trunk, e2Trunk} from "../../../database/lettres"
+import {aTrunk, b2Trunk, baaTrunk, babTrunk, baTrunk, bTrunk, e1Trunk, e2Trunk} from "../../../database/lettres"
 import {bateauTrunk, voitureTrunk} from "../../../database/transports"
 import {omit, pick} from 'lodash'
 import {gateauTrunk} from "../../../database/gateau"
+import {bananeBC} from "../../../database/banane"
+import {biere} from "../../../database/biere"
 
 describe('GET Trunks', function () {
 
     beforeEach(init(api, ENV, cols))
 
-    it('search ps=10', withTest({
-        req: {
-            url: `/api/trunks?ps=10`,
-        },
-        res: {
-            bodypath: [{
-                path: "$..name", value: ["a", "arbre", "b", "b2", "ba", "baa", "bab", "Banane BC", "banane canaries", "bateau"]
-            }]
+    it('search ps=10', withTest([
+        {
+            req: {
+                url: `/api/trunks?ps=10`,
+            },
+            res: {
+                bodypath: [{
+                    path: "$..name", value: ["skate", "planche", "bois", "arbre", "roulette", "elec", "eau", "foret", "buche", "chauffage"]
+                }]
+            }
+        }, {
+            req: {
+                url: `/api/trunks?ps=9&aidx=${skateTrunk._id}`,
+            },
+            res: {
+                bodypath: [{path: "$..name", value: ["planche", "bois", "arbre", "roulette", "elec", "eau", "foret", "buche", "chauffage"]}]
+            }
         }
-    }))
-
-    it('search with aidx', withTest({
-        req: {
-            url: `/api/trunks?ps=9&aidx=${arbreTrunk._id}`,
-        },
-        res: {
-            bodypath: [{path: "$..name", value: ["a", "b", "b2", "ba", "baa", "bab", "Banane BC", "banane canaries", "bateau"]}]
-        }
-    }))
-
-    it('search with aidx 2', withTest({
-        req: {
-            url: `/api/trunks?ps=8&aidx=${aTrunk._id}`,
-        },
-        res: {
-            bodypath: [{path: "$..name", value: ["b", "b2", "ba", "baa", "bab", "Banane BC", "banane canaries", "bateau"]}]
-        }
-    }))
-
+    ]))
 
     it('return the asked trees', withTest({
         req: {
@@ -57,7 +49,10 @@ describe('GET Trunks', function () {
             url: `/api/trunk?_ids=${skateTrunk._id}&_ids=${e1Trunk._id}`,
         },
         res: {
-            body: [omit(e1Trunk, notInSearchMixin), omit(skateTrunk, notInSearchMixin)]
+            body: [
+                omit(skateTrunk, notInSearchMixin),
+                omit(e1Trunk, notInSearchMixin)
+            ]
         }
     }))
 
@@ -86,10 +81,10 @@ describe('GET Trunks', function () {
         },
         res: {
             body: [
-                omit(e1Trunk, notInSearchMixin),
-                omit(e2Trunk, notInSearchMixin),
+                omit(elecTrunk, notInSearchMixin),
                 omit(eauTrunk, notInSearchMixin),
-                omit(elecTrunk, notInSearchMixin)
+                omit(e1Trunk, notInSearchMixin),
+                omit(e2Trunk, notInSearchMixin)
             ]
         }
     }))

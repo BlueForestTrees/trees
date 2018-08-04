@@ -19,7 +19,7 @@ export const getQuantifiedTrunk = async (qt, unit, _id) => ({...await getTrunk(_
 
 export const search = (name, type, pageSize, afterIdx) => collection()
     .find(prepareQuery(name, type, afterIdx), searchMixin)
-    .sort({name_lower: 1})
+    .sort({_id: 1})
     .limit(pageSize)
     .toArray()
 

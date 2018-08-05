@@ -42,16 +42,28 @@ export const authenticate = async function ({mail, password}, req, res) {
     }
 }
 
-export const loggedIn = function (req, res, next) {
+export const validToken = (req, res, next) => {
+    checkToken(req)
+    next()
+}
+
+const checkToken = req => {
     const token = req.headers[X_ACCESS_TOKEN]
     if (token) {
         try {
-            req.token = jwt.verify(token, ENV.AUTH_TOKEN_SECRET)
-            next()
+            return jwt.verify(token, ENV.AUTH_TOKEN_SECRET)
         } catch (e) {
             throw new UnauthorizedError("bad token", e)
         }
     } else {
         throw new UnauthorizedError("missing token")
     }
+}
+
+export const validGod = function (req, res, next) {
+    const token = checkToken(req)
+    if (!token.user.god) {
+        throw {status: 403}
+    }
+    next()
 }

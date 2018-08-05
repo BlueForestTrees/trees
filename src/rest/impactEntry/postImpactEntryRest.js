@@ -3,6 +3,7 @@ import {validColor, validGrandeur, validId, validName} from "../../const/validat
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
 import fileUpload from "express-fileupload"
+import {validGod} from "../../service/auth/authService"
 
 
 const router = Router()
@@ -18,6 +19,7 @@ router.post('/api/impactEntry',
 )
 
 router.post('/api/impactEntryBulk/ademe',
+    validGod,
     fileUpload({files: 1, limits: {fileSize: 5 * 1024 * 1024}}),
     run(({}, req) => importAdemeImpactEntries(req.files.file && req.files.file.data || req.files['xlsx.ademe.impact'].data))
 )

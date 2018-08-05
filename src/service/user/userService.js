@@ -15,7 +15,6 @@ export const confirmUser = ({mail, fullname, password}) => users().update({mail}
         status: userStatus.CONFIRMED,
         fullname,
         password: sha1(password),
-        clearpassword: password,
         confirmDate: new Date(),
         color: getRandomColor()
     }

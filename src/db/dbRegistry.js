@@ -19,7 +19,6 @@ export const registry = [
             wantSuscribeDate: new Date(),
             confirmDate: new Date(),
             password: sha1("tirlititi"),
-            clearpassword: "tirlititi",
             color: "#1565c0",
             god: true
         })
@@ -34,7 +33,6 @@ export const registry = [
             wantSuscribeDate: new Date(),
             confirmDate: new Date(),
             password: sha1("tirlititi"),
-            clearpassword: "tirlititi",
             color: "#1565c0"
         })
     },

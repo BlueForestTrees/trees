@@ -1,6 +1,6 @@
 {
   "name": "api-tree",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "ISC",
   "scripts": {
     "start": "node index.js",
@@ -27,7 +27,7 @@
     "nyc": "11.4.1",
     "rimraf": "2.6.2",
     "sinon": "4.2.1",
-    "test-api-express-mongo": "1.0.5"
+    "test-api-express-mongo": "1.0.4"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -36,7 +36,7 @@
     "cross-env": "5.2.0",
     "debug": "~2.6.9",
     "exceljs": "1.5.1",
-    "express-blueforest": "1.0.4",
+    "express-blueforest": "1.0.6",
     "express-fileupload": "0.4.0",
     "express-validator": "5.3.0",
     "fraction.js": "4.0.4",
@@ -45,7 +45,7 @@
     "items-service": "1.0.4",
     "jsonwebtoken": "8.3.0",
     "lodash": "4.17.10",
-    "mongo-queries-blueforest": "1.0.2",
+    "mongo-queries-blueforest": "1.0.4",
     "mongo-registry": "1.0.2",
     "morgan": "^1.9.0",
     "nested-error-stacks": "2.0.0",
@@ -53,7 +53,7 @@
     "pick-to-array": "1.1.0",
     "regex-escape": "3.4.8",
     "sha1": "1.1.1",
-    "unit-manip": "1.0.2"
+    "unit-manip": "1.0.3"
   },
   "babel": {
     "presets": [

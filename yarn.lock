@@ -1624,14 +1624,13 @@ expand-range@^1.8.1:
   dependencies:
     fill-range "^2.1.0"
 
-express-blueforest@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/express-blueforest/-/express-blueforest-1.0.3.tgz#632f61e1d6a16aac180177220b7a0656f5b73aa4"
+express-blueforest@1.0.7:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/express-blueforest/-/express-blueforest-1.0.6.tgz#15656c153bb2e64955cf87266922553eb49a6fd0"
   dependencies:
     body-parser "1.18.3"
     express "4.16.3"
     express-validator "5.3.0"
-    morgan "1.9.0"
 
 express-fileupload@0.4.0:
   version "0.4.0"
@@ -2915,6 +2914,13 @@ mongo-queries-blueforest@1.0.1:
     lodash "^4.17.5"
     mongodb "^2.2.36"
 
+mongo-queries-blueforest@1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/mongo-queries-blueforest/-/mongo-queries-blueforest-1.0.4.tgz#858c2ef492e062cd6aca4ae9c832cfc34894f2b9"
+  dependencies:
+    lodash "4.17.5"
+    mongodb "2.2.36"
+
 mongo-registry@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/mongo-registry/-/mongo-registry-1.0.2.tgz#aa2e2d58759c4e6a47ee35fb22b290b3c200e3d1"
@@ -2932,7 +2938,7 @@ mongodb-core@2.1.20:
     bson "~1.0.4"
     require_optional "~1.0.0"
 
-mongodb@^2.2.36:
+mongodb@2.2.36, mongodb@^2.2.36:
   version "2.2.36"
   resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-2.2.36.tgz#1c573680b2849fb0f47acbba3dc5fa228de975f5"
   dependencies:
@@ -2940,7 +2946,7 @@ mongodb@^2.2.36:
     mongodb-core "2.1.20"
     readable-stream "2.2.7"
 
-morgan@1.9.0, morgan@^1.9.0:
+morgan@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.9.0.tgz#d01fa6c65859b76fcf31b3cb53a3821a311d8051"
   dependencies:
@@ -4180,6 +4186,17 @@ test-api-express-mongo@1.0.2:
     lodash "4.17.10"
     mongo-connexion "1.1.1"
 
+test-api-express-mongo@1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/test-api-express-mongo/-/test-api-express-mongo-1.0.4.tgz#8af30c90ec05da52bba68c334502046ff04a2032"
+  dependencies:
+    chai "4.1.2"
+    chai-http "4.0.0"
+    fs-readdir-recursive "1.1.0"
+    jsonpath "1.0.0"
+    lodash "4.17.10"
+    mongo-connexion "1.1.1"
+
 test-exclude@^4.1.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/test-exclude/-/test-exclude-4.2.1.tgz#dfa222f03480bca69207ca728b37d74b45f724fa"
@@ -4318,6 +4335,12 @@ unit-manip@1.0.1:
   dependencies:
     fraction.js "^4.0.4"
     lodash "^4.17.5"
+
+unit-manip@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/unit-manip/-/unit-manip-1.0.3.tgz#1b26d165127a6b9caa945c5f386fba8394a7d7c3"
+  dependencies:
+    fraction.js "4.0.4"
 
 universalify@^0.1.0:
   version "0.1.2"

@@ -27,7 +27,7 @@
     "nyc": "11.4.1",
     "rimraf": "2.6.2",
     "sinon": "4.2.1",
-    "test-api-express-mongo": "1.0.3"
+    "test-api-express-mongo": "1.0.5"
   },
   "dependencies": {
     "body-parser": "~1.18.2",

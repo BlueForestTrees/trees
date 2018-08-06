@@ -3,7 +3,7 @@ import {Router, run} from 'express-blueforest'
 import {validColor, validId, validName, optionalValidType} from "../../const/validations"
 import {importAdemeTrunkEntries} from "../../service/trunk/postTrunkService"
 import fileUpload from "express-fileupload"
-import {validGod, validToken} from "../../service/auth/authService"
+import {validGod} from "../../service/auth/authService"
 
 
 const router = Router()

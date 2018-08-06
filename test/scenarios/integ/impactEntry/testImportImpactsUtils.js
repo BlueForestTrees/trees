@@ -1,5 +1,5 @@
 import {initServices} from "../../../../src/services"
-import {ademeToBlueforestImpact, ademeUnitToGrandeurEq} from "../../../../src/service/impactEntry/postImpactEntryService"
+import {ademeToBlueforestImpactEntries, ademeUnitToGrandeurEq} from "../../../../src/service/impactEntry/postImpactEntryService"
 import {expect} from "chai"
 import {countFromDbByDoc} from "test-api-express-mongo/dist/db"
 
@@ -50,6 +50,6 @@ describe('Imports utils', function () {
                 upsert: true
             }
         }
-        expect(ademeToBlueforestImpact([ademe])).to.deep.equal([blueforest])
+        expect(ademeToBlueforestImpactEntries([ademe])).to.deep.equal([blueforest])
     })
 })

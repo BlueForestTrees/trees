@@ -1624,7 +1624,7 @@ expand-range@^1.8.1:
   dependencies:
     fill-range "^2.1.0"
 
-express-blueforest@1.0.7:
+express-blueforest@1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/express-blueforest/-/express-blueforest-1.0.6.tgz#15656c153bb2e64955cf87266922553eb49a6fd0"
   dependencies:
@@ -4405,6 +4405,10 @@ util-deprecate@~1.0.1:
 utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
+
+v-file-upload@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/v-file-upload/-/v-file-upload-3.1.3.tgz#4262dafcfde3b8829d4de72e161c2c6e6d61bd0a"
 
 v8flags@^2.1.1:
   version "2.1.1"

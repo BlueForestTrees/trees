@@ -48,7 +48,7 @@ export const postAdemeImpactFileSpec = {
         url: "/api/impactEntryBulk/ademe",
         method: "POST",
         file: {
-            field: "xlsx.ademe.impact",
+            field: "xlsx.ademe.impactEntry",
             path: path.resolve("test/files/BI_1.09__06_CatImpacts_Details.xlsx")
         }
     },

@@ -21,5 +21,5 @@ router.post('/api/impactEntry',
 router.post('/api/impactEntryBulk/ademe',
     validGod,
     fileUpload({files: 1, limits: {fileSize: 5 * 1024 * 1024}}),
-    run(({}, req) => importAdemeImpactEntries(req.files.file && req.files.file.data || req.files['xlsx.ademe.impact'].data))
+    run(({}, req) => importAdemeImpactEntries(req.files.file && req.files.file.data || req.files['xlsx.ademe.impactEntry'].data))
 )

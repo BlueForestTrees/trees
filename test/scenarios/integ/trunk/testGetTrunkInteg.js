@@ -2,17 +2,16 @@ import {init, withTest} from "test-api-express-mongo/dist/api"
 import api from "../../../../src"
 import {cols} from "../../../../src/const/collections"
 import ENV from "../../../../src/env"
-import {arbreTrunk, eauTrunk, elecTrunk, skateTrunk} from "../../../database/skate"
+import {eauTrunk, elecTrunk, refugeBioTrunk, skateTrunk} from "../../../database/skate"
 import {notInSearchMixin} from "test-api-express-mongo/dist/domain"
-import {aTrunk, b2Trunk, baaTrunk, babTrunk, baTrunk, bTrunk, e1Trunk, e2Trunk} from "../../../database/lettres"
+import {baaTrunk, e1Trunk, e2Trunk} from "../../../database/lettres"
 import {bateauTrunk, voitureTrunk} from "../../../database/transports"
 import {omit, pick} from 'lodash'
 import {gateauTrunk} from "../../../database/gateau"
-import {bananeBC} from "../../../database/banane"
-import {biere} from "../../../database/biere"
 import {papierVA, papierVB} from "../../../database/papier"
+import {withBqtG} from "test-api-express-mongo/dist/domain"
 
-describe('GET Trunks', function () {
+describe('GET Trunk', function () {
 
     beforeEach(init(api, ENV, cols))
 
@@ -57,7 +56,7 @@ describe('GET Trunks', function () {
         }
     }))
 
-    it('return 400 since id is bad', withTest({
+    it('return 400 since ids are bad', withTest({
         req: {
             url: `/api/trunk?_ids=blabla`,
         },
@@ -78,14 +77,13 @@ describe('GET Trunks', function () {
 
     it('search by name 2', withTest({
         req: {
-            url: `/api/trunks?q=${eauTrunk.name.substring(0, 1)}`,
+            url: `/api/trunks?q=ers`,
         },
         res: {
             body: [
-                omit(elecTrunk, notInSearchMixin),
-                omit(eauTrunk, notInSearchMixin),
-                omit(e1Trunk, notInSearchMixin),
-                omit(e2Trunk, notInSearchMixin)
+                omit(papierVA, notInSearchMixin),
+                omit(papierVB, notInSearchMixin),
+                omit(refugeBioTrunk, notInSearchMixin)
             ]
         }
     }))
@@ -124,28 +122,28 @@ describe('GET Trunks', function () {
 
     it('get baa trunk with decimal qt', withTest({
         req: {
-            url: `/api/trunk/0.1/kg/${baaTrunk._id}`
+            url: `/api/trunk/100/Mass/${baaTrunk._id}`
         },
         res: {
-            body: {...omit(baaTrunk, ['name_lower', 'quantity']), quantity: {qt: 0.1, unit: "kg"}}
+            body: {...omit(baaTrunk, ['name_lower', 'quantity']), ...withBqtG(100, "Mass")}
         }
     }))
 
     it('get gateau trunk with qt', withTest({
         req: {
-            url: `/api/trunk/5/kg/${gateauTrunk._id}`
+            url: `/api/trunk/5000/Mass/${gateauTrunk._id}`
         },
         res: {
-            body: {...omit(gateauTrunk, ['name_lower', 'quantity']), quantity: {qt: 5, unit: "kg"}}
+            body: {...omit(gateauTrunk, ['name_lower', 'quantity']), ...withBqtG(5000, "Mass")}
         }
     }))
 
     it('get bateau trunk with qt', withTest({
         req: {
-            url: `/api/trunk/7/t*km/${bateauTrunk._id}`
+            url: `/api/trunk/7/Tran/${bateauTrunk._id}`
         },
         res: {
-            body: {...omit(bateauTrunk, ['name_lower', 'quantity']), quantity: {qt: 7, unit: "t*km"}}
+            body: {...omit(bateauTrunk, ['name_lower', 'quantity']), ...withBqtG(7, "Tran")}
         }
     }))
 

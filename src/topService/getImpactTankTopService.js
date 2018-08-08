@@ -1,7 +1,11 @@
 import _ from 'lodash'
 import {flatten, listify, summify} from "../util/calculations"
-import {readRootTree} from "../service/root/rootService"
 import {loadDenseQuantifiedImpacts} from "../service/impact/getImpactService"
+import {cols} from "../const/collections"
+import {col} from "mongo-registry/dist"
+import configure from "items-service"
+
+const readRootTree = configure(() => col(cols.ROOT)).initReadTree(cols.ROOT)
 
 export const getImpactTank = async (qt, unit, _id) => (
     {

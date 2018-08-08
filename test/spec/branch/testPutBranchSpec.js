@@ -4,10 +4,10 @@ import {bleTrunk, farineTrunk, gateauTrunk, laitBranch, laitTrunk} from "../../d
 import {setQuantity} from "test-api-express-mongo/dist/domain"
 import {clon} from "test-api-express-mongo/dist/util"
 import _ from 'lodash'
-import {withIdQuantity} from "test-api-express-mongo/dist/domain"
+import {withIdBqtG} from "test-api-express-mongo/dist/domain"
 
-const trunk = withIdQuantity(bleTrunk._id, 20, "min")
-const branch = withIdQuantity(farineTrunk._id, 10, "kg")
+const trunk = withIdBqtG(bleTrunk._id, 20, "min")
+const branch = withIdBqtG(farineTrunk._id, 10, "kg")
 export const setQuantityBranchSpec = {
     req: {
         url: `/api/branch`,
@@ -35,8 +35,8 @@ export const updateQuantityBranchSpec = {
         url:"/api/branch",
         method:"PUT",
         body: {
-            trunk: withIdQuantity(laitTrunk._id, 30,"L"),
-            branch: withIdQuantity(gateauTrunk._id, 250,"g")
+            trunk: withIdBqtG(laitTrunk._id, 30,"L"),
+            branch: withIdBqtG(gateauTrunk._id, 250,"g")
         }
     },
     res:{
@@ -60,8 +60,8 @@ export const updateQuantityAnotherUnitBranchSpec = {
         url:"/api/branch",
         method:"PUT",
         body: {
-            trunk: withIdQuantity(laitTrunk._id, 0.02, "m3"),
-            branch: withIdQuantity(gateauTrunk._id, 1, "kg"),
+            trunk: withIdBqtG(laitTrunk._id, 0.02, "m3"),
+            branch: withIdBqtG(gateauTrunk._id, 1, "kg"),
         }
     },
     res:{

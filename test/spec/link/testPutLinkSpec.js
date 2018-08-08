@@ -4,16 +4,16 @@ import {bleTrunk, farineTrunk} from "../../database/gateau"
 import {oneModifiedResponse} from "test-api-express-mongo/dist/domain"
 import {skateTrunk} from "../../database/skate"
 import {cols} from "../../../src/const/collections"
-import {withIdQuantity} from "test-api-express-mongo/dist/domain"
+import {withIdBqtG} from "test-api-express-mongo/dist/domain"
 
 export const putLinkRelativeToSpec = {
     req: {
         method: "PUT",
         url: "/api/link",
         body: {
-            trunk: withIdQuantity(farineTrunk._id, 10, "kg"),
+            trunk: withIdBqtG(farineTrunk._id, 10, "kg"),
             root: {
-                ...withIdQuantity(skateTrunk._id, 3, "count"),
+                ...withIdBqtG(skateTrunk._id, 3, "Nomb"),
                 relativeTo: {
                     _id: bleTrunk._id,
                     refqt: {qt: 104, unit: "kg"},
@@ -31,11 +31,11 @@ export const putLinkRelativeToSpec = {
                 {
                     colname: cols.ROOT,
                     doc: {
-                        ...withIdQuantity(farineTrunk._id, 10, "kg"),
+                        ...withIdBqtG(farineTrunk._id, 10, "kg"),
                         items: [
                             {_id:bleTrunk._id},
                             {
-                                ...withIdQuantity(skateTrunk._id, 3, "count"),
+                                ...withIdBqtG(skateTrunk._id, 3, "Nomb"),
                                 relativeTo: {
                                     _id: bleTrunk._id,
                                     refqt: {qt: 104, unit: "kg"},
@@ -48,10 +48,10 @@ export const putLinkRelativeToSpec = {
                 {
                     colname: cols.BRANCH,
                     doc: {
-                        ...withIdQuantity(skateTrunk._id, 3, "count"),
+                        ...withIdBqtG(skateTrunk._id, 3, "Nomb"),
                         items: [
                             {
-                                ...withIdQuantity(farineTrunk._id, 10, "kg")
+                                ...withIdBqtG(farineTrunk._id, 10, "kg")
                             }
                         ],
                     }

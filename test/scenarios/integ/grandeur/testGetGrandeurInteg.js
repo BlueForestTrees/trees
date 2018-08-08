@@ -250,7 +250,7 @@ describe('GET Grandeurs', function () {
                                 "coef": 1,
                                 "grandeur": "Nomb",
                                 "name": "pas d'unité",
-                                "shortname": "count",
+                                "shortname": "Nomb",
                             },
                             {
                                 "coef": 1,
@@ -307,16 +307,16 @@ describe('GET Grandeurs', function () {
                         "label": "Surface (m2, hec...)",
                         "units": [
                             {
-                                "coef": 1,
+                                "coef": 0.0001,
                                 "grandeur": "Surf",
-                                "name": "Mètre-carré (m2)",
-                                "shortname": "m2",
+                                "name": "Centimètre-carré (m2)",
+                                "shortname": "cm2",
                             },
                             {
                                 "coef": 1,
                                 "grandeur": "Surf",
-                                "name": "Centimètre-carré (m2)",
-                                "shortname": "cm2",
+                                "name": "Mètre-carré (m2)",
+                                "shortname": "m2",
                             },
                             {
                                 "coef": 10000,

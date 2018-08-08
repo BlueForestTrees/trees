@@ -31,16 +31,16 @@ const postTrunk = async name => request()
 
 const link = (parentId, childId) => request()
     .put('/api/link')
-    .send({trunk: {_id: parentId, ...withQuantity(1, "count")}, root: {_id: childId, ...withQuantity(1, "count")}})
+    .send({trunk: {_id: parentId, ...withQuantity(1, "Nomb")}, root: {_id: childId, ...withQuantity(1, "Nomb")}})
 
 const allGet200 = (parentId) => () => Promise.all([
     get200(`/api/trunk/${parentId}`),
-    get200(`/api/tank/1/count/${parentId}`),
-    get200(`/api/root/1/count/${parentId}`),
-    get200(`/api/facet/1/count/${parentId}`),
-    get200(`/api/impact/1/count/${parentId}`),
-    get200(`/api/impacttank/1/count/${parentId}`),
-    get200(`/api/branch/1/count/${parentId}`)
+    get200(`/api/tank/1/Nomb/${parentId}`),
+    get200(`/api/root/1/Nomb/${parentId}`),
+    get200(`/api/facet/1/Nomb/${parentId}`),
+    get200(`/api/impact/1/Nomb/${parentId}`),
+    get200(`/api/impacttank/1/Nomb/${parentId}`),
+    get200(`/api/branch/1/Nomb/${parentId}`)
 ])
 
 const get200 = url => request()

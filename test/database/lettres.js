@@ -1,57 +1,57 @@
-import {withIdQuantity, withTrunk} from "test-api-express-mongo/dist/domain"
+import {withIdBqtG, withDbTrunk} from "test-api-express-mongo/dist/domain"
 import {cols} from "../../src/const/collections"
 import {prixFacetEntry, vitBFacetEntry, vitCFacetEntry, vitEFacetEntry} from "./facetEntries"
 import {co2eImpactEntry, prixImpactEntry, vitBImpactEntry, vitCImpactEntry, vitDImpactEntry} from "./impactEntries"
 
-export const aTrunk = withTrunk("a", "aaaaaaaaaaaaaaaaaaaaaaaa", 1, "kg")
-export const bTrunk = withTrunk("b", "bbbbbbbbbbbbbbbbbbbbbbbb", 1, "kg")
-export const cTrunk = withTrunk("c", "cccccccccccccccccccccccc", 1, "kg")
-export const dTrunk = withTrunk("d", "dddddddddddddddddddddddd", 1, "kg")
-export const baTrunk = withTrunk("ba", "babababababababababababa", 1, "kg")
-export const b2Trunk = withTrunk("b2", "b2b2b2b2b2b2b2b2b2b2b2b2", 1, "kg")
-export const daTrunk = withTrunk("da", "dadadadadadadadadadadada", 1, "kg")
-export const dbTrunk = withTrunk("db", "dbdbdbdbdbdbdbdbdbdbdbdb", 1, "kg")
-export const baaTrunk = withTrunk("baa", "baabaabaabaabaabaabaabaa", 1, "kg")
-export const babTrunk = withTrunk("bab", "babbabbabbabbabbabbabbab", 1, "kg")
-export const dbaTrunk = withTrunk("dba", "dbadbadbadbadbadbadbadba", 1, "kg")
-export const dbaaTrunk = withTrunk("dbaa", "dbaadbaadbaadbaadbaadbaa", 1, "kg")
-export const e1Trunk = withTrunk("e1", "e1e1e1e1e1e1e1e1e1e1e1e1", 1, "m3")
-export const e2Trunk = withTrunk("e2", "e2e2e2e2e2e2e2e2e2e2e2e2", 1, "kg")
+export const aTrunk = withDbTrunk("a", "aaaaaaaaaaaaaaaaaaaaaaaa", 1000, "Mass")
+export const bTrunk = withDbTrunk("b", "bbbbbbbbbbbbbbbbbbbbbbbb", 1000, "Mass")
+export const cTrunk = withDbTrunk("c", "cccccccccccccccccccccccc", 1000, "Mass")
+export const dTrunk = withDbTrunk("d", "dddddddddddddddddddddddd", 1000, "Mass")
+export const baTrunk = withDbTrunk("ba", "babababababababababababa", 1000, "Mass")
+export const b2Trunk = withDbTrunk("b2", "b2b2b2b2b2b2b2b2b2b2b2b2", 1000, "Mass")
+export const daTrunk = withDbTrunk("da", "dadadadadadadadadadadada", 1000, "Mass")
+export const dbTrunk = withDbTrunk("db", "dbdbdbdbdbdbdbdbdbdbdbdb", 1000, "Mass")
+export const baaTrunk = withDbTrunk("baa", "baabaabaabaabaabaabaabaa", 1000, "Mass")
+export const babTrunk = withDbTrunk("bab", "babbabbabbabbabbabbabbab", 1000, "Mass")
+export const dbaTrunk = withDbTrunk("dba", "dbadbadbadbadbadbadbadba", 1000, "Mass")
+export const dbaaTrunk = withDbTrunk("dbaa", "dbaadbaadbaadbaadbaadbaa", 1000, "Mass")
+export const e1Trunk = withDbTrunk("e1", "e1e1e1e1e1e1e1e1e1e1e1e1", 1, "Volu")
+export const e2Trunk = withDbTrunk("e2", "e2e2e2e2e2e2e2e2e2e2e2e2", 1000, "Mass")
 
-const aRoot = {...withIdQuantity(aTrunk._id, 1, "kg"), items: [withIdQuantity(bTrunk._id, 1, "kg"), withIdQuantity(cTrunk._id, 1, "kg"), withIdQuantity(dTrunk._id, 1, "kg")]}
-const bRoot = {...withIdQuantity(bTrunk._id, 1, "kg"), items: [withIdQuantity(baTrunk._id, 1, "kg"), withIdQuantity(b2Trunk._id, 1, "kg")]}
-const baRoot = {...withIdQuantity(baTrunk._id, 1, "kg"), items: [withIdQuantity(baaTrunk._id, 1, "kg"), withIdQuantity(babTrunk._id, 1, "kg")]}
-const baaRoot = {...withIdQuantity(baaTrunk._id, 1, "kg"), items: [withIdQuantity(e1Trunk._id, 10, "L")]}
-const babRoot = {...withIdQuantity(babTrunk._id, 1, "kg"), items: [withIdQuantity(e1Trunk._id, 0.5, "m3")]}
-const b2Root = {...withIdQuantity(b2Trunk._id, 1, "kg"), items: [withIdQuantity(e2Trunk._id, 1, "kg")]}
-const cRoot = {...withIdQuantity(cTrunk._id, 1, "kg"), items: [withIdQuantity(e2Trunk._id, 1, "kg")]}
-export const dRoot = {...withIdQuantity(dTrunk._id, 1, "kg"), items: [withIdQuantity(daTrunk._id, 1, "kg"), withIdQuantity(dbTrunk._id, 1, "kg")]}
-const daRoot = {...withIdQuantity(daTrunk._id, 1, "kg"), items: [withIdQuantity(e2Trunk._id, 1, "kg")]}
-const dbRoot = {...withIdQuantity(dbTrunk._id, 1, "kg"), items: [withIdQuantity(dbaTrunk._id, 1, "kg")]}
-const dbaRoot = {...withIdQuantity(dbaTrunk._id, 1, "kg"), items: [withIdQuantity(dbaaTrunk._id, 1, "kg")]}
-const dbaaRoot = {...withIdQuantity(dbaaTrunk._id, 1, "kg"), items: [withIdQuantity(e2Trunk._id, 2, "kg")]}
-
-
-const bBranch = {...withIdQuantity(bTrunk._id, 1, "kg"), items: [withIdQuantity(aTrunk._id, 1, "kg")]}
-const baBranch = {...withIdQuantity(baTrunk._id, 1, "kg"), items: [withIdQuantity(bTrunk._id, 1, "kg")]}
-const baaBranch = {...withIdQuantity(baaTrunk._id, 1, "kg"), items: [withIdQuantity(baTrunk._id, 1, "kg")]}
-const babBranch = {...withIdQuantity(babTrunk._id, 1, "kg"), items: [withIdQuantity(baTrunk._id, 1, "kg")]}
-const b2Branch = {...withIdQuantity(b2Trunk._id, 1, "kg"), items: [withIdQuantity(bTrunk._id, 1, "kg")]}
-const cBranch = {...withIdQuantity(cTrunk._id, 1, "kg"), items: [withIdQuantity(aTrunk._id, 1, "kg")]}
-const dBranch = {...withIdQuantity(dTrunk._id, 1, "kg"), items: [withIdQuantity(aTrunk._id, 1, "kg")]}
-const daBranch = {...withIdQuantity(daTrunk._id, 1, "kg"), items: [withIdQuantity(dTrunk._id, 1, "kg")]}
-const dbBranch = {...withIdQuantity(dbTrunk._id, 1, "kg"), items: [withIdQuantity(dTrunk._id, 1, "kg")]}
-const dbaBranch = {...withIdQuantity(dbaTrunk._id, 1, "kg"), items: [withIdQuantity(dbTrunk._id, 1, "kg")]}
-const dbaaBranch = {...withIdQuantity(dbaaTrunk._id, 1, "kg"), items: [withIdQuantity(dbaTrunk._id, 1, "kg")]}
-const e1Branch = {...withIdQuantity(e1Trunk._id, 500, "L"), items: [withIdQuantity(baaTrunk._id, 50, "kg"), withIdQuantity(babTrunk._id, 1, "kg")]}
-const e2Branch = {...withIdQuantity(e2Trunk._id, 1, "kg"), items: [withIdQuantity(b2Trunk._id, 1, "kg"), withIdQuantity(cTrunk._id, 1, "kg"), withIdQuantity(daTrunk._id, 1, "kg"), withIdQuantity(dbaaTrunk._id, 500, "g")]}
+const aRoot = {...withIdBqtG(aTrunk._id, 1000, "Mass"), items: [withIdBqtG(bTrunk._id, 1000, "Mass"), withIdBqtG(cTrunk._id, 1000, "Mass"), withIdBqtG(dTrunk._id, 1000, "Mass")]}
+const bRoot = {...withIdBqtG(bTrunk._id, 1000, "Mass"), items: [withIdBqtG(baTrunk._id, 1000, "Mass"), withIdBqtG(b2Trunk._id, 1000, "Mass")]}
+const baRoot = {...withIdBqtG(baTrunk._id, 1000, "Mass"), items: [withIdBqtG(baaTrunk._id, 1000, "Mass"), withIdBqtG(babTrunk._id, 1000, "Mass")]}
+const baaRoot = {...withIdBqtG(baaTrunk._id, 1000, "Mass"), items: [withIdBqtG(e1Trunk._id, 0.01, "Volu")]}
+const babRoot = {...withIdBqtG(babTrunk._id, 1000, "Mass"), items: [withIdBqtG(e1Trunk._id, 0.5, "Volu")]}
+const b2Root = {...withIdBqtG(b2Trunk._id, 1000, "Mass"), items: [withIdBqtG(e2Trunk._id, 1000, "Mass")]}
+const cRoot = {...withIdBqtG(cTrunk._id, 1000, "Mass"), items: [withIdBqtG(e2Trunk._id, 1000, "Mass")]}
+export const dRoot = {...withIdBqtG(dTrunk._id, 1000, "Mass"), items: [withIdBqtG(daTrunk._id, 1000, "Mass"), withIdBqtG(dbTrunk._id, 1000, "Mass")]}
+const daRoot = {...withIdBqtG(daTrunk._id, 1000, "Mass"), items: [withIdBqtG(e2Trunk._id, 1000, "Mass")]}
+const dbRoot = {...withIdBqtG(dbTrunk._id, 1000, "Mass"), items: [withIdBqtG(dbaTrunk._id, 1000, "Mass")]}
+const dbaRoot = {...withIdBqtG(dbaTrunk._id, 1000, "Mass"), items: [withIdBqtG(dbaaTrunk._id, 1000, "Mass")]}
+const dbaaRoot = {...withIdBqtG(dbaaTrunk._id, 1000, "Mass"), items: [withIdBqtG(e2Trunk._id, 2000, "Mass")]}
 
 
-const aFacets = {...withIdQuantity(aTrunk._id, 1, "kg"), items: [withIdQuantity(prixFacetEntry._id, 100, "€"), withIdQuantity(vitCFacetEntry._id, 10, "mol"), withIdQuantity(vitBFacetEntry._id, 100, "mmol"), withIdQuantity(vitEFacetEntry._id, 120, "mmol")]}
-const bFacets = {_id: bTrunk._id, items: [withIdQuantity(prixFacetEntry._id, 40, "€"), withIdQuantity(vitCFacetEntry._id, 6, "mol"), withIdQuantity(vitBFacetEntry._id, 60, "mmol"), withIdQuantity(vitEFacetEntry._id, 80, "mmol")]}
+const bBranch = {...withIdBqtG(bTrunk._id, 1000, "Mass"), items: [withIdBqtG(aTrunk._id, 1000, "Mass")]}
+const baBranch = {...withIdBqtG(baTrunk._id, 1000, "Mass"), items: [withIdBqtG(bTrunk._id, 1000, "Mass")]}
+const baaBranch = {...withIdBqtG(baaTrunk._id, 1000, "Mass"), items: [withIdBqtG(baTrunk._id, 1000, "Mass")]}
+const babBranch = {...withIdBqtG(babTrunk._id, 1000, "Mass"), items: [withIdBqtG(baTrunk._id, 1000, "Mass")]}
+const b2Branch = {...withIdBqtG(b2Trunk._id, 1000, "Mass"), items: [withIdBqtG(bTrunk._id, 1000, "Mass")]}
+const cBranch = {...withIdBqtG(cTrunk._id, 1000, "Mass"), items: [withIdBqtG(aTrunk._id, 1000, "Mass")]}
+const dBranch = {...withIdBqtG(dTrunk._id, 1000, "Mass"), items: [withIdBqtG(aTrunk._id, 1000, "Mass")]}
+const daBranch = {...withIdBqtG(daTrunk._id, 1000, "Mass"), items: [withIdBqtG(dTrunk._id, 1000, "Mass")]}
+const dbBranch = {...withIdBqtG(dbTrunk._id, 1000, "Mass"), items: [withIdBqtG(dTrunk._id, 1000, "Mass")]}
+const dbaBranch = {...withIdBqtG(dbaTrunk._id, 1000, "Mass"), items: [withIdBqtG(dbTrunk._id, 1000, "Mass")]}
+const dbaaBranch = {...withIdBqtG(dbaaTrunk._id, 1000, "Mass"), items: [withIdBqtG(dbaTrunk._id, 1000, "Mass")]}
+const e1Branch = {...withIdBqtG(e1Trunk._id, 0.5, "Volu"), items: [withIdBqtG(baaTrunk._id, 50000, "Mass"), withIdBqtG(babTrunk._id, 1000, "Mass")]}
+const e2Branch = {...withIdBqtG(e2Trunk._id, 1000, "Mass"), items: [withIdBqtG(b2Trunk._id, 1000, "Mass"), withIdBqtG(cTrunk._id, 1000, "Mass"), withIdBqtG(daTrunk._id, 1000, "Mass"), withIdBqtG(dbaaTrunk._id, 500, "Mass")]}
 
-const aImpacts = {...withIdQuantity(aTrunk._id, 1, "kg"), items: [withIdQuantity(prixImpactEntry._id, 100, "€"), withIdQuantity(vitCImpactEntry._id, 10, "mol"), withIdQuantity(vitBImpactEntry._id, 100, "mmol"), withIdQuantity(co2eImpactEntry._id, 120, "mmol")]}
-const bImpacts = {_id: bTrunk._id, items: [withIdQuantity(prixImpactEntry._id, 40, "€"), withIdQuantity(vitCImpactEntry._id, 6, "mol"), withIdQuantity(vitBImpactEntry._id, 60, "mmol"), withIdQuantity(vitDImpactEntry._id, 80, "mmol")]}
+
+const aFacets = {...withIdBqtG(aTrunk._id, 1000, "Mass"), items: [withIdBqtG(prixFacetEntry._id, 100, "Prix"), withIdBqtG(vitCFacetEntry._id, 10, "Dens"), withIdBqtG(vitBFacetEntry._id, 0.1, "Dens"), withIdBqtG(vitEFacetEntry._id, 0.12, "Dens")]}
+const bFacets = {_id: bTrunk._id, items: [withIdBqtG(prixFacetEntry._id, 40, "Prix"), withIdBqtG(vitCFacetEntry._id, 6, "Dens"), withIdBqtG(vitBFacetEntry._id, 0.06, "Dens"), withIdBqtG(vitEFacetEntry._id, 0.08, "Dens")]}
+
+const aImpacts = {...withIdBqtG(aTrunk._id, 1000, "Mass"), items: [withIdBqtG(prixImpactEntry._id, 100, "Prix"), withIdBqtG(vitCImpactEntry._id, 10, "Dens"), withIdBqtG(vitBImpactEntry._id, 0.1, "Dens"), withIdBqtG(co2eImpactEntry._id, 0.12, "Dens")]}
+const bImpacts = {_id: bTrunk._id, items: [withIdBqtG(prixImpactEntry._id, 40, "Prix"), withIdBqtG(vitCImpactEntry._id, 6, "Dens"), withIdBqtG(vitBImpactEntry._id, 0.06, "Dens"), withIdBqtG(vitDImpactEntry._id, 0.08, "Dens")]}
 
 export const database = {
     [cols.TRUNK]: [aTrunk, bTrunk, cTrunk, dTrunk, baTrunk, b2Trunk, daTrunk, dbTrunk, baaTrunk, babTrunk, dbaTrunk, dbaaTrunk, e1Trunk, e2Trunk],

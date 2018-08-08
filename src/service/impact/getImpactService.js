@@ -17,13 +17,8 @@ export const loadImpact = _id =>
     getImpact(_id)
         .then(removeQuantity)
 
-export const loadQuantifiedImpacts = (quantity, _id) => {
+export const loadDenseQuantifiedImpacts = ({bqt, g, _id}) => {
     return getImpact(_id)
-        .then(impacts => applyQuantity(quantity, impacts))
-}
-
-export const loadDenseQuantifiedImpacts = ({quantity, _id}) => {
-    return getImpact(_id)
-        .then(impact => applyQuantity(quantity, impact))
+        .then(impact => applyQuantity({bqt, g}, impact))
         .then(impact => impact.items)
 }

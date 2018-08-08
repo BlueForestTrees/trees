@@ -1,20 +1,20 @@
 import {cols} from "../../src/const/collections"
-import {withIdQuantity, withTrunk} from "test-api-express-mongo/dist/domain"
+import {withIdBqtG, withDbTrunk} from "test-api-express-mongo/dist/domain"
 import {co2eImpactEntry} from "./impactEntries"
 
-export const papierVA = withTrunk("papier version A", "111111111111111111111111", 100, "m2")
-export const papierVB = withTrunk("papier version B", "222222222222222222222222", 50, "m2")
-export const couchePE = withTrunk("couche Plastique Polyéthylène", "333333333333333333333333", 1, "t")
-export const couchePapier = withTrunk("couche Papier", "444444444444444444444444", 1, "t")
-export const coucheAdhesif = withTrunk("couche Adhésif", "555555555555555555555555", 1, "t")
-export const coucheAlu = withTrunk("couche Alu", "666666666666666666666666", 1, "t")
+export const papierVA = withDbTrunk("papier version A", "111111111111111111111111", 100, "Surf")
+export const papierVB = withDbTrunk("papier version B", "222222222222222222222222", 50, "Surf")
+export const couchePE = withDbTrunk("couche Plastique Polyéthylène", "333333333333333333333333", 1, "t")
+export const couchePapier = withDbTrunk("couche Papier", "444444444444444444444444", 1, "t")
+export const coucheAdhesif = withDbTrunk("couche Adhésif", "555555555555555555555555", 1, "t")
+export const coucheAlu = withDbTrunk("couche Alu", "666666666666666666666666", 1, "t")
 
-const papierVAItem = withIdQuantity(papierVA._id, 100, "m2")
-const papierVBItem = withIdQuantity(papierVB._id, 100, "m2")
-const couchePEItem = withIdQuantity(couchePE._id, 780, "kg")
-const couchePapierItem = withIdQuantity(couchePapier._id, 2070, "kg")
-const coucheAdhesifItem = withIdQuantity(coucheAdhesif._id, 80, "kg")
-const coucheAluItem = withIdQuantity(coucheAlu._id, 890, "kg")
+const papierVAItem = withIdBqtG(papierVA._id, 100, "Surf")
+const papierVBItem = withIdBqtG(papierVB._id, 100, "Surf")
+const couchePEItem = withIdBqtG(couchePE._id, 780000, "Mass")
+const couchePapierItem = withIdBqtG(couchePapier._id, 2070000, "Mass")
+const coucheAdhesifItem = withIdBqtG(coucheAdhesif._id, 80000, "Mass")
+const coucheAluItem = withIdBqtG(coucheAlu._id, 890000, "Mass")
 
 const papierVARoot = {...papierVAItem, items: [couchePEItem, couchePapierItem, coucheAdhesifItem, coucheAluItem]}
 const papierVBRoot = {...papierVBItem, items: [couchePEItem, couchePapierItem, coucheAdhesifItem]}
@@ -24,10 +24,10 @@ const couchePapierBranch = {...couchePapierItem, items: [papierVAItem, papierVBI
 const coucheAdhesifBranch = {...coucheAdhesifItem, items: [papierVAItem, papierVBItem]}
 const coucheAluBranch = {...coucheAluItem, items: [papierVAItem]}
 
-const couchePEImpact = {...withIdQuantity(couchePE._id, 1, "t"), items: [withIdQuantity(co2eImpactEntry._id, 1920.512820513, "kg")]}
-const couchePapierImpact = {...withIdQuantity(couchePapier._id, 1, "t"), items: [withIdQuantity(co2eImpactEntry._id, 410.144927536, "kg")]}
-const coucheAdhesifImpact = {...withIdQuantity(coucheAdhesif._id, 1, "kg"), items: [withIdQuantity(co2eImpactEntry._id, 7.45, "kg")]}
-const coucheAluImpact = {...withIdQuantity(coucheAlu._id, 1, "t"), items: [withIdQuantity(co2eImpactEntry._id, 9834.831460674, "kg")]}
+const couchePEImpact = {...withIdBqtG(couchePE._id, 1000000, "Mass"), items: [withIdBqtG(co2eImpactEntry._id, 1920512.820513, "Mass")]}
+const couchePapierImpact = {...withIdBqtG(couchePapier._id, 1000000, "Mass"), items: [withIdBqtG(co2eImpactEntry._id, 410144.927536, "Mass")]}
+const coucheAdhesifImpact = {...withIdBqtG(coucheAdhesif._id, 1000, "Mass"), items: [withIdBqtG(co2eImpactEntry._id, 7450, "Mass")]}
+const coucheAluImpact = {...withIdBqtG(coucheAlu._id, 1000000, "Mass"), items: [withIdBqtG(co2eImpactEntry._id, 9834831.460674, "Mass")]}
 
 export const database = {
     [cols.TRUNK]: [papierVA, papierVB, coucheAdhesif, coucheAlu, couchePapier, couchePE],

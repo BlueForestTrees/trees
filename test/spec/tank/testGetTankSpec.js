@@ -132,19 +132,19 @@ export const linkAToSkateThenTank = [
             method: "PUT",
             url: "/api/link",
             body: {
-                trunk: {_id: skateTrunk._id, ...withQuantity(10, "count")},
+                trunk: {_id: skateTrunk._id, ...withQuantity(10, "Nomb")},
                 root: {_id: aTrunk._id, ...withQuantity(1, "kg")}
             }
         }
     },
     {
         req: {
-            url: `/api/tank/10/count/${skateTrunk._id}`
+            url: `/api/tank/10/Nomb/${skateTrunk._id}`
         },
         res: {
             body: {
                 _id: skateTrunk._id,
-                ...withQuantity(10, "count"),
+                ...withQuantity(10, "Nomb"),
                 items: [
                     {
                         ..._.pick(eauTrunk, ['_id']),
@@ -164,7 +164,7 @@ export const linkAToSkateThenTank = [
                         ..._.pick(arbreTrunk, ['_id']),
                         "quantity": {
                             "qt": 0.005,
-                            "unit": "count",
+                            "unit": "Nomb",
                         }
                     },
                     {

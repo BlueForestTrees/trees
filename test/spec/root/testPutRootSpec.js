@@ -1,12 +1,12 @@
 import {oneModifiedResponse} from "test-api-express-mongo/dist/domain"
-import {setQuantity, withIdQuantity} from "test-api-express-mongo/dist/domain"
+import {setQuantity, withIdBqtG} from "test-api-express-mongo/dist/domain"
 import {clon} from "test-api-express-mongo/dist/util"
 import {cols} from "../../../src/const/collections"
 import _ from 'lodash'
 import {bleTrunk, farineRoot, farineTrunk, gateauRoot, gateauTrunk, laitTrunk} from "../../database/gateau"
 
-let someFarine = withIdQuantity(farineTrunk._id, 10, "kg")
-let someBle = withIdQuantity(bleTrunk._id, 20, "min")
+let someFarine = withIdBqtG(farineTrunk._id, 10, "kg")
+let someBle = withIdBqtG(bleTrunk._id, 20, "min")
 
 const putRootUrl = {method: "PUT", url: '/api/root'}
 
@@ -39,7 +39,7 @@ export const putRelativeToRootSpec = {
         body: {
             trunk: someFarine,
             root: {
-                ...withIdQuantity(laitTrunk._id, 1, "L"),
+                ...withIdBqtG(laitTrunk._id, 1, "L"),
                 relativeTo: {
                     _id: bleTrunk._id,
                     refqt: {qt: 50.32, unit: "kg"},
@@ -59,7 +59,7 @@ export const putRelativeToRootSpec = {
                 items: [
                     ...farineRoot.items,
                     {
-                        ...withIdQuantity(laitTrunk._id, 1, "L"),
+                        ...withIdBqtG(laitTrunk._id, 1, "L"),
                         relativeTo: {
                             _id: bleTrunk._id,
                             refqt: {qt: 50.32, unit: "kg"},

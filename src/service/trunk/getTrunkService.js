@@ -14,7 +14,7 @@ export const getTrunks = _ids => {
     return collection().find(withIdIn(_ids), getFields).toArray()
 }
 
-export const getQuantifiedTrunk = async (qt, unit, _id) => ({...await getTrunk(_id), quantity: {qt, unit}})
+export const getQuantifiedTrunk = async ({bqt, g, _id}) => ({...await getTrunk(_id), quantity: {bqt, g}})
 
 export const search = (name, type, pageSize, afterIdx) => collection()
     .find(prepareQuery(name, type, afterIdx), searchMixin)

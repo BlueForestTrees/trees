@@ -3,15 +3,15 @@ import {replaceItem} from "test-api-express-mongo/dist/domain"
 import {cols} from "../../../src/const/collections"
 import {bleImpacts, farineTrunk} from "../../database/gateau"
 import {prixImpactEntry, vitBImpactEntry} from "../../database/impactEntries"
-import {withIdQuantity} from "test-api-express-mongo/dist/domain"
+import {withIdBqtG} from "test-api-express-mongo/dist/domain"
 
 export const farineCreatingImpactSpec = {
     req: {
         url: `/api/impact`,
         method: "POST",
         body: {
-            trunk: withIdQuantity(farineTrunk._id, 45, "m2"),
-            impact: withIdQuantity(prixImpactEntry._id, 144, "m2")
+            trunk: withIdBqtG(farineTrunk._id, 45, "m2"),
+            impact: withIdBqtG(prixImpactEntry._id, 144, "m2")
         }
     },
     res: {
@@ -21,9 +21,9 @@ export const farineCreatingImpactSpec = {
         expected: {
             colname: cols.IMPACT,
             doc: {
-                ...withIdQuantity(farineTrunk._id, 45, "m2"),
+                ...withIdBqtG(farineTrunk._id, 45, "m2"),
                 items: [
-                    withIdQuantity(prixImpactEntry._id, 144, "m2")
+                    withIdBqtG(prixImpactEntry._id, 144, "m2")
                 ],
             }
         }
@@ -36,8 +36,8 @@ export const bleAddingImpactSpec2 = {
         url: `/api/impact`,
         method: "POST",
         body: {
-            trunk: withIdQuantity(bleImpacts._id, 5, "kg"),
-            impact: withIdQuantity(prixImpactEntry._id, 144, "m2")
+            trunk: withIdBqtG(bleImpacts._id, 5, "kg"),
+            impact: withIdBqtG(prixImpactEntry._id, 144, "m2")
         }
     },
     res: {
@@ -47,10 +47,10 @@ export const bleAddingImpactSpec2 = {
         expected: {
             colname: cols.IMPACT,
             doc: {
-                ...withIdQuantity(bleImpacts._id, 10, "kg"),
+                ...withIdBqtG(bleImpacts._id, 10, "kg"),
                 items: [
                     ...bleImpacts.items,
-                    withIdQuantity(prixImpactEntry._id, 288, "m2")
+                    withIdBqtG(prixImpactEntry._id, 288, "m2")
                 ],
 
             }
@@ -64,8 +64,8 @@ export const bleUpdatingImpactSpec = {
         url: `/api/impact`,
         method: "POST",
         body: {
-            trunk: withIdQuantity(bleImpacts._id, 5, "kg"),
-            impact: withIdQuantity(vitBImpactEntry._id, 20, "mmol")
+            trunk: withIdBqtG(bleImpacts._id, 5, "kg"),
+            impact: withIdBqtG(vitBImpactEntry._id, 20, "mmol")
         }
     },
     res: {
@@ -74,7 +74,7 @@ export const bleUpdatingImpactSpec = {
     db: {
         expected: {
             colname: cols.IMPACT,
-            doc: replaceItem(bleImpacts, "items", withIdQuantity(vitBImpactEntry._id, 40, "mmol"))
+            doc: replaceItem(bleImpacts, "items", withIdBqtG(vitBImpactEntry._id, 40, "mmol"))
         }
     }
 }

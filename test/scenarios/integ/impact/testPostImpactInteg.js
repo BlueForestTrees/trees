@@ -7,7 +7,7 @@ import {cols} from "../../../../src/const/collections"
 import path from 'path'
 import {prixImpactEntry} from "../../../database/impactEntries"
 import {bleImpacts} from "../../../database/gateau"
-import {withIdQuantity} from "test-api-express-mongo/dist/domain"
+import {withIdBqtG} from "test-api-express-mongo/dist/domain"
 import {oneModifiedResponse} from "test-api-express-mongo/dist/domain"
 
 describe('POST Impact', function () {
@@ -21,8 +21,8 @@ describe('POST Impact', function () {
             url: `/api/impact`,
             method: "POST",
             body: {
-                trunk: withIdQuantity(bleImpacts._id, 10, "kg"),
-                impact: withIdQuantity(prixImpactEntry._id, 144, "m2")
+                trunk: withIdBqtG(bleImpacts._id, 10000, "g"),
+                impact: withIdBqtG(prixImpactEntry._id, 144, "Surf")
             }
         },
         res: {
@@ -32,10 +32,10 @@ describe('POST Impact', function () {
             expected: {
                 colname: cols.IMPACT,
                 doc: {
-                    ...withIdQuantity(bleImpacts._id, 10, "kg"),
+                    ...withIdBqtG(bleImpacts._id, 10000, "Mass"),
                     items: [
                         ...bleImpacts.items,
-                        withIdQuantity(prixImpactEntry._id, 144, "m2")
+                        withIdBqtG(prixImpactEntry._id, 144, "Surf")
                     ],
 
                 }

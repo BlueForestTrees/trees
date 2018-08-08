@@ -45,7 +45,7 @@ export const loadUnitsData = () => Promise.resolve(
             unit("kmol", "Kilo-Mole (mol)", 1000)
         ]),
         grandeur("Nomb", "Nombre (pas d'unité)", [
-            unit("count", "pas d'unité", 1),
+            unit("Nomb", "pas d'unité", 1),
             unit("Item(s)", "items", 1)
         ]),
         grandeur("Volu", "Volume (L, m3...)", [
@@ -73,7 +73,7 @@ export const loadUnitsData = () => Promise.resolve(
         ]),
         grandeur("Surf", "Surface (m2, hec...)", [
             unit("m2", "Mètre-carré (m2)", 1),
-            unit("cm2", "Centimètre-carré (m2)", 1),
+            unit("cm2", "Centimètre-carré (m2)", 0.0001),
             unit("hec", "Hectare (hec)", 10000)
         ]),
         grandeur("Long", "Longueur (mm, m, km...)", [

@@ -16,8 +16,3 @@ export const getFacet = _id =>
 export const loadFacet = _id =>
     getFacet(_id)
         .then(removeQuantity)
-
-
-export const loadQuantifiedFacets = (qt, unit, _id) =>
-    getFacet(_id)
-        .then(facets => applyQuantity({qt, unit}, facets))

@@ -1,10 +1,10 @@
-import {optionnalAfterIdx, optionnalPageSize, validId, validIds, validQ, validQt, validT, validUnit} from "../../const/validations"
+import {optionnalAfterIdx, optionnalPageSize, validId, validIds, validQ, validateParamsItem, validT, idsList} from "../../const/validations"
 import {getQuantifiedTrunk, getTrunk, getTrunks, search} from "../../service/trunk/getTrunkService"
+import {run, convert} from 'express-blueforest'
+import {Router} from "express-blueforest"
+import {col} from "mongo-registry/dist"
 
-import {run} from 'express-blueforest'
-import {QT, UNIT} from "../../const/paths"
-
-import {Router} from "express-blueforest"; const router = Router()
+const router = Router()
 
 module.exports = router
 
@@ -23,12 +23,11 @@ router.get('/api/trunk/:_id',
 
 router.get('/api/trunk',
     validIds,
-    run(({_ids}) => getTrunks(_ids))
+    convert(idsList),
+    run(getTrunks)
 )
 
-router.get('/api/trunk/:qt/:unit/:_id',
-    validId,
-    validQt(QT),
-    validUnit(UNIT),
-    run(({qt, unit, _id}) => getQuantifiedTrunk(qt, unit, _id))
+router.get('/api/trunk/:bqt/:g/:_id',
+    validateParamsItem,
+    run(getQuantifiedTrunk)
 )

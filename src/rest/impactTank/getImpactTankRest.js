@@ -1,5 +1,4 @@
-import {validId, validQt, validUnit} from "../../const/validations"
-import {QT, UNIT} from "../../const/paths"
+import {validateParamsItem} from "../../const/validations"
 import {getImpactTank} from "../../topService/getImpactTankTopService"
 
 import {run} from 'express-blueforest'
@@ -7,9 +6,7 @@ import {Router} from "express-blueforest"; const router = Router()
 
 module.exports = router
 
-router.get('/api/impacttank/:qt/:unit/:_id',
-    validId,
-    validQt(QT),
-    validUnit(UNIT),
-    run(({qt, unit, _id}) => getImpactTank(qt, unit, _id))
+router.get('/api/impacttank/:bqt/:g/:_id',
+    validateParamsItem,
+    run(({bqt, g, _id}) => getImpactTank(bqt, g, _id))
 )

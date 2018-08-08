@@ -1,8 +1,30 @@
-import {BRANCH_ID, COLOR, FACET_ID, FACETSIDS, GRANDEUR, ID, IMPACT_ID, NAME, ROOT_ID, ROOT_RELATIVE_TO, ROOT_RELATIVE_TO_DISQT, ROOT_RELATIVE_TO_DISQT_QT, ROOT_RELATIVE_TO_DISQT_UNIT, ROOT_RELATIVE_TO_ID, ROOT_RELATIVE_TO_REFQT, ROOT_RELATIVE_TO_REFQT_QT, ROOT_RELATIVE_TO_REFQT_UNIT, ROOTID, SOURCE_ID, TREEID, TRUNK_ID, TRUNKID, TYPE} from "./paths"
+import {
+    BQT,
+    BRANCH_ID,
+    COLOR,
+    FACET_ID,
+    FACETSIDS, G,
+    GRANDEUR,
+    ID,
+    IMPACT_ID,
+    NAME,
+    ROOT_ID,
+    ROOT_RELATIVE_TO,
+    ROOT_RELATIVE_TO_DISQT,
+    ROOT_RELATIVE_TO_DISQT_QT,
+    ROOT_RELATIVE_TO_DISQT_UNIT,
+    ROOT_RELATIVE_TO_ID,
+    ROOT_RELATIVE_TO_REFQT,
+    ROOT_RELATIVE_TO_REFQT_QT,
+    ROOT_RELATIVE_TO_REFQT_UNIT,
+    TREEID,
+    TRUNK_ID,
+    TYPE,
+} from "./paths"
 import {IS_DECIMAL, IS_NOT_RIGHT_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "./messages"
-import {check, body, oneOf} from 'express-validator/check'
+import {check, body, oneOf, param, query} from 'express-validator/check'
 import {isNil, map} from 'lodash'
-import {getGrandeursKeys, getShortnames, toBaseQG} from "unit-manip"
+import {getGrandeursKeys, getShortnames} from "unit-manip"
 import {trunksType} from "./trunks"
 import {isValidIds, objectNoEx, objects} from "mongo-queries-blueforest"
 import {errors} from "express-blueforest"
@@ -22,28 +44,18 @@ export const validMail = check("mail").isEmail().normalizeEmail().withMessage('m
 export const validWelcomeToken = check('t').exists()
 export const validPassword = check('password').isLength({min: 1, max: 100}).matches(/^.+/)
 export const validMessage = check("message").isString().isLength({min: 1, max: 1000}).withMessage('message trop long')
-export const validItem = field => [
-    check(field).exists().withMessage(`champ ${field} manquant`),
-    validMongoId(`${field}._id`),
-    validQt(`${field}.quantity.qt`),
-    validUnit(`${field}.quantity.unit`),
-    withBaseQt(field)
-]
-const withBaseQt = field => (req, res, next) => {
-    Object.assign(req.body[field].quantity, toBaseQG(req.body[field].quantity))
-    next()
-}
-export const validIds = (req, res, next) => {
-    check("_ids").exists()(req, res, next)
-    let _ids = req.query._ids
+
+export const validIds = query("_ids").exists()
+export const idsList = ({_ids}) => {
     if (!_ids) {
         throw new errors.ValidationError("_ids query params is missing")
     }
     if (!isValidIds(_ids)) {
         throw new errors.ValidationError("_ids query params are invalid")
     }
-    req.query._ids = objects(_ids)
+    return objects(_ids)
 }
+
 
 export const validGrandeur = check(GRANDEUR).isIn(getGrandeursKeys())
 
@@ -57,6 +69,8 @@ export const validFacetId = validMongoId(FACET_ID)
 export const validId = validMongoId(ID)
 export const validTreeId = validMongoId(TREEID)
 export const validFacetIds = validMongoId(FACETSIDS)
+
+export const validParamsId = mongoId(param(ID))
 
 export const noRelativeTo = check(ROOT_RELATIVE_TO).not().exists()
 
@@ -90,6 +104,9 @@ export const present = (...fields) => map(fields, field => check(field, SHOULD_B
 export const validUnit = field => check(field, IS_VALID_UNIT).optional().isIn(unitsShortnames)
 export const validQt = field => check(field, IS_DECIMAL).optional().isDecimal().toFloat()
 
+export const validParamsG = param(G, IS_VALID_UNIT).isIn(getGrandeursKeys())
+export const validParamsBqt = param(BQT, IS_DECIMAL).isDecimal().toFloat()
+
 const defaultPS = 20
 export const optionnalPageSize = [
     (req, res, next) => {
@@ -101,3 +118,21 @@ export const optionnalPageSize = [
     check("ps").isInt({min: 1, max: 200}).withMessage(`must be an integer between 1 and 200 (default to ${defaultPS})`).toInt()
 ]
 export const optionnalAfterIdx = optionalMongoId("aidx")
+
+export const validateParamsItem = [
+    validParamsId,
+    validParamsBqt,
+    validParamsG
+]
+
+export const validItem = field => [
+    check(field).exists().withMessage(`champ ${field} manquant`),
+    validMongoId(`${field}._id`),
+    validQt(`${field}.quantity.qt`),
+    validUnit(`${field}.quantity.unit`),
+    withBaseQt(field)
+]
+const withBaseQt = field => (req, res, next) => {
+    req.body[field].quantity = toBqtG(req.body[field].quantity)
+    next()
+}

@@ -30,32 +30,6 @@ export const farineCreatingImpactSpec = {
     }
 }
 
-export const bleAddingImpactSpec = {
-    req: {
-        url: `/api/impact`,
-        method: "POST",
-        body: {
-            trunk: withIdQuantity(bleImpacts._id, 10, "kg"),
-            impact: withIdQuantity(prixImpactEntry._id, 144, "m2")
-        }
-    },
-    res: {
-        body: oneModifiedResponse
-    },
-    db: {
-        expected: {
-            colname: cols.IMPACT,
-            doc: {
-                ...withIdQuantity(bleImpacts._id, 10, "kg"),
-                items: [
-                    ...bleImpacts.items,
-                    withIdQuantity(prixImpactEntry._id, 144, "m2")
-                ],
-
-            }
-        }
-    }
-}
 
 export const bleAddingImpactSpec2 = {
     req: {

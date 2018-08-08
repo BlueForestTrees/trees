@@ -35,3 +35,5 @@ const prepareQuery = (name, type, afterIdx) => {
     }
     return query
 }
+
+export const resolveTrunkExternId = externId => collection().findOne({externId}, {_id: 1, quantity: 1})

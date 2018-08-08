@@ -2,11 +2,10 @@ import {BRANCH_ID, COLOR, FACET_ID, FACETSIDS, GRANDEUR, ID, IMPACT_ID, NAME, RO
 import {IS_DECIMAL, IS_NOT_RIGHT_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "./messages"
 import {check, body, oneOf} from 'express-validator/check'
 import {isNil, map} from 'lodash'
-import {getGrandeursKeys, getShortnames} from "unit-manip"
+import {getGrandeursKeys, getShortnames, toBaseQG} from "unit-manip"
 import {trunksType} from "./trunks"
 import {isValidIds, objectNoEx, objects} from "mongo-queries-blueforest"
 import {errors} from "express-blueforest"
-import {debug} from "../util/debug"
 
 const unitsShortnames = getShortnames()
 
@@ -23,8 +22,17 @@ export const validMail = check("mail").isEmail().normalizeEmail().withMessage('m
 export const validWelcomeToken = check('t').exists()
 export const validPassword = check('password').isLength({min: 1, max: 100}).matches(/^.+/)
 export const validMessage = check("message").isString().isLength({min: 1, max: 1000}).withMessage('message trop long')
-export const validItem = key => [validMongoId(`${key}._id`), validQt(`${key}.quantity.qt`), validUnit(`${key}.quantity.unit`)]
-
+export const validItem = field => [
+    check(field).exists().withMessage(`champ ${field} manquant`),
+    validMongoId(`${field}._id`),
+    validQt(`${field}.quantity.qt`),
+    validUnit(`${field}.quantity.unit`),
+    withBaseQt(field)
+]
+const withBaseQt = field => (req, res, next) => {
+    Object.assign(req.body[field].quantity, toBaseQG(req.body[field].quantity))
+    next()
+}
 export const validIds = (req, res, next) => {
     check("_ids").exists()(req, res, next)
     let _ids = req.query._ids

@@ -6,6 +6,7 @@ import {col} from "mongo-registry/dist"
 import configure from "items-service"
 import {validGod} from "../../service/auth/authService"
 import {importAdemeImpact} from "../../service/impact/postImpactService"
+import fileUpload from "express-fileupload"
 
 const router = Router()
 const insertImpact = configure(() => col(cols.IMPACT)).upsertItem

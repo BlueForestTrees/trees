@@ -12,19 +12,19 @@ describe('GET Impacts', function () {
 
     beforeEach(init(api, ENV, cols))
 
-    it('unquantified impacts', withTest({
+    it('impacts', withTest({
         req: {
             url: `/api/impact/${bleImpacts._id}`
         },
         res: {
             body: () => ({
-                ...omit(bleFacets, ['items', 'quantity']),
-                items: withInfos(cols.IMPACT_ENTRY, withoutQuantity(clon(bleImpacts.items)))
+                _id: bleImpacts._id,
+                items: withInfos(cols.IMPACT_ENTRY, bleImpacts.items)
             })
         }
     }))
 
-    it('unquantified empty impacts', withTest({
+    it('empty impacts', withTest({
         req: {
             url: `/api/impact/${farineTrunk._id}`
         },

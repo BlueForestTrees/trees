@@ -13,11 +13,11 @@ export const cremeTrunk = withDbTrunk("creme", "5a6a03c03e77667641d2d2c5", 0.000
 export const gateauItem = withIdBqt(gateauTrunk._id, 500)
 const pizzaItem = withIdBqt(pizzaTrunk._id, 500)
 export const farineItem = withIdBqt(farineTrunk._id, 200)
-const laitItem = withIdBqt(laitTrunk._id, 0.02)
+export const laitItem = withIdBqt(laitTrunk._id, 0.02)
 
 export const gateauRoot = {_id: gateauItem._id, items: [farineItem, laitItem]}
 export const pizzaRoot = {_id: pizzaItem._id, items: [farineItem]}
-export const farineRoot = {_id: farineTrunk._id, items: [{_id: bleTrunk._id}]}
+export const farineRoot = {_id: farineItem._id, items: [{_id: bleTrunk._id}]}
 export const cremeRoot = {_id: cremeTrunk._id, items: [{_id: laitTrunk._id}]}
 
 export const farineBranch = {_id: farineItem._id, items: [gateauItem, pizzaItem]}

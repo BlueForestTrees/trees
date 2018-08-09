@@ -15,6 +15,6 @@ router.put('/api/branch',
     validBranchId,
     validTrunkId,
     branchIdIsNotTrunkId,
-    present(BRANCH_BQT, TRUNK_BQT),
+    present(TRUNK_BQT),
     run(({trunk, branch}) => upsertBranch(trunk, branch))
 )

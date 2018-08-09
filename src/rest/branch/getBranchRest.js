@@ -17,9 +17,7 @@ router.get('/api/branch/:_id',
     run(trunkService.appendItemsInfos({name: 1, color: 1}))
 )
 
-router.get('/api/branch/tree/:bqt/:g/:_id',
+router.get('/api/branch/tree/:_id',
     validPathId,
-    validPathBqt,
-    validPathG,
     run(branchService.initReadTree(cols.BRANCH))
 )

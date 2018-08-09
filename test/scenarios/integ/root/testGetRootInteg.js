@@ -35,7 +35,7 @@ describe('GET Root', function () {
         res: {
             body: () => ({
                 ...omit(gateauRoot, ['items', 'quantity']),
-                items: withInfos(cols.TRUNK, withoutQuantity(clon(gateauRoot.items)))
+                items: withInfos(cols.TRUNK, gateauRoot.items)
             })
         }
     }))

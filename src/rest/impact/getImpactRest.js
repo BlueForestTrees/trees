@@ -8,11 +8,11 @@ const router = Router()
 
 module.exports = router
 
-const itemService = configure(() => col(cols.FACET))
-const impactEntryService = configure(() => col(cols.FACET_ENTRY))
+const impactService = configure(() => col(cols.IMPACT))
+const impactEntryService = configure(() => col(cols.IMPACT_ENTRY))
 
 router.get('/api/impact/:_id',
     validId,
-    run(itemService.get),
+    run(impactService.get),
     run(impactEntryService.appendItemsInfos({name: 1, color: 1}))
 )

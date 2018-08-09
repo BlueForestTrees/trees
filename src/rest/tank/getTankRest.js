@@ -2,7 +2,7 @@ import {validPathId} from "../../const/validations"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest";
 import {omit} from 'lodash'
-import {quantified, summify} from "../../util/calculations"
+import {quantified, mergeTwoItems} from "../../util/calculations"
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry/dist"
 import configure from "items-service"
@@ -15,7 +15,7 @@ const readRootTree = rootService.initReadTree(cols.ROOT)
 export const getTank = (qt, unit, _id) =>
     readRootTree(qt, unit, _id)
         .then(async tree => {
-            tree.items = await summify(tankfy(tree.items))
+            tree.items = await mergeTwoItems(tankfy(tree.items))
             return tree
         })
 

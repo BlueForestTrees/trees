@@ -21,7 +21,7 @@ describe('GET Facets', function () {
         res: {
             body: () => ({
                 ...omit(bleFacets, ['items', 'quantity']),
-                items: withInfos(cols.FACET_ENTRY, withoutQuantity(clon(bleFacets.items)))
+                items: withInfos(cols.FACET_ENTRY, bleFacets.items)
             })
         }
     }))

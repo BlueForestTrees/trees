@@ -12,14 +12,13 @@ import {gateauItem, gateauTrunk} from "../../../database/gateau"
 
 const unknownId = ObjectID().toString()
 
-
 describe('GET ImpactTank', function () {
 
     beforeEach(init(api, ENV, cols))
 
     it('impact tank papier A', withTest({
         req: {
-            url: `/api/impacttank/${papierVA.quantity.bqt}/${papierVA.quantity.g}/${papierVA._id}`
+            url: `/api/impacttank/${papierVA._id}`
         },
         res: {
             body: {
@@ -35,7 +34,7 @@ describe('GET ImpactTank', function () {
 
     it('impact tank gateau', withTest({
         req: {
-            url: `/api/impacttank/${gateauItem.quantity.bqt}/${gateauItem.quantity.g}/${gateauTrunk._id}`,
+            url: `/api/impacttank/${gateauTrunk._id}`,
         },
         res: {
             body: {
@@ -55,7 +54,7 @@ describe('GET ImpactTank', function () {
 
     it('impact tank inconnu', withTest({
         req: {
-            url: `/api/impacttank/0.003/Volu/${unknownId}`
+            url: `/api/impacttank/${unknownId}`
         },
         res: {
             body: {

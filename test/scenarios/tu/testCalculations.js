@@ -1,5 +1,5 @@
 import {withIdBqtG, withBqtG} from "test-api-express-mongo/dist/domain"
-import {mergeItems, quantified, sum, summify} from "../../../src/util/calculations"
+import {mergeTwoItems, quantified, sum} from "../../../src/util/calculations"
 import {withId} from "mongo-queries-blueforest"
 import Fraction from "fraction.js"
 import chai from "chai"
@@ -20,7 +20,7 @@ describe('TU Calculations', function () {
     })
     describe('sum qt', function () {
         it('10fake + 6otherfake = 16fake', function () {
-            mergeItems(withBqtG(10, "fakeunit"), withBqtG(6, "anotherfakeunit")).should.deep.equal(withBqtG(16, "fakeunit"))
+            mergeTwoItems(withBqtG(10, "fakeunit"), withBqtG(6, "anotherfakeunit")).should.deep.equal(withBqtG(16, "fakeunit"))
         })
     })
 
@@ -37,12 +37,12 @@ describe('TU Calculations', function () {
 
     describe('summify tank', function () {
         it('[A10g,A5g] => [A15Mass]', function () {
-            summify([withIdBqtG("A", 10, "Mass"), withIdBqtG("A", 5, "Mass")])
+            mergeTwoItems([withIdBqtG("A", 10, "Mass"), withIdBqtG("A", 5, "Mass")])
                 .should.be.deep.equal([withIdBqtG("A", 15, "Mass")])
         })
         it('[A1Mass,B5,A500Mass,B3] => [A1500g,B8g]', function () {
 
-            summify([
+            mergeTwoItems([
                 withIdBqtG("A", 1000, "Mass"),
                 withIdBqtG("B", 5, "Nomb"),
                 withIdBqtG("A", 500, "g"),

@@ -122,28 +122,13 @@ describe('GET Trunk', function () {
 
     it('get baa trunk with decimal qt', withTest({
         req: {
-            url: `/api/trunk/100/Mass/${baaTrunk._id}`
+            url: `/api/trunk/${baaTrunk._id}`
         },
         res: {
-            body: {...omit(baaTrunk, ['name_lower', 'quantity']), ...withBqtG(100, "Mass")}
-        }
-    }))
-
-    it('get gateau trunk with qt', withTest({
-        req: {
-            url: `/api/trunk/5000/Mass/${gateauTrunk._id}`
-        },
-        res: {
-            body: {...omit(gateauTrunk, ['name_lower', 'quantity']), ...withBqtG(5000, "Mass")}
-        }
-    }))
-
-    it('get bateau trunk with qt', withTest({
-        req: {
-            url: `/api/trunk/7/Tran/${bateauTrunk._id}`
-        },
-        res: {
-            body: {...omit(bateauTrunk, ['name_lower', 'quantity']), ...withBqtG(7, "Tran")}
+            body: {
+                ...omit(baaTrunk, ['name_lower']),
+                ...withBqtG(10, "Mass")
+            }
         }
     }))
 

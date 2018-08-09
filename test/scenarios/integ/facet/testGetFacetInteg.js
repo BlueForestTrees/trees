@@ -25,17 +25,7 @@ describe('GET Facets', function () {
             })
         }
     }))
-    it('return quantified facets', withTest({
-        req: {
-            url: `/api/facet/5000/Mass/${bleFacets._id}`,
-        },
-        res: {
-            body: () => ({
-                ...withIdBqtG(bleFacets._id, 5000, "Mass"),
-                items: withInfos(cols.FACET_ENTRY, withQtCoef(bleFacets.items,0.5))
-            })
-        }
-    }))
+
     it('return empty facets', withTest({
         req: {
             url: `/api/facet/${"5a6a03c03e77667641d21234"}`,
@@ -43,18 +33,6 @@ describe('GET Facets', function () {
         res: {
             body: {
                 _id: "5a6a03c03e77667641d21234",
-                items: []
-            }
-        }
-    }))
-    it('return quantified empty facets', withTest({
-        req: {
-            url: `/api/facet/15/Mass/${"5a6a03c03e77667641d21234"}`,
-        },
-        res: {
-            body: {
-                _id: "5a6a03c03e77667641d21234",
-                ...withBqtG(15, "Mass"),
                 items: []
             }
         }

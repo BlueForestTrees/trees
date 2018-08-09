@@ -23,17 +23,7 @@ describe('GET Impacts', function () {
             })
         }
     }))
-    it('quantified impacts', withTest({
-        req: {
-            url: `/api/impact/5000/Mass/${bleImpacts._id}`
-        }, res: {
-            body: () => ({
-                _id: bleImpacts._id,
-                ...withBqtG(5000, "Mass"),
-                items: withInfos(cols.IMPACT_ENTRY, withQtCoef(bleImpacts.items, 0.5))
-            })
-        }
-    }))
+
     it('unquantified empty impacts', withTest({
         req: {
             url: `/api/impact/${farineTrunk._id}`
@@ -45,16 +35,6 @@ describe('GET Impacts', function () {
             }
         }
     }))
-    it('quantified empty impacts', withTest({
-        req: {
-            url: `/api/impact/15/Mass/5a6a03c03e77667641d21234`
-        }, res: {
-            body: {
-                _id: "5a6a03c03e77667641d21234",
-                ...withBqtG(15, "Mass"),
-                items: []
-            }
-        }
-    }))
+
 
 })

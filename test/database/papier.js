@@ -16,18 +16,18 @@ const couchePapierItem = withIdBqt(couchePapier._id, 2070000)
 const coucheAdhesifItem = withIdBqt(coucheAdhesif._id, 80000)
 const coucheAluItem = withIdBqt(coucheAlu._id, 890000)
 
-const papierVARoot = {...papierVAItem, items: [couchePEItem, couchePapierItem, coucheAdhesifItem, coucheAluItem]}
-const papierVBRoot = {...papierVBItem, items: [couchePEItem, couchePapierItem, coucheAdhesifItem]}
+const papierVARoot = {_id: papierVAItem._id, items: [couchePEItem, couchePapierItem, coucheAdhesifItem, coucheAluItem]}
+const papierVBRoot = {_id: papierVBItem._id, items: [couchePEItem, couchePapierItem, coucheAdhesifItem]}
 
-const couchePEBranch = {...couchePEItem, items: [papierVAItem, papierVBItem]}
-const couchePapierBranch = {...couchePapierItem, items: [papierVAItem, papierVBItem]}
-const coucheAdhesifBranch = {...coucheAdhesifItem, items: [papierVAItem, papierVBItem]}
-const coucheAluBranch = {...coucheAluItem, items: [papierVAItem]}
+const couchePEBranch = {_id: couchePEItem._id, items: [papierVAItem, papierVBItem]}
+const couchePapierBranch = {_id: couchePapierItem._id, items: [papierVAItem, papierVBItem]}
+const coucheAdhesifBranch = {_id: coucheAdhesifItem._id, items: [papierVAItem, papierVBItem]}
+const coucheAluBranch = {_id: coucheAluItem._id, items: [papierVAItem]}
 
-const couchePEImpact = {...withIdBqt(couchePE._id, 1000000), items: [withIdBqt(co2eImpactEntry._id, 1920512.820513)]}
-const couchePapierImpact = {...withIdBqt(couchePapier._id, 1000000), items: [withIdBqt(co2eImpactEntry._id, 410144.927536)]}
-const coucheAdhesifImpact = {...withIdBqt(coucheAdhesif._id, 1000), items: [withIdBqt(co2eImpactEntry._id, 7450)]}
-const coucheAluImpact = {...withIdBqt(coucheAlu._id, 1000000), items: [withIdBqt(co2eImpactEntry._id, 9834831.460674)]}
+const couchePEImpact = {_id: couchePE._id, items: [withIdBqt(co2eImpactEntry._id, 1920512.820513)]}
+const couchePapierImpact = {_id: couchePapier._id, items: [withIdBqt(co2eImpactEntry._id, 410144.927536)]}
+const coucheAdhesifImpact = {_id: coucheAdhesif._id, items: [withIdBqt(co2eImpactEntry._id, 7450)]}
+const coucheAluImpact = {_id: coucheAlu._id, items: [withIdBqt(co2eImpactEntry._id, 9834831.460674)]}
 
 export const database = {
     [cols.TRUNK]: [papierVA, papierVB, coucheAdhesif, coucheAlu, couchePapier, couchePE],

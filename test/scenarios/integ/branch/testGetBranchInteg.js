@@ -19,7 +19,7 @@ describe('GET Branch', function () {
         res: {
             body: () => ({
                 ...omit(farineBranch, ['items', 'quantity']),
-                items: withInfos(cols.TRUNK, withoutQuantity(clon(farineBranch.items)))
+                items: withInfos(cols.TRUNK, farineBranch.items)
             })
         }
     }))
@@ -33,52 +33,6 @@ describe('GET Branch', function () {
                 _id: pizzaTrunk._id,
                 items: []
             }
-        }
-    }))
-
-    it('return an error because unit mismatch', withTest({
-        req: {
-            url: `/api/branch/4/Volu/${farineBranch._id}`
-        },
-        res: {
-            code: 400,
-            body: withError(3, "Units mismatch: 'Volu' and 'Mass'")
-        }
-    }))
-
-    it('return branch with same quantity', withTest({
-        req: {
-            url: `/api/branch/${farineBranch.quantity.bqt}/${farineBranch.quantity.g}/${farineBranch._id}`
-        },
-        res: {
-            body: () => ({
-                ...omit(farineBranch, 'items'),
-                items: withInfos(cols.TRUNK, clon(farineBranch.items))
-            })
-        }
-    }))
-
-    it('return branch with another quantity', withTest({
-        req: {
-            url: `/api/branch/${farineBranch.quantity.bqt * 2}/${farineBranch.quantity.g}/${farineBranch._id}`
-        },
-        res: {
-            body: () => ({
-                ...withQtCoef(farineBranch, 2),
-                items: withInfos(cols.TRUNK, withQtCoef(farineBranch.items, 2))
-            })
-        }
-    }))
-
-    it('return branch even with no qt in branchs', withTest({
-        req: {
-            url: `/api/branch/${laitBranch.quantity.bqt}/${laitBranch.quantity.g}/${laitBranch._id}`
-        },
-        res: {
-            body: () => ({
-                ...omit(laitBranch, 'items'),
-                items: withInfos(cols.TRUNK, clon(laitBranch.items))
-            })
         }
     }))
 

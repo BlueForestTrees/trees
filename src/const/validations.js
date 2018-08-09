@@ -70,8 +70,6 @@ export const validId = validMongoId(ID)
 export const validTreeId = validMongoId(TREEID)
 export const validFacetIds = validMongoId(FACETSIDS)
 
-export const validParamsId = mongoId(param(ID))
-
 export const noRelativeTo = check(ROOT_RELATIVE_TO).not().exists()
 
 export const validRelativeTo = oneOf([
@@ -104,9 +102,9 @@ export const present = (...fields) => map(fields, field => check(field, SHOULD_B
 export const validUnit = field => check(field, IS_VALID_UNIT).optional().isIn(unitsShortnames)
 export const validBodyNumber = field => body(field, IS_DECIMAL).optional().isDecimal().toFloat()
 
-export const validParamsG = param(G, IS_VALID_UNIT).isIn(getGrandeursKeys())
-export const validG = (at, field) => at(field, IS_VALID_G).isIn(getGrandeursKeys())
-export const validParamsBqt = param(BQT, IS_DECIMAL).isDecimal().toFloat()
+export const validPathId = mongoId(param(ID))
+export const validPathBqt = param(BQT, IS_DECIMAL).isDecimal().toFloat()
+export const validPathG = param(G).isIn(getGrandeursKeys())
 
 const defaultPS = 20
 export const optionnalPageSize = [
@@ -119,12 +117,6 @@ export const optionnalPageSize = [
     check("ps").isInt({min: 1, max: 200}).withMessage(`must be an integer between 1 and 200 (default to ${defaultPS})`).toInt()
 ]
 export const optionnalAfterIdx = optionalMongoId("aidx")
-
-export const validateParamsItem = [
-    validParamsId,
-    validParamsBqt,
-    validParamsG
-]
 
 export const validItem = field => [
     validMongoId(`${field}._id`),

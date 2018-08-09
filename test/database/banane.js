@@ -7,7 +7,7 @@ export const banane = withDbTrunk("banane canaries", "7b6a03c03e77667641d2d2c3",
 export const transport = withDbTrunk("transport", "8b6a03c03e77667641d2d2c3", 1000000, "Long")
 
 export const bananeBCRoot = {
-    ...withIdBqt(bananeBC._id, 1),
+    _id: bananeBC._id,
     items:[
         withIdBqt(banane._id, 1),
         withIdBqtGRelativeTo(transport._id, "5000000", "Long", banane._id),

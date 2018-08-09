@@ -1,5 +1,5 @@
-import {optionnalAfterIdx, optionnalPageSize, validId, validIds, validQ, validateParamsItem, validT, idsList} from "../../const/validations"
-import {getQuantifiedTrunk, getTrunk, getTrunks, search} from "../../service/trunk/getTrunkService"
+import {optionnalAfterIdx, optionnalPageSize, validId, validIds, validQ, validT, idsList} from "../../const/validations"
+import {getTrunk, getTrunks, search} from "../../service/trunk/getTrunkService"
 import {run, convert} from 'express-blueforest'
 import {Router} from "express-blueforest"
 import {col} from "mongo-registry/dist"
@@ -25,9 +25,4 @@ router.get('/api/trunk',
     validIds,
     convert(idsList),
     run(getTrunks)
-)
-
-router.get('/api/trunk/:bqt/:g/:_id',
-    validateParamsItem,
-    run(getQuantifiedTrunk)
 )

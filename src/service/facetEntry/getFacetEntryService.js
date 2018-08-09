@@ -1,14 +1,10 @@
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry/dist"
-import {withIdIn} from "mongo-queries-blueforest"
-import {appendItemsInfos} from "../common/commonService"
 
 const collection = () => col(cols.FACET_ENTRY)
 
 const idField = {_id: 1}
 const searchMixin = {color: 1, name: 1, grandeur: 1}
-
-export const appendFacetInfos = appendItemsInfos(cols.FACET_ENTRY, {name: 1, color: 1})
 
 export const getFacetEntryByName = async name => collection().findOne({name})
 

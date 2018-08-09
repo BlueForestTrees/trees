@@ -20,7 +20,7 @@ describe('GET Root', function () {
     it('return banane with roots & relativeTo', withTest({
         req: {
             method: "GET",
-            url: `/api/root/1/Nomb/${bananeBC._id}`
+            url: `/api/root/${bananeBC._id}`
         },
         res: {
             bodypath: {path: `$.items[?(@._id==="${transport._id}")].relativeTo`, value: [banane._id]}
@@ -50,69 +50,6 @@ describe('GET Root', function () {
                 _id: laitTrunk._id,
                 items: []
             }
-        }
-    }))
-
-    it('return root with same quantity', withTest({
-        req: {
-            method: "GET",
-            url: `/api/root/${gateauRoot.quantity.bqt}/${gateauRoot.quantity.g}/${gateauRoot._id}`
-        },
-        res: {
-            body: () => ({
-                ...omit(gateauRoot, 'items'),
-                items: withInfos(cols.TRUNK, clon(gateauRoot.items))
-            })
-        }
-    }))
-
-    it('return root with another quantity', withTest({
-        req: {
-            method: "GET",
-            url: `/api/root/${gateauRoot.quantity.bqt * 2}/${gateauRoot.quantity.g}/${gateauRoot._id}`
-        },
-        res: {
-            body: () => ({
-                ...withQtCoef(gateauRoot, 2),
-                items: withInfos(cols.TRUNK, withQtCoef(gateauRoot.items, 2))
-            })
-        }
-    }))
-
-    it('return an error because unit mismatch', withTest({
-        req: {
-            method: "GET",
-            url: `/api/root/1/Volu/${gateauRoot._id}`
-        },
-        res: {
-            code: 400,
-            body: withError(3, "Units mismatch: 'Volu' and 'Mass'")
-        }
-    }))
-
-    it('return root with another quantity no unit', withTest({
-        req: {
-            method: "GET",
-            url: `/api/root/${skateRoot.quantity.bqt * 2}/${skateRoot.quantity.g}/${skateRoot._id}`
-        },
-        res: {
-            body: () => ({
-                ...withQtCoef(skateRoot, 2),
-                items: withInfos(cols.TRUNK, withQtCoef(skateRoot.items, 2))
-            })
-        }
-    }))
-
-    it('return root even with no qt in roots', withTest({
-        req: {
-            method: "GET",
-            url: `/api/root/60/Mass/${farineRoot._id}`
-        },
-        res: {
-            body: () => ({
-                ...withIdBqtG(farineRoot._id, 60, "Mass"),
-                items: withInfos(cols.TRUNK, clon(farineRoot.items))
-            })
         }
     }))
 

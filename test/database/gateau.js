@@ -15,20 +15,20 @@ const pizzaItem = withIdBqt(pizzaTrunk._id, 500)
 export const farineItem = withIdBqt(farineTrunk._id, 200)
 const laitItem = withIdBqt(laitTrunk._id, 0.02)
 
-export const gateauRoot = {...gateauItem, items: [farineItem, laitItem]}
-export const pizzaRoot = {...pizzaItem, items: [farineItem]}
+export const gateauRoot = {_id: gateauItem._id, items: [farineItem, laitItem]}
+export const pizzaRoot = {_id: pizzaItem._id, items: [farineItem]}
 export const farineRoot = {_id: farineTrunk._id, items: [{_id: bleTrunk._id}]}
 export const cremeRoot = {_id: cremeTrunk._id, items: [{_id: laitTrunk._id}]}
 
-export const farineBranch = {...farineItem, items: [gateauItem, pizzaItem]}
-export const laitBranch = {...laitItem, items: [{_id: cremeTrunk._id}, gateauItem]}
+export const farineBranch = {_id: farineItem._id, items: [gateauItem, pizzaItem]}
+export const laitBranch = {_id: laitItem._id, items: [{_id: cremeTrunk._id}, gateauItem]}
 export const bleBranch = {_id: bleTrunk._id, items: [{_id: farineTrunk._id}]}
 
 const gateauFacets = {_id: gateauTrunk._id, items: [withIdBqt(vitCFacetEntry._id, 10), withIdBqt(vitBFacetEntry._id, 0.1)]}
-export const bleFacets = {...withIdBqt(bleTrunk._id, 10000), items: [withIdBqt(vitCFacetEntry._id, 6), withIdBqt(vitBFacetEntry._id, 0.15)]}
+export const bleFacets = {_id: bleTrunk._id, items: [withIdBqt(vitCFacetEntry._id, 6), withIdBqt(vitBFacetEntry._id, 0.15)]}
 
-const gateauImpact = {...withIdBqt(gateauTrunk._id, 500), items: [withIdBqt(vitCImpactEntry._id, 10), withIdBqt(vitBImpactEntry._id, 0.1)]}
-export const bleImpacts = {...withIdBqt(bleTrunk._id, 10000), items: [withIdBqt(vitCImpactEntry._id, 6), withIdBqt(vitBImpactEntry._id, 0.15)]}
+const gateauImpact = {_id: gateauTrunk._id, items: [withIdBqt(vitCImpactEntry._id, 10), withIdBqt(vitBImpactEntry._id, 0.1)]}
+export const bleImpacts = {_id: bleTrunk._id, items: [withIdBqt(vitCImpactEntry._id, 6), withIdBqt(vitBImpactEntry._id, 0.15)]}
 
 export const database = {
     [cols.TRUNK]: [gateauTrunk, laitTrunk, farineTrunk, bleTrunk, pizzaTrunk, cremeTrunk],

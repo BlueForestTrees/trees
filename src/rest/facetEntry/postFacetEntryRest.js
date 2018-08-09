@@ -1,4 +1,4 @@
-import {addFacetEntry, replaceAllFacetEntries} from "../../service/facetEntry/postFacetEntryService"
+import {addFacetEntry} from "../../service/facetEntry/postFacetEntryService"
 import {validColor, validGrandeur, validId, validName} from "../../const/validations"
 
 import {run} from 'express-blueforest'

@@ -26,7 +26,7 @@ export const lettreTankSpec = {
                     ..._.pick(e1Trunk, ['_id']),
                     "quantity": {
                         "qt": 0.255,
-                        "unit": "m3"
+                        "unit": "Volu"
                     }
                 }
             ]
@@ -65,7 +65,7 @@ export const avecUneQtManquanteTankSpec = {
                     ..._.pick(e1Trunk, ['_id']),
                     "quantity": {
                         "qt": 0.255,
-                        "unit": "m3"
+                        "unit": "Volu"
                     }
                 }
             ]
@@ -105,7 +105,7 @@ export const avecUneQtManquanteTankSpec2 = {
                     ..._.pick(e1Trunk, ['_id']),
                     "quantity": {
                         "qt": 0.255,
-                        "unit": "m3"
+                        "unit": "Volu"
                     }
                 }
             ]
@@ -133,7 +133,7 @@ export const linkAToSkateThenTank = [
             url: "/api/link",
             body: {
                 trunk: {_id: skateTrunk._id, ...withQuantity(10, "Nomb")},
-                root: {_id: aTrunk._id, ...withQuantity(1, "kg")}
+                root: {_id: aTrunk._id, ...withQuantity(1000, "Mass")}
             }
         }
     },
@@ -150,7 +150,7 @@ export const linkAToSkateThenTank = [
                         ..._.pick(eauTrunk, ['_id']),
                         "quantity": {
                             "qt": 0.01006,
-                            "unit": "m3"
+                            "unit": "Volu"
                         }
                     },
                     {
@@ -178,7 +178,7 @@ export const linkAToSkateThenTank = [
                         ..._.pick(e1Trunk, ['_id']),
                         "quantity": {
                             "qt": 0.51,
-                            "unit": "m3"
+                            "unit": "Volu"
                         }
                     }
                 ]

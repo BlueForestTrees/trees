@@ -5,7 +5,7 @@ import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
 import {bleFacets, farineTrunk} from "../../../database/gateau"
-import {withIdBqtG} from "test-api-express-mongo/dist/domain"
+import {withIdBqt} from "test-api-express-mongo/dist/domain"
 import {prixFacetEntry, vitBFacetEntry} from "../../../database/facetEntries"
 import {replaceItem} from "test-api-express-mongo/dist/domain"
 
@@ -19,8 +19,8 @@ describe('POST Facet', function () {
             url: `/api/facet`,
             method: "POST",
             body: {
-                trunk: withIdBqtG(farineTrunk._id, 2000, "Mass"),
-                facet: withIdBqtG(prixFacetEntry._id, 144, "Surf")
+                trunk: withIdBqt(farineTrunk._id, 2000),
+                facet: withIdBqt(prixFacetEntry._id, 144)
             }
 
         },
@@ -32,9 +32,9 @@ describe('POST Facet', function () {
             expected: {
                 colname: cols.FACET,
                 doc: {
-                    ...withIdBqtG(farineTrunk._id, 2000, "Mass"),
+                    ...withIdBqt(farineTrunk._id, 2000),
                     items: [
-                        withIdBqtG(prixFacetEntry._id, 144, "Surf")
+                        withIdBqt(prixFacetEntry._id, 144)
                     ],
 
                 }
@@ -46,8 +46,8 @@ describe('POST Facet', function () {
             url: `/api/facet`,
             method: "POST",
             body: {
-                trunk: withIdBqtG(bleFacets._id, 10000, "Mass"),
-                facet: withIdBqtG(prixFacetEntry._id, 144, "Prix")
+                trunk: withIdBqt(bleFacets._id, 10000),
+                facet: withIdBqt(prixFacetEntry._id, 144)
             }
 
         },
@@ -59,10 +59,10 @@ describe('POST Facet', function () {
             expected: {
                 colname: cols.FACET,
                 doc: {
-                    ...withIdBqtG(bleFacets._id, 10000, "Mass"),
+                    ...withIdBqt(bleFacets._id, 10000),
                     items: [
                         ...bleFacets.items,
-                        withIdBqtG(prixFacetEntry._id, 144, "Prix")
+                        withIdBqt(prixFacetEntry._id, 144)
                     ],
 
                 }
@@ -74,8 +74,8 @@ describe('POST Facet', function () {
             url: `/api/facet`,
             method: "POST",
             body: {
-                trunk: withIdBqtG(bleFacets._id, 5000, "Mass"),
-                facet: withIdBqtG(vitBFacetEntry._id, 14, "Long")
+                trunk: withIdBqt(bleFacets._id, 5000),
+                facet: withIdBqt(vitBFacetEntry._id, 14)
             }
         },
         res: {
@@ -84,7 +84,7 @@ describe('POST Facet', function () {
         db: {
             expected: {
                 colname: cols.FACET,
-                doc: replaceItem(bleFacets, "items", withIdBqtG(vitBFacetEntry._id, 28, "Long"))
+                doc: replaceItem(bleFacets, "items", withIdBqt(vitBFacetEntry._id, 28))
             }
         }
     }))

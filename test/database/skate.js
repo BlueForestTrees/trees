@@ -1,4 +1,4 @@
-import {withIdBqtG, withId, withDbTrunk} from "test-api-express-mongo/dist/domain"
+import {withIdBqt, withId, withDbTrunk} from "test-api-express-mongo/dist/domain"
 import {cols} from "../../src/const/collections"
 
 export const skateTrunk = withDbTrunk("skate", "999903c03e77667641d99990", 10, "Nomb")
@@ -16,20 +16,20 @@ export const refugeBioTrunk = withDbTrunk("Refuge de biodiversité", "999903c03e
 export const planeteTrunk = withDbTrunk("Planète", "999903c03e77667641d99912", 1, "Nomb")
 export const systemeTrunk = withDbTrunk("Système", "999903c03e77667641d99913", 1, "Nomb")
 
-export const skateRoot = {...withIdBqtG(skateTrunk._id, 1, "Nomb"), items: [withIdBqtG(plancheTrunk._id, 1, "Nomb"), withIdBqtG(rouletteTrunk._id, 4, "Nomb")]}
-const plancheRoot = {...withIdBqtG(plancheTrunk._id, 1000, "Nomb"), items: [withIdBqtG(eauTrunk._id, 1, "Volu"), withIdBqtG(elecTrunk._id, 10000*861244.02, "Ener"), withIdBqtG(boisTrunk._id, 500000, "Mass")]}
-const boisRoot = {...withIdBqtG(boisTrunk._id, 1000000, "Mass"), items: [withIdBqtG(arbreTrunk._id, 1, "Nomb")]}
-const rouletteRoot = {...withIdBqtG(rouletteTrunk._id, 1000000, "Nomb"), items: [withIdBqtG(eauTrunk._id, 1.5, "Volu"), withIdBqtG(elecTrunk._id, 20000*861244.02, "Ener")]}
+export const skateRoot = {...withIdBqt(skateTrunk._id, 1), items: [withIdBqt(plancheTrunk._id, 1), withIdBqt(rouletteTrunk._id, 4)]}
+const plancheRoot = {...withIdBqt(plancheTrunk._id, 1000), items: [withIdBqt(eauTrunk._id, 1), withIdBqt(elecTrunk._id, 10000*861244.02), withIdBqt(boisTrunk._id, 500000)]}
+const boisRoot = {...withIdBqt(boisTrunk._id, 1000000), items: [withIdBqt(arbreTrunk._id, 1)]}
+const rouletteRoot = {...withIdBqt(rouletteTrunk._id, 1000000), items: [withIdBqt(eauTrunk._id, 1.5), withIdBqt(elecTrunk._id, 20000*861244.02)]}
 
-const plancheBranch = {...withIdBqtG(plancheTrunk._id, 1, "Nomb"), items: [withIdBqtG(skateTrunk._id, 1, "Nomb")]}
-const rouletteBranch = {...withIdBqtG(rouletteTrunk._id, 1, "Nomb"), items: [withIdBqtG(skateTrunk._id, 0.25, "Nomb")]}
-const eauBranch = {...withIdBqtG(eauTrunk._id, 1500, "L"), items: [withIdBqtG(plancheTrunk._id, 1500, "Nomb"), withIdBqtG(rouletteTrunk._id, 1000000, "Nomb")]}
-const elecBranch = {...withIdBqtG(elecTrunk._id, 861244.02*10, "Ener"), items: [withIdBqtG(plancheTrunk._id, 1, "Nomb"), withIdBqtG(rouletteTrunk._id, 50, "Nomb")]}
-export const boisBranch = {...withIdBqtG(boisTrunk._id, 500000, "Mass"), items: [withIdBqtG(plancheTrunk._id, 1000, "Nomb"), withIdBqtG(bucheTrunk._id, 500000, "Mass")]}
-const arbreBranch = {...withIdBqtG(arbreTrunk._id, 1, "Nomb"), items: [withIdBqtG(boisTrunk._id, 1000000, "Mass"), withIdBqtG(foretTrunk._id, 0.001, "Nomb")]}
-const bucheBranch = {...withIdBqtG(bucheTrunk._id, 3000, "Mass"), items: [withIdBqtG(chauffageTrunk._id, 3600, "Duré")]}
-const foretBranch = {...withIdBqtG(foretTrunk._id, 3, "Nomb"), items: [withId(grandeForetTrunk._id)]}
-const grandeForetBranch = {...withIdBqtG(grandeForetTrunk._id, 10, "Nomb"), items: [withIdBqtG(refugeBioTrunk._id, 1, "Nomb")]}
+const plancheBranch = {...withIdBqt(plancheTrunk._id, 1), items: [withIdBqt(skateTrunk._id, 1)]}
+const rouletteBranch = {...withIdBqt(rouletteTrunk._id, 1), items: [withIdBqt(skateTrunk._id, 0.25)]}
+const eauBranch = {...withIdBqt(eauTrunk._id, 1500, "L"), items: [withIdBqt(plancheTrunk._id, 1500), withIdBqt(rouletteTrunk._id, 1000000)]}
+const elecBranch = {...withIdBqt(elecTrunk._id, 861244.02*10), items: [withIdBqt(plancheTrunk._id, 1), withIdBqt(rouletteTrunk._id, 50)]}
+export const boisBranch = {...withIdBqt(boisTrunk._id, 500000), items: [withIdBqt(plancheTrunk._id, 1000), withIdBqt(bucheTrunk._id, 500000)]}
+const arbreBranch = {...withIdBqt(arbreTrunk._id, 1), items: [withIdBqt(boisTrunk._id, 1000000), withIdBqt(foretTrunk._id, 0.001)]}
+const bucheBranch = {...withIdBqt(bucheTrunk._id, 3000), items: [withIdBqt(chauffageTrunk._id, 3600)]}
+const foretBranch = {...withIdBqt(foretTrunk._id, 3), items: [withId(grandeForetTrunk._id)]}
+const grandeForetBranch = {...withIdBqt(grandeForetTrunk._id, 10), items: [withIdBqt(refugeBioTrunk._id, 1)]}
 
 export const database = {
     [cols.TRUNK]: [skateTrunk, plancheTrunk, boisTrunk, arbreTrunk, rouletteTrunk, elecTrunk, eauTrunk, foretTrunk, bucheTrunk, chauffageTrunk, grandeForetTrunk, refugeBioTrunk, planeteTrunk, systemeTrunk],

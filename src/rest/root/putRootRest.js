@@ -1,5 +1,5 @@
 import {col} from "mongo-registry/dist"
-import {ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT} from "../../const/paths"
+import {ROOT_QT, TRUNK_BQT} from "../../const/paths"
 import {validRootId, validTrunkId, present, rootIdIsNotTrunkId, validRelativeTo} from "../../const/validations"
 
 import configure from "items-service"
@@ -17,7 +17,7 @@ router.put('/api/root',
     validRootId,
     validRelativeTo,
     rootIdIsNotTrunkId,
-    present(ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT),
+    present(ROOT_QT, TRUNK_BQT),
     run(({trunk, root}) => cleanUpsert(trunk, root))
 )
 

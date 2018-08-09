@@ -1,4 +1,4 @@
-import {BRANCH_QT, BRANCH_UNIT, TRUNK_QT, TRUNK_UNIT} from "../../const/paths"
+import {BRANCH_BQT, TRUNK_BQT} from "../../const/paths"
 import {branchIdIsNotTrunkId, validBranchId, validTrunkId, present} from "../../const/validations"
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry/dist"
@@ -15,6 +15,6 @@ router.put('/api/branch',
     validBranchId,
     validTrunkId,
     branchIdIsNotTrunkId,
-    present(BRANCH_QT, BRANCH_UNIT, TRUNK_QT, TRUNK_UNIT),
+    present(BRANCH_BQT, TRUNK_BQT),
     run(({trunk, branch}) => upsertBranch(trunk, branch))
 )

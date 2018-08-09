@@ -1,12 +1,12 @@
 import {oneModifiedResponse} from "test-api-express-mongo/dist/domain"
-import {setQuantity, withIdBqtG} from "test-api-express-mongo/dist/domain"
+import {setBqt, withIdBqtG} from "test-api-express-mongo/dist/domain"
 import {clon} from "test-api-express-mongo/dist/util"
 import {cols} from "../../../src/const/collections"
 import _ from 'lodash'
 import {bleTrunk, farineRoot, farineTrunk, gateauRoot, gateauTrunk, laitTrunk} from "../../database/gateau"
 
-let someFarine = withIdBqtG(farineTrunk._id, 10, "kg")
-let someBle = withIdBqtG(bleTrunk._id, 20, "min")
+let someFarine = withIdBqtG(farineTrunk._id, 10000, "Mass")
+let someBle = withIdBqtG(bleTrunk._id, 60*20, "Duré")
 
 const putRootUrl = {method: "PUT", url: '/api/root'}
 
@@ -39,11 +39,11 @@ export const putRelativeToRootSpec = {
         body: {
             trunk: someFarine,
             root: {
-                ...withIdBqtG(laitTrunk._id, 1, "L"),
+                ...withIdBqtG(laitTrunk._id, 0.001, "Volu"),
                 relativeTo: {
                     _id: bleTrunk._id,
-                    refqt: {qt: 50.32, unit: "kg"},
-                    disqt: {qt: 1000, unit: "km"}
+                    refqt: {bqt: 50320, g: "Mass"},
+                    disqt: {bqt: 1000000, g: "Long"}
                 }
             }
         }
@@ -59,11 +59,11 @@ export const putRelativeToRootSpec = {
                 items: [
                     ...farineRoot.items,
                     {
-                        ...withIdBqtG(laitTrunk._id, 1, "L"),
+                        ...withIdBqtG(laitTrunk._id, 0.001, "Volu"),
                         relativeTo: {
                             _id: bleTrunk._id,
-                            refqt: {qt: 50.32, unit: "kg"},
-                            disqt: {qt: 1000, unit: "km"}
+                            refqt: {bqt: 50320, g: "Mass"},
+                            disqt: {bqt: 1000000, g: "Long"}
                         }
                     }
                 ],
@@ -75,7 +75,7 @@ export const putRelativeToRootSpec = {
 
 export const updateQuantityRootSpec = {}
 const updatedRoots = clon(gateauRoot.items)
-setQuantity(updatedRoots[1], 60)
+setBqt(updatedRoots[1], 60)
 
 updateQuantityRootSpec.req = {
     ...putRootUrl,
@@ -83,15 +83,15 @@ updateQuantityRootSpec.req = {
         trunk: {
             _id: gateauTrunk._id,
             quantity: {
-                unit: "g",
-                qt: 250
+                g: "Mass",
+                bqt: 250
             }
         },
         root: {
             _id: laitTrunk._id,
             quantity: {
-                unit: "L",
-                qt: 30
+                g: "L",
+                bqt: 30
             }
         }
     }
@@ -111,7 +111,7 @@ updateQuantityRootSpec.db = {
 
 export const updateQuantityAnotherUnitRootSpec = {}
 const updatedRootsWithDifferentUnit = clon(gateauRoot.items)
-setQuantity(updatedRootsWithDifferentUnit[1], 0.01, "m3")
+setBqt(updatedRootsWithDifferentUnit[1], 0.01, "m3")
 
 updateQuantityAnotherUnitRootSpec.req = {
     ...putRootUrl,
@@ -119,15 +119,15 @@ updateQuantityAnotherUnitRootSpec.req = {
         trunk: {
             _id: gateauTrunk._id,
             quantity: {
-                unit: "kg",
-                qt: 1
+                g: "Mass",
+                bqt: 1000
             }
         },
         root: {
             _id: laitTrunk._id,
             quantity: {
-                unit: "m3",
-                qt: 0.02
+                g: "Volu",
+                bqt: 0.02
             }
         }
     }

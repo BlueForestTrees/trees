@@ -10,5 +10,4 @@ describe('PUT Branch', function () {
 
     it('set quantity', withTest(setQuantityBranchSpec))
     it('update quantity', withTest(updateQuantityBranchSpec))
-    it('differentUnit', withTest(updateQuantityAnotherUnitBranchSpec))
 })

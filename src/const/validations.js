@@ -21,7 +21,7 @@ import {
     TRUNK_ID,
     TYPE,
 } from "./paths"
-import {IS_DECIMAL, IS_NOT_RIGHT_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "./messages"
+import {IS_DECIMAL, IS_NOT_RIGHT_ID, IS_VALID_G, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "./messages"
 import {check, body, oneOf, param, query} from 'express-validator/check'
 import {isNil, map} from 'lodash'
 import {getGrandeursKeys, getShortnames} from "unit-manip"
@@ -102,9 +102,10 @@ export const optionalValidType = check(TYPE).optional().isIn(Object.values(trunk
 
 export const present = (...fields) => map(fields, field => check(field, SHOULD_BE_DEFINED).exists())
 export const validUnit = field => check(field, IS_VALID_UNIT).optional().isIn(unitsShortnames)
-export const validQt = field => check(field, IS_DECIMAL).optional().isDecimal().toFloat()
+export const validBodyNumber = field => body(field, IS_DECIMAL).optional().isDecimal().toFloat()
 
 export const validParamsG = param(G, IS_VALID_UNIT).isIn(getGrandeursKeys())
+export const validG = (at, field) => at(field, IS_VALID_G).isIn(getGrandeursKeys())
 export const validParamsBqt = param(BQT, IS_DECIMAL).isDecimal().toFloat()
 
 const defaultPS = 20
@@ -126,13 +127,6 @@ export const validateParamsItem = [
 ]
 
 export const validItem = field => [
-    check(field).exists().withMessage(`champ ${field} manquant`),
     validMongoId(`${field}._id`),
-    validQt(`${field}.quantity.qt`),
-    validUnit(`${field}.quantity.unit`),
-    withBaseQt(field)
+    validBodyNumber(`${field}.quantity.bqt`)
 ]
-const withBaseQt = field => (req, res, next) => {
-    req.body[field].quantity = toBqtG(req.body[field].quantity)
-    next()
-}

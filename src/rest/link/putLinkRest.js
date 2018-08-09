@@ -1,5 +1,5 @@
-import {ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT} from "../../const/paths"
-import {validRootId, validTrunkId, present, rootIdIsNotTrunkId, validQt, validRelativeTo, validUnit} from "../../const/validations"
+import {ROOT_QT, TRUNK_BQT} from "../../const/paths"
+import {validRootId, validTrunkId, present, rootIdIsNotTrunkId, validBodyNumber, validRelativeTo, validUnit} from "../../const/validations"
 import {upsertLink} from "../../topService/linkTopService"
 
 import {run} from 'express-blueforest'
@@ -19,10 +19,8 @@ router.put('/api/link',
     validRootId,
     validRelativeTo,
     rootIdIsNotTrunkId,
-    present(ROOT_QT, ROOT_UNIT, TRUNK_QT, TRUNK_UNIT),
-    validUnit(ROOT_UNIT),
-    validUnit(TRUNK_UNIT),
-    validQt(ROOT_QT),
-    validQt(TRUNK_QT),
+    present(ROOT_QT, TRUNK_BQT),
+    validBodyNumber(ROOT_QT),
+    validBodyNumber(TRUNK_BQT),
     run(cleanUpsert)
 )

@@ -76,7 +76,7 @@ export const ademeToBlueforestTrunk = raws => map(raws, raw => {
                     name_lower: raw.Nom.toLowerCase(),
                     grandeur: grandeur(raw["Quantité"]["Unité"]) || erreurGrandeur(raw["Quantité"]["Unité"]),
                     quantity: {
-                        qt: raw["Quantité"]["Quantité de référence"], unit: raw["Quantité"]["Unité"]
+                        bqt: raw["Quantité"]["Quantité de référence"], unit: raw["Quantité"]["Unité"]
                     },
                     color: getRandomColor(),
                     origin: "ADEME",

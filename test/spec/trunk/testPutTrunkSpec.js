@@ -29,7 +29,7 @@ export const renameTrunkSpec = {
 }
 
 
-const newGateauQuantity = withQuantity(1, "kg")
+const newGateauQuantity = withQuantity(1000, "Mass")
 export const requantifyTrunkSpec = {
     req: {
         method: "PUT",
@@ -55,7 +55,7 @@ export const noUnitPutTrunkSpec = {
         method: "PUT",
         url: `/api/trunk/${gateauTrunk._id}`,
         body: {
-            quantity: {qt: 4}
+            quantity: {bqt: 4}
         }
     }, res: {
         code:400

@@ -6,7 +6,7 @@ import {col} from "mongo-registry/dist"
 import configure from "items-service"
 
 const router = Router()
-const insertFacet = configure(() => col(cols.FACET)).upsertItem
+const itemsService = configure(() => col(cols.FACET))
 
 module.exports = router
 
@@ -14,5 +14,5 @@ router.post('/api/facet',
     validItem("trunk"),
     validItem("facet"),
     facetIdIsNotTrunkId,
-    run(({trunk, facet}) => insertFacet(trunk, facet))
+    run(({trunk, facet}) => itemsService.upsertItem(trunk, facet))
 )

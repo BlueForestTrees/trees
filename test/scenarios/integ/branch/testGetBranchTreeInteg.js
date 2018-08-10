@@ -15,7 +15,7 @@ describe('GET Branch Tree', function () {
         },
         res:{
             body: {
-                _id: aTrunk._id,
+                ...withIdBqt(aTrunk._id, 1),
                 items: []
             }
         }

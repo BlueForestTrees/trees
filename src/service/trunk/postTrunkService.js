@@ -1,35 +1,11 @@
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry/dist"
 import {map, omit} from 'lodash'
-import {getTrunk} from "./getTrunkService"
-import {updateName} from './putTrunkService'
 import {parse} from "../../util/excel"
 import {getRandomColor} from "../../util/calculations"
 import {grandeur} from "unit-manip"
 
 const trunks = () => col(cols.TRUNK)
-
-export const createOrClone = ({sourceId, name}) => sourceId ? clone(sourceId) : create({name})
-
-export const putall = async (data) => {
-    await trunks().remove()
-    await trunks().insert(data)
-    return trunks().find().toArray()
-}
-
-export const create = async (trunk,req) => {
-    console.log("insertion de", trunk)
-    return trunks().insertOne({...trunk, name_lower: trunk.name.toLowerCase()})
-}
-
-const clone = async sourceId => {
-    const clone = await create(omit(await getTrunk(sourceId), '_id'))
-    const renamed = {_id: clone._id, name: `${clone.name}${clone._id}`}
-
-    await updateName(renamed)
-
-    return renamed
-}
 
 const parseDesc = {
     firstDocAt: 3,
@@ -73,7 +49,6 @@ export const ademeToBlueforestTrunk = raws => map(raws, raw => {
                 $set: {
                     externId: raw.externId,
                     name: raw.Nom,
-                    name_lower: raw.Nom.toLowerCase(),
                     grandeur: grandeur(raw["Quantité"]["Unité"]) || erreurGrandeur(raw["Quantité"]["Unité"]),
                     quantity: {
                         bqt: raw["Quantité"]["Quantité de référence"], unit: raw["Quantité"]["Unité"]

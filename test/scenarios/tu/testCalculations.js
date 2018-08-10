@@ -1,8 +1,7 @@
-import {withIdBqtG, withBqtG} from "test-api-express-mongo/dist/domain"
-import {mergeTwoItems, quantified, sum} from "../../../src/util/calculations"
-import {withId} from "mongo-queries-blueforest"
+import {withIdBqtG, withBqtG, withIdBqt, withId} from "test-api-express-mongo/dist/domain"
+import {mergeItemList, mergeTwoItems, quantified, sum} from "../../../src/util/calculations"
 import Fraction from "fraction.js"
-import chai from "chai"
+import chai, {expect} from "chai"
 
 chai.should()
 
@@ -35,26 +34,6 @@ describe('TU Calculations', function () {
         })
     })
 
-    describe('summify tank', function () {
-        it('[A10g,A5g] => [A15Mass]', function () {
-            mergeTwoItems([withIdBqtG("A", 10, "Mass"), withIdBqtG("A", 5, "Mass")])
-                .should.be.deep.equal([withIdBqtG("A", 15, "Mass")])
-        })
-        it('[A1Mass,B5,A500Mass,B3] => [A1500g,B8g]', function () {
-
-            mergeTwoItems([
-                withIdBqtG("A", 1000, "Mass"),
-                withIdBqtG("B", 5, "Nomb"),
-                withIdBqtG("A", 500, "g"),
-                withIdBqtG("B", 3, "Mass")
-
-            ]).should.be.deep.equal([
-                withIdBqtG("A", 1500, "Mass"),
-                withIdBqtG("B", 8, "Nomb")
-            ])
-        })
-    })
-
     describe('test quantified', function () {
         it('return false', function () {
             quantified([withId("aaaaaaaaaaaaaaaaaaaaaaaa")]).should.be.false
@@ -62,6 +41,48 @@ describe('TU Calculations', function () {
         it('return true', function () {
             quantified([withIdBqtG("aaaaaaaaaaaaaaaaaaaaaaaa", 3, "Mass")]).should.be.true
         })
+    })
+
+    it('extract SubitemList', function () {
+        const itemList = [
+            {
+                ...withId("111111111111111111111111"),
+                "items": []
+            },
+            {
+                ...withId("333333333333333333333333"),
+                "items": [withIdBqt("5a6a03c03e77667641d2d2c9", 10)]
+            },
+            {
+                ...withId("444444444444444444444444"),
+                "items": [withIdBqt("5a6a03c03e77667641d2d2c9", 100)]
+            }]
+        const subItemList = [
+            withIdBqt("5a6a03c03e77667641d2d2c9", 10),
+            withIdBqt("5a6a03c03e77667641d2d2c9", 100)
+        ]
+        expect(mergeItemList(itemList)).to.deep.equal(subItemList)
+    })
+
+    it('mergeItemList', function () {
+        const subItemList = [
+            withIdBqt("5a6a03c03e77667641d2d2c9", 10),
+            withIdBqt("5a6a03c03e77667641d2d2c9", 100),
+            withIdBqt("aaaaaaaaaaaaaaaaaaaaaaaa", 4)
+        ]
+        const mergedItemList = [
+            withIdBqt("5a6a03c03e77667641d2d2c9", 110),
+            withIdBqt("aaaaaaaaaaaaaaaaaaaaaaaa", 4)
+        ]
+    })
+
+    it('opérateurs logiques', function () {
+        expect(true^true).to.not.be.true
+        expect(false^false).to.not.be.true
+        expect(false^true).to.not.be.false
+        expect(true^false).to.not.be.false
+        expect(654^"Mass").to.not.be.true
+        expect(null^"Mass").to.not.be.false
     })
 
 })

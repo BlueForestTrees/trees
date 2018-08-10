@@ -13,6 +13,6 @@ export const getFacetEntryIdByName = async name => collection().findOne({name}, 
 export const getAllFacetEntries = async () => collection().find({}).toArray()
 
 export const searchFacetEntriesByNamepart = namePart => collection()
-    .find({name_lower: {$regex: `.*${namePart.toLowerCase()}.*`}}, searchMixin)
+    .find({name: {$regex: `.*${namePart.toLowerCase()}.*`}}, searchMixin)
     .sort({name: 1})
     .toArray()

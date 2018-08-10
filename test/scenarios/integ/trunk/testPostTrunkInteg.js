@@ -3,17 +3,32 @@ import {init, withTest} from "test-api-express-mongo/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {createStringObjectId} from "test-api-express-mongo/dist/util"
+import {createStringObjectId, createObjectId} from "test-api-express-mongo/dist/util"
+import {authGod} from "../../../database/users"
+import path from 'path'
 
-const badTrunk = {_id: "XXX"+createStringObjectId()+"XXX", color: "#FFCC00", name: "RATtatouille1664"}
+const trunk = {_id: createObjectId(), color: "#FFCC00", name: "RATtatouille1664", g:"Mass"}
+const badTrunk = {_id: "XXX" + createStringObjectId() + "XXX", color: "#FF00", g: "ass"}
 
 describe('POST Trunks', function () {
 
     beforeEach(init(api, ENV, cols))
 
-    it('create the trunk', withTest(postTrunkSpec))
+    it('create the trunk', withTest({
+        req: {
+            url: "/api/trunk",
+            method: "POST",
+            body: trunk
+        },
+        db: {
+            expected: {
+                colname: cols.TRUNK,
+                doc: trunk
+            }
+        }
+    }))
 
-    it('refuse to create a trunk with bad id', withTest({
+    it('refuse to create a bad trunk', withTest({
         req: {
             url: "/api/trunk",
             method: "POST",
@@ -21,7 +36,13 @@ describe('POST Trunks', function () {
         },
         res: {
             code: 400,
-            bodypath: {path: "$.errors._id.msg", value: ["invalid mongo id"]}
+            bodypath: [
+                {path: "$.errors.g.msg", value: ["should be Mass, Dens, Long, Tran..."]},
+                {path: "$.errors.name.msg", value: ["Invalid value"]},
+                {path: "$.errors.color.msg", value: ["Invalid value"]},
+                {path: "$.errors.color.value", value: ["#FF00"]},
+                {path: "$.errors._id.msg", value: ["invalid mongo id"]}
+            ]
         },
         db: {
             expected: {
@@ -31,9 +52,24 @@ describe('POST Trunks', function () {
         }
     }))
 
-    it('create a transport trunk', withTest(postTransportTrunkSpec))
-
-    it('refuse to create a trunk with color error', withTest(postBadColorTrunkSpec))
-
-    it('post ademe trunk file', withTest(postAdemeTrunkFileSpec))
+    it('post ademe trunk file', withTest({
+        req: {
+            url: "/api/trunkBulk/ademe",
+            method: "POST",
+            file: {
+                field: "xlsx.ademe.trunk",
+                path: path.resolve("test/files/CUT_BIG_BI_1.09__02_Procedes_Details.xlsx")
+            },
+            headers:{
+                ...authGod
+            }
+        },
+        res: {
+            bodypath: [
+                {path: "$.ok", value: [true]},
+                {path: "$.upsertions", value: [28]},
+                {path: "$.insertions", value: [0]},
+            ]
+        }
+    }))
 })

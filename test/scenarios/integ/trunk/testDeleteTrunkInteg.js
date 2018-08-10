@@ -10,8 +10,8 @@ describe('DELETE Trunks', function () {
 
     it('DELETE A TRUNK', withTest({
         req: {
-            url: `/api/trunk/${gateauTrunk._id}`,
-            method: "DELETE"
+            method: "DELETE",
+            url: `/api/trunk/${gateauTrunk._id}`
         },
         db: {
             expected: {

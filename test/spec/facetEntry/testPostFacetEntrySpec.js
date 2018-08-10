@@ -22,8 +22,7 @@ postFacetEntrySpec.db = {
             _id: object(_id),
             name: "nomNewFacetEntry",
             grandeur: "Dens",
-            color: "#FF0000",
-            name_lower: "nomnewfacetentry"
+            color: "#FF0000"
         }
     }
 }

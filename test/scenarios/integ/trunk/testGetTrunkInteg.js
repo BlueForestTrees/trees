@@ -3,7 +3,6 @@ import api from "../../../../src"
 import {cols} from "../../../../src/const/collections"
 import ENV from "../../../../src/env"
 import {eauTrunk, elecTrunk, refugeBioTrunk, skateTrunk} from "../../../database/skate"
-import {notInSearchMixin} from "test-api-express-mongo/dist/domain"
 import {baaTrunk, e1Trunk, e2Trunk} from "../../../database/lettres"
 import {bateauTrunk, voitureTrunk} from "../../../database/transports"
 import {omit, pick} from 'lodash'
@@ -35,24 +34,21 @@ describe('GET Trunk', function () {
         }
     ]))
 
-    it('return the asked trees', withTest({
+    it('search with _ids in', withTest({
         req: {
             url: `/api/trunk?_ids=${skateTrunk._id}`,
         },
         res: {
-            body: [omit(skateTrunk, notInSearchMixin)]
+            body: [skateTrunk]
         }
     }))
 
-    it('return the asked trees 2', withTest({
+    it('search with another _ids in', withTest({
         req: {
             url: `/api/trunk?_ids=${skateTrunk._id}&_ids=${e1Trunk._id}`,
         },
         res: {
-            body: [
-                omit(skateTrunk, notInSearchMixin),
-                omit(e1Trunk, notInSearchMixin)
-            ]
+            body: [skateTrunk,e1Trunk]
         }
     }))
 
@@ -68,10 +64,10 @@ describe('GET Trunk', function () {
 
     it('search by name', withTest({
         req: {
-            url: `/api/trunks?q=${skateTrunk.name.substring(0, 3)}`,
+            url: `/api/trunks?q=ska`,
         },
         res: {
-            body: [omit(skateTrunk, notInSearchMixin)]
+            body: [skateTrunk]
         }
     }))
 
@@ -81,9 +77,9 @@ describe('GET Trunk', function () {
         },
         res: {
             body: [
-                omit(papierVA, notInSearchMixin),
-                omit(papierVB, notInSearchMixin),
-                omit(refugeBioTrunk, notInSearchMixin)
+                papierVA,
+                papierVB,
+                refugeBioTrunk
             ]
         }
     }))
@@ -94,8 +90,8 @@ describe('GET Trunk', function () {
         },
         res: {
             body: [
-                omit(bateauTrunk, notInSearchMixin),
-                omit(voitureTrunk, notInSearchMixin),
+                bateauTrunk,
+                voitureTrunk,
             ]
         }
     }))
@@ -106,7 +102,7 @@ describe('GET Trunk', function () {
         },
         res: {
             body: [
-                omit(voitureTrunk, notInSearchMixin),
+                voitureTrunk,
             ]
         }
     }))
@@ -116,7 +112,7 @@ describe('GET Trunk', function () {
             url: `/api/trunk/${gateauTrunk._id}`
         },
         res: {
-            body: omit(gateauTrunk, 'name_lower')
+            body: gateauTrunk
         }
     }))
 
@@ -126,7 +122,7 @@ describe('GET Trunk', function () {
         },
         res: {
             body: {
-                ...omit(baaTrunk, ['name_lower']),
+                ...baaTrunk,
                 ...withBqtG(10, "Mass")
             }
         }

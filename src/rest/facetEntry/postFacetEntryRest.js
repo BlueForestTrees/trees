@@ -1,5 +1,5 @@
 import {addFacetEntry} from "../../service/facetEntry/postFacetEntryService"
-import {validColor, validGrandeur, validId, validName} from "../../const/validations"
+import {validColor, validBodyG, validId, validName} from "../../const/validations"
 
 import {run} from 'express-blueforest'
 
@@ -12,7 +12,7 @@ module.exports = router
 router.post('/api/facetEntry',
     validId,
     validName,
-    validGrandeur,
+    validBodyG,
     validColor,
     run(addFacetEntry)
 )

@@ -3,4 +3,3 @@ export const IS_VALID_G = 'must be a valid dimension shortname (Mass, Ener, Volu
 export const IS_NOT_RIGHT_ID = 'ids must be different'
 export const IS_DECIMAL = 'must be decimal'
 export const SHOULD_BE_DEFINED = 'should be defined'
-export const SHOULD_NOT_BE_DEFINED = 'should not be defined'

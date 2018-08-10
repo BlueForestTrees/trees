@@ -1,6 +1,6 @@
 import _, {cloneDeep, find, forEach, groupBy, isNil, map, omit, some} from 'lodash'
 
-export const treeToRootList = tree => {
+export const treeToList = tree => {
     const browser = [tree]
     let i = 0
     for (i; i < browser.length; i++) {
@@ -13,17 +13,36 @@ export const treeToRootList = tree => {
     return browser
 }
 
-
-export const flatten = arr =>
-    arr.reduce(
-        (flat, toFlatten) =>
-            flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten),
-        []
-    )
+export const mergeItemList = items => {
+    const collector = []
+    let i = 0
+    for (i; i < items.length; i++) {
+        const item = items[i]
+        if (item.items) {
+            collector.push(...item.items)
+        }
+    }
+    return collector
+}
 
 export const quantified = items => some(items, item => !isNil(item.quantity))
 
-export const mergeItemList = items =>
+export const extraireFeuilles = tree => {
+    const tank = []
+    const browser = tree.items.slice()
+    let i = 0
+    for (i; i < browser.length; i++) {
+        const item = browser[i]
+        if (item.quantity && item.items && quantified(item.items)) {
+            browser.push(...item.items)
+        } else {
+            tank.push(omit(item, "items"))
+        }
+    }
+    return tank
+}
+
+export const mergeList = items =>
     _(items)
         .groupBy("_id")
         .map(sum)
@@ -49,7 +68,7 @@ export const getRandomColor = () => {
     return color
 }
 
-export const show = o => {
-    console.log("SHOW", JSON.stringify(o,null,3))
+export const show = title => o => {
+    console.log("SHOW", title, JSON.stringify(o, null, 3))
     return o
 }

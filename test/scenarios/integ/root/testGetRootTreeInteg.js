@@ -7,7 +7,6 @@ import {farineItem, farineRoot, gateauRoot, laitItem} from "../../../database/ga
 import {withoutItemQuantity, withIdBqt, withIdBqtG, withQtCoef, withId} from "test-api-express-mongo/dist/domain"
 import {arbreTrunk} from "../../../database/skate"
 import {coucheAdhesif, coucheAlu, couchePapier, couchePE, papierVA} from "../../../database/papier"
-import {aTrunk, b2Trunk, baaTrunk, babTrunk, baTrunk, bTrunk, cTrunk, daTrunk, dbaaTrunk, dbaTrunk, dbTrunk, dRoot, dTrunk, e1Trunk, e2Trunk} from "../../../database/lettres"
 
 describe('GET Root tree', function () {
 
@@ -19,7 +18,7 @@ describe('GET Root tree', function () {
         },
         res: {
             body: {
-                ...withId(gateauRoot._id),
+                ...withIdBqt(gateauRoot._id, 1),
                 items: [
                     {
                         ...farineItem,
@@ -37,12 +36,12 @@ describe('GET Root tree', function () {
         },
         res: {
             body: {
-                ...withId(papierVA._id),
+                ...withIdBqt(papierVA._id, 1),
                 items: [
-                    withIdBqt(couchePE._id, 780000),
-                    withIdBqt(couchePapier._id, 2070000),
-                    withIdBqt(coucheAdhesif._id, 80000),
-                    withIdBqt(coucheAlu._id, 890000)
+                    withIdBqt(couchePE._id, 7),
+                    withIdBqt(couchePapier._id, 10),
+                    withIdBqt(coucheAdhesif._id, 100),
+                    withIdBqt(coucheAlu._id, 11)
                 ]
             }
         }
@@ -54,7 +53,7 @@ describe('GET Root tree', function () {
         },
         res: {
             body: {
-                _id: arbreTrunk._id,
+                ...withIdBqt(arbreTrunk._id, 1),
                 items: []
             }
         }

@@ -3,7 +3,7 @@ import {init, request, withTest} from "test-api-express-mongo/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {withBqtG} from "test-api-express-mongo/dist/domain"
+import {withBqtG, withIdBqt} from "test-api-express-mongo/dist/domain"
 import {ObjectID} from "mongodb"
 import {pick} from 'lodash'
 import {papierVA} from "../../../database/papier"
@@ -21,14 +21,9 @@ describe('GET ImpactTank', function () {
             url: `/api/impacttank/${papierVA._id}`
         },
         res: {
-            body: {
-                _id: papierVA._id,
-                quantity: papierVA.quantity,
-                items: [{
-                    ...pick(co2eImpactEntry, ['_id']),
-                    ...withBqtG(11696000, "Mass")
-                }]
-            }
+            body: [
+                withIdBqt(co2eImpactEntry._id, 21107)
+            ]
         }
     }))
 
@@ -37,18 +32,10 @@ describe('GET ImpactTank', function () {
             url: `/api/impacttank/${gateauTrunk._id}`,
         },
         res: {
-            body: {
-                _id: gateauTrunk._id,
-                quantity: gateauItem.quantity,
-                items: [{
-                    ...pick(vitCImpactEntry, ['_id']),
-                    ...withBqtG(3, "Dens")
-                },
-                    {
-                        ...pick(vitBImpactEntry, ['_id']),
-                        ...withBqtG(0.1, "Dens")
-                    }]
-            }
+            body: [
+                withIdBqt(vitCImpactEntry._id, 10),
+                withIdBqt(vitBImpactEntry._id, 0.1)
+            ]
         }
     }))
 
@@ -57,11 +44,7 @@ describe('GET ImpactTank', function () {
             url: `/api/impacttank/${unknownId}`
         },
         res: {
-            body: {
-                _id: unknownId,
-                ...withBqtG(0.003, "Volu"),
-                items: []
-            }
+            body: []
         }
     }))
 

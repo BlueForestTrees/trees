@@ -42,7 +42,6 @@ describe('Imports utils', function () {
                         externId: "370960f4-0a3a-415d-bf3e-e5ce63160bb9",
                         grandeur: "Mass",
                         name: "Changement climatique",
-                        name_lower: "changement climatique",
                         origin: "ADEME",
                         raw: ademe
                     }

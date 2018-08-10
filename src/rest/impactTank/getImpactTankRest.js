@@ -4,7 +4,8 @@ import configure from "items-service"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest";
 import {cols} from "../../const/collections"
-import {flatten, treeToRootList, mergeItemList, show} from "../../util/calculations"
+import {treeToList, mergeList, mergeItemList} from "../../util/calculations"
+
 const router = Router()
 
 module.exports = router
@@ -15,10 +16,9 @@ const readAllQuantifiedImpacts = configure(() => col(cols.IMPACT)).readAllQuanti
 router.get('/api/impacttank/:_id',
     validPathId,
     run(readRootTree),
-    run(treeToRootList),
-    run(show),
-    run(mergeItemList),
+    run(treeToList),
+    run(mergeList),
     run(readAllQuantifiedImpacts),
-    run(flatten),
-    run(mergeItemList)
+    run(mergeItemList),
+    run(mergeList)
 )

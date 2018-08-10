@@ -1,20 +1,23 @@
 import {create} from "../../service/trunk/postTrunkService"
 import {Router, run} from 'express-blueforest'
-import {validColor, validId, validName, optionalValidType} from "../../const/validations"
+import {validColor, validId, validName, optionalValidType, validBodyG} from "../../const/validations"
 import {importAdemeTrunkEntries} from "../../service/trunk/postTrunkService"
 import fileUpload from "express-fileupload"
 import {validGod} from "../../service/auth/authService"
-
+import {cols} from "../../const/collections"
+import configure from "items-service"
+import {col} from "mongo-registry/dist"
 
 const router = Router()
 module.exports = router
+const trunkService = configure(() => col(cols.TRUNK))
 
 router.post('/api/trunk',
     validId,
     validColor,
     validName,
-    optionalValidType,
-    run(create)
+    validBodyG,
+    run(trunkService.insertOne)
 )
 
 router.post('/api/trunkBulk/ademe',

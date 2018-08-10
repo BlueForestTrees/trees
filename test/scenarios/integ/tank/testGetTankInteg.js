@@ -16,13 +16,10 @@ describe('GET Tank', function () {
             url: `/api/tank/${aTrunk._id}`
         },
         res: {
-            body: {
-                ...withId(aTrunk._id),
-                items: [
+            body: [
                     withIdBqt(e2Trunk._id, 20002100),
                     withIdBqt(e1Trunk._id, 510)
                 ]
-            }
         }
     }))
 
@@ -39,14 +36,11 @@ describe('GET Tank', function () {
             }
         },
         res: {
-            body: {
-                _id: aTrunk._id,
-                items: [
+            body: [
                     withIdBqt(e2Trunk._id, 20001100),
                     withId(daTrunk._id),
                     withIdBqt(e1Trunk._id, 510)
                 ]
-            }
         }
     }))
 
@@ -63,14 +57,11 @@ describe('GET Tank', function () {
             }
         },
         res: {
-            body: {
-                _id: aTrunk._id,
-                items: [
+            body: [
                     withIdBqt(e2Trunk._id, 2100),
                     withId(dbTrunk._id),
                     withIdBqt(e1Trunk._id, 510)
                 ]
-            }
         }
     }))
 
@@ -79,10 +70,7 @@ describe('GET Tank', function () {
             url: `/api/tank/${laitTrunk._id}`
         },
         res: {
-            body: {
-                _id: laitTrunk._id,
-                items: []
-            }
+            body: []
         }
     }))
 
@@ -102,16 +90,13 @@ describe('GET Tank', function () {
                 url: `/api/tank/${skateTrunk._id}`
             },
             res: {
-                body: {
-                    _id: skateTrunk._id,
-                    items: [
+                body: [
                         withIdBqt(eauTrunk._id, 0.01006),
                         withIdBqt(elecTrunk._id, 86813397.216),
                         withIdBqt(arbreTrunk._id, 0.005),
                         withIdBqt(e2Trunk._id, 5000),
                         withIdBqt(e1Trunk._id, 510)
                     ]
-                }
             }
         }
     ]))

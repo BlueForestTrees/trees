@@ -20,10 +20,7 @@ export const postImpactEntrySpec = {
     db: {
         expected: {
             colname: cols.IMPACT_ENTRY,
-            doc: {
-                ...impactEntry,
-                name_lower: impactEntry.name.toLowerCase()
-            }
+            doc: impactEntry
         }
     }
 }
@@ -66,9 +63,7 @@ export const allreadyExistingImpactEntrySpec = {
     req: {
         url: "/api/impactEntry",
         method: "POST",
-        body: {
-            ..._.omit(vitCImpactEntry, ["name_lower"])
-        }
+        body: vitCImpactEntry
     },
     res: {
         code: 400,

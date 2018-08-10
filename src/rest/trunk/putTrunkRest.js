@@ -1,29 +1,18 @@
-import {validId} from "../../const/validations"
-import {NAME, QUANTITY, QUANTITY_QT, QUANTITY_UNIT} from "../../const/paths"
-import {SHOULD_BE_DEFINED, SHOULD_NOT_BE_DEFINED} from "../../const/messages"
-
-const {oneOf} = require('express-validator/check')
-
+import {validOptionalBodyBqtG, validOptionalBodyName, validPathId} from "../../const/validations"
 import {run} from 'express-blueforest'
-import {Router} from "express-blueforest"; const router = Router()
-const {check} = require('express-validator/check')
-const trunks = require('../../service/trunk/putTrunkService')
+import {Router} from "express-blueforest"
+import {cols} from "../../const/collections"
+import {col} from "mongo-registry/dist"
+import configure from "items-service"
 
+const router = Router()
 module.exports = router
 
+const trunkService = configure(() => col(cols.TRUNK))
+
 router.put('/api/trunk/:_id',
-    validId,
-    oneOf([
-        [
-            check(NAME, SHOULD_BE_DEFINED).exists().matches(/^.+/),
-            check(QUANTITY, SHOULD_NOT_BE_DEFINED).not().exists()
-        ],
-        [
-            check(NAME, SHOULD_NOT_BE_DEFINED).not().exists(),
-            check(QUANTITY, SHOULD_BE_DEFINED).exists(),
-            check(QUANTITY_QT, SHOULD_BE_DEFINED).exists(),
-            check(QUANTITY_UNIT, SHOULD_BE_DEFINED).exists(),
-        ],
-    ]),
-    run(trunks.update)
+    validPathId,
+    validOptionalBodyName,
+    validOptionalBodyBqtG,
+    run(trunkService.update)
 )

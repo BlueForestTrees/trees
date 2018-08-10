@@ -4,11 +4,10 @@ import {AllreadyExistError} from "../../exceptions/Errors"
 import {parse} from "../../util/excel"
 import {grandeur} from "unit-manip"
 import {map} from 'lodash'
-import {createObjectId} from "mongo-queries-blueforest"
 
 const impactsEntry = () => col(cols.IMPACT_ENTRY)
 
-export const addImpactEntry = entry => impactsEntry().insertOne({...entry, name_lower: entry.name.toLowerCase()})
+export const addImpactEntry = entry => impactsEntry().insertOne(entry)
 
 const parseDesc = {
     firstDocAt: 3,
@@ -39,7 +38,6 @@ export const ademeToBlueforestImpactEntries = raws => map(raws, raw => {
             $set: {
                 externId: raw.externId,
                 name: raw.nom,
-                name_lower: raw.nom.toLowerCase(),
                 ...ademeUnitToGrandeurEq(raw['Unité de référence']),
                 color: "#696969",
                 origin: "ADEME",

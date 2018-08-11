@@ -34,7 +34,7 @@ export const parse = async (buffer) => await new Promise(function (resolve) {
                 if (impacts[idProduit]) {
                     impacts[idProduit].items.push({
                         externId: impactId,
-                        quantity: {bqt: parseFloat(qt)}
+                        bqt: parseFloat(qt)
                     })
                 } else {
                     console.error(`import ademe impacts, {_id:${idProduit}, ${impactId}} n'existe pas`)

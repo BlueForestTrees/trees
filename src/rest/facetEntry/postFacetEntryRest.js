@@ -1,18 +1,20 @@
 import {addFacetEntry} from "../../service/facetEntry/postFacetEntryService"
-import {validColor, validBodyG, validId, validName} from "../../const/validations"
-
-import {run} from 'express-blueforest'
-
-import {Router} from "express-blueforest"
+import {validBodyColor, validBodyG, validBodyName, validBodyId} from "../../const/validations"
+import {Router, run} from 'express-blueforest'
+import {col} from "mongo-registry/dist"
+import configure from "items-service"
+import {cols} from "../../const/collections"
 
 const router = Router()
 
 module.exports = router
 
+const insertFacet = configure(() => col(cols.FACET_ENTRY)).insertOne
+
 router.post('/api/facetEntry',
-    validId,
-    validName,
+    validBodyId,
+    validBodyName,
     validBodyG,
-    validColor,
-    run(addFacetEntry)
+    validBodyColor,
+    run(insertFacet)
 )

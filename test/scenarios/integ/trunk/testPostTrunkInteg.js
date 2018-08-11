@@ -1,11 +1,9 @@
-import {postAdemeTrunkFileSpec, postBadColorTrunkSpec, postBadIdTrunkSpec, postTransportTrunkSpec, postTrunkSpec} from "../../../spec/trunk/testPostTrunkSpec"
+import {postAdemeTrunkFileSpec, postBadColorTrunkSpec, postBadIdTrunkSpec, postTransportTrunkSpec, postTrunkFileSpec, postTrunkSpec} from "../../../spec/trunk/testPostTrunkSpec"
 import {init, withTest} from "test-api-express-mongo/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
 import {createStringObjectId, createObjectId} from "test-api-express-mongo/dist/util"
-import {authGod} from "../../../database/users"
-import path from 'path'
 
 const trunk = {_id: createObjectId(), color: "#FFCC00", name: "RATtatouille1664", g:"Mass"}
 const badTrunk = {_id: "XXX" + createStringObjectId() + "XXX", color: "#FF00", g: "ass"}
@@ -52,24 +50,5 @@ describe('POST Trunks', function () {
         }
     }))
 
-    it('post ademe trunk file', withTest({
-        req: {
-            url: "/api/trunkBulk/ademe",
-            method: "POST",
-            file: {
-                field: "xlsx.ademe.trunk",
-                path: path.resolve("test/files/CUT_BIG_BI_1.09__02_Procedes_Details.xlsx")
-            },
-            headers:{
-                ...authGod
-            }
-        },
-        res: {
-            bodypath: [
-                {path: "$.ok", value: [true]},
-                {path: "$.upsertions", value: [28]},
-                {path: "$.insertions", value: [0]},
-            ]
-        }
-    }))
+    it('post ademe trunk file', withTest(postTrunkFileSpec))
 })

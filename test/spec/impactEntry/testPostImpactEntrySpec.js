@@ -4,6 +4,7 @@ import {vitCImpactEntry} from "../../database/impactEntries"
 import {cols} from "../../../src/const/collections"
 import {createObjectId} from "test-api-express-mongo/dist/util"
 import path from "path"
+import {authGod} from "../../database/users"
 
 const impactEntry = {
     _id: createObjectId(),
@@ -40,10 +41,11 @@ export const postBadGrandeurImpactEntrySpec = {
     }
 }
 
-export const postAdemeImpactFileSpec = {
+export const postAdemeImpactEntryFileSpec = {
     req: {
         url: "/api/impactEntryBulk/ademe",
         method: "POST",
+        headers: authGod,
         file: {
             field: "xlsx.ademe.impactEntry",
             path: path.resolve("test/files/BI_1.09__06_CatImpacts_Details.xlsx")

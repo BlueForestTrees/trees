@@ -29,9 +29,7 @@ const parseDesc = {
     ]
 }
 
-export const ademeToBlueforestImpactEntries = raws => map(raws, raw => {
-    console.log(raw)
-    return ({
+export const ademeToBlueforestImpactEntries = raws => map(raws, raw => ({
     updateOne: {
         filter: {externId: raw.externId},
         update: {
@@ -46,8 +44,7 @@ export const ademeToBlueforestImpactEntries = raws => map(raws, raw => {
         },
         upsert: true
     }
-    })
-})
+}))
 
 export const ademeUnitToGrandeurEq = ademeUnit => {
     // if (!ademeUnit) return null

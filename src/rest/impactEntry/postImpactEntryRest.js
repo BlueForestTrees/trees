@@ -1,5 +1,5 @@
 import {addImpactEntry, importAdemeImpactEntries} from "../../service/impactEntry/postImpactEntryService"
-import {validColor, validBodyG, validId, validName} from "../../const/validations"
+import {validBodyColor, validBodyG, validId, validBodyName} from "../../const/validations"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
 import fileUpload from "express-fileupload"
@@ -12,9 +12,9 @@ module.exports = router
 
 router.post('/api/impactEntry',
     validId,
-    validName,
+    validBodyName,
     validBodyG,
-    validColor,
+    validBodyColor,
     run(addImpactEntry)
 )
 

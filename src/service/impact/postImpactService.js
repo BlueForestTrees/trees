@@ -7,33 +7,29 @@ import {lookupImpactEntryByExternId} from "../impactEntry/getImpactEntryService"
 
 const collection = () => col(cols.IMPACT)
 
-export const ademeToBlueforestImpact = raws => Promise.all(map(raws, async raw => {
-        let trunk = {externId: raw.externId}
-        try {
-            trunk = await resolveTrunkExternId(raw.externId)
-        } catch (e) {//valeur par défaut de trunk
-        }
-        return {
-            insertOne: {
-                ...trunk,
-                items: map(raw.items, async item => {
-                    let impactEntry = {externId: item.externId}
-                    try {
-                        impactEntry = await lookupImpactEntryByExternId(item.externId)
-                    } catch (e) {//valeur par défaut de impactEntry
-                    }
-                    return {
-                        ...impactEntry,
-                        quantity: item.quantity
-                    }
-                })
-            }
-        }
+const resolveTrunkOrDefault = async raw => {
+    try {
+        return await resolveTrunkExternId(raw.externId) || {externId: raw.externId}
+    } catch (e) {
+        return {externId: raw.externId}
     }
-))
-
-export const importAdemeImpact = async buffer => {
-    let docs = await ademeToBlueforestImpact(await parse(buffer))
-    console.log(docs)
-    return collection().bulkWrite(docs, {ordered: false})
 }
+const resolveImpactOrDefault = async item => {
+    try {
+        return {
+            ...await lookupImpactEntryByExternId(item.externId) || {externId: item.externId},
+            bqt: item.bqt
+        }
+    } catch (e) {
+        return item
+    }
+}
+
+export const ademeToBlueforestImpact = raws => Promise.all(map(raws, async raw => ({
+    insertOne: {
+        ...await resolveTrunkOrDefault(raw),
+        items: await Promise.all(map(raw.items, resolveImpactOrDefault))
+    }
+})))
+
+export const importAdemeImpact = async buffer => collection().bulkWrite(await ademeToBlueforestImpact(await parse(buffer)), {ordered: false})

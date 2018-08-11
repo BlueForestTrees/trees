@@ -51,6 +51,7 @@ export const validBranchId = validMongoId(BRANCH_ID)
 export const validRootId = validMongoId(ROOT_ID)
 export const validTrunkId = validMongoId(TRUNK_ID)
 export const validId = validMongoId(ID)
+export const validBodyId = mongoId(body(ID))
 export const validTreeId = validMongoId(TREEID)
 export const validFacetIds = validMongoId(FACETSIDS)
 
@@ -77,8 +78,8 @@ export const rootIdIsNotTrunkId = check(ROOT_ID, IS_NOT_RIGHT_ID).custom((root, 
 export const impactIdIsNotTrunkId = check(IMPACT_ID, IS_NOT_RIGHT_ID).custom((root, {req}) => (!root || !req.body.trunk) || (root._id !== req.body.trunk._id))
 export const facetIdIsNotTrunkId = check(FACET_ID, IS_NOT_RIGHT_ID).custom((facet, {req}) => (!facet || !req.body.trunk) || (facet._id !== req.body.trunk._id))
 export const branchIdIsNotTrunkId = check(BRANCH_ID, IS_NOT_RIGHT_ID).custom((branch, {req}) => (!branch || !req.body.trunk) || (branch._id !== req.body.trunk._id))
-export const validName = body(NAME).isLength({min: 2}).matches(/^.+/)
-export const validColor = body(COLOR).isLength({min: 2}).matches(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)
+export const validBodyName = body(NAME).isLength({min: 2}).matches(/^.+/)
+export const validBodyColor = body(COLOR).isLength({min: 2}).matches(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)
 export const validQ = check('q').optional().exists()
 export const validT = check("t").optional().isIn(Object.values(trunksType))
 

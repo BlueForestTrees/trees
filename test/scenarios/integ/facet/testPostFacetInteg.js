@@ -5,7 +5,7 @@ import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
 import {bleFacets, farineTrunk} from "../../../database/gateau"
-import {withIdBqt} from "test-api-express-mongo/dist/domain"
+import {withIdBqt, withId} from "test-api-express-mongo/dist/domain"
 import {prixFacetEntry, vitBFacetEntry} from "../../../database/facetEntries"
 import {replaceItem} from "test-api-express-mongo/dist/domain"
 
@@ -74,7 +74,7 @@ describe('POST Facet', function () {
             url: `/api/facet`,
             method: "POST",
             body: {
-                trunk: withIdBqt(bleFacets._id, 5000),
+                trunk: withId(bleFacets._id),
                 facet: withIdBqt(vitBFacetEntry._id, 14)
             }
         },
@@ -89,4 +89,3 @@ describe('POST Facet', function () {
         }
     }))
 })
-

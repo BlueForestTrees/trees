@@ -1,4 +1,4 @@
-import {allreadyExistingImpactEntrySpec, postAdemeImpactFileSpec, postBadGrandeurImpactEntrySpec, postBadIdImpactEntrySpec, postImpactEntrySpec} from "../../../spec/impactEntry/testPostImpactEntrySpec"
+import {allreadyExistingImpactEntrySpec, postAdemeImpactEntryFileSpec, postBadGrandeurImpactEntrySpec, postBadIdImpactEntrySpec, postImpactEntrySpec} from "../../../spec/impactEntry/testPostImpactEntrySpec"
 import {init, withTest} from "test-api-express-mongo/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
@@ -40,6 +40,6 @@ describe('POST ImpactEntry', function () {
 
     it('postBadGrandeurImpactEntrySpec', withTest(postBadGrandeurImpactEntrySpec))
 
-    it('post ademe impact file', withTest(postAdemeImpactFileSpec))
+    it('post ademe impact file', withTest(postAdemeImpactEntryFileSpec))
 
 })

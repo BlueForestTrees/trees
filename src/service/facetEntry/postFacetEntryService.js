@@ -11,6 +11,4 @@ export const replaceAllFacetEntries = async (data) => {
     return col.find().toArray()
 }
 
-export const addFacetEntry = entry => facetsEntry().insertOne(entry)
-
 export const insertEntry = async entry => facetsEntry().insertOne(entry)

@@ -2,19 +2,29 @@ import fs from "fs"
 import {indexOfWithPairTag, pairTagInside, parse, smartSplit, tagLine} from "../../../src/util/csv"
 import {expect} from 'chai'
 
-const filename = "test/files/PETIT_BI_1.09__03_Procedes_Impacts.csv"
-
 let line = "-1-2;0\"00;\"12;34\";5678;1\"\"\"011;1213"
 
 describe('csv', function () {
     it('parse an entire csv file', async () => {
 
-        const impacts = await parse(fs.readFileSync(filename))
+        const impacts = await parse(fs.readFileSync("test/files/PETIT_BI_1.09__03_Procedes_Impacts.csv"))
 
-        const expectedImpacts = {
-            "940bf6ef-aaae-4559-9dd3-0cd68d30b2f4": {"ec7836be-83eb-41da-bcda-1a6a3fe2d149": {quantity: {bqt: 0.00175113}}, "865c4fbe-11cc-4905-9b0a-80a99d94f7e6": {quantity: {bqt: 0.000000311443}}},
-            "81cd479b-6536-40ac-be2a-ab18b6e79bb8": {"ec7836be-83eb-41da-bcda-1a6a3fe2d149": {quantity: {bqt: 0.0000434245}}, "865c4fbe-11cc-4905-9b0a-80a99d94f7e6": {quantity: {bqt: 0.0000000373707}}},
-        }
+        const expectedImpacts = [
+            {
+                externId: "940bf6ef-aaae-4559-9dd3-0cd68d30b2f4",
+                items: [
+                    {externId: "ec7836be-83eb-41da-bcda-1a6a3fe2d149", bqt: 0.00175113},
+                    {externId: "865c4fbe-11cc-4905-9b0a-80a99d94f7e6", bqt: 0.000000311443}
+                ]
+            },
+            {
+                externId: "81cd479b-6536-40ac-be2a-ab18b6e79bb8",
+                items: [
+                    {externId: "ec7836be-83eb-41da-bcda-1a6a3fe2d149", bqt: 0.0000434245},
+                    {externId: "865c4fbe-11cc-4905-9b0a-80a99d94f7e6", bqt: 0.0000000373707}
+                ]
+            },
+        ]
 
 
         expect(impacts).to.deep.equal(expectedImpacts)

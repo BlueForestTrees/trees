@@ -1,6 +1,6 @@
 import {create} from "../../service/trunk/postTrunkService"
 import {Router, run} from 'express-blueforest'
-import {validColor, validId, validName, optionalValidType, validBodyG} from "../../const/validations"
+import {validBodyColor, validId, validBodyName, optionalValidType, validBodyG} from "../../const/validations"
 import {importAdemeTrunkEntries} from "../../service/trunk/postTrunkService"
 import fileUpload from "express-fileupload"
 import {validGod} from "../../service/auth/authService"
@@ -14,8 +14,8 @@ const trunkService = configure(() => col(cols.TRUNK))
 
 router.post('/api/trunk',
     validId,
-    validColor,
-    validName,
+    validBodyColor,
+    validBodyName,
     validBodyG,
     run(trunkService.insertOne)
 )

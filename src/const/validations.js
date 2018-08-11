@@ -43,6 +43,7 @@ export const idsList = ({_ids}) => {
 
 export const optionalValidBodyBqt = number(body(QUANTITY_BQT).optional())
 export const optionalValidBodyG = grandeur(body(QUANTITY_G).optional())
+export const optionalValidG = grandeur(check(G).optional())
 export const optionalMongoId = field => mongoId(check(field).optional())
 
 export const validBodyG = grandeur(body(G))
@@ -81,7 +82,6 @@ export const branchIdIsNotTrunkId = check(BRANCH_ID, IS_NOT_RIGHT_ID).custom((br
 export const validBodyName = body(NAME).isLength({min: 2}).matches(/^.+/)
 export const validBodyColor = body(COLOR).isLength({min: 2}).matches(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)
 export const validQ = check('q').optional().exists()
-export const validT = check("t").optional().isIn(Object.values(trunksType))
 
 export const present = (...fields) => map(fields, field => check(field, SHOULD_BE_DEFINED).exists())
 export const validUnit = field => check(field, IS_VALID_UNIT).optional().isIn(unitsShortnames)

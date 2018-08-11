@@ -12,12 +12,12 @@ describe('GET FacetEntry', function () {
 
     it('search facet entry', withTest({
         req: {
-            url: "/api/facetEntry?q=Vitami"
+            url: "/api/facetEntry?q=vitami"
         },
         res: {
             body: [
-                omit(vitBFacetEntry, notInSearchMixin),
                 omit(vitCFacetEntry, notInSearchMixin),
+                omit(vitBFacetEntry, notInSearchMixin),
                 omit(vitDFacetEntry, notInSearchMixin),
                 omit(vitEFacetEntry, notInSearchMixin),
             ]

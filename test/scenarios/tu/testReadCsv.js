@@ -1,5 +1,5 @@
 import fs from "fs"
-import {indexOfWithPairTag, pairTagInside, parse, smartSplit, tagLine} from "../../../src/util/csv"
+import {indexOfWithPairTag, pairTagInside, parseImpactCsv, smartSplit, tagLine} from "../../../src/util/csv"
 import {expect} from 'chai'
 
 let line = "-1-2;0\"00;\"12;34\";5678;1\"\"\"011;1213"
@@ -7,7 +7,7 @@ let line = "-1-2;0\"00;\"12;34\";5678;1\"\"\"011;1213"
 describe('csv', function () {
     it('parse an entire csv file', async () => {
 
-        const impacts = await parse(fs.readFileSync("test/files/PETIT_BI_1.09__03_Procedes_Impacts.csv"))
+        const impacts = await parseImpactCsv(fs.readFileSync("test/files/PETIT_BI_1.09__03_Procedes_Impacts.csv"))
 
         const expectedImpacts = [
             {

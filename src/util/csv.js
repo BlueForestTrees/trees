@@ -3,7 +3,7 @@ import readline from 'readline'
 
 const sep = ";"
 
-export const parse = async (buffer) => await new Promise(function (resolve) {
+export const parseImpactCsv = async (buffer) => await new Promise(function (resolve) {
     const rl = readline.createInterface({
         input: streamIt(buffer),
     })

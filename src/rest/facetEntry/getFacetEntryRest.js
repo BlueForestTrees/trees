@@ -1,14 +1,27 @@
-import {getAllFacetEntries, getFacetEntryByName, searchFacetEntriesByNamepart} from "../../service/facetEntry/getFacetEntryService"
-
+import {getAllFacetEntries, getFacetEntryByName} from "../../service/facetEntry/getFacetEntryService"
 import {run} from 'express-blueforest'
-import {Router} from "express-blueforest"; const router = Router()
-const {check} = require('express-validator/check')
+import {Router} from "express-blueforest";
+import {optionalValidG, optionnalAfterIdx, optionnalPageSize, validQ} from "../../const/validations"
+import {cols} from "../../const/collections"
+import configure from "items-service"
+import {col} from "mongo-registry/dist"
 
+const router = Router()
 module.exports = router
 
+const facetEntryService = configure(() => col(cols.FACET_ENTRY))
+const searchMixin = {color: 1, name: 1, g: 1}
+
 router.get('/api/facetEntry',
-    check('q').exists(),
-    run(({q}) => searchFacetEntriesByNamepart(q))
+    validQ,
+    optionalValidG,
+    optionnalPageSize,
+    optionnalAfterIdx,
+    run(({q, g, aidx, ps}) => facetEntryService.search([
+        {key: "name", type: "regex", value: q},
+        {key: "quantity.g", value: g},
+        {key: "_id", type: "gt", value: aidx}
+    ], ps, searchMixin))
 )
 
 router.get('/api/facetEntry/all',

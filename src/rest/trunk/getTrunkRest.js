@@ -1,5 +1,4 @@
-import {optionnalAfterIdx, optionnalPageSize, validId, validIds, validQ, validT, idsList} from "../../const/validations"
-import {getTrunk, getTrunks, search} from "../../service/trunk/getTrunkService"
+import {optionnalAfterIdx, optionnalPageSize, validId, validIds, validQ, idsList, optionalValidG} from "../../const/validations"
 import {run, convert} from 'express-blueforest'
 import {Router} from "express-blueforest"
 import configure from "items-service"
@@ -7,17 +6,21 @@ import {col} from "mongo-registry/dist"
 import {cols} from "../../const/collections"
 
 const router = Router()
-
 module.exports = router
 
 const trunkService = configure(() => col(cols.TRUNK))
+const searchMixin = {color: 1, name: 1, grandeur: 1, quantity: 1, type: 1}
 
 router.get('/api/trunks',
     validQ,
-    validT,
+    optionalValidG,
     optionnalPageSize,
     optionnalAfterIdx,
-    run(({q, t, ps, aidx}) => search(q, t, ps, aidx))
+    run(({q, g, aidx, ps}) => trunkService.search([
+        {key: "name", type: "regex", value: q},
+        {key: "quantity.g", value: g},
+        {key: "_id", type: "gt", value: aidx}
+    ], ps, searchMixin))
 )
 
 router.get('/api/trunk/:_id',

@@ -8,7 +8,7 @@ describe('GET Impacts entries', function () {
 
     beforeEach(init(api, ENV, cols))
 
-    it('search facet entry', withTest({
+    it('search impact entry', withTest({
         req: {
             url: "/api/impactEntry?q=IP"
         },
@@ -17,7 +17,7 @@ describe('GET Impacts entries', function () {
                 {
                     "_id": prixImpactEntry._id,
                     "name": "IPrix",
-                    "grandeur": "Coût",
+                    "g": "Coût",
                     "color": prixImpactEntry.color
                 }
             ]

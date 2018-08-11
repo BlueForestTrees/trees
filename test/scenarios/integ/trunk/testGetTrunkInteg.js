@@ -86,7 +86,7 @@ describe('GET Trunk', function () {
 
     it('search by type', withTest({
         req: {
-            url: `/api/trunks?t=TR`,
+            url: `/api/trunks?g=Tran`,
         },
         res: {
             body: [

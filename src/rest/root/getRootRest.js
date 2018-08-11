@@ -9,15 +9,18 @@ const router = Router()
 module.exports = router
 
 const rootService = configure(() => col(cols.ROOT))
+const getRoot = rootService.get
+const readRootTree = rootService.initReadTree(cols.ROOT)
 const trunkService = configure(() => col(cols.TRUNK))
+const appendTrunkInfos = trunkService.appendItemsInfos({name: 1, color: 1})
 
 router.get('/api/root/:_id',
     validPathId,
-    run(rootService.get),
-    run(trunkService.appendItemsInfos({name: 1, color: 1}))
+    run(getRoot),
+    run(appendTrunkInfos)
 )
 
 router.get('/api/root/tree/:_id',
     validPathId,
-    run(rootService.initReadTree(cols.ROOT))
+    run(readRootTree)
 )

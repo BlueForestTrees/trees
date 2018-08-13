@@ -49,7 +49,7 @@ export const ademeToBlueforestTrunk = raws => map(raws, raw => {
                 $set: {
                     externId: raw.externId,
                     name: raw.Nom,
-                    grandeur: grandeur(raw["Quantité"]["Unité"]) || erreurGrandeur(raw["Quantité"]["Unité"]),
+                    g: grandeur(raw["Quantité"]["Unité"]) || erreurGrandeur(raw["Quantité"]["Unité"]),
                     quantity: {
                         bqt: raw["Quantité"]["Quantité de référence"], unit: raw["Quantité"]["Unité"]
                     },

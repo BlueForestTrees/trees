@@ -15,7 +15,7 @@ describe('PUT Trunks', function () {
             url: `/api/trunk/${gateauTrunk._id}`,
             body: {
                 name: "baChar",
-                quantity: {bqt: 1000, g: "Mass"}
+                ...withBqtG(gateauTrunk.quantity.bqt * 2, "Mass"),
             }
         }, res: {
             body: oneModifiedResponse
@@ -24,8 +24,28 @@ describe('PUT Trunks', function () {
                 colname: cols.TRUNK,
                 doc: {
                     ...gateauTrunk,
-                    ...withBqtG(1000, "Mass"),
-                    name: "baChar"
+                    name: "baChar",
+                    ...withBqtG(gateauTrunk.quantity.bqt * 2, "Mass")
+                }
+            }
+        }
+    }))
+
+    it('update trunk name only', withTest({
+        req: {
+            method: "PUT",
+            url: `/api/trunk/${gateauTrunk._id}`,
+            body: {
+                name: "bisou"
+            }
+        }, res: {
+            body: oneModifiedResponse
+        }, db: {
+            expected: {
+                colname: cols.TRUNK,
+                doc: {
+                    ...gateauTrunk,
+                    name: "bisou"
                 }
             }
         }

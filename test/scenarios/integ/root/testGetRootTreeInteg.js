@@ -3,7 +3,7 @@ import {init, request, withTest} from "test-api-express-mongo/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {farineItem, farineRoot, gateauRoot, laitItem} from "../../../database/gateau"
+import {farineItem, farineRoot, gateauRoots, laitItem} from "../../../database/gateau"
 import {withoutItemQuantity, withIdBqt, withIdBqtG, withQtCoef, withId} from "test-api-express-mongo/dist/domain"
 import {arbreTrunk} from "../../../database/skate"
 import {coucheAdhesif, coucheAlu, couchePapier, couchePE, papierVA} from "../../../database/papier"
@@ -14,11 +14,11 @@ describe('GET Root tree', function () {
 
     it('return a little tree', withTest({
         req: {
-            url: `/api/root/tree/${gateauRoot._id}`,
+            url: `/api/root/tree/${gateauRoots._id}`,
         },
         res: {
             body: {
-                ...withIdBqt(gateauRoot._id, 1),
+                ...withIdBqt(gateauRoots._id, 1),
                 items: [
                     {
                         ...farineItem,

@@ -1,5 +1,5 @@
 import {ROOT_QT, TRUNK_BQT} from "../../const/paths"
-import {validRootId, validTrunkId, present, rootIdIsNotTrunkId, validBodyNumber, validRelativeTo, validUnit} from "../../const/validations"
+import {validRootId, validTrunkId, present, rootIdIsNotTrunkId, validBodyNumber, validOptionalRelativeTo, validUnit} from "../../const/validations"
 import {upsertLink} from "../../topService/linkTopService"
 
 import {run} from 'express-blueforest'
@@ -17,7 +17,7 @@ const cleanUpsert = ({trunk, root}) => {
 router.put('/api/link',
     validTrunkId,
     validRootId,
-    validRelativeTo,
+    validOptionalRelativeTo,
     rootIdIsNotTrunkId,
     present(ROOT_QT, TRUNK_BQT),
     validBodyNumber(ROOT_QT),

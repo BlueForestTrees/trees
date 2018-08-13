@@ -8,9 +8,9 @@ describe('Imports utils', function () {
     beforeEach(initServices)
 
     it('convert ademe unit to blueforest unit', () => {
-        expect(ademeUnitToGrandeurEq("kg éq. CO2")).to.deep.equal({grandeur: "Mass", eq: "CO2"})
-        expect(ademeUnitToGrandeurEq("kg éq.CO2")).to.deep.equal({grandeur: "Mass", eq: "CO2"})
-        expect(ademeUnitToGrandeurEq("kg")).to.deep.equal({grandeur: "Mass"})
+        expect(ademeUnitToGrandeurEq("kg éq. CO2")).to.deep.equal({g: "Mass", eq: "CO2"})
+        expect(ademeUnitToGrandeurEq("kg éq.CO2")).to.deep.equal({g: "Mass", eq: "CO2"})
+        expect(ademeUnitToGrandeurEq("kg")).to.deep.equal({g: "Mass"})
     })
 
     it('convert ademe impact parse to blueforest impact', () => {
@@ -40,7 +40,7 @@ describe('Imports utils', function () {
                         color: "#696969",
                         eq: "CO2",
                         externId: "370960f4-0a3a-415d-bf3e-e5ce63160bb9",
-                        grandeur: "Mass",
+                        g: "Mass",
                         name: "Changement climatique",
                         origin: "ADEME",
                         raw: ademe

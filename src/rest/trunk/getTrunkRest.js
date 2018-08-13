@@ -9,7 +9,7 @@ const router = Router()
 module.exports = router
 
 const trunkService = configure(() => col(cols.TRUNK))
-const searchMixin = {color: 1, name: 1, grandeur: 1, quantity: 1, type: 1}
+const searchMixin = {color: 1, name: 1, g: 1, quantity: 1, type: 1}
 
 router.get('/api/trunks',
     validQ,

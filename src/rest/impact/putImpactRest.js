@@ -1,19 +1,20 @@
+import {validBodyBqt, validBodyId, validBodyImpactId, validBodyTrunkId} from "../../const/validations"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
-import {validBodyBqt, validBodyId, validBodyImpactId, validBodyTrunkId} from "../../const/validations"
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry/dist"
 import configure from "items-service"
 
 const router = Router()
-const facetService = configure(() => col(cols.FACET))
+const impactService = configure(() => col(cols.IMPACT))
 
 module.exports = router
 
-router.post('/api/facet',
+router.put('/api/impact',
     validBodyId,
     validBodyTrunkId,
     validBodyImpactId,
     validBodyBqt,
-    run(facetService.insertOne)
+    run(({_id, trunkId, facetId, bqt}) => ({filter: {_id, trunkId, facetId}, item: {bqt}})),
+    run(impactService.filteredUpdate)
 )

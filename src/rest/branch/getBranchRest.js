@@ -14,7 +14,7 @@ const trunkService = configure(() => col(cols.TRUNK))
 router.get('/api/branch/:_id',
     validPathId,
     run(branchService.get),
-    run(trunkService.appendItemsInfos({name: 1, color: 1}))
+    run(trunkService.append({name: 1, color: 1}))
 )
 
 router.get('/api/branch/tree/:_id',

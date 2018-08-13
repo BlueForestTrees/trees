@@ -3,42 +3,65 @@ import {init, withTest} from "test-api-express-mongo/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {createStringObjectId} from "test-api-express-mongo/dist/util"
+import {createStringObjectId, createObjectId} from "test-api-express-mongo/dist/util"
+import {co2eImpactEntry, vitCImpactEntry} from "../../../database/impactEntries"
+import {withError} from "test-api-express-mongo/dist/domain"
 
-const badImpactEntry = {
-    _id: createStringObjectId() + "984",
-    name: "nomNewImpactEntry",
-    grandeur: "Dens",
-    color: "#FFFFFF"
-}
+
+const badImpactEntry = {_id: createStringObjectId() + "984"}
+const impactEntry = {_id: createObjectId(),name: "nomNewImpactEntry",g: "Dens",color: "#FFFFFF"}
 
 describe('POST ImpactEntry', function () {
 
     beforeEach(init(api, ENV, cols))
 
-    it('normal post', withTest(postImpactEntrySpec))
-
-    it('refuse bad id', withTest({
+    it('post new impact entry', withTest({
         req: {
             url: `/api/impactEntry`,
+            method: "POST",
+            body: impactEntry
+        },
+        db: {
+            expected: {
+                colname: cols.IMPACT_ENTRY,
+                doc: impactEntry
+            }
+        }
+    }))
+
+    it('post existing facet entry', withTest({
+        req: {
+            method: "POST",
+            url: "/api/impactEntry",
+            body: co2eImpactEntry
+        }, res: {
+            code: 400,
+            body: withError(1,"allready exists")
+        }
+    }))
+
+    it('refuse to create a bad impact entry', withTest({
+        req: {
+            url: "/api/facetEntry",
             method: "POST",
             body: badImpactEntry
         },
         res: {
             code: 400,
-            bodypath: {path: "$.errors._id.msg", value: ["invalid mongo id"]}
+            bodypath: [
+                {path: "$.errors.g.msg", value: "should be Mass, Dens, Long, Tran..."},
+                {path: "$.errors.name.msg", value: "Invalid value"},
+                {path: "$.errors.color.msg", value: "Invalid value"},
+                {path: "$.errors._id.msg", value: "invalid mongo id"},
+            ]
         },
         db: {
             expected: {
-                colname: cols.IMPACT_ENTRY,
+                colname: cols.TRUNK,
                 missingDoc: badImpactEntry
             }
         }
     }))
-
-    it('refuse to post since same id exist', withTest(allreadyExistingImpactEntrySpec))
-
-    it('postBadGrandeurImpactEntrySpec', withTest(postBadGrandeurImpactEntrySpec))
 
     it('post ademe impact file', withTest(postAdemeImpactEntryFileSpec))
 

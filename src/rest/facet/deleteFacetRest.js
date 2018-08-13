@@ -4,15 +4,19 @@ import configure from "items-service"
 
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
-import {validFacetIds, validTreeId} from "../../const/validations"
+import {validPathImpactId, validPathTrunkId} from "../../const/validations"
 const router = Router()
-const {check} = require('express-validator/check')
 
 const deleteFacets = configure(() => col(cols.FACET)).deleteItems
 module.exports = router
 
-router.post('/api/facet/deletion',
-    validTreeId,
-    validFacetIds,
-    run(({treeId, facetIds}) => deleteFacets(treeId, facetIds))
+router.delete('/api/impact/:trunkId',
+    validPathTrunkId,
+    run(deleteFacets)
+)
+
+router.delete('/api/impact/:trunkId/:facetId',
+    validPathTrunkId,
+    validPathImpactId,
+    run(deleteFacets)
 )

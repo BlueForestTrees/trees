@@ -1,12 +1,13 @@
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
-import {impactIdIsNotTrunkId, validItem} from "../../const/validations"
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry/dist"
 import configure from "items-service"
 import {validGod} from "../../service/auth/authService"
 import fileUpload from "express-fileupload"
 import {parseImpactCsv} from "../../util/csv"
+import {validBodyBqt, validBodyId, validBodyImpactId, validBodyTrunkId} from "../../const/validations"
+import {map} from 'lodash'
 
 const router = Router()
 const impactService = configure(() => col(cols.IMPACT))
@@ -16,10 +17,11 @@ const trunkService = configure(() => col(cols.TRUNK))
 module.exports = router
 
 router.post('/api/impact',
-    validItem("trunk"),
-    validItem("impact"),
-    impactIdIsNotTrunkId,
-    run(({trunk, impact}) => impactService.upsertItem(trunk, impact))
+    validBodyId,
+    validBodyTrunkId,
+    validBodyImpactId,
+    validBodyBqt,
+    run(impactService.insertOne)
 )
 
 router.post('/api/impactBulk/ademe',
@@ -35,11 +37,9 @@ function ademeToBlueforestImpact(raws) {
         insertOne: {
             ...await resolveTrunkOrDefault(raw),
             items: await Promise.all(map(raw.items, resolveImpactOrDefault))
-
         }
     })))
 }
-
 const resolveTrunkOrDefault = async raw => {
     try {
         return await trunkService.findOne({externId: raw.externId}, {_id: 1}) || {externId: raw.externId}

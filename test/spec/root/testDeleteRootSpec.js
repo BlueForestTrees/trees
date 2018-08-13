@@ -1,13 +1,13 @@
 import {oneModifiedResponse} from "test-api-express-mongo/dist/domain"
 import {remove} from "test-api-express-mongo/dist/util"
 import {cols} from "../../../src/const/collections"
-import {bleTrunk, farineItem, farineRoot, gateauRoot} from "../../database/gateau"
+import {bleTrunk, farineItem, farineRoot, gateauRoots} from "../../database/gateau"
 
 export const rootDeletionSpec = {
     req: {
         method: `DELETE`,
         path: "/api/root",
-        param: `/${gateauRoot._id}/${farineItem._id}`,
+        param: `/${gateauRoots._id}/${farineItem._id}`,
     },
     res: {
         expected: oneModifiedResponse
@@ -15,7 +15,7 @@ export const rootDeletionSpec = {
     db: {
         expected: {
             colname: cols.ROOT,
-            doc: remove(gateauRoot, "items", {_id: farineItem._id})
+            doc: remove(gateauRoots, "items", {_id: farineItem._id})
         }
     }
 }

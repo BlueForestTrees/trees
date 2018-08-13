@@ -1,29 +1,24 @@
 import {col} from "mongo-registry/dist"
-import {ROOT_QT, TRUNK_BQT} from "../../const/paths"
-import {validRootId, validTrunkId, present, rootIdIsNotTrunkId, validRelativeTo} from "../../const/validations"
+import {validRootId, validTrunkId, rootIdIsNotTrunkId, validOptionalRelativeTo, validId, validBodyBqt} from "../../const/validations"
 
 import configure from "items-service"
 import {cols} from "../../const/collections"
 
 import {run} from 'express-blueforest'
-import {Router} from "express-blueforest"; const router = Router()
+import {Router} from "express-blueforest"
 
-const upsertRoot = configure(() => col(cols.ROOT)).upsertItem
+const router = Router()
+const rootService = configure(() => col(cols.ROOT))
 
 module.exports = router
 
 router.put('/api/root',
+    validId,
     validTrunkId,
     validRootId,
-    validRelativeTo,
+    validBodyBqt,
+    validOptionalRelativeTo,
     rootIdIsNotTrunkId,
-    present(ROOT_QT, TRUNK_BQT),
-    run(({trunk, root}) => cleanUpsert(trunk, root))
+    run(({_id, trunkId, rootId, bqt, relativeTo}) => ({filter: {_id, trunkId, rootId}, item: {bqt, relativeTo}})),
+    run(rootService.filteredUpdate)
 )
-
-const cleanUpsert = (trunk, root) => {
-    if (!root.relativeTo) {
-        delete root.relativeTo
-    }
-    return upsertRoot(trunk, root)
-}

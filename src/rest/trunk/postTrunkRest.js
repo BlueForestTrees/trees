@@ -1,6 +1,6 @@
 import {create} from "../../service/trunk/postTrunkService"
 import {Router, run} from 'express-blueforest'
-import {validBodyColor, validId, validBodyName, optionalValidType, validBodyG} from "../../const/validations"
+import {validBodyColor, validId, validBodyName, validBodyQuantityBqt, validBodyQuantityG} from "../../const/validations"
 import {importAdemeTrunkEntries} from "../../service/trunk/postTrunkService"
 import fileUpload from "express-fileupload"
 import {validGod} from "../../service/auth/authService"
@@ -16,7 +16,8 @@ router.post('/api/trunk',
     validId,
     validBodyColor,
     validBodyName,
-    validBodyG,
+    validBodyQuantityG,
+    validBodyQuantityBqt,
     run(trunkService.insertOne)
 )
 

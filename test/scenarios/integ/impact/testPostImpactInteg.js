@@ -4,13 +4,14 @@ import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
 import path from 'path'
-import {prixImpactEntry, vitBImpactEntry} from "../../../database/impactEntries"
-import {bleImpacts, farineTrunk} from "../../../database/gateau"
+import {prixImpactEntry} from "../../../database/impactEntries"
+import {farineTrunk} from "../../../database/gateau"
 import {withIdBqtG} from "test-api-express-mongo/dist/domain"
-import {replaceItem, oneModifiedResponse} from "test-api-express-mongo/dist/domain"
+import {replaceItem, oneResponse, oneModifiedResponse} from "test-api-express-mongo/dist/domain"
 import {authGod} from "../../../database/users"
 import {postAdemeImpactEntryFileSpec} from "../../../spec/impactEntry/testPostImpactEntrySpec"
 import {postTrunkFileSpec} from "../../../spec/trunk/testPostTrunkSpec"
+ import {object, createObjectId} from "test-api-express-mongo/dist/util"
 
 const postImpactPetitFileSpec = {
     req: {
@@ -34,104 +35,47 @@ describe('POST Impact', function () {
 
     beforeEach(init(api, ENV, cols))
 
-    it('create impacts to farine', withTest({
+    const impact = {_id: createObjectId(), trunkId: farineTrunk._id, impactId: prixImpactEntry._id, bqt: 4}
+    const impact2 = {_id: createObjectId(), trunkId: farineTrunk._id, impactId: prixImpactEntry._id, bqt: 4}
+
+    let postImpactReq = impact => ({
         req: {
             url: `/api/impact`,
             method: "POST",
-            body: {
-                trunk: withIdBqtG(farineTrunk._id, 45, "Surf"),
-                impact: withIdBqtG(prixImpactEntry._id, 144, "Surf")
-            }
+            body: impact
         },
         res: {
-            body: oneModifiedResponse
-        },
+            body: oneResponse
+        }
+    })
+
+    it('post new impact', withTest({
+        ...postImpactReq(impact),
         db: {
             expected: {
                 colname: cols.IMPACT,
-                doc: {
-                    ...withIdBqtG(farineTrunk._id, 45, "Surf"),
-                    items: [
-                        withIdBqtG(prixImpactEntry._id, 144, "Surf")
-                    ],
+                doc: impact
+            }
+        }
+    }))
+
+    it('post two impacts', withTest([
+        postImpactReq(impact),
+        postImpactReq(impact2),
+        {
+            db: {
+                expected: {
+                    list: [{
+                        colname: cols.IMPACT,
+                        doc: impact
+                    }, {
+                        colname: cols.IMPACT,
+                        doc: impact2
+                    }]
                 }
             }
         }
-    }))
-
-    it('adding impact to ble', withTest({
-        req: {
-            url: `/api/impact`,
-            method: "POST",
-            body: {
-                trunk: withIdBqtG(bleImpacts._id, 10000, "Mass"),
-                impact: withIdBqtG(prixImpactEntry._id, 144, "Surf")
-            }
-        },
-        res: {
-            body: oneModifiedResponse
-        },
-        db: {
-            expected: {
-                colname: cols.IMPACT,
-                doc: {
-                    ...withIdBqtG(bleImpacts._id, 10000, "Mass"),
-                    items: [
-                        ...bleImpacts.items,
-                        withIdBqtG(prixImpactEntry._id, 144, "Surf")
-                    ],
-
-                }
-            }
-        }
-    }))
-
-    it('adding impact to ble different trunk qt', withTest({
-        req: {
-            url: `/api/impact`,
-            method: "POST",
-            body: {
-                trunk: withIdBqtG(bleImpacts._id, 5000, "Mass"),
-                impact: withIdBqtG(prixImpactEntry._id, 144, "Surf")
-            }
-        },
-        res: {
-            body: oneModifiedResponse
-        },
-        db: {
-            expected: {
-                colname: cols.IMPACT,
-                doc: {
-                    ...withIdBqtG(bleImpacts._id, 10000, "Mass"),
-                    items: [
-                        ...bleImpacts.items,
-                        withIdBqtG(prixImpactEntry._id, 288, "Surf")
-                    ],
-
-                }
-            }
-        }
-    }))
-
-    it('update impact of ble', withTest({
-        req: {
-            url: `/api/impact`,
-            method: "POST",
-            body: {
-                trunk: withIdBqtG(bleImpacts._id, 5000, "Mass"),
-                impact: withIdBqtG(vitBImpactEntry._id, 0.02, "Dens")
-            }
-        },
-        res: {
-            body: oneModifiedResponse
-        },
-        db: {
-            expected: {
-                colname: cols.IMPACT,
-                doc: replaceItem(bleImpacts, "items", withIdBqtG(vitBImpactEntry._id, 0.04, "Dens"))
-            }
-        }
-    }))
+    ]))
 
     it('post ademe trunk file, resolve fail', withTest({
         ...postImpactPetitFileSpec,

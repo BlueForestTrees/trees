@@ -1,6 +1,6 @@
 import {clon} from "test-api-express-mongo/dist/util"
 import _ from 'lodash'
-import {bleFacets, gateauRoot} from "../../database/gateau"
+import {bleFacets, gateauRoots} from "../../database/gateau"
 
 import {cols} from "../../../src/const/collections"
 import {omit} from 'lodash';

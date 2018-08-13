@@ -4,15 +4,19 @@ import configure from "items-service"
 
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
-import {validMongoId, validTreeId} from "../../const/validations"
+import {validPathImpactId, validPathTrunkId} from "../../const/validations"
 const router = Router()
-const {check} = require('express-validator/check')
 
 const deleteImpacts = configure(() => col(cols.IMPACT)).deleteItems
 module.exports = router
 
-router.post('/api/impact/deletion',
-    validTreeId,
-    validMongoId("impactIds.*"),
-    run(({treeId, impactIds}) => deleteImpacts(treeId, impactIds))
+router.delete('/api/impact/:trunkId',
+    validPathTrunkId,
+    run(deleteImpacts)
+)
+
+router.delete('/api/impact/:trunkId/:impactId',
+    validPathTrunkId,
+    validPathImpactId,
+    run(deleteImpacts)
 )

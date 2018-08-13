@@ -1,5 +1,5 @@
 import {addFacetEntry} from "../../service/facetEntry/postFacetEntryService"
-import {validBodyColor, validBodyG, validBodyName, validBodyId} from "../../const/validations"
+import {validBodyColor, validBodyG, validBodyName, validBodyId, validBodyBqt} from "../../const/validations"
 import {Router, run} from 'express-blueforest'
 import {col} from "mongo-registry/dist"
 import configure from "items-service"
@@ -13,8 +13,8 @@ const insertFacet = configure(() => col(cols.FACET_ENTRY)).insertOne
 
 router.post('/api/facetEntry',
     validBodyId,
+    validBodyColor,
     validBodyName,
     validBodyG,
-    validBodyColor,
     run(insertFacet)
 )

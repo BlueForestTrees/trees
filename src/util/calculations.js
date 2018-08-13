@@ -1,5 +1,12 @@
 import _, {cloneDeep, find, forEach, groupBy, isNil, map, omit, some} from 'lodash'
 
+export const cleanNull = field => item => {
+    if (!item[field]) {
+        delete item[field]
+    }
+    return item
+}
+
 export const treeToList = tree => {
     const browser = [tree]
     let i = 0

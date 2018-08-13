@@ -4,7 +4,7 @@ import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
 
-describe('POST FacetEntry', function () {
+describe('POST feedback', function () {
 
     beforeEach(init(api, ENV, cols))
 

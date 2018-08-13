@@ -50,9 +50,9 @@ export const ademeUnitToGrandeurEq = ademeUnit => {
     // if (!ademeUnit) return null
     const splitted = ademeUnit.split("éq.")
     if (splitted.length === 1) {
-        return {grandeur: grandeur(ademeUnit)}
+        return {g: grandeur(ademeUnit)}
     } else if (splitted.length === 2) {
-        return {grandeur: grandeur(splitted[0].trim()), eq: splitted[1].trim()}
+        return {g: grandeur(splitted[0].trim()), eq: splitted[1].trim()}
     }
 }
 

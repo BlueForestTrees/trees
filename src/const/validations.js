@@ -1,11 +1,11 @@
-import {BQT, BRANCH_ID, COLOR, FACET_ID, FACETSIDS, G, ID, IMPACT_ID, NAME, QUANTITY_BQT, QUANTITY_G, ROOT_ID, ROOT_RELATIVE_TO, ROOT_RELATIVE_TO_DISQT, ROOT_RELATIVE_TO_DISQT_QT, ROOT_RELATIVE_TO_DISQT_UNIT, ROOT_RELATIVE_TO_ID, ROOT_RELATIVE_TO_REFQT, ROOT_RELATIVE_TO_REFQT_QT, ROOT_RELATIVE_TO_REFQT_UNIT, TREEID, TRUNK_ID,} from "./paths"
+import {BQT, BRANCHID, COLOR, FACET_ID, FACETSIDS, G, ID, IMPACT_ID, NAME, QUANTITY_BQT, QUANTITY_G, ROOTID, RELATIVE_TO, RELATIVE_TO_BQT, RELATIVE_TO_ID, TREEID, TRUNKID, IMPACTID} from "./paths"
 import {IS_DECIMAL, IS_NOT_RIGHT_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "./messages"
 import {check, body, oneOf, param, query} from 'express-validator/check'
 import {isNil, map} from 'lodash'
 import {getGrandeursKeys, getShortnames} from "unit-manip"
-import {trunksType} from "./trunks"
 import {isValidIds, objectNoEx, objects} from "mongo-queries-blueforest"
 import {errors} from "express-blueforest"
+import {cleanNull} from "../util/calculations"
 
 const defaultPS = 20
 const unitsShortnames = getShortnames()
@@ -42,43 +42,44 @@ export const idsList = ({_ids}) => {
 
 
 export const optionalValidBodyBqt = number(body(QUANTITY_BQT).optional())
+export const validBqt = number(check(BQT))
 export const optionalValidBodyG = grandeur(body(QUANTITY_G).optional())
 export const optionalValidG = grandeur(check(G).optional())
 export const optionalMongoId = field => mongoId(check(field).optional())
 
+export const validBodyQuantityG = grandeur(body(QUANTITY_G))
+export const validBodyQuantityBqt = number(body(QUANTITY_BQT))
 export const validBodyG = grandeur(body(G))
+export const validBodyBqt = number(body(BQT))
 export const validMongoId = field =>mongoId(check(field))
-export const validBranchId = validMongoId(BRANCH_ID)
-export const validRootId = validMongoId(ROOT_ID)
-export const validTrunkId = validMongoId(TRUNK_ID)
+export const validBranchId = validMongoId(BRANCHID)
+export const validRootId = validMongoId(ROOTID)
+export const validTrunkId = validMongoId(TRUNKID)
 export const validId = validMongoId(ID)
 export const validBodyId = mongoId(body(ID))
+export const validBodyTrunkId = mongoId(body(TRUNKID))
+export const validBodyImpactId = mongoId(body(IMPACTID))
 export const validTreeId = validMongoId(TREEID)
 export const validFacetIds = validMongoId(FACETSIDS)
 
-export const noRelativeTo = check(ROOT_RELATIVE_TO).not().exists()
+export const noBodyRelativeTo = body(RELATIVE_TO).not().exists()
 
-export const validRelativeTo = oneOf([
+export const validOptionalRelativeTo = oneOf([
     [
-        noRelativeTo
+        noBodyRelativeTo
     ],
     [
-        body(ROOT_RELATIVE_TO).exists(),
-        mongoId(body(ROOT_RELATIVE_TO_ID)),
-        body(ROOT_RELATIVE_TO_REFQT).exists(),
-        number(body(ROOT_RELATIVE_TO_REFQT_QT)),
-        body(ROOT_RELATIVE_TO_REFQT_UNIT).isIn(unitsShortnames),
-        body(ROOT_RELATIVE_TO_DISQT).exists(),
-        body(ROOT_RELATIVE_TO_DISQT_QT).isNumeric(),
-        body(ROOT_RELATIVE_TO_DISQT_UNIT).isIn(unitsShortnames),
+        body(RELATIVE_TO).exists(),
+        mongoId(body(RELATIVE_TO_ID)),
+        number(body(RELATIVE_TO_BQT)),
     ]
 ])
 
 
-export const rootIdIsNotTrunkId = check(ROOT_ID, IS_NOT_RIGHT_ID).custom((root, {req}) => (!root || !req.body.trunk) || (root._id !== req.body.trunk._id))
+export const rootIdIsNotTrunkId = check(ROOTID, IS_NOT_RIGHT_ID).custom((root, {req}) => (!root || !req.body.trunk) || (root._id !== req.body.trunk._id))
 export const impactIdIsNotTrunkId = check(IMPACT_ID, IS_NOT_RIGHT_ID).custom((root, {req}) => (!root || !req.body.trunk) || (root._id !== req.body.trunk._id))
 export const facetIdIsNotTrunkId = check(FACET_ID, IS_NOT_RIGHT_ID).custom((facet, {req}) => (!facet || !req.body.trunk) || (facet._id !== req.body.trunk._id))
-export const branchIdIsNotTrunkId = check(BRANCH_ID, IS_NOT_RIGHT_ID).custom((branch, {req}) => (!branch || !req.body.trunk) || (branch._id !== req.body.trunk._id))
+export const branchIdIsNotTrunkId = check(BRANCHID, IS_NOT_RIGHT_ID).custom((branch, {req}) => (!branch || !req.body.trunk) || (branch._id !== req.body.trunk._id))
 export const validBodyName = body(NAME).isLength({min: 2}).matches(/^.+/)
 export const validBodyColor = body(COLOR).isLength({min: 2}).matches(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)
 export const validQ = check('q').optional().exists()
@@ -88,6 +89,9 @@ export const validUnit = field => check(field, IS_VALID_UNIT).optional().isIn(un
 export const validBodyNumber = field => body(field, IS_DECIMAL).optional().isDecimal().toFloat()
 
 export const validPathId = mongoId(param(ID))
+export const validPathTrunkId = mongoId(param(TRUNKID))
+export const validPathRootId = mongoId(param(ROOTID))
+export const validPathImpactId = mongoId(param(IMPACTID))
 export const validPathBqt = param(BQT, IS_DECIMAL).isDecimal().toFloat()
 export const validOptionalBodyName = body(NAME).optional().exists().matches(/^.+/)
 export const validPathG = param(G).isIn(getGrandeursKeys())

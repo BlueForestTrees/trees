@@ -14,7 +14,7 @@ describe('POST Facet', function () {
 
     beforeEach(init(api, ENV, cols))
 
-    it('firstFacet', withTest({
+    it('post new facet', withTest({
         req: {
             url: `/api/facet`,
             method: "POST",
@@ -41,7 +41,8 @@ describe('POST Facet', function () {
             }
         }
     }))
-    it('thirdFacet', withTest({
+
+    it('post another facet', withTest({
         req: {
             url: `/api/facet`,
             method: "POST",
@@ -69,23 +70,9 @@ describe('POST Facet', function () {
             }
         }
     }))
-    it('updatingFacet', withTest({
-        req: {
-            url: `/api/facet`,
-            method: "POST",
-            body: {
-                trunk: withId(bleFacets._id),
-                facet: withIdBqt(vitBFacetEntry._id, 14)
-            }
-        },
-        res: {
-            body: oneModifiedResponse
-        },
-        db: {
-            expected: {
-                colname: cols.FACET,
-                doc: replaceItem(bleFacets, "items", withIdBqt(vitBFacetEntry._id, 28))
-            }
-        }
-    }))
+
+
+
+
+
 })

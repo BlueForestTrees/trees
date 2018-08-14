@@ -1,20 +1,24 @@
-import {branchIdIsNotTrunkId, validBranchId, validTrunkId} from "../../const/validations"
+import {branchIdIsNotTrunkId, validBodyBqt, validBodyBranchId, validBodyId, validBodyTrunkId, validBranchId, validTrunkId} from "../../const/validations"
 import configure from "items-service"
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry/dist"
 
 import {run} from 'express-blueforest'
-import {Router} from "express-blueforest"; const router = Router()
+import {Router} from "express-blueforest"
 
-const insertBranch = configure(() => col(cols.BRANCH)).insertItem
+const router = Router()
+
+const branchService = configure(() => col(cols.BRANCH))
 
 module.exports = router
 
 router.post('/api/branch',
     [
-        validTrunkId,
-        validBranchId,
+        validBodyId,
+        validBodyTrunkId,
+        validBodyBranchId,
+        validBodyBqt,
         branchIdIsNotTrunkId
     ],
-    run(({trunk, branch}) => insertBranch(trunk, branch))
+    run(branchService.insertOne)
 )

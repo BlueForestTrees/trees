@@ -10,27 +10,9 @@ describe('DELETE Impact', function () {
 
     beforeEach(init(api, ENV, cols))
 
-    it('delete all impacts of a trunk', withTest({
+    it('delete an impact', withTest({
         req: {
-            url: `/api/impact/${bleImpacts[0].trunkId}`,
-            method: "DELETE"
-        },
-        res: {
-            body: twoDeletionOk
-        },
-        db: {
-            expected: {
-                colname: cols.IMPACT,
-                missingDoc: {
-                    trunkId: bleTrunk._id
-                }
-            }
-        }
-    }))
-
-    it('delete one impact of a trunk', withTest({
-        req: {
-            url: `/api/impact/${bleImpacts[0].trunkId}/${bleImpacts[0].impactId}`,
+            url: `/api/impact/${bleImpacts[0]._id}`,
             method: "DELETE"
         },
         res: {
@@ -38,22 +20,10 @@ describe('DELETE Impact', function () {
         },
         db: {
             expected: {
-                list: [
-                    {
-                        colname: cols.IMPACT,
-                        missingDoc: {
-                            trunkId: bleImpacts[0].trunkId,
-                            impactId: bleImpacts[0].impactId
-                        }
-                    },
-                    {
-                        colname: cols.IMPACT,
-                        doc: {
-                            trunkId: bleImpacts[1].trunkId,
-                            impactId: bleImpacts[1].impactId
-                        }
-                    },
-                ]
+                colname: cols.IMPACT,
+                missingDoc: {
+                    _id: bleImpacts[0]._id
+                }
             }
         }
     }))

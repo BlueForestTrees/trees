@@ -4,19 +4,13 @@ import configure from "items-service"
 
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
-import {validPathImpactId, validPathTrunkId} from "../../const/validations"
+import {validPathId} from "../../const/validations"
 const router = Router()
 
-const deleteFacets = configure(() => col(cols.FACET)).deleteItems
+const deleteFacet = configure(() => col(cols.FACET)).deleteOne
 module.exports = router
 
-router.delete('/api/impact/:trunkId',
-    validPathTrunkId,
-    run(deleteFacets)
-)
-
-router.delete('/api/impact/:trunkId/:facetId',
-    validPathTrunkId,
-    validPathImpactId,
-    run(deleteFacets)
+router.delete('/api/facet/:_id',
+    validPathId,
+    run(deleteFacet)
 )

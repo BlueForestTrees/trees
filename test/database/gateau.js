@@ -12,7 +12,7 @@ export const pizzaTrunk = withDbTrunk("pizza", "5a6a03c03e77667641d2d2c4", 2, "N
 export const cremeTrunk = withDbTrunk("creme", "5a6a03c03e77667641d2d2c5", 0.0001, "Volu")
 
 export const gateauItem = withIdBqt(gateauTrunk._id, 500)
-const pizzaItem = withIdBqt(pizzaTrunk._id, 500)
+export const pizzaItem = withIdBqt(pizzaTrunk._id, 500)
 export const farineItem = withIdBqt(farineTrunk._id, 200)
 export const laitItem = withIdBqt(laitTrunk._id, 0.02)
 
@@ -21,15 +21,22 @@ export const gateauRoots = [
     {_id: object("aaaaaaa03e77667641d2d2c3"), trunkId: gateauItem._id, rootId: laitItem._id, bqt: 0.02}
 ]
 export const pizzaRoot = {_id: pizzaItem._id, items: [farineItem]}
-export const farineRoot = {_id: farineItem._id, items: [{_id: bleTrunk._id}]}
+export const farineRoots = [{_id: "aaaaaaa03e77667641d2d2c8", trunkId: farineItem._id, rootId: bleTrunk._id}]
 export const cremeRoot = {_id: cremeTrunk._id, items: [{_id: laitTrunk._id}]}
 
-export const farineBranch = {_id: farineItem._id, items: [gateauItem, pizzaItem]}
+export const farineBranch = [
+    {_id: object("aaaaaaa03e77667641d2d2c6"), trunkId: farineItem._id, branchId: gateauItem._id, bqt: 1 / 200},
+    {_id: object("aaaaaaa03e77667641d2d2c7"), trunkId: farineItem._id, branchId: pizzaItem._id}
+]
 export const laitBranch = {_id: laitItem._id, items: [{_id: cremeTrunk._id}, gateauItem]}
 export const bleBranch = {_id: bleTrunk._id, items: [{_id: farineTrunk._id}]}
 
 const gateauFacets = {_id: gateauTrunk._id, items: [withIdBqt(vitCFacetEntry._id, 10), withIdBqt(vitBFacetEntry._id, 0.1)]}
-export const bleFacets = {_id: bleTrunk._id, items: [withIdBqt(vitCFacetEntry._id, 6), withIdBqt(vitBFacetEntry._id, 0.15)]}
+
+export const bleFacets = [
+    {_id: object("aaaaaaa03e77667641d2d2c4"), trunkId: bleTrunk._id, facetId: vitCFacetEntry._id, bqt: 6},
+    {_id: object("aaaaaaa03e77667641d2d2c5"), trunkId: bleTrunk._id, facetId: vitBFacetEntry._id, bqt: 0.15}
+]
 
 const gateauImpact = {_id: gateauTrunk._id, items: [withIdBqt(vitCImpactEntry._id, 10), withIdBqt(vitBImpactEntry._id, 0.1)]}
 
@@ -41,8 +48,8 @@ export const bleImpacts = [
 
 export const database = {
     [cols.TRUNK]: [gateauTrunk, laitTrunk, farineTrunk, bleTrunk, pizzaTrunk, cremeTrunk],
-    [cols.BRANCH]: [laitBranch, farineBranch, bleBranch],
-    [cols.ROOT]: [...gateauRoots, farineRoot, pizzaRoot, cremeRoot],
-    [cols.FACET]: [gateauFacets, bleFacets],
+    [cols.BRANCH]: [laitBranch, ...farineBranch, bleBranch],
+    [cols.ROOT]: [...gateauRoots, ...farineRoots, pizzaRoot, cremeRoot],
+    [cols.FACET]: [gateauFacets, ...bleFacets],
     [cols.IMPACT]: [gateauImpact, ...bleImpacts]
 }

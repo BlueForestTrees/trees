@@ -1,4 +1,4 @@
-import {validBodyBqt, validBodyId, validBodyImpactId, validBodyTrunkId} from "../../const/validations"
+import {validBodyBqt, validBodyFacetId, validBodyId, validBodyTrunkId} from "../../const/validations"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
 import {cols} from "../../const/collections"
@@ -13,7 +13,7 @@ module.exports = router
 router.put('/api/facet',
     validBodyId,
     validBodyTrunkId,
-    validBodyImpactId,
+    validBodyFacetId,
     validBodyBqt,
     run(({_id, trunkId, facetId, bqt}) => ({filter: {_id, trunkId, facetId}, item: {bqt}})),
     run(facetService.filteredUpdate)

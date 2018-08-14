@@ -8,7 +8,7 @@ import {ObjectID} from "mongodb"
 import {pick} from 'lodash'
 import {papierVA} from "../../../database/papier"
 import {co2eImpactEntry, vitBImpactEntry, vitCImpactEntry} from "../../../database/impactEntries"
-import {gateauItem, gateauTrunk} from "../../../database/gateau"
+import {gateauTrunk} from "../../../database/gateau"
 
 const unknownId = ObjectID().toString()
 

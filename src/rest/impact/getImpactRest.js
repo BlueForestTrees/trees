@@ -19,6 +19,7 @@ router.get('/api/impact/:trunkId',
         {name: 1, color: 1, g: 1},
         (impact, impactEntry) => ({
             _id: impact._id,
+            impactId: impact.impactId,
             name: impactEntry.name,
             color: impactEntry.color,
             quantity: {bqt: impact.bqt, g: impactEntry.g}

@@ -1,11 +1,11 @@
-import {BQT, BRANCHID, COLOR, FACET_ID, FACETSIDS, G, ID, IMPACT_ID, NAME, QUANTITY_BQT, QUANTITY_G, ROOTID, RELATIVE_TO, RELATIVE_TO_BQT, RELATIVE_TO_ID, TREEID, TRUNKID, IMPACTID} from "./paths"
+import {BQT, BRANCHID, COLOR, FACET_ID, FACETSIDS, G, ID, IMPACT_ID, NAME, QUANTITY_BQT, QUANTITY_G, ROOTID, RELATIVE_TO, RELATIVE_TO_BQT, RELATIVE_TO_ID, TREEID, TRUNKID, IMPACTID, FACETID} from "./paths"
 import {IS_DECIMAL, IS_NOT_RIGHT_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "./messages"
 import {check, body, oneOf, param, query} from 'express-validator/check'
 import {isNil, map} from 'lodash'
 import {getGrandeursKeys, getShortnames} from "unit-manip"
 import {isValidIds, objectNoEx, objects} from "mongo-queries-blueforest"
 import {errors} from "express-blueforest"
-import {cleanNull} from "../util/calculations"
+import {withIdIn} from "../../../mongo-queries-blueforest/index"
 
 const defaultPS = 20
 const unitsShortnames = getShortnames()
@@ -37,7 +37,7 @@ export const idsList = ({_ids}) => {
     if (!isValidIds(_ids)) {
         throw new errors.ValidationError("_ids query params are invalid")
     }
-    return objects(_ids)
+    return withIdIn(objects(_ids))
 }
 
 
@@ -58,7 +58,10 @@ export const validTrunkId = validMongoId(TRUNKID)
 export const validId = validMongoId(ID)
 export const validBodyId = mongoId(body(ID))
 export const validBodyTrunkId = mongoId(body(TRUNKID))
+export const validBodyBranchId = mongoId(body(BRANCHID))
 export const validBodyImpactId = mongoId(body(IMPACTID))
+export const validBodyFacetId = mongoId(body(FACETID))
+export const validPathFacetId = mongoId(param(FACETID))
 export const validTreeId = validMongoId(TREEID)
 export const validFacetIds = validMongoId(FACETSIDS)
 

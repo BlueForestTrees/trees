@@ -3,7 +3,7 @@ import {init, request, withTest} from "test-api-express-mongo/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {farineItem, farineRoot, gateauRoots, laitItem} from "../../../database/gateau"
+import {farineItem, farineRoot, farineRoots, gateauRoots, gateauTrunk, laitItem} from "../../../database/gateau"
 import {withoutItemQuantity, withIdBqt, withIdBqtG, withQtCoef, withId} from "test-api-express-mongo/dist/domain"
 import {arbreTrunk} from "../../../database/skate"
 import {coucheAdhesif, coucheAlu, couchePapier, couchePE, papierVA} from "../../../database/papier"
@@ -14,17 +14,24 @@ describe('GET Root tree', function () {
 
     it('return a little tree', withTest({
         req: {
-            url: `/api/root/tree/${gateauRoots._id}`,
+            url: `/api/root/tree/${gateauTrunk._id}`,
         },
         res: {
             body: {
-                ...withIdBqt(gateauRoots._id, 1),
+                _id: gateauTrunk._id,
+                bqt: 1,
                 items: [
                     {
-                        ...farineItem,
-                        items: farineRoot.items
+                        _id: gateauRoots[1].rootId,
+                        bqt: gateauRoots[1].bqt
                     },
-                    laitItem
+                    {
+                        _id: gateauRoots[0].rootId,
+                        bqt: gateauRoots[0].bqt,
+                        items: [
+                            {_id: farineRoots[0].rootId}
+                        ]
+                    }
                 ]
             }
         }
@@ -36,12 +43,12 @@ describe('GET Root tree', function () {
         },
         res: {
             body: {
-                ...withIdBqt(papierVA._id, 1),
+                _id: papierVA._id, bqt: 1,
                 items: [
-                    withIdBqt(couchePE._id, 7),
-                    withIdBqt(couchePapier._id, 10),
-                    withIdBqt(coucheAdhesif._id, 100),
-                    withIdBqt(coucheAlu._id, 11)
+                    {_id: coucheAlu._id, bqt: 11},
+                    {_id: coucheAdhesif._id, bqt: 100},
+                    {_id: couchePapier._id, bqt: 10},
+                    {_id: couchePE._id, bqt: 7}
                 ]
             }
         }

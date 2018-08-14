@@ -13,12 +13,8 @@ describe('DELETE Facet', function () {
 
     it('delete the facet', withTest({
         req: {
-            url: "/api/facet/deletion",
-            method: "POST",
-            body: {
-                treeId: bleFacets._id,
-                facetIds: [bleFacets.items[0]._id]
-            }
+            url: `/api/facet/${bleFacets[0]._id}`,
+            method: "DELETE"
         },
         res: {
             expected: oneModifiedResponse
@@ -26,7 +22,7 @@ describe('DELETE Facet', function () {
         db: {
             expected: {
                 colname: cols.FACET,
-                doc: remove(bleFacets, "items", {_id: bleFacets.items[0]._id})
+                missingDoc: {_id: bleFacets[0]._id}
             }
         }
     }))

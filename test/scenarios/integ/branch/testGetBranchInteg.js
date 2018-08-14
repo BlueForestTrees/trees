@@ -3,7 +3,7 @@ import {run, withTest, init, request} from "test-api-express-mongo/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {farineBranch, laitBranch, pizzaTrunk} from "../../../database/gateau"
+import {farineBranch, farineItem, laitBranch, pizzaItem, pizzaTrunk} from "../../../database/gateau"
 import {withError, withQtCoef, withoutQuantity} from "test-api-express-mongo/dist/domain"
 import {omit} from 'lodash'
 import {clon} from "test-api-express-mongo/dist/util"
@@ -14,13 +14,17 @@ describe('GET Branch', function () {
 
     it('return branchs', withTest({
         req: {
-            url: `/api/branch/${farineBranch._id}`
+            url: `/api/branch/${farineItem._id}`
         },
         res: {
-            body: () => ({
-                ...omit(farineBranch, ['items', 'quantity']),
-                items: withInfos(cols.TRUNK, farineBranch.items)
-            })
+            bodypath: [
+                {path: "$[0]._id", value: farineBranch[0]._id},
+                {path: "$[0].quantity.bqt", value: farineBranch[0].bqt},
+                {path: "$[1].branchId", value: farineBranch[1].branchId},
+                {path: "$[1].name", value: pizzaTrunk.name},
+                {path: "$[1].color", value: pizzaTrunk.color},
+                {path: "$[1].quantity.g", value: pizzaTrunk.quantity.g},
+            ]
         }
     }))
 
@@ -29,10 +33,7 @@ describe('GET Branch', function () {
             url: `/api/branch/${pizzaTrunk._id}`
         },
         res: {
-            body: {
-                _id: pizzaTrunk._id,
-                items: []
-            }
+            body: []
         }
     }))
 

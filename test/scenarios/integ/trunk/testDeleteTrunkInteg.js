@@ -16,7 +16,7 @@ describe('DELETE Trunks', function () {
         db: {
             expected: {
                 colname: cols.TRUNK,
-                missingDoc: {_id: gateauTrunk._id}
+                missingDoc: gateauTrunk
             }
         }
     }))

@@ -1,7 +1,7 @@
 import {oneModifiedResponse} from "test-api-express-mongo/dist/domain"
 import {remove} from "test-api-express-mongo/dist/util"
 import {cols} from "../../../src/const/collections"
-import {bleTrunk, farineItem, farineRoot, gateauRoots} from "../../database/gateau"
+import {bleTrunk, farineItem, farineRoot, farineRoots, gateauRoots} from "../../database/gateau"
 
 export const rootDeletionSpec = {
     req: {
@@ -23,7 +23,7 @@ export const rootDeletionSpec = {
 export const deleteFarineRootBleSpec = {
     req: {
         path: "/api/root",
-        param: `/${farineRoot._id}/${bleTrunk._id}`,
+        param: `/${farineRoots[0]._id}`,
         method: "DELETE"
     },
     res: {
@@ -32,7 +32,7 @@ export const deleteFarineRootBleSpec = {
     db: {
         expected: {
             colname: cols.ROOT,
-            doc: remove(farineRoot, "items", {_id: bleTrunk._id})
+            missingDoc: farineRoots[0]
         }
     }
 }

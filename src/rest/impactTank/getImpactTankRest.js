@@ -1,4 +1,4 @@
-import {validPathId} from "../../const/validations"
+import {validPathId, validPathTrunkId} from "../../const/validations"
 import {col} from "mongo-registry/dist"
 import configure from "items-service"
 import {run} from 'express-blueforest'
@@ -10,15 +10,15 @@ const router = Router()
 
 module.exports = router
 
-const readRootTree = configure(() => col(cols.ROOT)).initReadTree(cols.ROOT)
+const readRootTree = configure(() => col(cols.ROOT)).treeRead(cols.ROOT, "rootId")
 const readAllQuantifiedImpacts = configure(() => col(cols.IMPACT)).readAllQuantified
 
-router.get('/api/impacttank/:_id',
-    validPathId,
-    run(readRootTree),
+router.get('/api/impacttank/:trunkId',
+    validPathTrunkId,
+    run(readRootTree, "READ TREE"),
     run(treeToList),
-    run(mergeList),
-    run(readAllQuantifiedImpacts),
+    run(mergeList, "MERGED LIST"),
+    run(readAllQuantifiedImpacts, "READ IMPACTS"),
     run(mergeItemList),
     run(mergeList)
 )

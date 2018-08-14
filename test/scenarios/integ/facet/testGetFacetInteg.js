@@ -3,11 +3,12 @@ import {init, withTest} from "test-api-express-mongo/dist/api"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {bleFacets} from "../../../database/gateau"
+import {bleFacets, bleTrunk} from "../../../database/gateau"
 import {omit} from 'lodash'
 import {withInfos} from "test-api-express-mongo/dist/db"
 import {withBqtG, withoutQuantity, withQtCoef, withIdBqtG} from "test-api-express-mongo/dist/domain"
 import {clon} from "test-api-express-mongo/dist/util"
+import {vitBFacetEntry} from "../../../database/facetEntries"
 
 
 describe('GET Facets', function () {
@@ -16,13 +17,17 @@ describe('GET Facets', function () {
 
     it('return facets', withTest({
         req: {
-            url: `/api/facet/${bleFacets._id}`
+            url: `/api/facet/${bleTrunk._id}`
         },
         res: {
-            body: () => ({
-                ...omit(bleFacets, ['items', 'quantity']),
-                items: withInfos(cols.FACET_ENTRY, bleFacets.items)
-            })
+            bodypath: [
+                {path: "$[0]._id", value: bleFacets[0]._id},
+                {path: "$[1]._id", value: bleFacets[1]._id},
+                {path: "$[1].name", value: vitBFacetEntry.name},
+                {path: "$[1].color", value: vitBFacetEntry.color},
+                {path: "$[1].quantity.bqt", value: bleFacets[1].bqt},
+                {path: "$[1].quantity.g", value: vitBFacetEntry.g},
+            ]
         }
     }))
 
@@ -31,10 +36,7 @@ describe('GET Facets', function () {
             url: `/api/facet/${"5a6a03c03e77667641d21234"}`,
         },
         res: {
-            body: {
-                _id: "5a6a03c03e77667641d21234",
-                items: []
-            }
+            body: []
         }
     }))
 

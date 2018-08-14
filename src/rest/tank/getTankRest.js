@@ -1,4 +1,4 @@
-import {validPathId} from "../../const/validations"
+import {validPathTrunkId} from "../../const/validations"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest";
 import {omit} from 'lodash'
@@ -9,11 +9,11 @@ import configure from "items-service"
 
 const router = Router()
 module.exports = router
-const readRootTree = configure(() => col(cols.ROOT)).initReadTree(cols.ROOT)
+const readRootTree = configure(() => col(cols.ROOT)).treeRead(cols.ROOT, "rootId")
 
-router.get('/api/tank/:_id',
-    validPathId,
-    run(readRootTree),
+router.get('/api/tank/:trunkId',
+    validPathTrunkId,
+    run(readRootTree, "TREE TANK"),
     run(extraireFeuilles),
     run(mergeList)
 )

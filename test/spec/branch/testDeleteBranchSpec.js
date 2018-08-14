@@ -3,21 +3,6 @@ import {cols} from "../../../src/const/collections"
 import {remove} from "test-api-express-mongo/dist/util"
 import {bleBranch, farineBranch, farineItem} from "../../database/gateau"
 
-export const branchDeletionSpec = {
-    req: {
-        method: "DELETE",
-        path: "/api/branch",
-        param: `/${farineBranch._id}/${farineBranch.items[0]._id}`,
-    }, res: {
-        expected: oneModifiedResponse
-    },
-    db: {
-        expected: {
-            colname: cols.BRANCH,
-            doc: remove(farineBranch, "items", {_id: farineBranch.items[0]._id})
-        }
-    }
-}
 
 export const deleteBleBranchFarineSpec = {
     req: {

@@ -31,5 +31,5 @@ router.get('/api/trunk/:_id',
 router.get('/api/trunk',
     validIds,
     convert(idsList),
-    run(trunkService.find({}))
+    run(trunkService.findMixin({}))
 )

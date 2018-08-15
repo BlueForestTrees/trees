@@ -33,8 +33,8 @@ describe('GET ImpactTank', function () {
         },
         res: {
             body: [
-                withIdBqt(vitCImpactEntry._id, 10),
-                withIdBqt(vitBImpactEntry._id, 0.1)
+                {_id: vitCImpactEntry._id, bqt: 10},
+                {_id: vitBImpactEntry._id, bqt: 0.1}
             ]
         }
     }))

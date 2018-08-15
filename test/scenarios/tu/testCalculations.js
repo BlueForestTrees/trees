@@ -1,5 +1,5 @@
 import {withIdBqtG, withBqtG, withIdBqt, withId} from "test-api-express-mongo/dist/domain"
-import {mergeItemList, mergeTwoItems, quantified, sum} from "../../../src/util/calculations"
+import {mergeItemList, mergeTwoItems, sum} from "../../../src/util/calculations"
 import Fraction from "fraction.js"
 import chai, {expect} from "chai"
 
@@ -18,28 +18,19 @@ describe('TU Calculations', function () {
         })
     })
     describe('sum qt', function () {
-        it('10fake + 6otherfake = 16fake', function () {
-            mergeTwoItems(withBqtG(10, "fakeunit"), withBqtG(6, "anotherfakeunit")).should.deep.equal(withBqtG(16, "fakeunit"))
+        it('mergeTwoItems', function () {
+            mergeTwoItems({bqt: 7, any: "rr"}, {bqt: 7, any: "rr"}).should.deep.equal({bqt: 14, any: "rr"})
         })
     })
 
     describe('sum items', function () {
         it('2 items', function () {
-            sum([withBqtG(10000, "Mass"), withBqtG(7000, "Mass")])
-                .should.deep.equal(withBqtG(17000, "Mass"))
+            sum([{bqt: 10000}, {bqt: 7000}])
+                .should.deep.equal({bqt: 17000})
         })
         it('3 items', function () {
-            sum([withBqtG(10000, "Mass"), withBqtG(7000, "Mass"), withBqtG(4000, "Mass")])
-                .should.deep.equal(withBqtG(21000, "Mass"))
-        })
-    })
-
-    describe('test quantified', function () {
-        it('return false', function () {
-            quantified([withId("aaaaaaaaaaaaaaaaaaaaaaaa")]).should.be.false
-        })
-        it('return true', function () {
-            quantified([withIdBqtG("aaaaaaaaaaaaaaaaaaaaaaaa", 3, "Mass")]).should.be.true
+            sum([{bqt: 10000}, {bqt: 7000}, {bqt: 10000}, {bqt: 7000}])
+                .should.deep.equal({bqt: 34000})
         })
     })
 

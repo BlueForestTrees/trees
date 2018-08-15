@@ -1,4 +1,4 @@
-import _, {cloneDeep, find, forEach, groupBy, isNil, map, omit, some} from 'lodash'
+import _, {reduce, cloneDeep, find, forEach, groupBy, isNil, map, omit, some} from 'lodash'
 
 export const cleanNull = field => item => {
     if (!item[field]) {
@@ -32,15 +32,13 @@ export const mergeItemList = items => {
     return collector
 }
 
-export const quantified = items => some(items, item => !isNil(item.quantity))
-
 export const extraireFeuilles = tree => {
     const tank = []
     const browser = tree.items.slice()
     let i = 0
     for (i; i < browser.length; i++) {
         const item = browser[i]
-        if (item.quantity && item.items && quantified(item.items)) {
+        if (item.items && item.bqt) {
             browser.push(...item.items)
         } else {
             tank.push(omit(item, "items"))
@@ -55,16 +53,14 @@ export const mergeList = items =>
         .map(sum)
         .value()
 
-export const sum = toSumItems =>
-    _(toSumItems)
-        .reduce(mergeTwoItems)
+export const sum = items => reduce(items, mergeTwoItems)
 
-export const mergeTwoItems = (left, right) => {
-    return left.quantity && right.quantity ?
-        (left.quantity.bqt += right.quantity.bqt) && left
+export const mergeTwoItems = (left, right) =>
+    left.bqt && right.bqt ?
+        (left.bqt += right.bqt) && left
         :
-        left.quantity ? left : right
-}
+        left.bqt ? left : right
+
 
 export const getRandomColor = () => {
     const letters = '0123456789ABCDEF'

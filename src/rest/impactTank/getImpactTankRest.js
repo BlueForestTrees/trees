@@ -16,9 +16,8 @@ const readAllQuantifiedImpacts = configure(() => col(cols.IMPACT)).readAllQuanti
 router.get('/api/impacttank/:trunkId',
     validPathTrunkId,
     run(readRootTree, "READ TREE"),
-    run(treeToList),
+    run(treeToList, "TREE TO LIST"),
     run(mergeList, "MERGED LIST"),
     run(readAllQuantifiedImpacts, "READ IMPACTS"),
-    run(mergeItemList),
-    run(mergeList)
+    run(mergeList, "MERGE ITEMS")
 )

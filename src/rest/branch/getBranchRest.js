@@ -14,10 +14,8 @@ const readBranchTree = branchService.treeRead(cols.BRANCH, "branchId")
 
 router.get('/api/branch/:trunkId',
     validPathTrunkId,
-    run(branchService.find({trunkId: 0})),
-    run(trunkService.append(
-        "branchId",
-        {name: 1, color: 1, 'quantity.g': 1},
+    run(branchService.findNoMixin, "GET BRANCHES"),
+    run(trunkService.append("branchId", {name: 1, color: 1, 'quantity.g': 1},
         (branch, branchTrunk) => {
             branch.name = branchTrunk.name
             branch.color = branchTrunk.color
@@ -25,7 +23,7 @@ router.get('/api/branch/:trunkId',
             delete branch.bqt
             return branch
         }
-    ))
+    ), "MERGE BRANCH INFOS")
 )
 
 router.get('/api/branch/tree/:trunkId',

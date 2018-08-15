@@ -3,7 +3,7 @@ import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
 import {init, withTest} from "test-api-express-mongo/dist/api"
 import {laitTrunk} from "../../../database/gateau"
-import {aTrunk, daTrunk, dbTrunk, dRoot, e1Trunk, e2Trunk} from "../../../database/lettres"
+import {aTrunk, daTrunk, dbTrunk, dRoot, dRoots, e1Trunk, e2Trunk} from "../../../database/lettres"
 import {withIdBqt, withId, withoutItemQuantity} from "test-api-express-mongo/dist/domain"
 import {arbreTrunk, eauTrunk, elecTrunk, skateTrunk} from "../../../database/skate"
 
@@ -17,8 +17,8 @@ describe('GET Tank', function () {
         },
         res: {
             body: [
-                    withIdBqt(e2Trunk._id, 20002100),
-                    withIdBqt(e1Trunk._id, 510)
+                {_id: e2Trunk._id, bqt: 20002100},
+                {_id: e1Trunk._id, bqt: 510}
                 ]
         }
     }))
@@ -31,7 +31,7 @@ describe('GET Tank', function () {
             preChange: {
                 colname: cols.ROOT,
                 doc: {
-                    ...withoutItemQuantity(dRoot, daTrunk._id)
+                    ...dRoots[0], bqt: undefined
                 }
             }
         },
@@ -51,9 +51,7 @@ describe('GET Tank', function () {
         db: {
             preChange: {
                 colname: cols.ROOT,
-                doc: {
-                    ...withoutItemQuantity(dRoot, dbTrunk._id)
-                }
+                doc: {...dRoots[1], bqt: undefined}
             }
         },
         res: {
@@ -73,33 +71,6 @@ describe('GET Tank', function () {
             body: []
         }
     }))
-
-    it('link a to skate then tank', withTest([
-        {
-            req: {
-                method: "PUT",
-                url: "/api/link",
-                body: {
-                    trunk: {_id: skateTrunk._id},
-                    root: withIdBqt(aTrunk._id, 1000)
-                }
-            }
-        },
-        {
-            req: {
-                url: `/api/tank/${skateTrunk._id}`
-            },
-            res: {
-                body: [
-                        withIdBqt(eauTrunk._id, 0.01006),
-                        withIdBqt(elecTrunk._id, 86813397.216),
-                        withIdBqt(arbreTrunk._id, 0.005),
-                        withIdBqt(e2Trunk._id, 5000),
-                        withIdBqt(e1Trunk._id, 510)
-                    ]
-            }
-        }
-    ]))
 
 })
 

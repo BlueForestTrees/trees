@@ -14,7 +14,7 @@ const trunkService = configure(() => col(cols.TRUNK))
 
 router.get('/api/root/:trunkId',
     validPathTrunkId,
-    run(rootService.find({trunkId: 0})),
+    run(rootService.findMixin({trunkId: 0})),
     run(trunkService.append(
         "rootId",
         {name: 1, color: 1, 'quantity.g': 1},

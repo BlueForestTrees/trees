@@ -13,7 +13,7 @@ const facetEntryService = configure(() => col(cols.FACET_ENTRY))
 
 router.get('/api/facet/:trunkId',
     validPathTrunkId,
-    run(facetService.find({trunkId: 0})),
+    run(facetService.findMixin({trunkId: 0})),
     run(facetEntryService.append(
         "facetId",
         {name: 1, color: 1, g: 1},

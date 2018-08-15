@@ -27,15 +27,15 @@ link(object("a11111111111111111111115"), papierVB._id, couchePE._id, 7)
 link(object("a11111111111111111111116"), papierVB._id, couchePapier._id, 10)
 link(object("a11111111111111111111117"), papierVB._id, coucheAdhesif._id, 100)
 
-const couchePEImpact = {_id: couchePE._id, items: [withIdBqt(co2eImpactEntry._id, 1)]}
-const couchePapierImpact = {_id: couchePapier._id, items: [withIdBqt(co2eImpactEntry._id, 10)]}
-const coucheAdhesifImpact = {_id: coucheAdhesif._id, items: [withIdBqt(co2eImpactEntry._id, 100)]}
-const coucheAluImpact = {_id: coucheAlu._id, items: [withIdBqt(co2eImpactEntry._id, 1000)]}
+const couchePEImpacts = [{_id: object("a11111111111111111111118"), trunkId: couchePE._id, impactId: co2eImpactEntry._id, bqt: 1}]
+const couchePapierImpacts = [{_id: object("a11111111111111111111119"), trunkId: couchePapier._id, impactId: co2eImpactEntry._id, bqt: 10}]
+const coucheAdhesifImpacts = [{_id: object("a11111111111111111111120"), trunkId: coucheAdhesif._id, impactId: co2eImpactEntry._id, bqt: 100}]
+const coucheAluImpacts = [{_id: object("a11111111111111111111121"), trunkId: coucheAlu._id, impactId: co2eImpactEntry._id, bqt: 1000}]
 
 export const database = {
     [cols.TRUNK]: [papierVA, papierVB, coucheAdhesif, coucheAlu, couchePapier, couchePE],
     [cols.ROOT]: roots,
-    [cols.IMPACT]: [couchePEImpact, couchePapierImpact, coucheAdhesifImpact, coucheAluImpact],
+    [cols.IMPACT]: [...couchePEImpacts, ...couchePapierImpacts, ...coucheAdhesifImpacts, ...coucheAluImpacts],
     [cols.BRANCH]: branches
 }
 

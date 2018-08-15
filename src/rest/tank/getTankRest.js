@@ -13,7 +13,7 @@ const readRootTree = configure(() => col(cols.ROOT)).treeRead(cols.ROOT, "rootId
 
 router.get('/api/tank/:trunkId',
     validPathTrunkId,
-    run(readRootTree, "TREE TANK"),
-    run(extraireFeuilles),
+    run(readRootTree, "TREE"),
+    run(extraireFeuilles, "TANK"),
     run(mergeList)
 )

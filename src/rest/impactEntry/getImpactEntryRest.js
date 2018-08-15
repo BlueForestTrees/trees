@@ -9,10 +9,11 @@ const router = Router()
 module.exports = router
 
 const impactEntryService = configure(() => col(cols.IMPACT_ENTRY))
+const getAllImpactEntries = impactEntryService.findMixin({})
 const searchMixin = {color: 1, name: 1, g: 1}
 
 router.get('/api/impactEntry/all',
-    run(() => impactEntryService.find({}))
+    run(getAllImpactEntries)
 )
 
 router.get('/api/impactEntry',

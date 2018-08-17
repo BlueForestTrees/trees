@@ -7,56 +7,44 @@ export const parseImpactCsv = async (buffer) => await new Promise(function (reso
     const rl = readline.createInterface({
         input: streamIt(buffer),
     })
-
-    const impacts = {}
+    
+    const impacts = []
     let head = true
     let ignoreCount = 1
     let idProduits = null
-
+    
     rl.on('line', (lineProduits) => {
         if (head) {
             head = false
             idProduits = tagLine(lineProduits)
             idProduits.skip(4)
-            let idProduit
-            while (idProduit = idProduits.next()) {
-                impacts[idProduit] = {externId: idProduit, items: []}
-            }
         } else if (ignoreCount === 0) {
-            idProduits.reset()
-            idProduits.skip(4)
             const tl = tagLine(lineProduits)
             let qt
             let impactId = tl.next()
             tl.skip(3)
+            idProduits.reset()
+            idProduits.skip(4)
             while (qt = tl.next()) {
-                const idProduit = idProduits.next()
-                if (impacts[idProduit]) {
-                    impacts[idProduit].items.push({
-                        externId: impactId,
-                        bqt: parseFloat(qt)
-                    })
-                } else {
-                    console.error(`import ademe impacts, {_id:${idProduit}, ${impactId}} n'existe pas`)
-                }
+                impacts.push({trunkExternId: idProduits.next(), impactExternId: impactId, bqt: parseFloat(qt)})
             }
         } else {
             ignoreCount--
         }
     })
-
+    
     rl.on('close', () => {
         resolve(Object.values(impacts))
     })
-
+    
 })
 
 export const pairTagInside = (line, start, end) => {
     let count = 0
     let i = start
-
+    
     if (start === end) return undefined
-
+    
     while (i < end) {
         i = line.indexOf("\"", i)
         if (i === -1) {
@@ -67,7 +55,7 @@ export const pairTagInside = (line, start, end) => {
             i++
         }
     }
-
+    
     return count % 2 === 0
 }
 
@@ -75,9 +63,9 @@ export const tagLine = line => {
     let i = 0
     let sep = ";"
     let end
-
+    
     let column = -1
-
+    
     return {
         col: () => column,
         reset: () => {

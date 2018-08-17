@@ -2,9 +2,10 @@ import {validPathId, validPathTrunkId} from "../../const/validations"
 import {col} from "mongo-registry/dist"
 import configure from "items-service"
 import {run} from 'express-blueforest'
-import {Router} from "express-blueforest";
+import {Router} from "express-blueforest"
 import {cols} from "../../const/collections"
-import {treeToList, mergeList, mergeItemList} from "../../util/calculations"
+import {treeToList, mergeList, mergeListBy} from "../../util/calculations"
+import {map} from 'unit-manip'
 
 const router = Router()
 
@@ -19,5 +20,6 @@ router.get('/api/impacttank/:trunkId',
     run(treeToList, "TREE TO LIST"),
     run(mergeList, "MERGED LIST"),
     run(readAllQuantifiedImpacts, "READ IMPACTS"),
-    run(mergeList, "MERGE ITEMS")
+    run(mergeListBy("impactId"), "MERGE ITEMS"),
+    run(impacts => map(impacts, impact => ({_id: impact.impactId, bqt: impact.bqt})))
 )

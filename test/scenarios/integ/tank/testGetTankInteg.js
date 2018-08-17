@@ -8,9 +8,9 @@ import {withIdBqt, withId, withoutItemQuantity} from "test-api-express-mongo/dis
 import {arbreTrunk, eauTrunk, elecTrunk, skateTrunk} from "../../../database/skate"
 
 describe('GET Tank', function () {
-
+    
     beforeEach(init(api, ENV, cols))
-
+    
     it('get lettre tank', withTest({
         req: {
             url: `/api/tank/${aTrunk._id}`
@@ -19,10 +19,10 @@ describe('GET Tank', function () {
             body: [
                 {_id: e2Trunk._id, bqt: 20002100},
                 {_id: e1Trunk._id, bqt: 510}
-                ]
+            ]
         }
     }))
-
+    
     it('get lettre tank avec une qt manquante', withTest({
         req: {
             url: `/api/tank/${aTrunk._id}`
@@ -37,13 +37,13 @@ describe('GET Tank', function () {
         },
         res: {
             body: [
-                    withIdBqt(e2Trunk._id, 20001100),
-                    withId(daTrunk._id),
-                    withIdBqt(e1Trunk._id, 510)
-                ]
+                {_id: e2Trunk._id, bqt: 20001100},
+                withId(daTrunk._id),
+                {_id: e1Trunk._id, bqt: 510}
+            ]
         }
     }))
-
+    
     it('get lettre tank avec une qt manquante 2', withTest({
         req: {
             url: `/api/tank/${aTrunk._id}`
@@ -56,13 +56,13 @@ describe('GET Tank', function () {
         },
         res: {
             body: [
-                    withIdBqt(e2Trunk._id, 2100),
-                    withId(dbTrunk._id),
-                    withIdBqt(e1Trunk._id, 510)
-                ]
+                {_id: e2Trunk._id, bqt: 2100},
+                withId(dbTrunk._id),
+                {_id: e1Trunk._id, bqt: 510}
+            ]
         }
     }))
-
+    
     it('get lettre sans tank', withTest({
         req: {
             url: `/api/tank/${laitTrunk._id}`
@@ -71,6 +71,6 @@ describe('GET Tank', function () {
             body: []
         }
     }))
-
+    
 })
 

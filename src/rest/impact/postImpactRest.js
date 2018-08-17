@@ -8,6 +8,7 @@ import fileUpload from "express-fileupload"
 import {parseImpactCsv} from "../../util/csv"
 import {validBodyBqt, validBodyId, validBodyImpactId, validBodyTrunkId} from "../../const/validations"
 import {map} from 'lodash'
+import {createObjectId} from "mongo-queries-blueforest"
 
 const router = Router()
 const impactService = configure(() => col(cols.IMPACT))
@@ -27,33 +28,27 @@ router.post('/api/impact',
 router.post('/api/impactBulk/ademe',
     validGod,
     fileUpload({files: 1, limits: {fileSize: 5 * 1024 * 1024}}),
-    run(({}, req) => parseImpactCsv(req.files.file && req.files.file.data || req.files['csv.ademe.impact'].data)),
-    run(ademeToBlueforestImpact),
-    run(impactService.bulkWrite)
+    run(({}, req) => parseImpactCsv(req.files.file && req.files.file.data || req.files['csv.ademe.impact'].data), "PARSE"),
+    run(ademeToBlueforestImpact, "CONVERT"),
+    run(impactService.bulkWrite, "BULK WRITE")
 )
 
 function ademeToBlueforestImpact(raws) {
     return Promise.all(map(raws, async raw => ({
         insertOne: {
-            ...await resolveTrunkOrDefault(raw),
-            items: await Promise.all(map(raw.items, resolveImpactOrDefault))
+            _id: createObjectId(),
+            ...await resolveTrunkId(raw),
+            ...await resolveImpactId(raw),
+            bqt: raw.bqt
         }
     })))
 }
-const resolveTrunkOrDefault = async raw => {
-    try {
-        return await trunkService.findOne({externId: raw.externId}, {_id: 1}) || {externId: raw.externId}
-    } catch (e) {
-        return {externId: raw.externId}
-    }
+
+const resolveTrunkId = async raw => {
+    const doc = (await trunkService.findOne({externId: raw.trunkExternId}, {_id: 1}))
+    return (doc && {trunkId: doc._id}) || {trunkExternId: raw.trunkExternId}
 }
-const resolveImpactOrDefault = async item => {
-    try {
-        return {
-            ...await impactEntryService.findOne({externId: item.externId}, {_id: 1}) || {externId: item.externId},
-            bqt: item.bqt
-        }
-    } catch (e) {
-        return item
-    }
+const resolveImpactId = async raw => {
+    const doc = await impactEntryService.findOne({externId: raw.impactExternId}, {_id: 1})
+    return (doc && {impactId: doc._id}) || {impactExternId: raw.impactExternId}
 }

@@ -38,7 +38,10 @@ export const bleFacets = [
     {_id: object("aaaaaaa03e77667641d2d2c5"), trunkId: bleTrunk._id, facetId: vitBFacetEntry._id, bqt: 0.15}
 ]
 
-const gateauImpact = {_id: gateauTrunk._id, items: [withIdBqt(vitCImpactEntry._id, 10), withIdBqt(vitBImpactEntry._id, 0.1)]}
+const gateauImpact = [
+    {_id: object("aaaaaaa03e77667641d2d210"), trunkId:gateauTrunk._id, impactId:vitCImpactEntry._id, bqt: 10},
+    {_id: object("aaaaaaa03e77667641d2d211"), trunkId:gateauTrunk._id, impactId:vitBImpactEntry._id, bqt: 0.1},
+]
 
 
 export const bleImpacts = [
@@ -51,5 +54,5 @@ export const database = {
     [cols.BRANCH]: [laitBranch, ...farineBranch, bleBranch],
     [cols.ROOT]: [...gateauRoots, ...farineRoots, pizzaRoot, cremeRoot],
     [cols.FACET]: [gateauFacets, ...bleFacets],
-    [cols.IMPACT]: [gateauImpact, ...bleImpacts]
+    [cols.IMPACT]: [...gateauImpact, ...bleImpacts]
 }

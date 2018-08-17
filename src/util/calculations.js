@@ -47,11 +47,13 @@ export const extraireFeuilles = tree => {
     return tank
 }
 
-export const mergeList = items =>
+export const mergeListBy = field => items =>
     _(items)
-        .groupBy("_id")
+        .groupBy(field)
         .map(sum)
         .value()
+
+export const mergeList = mergeListBy("_id")
 
 export const sum = items => reduce(items, mergeTwoItems)
 

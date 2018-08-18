@@ -28,15 +28,16 @@ export const loadUnitsData = () => Promise.resolve(
         grandeur("CTUe", "CTUe - Comparative Toxic Unit for ecosystems", [
             unit("CTUe", "Comparative Toxic Unit for ecosystems (CTUe) * volume * time", 1)
         ]),
-        grandeur("Ener", "Energie (wh, J, cal...)", [
-            unit("MJ", "Méga-Joule (MJ)", 239234.45),
-            unit("J", "Joule (J)", 0.23923445),
-            unit("ws", "Watt-Seconde (ws)", 0.23923445),
-            unit("cal", "calorie (cal)", 1),
-            unit("wh", "Watt-Heure (wh)", 0.23923445 * 3600),
-            unit("kWh", "KiloWatt-Heure (kWh)", 0.23923445 * 3600 * 1000),
-            unit("kcal", "Kilo-Calorie (kcal)", 1000),
-            unit("Mcal", "Mega-calorie (Mcal)", 1000 * 1000)
+        grandeur("Ene1", "Energie (J, kJ, MJ...)", [
+            unit("MJ", "Méga-Joule (MJ)", 1),
+            unit("kJ", "Kilo-Joule (kJ)", 0.001),
+            unit("J", "Joule (J)", 0.000001),
+        ]),
+        grandeur("Ene2", "Energie (Wh, kWh...)", [
+            unit("Ws", "Watt-Seconde (Ws)", 0.001 / 3600),
+            unit("Wm", "Watt-Minute (Wm)", 0.001 / 60),
+            unit("Wh", "Watt-Heure (Wh)", 0.001),
+            unit("kWh", "KiloWatt-Heure (kWh)", 1)
         ]),
         grandeur("Dens", "Densité (mol, mmol...)", [
             unit("μmol", "Micro-mole (umol)", 0.000001),
@@ -65,11 +66,11 @@ export const loadUnitsData = () => Promise.resolve(
             unit("an", "Année (an)", 60 * 60 * 24 * 30 * 355 * 12)
         ]),
         grandeur("Mass", "Masse (g, kg...)", [
-            unit("mg", "Milligramme (mg)", 0.001),
-            unit("g", "Gramme (g)", 1),
-            unit("kg", "Kilo-gramme (kg)", 1000),
-            unit("t", "Tonne (t)", 1000000),
-            unit("Mt", "Mega-tonne (Mt)", 1000000000)
+            unit("mg", "Milligramme (mg)", 0.000001),
+            unit("g", "Gramme (g)", 0.001),
+            unit("kg", "Kilo-gramme (kg)", 1),
+            unit("t", "Tonne (t)", 1000),
+            unit("Mt", "Mega-tonne (Mt)", 1000000)
         ]),
         grandeur("Surf", "Surface (m2, hec...)", [
             unit("m2", "Mètre-carré (m2)", 1),

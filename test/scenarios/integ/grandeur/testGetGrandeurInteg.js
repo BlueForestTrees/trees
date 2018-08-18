@@ -123,56 +123,56 @@ describe('GET Grandeurs', function () {
                         ]
                     },
                     {
-                        "key": "Ener",
-                        "label": "Energie (wh, J, cal...)",
+                        "key": "Ene1",
+                        "label": "Energie (J, kJ, MJ...)",
                         "units": [
                             {
-                                "coef": 0.23923445,
-                                "grandeur": "Ener",
+                                "coef": 0.000001,
+                                "grandeur": "Ene1",
                                 "name": "Joule (J)",
                                 "shortname": "J"
                             },
                             {
-                                "coef": 0.23923445,
-                                "grandeur": "Ener",
-                                "name": "Watt-Seconde (ws)",
-                                "shortname": "ws"
+                                "coef": 0.001,
+                                "grandeur": "Ene1",
+                                "name": "Kilo-Joule (kJ)",
+                                "shortname": "kJ"
                             },
                             {
                                 "coef": 1,
-                                "grandeur": "Ener",
-                                "name": "calorie (cal)",
-                                "shortname": "cal"
-                            },
-                            {
-                                "coef": 861.24402,
-                                "grandeur": "Ener",
-                                "name": "Watt-Heure (wh)",
-                                "shortname": "wh"
-                            },
-                            {
-                                "coef": 1000,
-                                "grandeur": "Ener",
-                                "name": "Kilo-Calorie (kcal)",
-                                "shortname": "kcal"
-                            },
-                            {
-                                "coef": 239234.45,
-                                "grandeur": "Ener",
+                                "grandeur": "Ene1",
                                 "name": "Méga-Joule (MJ)",
                                 "shortname": "MJ"
+                            }
+                        ]
+                    },
+                    {
+                        "key": "Ene2",
+                        "label": "Energie (Wh, kWh...)",
+                        "units": [
+                            {
+                                "coef": 2.7777777777777776e-7,
+                                "grandeur": "Ene2",
+                                "name": "Watt-Seconde (Ws)",
+                                "shortname": "Ws"
                             },
                             {
-                                "coef": 861244.02,
-                                "grandeur": "Ener",
+                                "coef": 0.000016666666666666667,
+                                "grandeur": "Ene2",
+                                "name": "Watt-Minute (Wm)",
+                                "shortname": "Wm"
+                            },
+                            {
+                                "coef": 0.001,
+                                "grandeur": "Ene2",
+                                "name": "Watt-Heure (Wh)",
+                                "shortname": "Wh"
+                            },
+                            {
+                                "coef": 1,
+                                "grandeur": "Ene2",
                                 "name": "KiloWatt-Heure (kWh)",
                                 "shortname": "kWh"
-                            },
-                            {
-                                "coef": 1000000,
-                                "grandeur": "Ener",
-                                "name": "Mega-calorie (Mcal)",
-                                "shortname": "Mcal"
                             }
                         ]
                     },
@@ -211,31 +211,31 @@ describe('GET Grandeurs', function () {
                         "label": "Masse (g, kg...)",
                         "units": [
                             {
-                                "coef": 0.001,
+                                "coef": 0.000001,
                                 "grandeur": "Mass",
                                 "name": "Milligramme (mg)",
                                 "shortname": "mg",
                             },
                             {
-                                "coef": 1,
+                                "coef": 0.001,
                                 "grandeur": "Mass",
                                 "name": "Gramme (g)",
                                 "shortname": "g",
                             },
                             {
-                                "coef": 1000,
+                                "coef": 1,
                                 "grandeur": "Mass",
                                 "name": "Kilo-gramme (kg)",
                                 "shortname": "kg",
                             },
                             {
-                                "coef": 1000000,
+                                "coef": 1000,
                                 "grandeur": "Mass",
                                 "name": "Tonne (t)",
                                 "shortname": "t",
                             },
                             {
-                                "coef": 1000000000,
+                                "coef": 1000000,
                                 "grandeur": "Mass",
                                 "name": "Mega-tonne (Mt)",
                                 "shortname": "Mt"

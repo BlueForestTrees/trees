@@ -5,7 +5,7 @@ import {init, request, withTest} from "test-api-express-mongo/dist/api"
 import path from "path"
 import {authGod} from "../../../database/users"
 
-describe.skip('POST ALL', function () {
+describe('POST ALL', function () {
     
     beforeEach(init(api, ENV, cols))
     

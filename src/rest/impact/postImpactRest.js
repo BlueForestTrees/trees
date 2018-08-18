@@ -22,7 +22,7 @@ const importImpactsByChunks = async raws => {
     for (let i = 0, chunk = 100; i < length; i += chunk) {
         await impactService.bulkWrite(await ademeToBlueforestImpact(raws.slice(i, i + chunk)))
     }
-    return length
+    return {ok: 1, nInserted: length}
 }
 
 const ademeToBlueforestImpact = raws => Promise.all(map(raws, async raw => ({

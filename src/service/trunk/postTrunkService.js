@@ -42,6 +42,9 @@ const parseDesc = {
 }
 
 export const ademeToBlueforestTrunk = raws => map(raws, raw => {
+    
+    console.log(raw["Quantité"]["Quantité de référence"], raw["Quantité"]["Unité"])
+    
     return {
         updateOne: {
             filter: {externId: raw.externId},

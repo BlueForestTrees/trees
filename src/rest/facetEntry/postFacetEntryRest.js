@@ -1,5 +1,5 @@
 import {addFacetEntry} from "../../service/facetEntry/postFacetEntryService"
-import {validBodyColor, validBodyG, validBodyName, validBodyId, validBodyBqt} from "../../const/validations"
+import {validBodyColor, validBodyG, validBodyName, validBodyId, validBodyBqt} from "../validations"
 import {Router, run} from 'express-blueforest'
 import {col} from "mongo-registry/dist"
 import configure from "items-service"

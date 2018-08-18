@@ -1,4 +1,4 @@
-import {validPathId} from "../../const/validations"
+import {validPathId} from "../validations"
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry/dist"
 import configure from "items-service"

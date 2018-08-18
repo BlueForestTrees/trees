@@ -1,12 +1,8 @@
 import {streamIt} from "./streams"
 import readline from 'readline'
 
-const sep = ";"
-
-export const parseImpactCsv = async (buffer) => await new Promise(function (resolve) {
-    const rl = readline.createInterface({
-        input: streamIt(buffer),
-    })
+export const parseImpactCsv = async buffer => await new Promise(function (resolve) {
+    const rl = readline.createInterface({input: streamIt(buffer)})
     
     const impacts = []
     let head = true
@@ -34,7 +30,7 @@ export const parseImpactCsv = async (buffer) => await new Promise(function (reso
     })
     
     rl.on('close', () => {
-        resolve(Object.values(impacts))
+        resolve(impacts)
     })
     
 })
@@ -58,7 +54,6 @@ export const pairTagInside = (line, start, end) => {
     
     return count % 2 === 0
 }
-
 export const tagLine = line => {
     let i = 0
     let sep = ";"
@@ -97,7 +92,6 @@ export const tagLine = line => {
         }
     }
 }
-
 export const indexOfWithPairTag = (line, sep, start) => {
     let i = start
     let lookAt = i

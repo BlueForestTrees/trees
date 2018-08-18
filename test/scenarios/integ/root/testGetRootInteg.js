@@ -15,10 +15,10 @@ describe('GET Root', function () {
         },
         res: {
             bodypath: [
-                {path: `$[?(@._id==="${bananeBCRoots[0]._id}")].quantity.g`, value: [banane.quantity.g]},
-                {path: `$[?(@._id==="${bananeBCRoots[1]._id}")].name`, value: [transport.name]},
-                {path: `$[?(@._id==="${bananeBCRoots[1]._id}")].color`, value: [transport.color]},
-                {path: `$[?(@._id==="${bananeBCRoots[1]._id}")].relativeTo._id`, value: [banane._id]},
+                {path: `$[?(@._id==="${bananeBCRoots[0].rootId}")].trunk.quantity.g`, value: [banane.quantity.g]},
+                {path: `$[?(@._id==="${bananeBCRoots[1].rootId}")].trunk.name`, value: [transport.name]},
+                {path: `$[?(@._id==="${bananeBCRoots[1].rootId}")].trunk.color`, value: [transport.color]},
+                {path: `$[?(@._id==="${bananeBCRoots[1].rootId}")].relativeTo._id`, value: [banane._id]},
             ]
         }
     }))

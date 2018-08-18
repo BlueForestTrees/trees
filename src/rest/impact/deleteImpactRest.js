@@ -4,7 +4,7 @@ import configure from "items-service"
 
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
-import {validPathId} from "../../const/validations"
+import {validPathId} from "../validations"
 const router = Router()
 
 const deleteImpact = configure(() => col(cols.IMPACT)).deleteOne

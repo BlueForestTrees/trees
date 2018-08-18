@@ -2,7 +2,7 @@ import {run} from 'express-blueforest'
 
 import {Router} from "express-blueforest"
 import {addFeedback} from "../../service/feedback/postFeedbackService"
-import {validMail, validMessage} from "../../const/validations"
+import {validMail, validMessage} from "../validations"
 const router = Router()
 
 module.exports = router

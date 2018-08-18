@@ -1,4 +1,4 @@
-import {validPathId, validPathTrunkId} from "../../const/validations"
+import {validPathId, validPathTrunkId} from "../validations"
 import {col} from "mongo-registry/dist"
 import configure from "items-service"
 import {run} from 'express-blueforest'

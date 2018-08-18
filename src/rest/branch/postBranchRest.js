@@ -1,4 +1,4 @@
-import {branchIdIsNotTrunkId, validBodyBqt, validBodyBranchId, validBodyId, validBodyTrunkId, validBranchId, validTrunkId} from "../../const/validations"
+import {branchIdIsNotTrunkId, validBodyBqt, validBodyBranchId, validBodyId, validBodyTrunkId, validBranchId, validTrunkId} from "../validations"
 import configure from "items-service"
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry/dist"

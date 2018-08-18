@@ -1,4 +1,4 @@
-import {validOptionalBodyBqtG, validOptionalBodyName, validPathId} from "../../const/validations"
+import {validOptionalBodyBqtG, validOptionalBodyName, validPathId} from "../validations"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
 import {cols} from "../../const/collections"

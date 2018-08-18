@@ -3,7 +3,7 @@ import {col} from "mongo-registry/dist"
 import {map, omit} from 'lodash'
 import {parse} from "../../util/excel"
 import {getRandomColor} from "../../util/calculations"
-import {grandeur} from "unit-manip"
+import {grandeur, unit} from "unit-manip"
 
 const trunks = () => col(cols.TRUNK)
 
@@ -29,15 +29,15 @@ const parseDesc = {
         {idx: 31, fieldName: "Description", xlsName: " Description de la technologie et des processus inclus ", under: "Technologie"},
         {idx: 32, fieldName: "Objectif", xlsName: " Objectif technique du produit ou du procédé ", under: "Technologie"},
         {idx: 33, fieldName: "Diagramme de flux", xlsName: " Diagramme de flux ", under: "Technologie"},
-
+        
         {idx: 36, fieldName: "Type de dataset", xlsName: " Type de dataset ", under: "Modélisation et Validation", subunder: "Méthode et allocation LCI"},
         {idx: 37, fieldName: "Principe de la méthode LCI", xlsName: " Principe de la méthode LCI ", under: "Modélisation et Validation", subunder: "Méthode et allocation LCI"},
         {idx: 38, fieldName: "Déviations principe", xlsName: " Deviations from LCI method principle ", offsetX: true, under: "Modélisation et Validation", subunder: "Méthode et allocation LCI"},
         {idx: 39, fieldName: "Approches de la méthode LCI", xlsName: " Approches de la méthode LCI ", under: "Modélisation et Validation", subunder: "Méthode et allocation LCI"},
         {idx: 40, fieldName: "Déviations approches", xlsName: " Deviations from LCI method approaches ", offsetX: true, under: "Modélisation et Validation", subunder: "Méthode et allocation LCI"},
-
+        
         // {fieldName: "Déviations approches", xlsName: " Deviations from LCI method approaches ", offsetX: true, under: "Modélisation et Validation", subunder: "Sources de données, traitement et représentativité"},
-
+    
     ]
 }
 
@@ -49,9 +49,9 @@ export const ademeToBlueforestTrunk = raws => map(raws, raw => {
                 $set: {
                     externId: raw.externId,
                     name: raw.Nom,
-                    g: grandeur(raw["Quantité"]["Unité"]) || erreurGrandeur(raw["Quantité"]["Unité"]),
                     quantity: {
-                        bqt: raw["Quantité"]["Quantité de référence"], unit: raw["Quantité"]["Unité"]
+                        bqt: raw["Quantité"]["Quantité de référence"] * unit(raw["Quantité"]["Unité"]).coef,
+                        g: grandeur(raw["Quantité"]["Unité"]) || erreurGrandeur(raw["Quantité"]["Unité"]),
                     },
                     color: getRandomColor(),
                     origin: "ADEME",

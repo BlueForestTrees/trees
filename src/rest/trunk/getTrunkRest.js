@@ -1,4 +1,4 @@
-import {optionnalAfterIdx, optionnalPageSize, validId, validIds, validQ, idsList, optionalValidG} from "../../const/validations"
+import {optionnalAfterIdx, optionnalPageSize, validId, validIds, validQ, idsList, optionalValidG} from "../validations"
 import {run, convert} from 'express-blueforest'
 import {Router} from "express-blueforest"
 import configure from "items-service"
@@ -25,7 +25,7 @@ router.get('/api/trunks',
 
 router.get('/api/trunk/:_id',
     validId,
-    run(trunkService.get)
+    run(trunkService.get),
 )
 
 router.get('/api/trunk',

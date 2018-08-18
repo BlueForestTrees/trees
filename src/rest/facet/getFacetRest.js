@@ -2,7 +2,7 @@ import {Router, run} from 'express-blueforest'
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry/dist"
 import configure from "items-service"
-import {validPathTrunkId} from "../../const/validations"
+import {validPathTrunkId} from "../validations"
 
 const router = Router()
 

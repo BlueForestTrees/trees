@@ -1,5 +1,5 @@
 import {addImpactEntry, importAdemeImpactEntries} from "../../service/impactEntry/postImpactEntryService"
-import {validBodyColor, validBodyG, validId, validBodyName} from "../../const/validations"
+import {validBodyColor, validBodyG, validId, validBodyName} from "../validations"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
 import fileUpload from "express-fileupload"

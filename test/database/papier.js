@@ -15,7 +15,7 @@ const branches = []
 
 const link = (_id, trunkId, rootId, bqt) => {
     roots.push({_id, trunkId, rootId, bqt})
-    branches.push({_id, trunkId: rootId, rootId: trunkId, bqt: 1 / bqt})
+    branches.push({_id, trunkId: rootId, branchId: trunkId, bqt: 1 / bqt})
 }
 
 link(object("a11111111111111111111111"), papierVA._id, couchePE._id, 7)

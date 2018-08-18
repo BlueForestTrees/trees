@@ -1,4 +1,4 @@
-import {validPathTrunkId, validTrunkId} from "../../const/validations"
+import {validPathTrunkId, validTrunkId} from "../validations"
 import {Router, run} from 'express-blueforest'
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry/dist"
@@ -16,13 +16,15 @@ router.get('/api/branch/:trunkId',
     validPathTrunkId,
     run(branchService.findNoMixin, "GET BRANCHES"),
     run(trunkService.append("branchId", {name: 1, color: 1, 'quantity.g': 1},
-        (branch, branchTrunk) => {
-            branch.name = branchTrunk.name
-            branch.color = branchTrunk.color
-            branch.quantity = {bqt: branch.bqt, g: branchTrunk.quantity.g}
-            delete branch.bqt
-            return branch
-        }
+        (branch, branchTrunk) => ({
+            _id: branch.branchId,
+            linkId: branch._id,
+            trunk: {
+                name: branchTrunk.name,
+                color: branchTrunk.color,
+                quantity: {bqt: branch.bqt, g: branchTrunk.quantity.g}
+            }
+        })
     ), "MERGE BRANCH INFOS")
 )
 

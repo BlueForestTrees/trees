@@ -1,5 +1,5 @@
 import {col} from "mongo-registry/dist"
-import {validRootId, validTrunkId, rootIdIsNotTrunkId, validOptionalRelativeTo, validId, validBodyBqt} from "../../const/validations"
+import {validRootId, validTrunkId, rootIdIsNotTrunkId, validBodyOptRelativeTo, validId, validBodyBqt} from "../validations"
 
 import configure from "items-service"
 import {cols} from "../../const/collections"
@@ -17,7 +17,8 @@ router.put('/api/root',
     validTrunkId,
     validRootId,
     validBodyBqt,
-    validOptionalRelativeTo,
+    validBodyOptRelativeTo,
+    
     rootIdIsNotTrunkId,
     run(({_id, trunkId, rootId, bqt, relativeTo}) => ({filter: {_id, trunkId, rootId}, item: {bqt, relativeTo}})),
     run(rootService.filteredUpdate)

@@ -1,4 +1,4 @@
-import {validPathTrunkId} from "../../const/validations"
+import {validPathTrunkId} from "../validations"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest";
 import {omit} from 'lodash'

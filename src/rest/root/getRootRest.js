@@ -1,4 +1,4 @@
-import {validId, validPathId, validPathTrunkId, validTrunkId} from "../../const/validations"
+import {validId, validPathId, validPathTrunkId, validTrunkId} from "../validations"
 import {Router, run} from 'express-blueforest'
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry/dist"
@@ -18,13 +18,16 @@ router.get('/api/root/:trunkId',
     run(trunkService.append(
         "rootId",
         {name: 1, color: 1, 'quantity.g': 1},
-        (root, rootTrunk) => {
-            root.name = rootTrunk.name
-            root.color = rootTrunk.color
-            root.quantity = {bqt: root.bqt, g: rootTrunk.quantity.g}
-            delete root.bqt
-            return root
-        }
+        (root, rootTrunk) => ({
+            linkId: root._id,
+            _id: root.rootId,
+            relativeTo: root.relativeTo,
+            trunk: {
+                name: rootTrunk.name,
+                color: rootTrunk.color,
+                quantity: {bqt: root.bqt, g: rootTrunk.quantity.g}
+            }
+        })
     ))
 )
 

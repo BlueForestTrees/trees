@@ -1,7 +1,7 @@
 import {getAllFacetEntries, getFacetEntryByName} from "../../service/facetEntry/getFacetEntryService"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest";
-import {optionalValidG, optionnalAfterIdx, optionnalPageSize, validQ} from "../../const/validations"
+import {optionalValidG, optionnalAfterIdx, optionnalPageSize, validQ} from "../validations"
 import {cols} from "../../const/collections"
 import configure from "items-service"
 import {col} from "mongo-registry/dist"

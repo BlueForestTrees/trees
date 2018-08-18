@@ -72,8 +72,3 @@ export const getRandomColor = () => {
     }
     return color
 }
-
-export const show = title => o => {
-    console.log("SHOW", title, JSON.stringify(o, null, 3))
-    return o
-}

@@ -41,30 +41,26 @@ const parseDesc = {
     ]
 }
 
-export const ademeToBlueforestTrunk = raws => map(raws, raw => {
-    
-    console.log(raw["Quantité"]["Quantité de référence"], raw["Quantité"]["Unité"])
-    
-    return {
-        updateOne: {
-            filter: {externId: raw.externId},
-            update: {
-                $set: {
-                    externId: raw.externId,
-                    name: raw.Nom,
-                    quantity: {
-                        bqt: raw["Quantité"]["Quantité de référence"] * unit(raw["Quantité"]["Unité"]).coef,
-                        g: grandeur(raw["Quantité"]["Unité"]) || erreurGrandeur(raw["Quantité"]["Unité"]),
-                    },
-                    color: getRandomColor(),
-                    origin: "ADEME",
-                    raw
-                }
-            },
-            upsert: true
-        }
+export const ademeToBlueforestTrunk = raws => map(raws, raw => ({
+    updateOne: {
+        filter: {externId: raw.externId},
+        update: {
+            $set: {
+                externId: raw.externId,
+                name: raw.Nom,
+                quantity: {
+                    bqt: raw["Quantité"]["Quantité de référence"] * unit(raw["Quantité"]["Unité"]).coef,
+                    g: grandeur(raw["Quantité"]["Unité"]) || erreurGrandeur(raw["Quantité"]["Unité"]),
+                },
+                color: getRandomColor(),
+                origin: "ADEME",
+                raw
+            }
+        },
+        upsert: true
     }
-})
+}))
+
 
 export const importAdemeTrunkEntries = async buffer => {
     const result = await trunks().bulkWrite(ademeToBlueforestTrunk(await parse(buffer, parseDesc)), {ordered: false})

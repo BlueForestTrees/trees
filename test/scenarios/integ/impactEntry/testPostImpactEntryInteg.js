@@ -63,6 +63,6 @@ describe('POST ImpactEntry', function () {
         }
     }))
 
-    it('post ademe impact file', withTest(postAdemeImpactEntryFileSpec))
+    it('post ademe impact entry file', withTest(postAdemeImpactEntryFileSpec))
 
 })

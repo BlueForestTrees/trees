@@ -9,6 +9,7 @@ import {parseImpactCsv} from "../../util/csv"
 import {validBodyBqt, validBodyId, validBodyImpactId, validBodyTrunkId} from "../validations"
 import {map} from 'lodash'
 import {createObjectId} from "mongo-queries-blueforest"
+import damages from "../../const/damages"
 
 const router = Router()
 const impactService = configure(() => col(cols.IMPACT))
@@ -39,8 +40,8 @@ const resolveTrunkId = async raw => {
     return (doc && {trunkId: doc._id}) || {trunkExternId: raw.trunkExternId}
 }
 const resolveImpactId = async raw => {
-    const doc = await impactEntryService.findOne({externId: raw.impactExternId}, {_id: 1})
-    return (doc && {impactId: doc._id}) || {impactExternId: raw.impactExternId}
+    const doc = await impactEntryService.findOne({externId: raw.impactExternId}, {_id: 1, damage: 1})
+    return (doc && {impactId: doc._id, damage: doc.damage}) || {impactExternId: raw.impactExternId}
 }
 
 router.post('/api/impact',

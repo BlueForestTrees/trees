@@ -13,11 +13,11 @@ describe('Imports', function () {
 
     beforeEach(init(api, ENV, cols))
 
-    it('first impact imports', async () => {
+    it('first impact imports entry', async () => {
         await importAdemeImpactEntries(impactBuffer)
         expect(await countFromDbByDoc(cols.IMPACT_ENTRY, {origin: "ADEME"})).to.equal(27)
     })
-    it('two impact imports', async () => {
+    it('two impact imports entry', async () => {
         await importAdemeImpactEntries(impactBuffer)
         await importAdemeImpactEntries(impactBuffer)
 

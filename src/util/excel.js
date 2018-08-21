@@ -13,9 +13,9 @@ export const parse = (buffer, desc) => {
     }).then(() => docs)
 }
 
-export const parseDocument = (workbook, map, idx) => {
+export const parseDocument = (workbook, map, colIdx) => {
     const obj = {}
-    const values = workbook.getWorksheet(1).getColumn(idx).values
+    const values = workbook.getWorksheet(1).getColumn(colIdx).values
     for (let i = 0; i < map.length; i++) {
         assign(obj, map[i], parseValue(map[i], values[map[i].idx]))
     }

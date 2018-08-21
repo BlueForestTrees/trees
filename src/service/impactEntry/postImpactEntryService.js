@@ -3,7 +3,8 @@ import {col} from "mongo-registry/dist"
 import {AllreadyExistError} from "../../exceptions/Errors"
 import {parse} from "../../util/excel"
 import {grandeur} from "unit-manip"
-import {map} from 'lodash'
+import {map, filter} from 'lodash'
+import damages from "../../const/damages"
 
 const impactsEntry = () => col(cols.IMPACT_ENTRY)
 
@@ -39,6 +40,7 @@ export const ademeToBlueforestImpactEntries = raws => map(raws, raw => ({
                 ...ademeUnitToGrandeurEq(raw['Unité de référence']),
                 color: "#696969",
                 origin: "ADEME",
+                damage: damages.indexOf(raw['Unité de référence']) !== -1,
                 raw
             }
         },

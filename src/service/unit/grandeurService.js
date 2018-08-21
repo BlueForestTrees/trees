@@ -83,9 +83,17 @@ export const loadUnitsData = () => Promise.resolve(
             unit("m", "Mètre (m)", 1),
             unit("km", "Kilo-mètre (km)", 1000)
         ]),
-        grandeur("Prix", "Prix/Coût (€...)", [
+        grandeur("Pri1", "Prix/Coût (€...)", [
+            unit("M€", "milliard-euro (€)", 1000000000),
+            unit("m€", "million-euro (€)", 1000000),
+            unit("k€", "kilo-euro (€)", 1000),
             unit("€", "euro (€)", 1),
-            unit("$", "dollar ($)", 1.17),
+        ]),
+        grandeur("Pri2", "Prix/Coût (€...)", [
+            unit("M$", "billion-dollar ($)", 1000000),
+            unit("m$", "million-dollar ($)", 1000000),
+            unit("k$", "kilo-dollar ($)", 1000),
+            unit("$", "dollar ($)", 1),
         ]),
         grandeur("Tran", "Transport (t*km...)", [
             unit("t*km", "Tonne Kilomètre (t*km)", 1),

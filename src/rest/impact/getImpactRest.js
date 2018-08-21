@@ -13,6 +13,7 @@ const impactEntryService = configure(() => col(cols.IMPACT_ENTRY))
 
 router.get('/api/impact/:trunkId',
     validPathTrunkId,
+    run(({trunkId}) => ({trunkId, damage: false})),
     run(impactService.findMixin({trunkId: 0})),
     run(impactEntryService.append(
         "impactId",

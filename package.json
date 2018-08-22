@@ -46,7 +46,7 @@
     "jsonwebtoken": "8.3.0",
     "lodash": "4.17.10",
     "mongo-queries-blueforest": "1.0.6",
-    "mongo-registry": "1.0.3",
+    "mongo-registry": "1.0.4",
     "morgan": "^1.9.0",
     "nested-error-stacks": "2.0.0",
     "nodemailer": "4.6.7",

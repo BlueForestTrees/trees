@@ -15,7 +15,7 @@ router.get('/api/impactEntry',
     validQ,
     run(({q}) => impactEntryService.search([
         {key: "name", type: "regex", value: q},
-        {key: "damage", value: false}
+        {key: "damage", value: {$ne: true}}
     ], 0, searchMixin))
 )
 

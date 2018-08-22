@@ -9,7 +9,7 @@ describe('POST ALL', function () {
     
     beforeEach(init(api, ENV, cols))
     
-    it('post all', withTest([
+    it('big post all', withTest([
         {
             req: {
                 url: "/api/trunkBulk/ademe",

@@ -12,7 +12,7 @@ import {ObjectID} from "mongodb"
 import {pick} from 'lodash'
 import {papierVA} from "../../../database/papier"
 import {co2eImpactEntry, vitBImpactEntry, vitCImpactEntry} from "../../../database/impactEntries"
-import {gateauTrunk} from "../../../database/gateau"
+import {bleImpacts, gateauTrunk} from "../../../database/gateau"
 
 const unknownId = ObjectID().toString()
 
@@ -25,8 +25,11 @@ describe('GET ImpactTank', function () {
                 url: `/api/impacttank/${papierVA._id}`
             },
             res: {
-                body: [
-                    {_id: co2eImpactEntry._id, bqt: 21107}
+                bodypath: [
+                    {path: "$[0]._id", value: co2eImpactEntry._id},
+                    {path: "$[0].name", value: co2eImpactEntry.name},
+                    {path: "$[0].quantity.bqt", value: 21107},
+                    {path: "$[0].quantity.g", value: co2eImpactEntry.g},
                 ]
             }
         }
@@ -37,9 +40,16 @@ describe('GET ImpactTank', function () {
             url: `/api/impacttank/${gateauTrunk._id}`,
         },
         res: {
-            body: [
-                {_id: vitCImpactEntry._id, bqt: 10},
-                {_id: vitBImpactEntry._id, bqt: 0.1}
+            bodypath: [
+                {path: "$[0]._id", value: vitCImpactEntry._id},
+                {path: "$[0].name", value: vitCImpactEntry.name},
+                {path: "$[0].quantity.bqt", value: 10},
+                {path: "$[0].quantity.g", value: vitCImpactEntry.g},
+                
+                {path: "$[1]._id", value: vitBImpactEntry._id},
+                {path: "$[1].name", value: vitBImpactEntry.name},
+                {path: "$[1].quantity.bqt", value: 0.1},
+                {path: "$[1].quantity.g", value: vitBImpactEntry.g},
             ]
         }
     }))

@@ -9,7 +9,7 @@ describe('TU mail', function () {
         expect(mail).to.equal("salut blue.org/ds1f984")
     })
 
-    it('send', function (done) {
+    it('send big', function (done) {
         sendMail("smedini@gmail.com", "subject", "html")
             .then(() => done())
             .catch((e) => {

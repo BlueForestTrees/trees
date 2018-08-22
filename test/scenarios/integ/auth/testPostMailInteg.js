@@ -8,7 +8,7 @@ describe('POST Mail', function () {
 
     beforeEach(init(api, ENV, cols))
 
-    it('valid mail test', withTest(validPostMailSpec))
+    it('valid mail test big', withTest(validPostMailSpec))
 
     it('existing mail test', withTest(existingPostMailSpec))
 

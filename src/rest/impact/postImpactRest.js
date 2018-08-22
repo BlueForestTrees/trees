@@ -7,9 +7,8 @@ import {validGod} from "../../service/auth/authService"
 import fileUpload from "express-fileupload"
 import {parseImpactCsv} from "../../util/csv"
 import {validBodyBqt, validBodyId, validBodyImpactId, validBodyTrunkId} from "../validations"
-import {map} from 'lodash'
+import {map, filter} from 'lodash'
 import {createObjectId} from "mongo-queries-blueforest"
-import damages from "../../const/damages"
 
 const router = Router()
 const impactService = configure(() => col(cols.IMPACT))
@@ -20,26 +19,36 @@ module.exports = router
 
 const importImpactsByChunks = async raws => {
     const length = raws.length
+    let insertions = 0
     for (let i = 0, chunk = 100; i < length; i += chunk) {
-        await impactService.bulkWrite(await ademeToBlueforestImpact(raws.slice(i, i + chunk)))
+        let impactsEtDamages = await ademeToBlueforestImpact(raws.slice(i, i + chunk))
+        let impacts = filter(impactsEtDamages, i => {
+            let keep = !i.insertOne.damage
+            delete i.insertOne.damage
+            return keep
+        })
+        if (impacts.length > 0) {
+            await impactService.bulkWrite(impacts)
+            insertions += impacts.length
+        }
     }
-    return {ok: 1, nInserted: length}
+    return {ok: 1, nInserted: insertions}
 }
 
 const ademeToBlueforestImpact = raws => Promise.all(map(raws, async raw => ({
     insertOne: {
         _id: createObjectId(),
-        ...await resolveTrunkId(raw),
-        ...await resolveImpactId(raw),
+        ...await resolveTrunk(raw),
+        ...await resolveImpactEntry(raw),
         bqt: raw.bqt
     }
 })))
 
-const resolveTrunkId = async raw => {
+const resolveTrunk = async raw => {
     const doc = (await trunkService.findOne({externId: raw.trunkExternId}, {_id: 1}))
     return (doc && {trunkId: doc._id}) || {trunkExternId: raw.trunkExternId}
 }
-const resolveImpactId = async raw => {
+const resolveImpactEntry = async raw => {
     const doc = await impactEntryService.findOne({externId: raw.impactExternId}, {_id: 1, damage: 1})
     return (doc && {impactId: doc._id, damage: doc.damage}) || {impactExternId: raw.impactExternId}
 }

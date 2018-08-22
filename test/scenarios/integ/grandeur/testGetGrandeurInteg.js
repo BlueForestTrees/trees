@@ -7,7 +7,7 @@ describe('GET Grandeurs', function () {
 
     beforeEach(init(api, ENV, cols))
 
-    it('return grandeurs', withTest({
+    it('get grandeurs', withTest({
             req: {
                 url: "/api/grandeurs"
             },
@@ -285,20 +285,62 @@ describe('GET Grandeurs', function () {
                         ]
                     },
                     {
-                        "key": "Prix",
+                        "key": "Pri1",
                         "label": "Prix/Coût (€...)",
                         "units": [
                             {
                                 "coef": 1,
-                                "grandeur": "Prix",
+                                "grandeur": "Pri1",
                                 "name": "euro (€)",
                                 "shortname": "€"
                             },
                             {
-                                "coef": 1.17,
-                                "grandeur": "Prix",
+                                "coef": 1000,
+                                "grandeur": "Pri1",
+                                "name": "kilo-euro (€)",
+                                "shortname": "k€"
+                            },
+                            {
+                                "coef": 1000000,
+                                "grandeur": "Pri1",
+                                "name": "million-euro (€)",
+                                "shortname": "m€"
+                            },
+                            {
+                                "coef": 1000000000,
+                                "grandeur": "Pri1",
+                                "name": "milliard-euro (€)",
+                                "shortname": "M€"
+                            }
+                        ]
+                    },
+                    {
+                        "key": "Pri2",
+                        "label": "Prix/Coût (€...)",
+                        "units": [
+                            {
+                                "coef": 1,
+                                "grandeur": "Pri2",
                                 "name": "dollar ($)",
                                 "shortname": "$"
+                            },
+                            {
+                                "coef": 1000,
+                                "grandeur": "Pri2",
+                                "name": "kilo-dollar ($)",
+                                "shortname": "k$"
+                            },
+                            {
+                                "coef": 1000000,
+                                "grandeur": "Pri2",
+                                "name": "billion-dollar ($)",
+                                "shortname": "M$"
+                            },
+                            {
+                                "coef": 1000000,
+                                "grandeur": "Pri2",
+                                "name": "million-dollar ($)",
+                                "shortname": "m$"
                             }
                         ]
                     },

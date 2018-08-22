@@ -6,7 +6,7 @@ import fileUpload from "express-fileupload"
 import {validGod} from "../../service/auth/authService"
 import {cols} from "../../const/collections"
 import configure from "items-service"
-import {col} from "mongo-registry/dist"
+import {col} from "mongo-registry"
 
 const router = Router()
 module.exports = router

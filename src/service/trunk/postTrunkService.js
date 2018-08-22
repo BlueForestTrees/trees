@@ -1,5 +1,5 @@
 import {cols} from "../../const/collections"
-import {col} from "mongo-registry/dist"
+import {col} from "mongo-registry"
 import {map, omit} from 'lodash'
 import {parse} from "../../util/excel"
 import {getRandomColor} from "../../util/calculations"

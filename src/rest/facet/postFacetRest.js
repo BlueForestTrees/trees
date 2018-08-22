@@ -2,7 +2,7 @@ import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
 import {validBodyBqt, validBodyId, validBodyFacetId, validBodyTrunkId} from "../validations"
 import {cols} from "../../const/collections"
-import {col} from "mongo-registry/dist"
+import {col} from "mongo-registry"
 import configure from "items-service"
 
 const router = Router()

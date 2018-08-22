@@ -1,5 +1,5 @@
 import {cols} from "../../const/collections"
-import {col} from "mongo-registry/dist"
+import {col} from "mongo-registry"
 import {AllreadyExistError} from "../../exceptions/Errors"
 import {parse} from "../../util/excel"
 import {grandeur} from "unit-manip"

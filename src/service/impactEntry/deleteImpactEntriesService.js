@@ -1,5 +1,5 @@
 import {cols} from "../../const/collections"
-import {col} from "mongo-registry/dist"
+import {col} from "mongo-registry"
 
 const impactEntries = () => col(cols.IMPACT_ENTRY)
 

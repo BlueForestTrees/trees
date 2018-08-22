@@ -1,4 +1,4 @@
-import {col} from "mongo-registry/dist"
+import {col} from "mongo-registry"
 import {validRootId, validTrunkId, rootIdIsNotTrunkId, validBodyOptRelativeTo, validId, validBodyBqt} from "../validations"
 
 import configure from "items-service"

@@ -1,5 +1,5 @@
 import {validPathId, validPathTrunkId} from "../validations"
-import {col} from "mongo-registry/dist"
+import {col} from "mongo-registry"
 import configure from "items-service"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"

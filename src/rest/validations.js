@@ -2,10 +2,9 @@ import {BQT, BRANCHID, COLOR, FACET_ID, FACETSIDS, G, ID, IMPACT_ID, NAME, QUANT
 import {IS_DECIMAL, IS_NOT_RIGHT_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "../const/messages"
 import {check, body, oneOf, param, query} from 'express-validator/check'
 import {isNil, map} from 'lodash'
-import {getGrandeursKeys, getShortnames} from "../../../unit-manip/dist/index"
-import {isValidIds, objectNoEx, objects} from "mongo-queries-blueforest"
-import {errors} from "../../../express-blueforest/index"
-import {withIdIn} from "../../../mongo-queries-blueforest/index"
+import {getGrandeursKeys, getShortnames} from "unit-manip"
+import {isValidIds, objectNoEx, objects, withIdIn} from "mongo-registry"
+import {errors} from "express-blueforest"
 
 const defaultPS = 20
 const unitsShortnames = getShortnames()

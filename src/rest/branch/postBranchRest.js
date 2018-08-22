@@ -1,7 +1,7 @@
 import {branchIdIsNotTrunkId, validBodyBqt, validBodyBranchId, validBodyId, validBodyTrunkId, validBranchId, validTrunkId} from "../validations"
 import configure from "items-service"
 import {cols} from "../../const/collections"
-import {col} from "mongo-registry/dist"
+import {col} from "mongo-registry"
 
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"

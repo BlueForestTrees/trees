@@ -1,14 +1,14 @@
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
 import {cols} from "../../const/collections"
-import {col} from "mongo-registry/dist"
+import {col} from "mongo-registry"
 import configure from "items-service"
 import {validGod} from "../../service/auth/authService"
 import fileUpload from "express-fileupload"
 import {parseImpactCsv} from "../../util/csv"
 import {validBodyBqt, validBodyId, validBodyImpactId, validBodyTrunkId} from "../validations"
 import {map, filter} from 'lodash'
-import {createObjectId} from "mongo-queries-blueforest"
+import {createObjectId} from "mongo-registry"
 
 const router = Router()
 const impactService = configure(() => col(cols.IMPACT))

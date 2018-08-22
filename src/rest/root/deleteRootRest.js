@@ -3,7 +3,7 @@ import {Router} from "express-blueforest"
 import {validPathId} from "../validations"
 import configure from "items-service"
 import {cols} from "../../const/collections"
-import {col} from "mongo-registry/dist"
+import {col} from "mongo-registry"
 
 const router = Router()
 

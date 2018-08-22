@@ -1,5 +1,5 @@
 import {cols} from "../const/collections"
-import {col} from "mongo-registry/dist"
+import {col} from "mongo-registry"
 import {userStatus} from "../const/userStatus"
 import sha1 from "sha1"
 

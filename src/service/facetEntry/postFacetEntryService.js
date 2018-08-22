@@ -1,5 +1,5 @@
 import {cols} from "../../const/collections"
-import {col} from "mongo-registry/dist"
+import {col} from "mongo-registry"
 
 const facetsEntry = () => col(cols.FACET_ENTRY)
 

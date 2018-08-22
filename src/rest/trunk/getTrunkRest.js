@@ -2,7 +2,7 @@ import {optionnalAfterIdx, optionnalPageSize, validId, validIds, validQ, idsList
 import {run, convert} from 'express-blueforest'
 import {Router} from "express-blueforest"
 import configure from "items-service"
-import {col} from "mongo-registry/dist"
+import {col} from "mongo-registry"
 import {cols} from "../../const/collections"
 
 const router = Router()

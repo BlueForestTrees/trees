@@ -1,6 +1,6 @@
 import {branchIdIsNotTrunkId, validBranchId, validTrunkId, validBodyBqt, validId, validBodyOptRelativeTo} from "../validations"
 import {cols} from "../../const/collections"
-import {col} from "mongo-registry/dist"
+import {col} from "mongo-registry"
 import configure from "items-service"
 
 import {run} from 'express-blueforest'

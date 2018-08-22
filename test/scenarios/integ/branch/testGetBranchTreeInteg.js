@@ -6,19 +6,20 @@ import {cols} from "../../../../src/const/collections"
 import {aTrunk} from "../../../database/lettres"
 
 describe('GET Branch Tree', function () {
-
+    
     beforeEach(init(api, ENV, cols))
-
+    
     it('return null', withTest({
-        req:{
+        req: {
             url: `/api/branch/tree/${aTrunk._id}`
         },
-        res:{
+        res: {
             body: {
-                ...withIdBqt(aTrunk._id, 1),
+                _id: aTrunk._id,
+                bqt: 1,
                 items: []
             }
         }
     }))
-
+    
 })

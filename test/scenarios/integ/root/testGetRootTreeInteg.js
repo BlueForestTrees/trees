@@ -9,9 +9,9 @@ import {arbreTrunk} from "../../../database/skate"
 import {coucheAdhesif, coucheAlu, couchePapier, couchePE, papierVA} from "../../../database/papier"
 
 describe('GET Root tree', function () {
-
+    
     beforeEach(init(api, ENV, cols))
-
+    
     it('return a little tree', withTest({
         req: {
             url: `/api/root/tree/${gateauTrunk._id}`,
@@ -36,7 +36,7 @@ describe('GET Root tree', function () {
             }
         }
     }))
-
+    
     it('return the papier tree', withTest({
         req: {
             url: `/api/root/tree/${papierVA._id}`,
@@ -53,17 +53,17 @@ describe('GET Root tree', function () {
             }
         }
     }))
-
+    
     it('return null', withTest({
         req: {
             url: `/api/root/tree/${arbreTrunk._id}`,
         },
         res: {
             body: {
-                ...withIdBqt(arbreTrunk._id, 1),
+                _id: arbreTrunk._id, bqt: 1,
                 items: []
             }
         }
     }))
-
+    
 })

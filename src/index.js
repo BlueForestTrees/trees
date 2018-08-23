@@ -16,3 +16,4 @@ const init = api => api.use(morgan(ENV.MORGAN || ':status :method :url :response
 export default dbInit(ENV, registry)
     .then(initServices)
     .then(startExpress(ENV, errorMapper, init))
+    .catch(e => console.error("BOOT ERROR\n",e))

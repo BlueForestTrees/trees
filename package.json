@@ -1,13 +1,14 @@
 {
   "name": "api-tree",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "license": "ISC",
   "scripts": {
     "start": "node index.js",
     "build": "rimraf dist && babel src --out-dir dist/js && copyfiles etc/** dist",
     "dev-api": "node --version && cross-env MAIL_TEMPLATE_PATH=etc/api-tree/templates MAIL_CONFIG_PATH=../secured/api-tree REST_PATH=src/rest nodemon src/index.js --exec babel-node",
     "test-api": "cross-env NODE_ENV=test PORT=9000 MAIL_TEMPLATE_PATH=etc/api-tree/templates MAIL_CONFIG_PATH=../secured/api-tree REST_PATH=src/rest mocha --recursive --require babel-register --exit \"test/**/*.js\"",
-    "test-init-db": "cross-env NODE_ENV=test mocha --exit test/scenarios/tu/testInitDb.js --require babel-register"
+    "test-init-db": "cross-env NODE_ENV=test mocha --exit test/scenarios/tu/testInitDb.js --require babel-register",
+    "start-db": "sudo docker run -itd -p 27017:27017 -v /var/lib/blueforest/mongo/dev:/data/db -e MONGO_INITDB_ROOT_USERNAME=doudou -e MONGO_INITDB_ROOT_PASSWORD=masta --restart unless-stopped mongo:latest"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
@@ -45,7 +46,7 @@
     "items-service": "1.0.9",
     "jsonwebtoken": "8.3.0",
     "lodash": "4.17.10",
-    "mongo-registry": "1.0.8",
+    "mongo-registry": "1.0.9",
     "morgan": "1.9.0",
     "nested-error-stacks": "2.0.0",
     "nodemailer": "4.6.7",

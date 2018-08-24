@@ -3,6 +3,8 @@ import handlebars from 'handlebars'
 import ENV from "../../env"
 import path from 'path'
 import nodemailer from 'nodemailer'
+const debug = require('debug')('api:express:mail')
+const error = require('debug')('api:express:mail:err')
 
 const transporter = nodemailer.createTransport(ENV.MAIL_CONFIG.options)
 
@@ -17,12 +19,12 @@ export const genMail = (context, templateFile) => {
 export const sendMail = async (to, subject, html) => await new Promise(function (resolve, reject) {
     transporter.sendMail({
         to, subject, text: html, html, from: ENV.MAIL_CONFIG.from
-    }, function (error, info) {
-        if (error) {
-            console.log(error)
-            reject(error)
+    }, function (err, info) {
+        if (err) {
+            error(err)
+            reject(err)
         } else {
-            console.log('Email sent: ' + info.response)
+            debug('Email sent: %o', info.response)
             resolve(null)
         }
     })

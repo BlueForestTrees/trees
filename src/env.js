@@ -1,4 +1,4 @@
-import {debug} from "test-api-express-mongo/dist/util"
+const debug = require('debug')('api:tree')
 import path from 'path'
 import fs from 'fs'
 import {version} from './../package.json'

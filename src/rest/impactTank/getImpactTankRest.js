@@ -1,4 +1,4 @@
-import {validPathId, validPathTrunkId} from "../validations"
+import {validPathTrunkId} from "../validations"
 import {col} from "mongo-registry"
 import configure from "items-service"
 import {run} from 'express-blueforest'
@@ -28,7 +28,7 @@ router.get('/api/impacttank/:trunkId',
             _id: impact.impactId,
             name: impactEntry.name,
             color: impactEntry.color,
-            quantity: {bqt: impact.bqt, g: impactEntry.g}
+            quantity: {bqt: impact.bqt, g: impactEntry.g, eq: impactEntry.eq}
         })
     ))
 )

@@ -23,7 +23,7 @@ router.get('/api/impact/:trunkId',
             impactId: impact.impactId,
             name: impactEntry.name,
             color: impactEntry.color,
-            quantity: {bqt: impact.bqt, g: impactEntry.g}
+            quantity: {bqt: impact.bqt, g: impactEntry.g, eq: impactEntry.eq}
         })
     ))
 )

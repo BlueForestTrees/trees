@@ -14,7 +14,7 @@ describe('GET Impacts', function () {
 
     beforeEach(init(api, ENV, cols))
 
-    it('impacts', withTest({
+    it('get impacts', withTest({
         req: {
             url: `/api/impact/${bleTrunk._id}`
         },
@@ -28,6 +28,7 @@ describe('GET Impacts', function () {
                 {path: "$[1].name", value: vitBImpactEntry.name},
                 {path: "$[1].quantity.bqt", value: 0.15},
                 {path: "$[1].quantity.g", value: vitBImpactEntry.g},
+                {path: "$[1].quantity.eq", value: vitBImpactEntry.eq},
             ]
         }
     }))

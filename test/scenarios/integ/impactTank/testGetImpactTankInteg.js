@@ -12,7 +12,7 @@ import {ObjectID} from "mongodb"
 import {pick} from 'lodash'
 import {papierVA} from "../../../database/papier"
 import {co2eImpactEntry, vitBImpactEntry, vitCImpactEntry} from "../../../database/impactEntries"
-import {bleImpacts, gateauTrunk} from "../../../database/gateau"
+import {gateauTrunk} from "../../../database/gateau"
 
 const unknownId = ObjectID().toString()
 
@@ -50,6 +50,7 @@ describe('GET ImpactTank', function () {
                 {path: "$[1].name", value: vitBImpactEntry.name},
                 {path: "$[1].quantity.bqt", value: 0.1},
                 {path: "$[1].quantity.g", value: vitBImpactEntry.g},
+                {path: "$[1].quantity.eq", value: vitBImpactEntry.eq},
             ]
         }
     }))

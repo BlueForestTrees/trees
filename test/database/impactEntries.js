@@ -9,6 +9,8 @@ export const vitDImpactEntry = withEntry("5a6a03c03e77667641d2d2c7", "Ivitamine 
 export const vitEImpactEntry = withEntry("5a6a03c03e77667641d2d2c8", "Ivitamine E",  "Dens")
 export const co2eImpactEntry = withEntry("5a6a03c03e77667641d2d2c9", "équivalent CO2",  "Mass")
 
+vitBImpactEntry.eq = "CO2"
+
 export const database = {
     [cols.IMPACT_ENTRY]: [vitDImpactEntry, vitEImpactEntry, co2eImpactEntry, vitCImpactEntry, vitBImpactEntry, prixImpactEntry]
 }

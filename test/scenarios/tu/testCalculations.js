@@ -75,5 +75,12 @@ describe('TU Calculations', function () {
         expect(654^"Mass").to.not.be.true
         expect(null^"Mass").to.not.be.false
     })
+    
+    it('test &', function(){
+        expect(false & false).to.not.be.true
+        expect(false & true).to.not.be.false
+        expect(true & false).to.not.be.false
+        expect(true & true).to.not.be.true
+    })
 
 })

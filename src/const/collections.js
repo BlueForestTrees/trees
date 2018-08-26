@@ -1,6 +1,7 @@
 export const cols = {
     LINK: 'LinkCollection',
     TRUNK: 'TrunkCollection',
+    CATEGORIES: 'CategoriesCollection',
     FACET: 'FacetCollection',
     FACET_ENTRY: 'FacetEntryCollection',
     IMPACT: 'ImpactCollection',

@@ -9,11 +9,10 @@ import configure from "items-service"
 
 const router = Router()
 module.exports = router
-const readRootTree = configure(() => col(cols.ROOT)).treeRead(cols.ROOT, "rootId")
 
 router.get('/api/tank/:trunkId',
     validPathTrunkId,
-    run(readRootTree, "TREE"),
+    run(configure(() => col(cols.ROOT)).treeRead(cols.ROOT, "trunkId","rootId"), "TREE"),
     run(extraireFeuilles, "TANK"),
     run(mergeList)
 )

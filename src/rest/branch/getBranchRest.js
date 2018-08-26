@@ -10,7 +10,7 @@ module.exports = router
 
 const branchService = configure(() => col(cols.BRANCH))
 const trunkService = configure(() => col(cols.TRUNK))
-const readBranchTree = branchService.treeRead(cols.BRANCH, "branchId")
+const readBranchTree = branchService.treeRead(cols.BRANCH, "trunkId", "branchId")
 
 router.get('/api/branch/:trunkId',
     validPathTrunkId,

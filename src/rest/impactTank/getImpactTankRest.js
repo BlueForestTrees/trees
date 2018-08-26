@@ -10,7 +10,7 @@ const router = Router()
 
 module.exports = router
 
-const readRootTree = configure(() => col(cols.ROOT)).treeRead(cols.ROOT, "rootId")
+const readRootTree = configure(() => col(cols.ROOT)).treeRead(cols.ROOT, "trunkId", "rootId")
 const readAllQuantifiedImpacts = configure(() => col(cols.IMPACT)).readAllQuantified
 const impactEntryService = configure(() => col(cols.IMPACT_ENTRY))
 

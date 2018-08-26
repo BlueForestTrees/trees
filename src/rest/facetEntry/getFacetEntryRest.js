@@ -1,7 +1,7 @@
 import {getAllFacetEntries, getFacetEntryByName} from "../../service/facetEntry/getFacetEntryService"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest";
-import {optionalValidG, optionnalAfterIdx, optionnalPageSize, validQ} from "../validations"
+import {optionalValidG, optionnalAfterIdx, optionnalPageSize, optionalValidQ} from "../validations"
 import {cols} from "../../const/collections"
 import configure from "items-service"
 import {col} from "mongo-registry"
@@ -13,7 +13,7 @@ const facetEntryService = configure(() => col(cols.FACET_ENTRY))
 const searchMixin = {color: 1, name: 1, g: 1}
 
 router.get('/api/facetEntry',
-    validQ,
+    optionalValidQ,
     optionalValidG,
     optionnalPageSize,
     optionnalAfterIdx,

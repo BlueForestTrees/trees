@@ -4,7 +4,7 @@ import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
 import {createStringObjectId, createObjectId} from "test-api-express-mongo/dist/util"
-import {co2eImpactEntry, vitCImpactEntry} from "../../../database/impactEntries"
+import {co2eImpactEntry} from "../../../database/impactEntries"
 import {withError} from "test-api-express-mongo/dist/domain"
 
 
@@ -62,7 +62,5 @@ describe('POST ImpactEntry', function () {
             }
         }
     }))
-
-    it('post ademe impact entry file', withTest(postAdemeImpactEntryFileSpec))
 
 })

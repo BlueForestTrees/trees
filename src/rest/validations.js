@@ -1,14 +1,14 @@
 import {BQT, BRANCHID, COLOR, FACET_ID, FACETSIDS, G, ID, IMPACT_ID, NAME, QUANTITY_BQT, QUANTITY_G, ROOTID, RELATIVE_TO, RELATIVE_TO_BQT, RELATIVE_TO_ID, TREEID, TRUNKID, IMPACTID, FACETID} from "../const/paths"
-import {IS_DECIMAL, IS_NOT_RIGHT_ID, IS_VALID_UNIT, SHOULD_BE_DEFINED} from "../const/messages"
+import {IS_DECIMAL, IS_NOT_RIGHT_ID, SHOULD_BE_DEFINED} from "../const/messages"
 import {check, body, oneOf, param, query} from 'express-validator/check'
 import {isNil, map} from 'lodash'
-import {getGrandeursKeys, getShortnames} from "unit-manip"
 import {isValidIds, objectNoEx, objects, withIdIn} from "mongo-registry"
 import {errors} from "express-blueforest"
+import {grandeursKeys} from "../const/grandeurs"
 
+const debug = require('debug')('api:tree:validation')
 const defaultPS = 20
-const unitsShortnames = getShortnames()
-const grandeur = chain => chain.isIn(getGrandeursKeys()).withMessage("should be Mass, Dens, Long, Tran...")
+const grandeur = chain => chain.isIn(grandeursKeys).withMessage("should be Mass, Dens, Long, Tran...")
 const mongoId = chain => chain.exists().withMessage("missing").isMongoId().withMessage("invalid mongo id").customSanitizer(objectNoEx)
 const number = chain => chain.isNumeric().withMessage("must be a valid number")
 
@@ -36,6 +36,7 @@ export const idsList = ({_ids}) => {
     if (!isValidIds(_ids)) {
         throw new errors.ValidationError("_ids query params are invalid")
     }
+    
     return withIdIn(objects(_ids))
 }
 
@@ -85,10 +86,9 @@ export const facetIdIsNotTrunkId = check(FACET_ID, IS_NOT_RIGHT_ID).custom((face
 export const branchIdIsNotTrunkId = check(BRANCHID, IS_NOT_RIGHT_ID).custom((branch, {req}) => (!branch || !req.body.trunk) || (branch._id !== req.body.trunk._id))
 export const validBodyName = body(NAME).isLength({min: 2}).matches(/^.+/)
 export const validBodyColor = body(COLOR).isLength({min: 2}).matches(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)
-export const validQ = check('q').optional().exists()
+export const optionalValidQ = check('q').optional().exists()
 
 export const present = (...fields) => map(fields, field => check(field, SHOULD_BE_DEFINED).exists())
-export const validUnit = field => check(field, IS_VALID_UNIT).optional().isIn(unitsShortnames)
 export const validBodyNumber = field => body(field, IS_DECIMAL).optional().isDecimal().toFloat()
 
 export const validPathId = mongoId(param(ID))
@@ -97,7 +97,7 @@ export const validPathRootId = mongoId(param(ROOTID))
 export const validPathImpactId = mongoId(param(IMPACTID))
 export const validPathBqt = param(BQT, IS_DECIMAL).isDecimal().toFloat()
 export const validOptionalBodyName = body(NAME).optional().exists().matches(/^.+/)
-export const validPathG = param(G).isIn(getGrandeursKeys())
+export const validPathG = param(G).isIn(grandeursKeys)
 
 export const validOptionalBodyBqtG = [
     optionalValidBodyG,

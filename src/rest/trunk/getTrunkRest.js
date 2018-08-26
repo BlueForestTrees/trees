@@ -1,4 +1,4 @@
-import {optionnalAfterIdx, optionnalPageSize, validId, validIds, validQ, idsList, optionalValidG} from "../validations"
+import {optionnalAfterIdx, optionnalPageSize, validId, validIds, optionalValidQ, idsList, optionalValidG} from "../validations"
 import {run, convert} from 'express-blueforest'
 import {Router} from "express-blueforest"
 import configure from "items-service"
@@ -12,7 +12,7 @@ const trunkService = configure(() => col(cols.TRUNK))
 const searchMixin = {color: 1, name: 1, g: 1, quantity: 1, type: 1}
 
 router.get('/api/trunks',
-    validQ,
+    optionalValidQ,
     optionalValidG,
     optionnalPageSize,
     optionnalAfterIdx,

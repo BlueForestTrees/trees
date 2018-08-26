@@ -9,7 +9,6 @@ const router = Router()
 module.exports = router
 
 const rootService = configure(() => col(cols.ROOT))
-const readRootTree = rootService.treeRead(cols.ROOT, "rootId")
 const trunkService = configure(() => col(cols.TRUNK))
 
 router.get('/api/root/:trunkId',
@@ -33,5 +32,5 @@ router.get('/api/root/:trunkId',
 
 router.get('/api/root/tree/:trunkId',
     validTrunkId,
-    run(readRootTree)
+    run(rootService.treeRead(cols.ROOT, "trunkId", "rootId"))
 )

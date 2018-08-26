@@ -4122,7 +4122,7 @@ term-size@^1.2.0:
   dependencies:
     execa "^0.7.0"
 
-test-api-express-mongo@1.0.11:
+test-api-express-mongo@1.0.8:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/test-api-express-mongo/-/test-api-express-mongo-1.0.8.tgz#e991c0d696f730d6995f20d8ae29ca313c94e48d"
   dependencies:
@@ -4266,9 +4266,9 @@ unique-string@^1.0.0:
   dependencies:
     crypto-random-string "^1.0.0"
 
-unit-manip@1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/unit-manip/-/unit-manip-1.0.5.tgz#5417872ef6aaea2b0e5e35897faae767f3bbb1bd"
+unit-manip@1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/unit-manip/-/unit-manip-1.0.7.tgz#b1756875a50705a82d9f15a92765b1e671c2143f"
   dependencies:
     fraction.js "4.0.4"
 

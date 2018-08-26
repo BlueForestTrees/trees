@@ -6,6 +6,7 @@ import {getRandomColor} from "../../util/calculations"
 import {grandeur, unit} from "unit-manip"
 
 const trunks = () => col(cols.TRUNK)
+const cats = () => col(cols.CATEGORIES)
 
 const parseDesc = {
     firstDocAt: 3,
@@ -35,13 +36,33 @@ const parseDesc = {
         {idx: 38, fieldName: "Déviations principe", xlsName: " Deviations from LCI method principle ", offsetX: true, under: "Modélisation et Validation", subunder: "Méthode et allocation LCI"},
         {idx: 39, fieldName: "Approches de la méthode LCI", xlsName: " Approches de la méthode LCI ", under: "Modélisation et Validation", subunder: "Méthode et allocation LCI"},
         {idx: 40, fieldName: "Déviations approches", xlsName: " Deviations from LCI method approaches ", offsetX: true, under: "Modélisation et Validation", subunder: "Méthode et allocation LCI"},
-        
-        // {fieldName: "Déviations approches", xlsName: " Deviations from LCI method approaches ", offsetX: true, under: "Modélisation et Validation", subunder: "Sources de données, traitement et représentativité"},
-    
     ]
 }
 
-export const ademeToBlueforestTrunk = raws => map(raws, raw => ({
+const resolveCategorie = name => cats().findOne({name})
+
+const resolveCategories = async raw => {
+    const categories = []
+    const c1 = await resolveCategorie(raw["Catégorie 1"])
+    if (c1) {
+        categories.push(c1._id)
+        const c2 = await resolveCategorie(raw["Catégorie 2"])
+        if (c2) {
+            categories.push(c2._id)
+            const c3 = await resolveCategorie(raw["Catégorie 3"])
+            if (c3) {
+                categories.push(c3._id)
+                const c4 = await resolveCategorie(raw["Catégorie 4"])
+                if (c4) {
+                    categories.push(c4._id)
+                }
+            }
+        }
+    }
+    return categories
+}
+
+export const ademeToBlueforestTrunk = raws => Promise.all(map(raws, async raw => ({
     updateOne: {
         filter: {externId: raw.externId},
         update: {
@@ -52,6 +73,7 @@ export const ademeToBlueforestTrunk = raws => map(raws, raw => ({
                     bqt: raw["Quantité"]["Quantité de référence"] * unit(raw["Quantité"]["Unité"]).coef,
                     g: grandeur(raw["Quantité"]["Unité"]) || erreurGrandeur(raw["Quantité"]["Unité"]),
                 },
+                cat: await resolveCategories(raw),
                 color: getRandomColor(),
                 origin: "ADEME",
                 raw
@@ -59,11 +81,11 @@ export const ademeToBlueforestTrunk = raws => map(raws, raw => ({
         },
         upsert: true
     }
-}))
+})))
 
 
 export const importAdemeTrunkEntries = async buffer => {
-    const result = await trunks().bulkWrite(ademeToBlueforestTrunk(await parse(buffer, parseDesc)), {ordered: false})
+    const result = await trunks().bulkWrite(await ademeToBlueforestTrunk(await parse(buffer, parseDesc)), {ordered: false})
     return {
         ok: result.ok === 1,
         insertions: result.nInserted,

@@ -6,7 +6,7 @@ import {parse, parseDocument} from "../../../src/util/excel"
 
 describe('xlsx read', function () {
 
-    const filename = "test/files/BI_1.09__06_CatImpacts_Details.xlsx"
+    const filename = "files/BI_1.09__06_CatImpacts_Details.xlsx"
 
     it('read cell A1 value', () => {
         const workbook = new Excel.Workbook()

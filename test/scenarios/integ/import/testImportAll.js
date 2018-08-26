@@ -16,7 +16,7 @@ describe('POST ALL', function () {
                 method: "POST",
                 file: {
                     field: "xlsx.ademe.trunk",
-                    path: path.resolve("test/files/BI_1.09__02_Procedes_Details.xlsx")
+                    path: path.resolve("files/BI_1.09__02_Procedes_Details.xlsx")
                 },
                 headers: {
                     ...authGod
@@ -29,7 +29,7 @@ describe('POST ALL', function () {
                 method: "POST",
                 file: {
                     field: "xlsx.ademe.impactEntry",
-                    path: path.resolve("test/files/BI_1.09__06_CatImpacts_Details.xlsx")
+                    path: path.resolve("files/BI_1.09__06_CatImpacts_Details.xlsx")
                 },
                 headers: {
                     ...authGod
@@ -42,7 +42,7 @@ describe('POST ALL', function () {
                 method: "POST",
                 file: {
                     field: "csv.ademe.impact",
-                    path: path.resolve("test/files/BI_1.09__03_Procedes_Impacts.csv")
+                    path: path.resolve("files/BI_1.09__03_Procedes_Impacts.csv")
                 },
                 headers: {
                     ...authGod

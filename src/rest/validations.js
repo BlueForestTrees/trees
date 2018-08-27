@@ -2,7 +2,7 @@ import {BQT, BRANCHID, COLOR, FACET_ID, FACETSIDS, G, ID, IMPACT_ID, NAME, QUANT
 import {IS_DECIMAL, IS_NOT_RIGHT_ID, SHOULD_BE_DEFINED} from "../const/messages"
 import {check, body, oneOf, param, query} from 'express-validator/check'
 import {isNil, map} from 'lodash'
-import {isValidIds, objectNoEx, objects, withIdIn} from "mongo-registry"
+import {isValidIds, objectNoEx, object, objects, withIdIn} from "mongo-registry"
 import {errors} from "express-blueforest"
 import {grandeursKeys} from "../const/grandeurs"
 
@@ -27,6 +27,15 @@ export const validMail = check("mail").isEmail().normalizeEmail().withMessage('m
 export const validWelcomeToken = check('t').exists()
 export const validPassword = check('password').isLength({min: 1, max: 100}).matches(/^.+/)
 export const validMessage = check("message").isString().isLength({min: 1, max: 1000}).withMessage('message trop long')
+
+export const validCats = query("cat").optional().exists()
+export const catList = ({cat}) => {
+    if (!isValidIds(cat)) {
+        throw new errors.ValidationError("cat query params are invalid")
+    }
+
+    return Array.isArray(cat) ? map(cat, c=>object(c)) : [object(cat)]
+}
 
 export const validIds = query("_ids").exists()
 export const idsList = ({_ids}) => {

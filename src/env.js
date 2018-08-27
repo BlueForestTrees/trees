@@ -1,9 +1,8 @@
 const debug = require('debug')('api:tree')
-import path from 'path'
-import fs from 'fs'
-import {version} from './../package.json'
+import {version, name} from './../package.json'
 
 const ENV = {
+    NAME:name,
     PORT: process.env.PORT || 8080,
     
     REST_PATH: process.env.REST_PATH || "rest",
@@ -15,27 +14,10 @@ const ENV = {
     DB_PWD: process.env.DB_PWD || "masta",
     
     NODE_ENV: process.env.NODE_ENV || null,
-    VERSION: process.env.npm_package_version,
+    VERSION: version,
     MORGAN: process.env.MORGAN || ':status :method :url :response-time ms - :res[content-length]',
-    AUTH_TOKEN_SECRET: process.env.AUTH_TOKEN_SECRET || 'fqse6}@@@#{tc\'uauauaua_f\'}_^@{}@_{{}#~@26nt8/z(_ic;ç(_q206az\'\"tct;çp_²²\\\\\\\"',
-    
-    MAIL_CONFIG_PATH: process.env.MAIL_CONFIG_PATH ? path.resolve(process.env.MAIL_CONFIG_PATH, "mailConfig.json") : path.resolve("/etc/api-tree/mailConfig.json"),
-    MAIL_TEMPLATE_PATH: process.env.MAIL_TEMPLATE_PATH || path.resolve("/etc/api-tree/templates")
 }
 
-try {
-    ENV.MAIL_CONFIG = JSON.parse(fs.readFileSync(ENV.MAIL_CONFIG_PATH, 'utf8'))
-} catch (e) {
-    if (ENV.NODE_ENV === "production") {
-        throw e
-    } else {
-        console.warn("Pas de config de mail dans", ENV.MAIL_CONFIG_PATH)
-    }
-}
-
-ENV.VERSION = version
-
-
-debug({ENV})
+debug(JSON.stringify(ENV))
 
 export default ENV

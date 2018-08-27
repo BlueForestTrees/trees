@@ -10,7 +10,7 @@ const router = Router()
 const deleteFacet = configure(() => col(cols.FACET)).deleteOne
 module.exports = router
 
-router.delete('/api/facet/:_id',
+router.delete('/api/tree/facet/:_id',
     validPathId,
     run(deleteFacet)
 )

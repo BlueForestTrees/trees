@@ -11,7 +11,7 @@ module.exports = router
 const impactService = configure(() => col(cols.IMPACT))
 const impactEntryService = configure(() => col(cols.IMPACT_ENTRY))
 
-router.get('/api/impact/:trunkId',
+router.get('/api/tree/impact/:trunkId',
     validPathTrunkId,
     run(({trunkId}) => ({trunkId})),
     run(impactService.findMixin({trunkId: 0})),

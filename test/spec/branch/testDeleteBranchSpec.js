@@ -1,6 +1,6 @@
-import {oneModifiedResponse} from "test-api-express-mongo/dist/domain"
+import {oneModifiedResponse} from "test-api-express-mongo"
 import {cols} from "../../../src/const/collections"
-import {remove} from "test-api-express-mongo/dist/util"
+import {remove} from "test-api-express-mongo"
 import {bleBranch, farineBranch, farineItem} from "../../database/gateau"
 
 

@@ -1,11 +1,11 @@
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {assertDb} from "test-api-express-mongo/dist/db"
-import {init, request, withTest} from "test-api-express-mongo/dist/api"
-import {run} from "test-api-express-mongo/dist/api"
+import {assertDb} from "test-api-express-mongo"
+import {init, request, withTest} from "test-api-express-mongo"
+import {run} from "test-api-express-mongo"
 import {farineItem, gateauRoots} from "../../../database/gateau"
-import {oneModifiedResponse} from "test-api-express-mongo/dist/domain"
+import {oneModifiedResponse} from "test-api-express-mongo"
 
 describe('DELETE Root', function () {
 
@@ -14,7 +14,7 @@ describe('DELETE Root', function () {
     it('delete the root', withTest({
         req: {
             method: `DELETE`,
-            path: `/api/root/${gateauRoots[0]._id}`,
+            path: `/api/tree/root/${gateauRoots[0]._id}`,
         },
         res: {
             expected: oneModifiedResponse

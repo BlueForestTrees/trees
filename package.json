@@ -5,9 +5,9 @@
   "scripts": {
     "start": "node index.js",
     "build": "rimraf dist && babel src --out-dir dist/js && copyfiles etc/** dist",
-    "dev-api": "node --version && cross-env DEBUG=api:* MAIL_TEMPLATE_PATH=etc/api-tree/templates MAIL_CONFIG_PATH=../secured/api-tree REST_PATH=src/rest nodemon src/index.js --exec babel-node",
-    "test-api": "cross-env DEBUG=test:*,api:* NODE_ENV=test PORT=9000 MAIL_TEMPLATE_PATH=etc/api-tree/templates MAIL_CONFIG_PATH=../secured/api-tree REST_PATH=src/rest mocha --recursive --require babel-register --exit \"test/**/*.js\"",
-    "test-init-db": "cross-env DEBUG=api:* NODE_ENV=test mocha --exit test/scenarios/tu/testInitDb.js --require babel-register",
+    "dev": "node --version && cross-env DEBUG=api:* REST_PATH=src/rest nodemon src/index.js --exec babel-node",
+    "test": "cross-env DEBUG=test:*,api:* NODE_ENV=test PORT=9000 REST_PATH=src/rest mocha --recursive --require babel-register --exit \"test/**/*.js\"",
+    "init-db": "cross-env DEBUG=api:* NODE_ENV=test mocha --exit test/scenarios/tu/testInitDb.js --require babel-register",
     "start-db": "sudo docker run -itd -p 27017:27017 -v /var/lib/blueforest/mongo/dev:/data/db -e MONGO_INITDB_ROOT_USERNAME=doudou -e MONGO_INITDB_ROOT_PASSWORD=masta --restart unless-stopped mongo:latest"
   },
   "devDependencies": {
@@ -28,7 +28,7 @@
     "nyc": "11.4.1",
     "rimraf": "2.6.2",
     "sinon": "4.2.1",
-    "test-api-express-mongo": "1.0.8"
+    "test-api-express-mongo": "1.0.13"
   },
   "dependencies": {
     "body-parser": "1.18.2",
@@ -42,16 +42,13 @@
     "express-validator": "5.3.0",
     "fraction.js": "4.0.4",
     "fs-readdir-recursive": "1.1.0",
-    "handlebars": "4.0.11",
     "items-service": "1.0.9",
     "jsonwebtoken": "8.3.0",
     "lodash": "4.17.10",
-    "mongo-registry": "1.0.11",
+    "mongo-registry": "1.0.12",
     "nested-error-stacks": "2.0.0",
-    "nodemailer": "4.6.7",
     "pick-to-array": "1.1.0",
-    "regex-escape": "3.4.8",
-    "sha1": "1.1.1"
+    "regex-escape": "3.4.8"
   },
   "babel": {
     "presets": [

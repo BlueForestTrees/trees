@@ -1,8 +1,8 @@
 import {cols} from "../../src/const/collections"
 import {vitBFacetEntry, vitCFacetEntry} from "./facetEntries"
-import {withIdBqt, withDbTrunk} from "test-api-express-mongo/dist/domain"
+import {withIdBqt, withDbTrunk} from "test-api-express-mongo"
 import {vitBImpactEntry, vitCImpactEntry} from "./impactEntries"
-import {object} from "test-api-express-mongo/dist/util"
+import {object} from "test-api-express-mongo"
 
 export const gateauTrunk = withDbTrunk("Gateau au chocolat", "5a6a03c03e77667641d2d2c3", 200, "Mass")
 export const farineTrunk = withDbTrunk("Farine", "5a6a03c03e77667641d2d2c1", 100, "Mass")

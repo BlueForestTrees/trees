@@ -1,4 +1,4 @@
-import {init, request, withTest} from "test-api-express-mongo/dist/api"
+import {init, request, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
@@ -11,7 +11,7 @@ describe('DELETE Trunks', function () {
     it('DELETE A TRUNK', withTest({
         req: {
             method: "DELETE",
-            url: `/api/trunk/${gateauTrunk._id}`
+            url: `/api/tree/trunk/${gateauTrunk._id}`
         },
         db: {
             expected: {

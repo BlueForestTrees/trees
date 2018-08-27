@@ -10,7 +10,7 @@ const router = Router()
 const deleteImpact = configure(() => col(cols.IMPACT)).deleteOne
 module.exports = router
 
-router.delete('/api/impact/:_id',
+router.delete('/api/tree/impact/:_id',
     validPathId,
     run(deleteImpact)
 )

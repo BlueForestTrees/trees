@@ -11,7 +11,7 @@ const router = Router()
 
 module.exports = router
 
-router.post('/api/impactEntry',
+router.post('/api/tree/impactEntry',
     validId,
     validBodyName,
     validBodyG,

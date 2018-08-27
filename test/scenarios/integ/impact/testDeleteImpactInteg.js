@@ -1,10 +1,10 @@
-import {assertDb} from "test-api-express-mongo/dist/db"
-import {init, request, withTest} from "test-api-express-mongo/dist/api"
+import {assertDb} from "test-api-express-mongo"
+import {init, request, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
 import {bleImpacts, bleTrunk} from "../../../database/gateau"
-import {zeroDeletionOk, oneDeletionOk, twoDeletionOk} from "test-api-express-mongo/dist/domain"
+import {zeroDeletionOk, oneDeletionOk, twoDeletionOk} from "test-api-express-mongo"
 
 describe('DELETE Impact', function () {
 
@@ -12,7 +12,7 @@ describe('DELETE Impact', function () {
 
     it('delete an impact', withTest({
         req: {
-            url: `/api/impact/${bleImpacts[0]._id}`,
+            url: `/api/tree/impact/${bleImpacts[0]._id}`,
             method: "DELETE"
         },
         res: {
@@ -31,7 +31,7 @@ describe('DELETE Impact', function () {
     it('delete non existing impact of a trunk', withTest([
         {
             req: {
-                url: `/api/impact/${bleImpacts[0].trunkId}`,
+                url: `/api/tree/impact/${bleImpacts[0].trunkId}`,
                 method: "DELETE"
             },
             res: {
@@ -40,7 +40,7 @@ describe('DELETE Impact', function () {
         },
         {
             req: {
-                url: `/api/impact/${bleImpacts[0].trunkId}`,
+                url: `/api/tree/impact/${bleImpacts[0].trunkId}`,
                 method: "DELETE"
             },
             res: {

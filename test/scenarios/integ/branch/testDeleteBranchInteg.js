@@ -1,10 +1,10 @@
-import {init, withTest} from "test-api-express-mongo/dist/api"
+import {init, withTest} from "test-api-express-mongo"
 import {branchDeletionSpec} from "../../../spec/branch/testDeleteBranchSpec"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
 import {farineBranch} from "../../../database/gateau"
-import {oneModifiedResponse} from "test-api-express-mongo/dist/domain"
+import {oneModifiedResponse} from "test-api-express-mongo"
 
 describe('DELETE branch', function () {
 
@@ -13,7 +13,7 @@ describe('DELETE branch', function () {
     it('delete the branch', withTest({
         req: {
             method: "DELETE",
-            path: "/api/branch",
+            path: "/api/tree/branch",
             param: `/${farineBranch[0]._id}`,
         }, res: {
             expected: oneModifiedResponse

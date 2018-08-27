@@ -10,7 +10,7 @@ const branchService = configure(() => col(cols.BRANCH))
 
 module.exports = router
 
-router.put('/api/branch',
+router.put('/api/tree/branch',
     validId,
     validTrunkId,
     validBranchId,

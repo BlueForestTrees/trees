@@ -10,7 +10,7 @@ const facetService = configure(() => col(cols.FACET))
 
 module.exports = router
 
-router.put('/api/facet',
+router.put('/api/tree/facet',
     validBodyId,
     validBodyTrunkId,
     validBodyFacetId,

@@ -1,5 +1,5 @@
 import {cols} from "../../src/const/collections"
-import {withEntry} from "test-api-express-mongo/dist/domain"
+import {withEntry} from "test-api-express-mongo"
 
 export const vitBFacetEntry = withEntry("5a6a03c03e77667641d2d2c5", "vitamine B", "Dens")
 export const vitCFacetEntry = withEntry("5a6a03c03e77667641d2d2c4", "vitamine C", "Dens")

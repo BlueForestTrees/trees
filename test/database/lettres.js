@@ -1,6 +1,6 @@
-import {withIdBqt, withDbTrunk} from "test-api-express-mongo/dist/domain"
+import {withIdBqt, withDbTrunk} from "test-api-express-mongo"
 import {cols} from "../../src/const/collections"
-import {createStringObjectId, object} from "test-api-express-mongo/dist/util"
+import {createStringObjectId, object} from "test-api-express-mongo"
 import {prixFacetEntry, vitBFacetEntry, vitCFacetEntry, vitEFacetEntry} from "./facetEntries"
 import {co2eImpactEntry, prixImpactEntry, vitBImpactEntry, vitCImpactEntry, vitDImpactEntry} from "./impactEntries"
 

@@ -11,7 +11,7 @@ const insertRoot = configure(() => col(cols.ROOT)).insertOne
 
 module.exports = router
 
-router.post('/api/root',
+router.post('/api/tree/root',
     validBodyId,
     validBodyTrunkId,
     validBodyRootId,

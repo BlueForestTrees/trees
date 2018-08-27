@@ -12,7 +12,7 @@ module.exports = router
 const facetEntryService = configure(() => col(cols.FACET_ENTRY))
 const searchMixin = {color: 1, name: 1, g: 1}
 
-router.get('/api/facetEntry',
+router.get('/api/tree/facetEntry',
     optionalValidQ,
     optionalValidG,
     optionnalPageSize,
@@ -24,10 +24,10 @@ router.get('/api/facetEntry',
     ], ps, searchMixin))
 )
 
-router.get('/api/facetEntry/all',
+router.get('/api/tree/facetEntry/all',
     run(getAllFacetEntries)
 )
 
-router.get('/api/facetEntry/:name',
+router.get('/api/tree/facetEntry/:name',
     run(({name}) => getFacetEntryByName(name))
 )

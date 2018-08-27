@@ -3,11 +3,11 @@ import {
     papierAImpactTankSpec,
     sansImpactTankSpec
 } from "../../../spec/impacttank/testGetImpactTankSpec"
-import {init, request, withTest} from "test-api-express-mongo/dist/api"
+import {init, request, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {withBqtG, withIdBqt} from "test-api-express-mongo/dist/domain"
+import {withBqtG, withIdBqt} from "test-api-express-mongo"
 import {ObjectID} from "mongodb"
 import {pick} from 'lodash'
 import {papierVA} from "../../../database/papier"
@@ -22,7 +22,7 @@ describe('GET ImpactTank', function () {
     
     it('impact tank papier A', withTest({
             req: {
-                url: `/api/impacttank/${papierVA._id}`
+                url: `/api/tree/impacttank/${papierVA._id}`
             },
             res: {
                 bodypath: [
@@ -37,7 +37,7 @@ describe('GET ImpactTank', function () {
     
     it('impact tank gateau', withTest({
         req: {
-            url: `/api/impacttank/${gateauTrunk._id}`,
+            url: `/api/tree/impacttank/${gateauTrunk._id}`,
         },
         res: {
             bodypath: [
@@ -57,7 +57,7 @@ describe('GET ImpactTank', function () {
     
     it('impact tank inconnu', withTest({
         req: {
-            url: `/api/impacttank/${unknownId}`
+            url: `/api/tree/impacttank/${unknownId}`
         },
         res: {
             body: []

@@ -12,7 +12,7 @@ const rootService = configure(() => col(cols.ROOT))
 
 module.exports = router
 
-router.put('/api/root',
+router.put('/api/tree/root',
     validId,
     validTrunkId,
     validRootId,

@@ -1,13 +1,13 @@
 import {emptyGetFacetSpec, emptyQuantifiedGetFacetSpec, getFacetSpec, getQuantifiedFacetSpec} from "../../../spec/facet/testGetFacetSpec"
-import {init, withTest} from "test-api-express-mongo/dist/api"
+import {init, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
 import {bleFacets, bleTrunk} from "../../../database/gateau"
 import {omit} from 'lodash'
-import {withInfos} from "test-api-express-mongo/dist/db"
-import {withBqtG, withoutQuantity, withQtCoef, withIdBqtG} from "test-api-express-mongo/dist/domain"
-import {clon} from "test-api-express-mongo/dist/util"
+import {withInfos} from "test-api-express-mongo"
+import {withBqtG, withoutQuantity, withQtCoef, withIdBqtG} from "test-api-express-mongo"
+import {clon} from "test-api-express-mongo"
 import {vitBFacetEntry} from "../../../database/facetEntries"
 
 
@@ -17,7 +17,7 @@ describe('GET Facets', function () {
 
     it('return facets', withTest({
         req: {
-            url: `/api/facet/${bleTrunk._id}`
+            url: `/api/tree/facet/${bleTrunk._id}`
         },
         res: {
             bodypath: [
@@ -33,7 +33,7 @@ describe('GET Facets', function () {
 
     it('return empty facets', withTest({
         req: {
-            url: `/api/facet/${"5a6a03c03e77667641d21234"}`,
+            url: `/api/tree/facet/${"5a6a03c03e77667641d21234"}`,
         },
         res: {
             body: []

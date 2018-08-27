@@ -10,7 +10,7 @@ const router = Router()
 const rootService = configure(() => col(cols.ROOT))
 module.exports = router
 
-router.delete('/api/root/:_id',
+router.delete('/api/tree/root/:_id',
     validPathId,
     run(rootService.deleteOne),
 )

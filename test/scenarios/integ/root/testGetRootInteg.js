@@ -1,4 +1,4 @@
-import {init, withTest} from "test-api-express-mongo/dist/api"
+import {init, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
@@ -11,7 +11,7 @@ describe('GET Root', function () {
     it('return roots with relativeTo', withTest({
         req: {
             method: "GET",
-            url: `/api/root/${bananeBC._id}`
+            url: `/api/tree/root/${bananeBC._id}`
         },
         res: {
             bodypath: [
@@ -26,7 +26,7 @@ describe('GET Root', function () {
     it('return empty roots', withTest({
         req: {
             method: "GET",
-            url: `/api/root/${transport._id}`
+            url: `/api/tree/root/${transport._id}`
         },
         res: {
             body: []

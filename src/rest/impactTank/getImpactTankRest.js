@@ -14,7 +14,7 @@ const readRootTree = configure(() => col(cols.ROOT)).treeRead(cols.ROOT, "trunkI
 const readAllQuantifiedImpacts = configure(() => col(cols.IMPACT)).readAllQuantified
 const impactEntryService = configure(() => col(cols.IMPACT_ENTRY))
 
-router.get('/api/impacttank/:trunkId',
+router.get('/api/tree/impacttank/:trunkId',
     validPathTrunkId,
     run(readRootTree, "READ TREE"),
     run(treeToList, "TREE TO LIST"),

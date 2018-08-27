@@ -1,10 +1,10 @@
 import api from "../../../../src"
 import ENV from "../../../../src/env"
-import {init, request, withTest} from "test-api-express-mongo/dist/api"
+import {init, request, withTest} from "test-api-express-mongo"
 import {cols} from "../../../../src/const/collections"
 import {bleImpacts, bleTrunk} from "../../../database/gateau"
-import {withIdBqtG, oneModifiedResponse} from "test-api-express-mongo/dist/domain"
-import {createObjectId} from "test-api-express-mongo/dist/util"
+import {withIdBqtG, oneModifiedResponse} from "test-api-express-mongo"
+import {createObjectId} from "test-api-express-mongo"
 
 describe('PUT Impact', function () {
 
@@ -12,7 +12,7 @@ describe('PUT Impact', function () {
 
     it('put impact', withTest({
         req: {
-            url: `/api/impact`,
+            url: `/api/tree/impact`,
             method: "PUT",
             body: {...bleImpacts[0], bqt: bleImpacts[0].bqt * 4}
         },

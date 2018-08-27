@@ -1,10 +1,10 @@
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {init, withTest} from "test-api-express-mongo/dist/api"
+import {init, withTest} from "test-api-express-mongo"
 import {laitTrunk} from "../../../database/gateau"
 import {aTrunk, daTrunk, dbTrunk, dRoot, dRoots, e1Trunk, e2Trunk} from "../../../database/lettres"
-import {withIdBqt, withId, withoutItemQuantity} from "test-api-express-mongo/dist/domain"
+import {withIdBqt, withId, withoutItemQuantity} from "test-api-express-mongo"
 import {arbreTrunk, eauTrunk, elecTrunk, skateTrunk} from "../../../database/skate"
 
 describe('GET Tank', function () {
@@ -13,7 +13,7 @@ describe('GET Tank', function () {
     
     it('get lettre tank', withTest({
         req: {
-            url: `/api/tank/${aTrunk._id}`
+            url: `/api/tree/tank/${aTrunk._id}`
         },
         res: {
             body: [
@@ -25,7 +25,7 @@ describe('GET Tank', function () {
     
     it('get lettre tank avec une qt manquante', withTest({
         req: {
-            url: `/api/tank/${aTrunk._id}`
+            url: `/api/tree/tank/${aTrunk._id}`
         },
         db: {
             preChange: {
@@ -46,7 +46,7 @@ describe('GET Tank', function () {
     
     it('get lettre tank avec une qt manquante 2', withTest({
         req: {
-            url: `/api/tank/${aTrunk._id}`
+            url: `/api/tree/tank/${aTrunk._id}`
         },
         db: {
             preChange: {
@@ -65,7 +65,7 @@ describe('GET Tank', function () {
     
     it('get lettre sans tank', withTest({
         req: {
-            url: `/api/tank/${laitTrunk._id}`
+            url: `/api/tree/tank/${laitTrunk._id}`
         },
         res: {
             body: []

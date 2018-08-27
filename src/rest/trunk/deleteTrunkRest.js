@@ -11,7 +11,7 @@ module.exports = router
 
 const trunkService = configure(() => col(cols.TRUNK))
 
-router.delete('/api/trunk/:_id',
+router.delete('/api/tree/trunk/:_id',
     validId,
     run(trunkService.deleteOne)
 )

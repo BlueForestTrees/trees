@@ -1,4 +1,3 @@
-import {create} from "../../service/trunk/postTrunkService"
 import {Router, run} from 'express-blueforest'
 import {validBodyColor, validId, validBodyName, validBodyQuantityBqt, validBodyQuantityG} from "../validations"
 import {cols} from "../../const/collections"
@@ -9,7 +8,7 @@ const router = Router()
 module.exports = router
 const trunkService = configure(() => col(cols.TRUNK))
 
-router.post('/api/trunk',
+router.post('/api/tree/trunk',
     validId,
     validBodyColor,
     validBodyName,

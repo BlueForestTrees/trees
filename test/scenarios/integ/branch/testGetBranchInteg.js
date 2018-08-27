@@ -1,12 +1,12 @@
-import {withInfos} from "test-api-express-mongo/dist/db"
-import {run, withTest, init, request} from "test-api-express-mongo/dist/api"
+import {withInfos} from "test-api-express-mongo"
+import {run, withTest, init, request} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
 import {farineBranch, farineItem, laitBranch, pizzaItem, pizzaTrunk} from "../../../database/gateau"
-import {withError, withQtCoef, withoutQuantity} from "test-api-express-mongo/dist/domain"
+import {withError, withQtCoef, withoutQuantity} from "test-api-express-mongo"
 import {omit} from 'lodash'
-import {clon} from "test-api-express-mongo/dist/util"
+import {clon} from "test-api-express-mongo"
 
 describe('GET Branch', function () {
     
@@ -14,7 +14,7 @@ describe('GET Branch', function () {
     
     it('return branchs', withTest({
         req: {
-            url: `/api/branch/${farineItem._id}`
+            url: `/api/tree/branch/${farineItem._id}`
         },
         res: {
             bodypath: [
@@ -30,7 +30,7 @@ describe('GET Branch', function () {
     
     it('return empty branchs', withTest({
         req: {
-            url: `/api/branch/${pizzaTrunk._id}`
+            url: `/api/tree/branch/${pizzaTrunk._id}`
         },
         res: {
             body: []

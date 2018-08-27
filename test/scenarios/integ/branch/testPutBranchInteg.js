@@ -1,9 +1,9 @@
-import {init, request, withTest} from "test-api-express-mongo/dist/api"
+import {init, request, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
 import {farineBranch} from "../../../database/gateau"
-import {oneModifiedResponse} from "test-api-express-mongo/dist/domain"
+import {oneModifiedResponse} from "test-api-express-mongo"
 
 describe('PUT Branch', function () {
 
@@ -12,7 +12,7 @@ describe('PUT Branch', function () {
     it('put branch', withTest({
         req: {
             method: "PUT",
-            url: '/api/branch',
+            url: '/api/tree/branch',
             body: {...farineBranch[0], bqt: farineBranch[0].bqt * 4}
         },
         res: {

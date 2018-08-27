@@ -1,14 +1,14 @@
-import {object, createObjectId} from "test-api-express-mongo/dist/util"
-import {oneResponse} from "test-api-express-mongo/dist/domain"
-import {assertDb} from "test-api-express-mongo/dist/db"
+import {object, createObjectId} from "test-api-express-mongo"
+import {oneResponse} from "test-api-express-mongo"
+import {assertDb} from "test-api-express-mongo"
 import {existingBranchPostSpec, newBranchSpec} from "../../../spec/branch/testPostBranchSpec"
-import {run} from "test-api-express-mongo/dist/api"
-import {init, request, withTest} from "test-api-express-mongo/dist/api"
+import {run} from "test-api-express-mongo"
+import {init, request, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
 import {biere, capsule} from "../../../database/biere"
-import {withError} from "test-api-express-mongo/dist/domain"
+import {withError} from "test-api-express-mongo"
 
 describe('POST Branch', function () {
 
@@ -18,7 +18,7 @@ describe('POST Branch', function () {
 
     const postBranchReq = {
         req: {
-            url: '/api/branch',
+            url: '/api/tree/branch',
             method: "POST",
             body: branch
         }

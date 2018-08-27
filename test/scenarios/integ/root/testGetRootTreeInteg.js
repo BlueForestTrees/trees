@@ -1,10 +1,10 @@
 import {expect} from 'chai'
-import {init, request, withTest} from "test-api-express-mongo/dist/api"
+import {init, request, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
 import {farineRoot, farineRoots, gateauRoots, gateauTrunk} from "../../../database/gateau"
-import {withoutItemQuantity, withIdBqt, withIdBqtG, withQtCoef, withId} from "test-api-express-mongo/dist/domain"
+import {withoutItemQuantity, withIdBqt, withIdBqtG, withQtCoef, withId} from "test-api-express-mongo"
 import {arbreTrunk} from "../../../database/skate"
 import {coucheAdhesif, coucheAlu, couchePapier, couchePE, papierVA} from "../../../database/papier"
 
@@ -14,7 +14,7 @@ describe('GET Root tree', function () {
     
     it('return a little tree', withTest({
         req: {
-            url: `/api/root/tree/${gateauTrunk._id}`,
+            url: `/api/tree/root/tree/${gateauTrunk._id}`,
         },
         res: {
             body: {
@@ -39,7 +39,7 @@ describe('GET Root tree', function () {
     
     it('return the papier tree', withTest({
         req: {
-            url: `/api/root/tree/${papierVA._id}`,
+            url: `/api/tree/root/tree/${papierVA._id}`,
         },
         res: {
             body: {
@@ -56,7 +56,7 @@ describe('GET Root tree', function () {
     
     it('return null', withTest({
         req: {
-            url: `/api/root/tree/${arbreTrunk._id}`,
+            url: `/api/tree/root/tree/${arbreTrunk._id}`,
         },
         res: {
             body: {

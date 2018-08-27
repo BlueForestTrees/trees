@@ -10,7 +10,7 @@ const impactService = configure(() => col(cols.IMPACT))
 
 module.exports = router
 
-router.put('/api/impact',
+router.put('/api/tree/impact',
     validBodyId,
     validBodyTrunkId,
     validBodyImpactId,

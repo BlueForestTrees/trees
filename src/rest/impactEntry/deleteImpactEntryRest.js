@@ -6,6 +6,6 @@ const router = Router()
 
 module.exports = router
 
-router.delete('/api/impactEntry', run(purgeImpactsEntries))
+router.delete('/api/tree/impactEntry', run(purgeImpactsEntries))
 
 

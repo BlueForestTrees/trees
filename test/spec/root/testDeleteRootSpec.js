@@ -1,5 +1,5 @@
-import {oneModifiedResponse} from "test-api-express-mongo/dist/domain"
-import {remove} from "test-api-express-mongo/dist/util"
+import {oneModifiedResponse} from "test-api-express-mongo"
+import {remove} from "test-api-express-mongo"
 import {cols} from "../../../src/const/collections"
 import {bleTrunk, farineItem, farineRoot, farineRoots, gateauRoots} from "../../database/gateau"
 

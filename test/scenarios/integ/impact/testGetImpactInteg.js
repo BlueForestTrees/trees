@@ -1,11 +1,11 @@
-import {init, request, withTest} from "test-api-express-mongo/dist/api"
+import {init, request, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {withBqtG, withQtCoef, withoutQuantity} from "test-api-express-mongo/dist/domain"
-import {withImpactInfos, withInfos} from "test-api-express-mongo/dist/db"
+import {withBqtG, withQtCoef, withoutQuantity} from "test-api-express-mongo"
+import {withImpactInfos, withInfos} from "test-api-express-mongo"
 import {bleImpacts, bleTrunk, farineTrunk} from "../../../database/gateau"
-import {clon} from "test-api-express-mongo/dist/util"
+import {clon} from "test-api-express-mongo"
 import {omit} from "lodash"
 import {vitBImpactEntry, vitCImpactEntry} from "../../../database/impactEntries"
 import {vitBFacetEntry} from "../../../database/facetEntries"
@@ -16,7 +16,7 @@ describe('GET Impacts', function () {
 
     it('get impacts', withTest({
         req: {
-            url: `/api/impact/${bleTrunk._id}`
+            url: `/api/tree/impact/${bleTrunk._id}`
         },
         res: {
             bodypath: [
@@ -35,7 +35,7 @@ describe('GET Impacts', function () {
 
     it('empty impacts', withTest({
         req: {
-            url: `/api/impact/${farineTrunk._id}`
+            url: `/api/tree/impact/${farineTrunk._id}`
         },
         res: {
             body: []

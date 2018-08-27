@@ -1,4 +1,13 @@
-import {optionnalAfterIdx, optionnalPageSize, validId, validIds, optionalValidQ, idsList, optionalValidG} from "../validations"
+import {
+    optionnalAfterIdx,
+    optionnalPageSize,
+    validId,
+    validIds,
+    optionalValidQ,
+    idsList,
+    optionalValidG,
+    catList, validCats
+} from "../validations"
 import {run, convert} from 'express-blueforest'
 import {Router} from "express-blueforest"
 import configure from "items-service"
@@ -11,24 +20,27 @@ module.exports = router
 const trunkService = configure(() => col(cols.TRUNK))
 const searchMixin = {color: 1, name: 1, g: 1, quantity: 1, type: 1}
 
-router.get('/api/trunks',
+router.get('/api/tree/trunks',
     optionalValidQ,
     optionalValidG,
     optionnalPageSize,
     optionnalAfterIdx,
-    run(({q, g, aidx, ps}) => trunkService.search([
+    validCats,
+    convert(catList),
+    run(({q, g, aidx, ps, cat}) => trunkService.search([
         {key: "name", type: "regex", value: q},
         {key: "quantity.g", value: g},
+        {key: "cat", value: cat},
         {key: "_id", type: "gt", value: aidx}
     ], ps, searchMixin))
 )
 
-router.get('/api/trunk/:_id',
+router.get('/api/tree/trunk/:_id',
     validId,
     run(trunkService.get),
 )
 
-router.get('/api/trunk',
+router.get('/api/tree/trunk',
     validIds,
     convert(idsList),
     run(trunkService.findMixin({}))

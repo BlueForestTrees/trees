@@ -12,7 +12,7 @@ const branchService = configure(() => col(cols.BRANCH))
 const trunkService = configure(() => col(cols.TRUNK))
 const readBranchTree = branchService.treeRead(cols.BRANCH, "trunkId", "branchId")
 
-router.get('/api/branch/:trunkId',
+router.get('/api/tree/branch/:trunkId',
     validPathTrunkId,
     run(branchService.findNoMixin, "GET BRANCHES"),
     run(trunkService.append("branchId", {name: 1, color: 1, 'quantity.g': 1},
@@ -28,7 +28,7 @@ router.get('/api/branch/:trunkId',
     ), "MERGE BRANCH INFOS")
 )
 
-router.get('/api/branch/tree/:trunkId',
+router.get('/api/tree/branch/tree/:trunkId',
     validTrunkId,
     run(readBranchTree)
 )

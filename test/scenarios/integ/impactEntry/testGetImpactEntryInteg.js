@@ -1,4 +1,4 @@
-import {init, testGet200BodyOk, withTest} from "test-api-express-mongo/dist/api"
+import {init, testGet200BodyOk, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
@@ -10,7 +10,7 @@ describe('GET Impacts entries', function () {
 
     it('search impact entry', withTest({
         req: {
-            url: "/api/impactEntry?q=IP"
+            url: "/api/tree/impactEntry?q=IP"
         },
         res: {
             body: [

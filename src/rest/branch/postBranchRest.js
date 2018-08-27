@@ -12,7 +12,7 @@ const branchService = configure(() => col(cols.BRANCH))
 
 module.exports = router
 
-router.post('/api/branch',
+router.post('/api/tree/branch',
     [
         validBodyId,
         validBodyTrunkId,

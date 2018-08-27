@@ -1035,7 +1035,7 @@ chalk@^2.0.1:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-"charenc@>= 0.0.1", charenc@~0.0.1:
+charenc@~0.0.1:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
 
@@ -1310,7 +1310,7 @@ cross-spawn@^6.0.5:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-"crypt@>= 0.0.1", crypt@~0.0.1:
+crypt@~0.0.1:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/crypt/-/crypt-0.0.2.tgz#88d7ff7ec0dfb86f713dc87bbb42d044d3e6c41b"
 
@@ -1992,7 +1992,7 @@ growl@1.10.3:
   version "1.10.3"
   resolved "https://registry.yarnpkg.com/growl/-/growl-1.10.3.tgz#1926ba90cf3edfe2adb4927f5880bc22c66c790f"
 
-handlebars@4.0.11, handlebars@^4.0.3:
+handlebars@^4.0.3:
   version "4.0.11"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.11.tgz#630a35dfe0294bc281edae6ffc5d329fc7982dcc"
   dependencies:
@@ -2887,9 +2887,9 @@ moment@>=2.19.3:
   version "2.22.2"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
 
-mongo-registry@1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/mongo-registry/-/mongo-registry-1.0.11.tgz#f8b063c1bdd0b1a2ca38c6ebb22540b97d248000"
+mongo-registry@1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/mongo-registry/-/mongo-registry-1.0.12.tgz#b3300de7014d2d8501520361d4495ddd7f3b7ba9"
   dependencies:
     compare-versions "3.3.0"
     fraction.js "4.0.4"
@@ -3006,10 +3006,6 @@ node-unzip-2@^0.2.7:
     pullstream "~0.4.0"
     readable-stream "~1.0.0"
     setimmediate "~1.0.1"
-
-nodemailer@4.6.7:
-  version "4.6.7"
-  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-4.6.7.tgz#b68de7f36d65618bdeeeb76234e3547d51266373"
 
 nodemon@1.17.3:
   version "1.17.3"
@@ -3788,13 +3784,6 @@ setprototypeof@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.1.0.tgz#d0bd85536887b6fe7c0d818cb962d9d91c54e656"
 
-sha1@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/sha1/-/sha1-1.1.1.tgz#addaa7a93168f393f19eb2b15091618e2700f848"
-  dependencies:
-    charenc ">= 0.0.1"
-    crypt ">= 0.0.1"
-
 shebang-command@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-1.2.0.tgz#44aac65b695b03398968c39f363fee5deafdf1ea"
@@ -4122,9 +4111,9 @@ term-size@^1.2.0:
   dependencies:
     execa "^0.7.0"
 
-test-api-express-mongo@1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/test-api-express-mongo/-/test-api-express-mongo-1.0.8.tgz#e991c0d696f730d6995f20d8ae29ca313c94e48d"
+test-api-express-mongo@1.0.13:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/test-api-express-mongo/-/test-api-express-mongo-1.0.13.tgz#53c5493744dc47386fdca2886cc6719200af64e2"
   dependencies:
     chai "4.1.2"
     chai-http "4.0.0"
@@ -4266,12 +4255,6 @@ unique-string@^1.0.0:
   dependencies:
     crypto-random-string "^1.0.0"
 
-unit-manip@1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/unit-manip/-/unit-manip-1.0.7.tgz#b1756875a50705a82d9f15a92765b1e671c2143f"
-  dependencies:
-    fraction.js "4.0.4"
-
 universalify@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
@@ -4335,10 +4318,6 @@ util-deprecate@~1.0.1:
 utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
-
-v-file-upload@3.1.3:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/v-file-upload/-/v-file-upload-3.1.3.tgz#4262dafcfde3b8829d4de72e161c2c6e6d61bd0a"
 
 v8flags@^2.1.1:
   version "2.1.1"

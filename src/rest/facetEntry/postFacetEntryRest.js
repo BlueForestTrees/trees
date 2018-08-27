@@ -11,7 +11,7 @@ module.exports = router
 
 const insertFacet = configure(() => col(cols.FACET_ENTRY)).insertOne
 
-router.post('/api/facetEntry',
+router.post('/api/tree/facetEntry',
     validBodyId,
     validBodyColor,
     validBodyName,

@@ -1,11 +1,11 @@
 import {allreadyExistingImpactEntrySpec, postAdemeImpactEntryFileSpec, postBadGrandeurImpactEntrySpec, postBadIdImpactEntrySpec, postImpactEntrySpec} from "../../../spec/impactEntry/testPostImpactEntrySpec"
-import {init, withTest} from "test-api-express-mongo/dist/api"
+import {init, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {createStringObjectId, createObjectId} from "test-api-express-mongo/dist/util"
+import {createStringObjectId, createObjectId} from "test-api-express-mongo"
 import {co2eImpactEntry} from "../../../database/impactEntries"
-import {withError} from "test-api-express-mongo/dist/domain"
+import {withError} from "test-api-express-mongo"
 
 
 const badImpactEntry = {_id: createStringObjectId() + "984"}
@@ -17,7 +17,7 @@ describe('POST ImpactEntry', function () {
 
     it('post new impact entry', withTest({
         req: {
-            url: `/api/impactEntry`,
+            url: `/api/tree/impactEntry`,
             method: "POST",
             body: impactEntry
         },
@@ -32,7 +32,7 @@ describe('POST ImpactEntry', function () {
     it('post existing facet entry', withTest({
         req: {
             method: "POST",
-            url: "/api/impactEntry",
+            url: "/api/tree/impactEntry",
             body: co2eImpactEntry
         }, res: {
             code: 400,
@@ -42,7 +42,7 @@ describe('POST ImpactEntry', function () {
 
     it('refuse to create a bad impact entry', withTest({
         req: {
-            url: "/api/facetEntry",
+            url: "/api/tree/facetEntry",
             method: "POST",
             body: badImpactEntry
         },

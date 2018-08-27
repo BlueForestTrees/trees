@@ -11,7 +11,7 @@ module.exports = router
 const facetService = configure(() => col(cols.FACET))
 const facetEntryService = configure(() => col(cols.FACET_ENTRY))
 
-router.get('/api/facet/:trunkId',
+router.get('/api/tree/facet/:trunkId',
     validPathTrunkId,
     run(facetService.findMixin({trunkId: 0})),
     run(facetEntryService.append(

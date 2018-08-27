@@ -1,4 +1,4 @@
-import {withIdBqtG, withBqtG, withIdBqt, withId} from "test-api-express-mongo/dist/domain"
+import {withIdBqtG, withBqtG, withIdBqt, withId} from "test-api-express-mongo"
 import {mergeItemList, mergeTwoItems, sum} from "../../../src/util/calculations"
 import Fraction from "fraction.js"
 import chai, {expect} from "chai"

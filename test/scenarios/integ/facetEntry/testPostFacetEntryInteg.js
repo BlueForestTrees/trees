@@ -1,12 +1,12 @@
-import {ObjectIDRegex} from "test-api-express-mongo/dist/domain"
-import {init, request, run, withTest} from "test-api-express-mongo/dist/api"
-import {assertDb} from "test-api-express-mongo/dist/db"
+import {ObjectIDRegex} from "test-api-express-mongo"
+import {init, request, run, withTest} from "test-api-express-mongo"
+import {assertDb} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {createStringObjectId, object} from "test-api-express-mongo/dist/util"
+import {createStringObjectId, object} from "test-api-express-mongo"
 import {vitCFacetEntry} from "../../../database/facetEntries"
-import {withError} from "test-api-express-mongo/dist/domain"
+import {withError} from "test-api-express-mongo"
 
 const _id = createStringObjectId()
 const facetEntry = {_id: object(_id), name: "nomNewFacetEntry", g: "Dens", color: "#FF0000"}
@@ -18,7 +18,7 @@ describe('POST FacetEntry', function () {
 
     it('post new facet entry', withTest({
             req: {
-                url: "/api/facetEntry",
+                url: "/api/tree/facetEntry",
                 method: "POST",
                 body: facetEntry,
             },
@@ -34,7 +34,7 @@ describe('POST FacetEntry', function () {
     it('post existing facet entry', withTest({
         req: {
             method: "POST",
-            url: "/api/facetEntry",
+            url: "/api/tree/facetEntry",
             body: vitCFacetEntry
         }, res: {
             code: 400,
@@ -44,7 +44,7 @@ describe('POST FacetEntry', function () {
 
     it('refuse to create a bad facet entry', withTest({
         req: {
-            url: "/api/facetEntry",
+            url: "/api/tree/facetEntry",
             method: "POST",
             body: badFacet
         },

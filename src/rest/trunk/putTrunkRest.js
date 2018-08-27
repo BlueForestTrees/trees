@@ -10,7 +10,7 @@ module.exports = router
 
 const trunkService = configure(() => col(cols.TRUNK))
 
-router.put('/api/trunk/:_id',
+router.put('/api/tree/trunk/:_id',
     validPathId,
     validOptionalBodyName,
     validOptionalBodyBqtG,

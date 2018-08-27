@@ -6,6 +6,6 @@ const router = Router()
 
 module.exports = router
 
-router.delete('/api/facetEntry', run(purgeFacetsEntries))
+router.delete('/api/tree/facetEntry', run(purgeFacetsEntries))
 
 

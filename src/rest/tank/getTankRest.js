@@ -10,7 +10,7 @@ import configure from "items-service"
 const router = Router()
 module.exports = router
 
-router.get('/api/tank/:trunkId',
+router.get('/api/tree/tank/:trunkId',
     validPathTrunkId,
     run(configure(() => col(cols.ROOT)).treeRead(cols.ROOT, "trunkId","rootId"), "TREE"),
     run(extraireFeuilles, "TANK"),

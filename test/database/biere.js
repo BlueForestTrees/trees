@@ -1,5 +1,5 @@
 import {cols} from "../../src/const/collections"
-import {withDbTrunk} from "test-api-express-mongo/dist/domain"
+import {withDbTrunk} from "test-api-express-mongo"
 
 
 export const biere = withDbTrunk("Bière Heineken", "6a6a03c03e77667641d2d2c3",6,"Nomb")

@@ -1,4 +1,4 @@
-import {createObjectId} from "test-api-express-mongo/dist/util"
+import {createObjectId} from "test-api-express-mongo"
 
 export const postBadGrandeurImpactEntrySpec = {
     req: {

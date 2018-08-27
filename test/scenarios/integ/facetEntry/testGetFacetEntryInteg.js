@@ -1,4 +1,4 @@
-import {init, withTest} from "test-api-express-mongo/dist/api"
+import {init, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
@@ -11,7 +11,7 @@ describe('GET FacetEntry', function () {
 
     it('search facet entry', withTest({
         req: {
-            url: "/api/facetEntry?q=vitami"
+            url: "/api/tree/facetEntry?q=vitami"
         },
         res: {
             body: [

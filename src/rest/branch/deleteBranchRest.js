@@ -10,7 +10,7 @@ const deleteBranch = configure(() => col(cols.BRANCH)).deleteOne
 
 module.exports = router
 
-router.delete('/api/branch/:_id',
+router.delete('/api/tree/branch/:_id',
     validPathId,
     run(deleteBranch)
 )

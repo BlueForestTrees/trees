@@ -1,16 +1,16 @@
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {run, withTest} from "test-api-express-mongo/dist/api"
-import {init} from "test-api-express-mongo/dist/api"
-import {withError, oneResponse} from "test-api-express-mongo/dist/domain"
+import {run, withTest} from "test-api-express-mongo"
+import {init} from "test-api-express-mongo"
+import {withError, oneResponse} from "test-api-express-mongo"
 import {biere, capsule} from "../../../database/biere"
-import {createObjectId} from "test-api-express-mongo/dist/util"
+import {createObjectId} from "test-api-express-mongo"
 
 let _id = createObjectId()
 const postARootSpec = {
     req: {
-        url: `/api/root`,
+        url: `/api/tree/root`,
         method: "POST",
         body: {_id, trunkId: biere._id, rootId: capsule._id, bqt: 2}
     },
@@ -44,7 +44,7 @@ describe('POST Root', function () {
 
     it('post a bad root', withTest({
         req: {
-            url: `/api/root`,
+            url: `/api/tree/root`,
             method: "POST",
             body: {}
         },

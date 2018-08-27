@@ -1,8 +1,8 @@
-import {withIdBqtG, withIdBqt, withBqtG, oneModifiedResponse, noneModifiedResponse} from "test-api-express-mongo/dist/domain"
+import {withIdBqtG, withIdBqt, withBqtG, oneModifiedResponse, noneModifiedResponse} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {init, withTest} from "test-api-express-mongo/dist/api"
+import {init, withTest} from "test-api-express-mongo"
 import {gateauTrunk} from "../../../database/gateau"
 
 describe('PUT Trunks', function () {
@@ -12,7 +12,7 @@ describe('PUT Trunks', function () {
     it('update the trunk', withTest({
         req: {
             method: "PUT",
-            url: `/api/trunk/${gateauTrunk._id}`,
+            url: `/api/tree/trunk/${gateauTrunk._id}`,
             body: {
                 name: "baChar",
                 ...withBqtG(gateauTrunk.quantity.bqt * 2, "Mass"),
@@ -34,7 +34,7 @@ describe('PUT Trunks', function () {
     it('update trunk name only', withTest({
         req: {
             method: "PUT",
-            url: `/api/trunk/${gateauTrunk._id}`,
+            url: `/api/tree/trunk/${gateauTrunk._id}`,
             body: {
                 name: "bisou"
             }
@@ -54,7 +54,7 @@ describe('PUT Trunks', function () {
     it('update without changes trunk', withTest({
         req: {
             method: "PUT",
-            url: `/api/trunk/${gateauTrunk._id}`,
+            url: `/api/tree/trunk/${gateauTrunk._id}`,
             body: {}
         }, res: {
             body: noneModifiedResponse
@@ -69,7 +69,7 @@ describe('PUT Trunks', function () {
     it('update without b trunk', withTest({
         req: {
             method: "PUT",
-            url: `/api/trunk/${gateauTrunk._id}`,
+            url: `/api/tree/trunk/${gateauTrunk._id}`,
             body: {
                 name: "baChar",
                 quantity: {bqt: 1000}

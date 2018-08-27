@@ -1,10 +1,9 @@
-import {postTrunkFileSpec} from "../../../spec/trunk/testPostTrunkSpec"
-import {init, withTest} from "test-api-express-mongo/dist/api"
+import {init, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {createStringObjectId, createObjectId} from "test-api-express-mongo/dist/util"
-import {withError} from "test-api-express-mongo/dist/domain"
+import {createStringObjectId, createObjectId} from "test-api-express-mongo"
+import {withError} from "test-api-express-mongo"
 import {arbreTrunk} from "../../../database/skate"
 
 const trunk = {_id: createObjectId(), color: "#FFCC00", name: "RATtatouille1664", quantity: {g: "Mass", bqt: 450}}
@@ -16,7 +15,7 @@ describe('POST Trunks', function () {
 
     it('post a new trunk', withTest({
         req: {
-            url: "/api/trunk",
+            url: "/api/tree/trunk",
             method: "POST",
             body: trunk
         },
@@ -31,7 +30,7 @@ describe('POST Trunks', function () {
     it('post existing trunk', withTest({
         req: {
             method: "POST",
-            url: "/api/trunk",
+            url: "/api/tree/trunk",
             body: arbreTrunk
         }, res: {
             code: 400,
@@ -41,7 +40,7 @@ describe('POST Trunks', function () {
 
     it('refuse to create a bad trunk', withTest({
         req: {
-            url: "/api/trunk",
+            url: "/api/tree/trunk",
             method: "POST",
             body: badTrunk
         },
@@ -64,5 +63,4 @@ describe('POST Trunks', function () {
         }
     }))
 
-    it('post ademe trunk file', withTest(postTrunkFileSpec))
 })

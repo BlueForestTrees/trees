@@ -11,7 +11,7 @@ module.exports = router
 const rootService = configure(() => col(cols.ROOT))
 const trunkService = configure(() => col(cols.TRUNK))
 
-router.get('/api/root/:trunkId',
+router.get('/api/tree/root/:trunkId',
     validPathTrunkId,
     run(rootService.findMixin({trunkId: 0})),
     run(trunkService.append(
@@ -30,7 +30,7 @@ router.get('/api/root/:trunkId',
     ))
 )
 
-router.get('/api/root/tree/:trunkId',
+router.get('/api/tree/root/tree/:trunkId',
     validTrunkId,
     run(rootService.treeRead(cols.ROOT, "trunkId", "rootId"))
 )

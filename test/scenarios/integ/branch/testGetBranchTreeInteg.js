@@ -1,5 +1,5 @@
-import {init, withTest} from "test-api-express-mongo/dist/api"
-import {withIdBqtG, withId, withIdBqt} from "test-api-express-mongo/dist/domain"
+import {init, withTest} from "test-api-express-mongo"
+import {withIdBqtG, withId, withIdBqt} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
@@ -11,7 +11,7 @@ describe('GET Branch Tree', function () {
     
     it('return null', withTest({
         req: {
-            url: `/api/branch/tree/${aTrunk._id}`
+            url: `/api/tree/branch/tree/${aTrunk._id}`
         },
         res: {
             body: {

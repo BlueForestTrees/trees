@@ -11,7 +11,7 @@ module.exports = router
 const impactEntryService = configure(() => col(cols.IMPACT_ENTRY))
 const searchMixin = {color: 1, name: 1, g: 1}
 
-router.get('/api/impactEntry',
+router.get('/api/tree/impactEntry',
     optionalValidQ,
     run(({q}) => impactEntryService.search([
         {key: "name", type: "regex", value: q},
@@ -19,6 +19,6 @@ router.get('/api/impactEntry',
     ], 0, searchMixin))
 )
 
-router.get('/api/impactEntry/:name',
+router.get('/api/tree/impactEntry/:name',
     run(impactEntryService.findOne)
 )

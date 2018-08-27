@@ -1,6 +1,6 @@
-import {object} from "test-api-express-mongo/dist/util"
+import {object} from "test-api-express-mongo"
 import {cols} from "../../src/const/collections"
-import {withIdBqt, withDbTrunk} from "test-api-express-mongo/dist/domain"
+import {withIdBqt, withDbTrunk} from "test-api-express-mongo"
 import {co2eImpactEntry} from "./impactEntries"
 
 export const papierVA = withDbTrunk("papier version A", "111111111111111111111111", 100, "Surf")

@@ -2443,10 +2443,11 @@ istanbul-reports@^1.1.3:
   dependencies:
     handlebars "^4.0.3"
 
-items-service@1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/items-service/-/items-service-1.0.9.tgz#cf4783e83fb6cbf32280361adc587d4c59cab040"
+items-service@1.0.10:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/items-service/-/items-service-1.0.11.tgz#8044d8fd9291e17c0c4202213cb3feb1f89f2187"
   dependencies:
+    debug "^3.1.0"
     fraction.js "4.0.9"
     regex-escape "3.4.8"
 

@@ -28,14 +28,7 @@ export const validWelcomeToken = check('t').exists()
 export const validPassword = check('password').isLength({min: 1, max: 100}).matches(/^.+/)
 export const validMessage = check("message").isString().isLength({min: 1, max: 1000}).withMessage('message trop long')
 
-export const validCats = query("cat").optional().exists()
-export const catList = ({cat}) => {
-    if (!isValidIds(cat)) {
-        throw new errors.ValidationError("cat query params are invalid")
-    }
 
-    return Array.isArray(cat) ? map(cat, c=>object(c)) : [object(cat)]
-}
 
 export const validIds = query("_ids").exists()
 export const idsList = ({_ids}) => {
@@ -132,6 +125,10 @@ export const optionnalPageSize = [
     check("ps").isInt({min: 1, max: 200}).withMessage(`must be an integer between 1 and 200 (default to ${defaultPS})`).toInt()
 ]
 export const optionnalAfterIdx = optionalMongoId("aidx")
+export const optionnalC1 = optionalMongoId("c1")
+export const optionnalC2 = optionalMongoId("c2")
+export const optionnalC3 = optionalMongoId("c3")
+export const optionnalC4 = optionalMongoId("c4")
 
 export const validItem = field => [
     validMongoId(`${field}._id`),

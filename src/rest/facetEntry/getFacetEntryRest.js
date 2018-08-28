@@ -5,6 +5,7 @@ import {optionalValidG, optionnalAfterIdx, optionnalPageSize, optionalValidQ} fr
 import {cols} from "../../const/collections"
 import configure from "items-service"
 import {col} from "mongo-registry"
+import regexEscape from "regex-escape"
 
 const router = Router()
 module.exports = router
@@ -17,11 +18,13 @@ router.get('/api/tree/facetEntry',
     optionalValidG,
     optionnalPageSize,
     optionnalAfterIdx,
-    run(({q, g, aidx, ps}) => facetEntryService.search([
-        {key: "name", type: "regex", value: q},
-        {key: "quantity.g", value: g},
-        {key: "_id", type: "gt", value: aidx}
-    ], ps, searchMixin))
+    run(({q, g, aidx, ps}) => facetEntryService.search(
+        {
+            name:{$regex: `^.*${regexEscape(q)}.*`},
+            "quantity.g":g,
+            _id:{$gt:aidx}
+        },
+        ps, searchMixin))
 )
 
 router.get('/api/tree/facetEntry/all',

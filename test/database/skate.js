@@ -1,7 +1,9 @@
-import {withIdBqt, withId, withDbTrunk} from "test-api-express-mongo"
+import {withIdBqt, withId, withDbTrunk, object} from "test-api-express-mongo"
 import {cols} from "../../src/const/collections"
 
 export const skateTrunk = withDbTrunk("skate", "999903c03e77667641d99990", 10, "Nomb")
+export const sportCatId = object("777777c03e77667641d99977")
+skateTrunk.cat = {c1 : sportCatId}
 export const plancheTrunk = withDbTrunk("planche", "999903c03e77667641d99991", 16, "Nomb")
 export const boisTrunk = withDbTrunk("bois", "999903c03e77667641d99995", 5, "t")
 export const arbreTrunk = withDbTrunk("arbre", "999903c03e77667641d99996", 1, "Nomb")

@@ -2,7 +2,7 @@ import {init, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import {cols} from "../../../../src/const/collections"
 import ENV from "../../../../src/env"
-import {refugeBioTrunk, skateTrunk} from "../../../database/skate"
+import {refugeBioTrunk, skateTrunk, sportCatId} from "../../../database/skate"
 import {baaTrunk, e1Trunk} from "../../../database/lettres"
 import {bateauTrunk, voitureTrunk} from "../../../database/transports"
 import {omit, pick} from 'lodash'
@@ -16,7 +16,7 @@ describe('GET Trunk', function () {
 
     it('search by cat', withTest({
         req: {
-            url: `/api/tree/trunks?cat=${skateTrunk._id}&cat=${papierVA._id}`,
+            url: `/api/tree/trunks?c1=${sportCatId}`,
         },
         res: {
             body: [skateTrunk]

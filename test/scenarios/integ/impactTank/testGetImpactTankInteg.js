@@ -13,6 +13,7 @@ import {pick} from 'lodash'
 import {papierVA} from "../../../database/papier"
 import {co2eImpactEntry, vitBImpactEntry, vitCImpactEntry} from "../../../database/impactEntries"
 import {gateauTrunk} from "../../../database/gateau"
+import {aTrunk} from "../../../database/lettres"
 
 const unknownId = ObjectID().toString()
 
@@ -54,7 +55,13 @@ describe('GET ImpactTank', function () {
             ]
         }
     }))
-    
+
+    it('impact tank a', withTest({
+        req: {
+            url: `/api/tree/impacttank/${aTrunk._id}`
+        }
+    }))
+
     it('impact tank inconnu', withTest({
         req: {
             url: `/api/tree/impacttank/${unknownId}`

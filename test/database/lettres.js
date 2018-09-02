@@ -91,10 +91,10 @@ const bFacets = [
 ]
 
 const aImpacts = [
-    {_id: object("fafa0026aaaaaaaaaaaaaaaa"), trunkId: aTrunk._id, facetId: prixFacetEntry._id, bqt: 100},
-    {_id: object("fafa0027aaaaaaaaaaaaaaaa"), trunkId: aTrunk._id, facetId: vitCImpactEntry._id, bqt: 100},
-    {_id: object("fafa0028aaaaaaaaaaaaaaaa"), trunkId: aTrunk._id, facetId: vitBImpactEntry._id, bqt: 100},
-    {_id: object("fafa0029aaaaaaaaaaaaaaaa"), trunkId: aTrunk._id, facetId: co2eImpactEntry._id, bqt: 100},
+    {_id: object("fafa0026aaaaaaaaaaaaaaaa"), trunkId: aTrunk._id, impactId: prixFacetEntry._id, bqt: 100},
+    {_id: object("fafa0027aaaaaaaaaaaaaaaa"), trunkId: aTrunk._id, impactId: vitCImpactEntry._id, bqt: 100},
+    {_id: object("fafa0028aaaaaaaaaaaaaaaa"), trunkId: aTrunk._id, impactId: vitBImpactEntry._id, bqt: 100},
+    {_id: object("fafa0029aaaaaaaaaaaaaaaa"), trunkId: aTrunk._id, impactId: co2eImpactEntry._id, bqt: 100},
 ]
 const bImpacts = [
     {_id: object("fafa0030aaaaaaaaaaaaaaaa"), trunkId: bTrunk._id, impactId: prixFacetEntry._id, bqt: 40},

@@ -59,11 +59,11 @@ describe('TU Calculations', function () {
         const subItemList = [
             withIdBqt("5a6a03c03e77667641d2d2c9", 10),
             withIdBqt("5a6a03c03e77667641d2d2c9", 100),
-            withIdBqt("aaaaaaaaaaaaaaaaaaaaaaaa", 4)
+            withIdBqt("aaaaaaaaaaaaaaaaaabbaaaa", 4)
         ]
         const mergedItemList = [
             withIdBqt("5a6a03c03e77667641d2d2c9", 110),
-            withIdBqt("aaaaaaaaaaaaaaaaaaaaaaaa", 4)
+            withIdBqt("aaaaaaaaaaaaaaaaaabbaaaa", 4)
         ]
     })
 

@@ -20,19 +20,13 @@ export const gateauRoots = [
     {_id: object("aaaaaaa03e77667641d2d2c2"), trunkId: gateauItem._id, rootId: farineItem._id, bqt: 200},
     {_id: object("aaaaaaa03e77667641d2d2c3"), trunkId: gateauItem._id, rootId: laitItem._id, bqt: 0.02}
 ]
-export const pizzaRoot = {_id: pizzaItem._id, items: [farineItem]}
+export const pizzaRoots = [{_id: "aaaaaab03e77667641d2d2c8",trunkId: pizzaItem._id, rootId: farineItem._id}]
 export const farineRoots = [{_id: "aaaaaaa03e77667641d2d2c8", trunkId: farineItem._id, rootId: bleTrunk._id}]
-export const cremeRoot = {_id: cremeTrunk._id, items: [{_id: laitTrunk._id}]}
 
-export const farineBranch = [
-    {_id: object("aaaaaaa03e77667641d2d2c6"), trunkId: farineItem._id, branchId: gateauItem._id, bqt: 1 / 200},
-    {_id: object("aaaaaaa03e77667641d2d2c7"), trunkId: farineItem._id, branchId: pizzaItem._id}
+const gateauFacets = [
+    {_id: "aaaaaac03e77667641d2d2c8", trunkId: gateauTrunk._id, facetId:vitCFacetEntry._id, bqt:10},
+    {_id: "aaaaaad03e77667641d2d2c8", trunkId: gateauTrunk._id, facetId:vitBFacetEntry._id, bqt:0.1},
 ]
-export const laitBranch = {_id: laitItem._id, items: [{_id: cremeTrunk._id}, gateauItem]}
-export const bleBranch = {_id: bleTrunk._id, items: [{_id: farineTrunk._id}]}
-
-const gateauFacets = {_id: gateauTrunk._id, items: [withIdBqt(vitCFacetEntry._id, 10), withIdBqt(vitBFacetEntry._id, 0.1)]}
-
 export const bleFacets = [
     {_id: object("aaaaaaa03e77667641d2d2c4"), trunkId: bleTrunk._id, facetId: vitCFacetEntry._id, bqt: 6},
     {_id: object("aaaaaaa03e77667641d2d2c5"), trunkId: bleTrunk._id, facetId: vitBFacetEntry._id, bqt: 0.15}
@@ -51,8 +45,7 @@ export const bleImpacts = [
 
 export const database = {
     [cols.TRUNK]: [gateauTrunk, laitTrunk, farineTrunk, bleTrunk, pizzaTrunk, cremeTrunk],
-    [cols.BRANCH]: [laitBranch, ...farineBranch, bleBranch],
-    [cols.ROOT]: [...gateauRoots, ...farineRoots, pizzaRoot, cremeRoot],
-    [cols.FACET]: [gateauFacets, ...bleFacets],
+    [cols.ROOT]: [...gateauRoots, ...farineRoots, ...pizzaRoots],
+    [cols.FACET]: [...gateauFacets, ...bleFacets],
     [cols.IMPACT]: [...gateauImpact, ...bleImpacts]
 }

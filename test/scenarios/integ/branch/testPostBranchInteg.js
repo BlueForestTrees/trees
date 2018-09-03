@@ -1,7 +1,6 @@
 import {object, createObjectId} from "test-api-express-mongo"
 import {oneResponse} from "test-api-express-mongo"
 import {assertDb} from "test-api-express-mongo"
-import {existingBranchPostSpec, newBranchSpec} from "../../../spec/branch/testPostBranchSpec"
 import {run} from "test-api-express-mongo"
 import {init, request, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
@@ -14,7 +13,8 @@ describe('POST Branch', function () {
 
     beforeEach(init(api, ENV, cols))
 
-    const branch = {_id: createObjectId(), trunkId: capsule._id, branchId: biere._id, bqt: 4}
+    const branch = {_id: createObjectId(), trunkId: capsule._id, bqt: 4, branchId: biere._id}
+    const expected = {_id: branch._id, trunkId: biere._id, bqt: 1/4, rootId: capsule._id}
 
     const postBranchReq = {
         req: {
@@ -31,8 +31,8 @@ describe('POST Branch', function () {
         },
         db: {
             expected: {
-                colname: cols.BRANCH,
-                doc: branch
+                colname: cols.ROOT,
+                doc: expected
             }
         }
     }))

@@ -1,9 +1,8 @@
 import {init, withTest} from "test-api-express-mongo"
-import {branchDeletionSpec} from "../../../spec/branch/testDeleteBranchSpec"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {farineBranch} from "../../../database/gateau"
+import {gateauRoots} from "../../../database/gateau"
 import {oneModifiedResponse} from "test-api-express-mongo"
 
 describe('DELETE branch', function () {
@@ -14,14 +13,14 @@ describe('DELETE branch', function () {
         req: {
             method: "DELETE",
             path: "/api/tree/branch",
-            param: `/${farineBranch[0]._id}`,
+            param: `/${gateauRoots[0]._id}`,
         }, res: {
             expected: oneModifiedResponse
         },
         db: {
             expected: {
-                colname: cols.BRANCH,
-                missingDoc: farineBranch[0]
+                colname: cols.ROOT,
+                missingDoc: {_id:gateauRoots[0]._id}
             }
         }
     }))

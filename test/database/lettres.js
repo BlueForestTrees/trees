@@ -62,20 +62,6 @@ export const dbaaRoots = [
     {_id: object("fafa0017aaaaaaaaaaaaaaaa"), trunkId: dbaaTrunk._id, rootId: e2Trunk._id, bqt: 2000},
 ]
 
-const bBranch = {_id: bTrunk._id, items: [withIdBqt(aTrunk._id, 10)]}
-const baBranch = {_id: baTrunk._id, items: [withIdBqt(bTrunk._id, 10)]}
-const baaBranch = {_id: baaTrunk._id, items: [withIdBqt(baTrunk._id, 10)]}
-const babBranch = {_id: babTrunk._id, items: [withIdBqt(baTrunk._id, 10)]}
-const b2Branch = {_id: b2Trunk._id, items: [withIdBqt(bTrunk._id, 10)]}
-const cBranch = {_id: cTrunk._id, items: [withIdBqt(aTrunk._id, 10)]}
-const dBranch = {_id: dTrunk._id, items: [withIdBqt(aTrunk._id, 10)]}
-const daBranch = {_id: daTrunk._id, items: [withIdBqt(dTrunk._id, 10)]}
-const dbBranch = {_id: dbTrunk._id, items: [withIdBqt(dTrunk._id, 10)]}
-const dbaBranch = {_id: dbaTrunk._id, items: [withIdBqt(dbTrunk._id, 10)]}
-const dbaaBranch = {_id: dbaaTrunk._id, items: [withIdBqt(dbaTrunk._id, 10)]}
-const e1Branch = {_id: e1Trunk._id, items: [withIdBqt(baaTrunk._id, 50000), withIdBqt(babTrunk._id, 10)]}
-const e2Branch = {_id: e2Trunk._id, items: [withIdBqt(b2Trunk._id, 10), withIdBqt(cTrunk._id, 10), withIdBqt(daTrunk._id, 10), withIdBqt(dbaaTrunk._id, 500)]}
-
 const aFacets = [
     {_id: object("fafa0018aaaaaaaaaaaaaaaa"), trunkId: aTrunk._id, facetId: prixFacetEntry._id, bqt: 100},
     {_id: object("fafa0019aaaaaaaaaaaaaaaa"), trunkId: aTrunk._id, facetId: vitCFacetEntry._id, bqt: 10},
@@ -107,6 +93,5 @@ export const database = {
     [cols.TRUNK]: [aTrunk, bTrunk, cTrunk, dTrunk, baTrunk, b2Trunk, daTrunk, dbTrunk, baaTrunk, babTrunk, dbaTrunk, dbaaTrunk, e1Trunk, e2Trunk],
     [cols.ROOT]: [...aRoots, ...bRoots, ...baRoots, ...baaRoots, ...babRoots, ...b2Roots, ...cRoots, ...dRoots, ...daRoots, ...dbRoots, ...dbaRoots, ...dbaaRoots],
     [cols.FACET]: [...aFacets, ...bFacets],
-    [cols.IMPACT]: [...aImpacts, ...bImpacts],
-    [cols.BRANCH]: [bBranch, baBranch, baaBranch, babBranch, b2Branch, cBranch, dBranch, daBranch, dbBranch, dbaBranch, dbaaBranch, e1Branch, e2Branch]
+    [cols.IMPACT]: [...aImpacts, ...bImpacts]
 }

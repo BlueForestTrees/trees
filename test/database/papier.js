@@ -11,11 +11,9 @@ export const coucheAdhesif = withDbTrunk("couche Adhésif", "5555555555555555555
 export const coucheAlu = withDbTrunk("couche Alu", "666666666666666666666666", 1000, "Mass")
 
 const roots = []
-const branches = []
 
 const link = (_id, trunkId, rootId, bqt) => {
     roots.push({_id, trunkId, rootId, bqt})
-    branches.push({_id, trunkId: rootId, branchId: trunkId, bqt: 1 / bqt})
 }
 
 link(object("a11111111111111111111111"), papierVA._id, couchePE._id, 7)
@@ -35,7 +33,6 @@ const coucheAluImpacts = [{_id: object("a11111111111111111111121"), trunkId: cou
 export const database = {
     [cols.TRUNK]: [papierVA, papierVB, coucheAdhesif, coucheAlu, couchePapier, couchePE],
     [cols.ROOT]: roots,
-    [cols.IMPACT]: [...couchePEImpacts, ...couchePapierImpacts, ...coucheAdhesifImpacts, ...coucheAluImpacts],
-    [cols.BRANCH]: branches
+    [cols.IMPACT]: [...couchePEImpacts, ...couchePapierImpacts, ...coucheAdhesifImpacts, ...coucheAluImpacts]
 }
 

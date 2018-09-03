@@ -4,7 +4,7 @@ import {cols} from "../../../../src/const/collections"
 import {assertDb} from "test-api-express-mongo"
 import {init, request, withTest} from "test-api-express-mongo"
 import {run} from "test-api-express-mongo"
-import {farineItem, gateauRoots} from "../../../database/gateau"
+import {gateauRoots} from "../../../database/gateau"
 import {oneModifiedResponse} from "test-api-express-mongo"
 
 describe('DELETE Root', function () {

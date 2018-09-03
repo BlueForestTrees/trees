@@ -6,7 +6,7 @@ import configure from "items-service"
 import {run} from 'express-blueforest'
 const router = require("express-blueforest").Router()
 
-const deleteBranch = configure(() => col(cols.BRANCH)).deleteOne
+const deleteBranch = configure(() => col(cols.ROOT)).deleteOne
 
 module.exports = router
 

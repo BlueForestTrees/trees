@@ -1,4 +1,4 @@
-import {branchIdIsNotTrunkId, validBranchId, validTrunkId, validBodyBqt, validId, validBodyOptRelativeTo} from "../validations"
+import {branchIdIsNotTrunkId, validBodyBqt, validId} from "../validations"
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry"
 import configure from "items-service"
@@ -6,16 +6,17 @@ import configure from "items-service"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"; const router = Router()
 
-const branchService = configure(() => col(cols.BRANCH))
+const rootService = configure(() => col(cols.ROOT))
 
 module.exports = router
 
+const branchToRoot = ({_id, bqt}) => ({_id, bqt:1/bqt})
+
 router.put('/api/tree/branch',
     validId,
-    validTrunkId,
-    validBranchId,
     validBodyBqt,
     branchIdIsNotTrunkId,
-    run(({_id, trunkId, branchId, bqt}) => ({filter: {_id, trunkId, branchId}, item: {bqt}})),
-    run(branchService.filteredUpdate)
+    run(branchToRoot),
+    run(({_id, bqt}) => ({filter: {_id}, item: {bqt}})),
+    run(rootService.filteredUpdate)
 )

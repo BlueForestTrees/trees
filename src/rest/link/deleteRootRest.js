@@ -7,10 +7,10 @@ import {col} from "mongo-registry"
 
 const router = Router()
 
-const rootService = configure(() => col(cols.ROOT))
+const deleteRoot = configure(() => col(cols.ROOT)).deleteOne
 module.exports = router
 
 router.delete('/api/tree/root/:_id',
     validPathId,
-    run(rootService.deleteOne),
+    run(deleteRoot),
 )

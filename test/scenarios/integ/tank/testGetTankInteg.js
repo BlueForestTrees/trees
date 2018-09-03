@@ -16,9 +16,11 @@ describe('GET Tank', function () {
             url: `/api/tree/tank/${aTrunk._id}`
         },
         res: {
-            body: [
-                {_id: e2Trunk._id, bqt: 20002100},
-                {_id: e1Trunk._id, bqt: 510}
+            bodypath: [
+                {path:"$[0]._id",value: e2Trunk._id},
+                {path:"$[0].trunk.quantity.bqt",value: 20002100},
+                {path:"$[1]._id",value: e1Trunk._id},
+                {path:"$[1].trunk.quantity.bqt",value: 510}
             ]
         }
     }))
@@ -36,10 +38,12 @@ describe('GET Tank', function () {
             }
         },
         res: {
-            body: [
-                {_id: e2Trunk._id, bqt: 20001100},
-                withId(daTrunk._id),
-                {_id: e1Trunk._id, bqt: 510}
+            bodypath: [
+                {path:"$[0]._id",value: e2Trunk._id},
+                {path:"$[0].trunk.quantity.bqt",value: 20001100},
+                {path:"$[1]._id",value: daTrunk._id},
+                {path:"$[2]._id",value: e1Trunk._id},
+                {path:"$[2].trunk.quantity.bqt",value: 510},
             ]
         }
     }))
@@ -55,10 +59,12 @@ describe('GET Tank', function () {
             }
         },
         res: {
-            body: [
-                {_id: e2Trunk._id, bqt: 2100},
-                withId(dbTrunk._id),
-                {_id: e1Trunk._id, bqt: 510}
+            bodypath: [
+                {path:"$[0]._id",value: e2Trunk._id},
+                {path:"$[0].trunk.quantity.bqt",value: 2100},
+                {path:"$[1]._id",value: dbTrunk._id},
+                {path:"$[2]._id",value: e1Trunk._id},
+                {path:"$[2].trunk.quantity.bqt",value: 510},
             ]
         }
     }))

@@ -1,4 +1,4 @@
-import {validPathTrunkId, validTrunkId} from "../validations"
+import {validPathRootId, validRootId} from "../validations"
 import {Router, run} from 'express-blueforest'
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry"
@@ -8,27 +8,23 @@ const router = Router()
 
 module.exports = router
 
-const branchService = configure(() => col(cols.BRANCH))
+const rootService = configure(() => col(cols.ROOT))
 const trunkService = configure(() => col(cols.TRUNK))
-const readBranchTree = branchService.treeRead(cols.BRANCH, "trunkId", "branchId")
 
-router.get('/api/tree/branch/:trunkId',
-    validPathTrunkId,
-    run(branchService.findNoMixin, "GET BRANCHES"),
-    run(trunkService.append("branchId", {name: 1, color: 1, 'quantity.g': 1},
-        (branch, branchTrunk) => ({
-            _id: branch.branchId,
-            linkId: branch._id,
+router.get('/api/tree/branch/:rootId',
+    validPathRootId,
+    run(rootService.findNoMixin),
+    run(trunkService.append(
+        "trunkId",
+        {name: 1, color: 1, 'quantity.g': 1},
+        (root, trunk) => ({
+            _id: trunk._id,
+            linkId: root._id,
             trunk: {
-                name: branchTrunk.name,
-                color: branchTrunk.color,
-                quantity: {bqt: branch.bqt, g: branchTrunk.quantity.g}
+                name: trunk.name,
+                color: trunk.color,
+                quantity: {bqt: 1/root.bqt, g: trunk.quantity.g}
             }
         })
-    ), "MERGE BRANCH INFOS")
-)
-
-router.get('/api/tree/branch/tree/:trunkId',
-    validTrunkId,
-    run(readBranchTree)
+    ))
 )

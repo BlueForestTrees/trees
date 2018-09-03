@@ -6,6 +6,5 @@ export const cols = {
     IMPACT: 'ImpactCollection',
     IMPACT_ENTRY: 'ImpactEntryCollection',
     ROOT: 'RootCollection',
-    BRANCH: 'BranchCollection',
     USAGE: 'UsageCollection',
 }

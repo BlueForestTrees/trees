@@ -1610,9 +1610,9 @@ expand-range@^1.8.1:
   dependencies:
     fill-range "^2.1.0"
 
-express-blueforest@1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/express-blueforest/-/express-blueforest-1.0.9.tgz#62983ed39267b2b7124d265817843cc0822d58c3"
+express-blueforest@1.0.14:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/express-blueforest/-/express-blueforest-1.0.14.tgz#7e94e218bc22f444f7f6f9b339be413f01c4b812"
   dependencies:
     body-parser "1.18.3"
     express "4.16.3"

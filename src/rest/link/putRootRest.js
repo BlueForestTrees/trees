@@ -1,22 +1,44 @@
 import {col} from "mongo-registry"
-import {rootIdIsNotTrunkId, validBodyOptRelativeTo, validId, validBodyBqt} from "../validations"
-
-import configure from "items-service"
+import {validBodyOptRelativeTo, validId, validBodyBqt, validTrunkId, validRootId} from "../validations"
+import {map} from "lodash"
 import {cols} from "../../const/collections"
 
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
 
 const router = Router()
-const rootService = configure(() => col(cols.ROOT))
+const roots = col(cols.ROOT)
+const bulkWrite = data => data.length > 0 && roots.bulkWrite(data, {ordered: false})
+const prepareTransportsUpdate = bqt => transports => map(transports, transport => ({
+    updateOne: {
+        filter: {_id: transport._id},
+        update: {
+            $set: {
+                //distance (m) * masse (kg) => km * t
+                "bqt": (transport.relativeTo.bqt/1000) * (bqt/1000)
+            }
+        }
+    }
+}))
 
 module.exports = router
+
+const updateRoot = ({_id, trunkId, rootId, bqt, relativeTo}) =>
+    roots
+        .updateOne({_id, trunkId, rootId}, {$set: {bqt, relativeTo}})
+        .then(
+            roots
+                .find({"relativeTo._id": rootId}).toArray()
+                .then(prepareTransportsUpdate(bqt))
+                .then(bulkWrite)
+                .then(null)
+        )
 
 router.put('/api/tree/root',
     validId,
     validBodyBqt,
     validBodyOptRelativeTo,
-    rootIdIsNotTrunkId,
-    run(({_id, trunkId, rootId, bqt, relativeTo}) => ({filter: {_id}, item: {bqt, relativeTo}})),
-    run(rootService.filteredUpdate)
+    validTrunkId,
+    validRootId,
+    run(updateRoot)
 )

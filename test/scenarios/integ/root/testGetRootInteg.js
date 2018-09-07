@@ -2,7 +2,7 @@ import {init, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {cols} from "../../../../src/const/collections"
-import {banane, bananeBC, bananeBCRoots, transport} from "../../../database/banane"
+import {banane, bananeBC, bananeBCRoots, camionTrunk} from "../../../database/banane"
 
 describe('GET Root', function () {
 
@@ -16,8 +16,8 @@ describe('GET Root', function () {
         res: {
             bodypath: [
                 {path: `$[?(@._id==="${bananeBCRoots[0].rootId}")].trunk.quantity.g`, value: [banane.quantity.g]},
-                {path: `$[?(@._id==="${bananeBCRoots[1].rootId}")].trunk.name`, value: [transport.name]},
-                {path: `$[?(@._id==="${bananeBCRoots[1].rootId}")].trunk.color`, value: [transport.color]},
+                {path: `$[?(@._id==="${bananeBCRoots[1].rootId}")].trunk.name`, value: [camionTrunk.name]},
+                {path: `$[?(@._id==="${bananeBCRoots[1].rootId}")].trunk.color`, value: [camionTrunk.color]},
                 {path: `$[?(@._id==="${bananeBCRoots[1].rootId}")].relativeTo._id`, value: [banane._id]},
             ]
         }
@@ -26,7 +26,7 @@ describe('GET Root', function () {
     it('return empty roots', withTest({
         req: {
             method: "GET",
-            url: `/api/tree/root/${transport._id}`
+            url: `/api/tree/root/${camionTrunk._id}`
         },
         res: {
             body: []

@@ -1,5 +1,12 @@
 import {Router, run} from 'express-blueforest'
-import {validBodyColor, validId, validBodyName, validBodyQuantityBqt, validBodyQuantityG} from "../validations"
+import {
+    validBodyColor,
+    validId,
+    validBodyName,
+    validBodyQuantityBqt,
+    validBodyQuantityG,
+    validUser, setUserIdIn
+} from "../validations"
 import {cols} from "../../const/collections"
 import configure from "items-service"
 import {col} from "mongo-registry"
@@ -14,5 +21,7 @@ router.post('/api/tree/trunk',
     validBodyName,
     validBodyQuantityG,
     validBodyQuantityBqt,
+    validUser,
+    run(setUserIdIn("oid")),
     run(trunkService.insertOne)
 )

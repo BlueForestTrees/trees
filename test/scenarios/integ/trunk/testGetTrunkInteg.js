@@ -9,6 +9,7 @@ import {omit, pick} from 'lodash'
 import {gateauTrunk} from "../../../database/gateau"
 import {papierVA, papierVB} from "../../../database/papier"
 import {withBqtG} from "test-api-express-mongo"
+import {camionTrunk} from "../../../database/banane"
 
 describe('GET Trunk', function () {
 
@@ -43,34 +44,6 @@ describe('GET Trunk', function () {
         }
     ]))
 
-    it('search with _ids in', withTest({
-        req: {
-            url: `/api/tree/trunk?_ids=${skateTrunk._id}`,
-        },
-        res: {
-            body: [skateTrunk]
-        }
-    }))
-
-    it('search with another _ids in', withTest({
-        req: {
-            url: `/api/tree/trunk?_ids=${skateTrunk._id}&_ids=${e1Trunk._id}`,
-        },
-        res: {
-            body: [skateTrunk,e1Trunk]
-        }
-    }))
-
-    it('return 400 since ids are bad', withTest({
-        req: {
-            url: `/api/tree/trunk?_ids=blabla`,
-        },
-        res: {
-            code: 400,
-            bodypath: {path: "$.errorCode", value: [2]}
-        }
-    }))
-
     it('search by name', withTest({
         req: {
             url: `/api/tree/trunks?q=ska`,
@@ -101,6 +74,7 @@ describe('GET Trunk', function () {
             body: [
                 bateauTrunk,
                 voitureTrunk,
+                camionTrunk
             ]
         }
     }))

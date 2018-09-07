@@ -5,6 +5,8 @@ import {cols} from "../../../../src/const/collections"
 import {createStringObjectId, createObjectId} from "test-api-express-mongo"
 import {withError} from "test-api-express-mongo"
 import {arbreTrunk} from "../../../database/skate"
+import {authGod, god} from "../../../database/users"
+
 
 const trunk = {_id: createObjectId(), color: "#FFCC00", name: "RATtatouille1664", quantity: {g: "Mass", bqt: 450}}
 const badTrunk = {_id: "XXX" + createStringObjectId() + "XXX", color: "#FF00", quantity: {g: "ass", bqt: "sd"}}
@@ -13,16 +15,28 @@ describe('POST Trunks', function () {
 
     beforeEach(init(api, ENV, cols))
 
-    it('post a new trunk', withTest({
+    it('post trunk without auth', withTest({
         req: {
             url: "/api/tree/trunk",
             method: "POST",
             body: trunk
         },
+        res: {
+            code: 401
+        }
+    }))
+
+    it('post a new trunk', withTest({
+        req: {
+            url: "/api/tree/trunk",
+            method: "POST",
+            body: trunk,
+            headers: authGod
+        },
         db: {
             expected: {
                 colname: cols.TRUNK,
-                doc: trunk
+                doc: {...trunk, oid: god._id}
             }
         }
     }))
@@ -31,7 +45,8 @@ describe('POST Trunks', function () {
         req: {
             method: "POST",
             url: "/api/tree/trunk",
-            body: arbreTrunk
+            body: arbreTrunk,
+            headers: authGod
         }, res: {
             code: 400,
             body: withError(1, "allready exists")

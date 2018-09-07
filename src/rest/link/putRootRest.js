@@ -1,5 +1,13 @@
 import {col} from "mongo-registry"
-import {validBodyOptRelativeTo, validId, validBodyBqt, validTrunkId, validRootId} from "../validations"
+import {
+    validBodyOptRelativeTo,
+    validId,
+    validBodyBqt,
+    validTrunkId,
+    validRootId,
+    validOwner,
+    validUser
+} from "../validations"
 import {map} from "lodash"
 import {cols} from "../../const/collections"
 
@@ -15,7 +23,7 @@ const prepareTransportsUpdate = bqt => transports => map(transports, transport =
         update: {
             $set: {
                 //distance (m) * masse (kg) => km * t
-                "bqt": (transport.relativeTo.bqt/1000) * (bqt/1000)
+                "bqt": (transport.relativeTo.bqt / 1000) * (bqt / 1000)
             }
         }
     }
@@ -25,13 +33,12 @@ module.exports = router
 
 const updateRoot = ({_id, trunkId, rootId, bqt, relativeTo}) =>
     roots
-        .updateOne({_id, trunkId, rootId}, {$set: {bqt, relativeTo}})
+        .updateOne({_id}, {$set: {bqt, relativeTo}})
         .then(
             roots
                 .find({"relativeTo._id": rootId}).toArray()
                 .then(prepareTransportsUpdate(bqt))
                 .then(bulkWrite)
-                .then(null)
         )
 
 router.put('/api/tree/root',
@@ -40,5 +47,7 @@ router.put('/api/tree/root',
     validBodyOptRelativeTo,
     validTrunkId,
     validRootId,
+    validUser,
+    validOwner(roots),
     run(updateRoot)
 )

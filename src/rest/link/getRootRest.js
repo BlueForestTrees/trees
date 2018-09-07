@@ -1,4 +1,4 @@
-import {validPathTrunkId, validTrunkId} from "../validations"
+import {appendOid, validPathTrunkId, validTrunkId} from "../validations"
 import {Router, run} from 'express-blueforest'
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry"
@@ -13,6 +13,7 @@ const trunkService = configure(() => col(cols.TRUNK))
 
 router.get('/api/tree/root/:trunkId',
     validPathTrunkId,
+    run(appendOid(col(cols.TRUNK), "_id", "trunkId"), "APPEND OID"),
     run(rootService.findMixin({trunkId: 0})),
     run(trunkService.append(
         "rootId",

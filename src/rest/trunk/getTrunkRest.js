@@ -44,9 +44,3 @@ router.get('/api/tree/trunk/:_id',
     validId,
     run(trunkService.get),
 )
-
-router.get('/api/tree/trunk',
-    validIds,
-    convert(idsList),
-    run(trunkService.findMixin({}))
-)

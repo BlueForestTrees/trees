@@ -1,4 +1,11 @@
-import {branchIdIsNotTrunkId, validBodyBqt, validBodyBranchId, validBodyId, validBodyTrunkId} from "../validations"
+import {
+    branchIdIsNotTrunkId,
+    setUserIdIn,
+    validBodyBqt,
+    validBodyBranchId,
+    validBodyId,
+    validBodyTrunkId, validUser
+} from "../validations"
 import configure from "items-service"
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry"
@@ -12,7 +19,7 @@ const rootService = configure(() => col(cols.ROOT))
 
 module.exports = router
 
-const branchToRoot = ({_id, trunkId, branchId, bqt}) => ({_id, trunkId:branchId, rootId:trunkId, bqt:1/bqt})
+const branchToRoot = ({_id, trunkId, branchId, bqt}) => ({_id, trunkId: branchId, rootId: trunkId, bqt: 1 / bqt})
 
 router.post('/api/tree/branch',
     [
@@ -23,6 +30,8 @@ router.post('/api/tree/branch',
         branchIdIsNotTrunkId
     ],
     run(branchToRoot),
+    validUser,
+    run(setUserIdIn("oid")),
     run(rootService.insertOne),
-    run(({result})=>result)
+    run(({result}) => result)
 )

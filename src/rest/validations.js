@@ -1,10 +1,29 @@
-import {BQT, BRANCHID, COLOR, FACET_ID, FACETSIDS, G, ID, IMPACT_ID, NAME, QUANTITY_BQT, QUANTITY_G, ROOTID, RELATIVE_TO, RELATIVE_TO_BQT, RELATIVE_TO_ID, TREEID, TRUNKID, IMPACTID, FACETID} from "../const/paths"
+import {
+    BQT,
+    BRANCHID,
+    COLOR,
+    G,
+    ID,
+    NAME,
+    QUANTITY_BQT,
+    QUANTITY_G,
+    ROOTID,
+    RELATIVE_TO,
+    RELATIVE_TO_BQT,
+    RELATIVE_TO_ID,
+    TRUNKID,
+    IMPACTID,
+    FACETID
+} from "../const/paths"
 import {IS_DECIMAL, IS_NOT_RIGHT_ID, SHOULD_BE_DEFINED} from "../const/messages"
 import {check, body, oneOf, param, query} from 'express-validator/check'
 import {isNil, map} from 'lodash'
 import {isValidIds, objectNoEx, object, objects, withIdIn} from "mongo-registry"
 import {errors} from "express-blueforest"
 import {grandeursKeys} from "../const/grandeurs"
+import jwt from "jsonwebtoken"
+import {X_ACCESS_TOKEN} from "../headers"
+import {run} from 'express-blueforest'
 
 const debug = require('debug')('api:tree:validation')
 const defaultPS = 20
@@ -12,7 +31,41 @@ const grandeur = chain => chain.isIn(grandeursKeys).withMessage("should be Mass,
 const mongoId = chain => chain.exists().withMessage("missing").isMongoId().withMessage("invalid mongo id").customSanitizer(objectNoEx)
 const number = chain => chain.isNumeric().withMessage("must be a valid number")
 
+export const appendOid = (col, left, right) => async o => {
+    const item = await col.findOne({[left]: o[right]}, {oid: 1})
+    if (item) {
+        o.oid = item.oid
+        return o
+    } else {
+        throw {code: "bf404"}
+    }
+}
 
+export const validUser = run((o, req) => {
+    let token = jwt.decode(req.headers[X_ACCESS_TOKEN])
+    if (!token || !token.user) {
+        throw {code: "bf401"}
+    }
+    req.user = token.user
+    req.user._id = object(req.user._id)
+    debug("user %o", req.user)
+    return o
+})
+
+export const setUserIdIn = field => (o, req) => {
+    o[field] = req.user._id
+    return o
+}
+
+export const validOwner = col => run(async (o, req) => {
+    let filter = {_id: o._id, oid: req.user._id}
+    debug("validOwner with %o", filter)
+    if (await col.findOne(filter)) {
+        return o
+    } else {
+        throw {code: "bf403"}
+    }
+})
 
 export const valid = (field, optional) => {
     let chain = check(field)
@@ -29,20 +82,6 @@ export const validPassword = check('password').isLength({min: 1, max: 100}).matc
 export const validMessage = check("message").isString().isLength({min: 1, max: 1000}).withMessage('message trop long')
 
 
-
-export const validIds = query("_ids").exists()
-export const idsList = ({_ids}) => {
-    if (!_ids) {
-        throw new errors.ValidationError("_ids query params is missing")
-    }
-    if (!isValidIds(_ids)) {
-        throw new errors.ValidationError("_ids query params are invalid")
-    }
-    
-    return withIdIn(objects(_ids))
-}
-
-
 export const optionalValidBodyBqt = number(body(QUANTITY_BQT).optional())
 export const validBqt = number(check(BQT))
 export const optionalValidBodyG = grandeur(body(QUANTITY_G).optional())
@@ -53,8 +92,7 @@ export const validBodyQuantityG = grandeur(body(QUANTITY_G))
 export const validBodyQuantityBqt = number(body(QUANTITY_BQT))
 export const validBodyG = grandeur(body(G))
 export const validBodyBqt = number(body(BQT))
-export const validMongoId = field =>mongoId(check(field))
-export const validBranchId = validMongoId(BRANCHID)
+export const validMongoId = field => mongoId(check(field))
 export const validRootId = validMongoId(ROOTID)
 export const validTrunkId = validMongoId(TRUNKID)
 export const validId = validMongoId(ID)
@@ -64,9 +102,6 @@ export const validBodyRootId = mongoId(body(ROOTID))
 export const validBodyBranchId = mongoId(body(BRANCHID))
 export const validBodyImpactId = mongoId(body(IMPACTID))
 export const validBodyFacetId = mongoId(body(FACETID))
-export const validPathFacetId = mongoId(param(FACETID))
-export const validTreeId = validMongoId(TREEID)
-export const validFacetIds = validMongoId(FACETSIDS)
 
 export const noBodyRelativeTo = body(RELATIVE_TO).not().exists()
 
@@ -83,8 +118,6 @@ export const validBodyOptRelativeTo = oneOf([
 
 
 export const rootIdIsNotTrunkId = check(ROOTID, IS_NOT_RIGHT_ID).custom((root, {req}) => (!root || !req.body.trunk) || (root._id !== req.body.trunk._id))
-export const impactIdIsNotTrunkId = check(IMPACT_ID, IS_NOT_RIGHT_ID).custom((root, {req}) => (!root || !req.body.trunk) || (root._id !== req.body.trunk._id))
-export const facetIdIsNotTrunkId = check(FACET_ID, IS_NOT_RIGHT_ID).custom((facet, {req}) => (!facet || !req.body.trunk) || (facet._id !== req.body.trunk._id))
 export const branchIdIsNotTrunkId = check(BRANCHID, IS_NOT_RIGHT_ID).custom((branch, {req}) => (!branch || !req.body.trunk) || (branch._id !== req.body.trunk._id))
 export const validBodyName = body(NAME).isLength({min: 2}).matches(/^.+/)
 export const validBodyColor = body(COLOR).isLength({min: 2}).matches(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)
@@ -122,7 +155,10 @@ export const optionnalPageSize = [
         }
         next()
     },
-    check("ps").isInt({min: 1, max: 200}).withMessage(`must be an integer between 1 and 200 (default to ${defaultPS})`).toInt()
+    check("ps").isInt({
+        min: 1,
+        max: 200
+    }).withMessage(`must be an integer between 1 and 200 (default to ${defaultPS})`).toInt()
 ]
 export const optionnalAfterIdx = optionalMongoId("aidx")
 export const optionnalC1 = optionalMongoId("c1")

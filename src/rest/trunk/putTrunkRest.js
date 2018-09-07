@@ -1,4 +1,11 @@
-import {validOptionalBodyBqtG, validOptionalBodyName, validPathId} from "../validations"
+import {
+    validBodyOwnerId,
+    validOptionalBodyBqtG,
+    validOptionalBodyName,
+    validUserIsOwner,
+    validPathId,
+    validUser, validOwner
+} from "../validations"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
 import {cols} from "../../const/collections"
@@ -14,5 +21,7 @@ router.put('/api/tree/trunk/:_id',
     validPathId,
     validOptionalBodyName,
     validOptionalBodyBqtG,
+    validUser,
+    validOwner(col(cols.TRUNK)),
     run(trunkService.update)
 )

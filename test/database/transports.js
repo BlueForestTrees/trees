@@ -10,7 +10,7 @@ export const voitureTrunk = withDbTrunk("voiture", "554503c03e77667641d99990", 1
 export const database = {
     [cols.TRUNK]: [bateauTrunk, voitureTrunk],
     [cols.IMPACT]: [
-        {_id: object("054503c03e77667641d99990"), trunkId: bateauTrunk._id, rootId: co2eImpactEntry._id, bqt: 2000000},
-        {_id: object("054503c03e77667641d99991"), trunkId: voitureTrunk._id, rootId: co2eImpactEntry._id, bqt: 5000000},
+        {_id: object("054503c03e77667641d99990"), trunkId: bateauTrunk._id, impactId: co2eImpactEntry._id, bqt: 2000000},
+        {_id: object("054503c03e77667641d99991"), trunkId: voitureTrunk._id, impactId: co2eImpactEntry._id, bqt: 5000000},
     ]
 }

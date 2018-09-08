@@ -5,13 +5,14 @@ import {
     validIds,
     optionalValidQ,
     idsList,
-    optionalValidG, optionnalC1, optionnalC2, optionnalC3, optionnalC4,
+    optionalValidG, optionnalC1, optionnalC2, optionnalC3, optionnalC4, optionalValidOid,
 } from "../validations"
 import {run, convert} from 'express-blueforest'
 import {Router} from "express-blueforest"
 import configure from "items-service"
 import {col} from "mongo-registry"
 import {cols} from "../../const/collections"
+
 const debug = require('debug')('api:trees')
 
 const router = Router()
@@ -23,15 +24,17 @@ const searchMixin = {color: 1, name: 1, g: 1, quantity: 1, type: 1}
 router.get('/api/tree/trunks',
     optionalValidQ,
     optionalValidG,
+    optionalValidOid,
     optionnalPageSize,
     optionnalAfterIdx,
     optionnalC1,
     optionnalC2,
     optionnalC3,
     optionnalC4,
-    run(({q, g, aidx, ps, c1, c2, c3, c4}) => trunkService.search([
+    run(({q, g, aidx, ps, c1, c2, c3, c4, oid}) => trunkService.search([
         {key: "name", type: "regex", value: q},
         {key: "quantity.g", value: g},
+        {key: "oid", value: oid},
         {key: "cat.c1", value: c1},
         {key: "cat.c2", value: c2},
         {key: "cat.c3", value: c3},

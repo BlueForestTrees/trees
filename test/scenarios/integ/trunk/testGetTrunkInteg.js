@@ -10,10 +10,22 @@ import {gateauTrunk} from "../../../database/gateau"
 import {papierVA, papierVB} from "../../../database/papier"
 import {withBqtG} from "test-api-express-mongo"
 import {camionTrunk} from "../../../database/banane"
+import {god} from "../../../database/users"
 
 describe('GET Trunk', function () {
 
     beforeEach(init(api, ENV, cols))
+
+    it('search by oid', withTest({
+        req: {
+            url: `/api/tree/trunks?oid=${god._id}`,
+        },
+        res: {
+            bodypath: [{
+                path: "$.length", value: 4
+            }]
+        }
+    }))
 
     it('search by cat', withTest({
         req: {

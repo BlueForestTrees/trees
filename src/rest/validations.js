@@ -13,7 +13,7 @@ import {
     RELATIVE_TO_ID,
     TRUNKID,
     IMPACTID,
-    FACETID
+    FACETID, OID
 } from "../const/paths"
 import {IS_DECIMAL, IS_NOT_RIGHT_ID, SHOULD_BE_DEFINED} from "../const/messages"
 import {check, body, oneOf, param, query} from 'express-validator/check'
@@ -100,13 +100,13 @@ export const validBodyQuantityBqt = number(body(QUANTITY_BQT))
 export const validBodyG = grandeur(body(G))
 export const validBodyBqt = number(body(BQT))
 export const validMongoId = field => mongoId(check(field))
+export const optionalValidOid = optionalMongoId(OID)
 export const validRootId = validMongoId(ROOTID)
 export const validTrunkId = validMongoId(TRUNKID)
 export const validId = validMongoId(ID)
 export const validBodyId = mongoId(body(ID))
 export const validBodyTrunkId = mongoId(body(TRUNKID))
 export const validBodyRootId = mongoId(body(ROOTID))
-export const validBodyBranchId = mongoId(body(BRANCHID))
 export const validBodyImpactId = mongoId(body(IMPACTID))
 export const validBodyFacetId = mongoId(body(FACETID))
 

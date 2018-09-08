@@ -3,11 +3,20 @@ import {Router} from "express-blueforest"
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry"
 import configure from "items-service"
-import {validBodyBqt, validBodyId, validBodyImpactId, validBodyTrunkId} from "../validations"
+import {
+    setUserIdIn,
+    validBodyBqt,
+    validBodyId,
+    validBodyImpactId,
+    validBodyTrunkId,
+    validOwner,
+    validUser
+} from "../validations"
 import {map, filter} from 'lodash'
 import {createObjectId} from "mongo-registry"
 
 const router = Router()
+const trunks = col(cols.TRUNK)
 const impactService = configure(() => col(cols.IMPACT))
 
 module.exports = router
@@ -17,5 +26,8 @@ router.post('/api/tree/impact',
     validBodyTrunkId,
     validBodyImpactId,
     validBodyBqt,
+    validUser,
+    validOwner(trunks, "trunkId"),
+    run(setUserIdIn("oid")),
     run(impactService.insertOne)
 )

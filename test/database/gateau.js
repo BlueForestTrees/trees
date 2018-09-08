@@ -8,6 +8,7 @@ import {god} from "./users"
 export const gateauTrunk = withDbTrunk("Gateau au chocolat", "5a6a03c03e77667641d2d2c3", 200, "Mass")
 gateauTrunk.oid = god._id
 export const farineTrunk = withDbTrunk("Farine", "5a6a03c03e77667641d2d2c1", 100, "Mass")
+farineTrunk.oid = god._id
 export const laitTrunk = withDbTrunk("Lait", "5a6a03c03e77667641d2d2c2", 0.001, "Volu")
 export const bleTrunk = withDbTrunk("blé", "5a6a03c03e77667641d2d2c0", 1000, "Mass")
 export const pizzaTrunk = withDbTrunk("pizza", "5a6a03c03e77667641d2d2c4", 2, "Nomb")
@@ -30,7 +31,7 @@ const gateauFacets = [
     {_id: "aaaaaad03e77667641d2d2c8", trunkId: gateauTrunk._id, facetId: vitBFacetEntry._id, bqt: 0.1},
 ]
 export const bleFacets = [
-    {_id: object("aaaaaaa03e77667641d2d2c4"), trunkId: bleTrunk._id, facetId: vitCFacetEntry._id, bqt: 6},
+    {_id: object("aaaaaaa03e77667641d2d2c4"), oid: god._id, trunkId: bleTrunk._id, facetId: vitCFacetEntry._id, bqt: 6},
     {_id: object("aaaaaaa03e77667641d2d2c5"), trunkId: bleTrunk._id, facetId: vitBFacetEntry._id, bqt: 0.15}
 ]
 
@@ -41,7 +42,7 @@ const gateauImpact = [
 
 
 export const bleImpacts = [
-    {_id: object("aaaaaaa03e77667641d2d2c0"), trunkId: bleTrunk._id, impactId: vitCImpactEntry._id, bqt: 6},
+    {_id: object("aaaaaaa03e77667641d2d2c0"), oid:god._id, trunkId: bleTrunk._id, impactId: vitCImpactEntry._id, bqt: 6},
     {_id: object("aaaaaaa03e77667641d2d2c1"), trunkId: bleTrunk._id, impactId: vitBImpactEntry._id, bqt: 0.15}
 ]
 

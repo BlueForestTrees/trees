@@ -33,5 +33,6 @@ router.get('/api/tree/root/:trunkId',
 
 router.get('/api/tree/root/tree/:trunkId',
     validTrunkId,
+    run(appendOid(col(cols.TRUNK), "_id", "trunkId"), "APPEND OID"),
     run(rootService.treeRead(cols.ROOT, "trunkId", "rootId"))
 )

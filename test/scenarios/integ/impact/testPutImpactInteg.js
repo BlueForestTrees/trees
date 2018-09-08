@@ -5,6 +5,7 @@ import {cols} from "../../../../src/const/collections"
 import {bleImpacts, bleTrunk} from "../../../database/gateau"
 import {withIdBqtG, oneModifiedResponse} from "test-api-express-mongo"
 import {createObjectId} from "test-api-express-mongo"
+import {authGod, authSimple} from "../../../database/users"
 
 describe('PUT Impact', function () {
 
@@ -14,7 +15,8 @@ describe('PUT Impact', function () {
         req: {
             url: `/api/tree/impact`,
             method: "PUT",
-            body: {...bleImpacts[0], bqt: bleImpacts[0].bqt * 4}
+            body: {...bleImpacts[0], bqt: bleImpacts[0].bqt * 4},
+            headers: authGod
         },
         res: {
             body: oneModifiedResponse
@@ -24,6 +26,29 @@ describe('PUT Impact', function () {
                 colname: cols.IMPACT,
                 doc: {...bleImpacts[0], bqt: bleImpacts[0].bqt * 4}
             }
+        }
+    }))
+
+    it('put impact no auth', withTest({
+        req: {
+            url: `/api/tree/impact`,
+            method: "PUT",
+            body: {...bleImpacts[0], bqt: bleImpacts[0].bqt * 4}
+        },
+        res: {
+            code: 401
+        }
+    }))
+
+    it('put impact bad auth', withTest({
+        req: {
+            url: `/api/tree/impact`,
+            method: "PUT",
+            body: {...bleImpacts[0], bqt: bleImpacts[0].bqt * 4},
+            headers: authSimple
+        },
+        res: {
+            code: 403
         }
     }))
 

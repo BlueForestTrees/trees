@@ -9,6 +9,7 @@ import {gateauTrunk} from "../../../database/gateau"
 import {withIdBqt, withId} from "test-api-express-mongo"
 import {vitEFacetEntry} from "../../../database/facetEntries"
 import {replaceItem} from "test-api-express-mongo"
+import {authGod, authSimple, god} from "../../../database/users"
 
 const facet = {_id: createObjectId(), trunkId: gateauTrunk._id, facetId: vitEFacetEntry._id, bqt: 85}
 
@@ -16,12 +17,35 @@ describe('POST Facet', function () {
 
     beforeEach(init(api, ENV, cols))
 
-    it('post new facet', withTest({
+    it('post facet no auth', withTest({
         req: {
             url: `/api/tree/facet`,
             method: "POST",
             body: facet
+        },
+        res: {
+            code: 401
+        }
+    }))
 
+    it('post facet bad auth', withTest({
+        req: {
+            url: `/api/tree/facet`,
+            method: "POST",
+            body: facet,
+            headers: authSimple
+        },
+        res: {
+            code: 403
+        }
+    }))
+
+    it('post facet', withTest({
+        req: {
+            url: `/api/tree/facet`,
+            method: "POST",
+            body: facet,
+            headers: authGod
         },
         res: {
             body: oneInsertedResponse
@@ -30,7 +54,7 @@ describe('POST Facet', function () {
         db: {
             expected: {
                 colname: cols.FACET,
-                doc: facet
+                doc: {...facet, oid: god._id}
             }
         }
     }))

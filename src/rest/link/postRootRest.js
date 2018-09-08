@@ -7,7 +7,7 @@ import {
     validBodyId,
     validBodyTrunkId,
     validBodyRootId,
-    validUser, setUserIdIn
+    validUser, validOwner, setUserIdIn
 } from "../validations"
 import {cols} from "../../const/collections"
 import {col} from "mongo-registry"
@@ -15,6 +15,7 @@ import configure from "items-service"
 import {cleanNull} from "../../util/calculations"
 
 const router = Router()
+const trunks = col(cols.TRUNK)
 const insertRoot = configure(() => col(cols.ROOT)).insertOne
 
 module.exports = router
@@ -27,6 +28,7 @@ router.post('/api/tree/root',
     validBodyBqt,
     rootIdIsNotTrunkId,
     validUser,
+    validOwner(trunks, "trunkId"),
     run(setUserIdIn("oid")),
     run(cleanNull("relativeTo")),
     run(insertRoot),

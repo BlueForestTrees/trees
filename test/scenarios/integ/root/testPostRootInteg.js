@@ -6,7 +6,7 @@ import {init} from "test-api-express-mongo"
 import {withError, oneResponse} from "test-api-express-mongo"
 import {biere, capsule} from "../../../database/biere"
 import {createObjectId} from "test-api-express-mongo"
-import {authGod, god} from "../../../database/users"
+import {authGod, authSimple, god} from "../../../database/users"
 
 let _id = createObjectId()
 const postARootSpec = {
@@ -30,6 +30,18 @@ const postARootSpec = {
 describe('POST Root', function () {
 
     beforeEach(init(api, ENV, cols))
+
+    it('post root not owner', withTest({
+        req: {
+            url: `/api/tree/root`,
+            method: "POST",
+            body: {_id, trunkId: biere._id, rootId: capsule._id, bqt: 2},
+            headers: authSimple
+        },
+        res: {
+            code: 403
+        }
+    }))
 
     it('post root', withTest(postARootSpec))
 

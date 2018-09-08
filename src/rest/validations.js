@@ -57,13 +57,20 @@ export const setUserIdIn = field => (o, req) => {
     return o
 }
 
-export const validOwner = col => run(async (o, req) => {
-    let filter = {_id: o._id, oid: req.user._id}
-    debug("validOwner with %o", filter)
-    if (await col.findOne(filter)) {
-        return o
+export const validOwner = (col, field = "_id") => run(async (o, req) => {
+    let filter = {_id: o[field]}
+    const doc = await col.findOne(filter)
+    if (doc) {
+        if (req.user._id.equals(doc.oid)) {
+            debug("valid owner user %o, doc %o", req.user._id, doc._id)
+            return o
+        } else {
+            debug("invalid owner user %o, doc %o", req.user._id, doc._id)
+            throw {code: "bf403"}
+        }
     } else {
-        throw {code: "bf403"}
+        debug("doc not found user %o, doc %o", req.user._id, doc._id)
+        throw {code: "bf404"}
     }
 })
 

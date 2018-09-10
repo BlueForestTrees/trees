@@ -1,7 +1,7 @@
 import {init, testGet200BodyOk, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
-import {cols} from "../../../../src/const/collections"
+import {cols} from "../../../../src/collections"
 import {prixImpactEntry} from "../../../database/impactEntries"
 
 describe('GET Impacts entries', function () {

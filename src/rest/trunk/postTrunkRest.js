@@ -6,8 +6,8 @@ import {
     validBodyQuantityBqt,
     validBodyQuantityG,
     validUser, setUserIdIn
-} from "../validations"
-import {cols} from "../../const/collections"
+} from "../../validations"
+import {cols} from "../../collections"
 import configure from "items-service"
 import {col} from "mongo-registry"
 

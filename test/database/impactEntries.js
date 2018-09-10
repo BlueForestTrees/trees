@@ -1,4 +1,4 @@
-import {cols} from "../../src/const/collections"
+import {cols} from "../../src/collections"
 import {withEntry} from "test-api-express-mongo"
 
 

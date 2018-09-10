@@ -2,7 +2,7 @@ import {assertDb} from "test-api-express-mongo"
 import {init, request, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
-import {cols} from "../../../../src/const/collections"
+import {cols} from "../../../../src/collections"
 import {prixImpactEntry} from "../../../database/impactEntries"
 import {farineTrunk} from "../../../database/gateau"
 import {oneResponse} from "test-api-express-mongo"
@@ -56,7 +56,7 @@ describe('POST Impact', function () {
         db: {
             expected: {
                 colname: cols.IMPACT,
-                doc: impact
+                doc: {...impact, oid:god._id}
             }
         }
     }))

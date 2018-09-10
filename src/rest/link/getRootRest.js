@@ -1,6 +1,6 @@
-import {appendOid, validPathTrunkId, validTrunkId} from "../validations"
+import {appendOid, validPathTrunkId, validTrunkId} from "../../validations"
 import {Router, run} from 'express-blueforest'
-import {cols} from "../../const/collections"
+import {cols} from "../../collections"
 import {col} from "mongo-registry"
 import configure from "items-service"
 

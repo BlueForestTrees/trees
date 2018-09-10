@@ -1,7 +1,7 @@
 import {withIdBqtG, withIdBqt, withBqtG, oneModifiedResponse, noneModifiedResponse} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
-import {cols} from "../../../../src/const/collections"
+import {cols} from "../../../../src/collections"
 import {init, withTest} from "test-api-express-mongo"
 import {gateauTrunk} from "../../../database/gateau"
 import {authGod, authSimple} from "../../../database/users"
@@ -40,7 +40,6 @@ describe('PUT Trunks', function () {
             method: "PUT",
             url: `/api/tree/trunk/${gateauTrunk._id}`,
             body: {
-                name: "baChar",
                 ...withBqtG(gateauTrunk.quantity.bqt * 2, "Mass"),
             },
             headers: authGod
@@ -51,7 +50,6 @@ describe('PUT Trunks', function () {
                 colname: cols.TRUNK,
                 doc: {
                     ...gateauTrunk,
-                    name: "baChar",
                     ...withBqtG(gateauTrunk.quantity.bqt * 2, "Mass")
                 }
             }

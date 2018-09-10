@@ -7,9 +7,9 @@ import {
     validRootId,
     validOwner,
     validUser
-} from "../validations"
+} from "../../validations"
 import {map} from "lodash"
-import {cols} from "../../const/collections"
+import {cols} from "../../collections"
 
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"

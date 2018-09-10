@@ -1,6 +1,6 @@
 import api from "../../../../src"
 import ENV from "../../../../src/env"
-import {cols} from "../../../../src/const/collections"
+import {cols} from "../../../../src/collections"
 import {assertDb} from "test-api-express-mongo"
 import {init, request, withTest} from "test-api-express-mongo"
 import {run} from "test-api-express-mongo"

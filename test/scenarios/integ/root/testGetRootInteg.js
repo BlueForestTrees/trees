@@ -1,7 +1,7 @@
 import {init, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
-import {cols} from "../../../../src/const/collections"
+import {cols} from "../../../../src/collections"
 import {banane, bananeBC, bananeBCRoots, camionTrunk} from "../../../database/banane"
 
 describe('GET Root', function () {

@@ -1,7 +1,7 @@
-import {validId} from "../validations"
+import {validId} from "../../validations"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
-import {cols} from "../../const/collections"
+import {cols} from "../../collections"
 import {col} from "mongo-registry"
 import configure from "items-service"
 

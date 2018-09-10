@@ -2,7 +2,7 @@ import {allreadyExistingImpactEntrySpec, postAdemeImpactEntryFileSpec, postBadGr
 import {init, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
-import {cols} from "../../../../src/const/collections"
+import {cols} from "../../../../src/collections"
 import {createStringObjectId, createObjectId} from "test-api-express-mongo"
 import {co2eImpactEntry} from "../../../database/impactEntries"
 import {withError} from "test-api-express-mongo"
@@ -29,7 +29,7 @@ describe('POST ImpactEntry', function () {
         }
     }))
 
-    it('post existing facet entry', withTest({
+    it('post existing impact entry', withTest({
         req: {
             method: "POST",
             url: "/api/tree/impactEntry",
@@ -42,7 +42,7 @@ describe('POST ImpactEntry', function () {
 
     it('refuse to create a bad impact entry', withTest({
         req: {
-            url: "/api/tree/facetEntry",
+            url: "/api/tree/impactEntry",
             method: "POST",
             body: badImpactEntry
         },

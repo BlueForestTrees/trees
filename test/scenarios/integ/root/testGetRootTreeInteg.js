@@ -2,7 +2,7 @@ import {expect} from 'chai'
 import {init, request, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
-import {cols} from "../../../../src/const/collections"
+import {cols} from "../../../../src/collections"
 import {farineRoot, farineRoots, gateauRoots, gateauTrunk} from "../../../database/gateau"
 import {withoutItemQuantity, withIdBqt, withIdBqtG, withQtCoef, withId} from "test-api-express-mongo"
 import {arbreTrunk} from "../../../database/skate"

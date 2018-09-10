@@ -1,5 +1,5 @@
 import {object} from "test-api-express-mongo"
-import {cols} from "../../src/const/collections"
+import {cols} from "../../src/collections"
 import {withIdBqt, withDbTrunk} from "test-api-express-mongo"
 import {co2eImpactEntry} from "./impactEntries"
 

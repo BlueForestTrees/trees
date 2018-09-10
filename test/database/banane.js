@@ -1,4 +1,4 @@
-import {cols} from "../../src/const/collections"
+import {cols} from "../../src/collections"
 import {withDbTrunk} from "test-api-express-mongo"
 import {object} from "test-api-express-mongo"
 import {god} from "./users"

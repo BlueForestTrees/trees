@@ -1,6 +1,6 @@
 import api from "../../../../src"
 import ENV from "../../../../src/env"
-import {cols} from "../../../../src/const/collections"
+import {cols} from "../../../../src/collections"
 import {init, withTest} from "test-api-express-mongo"
 import {laitTrunk} from "../../../database/gateau"
 import {aTrunk, daTrunk, dbTrunk, dRoot, dRoots, e1Trunk, e2Trunk} from "../../../database/lettres"

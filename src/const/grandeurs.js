@@ -1,1 +1,0 @@
-export const grandeursKeys = ["PNOF", "PDF","DALY","CTUh","CTUe","Ene1","Ene2","Dens","Nomb","Volu","Duré","Mass","Surf","Long","Pri1","Pri2","Tran"]

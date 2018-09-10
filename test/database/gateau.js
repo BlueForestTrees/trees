@@ -1,4 +1,4 @@
-import {cols} from "../../src/const/collections"
+import {cols} from "../../src/collections"
 import {vitBFacetEntry, vitCFacetEntry} from "./facetEntries"
 import {withIdBqt, withDbTrunk} from "test-api-express-mongo"
 import {vitBImpactEntry, vitCImpactEntry} from "./impactEntries"

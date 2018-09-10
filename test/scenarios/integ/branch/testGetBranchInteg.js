@@ -2,7 +2,7 @@ import {withInfos} from "test-api-express-mongo"
 import {run, withTest, init, request} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
-import {cols} from "../../../../src/const/collections"
+import {cols} from "../../../../src/collections"
 import {gateauRoots, farineItem, laitBranch, pizzaTrunk} from "../../../database/gateau"
 import {withError, withQtCoef, withoutQuantity} from "test-api-express-mongo"
 import {omit} from 'lodash'

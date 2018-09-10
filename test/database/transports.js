@@ -1,11 +1,10 @@
 import {withIdBqt, withId, withDbTrunk} from "test-api-express-mongo"
-import {cols} from "../../src/const/collections"
+import {cols} from "../../src/collections"
 import {co2eImpactEntry} from "./impactEntries"
-import {trunksType} from "../../src/const/trunks"
 import {object} from "test-api-express-mongo"
 
-export const bateauTrunk = withDbTrunk("bateau", "454503c03e77667641d99990", 1, "Tran", trunksType.TRANSPORT)
-export const voitureTrunk = withDbTrunk("voiture", "554503c03e77667641d99990", 1, "Tran", trunksType.TRANSPORT)
+export const bateauTrunk = withDbTrunk("bateau", "454503c03e77667641d99990", 1, "Tran")
+export const voitureTrunk = withDbTrunk("voiture", "554503c03e77667641d99990", 1, "Tran")
 
 export const database = {
     [cols.TRUNK]: [bateauTrunk, voitureTrunk],

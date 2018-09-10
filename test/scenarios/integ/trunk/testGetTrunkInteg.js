@@ -1,16 +1,16 @@
 import {init, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
-import {cols} from "../../../../src/const/collections"
+import {cols} from "../../../../src/collections"
 import ENV from "../../../../src/env"
 import {refugeBioTrunk, skateTrunk, sportCatId} from "../../../database/skate"
-import {baaTrunk, e1Trunk} from "../../../database/lettres"
+import {baaTrunk} from "../../../database/lettres"
 import {bateauTrunk, voitureTrunk} from "../../../database/transports"
 import {omit, pick} from 'lodash'
 import {gateauTrunk} from "../../../database/gateau"
 import {papierVA, papierVB} from "../../../database/papier"
 import {withBqtG} from "test-api-express-mongo"
 import {camionTrunk} from "../../../database/banane"
-import {god} from "../../../database/users"
+import {god, simple} from "../../../database/users"
 
 describe('GET Trunk', function () {
 
@@ -120,6 +120,24 @@ describe('GET Trunk', function () {
                 ...baaTrunk,
                 ...withBqtG(10, "Mass")
             }
+        }
+    }))
+
+    it('check is owner', withTest({
+        req: {
+            url: `/api/tree/${gateauTrunk._id}/owner/${god._id}`
+        },
+        res: {
+            body: true
+        }
+    }))
+
+    it('check is not owner', withTest({
+        req: {
+            url: `/api/tree/${gateauTrunk._id}/owner/${simple._id}`
+        },
+        res: {
+            body: false
         }
     }))
 

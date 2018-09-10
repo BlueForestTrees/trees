@@ -1,10 +1,10 @@
-import {cols} from "../../const/collections"
+import {cols} from "../../collections"
 import {col} from "mongo-registry"
 import configure from "items-service"
 
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
-import {validOwner, validPathId, validUser} from "../validations"
+import {validOwner, validPathId, validUser} from "../../validations"
 const router = Router()
 
 const impacts = col(cols.IMPACT)

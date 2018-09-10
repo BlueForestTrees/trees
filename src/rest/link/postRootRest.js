@@ -8,8 +8,8 @@ import {
     validBodyTrunkId,
     validBodyRootId,
     validUser, validOwner, setUserIdIn
-} from "../validations"
-import {cols} from "../../const/collections"
+} from "../../validations"
+import {cols} from "../../collections"
 import {col} from "mongo-registry"
 import configure from "items-service"
 import {cleanNull} from "../../util/calculations"

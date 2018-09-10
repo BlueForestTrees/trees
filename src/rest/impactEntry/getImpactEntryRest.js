@@ -1,7 +1,7 @@
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
-import {optionalValidQ} from "../validations"
-import {cols} from "../../const/collections"
+import {optionalValidQ} from "../../validations"
+import {cols} from "../../collections"
 import configure from "items-service"
 import {col} from "mongo-registry"
 

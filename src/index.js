@@ -1,6 +1,6 @@
 import ENV from "./env"
 import {dbInit} from "mongo-registry"
-import {registry} from "./db/dbRegistry"
+import {registry} from "./dbRegistry"
 import startExpress from "express-blueforest"
 
 

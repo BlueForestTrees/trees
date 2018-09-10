@@ -1,4 +1,4 @@
-import {cols} from "../const/collections"
+import {cols} from "./collections"
 import {col} from "mongo-registry"
 
 export const registry = [

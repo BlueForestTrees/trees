@@ -1,7 +1,7 @@
 import api from "../../../../src"
 import ENV from "../../../../src/env"
 import {init, request, withTest} from "test-api-express-mongo"
-import {cols} from "../../../../src/const/collections"
+import {cols} from "../../../../src/collections"
 import {bleImpacts, bleTrunk} from "../../../database/gateau"
 import {withIdBqtG, oneModifiedResponse} from "test-api-express-mongo"
 import {createObjectId} from "test-api-express-mongo"

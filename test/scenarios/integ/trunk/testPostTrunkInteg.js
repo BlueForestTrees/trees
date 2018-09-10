@@ -1,7 +1,7 @@
 import {init, withTest} from "test-api-express-mongo"
 import api from "../../../../src"
 import ENV from "../../../../src/env"
-import {cols} from "../../../../src/const/collections"
+import {cols} from "../../../../src/collections"
 import {createStringObjectId, createObjectId} from "test-api-express-mongo"
 import {withError} from "test-api-express-mongo"
 import {arbreTrunk} from "../../../database/skate"

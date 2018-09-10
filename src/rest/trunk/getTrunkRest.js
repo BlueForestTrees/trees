@@ -5,21 +5,19 @@ import {
     validIds,
     optionalValidQ,
     idsList,
-    optionalValidG, optionnalC1, optionnalC2, optionnalC3, optionnalC4, optionalValidOid,
-} from "../validations"
+    optionalValidG, optionnalC1, optionnalC2, optionnalC3, optionnalC4, optionalValidOid, validPathId, validPathOid
+} from "../../validations"
 import {run, convert} from 'express-blueforest'
 import {Router} from "express-blueforest"
 import configure from "items-service"
 import {col} from "mongo-registry"
-import {cols} from "../../const/collections"
-
-const debug = require('debug')('api:trees')
+import {cols} from "../../collections"
 
 const router = Router()
 module.exports = router
 
 const trunkService = configure(() => col(cols.TRUNK))
-const searchMixin = {color: 1, name: 1, g: 1, quantity: 1, type: 1}
+const searchMixin = {projection: {color: 1, name: 1, g: 1, quantity: 1, cat:1}}
 
 router.get('/api/tree/trunks',
     optionalValidQ,
@@ -46,4 +44,10 @@ router.get('/api/tree/trunks',
 router.get('/api/tree/trunk/:_id',
     validId,
     run(trunkService.get),
+)
+
+router.get('/api/tree/:_id/owner/:oid',
+    validPathId,
+    validPathOid,
+    run(({oid, _id}) => col(cols.TRUNK).findOne({_id, oid}, {projection: {_id: 1}}).then(res => !!res)),
 )

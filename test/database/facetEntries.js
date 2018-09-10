@@ -1,4 +1,4 @@
-import {cols} from "../../src/const/collections"
+import {cols} from "../../src/collections"
 import {withEntry} from "test-api-express-mongo"
 
 export const vitBFacetEntry = withEntry("5a6a03c03e77667641d2d2c5", "vitamine B", "Dens")

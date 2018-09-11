@@ -17,7 +17,7 @@ const router = Router()
 module.exports = router
 
 const trunkService = configure(() => col(cols.TRUNK))
-const searchMixin = {projection: {color: 1, name: 1, g: 1, quantity: 1, cat:1}}
+const searchMixin = {projection: {color: 1, name: 1, g: 1, quantity: 1, cat: 1, oid: 1}}
 
 router.get('/api/tree/trunks',
     optionalValidQ,

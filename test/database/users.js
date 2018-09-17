@@ -20,7 +20,7 @@ export const god = {
     password: "not_sha1_never_used_password",
     confirmDate: new Date(),
     color: getRandomColor(),
-    god: true
+    rights: "G"
 }
 export const simple = {
     _id: object("123123123123123313212332")

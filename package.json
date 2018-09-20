@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node index.js",
     "build": "rimraf dist && babel src --out-dir dist/js && copyfiles etc/** dist",
-    "dev": "node --version && cross-env DEBUG=api:* REST_PATH=src/rest nodemon src/index.js --exec babel-node",
+    "dev": "node --version && cross-env PORT=8080 DEBUG=api:* REST_PATH=src/rest nodemon src/index.js --exec babel-node",
     "test": "cross-env DEBUG=test:*,api:* NODE_ENV=test PORT=9000 REST_PATH=src/rest mocha --recursive --require babel-register --exit \"test/**/*.js\"",
     "init-db": "cross-env DEBUG=api:* NODE_ENV=test mocha --exit test/scenarios/tu/testInitDb.js --require babel-register",
     "start-db": "sudo docker run -itd -p 27017:27017 -v /var/lib/blueforest/mongo/dev:/data/db -e MONGO_INITDB_ROOT_USERNAME=doudou -e MONGO_INITDB_ROOT_PASSWORD=masta --restart unless-stopped mongo:latest"

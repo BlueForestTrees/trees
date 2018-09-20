@@ -1,6 +1,6 @@
 import {check, body, oneOf, param} from 'express-validator/check'
 import {isNil, map} from 'lodash'
-import {isValidIds, objectNoEx, object, objects, withIdIn} from "mongo-registry"
+import {isValidIds, objectNoEx, object, withIdIn} from "mongo-registry"
 import {errors} from "express-blueforest"
 import jwt from "jsonwebtoken"
 import {X_ACCESS_TOKEN} from "./headers"

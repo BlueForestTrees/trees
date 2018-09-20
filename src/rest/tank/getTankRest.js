@@ -12,9 +12,11 @@ module.exports = router
 
 const trunkService = configure(() => col(cols.TRUNK))
 
+const loadTree = configure(() => col(cols.ROOT)).treeRead(cols.ROOT, "trunkId","rootId")
+
 router.get('/api/tree/tank/:trunkId',
     validPathTrunkId,
-    run(configure(() => col(cols.ROOT)).treeRead(cols.ROOT, "trunkId","rootId"), "TREE"),
+    run(loadTree, "TREE"),
     run(extraireFeuilles, "TANK"),
     run(mergeList),
     run(trunkService.append(

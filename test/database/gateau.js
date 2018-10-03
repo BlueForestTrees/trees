@@ -49,6 +49,5 @@ export const bleImpacts = [
 export const database = {
     [cols.TRUNK]: [gateauTrunk, laitTrunk, farineTrunk, bleTrunk, pizzaTrunk, cremeTrunk],
     [cols.ROOT]: [...gateauRoots, ...farineRoots, ...pizzaRoots],
-    [cols.FACET]: [...gateauFacets, ...bleFacets],
     [cols.IMPACT]: [...gateauImpact, ...bleImpacts]
 }

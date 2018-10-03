@@ -92,6 +92,5 @@ const bImpacts = [
 export const database = {
     [cols.TRUNK]: [aTrunk, bTrunk, cTrunk, dTrunk, baTrunk, b2Trunk, daTrunk, dbTrunk, baaTrunk, babTrunk, dbaTrunk, dbaaTrunk, e1Trunk, e2Trunk],
     [cols.ROOT]: [...aRoots, ...bRoots, ...baRoots, ...baaRoots, ...babRoots, ...b2Roots, ...cRoots, ...dRoots, ...daRoots, ...dbRoots, ...dbaRoots, ...dbaaRoots],
-    [cols.FACET]: [...aFacets, ...bFacets],
     [cols.IMPACT]: [...aImpacts, ...bImpacts]
 }

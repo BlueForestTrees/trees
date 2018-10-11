@@ -1,7 +1,7 @@
 export const cols = {
     TRUNK: 'TrunkCollection',
-    IMPACT: 'ImpactCollection',
-    IMPACT_ENTRY: 'ImpactEntryCollection',
+    IMPACT: 'impactCollection',
+    IMPACT_ENTRY: 'impactEntryCollection',
     ROOT: 'RootCollection',
     USAGE: 'UsageCollection',
 }

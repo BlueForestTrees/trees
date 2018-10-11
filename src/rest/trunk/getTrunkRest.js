@@ -5,7 +5,7 @@ import {
     validIds,
     optionalValidQ,
     idsList,
-    optionalValidG, optionnalC1, optionnalC2, optionnalC3, optionnalC4, optionalValidOid, validPathId, validPathOid
+    optionalValidG, optionnalC1, optionnalC2, optionnalC3, optionnalC4, optionalValidOid, validPathId, validPathOid, optionnalC0
 } from "../../validations"
 import {run, convert} from 'express-blueforest'
 import {Router} from "express-blueforest"
@@ -25,14 +25,16 @@ router.get('/api/tree/trunks',
     optionalValidOid,
     optionnalPageSize,
     optionnalAfterIdx,
+    optionnalC0,
     optionnalC1,
     optionnalC2,
     optionnalC3,
     optionnalC4,
-    run(({q, g, aidx, ps, c1, c2, c3, c4, oid}) => trunkService.search([
+    run(({q, g, aidx, ps, c0, c1, c2, c3, c4, oid}) => trunkService.search([
         {key: "name", type: "regex", value: q},
         {key: "quantity.g", value: g},
         {key: "oid", value: oid},
+        {key: "cat.c0", value: c0},
         {key: "cat.c1", value: c1},
         {key: "cat.c2", value: c2},
         {key: "cat.c3", value: c3},

@@ -145,6 +145,7 @@ export const optionnalPageSize = [
     }).withMessage(`must be an integer between 1 and 200 (default to ${defaultPS})`).toInt()
 ]
 export const optionnalAfterIdx = optionalMongoId("aidx")
+export const optionnalC0 = optionalMongoId("c0")
 export const optionnalC1 = optionalMongoId("c1")
 export const optionnalC2 = optionalMongoId("c2")
 export const optionnalC3 = optionalMongoId("c3")

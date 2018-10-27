@@ -4,7 +4,7 @@ stages:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: blueforest/trees:1.0.7
+      tag: blueforest/tree:1.0.7
       pushRemote: true
       registry: index.docker.io
 - name: deploy

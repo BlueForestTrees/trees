@@ -150,3 +150,6 @@ export const optionnalC1 = optionalMongoId("c1")
 export const optionnalC2 = optionalMongoId("c2")
 export const optionnalC3 = optionalMongoId("c3")
 export const optionnalC4 = optionalMongoId("c4")
+
+export const validPathBqt = number(param(BQT))
+export const validPathAttributeId = mongoId(param("attrId"))

@@ -47,7 +47,7 @@ spec:
               key: mongodb-root-username
               name: mongo-mongodb
               optional: false
-        image: blueforest/tree:1.0.8
+        image: blueforest/tree:1.0.9
         imagePullPolicy: Always
         name: tree
         resources: {}

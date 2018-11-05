@@ -10,7 +10,7 @@ const debug = require('debug')('api:tree:validation')
 const defaultPS = 20
 const grandeur = chain => chain.isIn(grandeursKeys).withMessage("should be Mass, Dens, Long, Tran...")
 const mongoId = chain => chain.exists().withMessage("missing").isMongoId().withMessage("invalid mongo id").customSanitizer(objectNoEx)
-const number = chain => chain.isNumeric().withMessage("must be a valid number")
+const number = chain => chain.exists().custom(v => !isNaN(Number.parseFloat(v))).withMessage("must be a valid number").customSanitizer(Number.parseFloat)
 
 const ID = '_id'
 const OID = 'oid'

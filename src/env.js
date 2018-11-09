@@ -17,6 +17,8 @@ const ENV = {
     NODE_ENV: process.env.NODE_ENV || null,
     VERSION: version,
     MORGAN: process.env.MORGAN || ':status :method :url :response-time ms - :res[content-length]',
+
+    RABBIT_HOST: process.env.RABBIT_HOST || 'amqp://localhost'
 }
 
 debug(JSON.stringify(ENV))

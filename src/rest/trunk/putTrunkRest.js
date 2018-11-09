@@ -1,8 +1,6 @@
 import {
-    validBodyOwnerId,
     validOptionalBodyBqtG,
     validOptionalBodyName,
-    validUserIsOwner,
     validPathId,
     validUser, validOwner
 } from "../../validations"

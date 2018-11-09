@@ -63,6 +63,9 @@ export const validOwner = (col, field = "_id") => run(async (o, req) => {
         if (req.user._id.equals(doc.oid)) {
             debug("valid owner user %o, doc %o", req.user._id, doc._id)
             return o
+        } else if (req.user.rights.charAt(0) === 'G') {
+            debug("valid god user %o, doc %o", req.user._id, doc._id)
+            return o
         } else {
             debug("invalid owner user %o, doc %o", req.user._id, doc._id)
             throw {code: "bf403"}

@@ -12,6 +12,7 @@ import {Router} from "express-blueforest"
 import configure from "items-service"
 import {col} from "mongo-registry"
 import {cols} from "../../collections"
+import regexEscape from "regex-escape"
 
 const router = Router()
 module.exports = router
@@ -30,17 +31,26 @@ router.get('/api/tree/trunks',
     optionnalC2,
     optionnalC3,
     optionnalC4,
-    run(({q, g, aidx, ps, c0, c1, c2, c3, c4, oid}) => trunkService.search([
-        {key: "name", type: "regex", value: q},
-        {key: "quantity.g", value: g},
-        {key: "oid", value: oid},
-        {key: "cat.c0", value: c0},
-        {key: "cat.c1", value: c1},
-        {key: "cat.c2", value: c2},
-        {key: "cat.c3", value: c3},
-        {key: "cat.c4", value: c4},
-        {key: "_id", type: "gt", value: aidx}
-    ], ps, searchMixin))
+    run(({q, g, aidx, ps, c0, c1, c2, c3, c4, oid}) => {
+
+        const filter = {}
+
+        if (q !== undefined) filter.name = {$regex: new RegExp(`^.*${regexEscape(q)}.*`, "i")}
+        if (g !== undefined) filter["quantity.g"] = g
+        if (oid !== undefined) filter.oid = oid
+        if (c0 !== undefined) filter["cat.c0"] = c0
+        if (c1 !== undefined) filter["cat.c1"] = c1
+        if (c2 !== undefined) filter["cat.c2"] = c2
+        if (c3 !== undefined) filter["cat.c3"] = c3
+        if (c4 !== undefined) filter["cat.c4"] = c4
+        if (aidx !== undefined) filter._id = {$gt: aidx}
+
+        return col(cols.TRUNK)
+            .find(filter, searchMixin)
+            .sort({_id: 1})
+            .limit(ps)
+            .toArray()
+    })
 )
 
 router.get('/api/tree/trunk/:_id',

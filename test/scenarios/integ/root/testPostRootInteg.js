@@ -81,7 +81,7 @@ describe('POST Root', function () {
                 {path: "$.errors._id.msg", value: "missing"},
                 {path: "$.errors.trunkId.msg", value: "missing"},
                 {path: "$.errors.rootId.msg", value: "missing"},
-                {path: "$.errors.bqt.msg", value: "must be a valid number"},
+                {path: "$.errors.bqt.msg", value: "Invalid value"},
             ]
         }
     }))

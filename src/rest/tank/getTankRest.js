@@ -24,11 +24,9 @@ router.get('/api/tree/tank/:trunkId',
         {name: 1, color: 1, 'quantity.g': 1},
         (tankItem, trunk) => ({
             _id: tankItem._id,
-            trunk: {
-                name: trunk.name,
-                color: trunk.color,
-                quantity: {bqt: tankItem.bqt, g: trunk.quantity.g}
-            }
+            name: trunk.name,
+            color: trunk.color,
+            quantity: {bqt: tankItem.bqt, g: trunk.quantity.g}
         })
     ))
 )

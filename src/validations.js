@@ -15,12 +15,10 @@ const number = chain => chain.exists().custom(v => !isNaN(Number.parseFloat(v)))
 const ID = '_id'
 const OID = 'oid'
 const TRUNKID = 'trunkId'
-const USERID = 'userId'
 const ROOTID = 'rootId'
 const RELATIVE_TO = 'relativeTo'
 const RELATIVE_TO_ID = 'relativeTo._id'
 const RELATIVE_TO_BQT = 'relativeTo.bqt'
-const IMPACTID = 'impactId'
 const NAME = 'name'
 const COLOR = 'color'
 const G = 'g'
@@ -83,7 +81,6 @@ export const optionalMongoId = field => mongoId(check(field).optional())
 
 export const validBodyQuantityG = grandeur(body(QUANTITY_G))
 export const validBodyQuantityBqt = number(body(QUANTITY_BQT))
-export const validBodyG = grandeur(body(G))
 export const validBodyBqt = number(body(BQT))
 export const validMongoId = field => mongoId(check(field))
 export const optionalValidOid = optionalMongoId(OID)
@@ -93,7 +90,6 @@ export const validId = validMongoId(ID)
 export const validBodyId = mongoId(body(ID))
 export const validBodyTrunkId = mongoId(body(TRUNKID))
 export const validBodyRootId = mongoId(body(ROOTID))
-export const validBodyImpactId = mongoId(body(IMPACTID))
 
 
 export const noBodyRelativeTo = body(RELATIVE_TO).not().exists()

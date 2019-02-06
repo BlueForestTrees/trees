@@ -16,6 +16,7 @@ describe('GET Root', function () {
         res: {
             bodypath: [
                 {path: `$[?(@._id==="${bananeBCRoots[0].rootId}")].trunk.quantity.g`, value: [banane.quantity.g]},
+                {path: `$[?(@._id==="${bananeBCRoots[0].rootId}")].trunk.quantity.bqt`, value: 1},
                 {path: `$[?(@._id==="${bananeBCRoots[1].rootId}")].trunk.name`, value: [camionTrunk.name]},
                 {path: `$[?(@._id==="${bananeBCRoots[1].rootId}")].trunk.color`, value: [camionTrunk.color]},
                 {path: `$[?(@._id==="${bananeBCRoots[1].rootId}")].relativeTo._id`, value: [banane._id]},

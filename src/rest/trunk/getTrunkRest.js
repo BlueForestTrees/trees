@@ -43,11 +43,11 @@ router.get('/api/tree/trunks',
         if (c2 !== undefined) filter["cat.c2"] = c2
         if (c3 !== undefined) filter["cat.c3"] = c3
         if (c4 !== undefined) filter["cat.c4"] = c4
-        if (aidx !== undefined) filter._id = {$gt: aidx}
+        if (aidx !== undefined) filter._id = {$lt: aidx}
 
         return col(cols.TRUNK)
             .find(filter, searchMixin)
-            .sort({_id: 1})
+            .sort({_id: -1})
             .limit(ps)
             .toArray()
     })

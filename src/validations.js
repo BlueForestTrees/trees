@@ -152,3 +152,4 @@ export const optionnalC4 = optionalMongoId("c4")
 
 export const validPathBqt = number(param(BQT))
 export const validPathAttributeId = mongoId(param("attrId"))
+export const validLimit = number(param("limit")).isLength({min: 1, max: 15})

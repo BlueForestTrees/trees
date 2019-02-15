@@ -114,6 +114,7 @@ export const optionalValidQ = check('q').optional().exists()
 export const validPathId = mongoId(param(ID))
 export const validPathOid = mongoId(param(OID))
 export const validPathTrunkId = mongoId(param(TRUNKID))
+export const validOptionalTrunkId = mongoId(check(TRUNKID)).optional()
 export const validPathRootId = mongoId(param(ROOTID))
 export const validOptionalBodyName = body(NAME).optional().exists().matches(/^.+/)
 
@@ -140,8 +141,8 @@ export const optionnalPageSize = [
     },
     check("ps").isInt({
         min: 1,
-        max: 200
-    }).withMessage(`must be an integer between 1 and 200 (default to ${defaultPS})`).toInt()
+        max: 30
+    }).withMessage(`must be an integer between 1 and 30 (default to ${defaultPS})`).toInt()
 ]
 export const optionnalAfterIdx = optionalMongoId("aidx")
 export const optionnalC0 = optionalMongoId("c0")

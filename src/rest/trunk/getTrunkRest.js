@@ -12,13 +12,12 @@ import {Router} from "express-blueforest"
 import configure from "items-service"
 import {col} from "mongo-registry"
 import {cols} from "../../collections"
-import regexEscape from "regex-escape"
 
 const router = Router()
 module.exports = router
 
 const trunkService = configure(() => col(cols.TRUNK))
-const searchMixin = {projection: {color: 1, name: 1, g: 1, quantity: 1, cat: 1, oid: 1}}
+const searchMixin = {projection: {color: 1, name: 1, g: 1, quantity: 1, cat: 1, oid: 1, stores: 1}}
 
 router.get('/api/tree/trunks',
     optionalValidQ,
@@ -35,7 +34,7 @@ router.get('/api/tree/trunks',
 
         const filter = {}
 
-        if (q !== undefined) filter.name = {$regex: new RegExp(`^.*${regexEscape(q)}.*`, "i")}
+        if (q !== undefined) filter.$text = {$search: q}
         if (g !== undefined) filter["quantity.g"] = g
         if (oid !== undefined) filter.oid = oid
         if (c0 !== undefined) filter["cat.c0"] = c0

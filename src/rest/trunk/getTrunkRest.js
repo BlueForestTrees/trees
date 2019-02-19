@@ -12,6 +12,7 @@ import {Router} from "express-blueforest"
 import configure from "items-service"
 import {col} from "mongo-registry"
 import {cols} from "../../collections"
+import regexEscape from "regex-escape"
 
 const router = Router()
 module.exports = router
@@ -34,7 +35,14 @@ router.get('/api/tree/trunks',
 
         const filter = {}
 
-        if (q !== undefined) filter.$text = {$search: q}
+        if (q !== undefined) {
+            const termFilter = {$regex: new RegExp(`^.*${regexEscape(q)}.*`, "i")}
+            filter.$or = [
+                {name: termFilter},
+                {stores: termFilter}
+            ]
+        }
+
         if (g !== undefined) filter["quantity.g"] = g
         if (oid !== undefined) filter.oid = oid
         if (c0 !== undefined) filter["cat.c0"] = c0

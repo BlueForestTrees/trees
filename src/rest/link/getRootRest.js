@@ -14,7 +14,6 @@ const trunkService = configure(() => col(cols.TRUNK))
 
 router.get('/api/tree/root/:trunkId',
     validPathTrunkId,
-    run(appendOid(col(cols.TRUNK), "_id", "trunkId"), "APPEND OID"),
     run(rootService.findMixin({trunkId: 0})),
     run(trunkService.append(
         "rootId",
@@ -47,11 +46,11 @@ router.get(`/api/tree/root/equiv/:bqt/:attrId/:limit`,
     validPathAttributeId,
     validLimit,
     validOptionalTrunkId,
-    run(({bqt, attrId, limit, trunkId}, req, res) => {
+    run(({bqt, attrId, limit, tid}, req, res) => {
         res.locals.bqt = bqt
 
         const bqtFilter = bqt === 0 ? {bqt: 0} : {bqt: {$ne: 0}}
-        const trunkIdFilter = trunkId ? {trunkId} : {}
+        const trunkIdFilter = tid ? {trunkId: tid} : {}
         return col(cols.ROOT)
             .aggregate(
                 [

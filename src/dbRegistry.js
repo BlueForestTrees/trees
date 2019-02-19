@@ -11,10 +11,10 @@ export const registry = [
         version: "1.0.6",
         log: "index: TrunkCollection.externId",
         script: () => col(cols.TRUNK).createIndex({"externId": 1})
-    }, {
-        version: "1.1.4",
-        log: "index: text name, store, categories_tags",
-        script: () => col(cols.TRUNK).createIndex({categories_tags:"text", name:"text", stores:"text"})
     },
-
+    {
+        version: "1.1.5",
+        log: "search (name, stores) IDX",
+        script: () => col(cols.TRUNK).createIndex({name: 1, stores: 1})
+    }
 ]

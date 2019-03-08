@@ -50,7 +50,7 @@
     "nested-error-stacks": "2.0.0",
     "pick-to-array": "1.1.0",
     "regex-escape": "3.4.8",
-    "simple-rbmq": "1.0.22"
+    "simple-rbmq": "1.0.23"
   },
   "babel": {
     "presets": [

@@ -1,6 +1,6 @@
 import {check, body, oneOf, param} from 'express-validator/check'
 import {isNil, map} from 'lodash'
-import {isValidIds, objectNoEx, object, withIdIn} from "mongo-registry"
+import {objectNoEx, object, withIdIn} from "mongo-registry"
 import {errors} from "express-blueforest"
 import jwt from "jsonwebtoken"
 import {X_ACCESS_TOKEN} from "./headers"
@@ -49,10 +49,8 @@ export const validUser = run((o, req) => {
     return o
 })
 
-export const setUserIdIn = field => (o, req) => {
-    o[field] = req.user._id
-    return o
-}
+export const setOid = (o, req) => (o.oid = req.user._id) && o
+
 
 export const validOwner = (col, field = "_id") => run(async (o, req) => {
     let filter = {_id: o[field]}

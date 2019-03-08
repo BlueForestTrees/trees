@@ -1,5 +1,4 @@
-import {run} from 'express-blueforest'
-import {Router} from "express-blueforest"
+import {Router, run} from "express-blueforest"
 import {
     rootIdIsNotTrunkId,
     validBodyBqt,
@@ -7,16 +6,16 @@ import {
     validBodyId,
     validBodyTrunkId,
     validBodyRootId,
-    validUser, validOwner, setUserIdIn
+    validUser, validOwner, setOid
 } from "../../validations"
 import {cols} from "../../collections"
-import {col} from "mongo-registry"
-import configure from "items-service"
+import {col, object} from "mongo-registry"
 import {cleanNull} from "../../util/calculations"
 
 const router = Router()
+module.exports = router
+
 const trunks = col(cols.TRUNK)
-const insertRoot = configure(() => col(cols.ROOT)).insertOne
 
 module.exports = router
 
@@ -29,8 +28,8 @@ router.post('/api/tree/root',
     rootIdIsNotTrunkId,
     validUser,
     validOwner(trunks, "trunkId"),
-    run(setUserIdIn("oid")),
+    run(setOid),
     run(cleanNull("relativeTo")),
-    run(insertRoot),
+    run(root => col(cols.ROOT).insertOne(root)),
     run(({result}) => result)
 )

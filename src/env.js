@@ -1,5 +1,6 @@
 const debug = require('debug')('api:tree')
 import {version, name} from './../package.json'
+import fs from 'fs'
 
 const ENV = {
     NAME:name,
@@ -18,8 +19,14 @@ const ENV = {
     VERSION: version,
     MORGAN: process.env.MORGAN || ':status :method :url :response-time ms - :res[content-length]',
 
-    RABBIT_HOST: process.env.RABBIT_HOST || 'amqp://localhost'
+    RK_TRUNK_UPSERT: "trunk-upsert",
+    RK_TRUNK_DELETE: "trunk-delete",
+    RB_PATH: process.env.RB_PATH || "mq.json",
+    QUEUE_PATH: process.env.QUEUE_PATH || "queue.json",
 }
+
+ENV.RB = JSON.parse(fs.readFileSync(ENV.RB_PATH, 'utf8'))
+ENV.QUEUE = JSON.parse(fs.readFileSync(ENV.QUEUE_PATH, 'utf8'))
 
 debug(JSON.stringify(ENV))
 

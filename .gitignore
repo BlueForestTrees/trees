@@ -4,6 +4,7 @@
 node_modules/
 target/
 dist/
+yarn-error.log
 
 # User-specific stuff:
 .idea/workspace.xml

@@ -2,12 +2,12 @@ import ENV from "./env"
 import {dbInit} from "mongo-registry"
 import {registry} from "./dbRegistry"
 import startExpress from "express-blueforest"
-
+import {initRabbit} from "simple-rbmq"
 
 const errorMapper = err => {
     if (err.code === 11000) {
         err.status = 400
-        err.body = {errorCode: 1, message: "allready exists"}
+        err.body = {errorCode: 1, message: "L'élément existe déjà"}
     } else if (err.code === 'bf403') {
         err.status = 403
         err.body = {errorCode: 3, message: "Réservé au propriétaire ou au super-utilisateur."}
@@ -20,6 +20,7 @@ const errorMapper = err => {
     }
 }
 
-export default dbInit(ENV, registry)
+export default initRabbit(ENV.RB)
+    .then(() => dbInit(ENV, registry))
     .then(startExpress(ENV, errorMapper))
     .catch(e => console.error("BOOT ERROR\n", e))

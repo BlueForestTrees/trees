@@ -49,7 +49,7 @@ describe('POST Trunks', function () {
             headers: authGod
         }, res: {
             code: 400,
-            body: withError(1, "allready exists")
+            body: withError(1, "L'élément existe déjà")
         }
     }))
 

@@ -1,27 +1,18 @@
-import {Router, run} from 'express-blueforest'
-import {
-    validBodyColor,
-    validId,
-    validBodyName,
-    validBodyQuantityBqt,
-    validBodyQuantityG,
-    validUser, setUserIdIn
-} from "../../validations"
-import {cols} from "../../collections"
-import configure from "items-service"
-import {col} from "mongo-registry"
+import {Router, run, thenNull} from 'express-blueforest'
+import {col, object} from "mongo-registry"
+import {validId, validBodyName, validBodyQuantityBqt, validBodyQuantityG, validUser, setOid} from "../../validations"
+import ENV from "../../env"
+import {createSender} from "simple-rbmq"
 
 const router = Router()
 module.exports = router
-const trunkService = configure(() => col(cols.TRUNK))
 
 router.post('/api/tree/trunk',
     validId,
-    validBodyColor,
     validBodyName,
     validBodyQuantityG,
     validBodyQuantityBqt,
     validUser,
-    run(setUserIdIn("oid")),
-    run(trunkService.insertOne)
+    run(setOid),
+    run(createSender(ENV.RB.exchange, ENV.RK_TRUNK_UPSERT))
 )

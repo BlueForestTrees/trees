@@ -1,22 +1,11 @@
 import {withIdBqtG, withBqtG, withIdBqt, withId} from "test-api-express-mongo"
 import {mergeItemList, mergeTwoItems, sum} from "../../../src/util/calculations"
-import Fraction from "fraction.js"
 import chai, {expect} from "chai"
 
 chai.should()
 
 describe('TU Calculations', function () {
 
-    describe('long tests', function () {
-        it('multiply', function () {
-            (Fraction(1).mul(410.144927536).mul(2.07)).valueOf().should.equal(849);
-            (0.23923445 * 3600 * 1000).should.equal(861244.02);
-
-            (Fraction(1, 2).mul(Fraction(1, 2))).valueOf().should.equal(0.25);
-
-            Fraction(0.1).mul(0.2).valueOf().should.equal(0.02);
-        })
-    })
     describe('sum qt', function () {
         it('mergeTwoItems', function () {
             mergeTwoItems({bqt: 7, any: "rr"}, {bqt: 7, any: "rr"}).should.deep.equal({bqt: 14, any: "rr"})

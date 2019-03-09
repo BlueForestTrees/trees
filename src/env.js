@@ -19,8 +19,8 @@ const ENV = {
     VERSION: version,
     MORGAN: process.env.MORGAN || ':status :method :url :response-time ms - :res[content-length]',
 
-    RK_TRUNK_UPSERT: "trunk-upsert",
-    RK_TRUNK_DELETE: "trunk-delete",
+    RK_TRUNK_UPSERT: process.env.RK_TRUNK_UPSERT || "trunk-upsert",
+    RK_TRUNK_DELETE: process.env.RK_TRUNK_DELETE || "trunk-delete",
     RB_PATH: process.env.RB_PATH || "mq.json",
     QUEUE_PATH: process.env.QUEUE_PATH || "queue.json",
 }

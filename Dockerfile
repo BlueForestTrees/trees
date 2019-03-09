@@ -10,6 +10,7 @@ RUN npm run build
 
 FROM node:alpine
 COPY --from=api-builder /build/package.json ./
+COPY --from=api-builder /build/package-lock.json ./
 COPY --from=api-builder /build/dist ./
 COPY --from=api-builder /build/node_modules ./node_modules
 

@@ -2,6 +2,7 @@ FROM node:alpine AS api-builder
 
 RUN mkdir -p /build
 COPY package.json ./build/
+COPY package-lock.json ./build/
 COPY src/ ./build/src
 
 WORKDIR /build

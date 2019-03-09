@@ -21,12 +21,10 @@ const ENV = {
 
     RK_TRUNK_UPSERT: process.env.RK_TRUNK_UPSERT || "trunk-upsert",
     RK_TRUNK_DELETE: process.env.RK_TRUNK_DELETE || "trunk-delete",
-    RB_PATH: process.env.RB_PATH || "mq.json",
-    QUEUE_PATH: process.env.QUEUE_PATH || "queue.json",
+    RB_PATH: process.env.RB_PATH || "mq.json"
 }
 
 ENV.RB = JSON.parse(fs.readFileSync(ENV.RB_PATH, 'utf8'))
-ENV.QUEUE = JSON.parse(fs.readFileSync(ENV.QUEUE_PATH, 'utf8'))
 
 debug(JSON.stringify(ENV))
 

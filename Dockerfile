@@ -5,7 +5,7 @@ COPY package.json ./build/
 COPY src/ ./build/src
 
 WORKDIR /build
-RUN npm install
+RUN npm ci
 RUN npm run build
 
 FROM node:alpine

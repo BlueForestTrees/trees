@@ -21,6 +21,8 @@ const ENV = {
 
     RK_TRUNK_UPSERT: process.env.RK_TRUNK_UPSERT || "trunk-upsert",
     RK_TRUNK_DELETE: process.env.RK_TRUNK_DELETE || "trunk-delete",
+    RK_ROOT_UPSERT: process.env.RK_TRUNK_UPSERT || "root-upsert",
+    RK_ROOT_DELETE: process.env.RK_TRUNK_DELETE || "root-delete",
     RB_PATH: process.env.RB_PATH || "mq.json"
 }
 

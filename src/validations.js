@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken"
 import {X_ACCESS_TOKEN} from "./headers"
 import {run} from 'express-blueforest'
 
-const debug = require('debug')('api:tree:validation')
+const debug = require('debug')('api:validations')
 const defaultPS = 20
 const grandeur = chain => chain.isIn(grandeursKeys).withMessage("should be Mass, Dens, Long, Tran...")
 const mongoId = chain => chain.exists().withMessage("missing").isMongoId().withMessage("invalid mongo id").customSanitizer(objectNoEx)
@@ -16,7 +16,7 @@ const ID = '_id'
 const OID = 'oid'
 const TRUNKID = 'trunkId'
 const ROOTID = 'rootId'
-const RELATIVE_TO = 'relativeTo'
+export const RELATIVE_TO = 'relativeTo'
 const RELATIVE_TO_ID = 'relativeTo._id'
 const RELATIVE_TO_BQT = 'relativeTo.bqt'
 const NAME = 'name'
@@ -45,7 +45,6 @@ export const validUser = run((o, req) => {
     }
     req.user = token.user
     req.user._id = object(req.user._id)
-    debug("user %o", req.user)
     return o
 })
 

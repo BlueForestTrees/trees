@@ -1,6 +1,6 @@
 {
   "name": "api-tree",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "license": "ISC",
   "scripts": {
     "start": "node index.js",
@@ -38,7 +38,7 @@
     "cross-env": "5.2.0",
     "debug": "3.1.0",
     "exceljs": "1.6.0",
-    "express-blueforest": "1.1.5",
+    "express-blueforest": "1.1.8",
     "express-fileupload": "0.4.0",
     "express-validator": "5.3.0",
     "fraction.js": "4.0.4",

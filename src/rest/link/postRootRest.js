@@ -1,3 +1,4 @@
+import {createSender} from "simple-rbmq"
 import {Router, run} from "express-blueforest"
 import {
     rootIdIsNotTrunkId,
@@ -6,11 +7,12 @@ import {
     validBodyId,
     validBodyTrunkId,
     validBodyRootId,
-    validUser, validOwner, setOid
+    validUser, validOwner, setOid, RELATIVE_TO
 } from "../../validations"
 import {cols} from "../../collections"
 import {col, object} from "mongo-registry"
 import {cleanNull} from "../../util/calculations"
+import ENV from "../../env"
 
 const router = Router()
 module.exports = router
@@ -28,8 +30,8 @@ router.post('/api/tree/root',
     rootIdIsNotTrunkId,
     validUser,
     validOwner(trunks, "trunkId"),
+
     run(setOid),
-    run(cleanNull("relativeTo")),
-    run(root => col(cols.ROOT).insertOne(root)),
-    run(({result}) => result)
+    run(cleanNull(RELATIVE_TO)),
+    run(createSender(ENV.RB.exchange, ENV.RK_ROOT_UPSERT))
 )

@@ -1,19 +1,18 @@
+import {validOwner, validPathId, validUser} from "../../validations"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
-import {validOwner, validPathId, validUser} from "../../validations"
-import configure from "items-service"
 import {cols} from "../../collections"
 import {col} from "mongo-registry"
+import {createSender} from "simple-rbmq"
+import ENV from "../../env"
 
 const router = Router()
-
-const roots = col(cols.ROOT)
-const deleteRoot = configure(() => col(cols.ROOT)).deleteOne
-module.exports = router
 
 router.delete('/api/tree/root/:_id',
     validPathId,
     validUser,
-    validOwner(roots),
-    run(deleteRoot),
+    validOwner(col(cols.ROOT)),
+    run(createSender(ENV.RB.exchange, ENV.RK_ROOT_DELETE)),
 )
+
+module.exports = router

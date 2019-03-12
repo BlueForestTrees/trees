@@ -8,11 +8,11 @@ import ENV from "../../env"
 
 const router = Router()
 
-module.exports = router
-
 router.delete('/api/tree/trunk/:_id',
     validId,
     validUser,
     validOwner(col(cols.TRUNK)),
     run(createSender(ENV.RB.exchange, ENV.RK_TRUNK_DELETE))
 )
+
+module.exports = router

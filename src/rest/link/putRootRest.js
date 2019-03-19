@@ -11,7 +11,7 @@ import {cols} from "../../collections"
 
 import {run, Router} from 'express-blueforest'
 import ENV from "../../env"
-import {cleanNull} from "../../util/calculations"
+import {cleanFalsy} from "../../util/calculations"
 
 const router = Router()
 const roots = col(cols.ROOT)
@@ -22,7 +22,7 @@ router.put('/api/tree/root',
     validUser,
     validBodyOptRelativeTo,
     validOwner(roots),
-    run(cleanNull(RELATIVE_TO)),
+    run(cleanFalsy(RELATIVE_TO)),
     run(createSender(ENV.RB.exchange, ENV.RK_ROOT_UPSERT))
 )
 

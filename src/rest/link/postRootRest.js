@@ -11,7 +11,7 @@ import {
 } from "../../validations"
 import {cols} from "../../collections"
 import {col, object} from "mongo-registry"
-import {cleanNull} from "../../util/calculations"
+import {cleanFalsy} from "../../util/calculations"
 import ENV from "../../env"
 
 const router = Router()
@@ -32,6 +32,6 @@ router.post('/api/tree/root',
     validOwner(trunks, "trunkId"),
 
     run(setOid),
-    run(cleanNull(RELATIVE_TO)),
+    run(cleanFalsy(RELATIVE_TO)),
     run(createSender(ENV.RB.exchange, ENV.RK_ROOT_UPSERT))
 )

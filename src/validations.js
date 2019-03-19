@@ -6,6 +6,9 @@ import jwt from "jsonwebtoken"
 import {X_ACCESS_TOKEN} from "./headers"
 import {run} from 'express-blueforest'
 
+export const throwit = message => {
+    throw message
+}
 const debug = require('debug')('api:validations')
 const defaultPS = 20
 const grandeur = chain => chain.isIn(grandeursKeys).withMessage("should be Mass, Dens, Long, Tran...")
@@ -52,23 +55,19 @@ export const setOid = (o, req) => (o.oid = req.user._id) && o
 
 
 export const validOwner = (col, field = "_id") => run(async (o, req) => {
-    let filter = {_id: o[field]}
-    const doc = await col.findOne(filter)
-    if (doc) {
-        if (req.user._id.equals(doc.oid)) {
-            debug("valid owner user %o, doc %o", req.user._id, doc._id)
-            return o
-        } else if (req.user.rights && req.user.rights.charAt(0) === 'G') {
-            debug("valid god user %o, doc %o", req.user._id, doc._id)
-            return o
-        } else {
-            debug("invalid owner user %o, doc %o", req.user._id, doc._id)
-            throw {code: "bf403"}
-        }
-    } else {
-        debug("doc not found user %o, doc %o", req.user._id, doc._id)
-        throw {code: "bf404"}
-    }
+    const doc = await col.findOne({_id: o[field]})
+    const validOwner =
+        (!doc && "no doc")
+        ||
+        (req.user._id.equals(doc.oid) && "owner")
+        ||
+        (req.user.rights && req.user.rights.charAt(0) === 'G' && "god")
+
+    debug('{validOwner:{_id:"%s", oid:"%s", validity:"%s"}}', o[field], req.user._id, validOwner)
+
+    validOwner || throwit({code: "bf403"})
+
+    return o
 })
 
 export const optionalValidBodyBqt = number(body(QUANTITY_BQT).optional())

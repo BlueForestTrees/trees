@@ -1,6 +1,6 @@
 import _, {reduce, cloneDeep, find, forEach, groupBy, isNil, map, omit, some} from 'lodash'
 
-export const cleanNull = field => item => {
+export const cleanFalsy = field => item => {
     if (!item[field]) {
         delete item[field]
     }

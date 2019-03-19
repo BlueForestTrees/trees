@@ -5,7 +5,7 @@ import {
     validIds,
     optionalValidQ,
     idsList,
-    optionalValidG, optionnalC1, optionnalC2, optionnalC3, optionnalC4, optionalValidOid, validPathId, validPathOid, optionnalC0
+    optionalValidG, optionnalC1, optionnalC2, optionnalC3, optionnalC4, optionalValidOid, validPathId, validPathOid, optionnalC0, throwit
 } from "../../validations"
 import {run, convert} from 'express-blueforest'
 import {Router} from "express-blueforest"
@@ -65,8 +65,11 @@ router.get('/api/tree/trunk/:_id',
     run(trunkService.get),
 )
 
+//validation du oid. 404 si _id pas trouvé.
 router.get('/api/tree/:_id/owner/:oid',
     validPathId,
     validPathOid,
-    run(({oid, _id}) => col(cols.TRUNK).findOne({_id, oid}, {projection: {_id: 1}}).then(res => !!res)),
+    run(({oid, _id}) => col(cols.TRUNK)
+        .findOne({_id, oid}, {projection: {_id: 1}})
+        .then(res => !!res || throwit({code: "bf404"})))
 )

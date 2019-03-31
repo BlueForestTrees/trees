@@ -1,6 +1,6 @@
 import {Router, run} from 'express-blueforest'
 import {col, object} from "mongo-registry"
-import {validId, validBodyName, validBodyQuantityBqt, validBodyQuantityG, validUser, setOid} from "../../validations"
+import {set, validId, validBodyName, validBodyQuantityBqt, validBodyQuantityG, validUser, setOid} from "../../validations"
 import ENV from "../../env"
 import {createSender} from "simple-rbmq"
 
@@ -14,5 +14,6 @@ router.post('/api/tree/trunk',
     validBodyQuantityBqt,
     validUser,
     run(setOid),
+    run(set("date", () => new Date())),
     run(createSender(ENV.RB.exchange, ENV.RK_TRUNK_UPSERT))
 )

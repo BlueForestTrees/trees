@@ -2,7 +2,7 @@ import {
     validOptionalBodyBqtG,
     validOptionalBodyName,
     validPathId,
-    validUser, validOwner
+    validUser, validOwner, set
 } from "../../validations"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
@@ -20,5 +20,6 @@ router.put('/api/tree/trunk/:_id',
     validOptionalBodyBqtG,
     validUser,
     validOwner(col(cols.TRUNK)),
+    run(set("date", () => new Date())),
     run(createSender(ENV.RB.exchange, ENV.RK_TRUNK_UPSERT))
 )

@@ -1,6 +1,6 @@
 {
   "name": "api-tree",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "license": "ISC",
   "scripts": {
     "start": "node index.js",
@@ -50,7 +50,7 @@
     "nested-error-stacks": "2.0.0",
     "pick-to-array": "1.1.0",
     "regex-escape": "3.4.8",
-    "simple-rbmq": "1.0.23"
+    "simple-rbmq": "2.0.2"
   },
   "babel": {
     "presets": [

@@ -29,7 +29,7 @@ const QUANTITY_BQT = 'quantity.bqt'
 const QUANTITY_G = 'quantity.g'
 const BQT = 'bqt'
 const IS_NOT_RIGHT_ID = 'ids must be different'
-const grandeursKeys = ["PNOF", "PDF", "DALY", "CTUh", "CTUe", "Ene1", "Ene2", "Dens", "Nomb", "Volu", "Duré", "Mass", "Surf", "Long", "Pri1", "Pri2", "Tran"]
+const grandeursKeys = ["NO", "D", "AL", "TU", "Ene1", "Ene2", "Dens", "Nomb", "Volu", "Duré", "Mass", "Surf", "Long", "Pri1", "Pri2", "Tran"]
 
 export const appendOid = (col, left, right) => async o => {
     const item = await col.findOne({[left]: o[right]}, {oid: 1})

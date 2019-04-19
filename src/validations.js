@@ -104,6 +104,9 @@ export const validBodyOptRelativeTo = oneOf([
 
 export const rootIdIsNotTrunkId = check(ROOTID, IS_NOT_RIGHT_ID).custom((root, {req}) => (!root || !req.body.trunk) || (root._id !== req.body.trunk._id))
 export const validBodyName = body(NAME).isLength({min: 2}).matches(/^.+/)
+export const validOptionalComment = body("comment").isLength({min: 0, max: 20000})
+export const validOptionalOrigin = body("origin").isLength({min: 0, max: 200})
+export const validOptionalSource = body("source").isLength({min: 0, max: 300}).optional()
 export const validBodyColor = body(COLOR).isLength({min: 2}).matches(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)
 export const optionalValidQ = check('q').optional().exists()
 
@@ -112,7 +115,7 @@ export const validPathOid = mongoId(param(OID))
 export const validPathTrunkId = mongoId(param(TRUNKID))
 export const validOptionalTrunkId = mongoId(check(TRUNKID)).optional()
 export const validPathRootId = mongoId(param(ROOTID))
-export const validOptionalBodyName = body(NAME).optional().exists().matches(/^.+/)
+export const validOptionalBodyName = body(NAME).isLength({min: 0, max: 50}).optional()
 
 export const validOptionalBodyBqtG = [
     optionalValidBodyG,

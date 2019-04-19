@@ -1,8 +1,8 @@
 import {
     validOptionalBodyBqtG,
     validOptionalBodyName,
-    validPathId,
-    validUser, validOwner, set
+    validUser, validOwner, set, validId,
+    validOptionalComment, validOptionalOrigin, validOptionalSource
 } from "../../validations"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
@@ -14,10 +14,13 @@ import {cols} from "../../collections"
 const router = Router()
 module.exports = router
 
-router.put('/api/tree/trunk/:_id',
-    validPathId,
+router.put('/api/tree/trunk',
+    validId,
     validOptionalBodyName,
     validOptionalBodyBqtG,
+    validOptionalSource,
+    validOptionalOrigin,
+    validOptionalComment,
     validUser,
     validOwner(col(cols.TRUNK)),
     run(set("date", () => new Date())),

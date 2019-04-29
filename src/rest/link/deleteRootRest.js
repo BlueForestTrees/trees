@@ -1,4 +1,4 @@
-import {validOwner, validPathId, validPathTrunkId, validUser} from "../../validations"
+import {validOwner, validPathId, validPathRootId, validPathTrunkId, validUser} from "../../validations"
 import {run} from 'express-blueforest'
 import {Router} from "express-blueforest"
 import {cols} from "../../collections"
@@ -8,8 +8,9 @@ import ENV from "../../env"
 
 const router = Router()
 
-router.delete('/api/tree/root/:trunkId/:_id',
+router.delete('/api/tree/root/:trunkId/:rootId/:_id',
     validPathId,
+    validPathRootId,
     validPathTrunkId,
     validUser,
     validOwner(col(cols.ROOT)),

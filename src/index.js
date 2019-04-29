@@ -25,4 +25,7 @@ const errorMapper = err => {
 export default initRabbit(ENV.RB)
     .then(() => dbInit(ENV, registry))
     .then(startExpress(ENV, errorMapper))
-    .catch(e => error({error: {req: {url: "boot"}, cause: e}}))
+    .catch(e => {
+        error({error: {req: {url: "boot"}, cause: e}})
+        process.exit(400)
+    })

@@ -16,6 +16,7 @@ const mongoId = chain => chain.exists().withMessage("missing").isMongoId().withM
 const number = chain => chain.exists().custom(v => !isNaN(Number.parseFloat(v))).withMessage("must be a valid number").customSanitizer(Number.parseFloat)
 
 const ID = '_id'
+const LINK_ID = 'linkId'
 const OID = 'oid'
 const TRUNKID = 'trunkId'
 const ROOTID = 'rootId'
@@ -111,6 +112,7 @@ export const validBodyColor = body(COLOR).isLength({min: 2}).matches(/^#([A-Fa-f
 export const optionalValidQ = check('q').optional().exists()
 
 export const validPathId = mongoId(param(ID))
+export const validPathLinkId = mongoId(param(LINK_ID))
 export const validPathOid = mongoId(param(OID))
 export const validPathTrunkId = mongoId(param(TRUNKID))
 export const validOptionalTrunkId = mongoId(check(TRUNKID)).optional()

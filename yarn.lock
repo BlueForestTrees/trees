@@ -3116,10 +3116,10 @@ lodash@4.17.10:
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
   integrity sha512-UejweD1pDoXu+AD825lWwp4ZGtSwgnpZxb3JDViD7StjQz+Nb/6l093lx4OQ0foGWNRoc19mWy7BzL+UAK2iVg==
 
-lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4, lodash@^4.8.0:
-  version "4.17.11"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
-  integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
+lodash@4.17.19, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4, lodash@^4.8.0:
+  version "4.17.19"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
+  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
 
 lolex@^2.2.0, lolex@^2.3.2:
   version "2.7.5"
@@ -4451,10 +4451,10 @@ signal-exit@^3.0.0, signal-exit@^3.0.1, signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
   integrity sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
 
-simple-rbmq@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/simple-rbmq/-/simple-rbmq-2.0.2.tgz#3d87d3837f8e59b72159fa6d4577cd7ab979dfe0"
-  integrity sha512-5sv7DAhrsq3APcWgXqCCvlXpSkkiWkPyMbg5sBJOhjiNhtMGwYgpWt/rExg5QnxHeYaeM0hpc9au37LHk11mew==
+simple-rbmq@2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/simple-rbmq/-/simple-rbmq-2.0.6.tgz#908ff661eff2e646558c67650c9deaf482eb407d"
+  integrity sha512-zbnJtoAT/i8xk5AEhJZcoMjvvU+lLbczTRxzrIRQYzVDJS+WNnNtTa38Ce2kNPy9c4B8KcW8X2wRS7WegGKbLQ==
   dependencies:
     amqp-connection-manager "2.3.1"
     amqplib "0.5.3"

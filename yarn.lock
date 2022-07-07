@@ -3367,9 +3367,9 @@ mocha@5.0.0:
     supports-color "4.4.0"
 
 moment@>=2.19.3:
-  version "2.24.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
-  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
+  version "2.29.4"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
+  integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
 
 mongo-registry@1.0.21:
   version "1.0.21"
@@ -4451,10 +4451,10 @@ signal-exit@^3.0.0, signal-exit@^3.0.1, signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
   integrity sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
 
-simple-rbmq@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/simple-rbmq/-/simple-rbmq-2.0.2.tgz#3d87d3837f8e59b72159fa6d4577cd7ab979dfe0"
-  integrity sha512-5sv7DAhrsq3APcWgXqCCvlXpSkkiWkPyMbg5sBJOhjiNhtMGwYgpWt/rExg5QnxHeYaeM0hpc9au37LHk11mew==
+simple-rbmq@2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/simple-rbmq/-/simple-rbmq-2.0.6.tgz#908ff661eff2e646558c67650c9deaf482eb407d"
+  integrity sha512-zbnJtoAT/i8xk5AEhJZcoMjvvU+lLbczTRxzrIRQYzVDJS+WNnNtTa38Ce2kNPy9c4B8KcW8X2wRS7WegGKbLQ==
   dependencies:
     amqp-connection-manager "2.3.1"
     amqplib "0.5.3"
